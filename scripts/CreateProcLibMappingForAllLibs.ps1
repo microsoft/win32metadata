@@ -6,7 +6,7 @@ $inputFileName = Join-Path -Path $windowsWin32ProjectRoot -ChildPath "libMapping
 
 if (!(Test-Path $inputFileName))
 {
-    Copy-Item $inputFileName $outputFileName
+    Copy-Item $outputFileName $inputFileName
 }
 
 $libPkgPath = Get-WinSdkCppX64PkgPath

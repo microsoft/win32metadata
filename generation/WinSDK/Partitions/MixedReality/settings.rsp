@@ -1,5 +1,6 @@
 --traverse
-<IncludeRoot>/um/SpatialInteractionManagerInterop.h
-<IncludeRoot>/um/HolographicSpaceInterop.h
+<IncludeRoot>/um/perceptiondevice.h
+<IncludeRoot>/um/perceptiondevicecore.h
 --namespace
-Windows.Win32.System.WinRT
+Windows.Win32.System.MixedReality
+

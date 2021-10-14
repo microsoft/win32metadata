@@ -73,9 +73,9 @@ inline void SPDestructElementsVoid(void* pElements, size_t sizeof_TYPE, int nCou
 {
     _ASSERT( ( nCount == 0 ||
                SPIsValidAddress( pElements, nCount * (UINT) sizeof_TYPE, TRUE  ) ) );
-    pElements;  // not used
-    nCount; // not used
-    sizeof_TYPE; // not used
+    (void)pElements;  // not used
+    (void)nCount; // not used
+    (void)sizeof_TYPE; // not used
 
     // default does nothing
 }
@@ -85,8 +85,8 @@ inline void SPDestructElements(TYPE* pElements, int nCount)
 {
     _ASSERT( ( nCount == 0 ||
                SPIsValidAddress( pElements, nCount * sizeof(TYPE), TRUE  ) ) );
-    pElements;  // not used
-    nCount; // not used
+    (void)pElements;  // not used
+    (void)nCount; // not used
 
     // default does nothing
 }

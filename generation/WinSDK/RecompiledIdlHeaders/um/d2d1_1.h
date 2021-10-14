@@ -1222,7 +1222,7 @@ interface DX_DECLARE_INTERFACE("483473d7-cd46-4f9d-9d3a-3112aa80159d") ID2D1Prop
         HRESULT ignoreHr = GetValue(static_cast<UINT32>(index), reinterpret_cast<BYTE *>(&value), sizeof(value));
     
         // Unreferenced variable:
-        ignoreHr;
+        (void)ignoreHr;
     
         return value;
     }

@@ -5120,7 +5120,7 @@ EXTERN_C HRESULT DWRITE_EXPORT DWriteCreateFactory(
     _In_ DWRITE_FACTORY_TYPE factoryType,
     _In_ REFIID iid,
     _COM_Outptr_ IUnknown **factory
-    );
+    ) WIN_NOEXCEPT;
 
 // Macros used to define DirectWrite error codes.
 #define FACILITY_DWRITE 0x898

@@ -1086,7 +1086,7 @@
 //
 // MessageText:
 //
-// The per-user filter pool for session %2 could not be removed.%1
+// The per-user filter pool for session %2 and user context token %3 could not be removed.%1
 //
 #define EVENT_FILTERPOOL_DELETE_FAILED   0xC0000C1FL
 
@@ -1104,7 +1104,7 @@
 //
 // MessageText:
 //
-// The per-user filter pool for session %2 could not be added <%3,%4>.%1
+// The per-user filter pool for session %2 and user context token %3 could not be added <%4,%5>.%1
 //
 #define EVENT_DETAILED_FILTERPOOL_ADD_FAILED 0xC0000C21L
 
@@ -7189,7 +7189,7 @@
 #define QUERY_E_DUPLICATE_RANGE_NAME     ((HRESULT)0x8004161BL)
 
 //
-// Codes 0x1650-0x167f are reserved for QUERYLIB (see qutil\h\qutilerr.mc)
+// Codes 0x1650-0x167f are reserved for QUERYLIB (see querylib\include\qutilerr.mc)
 //
 //
 // MessageId: QPLIST_E_CANT_OPEN_FILE
@@ -8028,6 +8028,42 @@
 // Protected catalog for the user is not available due to key drop status.
 //
 #define CI_E_PROTECTED_CATALOG_NOT_AVAILABLE ((HRESULT)0xC0041833L)
+
+//
+// MessageId: CI_E_NO_PROTECTED_USER
+//
+// MessageText:
+//
+// The system only stores index entries in a protected catalog, but no protected user currently exists.
+//
+#define CI_E_NO_PROTECTED_USER           ((HRESULT)0xC0041834L)
+
+//
+// MessageId: CI_E_MULTIPLE_PROTECTED_USERS_UNSUPPORTED
+//
+// MessageText:
+//
+// Content indexer only currently supports having a single protected user per device, but multiple protected users were present.
+//
+#define CI_E_MULTIPLE_PROTECTED_USERS_UNSUPPORTED ((HRESULT)0xC0041835L)
+
+//
+// MessageId: CI_E_PROTECTED_CATALOG_SID_MISMATCH
+//
+// MessageText:
+//
+// The system detected a SID owner for a protected item that did not match the SID owner of the protected catalog for the item.
+//
+#define CI_E_PROTECTED_CATALOG_SID_MISMATCH ((HRESULT)0xC0041836L)
+
+//
+// MessageId: CI_E_PROTECTED_CATALOG_NON_INTERACTIVE_USER
+//
+// MessageText:
+//
+// On a system with a protected catalog, indexer only supports queries from the interactive user account.
+//
+#define CI_E_PROTECTED_CATALOG_NON_INTERACTIVE_USER ((HRESULT)0xC0041837L)
 
 #endif // _CIERROR_H_
 #ifndef _FILTERR_H_

@@ -1126,6 +1126,73 @@ WSASetUdpRecvMaxCoalescedSize(
 }
 #endif // NTDDI_VERSION >= NTDDI_WIN10_VB
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+//
+// Wrapper functions for the IP_RECVECN/IPV6_RECVECN socket option.
+//
+
+WS2TCPIP_INLINE
+INT
+WSAGetRecvIPEcn(
+    _In_ SOCKET Socket,
+    _Out_ DWORD *Enabled
+    )
+{
+    WSAPROTOCOL_INFOW Info;
+    INT InfoSize = sizeof(Info);
+    INT OptSize = sizeof(*Enabled);
+    INT Error;
+
+    Error = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
+    if (Error != SOCKET_ERROR) {
+        if (Info.iAddressFamily == AF_INET) {
+            Error =
+                getsockopt(Socket, IPPROTO_IP, IP_RECVECN, (PCHAR)Enabled, &OptSize);
+#if(_WIN32_WINNT >= 0x0501)
+        } else if (Info.iAddressFamily == AF_INET6) {
+            Error =
+                getsockopt(Socket, IPPROTO_IPV6, IPV6_RECVECN, (PCHAR)Enabled, &OptSize);
+#endif //(_WIN32_WINNT >= 0x0501)
+        } else {
+            Error = SOCKET_ERROR;
+            WSASetLastError(WSAEAFNOSUPPORT);
+        }
+    }
+
+    return Error;
+}
+
+WS2TCPIP_INLINE
+INT
+WSASetRecvIPEcn(
+    _In_ SOCKET Socket,
+    _In_ DWORD Enabled
+    )
+{
+    WSAPROTOCOL_INFOW Info;
+    INT InfoSize = sizeof(Info);
+    INT Error;
+
+    Error = getsockopt(Socket, SOL_SOCKET, SO_PROTOCOL_INFO, (PCHAR)&Info, &InfoSize);
+    if (Error != SOCKET_ERROR) {
+        if (Info.iAddressFamily == AF_INET) {
+            Error =
+                setsockopt(Socket, IPPROTO_IP, IP_RECVECN, (PCHAR)&Enabled, sizeof(Enabled));
+#if(_WIN32_WINNT >= 0x0501)
+        } else if (Info.iAddressFamily == AF_INET6) {
+            Error =
+                setsockopt(Socket, IPPROTO_IPV6, IPV6_RECVECN, (PCHAR)&Enabled, sizeof(Enabled));
+#endif //(_WIN32_WINNT >= 0x0501)
+        } else {
+            Error = SOCKET_ERROR;
+            WSASetLastError(WSAEAFNOSUPPORT);
+        }
+    }
+
+    return Error;
+}
+#endif // NTDDI_VERSION >= NTDDI_WIN10_FE
+
 #if (_WIN32_WINNT >= 0x0600)
 #ifdef _SECURE_SOCKET_TYPES_DEFINED_
 #pragma region Desktop Family or AppRuntime Package

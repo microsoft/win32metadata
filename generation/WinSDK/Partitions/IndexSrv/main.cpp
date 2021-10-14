@@ -9,3 +9,4 @@
 #include <ntquery.h>
 #include <filter.h>
 #include <indexsrv.h>
+#include <filterr.h>

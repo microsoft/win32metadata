@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -201,28 +209,34 @@ EXTERN_C const IID IID_IRemoteDesktopClientSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRemoteDesktopClientSettings * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRemoteDesktopClientSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRemoteDesktopClientSettings * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRemoteDesktopClientSettings * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRemoteDesktopClientSettings * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRemoteDesktopClientSettings * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -231,6 +245,7 @@ EXTERN_C const IID IID_IRemoteDesktopClientSettings;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRemoteDesktopClientSettings * This,
             /* [annotation][in] */ 
@@ -250,19 +265,23 @@ EXTERN_C const IID IID_IRemoteDesktopClientSettings;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientSettings, ApplySettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ApplySettings )( 
             __RPC__in IRemoteDesktopClientSettings * This,
             /* [in] */ __RPC__in BSTR rdpFileContents);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientSettings, RetrieveSettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *RetrieveSettings )( 
             __RPC__in IRemoteDesktopClientSettings * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *rdpFileContents);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientSettings, GetRdpProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetRdpProperty )( 
             __RPC__in IRemoteDesktopClientSettings * This,
             /* [in] */ __RPC__in BSTR propertyName,
             /* [retval][out] */ __RPC__out VARIANT *value);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientSettings, SetRdpProperty)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetRdpProperty )( 
             __RPC__in IRemoteDesktopClientSettings * This,
             /* [in] */ __RPC__in BSTR propertyName,
@@ -389,28 +408,34 @@ EXTERN_C const IID IID_IRemoteDesktopClientActions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRemoteDesktopClientActions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRemoteDesktopClientActions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRemoteDesktopClientActions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRemoteDesktopClientActions * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRemoteDesktopClientActions * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRemoteDesktopClientActions * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -419,6 +444,7 @@ EXTERN_C const IID IID_IRemoteDesktopClientActions;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRemoteDesktopClientActions * This,
             /* [annotation][in] */ 
@@ -438,16 +464,20 @@ EXTERN_C const IID IID_IRemoteDesktopClientActions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientActions, SuspendScreenUpdates)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SuspendScreenUpdates )( 
             __RPC__in IRemoteDesktopClientActions * This);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientActions, ResumeScreenUpdates)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ResumeScreenUpdates )( 
             __RPC__in IRemoteDesktopClientActions * This);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientActions, ExecuteRemoteAction)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ExecuteRemoteAction )( 
             __RPC__in IRemoteDesktopClientActions * This,
             /* [in] */ RemoteActionType remoteAction);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientActions, GetSnapshot)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetSnapshot )( 
             __RPC__in IRemoteDesktopClientActions * This,
             /* [in] */ SnapshotEncodingType snapshotEncoding,
@@ -557,28 +587,34 @@ EXTERN_C const IID IID_IRemoteDesktopClientTouchPointer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -587,6 +623,7 @@ EXTERN_C const IID IID_IRemoteDesktopClientTouchPointer;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRemoteDesktopClientTouchPointer * This,
             /* [annotation][in] */ 
@@ -606,26 +643,32 @@ EXTERN_C const IID IID_IRemoteDesktopClientTouchPointer;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientTouchPointer, put_Enabled)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientTouchPointer, get_Enabled)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientTouchPointer, put_EventsEnabled)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventsEnabled )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [in] */ VARIANT_BOOL eventsEnabled);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientTouchPointer, get_EventsEnabled)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventsEnabled )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *eventsEnabled);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientTouchPointer, put_PointerSpeed)
         /* [id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PointerSpeed )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [in] */ ULONG pointerSpeed);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClientTouchPointer, get_PointerSpeed)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PointerSpeed )( 
             __RPC__in IRemoteDesktopClientTouchPointer * This,
             /* [retval][out] */ __RPC__out ULONG *pointerSpeed);
@@ -762,28 +805,34 @@ EXTERN_C const IID IID_IRemoteDesktopClient;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRemoteDesktopClient * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRemoteDesktopClient * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -792,6 +841,7 @@ EXTERN_C const IID IID_IRemoteDesktopClient;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRemoteDesktopClient * This,
             /* [annotation][in] */ 
@@ -811,43 +861,53 @@ EXTERN_C const IID IID_IRemoteDesktopClient;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, Connect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IRemoteDesktopClient * This);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, Disconnect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IRemoteDesktopClient * This);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, Reconnect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Reconnect )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [in] */ ULONG width,
             /* [in] */ ULONG height);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, get_Settings)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Settings )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [retval][out] */ __RPC__deref_out_opt IRemoteDesktopClientSettings **settings);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, get_Actions)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Actions )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [retval][out] */ __RPC__deref_out_opt IRemoteDesktopClientActions **actions);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, get_TouchPointer)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TouchPointer )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [retval][out] */ __RPC__deref_out_opt IRemoteDesktopClientTouchPointer **touchPointer);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, DeleteSavedCredentials)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DeleteSavedCredentials )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [in] */ __RPC__in BSTR serverName);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, UpdateSessionDisplaySettings)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *UpdateSessionDisplaySettings )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [in] */ ULONG width,
             /* [in] */ ULONG height);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, attachEvent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *attachEvent )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [in] */ __RPC__in BSTR eventName,
             /* [in] */ __RPC__in_opt IDispatch *callback);
         
+        DECLSPEC_XFGVIRT(IRemoteDesktopClient, detachEvent)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *detachEvent )( 
             __RPC__in IRemoteDesktopClient * This,
             /* [in] */ __RPC__in BSTR eventName,

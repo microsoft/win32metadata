@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -1688,28 +1696,34 @@ EXTERN_C const IID IID_IInkRectangle;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRectangle * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRectangle * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRectangle * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1718,6 +1732,7 @@ EXTERN_C const IID IID_IInkRectangle;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRectangle * This,
             /* [annotation][in] */ 
@@ -1737,46 +1752,57 @@ EXTERN_C const IID IID_IInkRectangle;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, get_Top)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Top )( 
             __RPC__in IInkRectangle * This,
             /* [retval][out] */ __RPC__out long *Units);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, put_Top)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Top )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ long Units);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, get_Left)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Left )( 
             __RPC__in IInkRectangle * This,
             /* [retval][out] */ __RPC__out long *Units);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, put_Left)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Left )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ long Units);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, get_Bottom)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Bottom )( 
             __RPC__in IInkRectangle * This,
             /* [retval][out] */ __RPC__out long *Units);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, put_Bottom)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Bottom )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ long Units);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, get_Right)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Right )( 
             __RPC__in IInkRectangle * This,
             /* [retval][out] */ __RPC__out long *Units);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, put_Right)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Right )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ long Units);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, get_Data)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             __RPC__in IInkRectangle * This,
             /* [retval][out] */ __RPC__out RECT *Rect);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, put_Data)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Data )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ RECT Rect);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, GetRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRectangle )( 
             __RPC__in IInkRectangle * This,
             /* [out] */ __RPC__out long *Top,
@@ -1784,6 +1810,7 @@ EXTERN_C const IID IID_IInkRectangle;
             /* [out] */ __RPC__out long *Bottom,
             /* [out] */ __RPC__out long *Right);
         
+        DECLSPEC_XFGVIRT(IInkRectangle, SetRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetRectangle )( 
             __RPC__in IInkRectangle * This,
             /* [in] */ long Top,
@@ -1907,28 +1934,34 @@ EXTERN_C const IID IID_IInkExtendedProperty;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkExtendedProperty * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkExtendedProperty * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkExtendedProperty * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkExtendedProperty * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkExtendedProperty * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkExtendedProperty * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1937,6 +1970,7 @@ EXTERN_C const IID IID_IInkExtendedProperty;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkExtendedProperty * This,
             /* [annotation][in] */ 
@@ -1956,14 +1990,17 @@ EXTERN_C const IID IID_IInkExtendedProperty;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperty, get_Guid)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Guid )( 
             __RPC__in IInkExtendedProperty * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Guid);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperty, get_Data)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             __RPC__in IInkExtendedProperty * This,
             /* [retval][out] */ __RPC__out VARIANT *Data);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperty, put_Data)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Data )( 
             __RPC__in IInkExtendedProperty * This,
             /* [in] */ VARIANT Data);
@@ -2072,28 +2109,34 @@ EXTERN_C const IID IID_IInkExtendedProperties;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkExtendedProperties * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkExtendedProperties * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkExtendedProperties * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkExtendedProperties * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkExtendedProperties * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkExtendedProperties * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2102,6 +2145,7 @@ EXTERN_C const IID IID_IInkExtendedProperties;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkExtendedProperties * This,
             /* [annotation][in] */ 
@@ -2121,32 +2165,39 @@ EXTERN_C const IID IID_IInkExtendedProperties;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperties, get_Count)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IInkExtendedProperties * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperties, get__NewEnum)
         /* [helpcontext][helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IInkExtendedProperties * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **_NewEnum);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperties, Item)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IInkExtendedProperties * This,
             /* [in] */ VARIANT Identifier,
             /* [retval][out] */ __RPC__deref_out_opt IInkExtendedProperty **Item);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperties, Add)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IInkExtendedProperties * This,
             /* [in] */ __RPC__in BSTR Guid,
             /* [in] */ VARIANT Data,
             /* [retval][out] */ __RPC__deref_out_opt IInkExtendedProperty **InkExtendedProperty);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperties, Remove)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IInkExtendedProperties * This,
             /* [in] */ VARIANT Identifier);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperties, Clear)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IInkExtendedProperties * This);
         
+        DECLSPEC_XFGVIRT(IInkExtendedProperties, DoesPropertyExist)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DoesPropertyExist )( 
             __RPC__in IInkExtendedProperties * This,
             /* [in] */ __RPC__in BSTR Guid,
@@ -2304,28 +2355,34 @@ EXTERN_C const IID IID_IInkDrawingAttributes;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkDrawingAttributes * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkDrawingAttributes * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2334,6 +2391,7 @@ EXTERN_C const IID IID_IInkDrawingAttributes;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkDrawingAttributes * This,
             /* [annotation][in] */ 
@@ -2353,82 +2411,102 @@ EXTERN_C const IID IID_IInkDrawingAttributes;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_Color)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Color )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out long *CurrentColor);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_Color)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Color )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ long NewColor);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_Width)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Width )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out float *CurrentWidth);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_Width)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Width )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ float NewWidth);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_Height)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Height )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out float *CurrentHeight);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_Height)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Height )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ float NewHeight);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_FitToCurve)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FitToCurve )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Flag);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_FitToCurve)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FitToCurve )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ VARIANT_BOOL Flag);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_IgnorePressure)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IgnorePressure )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Flag);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_IgnorePressure)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IgnorePressure )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ VARIANT_BOOL Flag);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_AntiAliased)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AntiAliased )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Flag);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_AntiAliased)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AntiAliased )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ VARIANT_BOOL Flag);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_Transparency)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Transparency )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out long *CurrentTransparency);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_Transparency)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Transparency )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ long NewTransparency);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_RasterOperation)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RasterOperation )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out InkRasterOperation *CurrentRasterOperation);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_RasterOperation)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RasterOperation )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ InkRasterOperation NewRasterOperation);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_PenTip)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PenTip )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__out InkPenTip *CurrentPenTip);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, put_PenTip)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PenTip )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [in] */ InkPenTip NewPenTip);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, get_ExtendedProperties)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedProperties )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkExtendedProperties **Properties);
         
+        DECLSPEC_XFGVIRT(IInkDrawingAttributes, Clone)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IInkDrawingAttributes * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDrawingAttributes **DrawingAttributes);
@@ -2645,28 +2723,34 @@ EXTERN_C const IID IID_IInkTransform;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkTransform * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkTransform * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkTransform * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkTransform * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkTransform * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkTransform * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2675,6 +2759,7 @@ EXTERN_C const IID IID_IInkTransform;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkTransform * This,
             /* [annotation][in] */ 
@@ -2694,35 +2779,42 @@ EXTERN_C const IID IID_IInkTransform;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkTransform, Reset)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IInkTransform * This);
         
+        DECLSPEC_XFGVIRT(IInkTransform, Translate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Translate )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float HorizontalComponent,
             /* [in] */ float VerticalComponent);
         
+        DECLSPEC_XFGVIRT(IInkTransform, Rotate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float Degrees,
             /* [defaultvalue][in] */ float x,
             /* [defaultvalue][in] */ float y);
         
+        DECLSPEC_XFGVIRT(IInkTransform, Reflect)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reflect )( 
             __RPC__in IInkTransform * This,
             /* [in] */ VARIANT_BOOL Horizontally,
             /* [in] */ VARIANT_BOOL Vertically);
         
+        DECLSPEC_XFGVIRT(IInkTransform, Shear)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Shear )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float HorizontalComponent,
             /* [in] */ float VerticalComponent);
         
+        DECLSPEC_XFGVIRT(IInkTransform, ScaleTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScaleTransform )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float HorizontalMultiplier,
             /* [in] */ float VerticalMultiplier);
         
+        DECLSPEC_XFGVIRT(IInkTransform, GetTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTransform )( 
             __RPC__in IInkTransform * This,
             /* [out] */ __RPC__out float *eM11,
@@ -2732,6 +2824,7 @@ EXTERN_C const IID IID_IInkTransform;
             /* [out] */ __RPC__out float *eDx,
             /* [out] */ __RPC__out float *eDy);
         
+        DECLSPEC_XFGVIRT(IInkTransform, SetTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetTransform )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float eM11,
@@ -2741,58 +2834,72 @@ EXTERN_C const IID IID_IInkTransform;
             /* [in] */ float eDx,
             /* [in] */ float eDy);
         
+        DECLSPEC_XFGVIRT(IInkTransform, get_eM11)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_eM11 )( 
             __RPC__in IInkTransform * This,
             /* [retval][out] */ __RPC__out float *Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, put_eM11)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_eM11 )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, get_eM12)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_eM12 )( 
             __RPC__in IInkTransform * This,
             /* [retval][out] */ __RPC__out float *Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, put_eM12)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_eM12 )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, get_eM21)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_eM21 )( 
             __RPC__in IInkTransform * This,
             /* [retval][out] */ __RPC__out float *Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, put_eM21)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_eM21 )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, get_eM22)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_eM22 )( 
             __RPC__in IInkTransform * This,
             /* [retval][out] */ __RPC__out float *Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, put_eM22)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_eM22 )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, get_eDx)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_eDx )( 
             __RPC__in IInkTransform * This,
             /* [retval][out] */ __RPC__out float *Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, put_eDx)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_eDx )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, get_eDy)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_eDy )( 
             __RPC__in IInkTransform * This,
             /* [retval][out] */ __RPC__out float *Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, put_eDy)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_eDy )( 
             __RPC__in IInkTransform * This,
             /* [in] */ float Value);
         
+        DECLSPEC_XFGVIRT(IInkTransform, get_Data)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Data )( 
             __RPC__in IInkTransform * This,
             /* [retval][out] */ __RPC__out XFORM *XForm);
         
+        DECLSPEC_XFGVIRT(IInkTransform, put_Data)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Data )( 
             __RPC__in IInkTransform * This,
             /* [in] */ XFORM XForm);
@@ -2944,28 +3051,34 @@ EXTERN_C const IID IID_IInkGesture;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkGesture * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkGesture * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkGesture * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkGesture * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkGesture * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkGesture * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2974,6 +3087,7 @@ EXTERN_C const IID IID_IInkGesture;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkGesture * This,
             /* [annotation][in] */ 
@@ -2993,14 +3107,17 @@ EXTERN_C const IID IID_IInkGesture;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkGesture, get_Confidence)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Confidence )( 
             __RPC__in IInkGesture * This,
             /* [retval][out] */ __RPC__out InkRecognitionConfidence *Confidence);
         
+        DECLSPEC_XFGVIRT(IInkGesture, get_Id)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IInkGesture * This,
             /* [retval][out] */ __RPC__out InkApplicationGesture *Id);
         
+        DECLSPEC_XFGVIRT(IInkGesture, GetHotPoint)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetHotPoint )( 
             __RPC__in IInkGesture * This,
             /* [out][in] */ __RPC__inout long *X,
@@ -3107,28 +3224,34 @@ EXTERN_C const IID IID_IInkCursor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkCursor * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkCursor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkCursor * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkCursor * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkCursor * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkCursor * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3137,6 +3260,7 @@ EXTERN_C const IID IID_IInkCursor;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkCursor * This,
             /* [annotation][in] */ 
@@ -3156,30 +3280,37 @@ EXTERN_C const IID IID_IInkCursor;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkCursor, get_Name)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IInkCursor * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
+        DECLSPEC_XFGVIRT(IInkCursor, get_Id)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IInkCursor * This,
             /* [retval][out] */ __RPC__out long *Id);
         
+        DECLSPEC_XFGVIRT(IInkCursor, get_Inverted)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Inverted )( 
             __RPC__in IInkCursor * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Status);
         
+        DECLSPEC_XFGVIRT(IInkCursor, get_DrawingAttributes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DrawingAttributes )( 
             __RPC__in IInkCursor * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDrawingAttributes **Attributes);
         
+        DECLSPEC_XFGVIRT(IInkCursor, putref_DrawingAttributes)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_DrawingAttributes )( 
             __RPC__in IInkCursor * This,
             /* [in] */ __RPC__in_opt IInkDrawingAttributes *Attributes);
         
+        DECLSPEC_XFGVIRT(IInkCursor, get_Tablet)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tablet )( 
             __RPC__in IInkCursor * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkTablet **Tablet);
         
+        DECLSPEC_XFGVIRT(IInkCursor, get_Buttons)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Buttons )( 
             __RPC__in IInkCursor * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkCursorButtons **Buttons);
@@ -3286,28 +3417,34 @@ EXTERN_C const IID IID_IInkCursors;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkCursors * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkCursors * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkCursors * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkCursors * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkCursors * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkCursors * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3316,6 +3453,7 @@ EXTERN_C const IID IID_IInkCursors;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkCursors * This,
             /* [annotation][in] */ 
@@ -3335,14 +3473,17 @@ EXTERN_C const IID IID_IInkCursors;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkCursors, get_Count)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IInkCursors * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(IInkCursors, get__NewEnum)
         /* [helpcontext][helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IInkCursors * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **_NewEnum);
         
+        DECLSPEC_XFGVIRT(IInkCursors, Item)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IInkCursors * This,
             /* [in] */ long Index,
@@ -3437,28 +3578,34 @@ EXTERN_C const IID IID_IInkCursorButton;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkCursorButton * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkCursorButton * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkCursorButton * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkCursorButton * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkCursorButton * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkCursorButton * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3467,6 +3614,7 @@ EXTERN_C const IID IID_IInkCursorButton;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkCursorButton * This,
             /* [annotation][in] */ 
@@ -3486,14 +3634,17 @@ EXTERN_C const IID IID_IInkCursorButton;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkCursorButton, get_Name)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IInkCursorButton * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
+        DECLSPEC_XFGVIRT(IInkCursorButton, get_Id)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IInkCursorButton * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Id);
         
+        DECLSPEC_XFGVIRT(IInkCursorButton, get_State)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IInkCursorButton * This,
             /* [retval][out] */ __RPC__out InkCursorButtonState *CurrentState);
@@ -3588,28 +3739,34 @@ EXTERN_C const IID IID_IInkCursorButtons;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkCursorButtons * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkCursorButtons * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkCursorButtons * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkCursorButtons * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkCursorButtons * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkCursorButtons * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3618,6 +3775,7 @@ EXTERN_C const IID IID_IInkCursorButtons;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkCursorButtons * This,
             /* [annotation][in] */ 
@@ -3637,14 +3795,17 @@ EXTERN_C const IID IID_IInkCursorButtons;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkCursorButtons, get_Count)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IInkCursorButtons * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(IInkCursorButtons, get__NewEnum)
         /* [helpcontext][helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IInkCursorButtons * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **_NewEnum);
         
+        DECLSPEC_XFGVIRT(IInkCursorButtons, Item)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IInkCursorButtons * This,
             /* [in] */ VARIANT Identifier,
@@ -3753,28 +3914,34 @@ EXTERN_C const IID IID_IInkTablet;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkTablet * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkTablet * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkTablet * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkTablet * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkTablet * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkTablet * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3783,6 +3950,7 @@ EXTERN_C const IID IID_IInkTablet;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkTablet * This,
             /* [annotation][in] */ 
@@ -3802,27 +3970,33 @@ EXTERN_C const IID IID_IInkTablet;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkTablet, get_Name)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IInkTablet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
+        DECLSPEC_XFGVIRT(IInkTablet, get_PlugAndPlayId)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PlugAndPlayId )( 
             __RPC__in IInkTablet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Id);
         
+        DECLSPEC_XFGVIRT(IInkTablet, get_MaximumInputRectangle)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaximumInputRectangle )( 
             __RPC__in IInkTablet * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkTablet, get_HardwareCapabilities)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HardwareCapabilities )( 
             __RPC__in IInkTablet * This,
             /* [retval][out] */ __RPC__out TabletHardwareCapabilities *Capabilities);
         
+        DECLSPEC_XFGVIRT(IInkTablet, IsPacketPropertySupported)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsPacketPropertySupported )( 
             __RPC__in IInkTablet * This,
             /* [in] */ __RPC__in BSTR packetPropertyName,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Supported);
         
+        DECLSPEC_XFGVIRT(IInkTablet, GetPropertyMetrics)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyMetrics )( 
             __RPC__in IInkTablet * This,
             /* [in] */ __RPC__in BSTR propertyName,
@@ -3923,28 +4097,34 @@ EXTERN_C const IID IID_IInkTablet2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkTablet2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkTablet2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkTablet2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkTablet2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkTablet2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkTablet2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3953,6 +4133,7 @@ EXTERN_C const IID IID_IInkTablet2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkTablet2 * This,
             /* [annotation][in] */ 
@@ -3972,6 +4153,7 @@ EXTERN_C const IID IID_IInkTablet2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkTablet2, get_DeviceKind)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceKind )( 
             __RPC__in IInkTablet2 * This,
             /* [retval][out] */ __RPC__out TabletDeviceKind *Kind);
@@ -4056,28 +4238,34 @@ EXTERN_C const IID IID_IInkTablet3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkTablet3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkTablet3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkTablet3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkTablet3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkTablet3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkTablet3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4086,6 +4274,7 @@ EXTERN_C const IID IID_IInkTablet3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkTablet3 * This,
             /* [annotation][in] */ 
@@ -4105,10 +4294,12 @@ EXTERN_C const IID IID_IInkTablet3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkTablet3, get_IsMultiTouch)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsMultiTouch )( 
             __RPC__in IInkTablet3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pIsMultiTouch);
         
+        DECLSPEC_XFGVIRT(IInkTablet3, get_MaximumCursors)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaximumCursors )( 
             __RPC__in IInkTablet3 * This,
             /* [retval][out] */ __RPC__out ULONG *pMaximumCursors);
@@ -4207,28 +4398,34 @@ EXTERN_C const IID IID_IInkTablets;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkTablets * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkTablets * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkTablets * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkTablets * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkTablets * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkTablets * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4237,6 +4434,7 @@ EXTERN_C const IID IID_IInkTablets;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkTablets * This,
             /* [annotation][in] */ 
@@ -4256,23 +4454,28 @@ EXTERN_C const IID IID_IInkTablets;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkTablets, get_Count)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IInkTablets * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(IInkTablets, get__NewEnum)
         /* [helpcontext][helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IInkTablets * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **_NewEnum);
         
+        DECLSPEC_XFGVIRT(IInkTablets, get_DefaultTablet)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultTablet )( 
             __RPC__in IInkTablets * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkTablet **DefaultTablet);
         
+        DECLSPEC_XFGVIRT(IInkTablets, Item)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IInkTablets * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt IInkTablet **Tablet);
         
+        DECLSPEC_XFGVIRT(IInkTablets, IsPacketPropertySupported)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsPacketPropertySupported )( 
             __RPC__in IInkTablets * This,
             /* [in] */ __RPC__in BSTR packetPropertyName,
@@ -4498,28 +4701,34 @@ EXTERN_C const IID IID_IInkStrokeDisp;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkStrokeDisp * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkStrokeDisp * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkStrokeDisp * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4528,6 +4737,7 @@ EXTERN_C const IID IID_IInkStrokeDisp;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkStrokeDisp * This,
             /* [annotation][in] */ 
@@ -4547,77 +4757,95 @@ EXTERN_C const IID IID_IInkStrokeDisp;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_ID)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ID )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out long *ID);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_BezierPoints)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BezierPoints )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out VARIANT *Points);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_DrawingAttributes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DrawingAttributes )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDrawingAttributes **DrawAttrs);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, putref_DrawingAttributes)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_DrawingAttributes )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in_opt IInkDrawingAttributes *DrawAttrs);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_Ink)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ink )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **Ink);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_ExtendedProperties)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedProperties )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkExtendedProperties **Properties);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_PolylineCusps)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PolylineCusps )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out VARIANT *Cusps);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_BezierCusps)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BezierCusps )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out VARIANT *Cusps);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_SelfIntersections)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SelfIntersections )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out VARIANT *Intersections);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_PacketCount)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PacketCount )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out long *plCount);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_PacketSize)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PacketSize )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_PacketDescription)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PacketDescription )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out VARIANT *PacketDescription);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, get_Deleted)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Deleted )( 
             __RPC__in IInkStrokeDisp * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Deleted);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, GetBoundingBox)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBoundingBox )( 
             __RPC__in IInkStrokeDisp * This,
             /* [defaultvalue][in] */ InkBoundingBoxMode BoundingBoxMode,
             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, FindIntersections)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *FindIntersections )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in_opt IInkStrokes *Strokes,
             /* [retval][out] */ __RPC__out VARIANT *Intersections);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, GetRectangleIntersections)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRectangleIntersections )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle,
             /* [retval][out] */ __RPC__out VARIANT *Intersections);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, Clip)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clip )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, HitTestCircle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HitTestCircle )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ long X,
@@ -4625,6 +4853,7 @@ EXTERN_C const IID IID_IInkStrokeDisp;
             /* [in] */ float Radius,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Intersects);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, NearestPoint)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NearestPoint )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ long X,
@@ -4632,11 +4861,13 @@ EXTERN_C const IID IID_IInkStrokeDisp;
             /* [defaultvalue][out][in] */ __RPC__inout float *Distance,
             /* [retval][out] */ __RPC__out float *Point);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, Split)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Split )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ float SplitAt,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokeDisp **NewStroke);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, GetPacketDescriptionPropertyMetrics)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPacketDescriptionPropertyMetrics )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in BSTR PropertyName,
@@ -4645,12 +4876,14 @@ EXTERN_C const IID IID_IInkStrokeDisp;
             /* [out] */ __RPC__out TabletPropertyMetricUnit *Units,
             /* [out] */ __RPC__out float *Resolution);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, GetPoints)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPoints )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in][defaultvalue] */ long Index,
             /* [in][defaultvalue] */ long Count,
             /* [retval][out] */ __RPC__out VARIANT *Points);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, SetPoints)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetPoints )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ VARIANT Points,
@@ -4658,12 +4891,14 @@ EXTERN_C const IID IID_IInkStrokeDisp;
             /* [defaultvalue][in] */ long Count,
             /* [retval][out] */ __RPC__out long *NumberOfPointsSet);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, GetPacketData)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPacketData )( 
             __RPC__in IInkStrokeDisp * This,
             /* [defaultvalue][in] */ long Index,
             /* [defaultvalue][in] */ long Count,
             /* [retval][out] */ __RPC__out VARIANT *PacketData);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, GetPacketValuesByProperty)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPacketValuesByProperty )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in BSTR PropertyName,
@@ -4671,6 +4906,7 @@ EXTERN_C const IID IID_IInkStrokeDisp;
             /* [defaultvalue][in] */ long Count,
             /* [retval][out] */ __RPC__out VARIANT *PacketValues);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, SetPacketValuesByProperty)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetPacketValuesByProperty )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in BSTR bstrPropertyName,
@@ -4679,36 +4915,43 @@ EXTERN_C const IID IID_IInkStrokeDisp;
             /* [defaultvalue][in] */ long Count,
             /* [retval][out] */ __RPC__out long *NumberOfPacketsSet);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, GetFlattenedBezierPoints)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetFlattenedBezierPoints )( 
             __RPC__in IInkStrokeDisp * This,
             /* [defaultvalue][in] */ long FittingError,
             /* [retval][out] */ __RPC__out VARIANT *FlattenedBezierPoints);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, Transform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Transform )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in_opt IInkTransform *Transform,
             /* [defaultvalue][in] */ VARIANT_BOOL ApplyOnPenWidth);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, ScaleToRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScaleToRectangle )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, Move)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ float HorizontalComponent,
             /* [in] */ float VerticalComponent);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, Rotate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ float Degrees,
             /* [defaultvalue][in] */ float x,
             /* [defaultvalue][in] */ float y);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, Shear)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Shear )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ float HorizontalMultiplier,
             /* [in] */ float VerticalMultiplier);
         
+        DECLSPEC_XFGVIRT(IInkStrokeDisp, ScaleTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScaleTransform )( 
             __RPC__in IInkStrokeDisp * This,
             /* [in] */ float HorizontalMultiplier,
@@ -4951,28 +5194,34 @@ EXTERN_C const IID IID_IInkStrokes;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkStrokes * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkStrokes * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkStrokes * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4981,6 +5230,7 @@ EXTERN_C const IID IID_IInkStrokes;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkStrokes * This,
             /* [annotation][in] */ 
@@ -5000,90 +5250,110 @@ EXTERN_C const IID IID_IInkStrokes;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, get_Count)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IInkStrokes * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, get__NewEnum)
         /* [helpcontext][helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IInkStrokes * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **_NewEnum);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, get_Ink)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ink )( 
             __RPC__in IInkStrokes * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **Ink);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, get_RecognitionResult)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecognitionResult )( 
             __RPC__in IInkStrokes * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionResult **RecognitionResult);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, ToString)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ToString )( 
             __RPC__in IInkStrokes * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *ToString);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, Item)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ long Index,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokeDisp **Stroke);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, Add)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in_opt IInkStrokeDisp *InkStroke);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, AddStrokes)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddStrokes )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in_opt IInkStrokes *InkStrokes);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, Remove)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in_opt IInkStrokeDisp *InkStroke);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, RemoveStrokes)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveStrokes )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in_opt IInkStrokes *InkStrokes);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, ModifyDrawingAttributes)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyDrawingAttributes )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in_opt IInkDrawingAttributes *DrawAttrs);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, GetBoundingBox)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBoundingBox )( 
             __RPC__in IInkStrokes * This,
             /* [defaultvalue][in] */ InkBoundingBoxMode BoundingBoxMode,
             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **BoundingBox);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, Transform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Transform )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in_opt IInkTransform *Transform,
             /* [defaultvalue][in] */ VARIANT_BOOL ApplyOnPenWidth);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, ScaleToRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScaleToRectangle )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, Move)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ float HorizontalComponent,
             /* [in] */ float VerticalComponent);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, Rotate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ float Degrees,
             /* [defaultvalue][in] */ float x,
             /* [defaultvalue][in] */ float y);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, Shear)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Shear )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ float HorizontalMultiplier,
             /* [in] */ float VerticalMultiplier);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, ScaleTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScaleTransform )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ float HorizontalMultiplier,
             /* [in] */ float VerticalMultiplier);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, Clip)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clip )( 
             __RPC__in IInkStrokes * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkStrokes, RemoveRecognitionResult)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveRecognitionResult )( 
             __RPC__in IInkStrokes * This);
         
@@ -5237,28 +5507,34 @@ EXTERN_C const IID IID_IInkCustomStrokes;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkCustomStrokes * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkCustomStrokes * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkCustomStrokes * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkCustomStrokes * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkCustomStrokes * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkCustomStrokes * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5267,6 +5543,7 @@ EXTERN_C const IID IID_IInkCustomStrokes;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkCustomStrokes * This,
             /* [annotation][in] */ 
@@ -5286,28 +5563,34 @@ EXTERN_C const IID IID_IInkCustomStrokes;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkCustomStrokes, get_Count)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IInkCustomStrokes * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(IInkCustomStrokes, get__NewEnum)
         /* [helpcontext][helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IInkCustomStrokes * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **_NewEnum);
         
+        DECLSPEC_XFGVIRT(IInkCustomStrokes, Item)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IInkCustomStrokes * This,
             /* [in] */ VARIANT Identifier,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkCustomStrokes, Add)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IInkCustomStrokes * This,
             /* [in] */ __RPC__in BSTR Name,
             /* [in] */ __RPC__in_opt IInkStrokes *Strokes);
         
+        DECLSPEC_XFGVIRT(IInkCustomStrokes, Remove)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IInkCustomStrokes * This,
             /* [in] */ VARIANT Identifier);
         
+        DECLSPEC_XFGVIRT(IInkCustomStrokes, Clear)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IInkCustomStrokes * This);
         
@@ -5398,28 +5681,34 @@ EXTERN_C const IID DIID__IInkStrokesEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IInkStrokesEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IInkStrokesEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IInkStrokesEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IInkStrokesEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IInkStrokesEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IInkStrokesEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5428,6 +5717,7 @@ EXTERN_C const IID DIID__IInkStrokesEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IInkStrokesEvents * This,
             /* [annotation][in] */ 
@@ -5623,28 +5913,34 @@ EXTERN_C const IID IID_IInkDisp;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkDisp * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkDisp * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkDisp * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkDisp * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkDisp * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkDisp * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5653,6 +5949,7 @@ EXTERN_C const IID IID_IInkDisp;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkDisp * This,
             /* [annotation][in] */ 
@@ -5672,59 +5969,72 @@ EXTERN_C const IID IID_IInkDisp;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkDisp, get_Strokes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Strokes )( 
             __RPC__in IInkDisp * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkDisp, get_ExtendedProperties)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedProperties )( 
             __RPC__in IInkDisp * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkExtendedProperties **Properties);
         
+        DECLSPEC_XFGVIRT(IInkDisp, get_Dirty)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dirty )( 
             __RPC__in IInkDisp * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Dirty);
         
+        DECLSPEC_XFGVIRT(IInkDisp, put_Dirty)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Dirty )( 
             __RPC__in IInkDisp * This,
             /* [in] */ VARIANT_BOOL Dirty);
         
+        DECLSPEC_XFGVIRT(IInkDisp, get_CustomStrokes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CustomStrokes )( 
             __RPC__in IInkDisp * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkCustomStrokes **ppunkInkCustomStrokes);
         
+        DECLSPEC_XFGVIRT(IInkDisp, GetBoundingBox)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetBoundingBox )( 
             __RPC__in IInkDisp * This,
             /* [defaultvalue][in] */ InkBoundingBoxMode BoundingBoxMode,
             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkDisp, DeleteStrokes)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteStrokes )( 
             __RPC__in IInkDisp * This,
             /* [unique][defaultvalue][in] */ __RPC__in_opt IInkStrokes *Strokes);
         
+        DECLSPEC_XFGVIRT(IInkDisp, DeleteStroke)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DeleteStroke )( 
             __RPC__in IInkDisp * This,
             /* [in] */ __RPC__in_opt IInkStrokeDisp *Stroke);
         
+        DECLSPEC_XFGVIRT(IInkDisp, ExtractStrokes)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExtractStrokes )( 
             __RPC__in IInkDisp * This,
             /* [defaultvalue][in] */ __RPC__in_opt IInkStrokes *Strokes,
             /* [defaultvalue][in] */ InkExtractFlags ExtractFlags,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **ExtractedInk);
         
+        DECLSPEC_XFGVIRT(IInkDisp, ExtractWithRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ExtractWithRectangle )( 
             __RPC__in IInkDisp * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle,
             /* [defaultvalue][in] */ InkExtractFlags extractFlags,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **ExtractedInk);
         
+        DECLSPEC_XFGVIRT(IInkDisp, Clip)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clip )( 
             __RPC__in IInkDisp * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkDisp, Clone)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IInkDisp * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **NewInk);
         
+        DECLSPEC_XFGVIRT(IInkDisp, HitTestCircle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HitTestCircle )( 
             __RPC__in IInkDisp * This,
             /* [in] */ long X,
@@ -5732,12 +6042,14 @@ EXTERN_C const IID IID_IInkDisp;
             /* [in] */ float radius,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkDisp, HitTestWithRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HitTestWithRectangle )( 
             __RPC__in IInkDisp * This,
             /* [in] */ __RPC__in_opt IInkRectangle *SelectionRectangle,
             /* [in] */ float IntersectPercent,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkDisp, HitTestWithLasso)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HitTestWithLasso )( 
             __RPC__in IInkDisp * This,
             /* [in] */ VARIANT Points,
@@ -5745,6 +6057,7 @@ EXTERN_C const IID IID_IInkDisp;
             /* [defaultvalue][unique][out][in] */ __RPC__inout_opt VARIANT *LassoPoints,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkDisp, NearestPoint)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NearestPoint )( 
             __RPC__in IInkDisp * This,
             /* [in] */ long X,
@@ -5753,32 +6066,38 @@ EXTERN_C const IID IID_IInkDisp;
             /* [defaultvalue][out][in] */ __RPC__inout float *DistanceFromPacket,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokeDisp **Stroke);
         
+        DECLSPEC_XFGVIRT(IInkDisp, CreateStrokes)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateStrokes )( 
             __RPC__in IInkDisp * This,
             /* [defaultvalue][in] */ VARIANT StrokeIds,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkDisp, AddStrokesAtRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddStrokesAtRectangle )( 
             __RPC__in IInkDisp * This,
             /* [in] */ __RPC__in_opt IInkStrokes *SourceStrokes,
             /* [in] */ __RPC__in_opt IInkRectangle *TargetRectangle);
         
+        DECLSPEC_XFGVIRT(IInkDisp, Save)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IInkDisp * This,
             /* [defaultvalue][in] */ InkPersistenceFormat PersistenceFormat,
             /* [defaultvalue][in] */ InkPersistenceCompressionMode CompressionMode,
             /* [retval][out] */ __RPC__out VARIANT *Data);
         
+        DECLSPEC_XFGVIRT(IInkDisp, Load)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IInkDisp * This,
             /* [in] */ VARIANT Data);
         
+        DECLSPEC_XFGVIRT(IInkDisp, CreateStroke)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateStroke )( 
             __RPC__in IInkDisp * This,
             /* [in] */ VARIANT PacketData,
             /* [in] */ VARIANT PacketDescription,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokeDisp **Stroke);
         
+        DECLSPEC_XFGVIRT(IInkDisp, ClipboardCopyWithRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClipboardCopyWithRectangle )( 
             __RPC__in IInkDisp * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle,
@@ -5786,6 +6105,7 @@ EXTERN_C const IID IID_IInkDisp;
             /* [defaultvalue][in] */ InkClipboardModes ClipboardModes,
             /* [retval][out] */ __RPC__deref_out_opt IDataObject **DataObject);
         
+        DECLSPEC_XFGVIRT(IInkDisp, ClipboardCopy)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClipboardCopy )( 
             __RPC__in IInkDisp * This,
             /* [defaultvalue][in] */ __RPC__in_opt IInkStrokes *strokes,
@@ -5793,11 +6113,13 @@ EXTERN_C const IID IID_IInkDisp;
             /* [defaultvalue][in] */ InkClipboardModes ClipboardModes,
             /* [retval][out] */ __RPC__deref_out_opt IDataObject **DataObject);
         
+        DECLSPEC_XFGVIRT(IInkDisp, CanPaste)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CanPaste )( 
             __RPC__in IInkDisp * This,
             /* [defaultvalue][in] */ __RPC__in_opt IDataObject *DataObject,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *CanPaste);
         
+        DECLSPEC_XFGVIRT(IInkDisp, ClipboardPaste)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClipboardPaste )( 
             __RPC__in IInkDisp * This,
             /* [defaultvalue][in] */ long x,
@@ -5949,28 +6271,34 @@ EXTERN_C const IID DIID__IInkEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IInkEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IInkEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IInkEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IInkEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IInkEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IInkEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5979,6 +6307,7 @@ EXTERN_C const IID DIID__IInkEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IInkEvents * This,
             /* [annotation][in] */ 
@@ -6128,28 +6457,34 @@ EXTERN_C const IID IID_IInkRenderer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRenderer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRenderer * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRenderer * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6158,6 +6493,7 @@ EXTERN_C const IID IID_IInkRenderer;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRenderer * This,
             /* [annotation][in] */ 
@@ -6177,77 +6513,92 @@ EXTERN_C const IID IID_IInkRenderer;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, GetViewTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetViewTransform )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ __RPC__in_opt IInkTransform *ViewTransform);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, SetViewTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetViewTransform )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ __RPC__in_opt IInkTransform *ViewTransform);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, GetObjectTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetObjectTransform )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ __RPC__in_opt IInkTransform *ObjectTransform);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, SetObjectTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetObjectTransform )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ __RPC__in_opt IInkTransform *ObjectTransform);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, Draw)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Draw )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ LONG_PTR hDC,
             /* [in] */ __RPC__in_opt IInkStrokes *Strokes);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, DrawStroke)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DrawStroke )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ LONG_PTR hDC,
             /* [in] */ __RPC__in_opt IInkStrokeDisp *Stroke,
             /* [defaultvalue][in] */ __RPC__in_opt IInkDrawingAttributes *DrawingAttributes);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, PixelToInkSpace)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PixelToInkSpace )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ LONG_PTR hDC,
             /* [out][in] */ __RPC__inout long *x,
             /* [out][in] */ __RPC__inout long *y);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, InkSpaceToPixel)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InkSpaceToPixel )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ LONG_PTR hdcDisplay,
             /* [out][in] */ __RPC__inout long *x,
             /* [out][in] */ __RPC__inout long *y);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, PixelToInkSpaceFromPoints)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PixelToInkSpaceFromPoints )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ LONG_PTR hDC,
             /* [out][in] */ __RPC__inout VARIANT *Points);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, InkSpaceToPixelFromPoints)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InkSpaceToPixelFromPoints )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ LONG_PTR hDC,
             /* [out][in] */ __RPC__inout VARIANT *Points);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, Measure)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Measure )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ __RPC__in_opt IInkStrokes *Strokes,
             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, MeasureStroke)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MeasureStroke )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ __RPC__in_opt IInkStrokeDisp *Stroke,
             /* [defaultvalue][in] */ __RPC__in_opt IInkDrawingAttributes *DrawingAttributes,
             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, Move)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Move )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ float HorizontalComponent,
             /* [in] */ float VerticalComponent);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, Rotate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Rotate )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ float Degrees,
             /* [defaultvalue][in] */ float x,
             /* [defaultvalue][in] */ float y);
         
+        DECLSPEC_XFGVIRT(IInkRenderer, ScaleTransform)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ScaleTransform )( 
             __RPC__in IInkRenderer * This,
             /* [in] */ float HorizontalMultiplier,
@@ -6494,28 +6845,34 @@ EXTERN_C const IID IID_IInkCollector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkCollector * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkCollector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkCollector * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkCollector * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkCollector * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkCollector * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6524,6 +6881,7 @@ EXTERN_C const IID IID_IInkCollector;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkCollector * This,
             /* [annotation][in] */ 
@@ -6543,165 +6901,205 @@ EXTERN_C const IID IID_IInkCollector;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_hWnd)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_hWnd )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out LONG_PTR *CurrentWindow);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_hWnd)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_hWnd )( 
             __RPC__in IInkCollector * This,
             /* [in] */ LONG_PTR NewWindow);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_Enabled)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Collecting);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_Enabled)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IInkCollector * This,
             /* [in] */ VARIANT_BOOL Collecting);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_DefaultDrawingAttributes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultDrawingAttributes )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDrawingAttributes **CurrentAttributes);
         
+        DECLSPEC_XFGVIRT(IInkCollector, putref_DefaultDrawingAttributes)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_DefaultDrawingAttributes )( 
             __RPC__in IInkCollector * This,
             /* [in] */ __RPC__in_opt IInkDrawingAttributes *NewAttributes);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_Renderer)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Renderer )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRenderer **CurrentInkRenderer);
         
+        DECLSPEC_XFGVIRT(IInkCollector, putref_Renderer)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Renderer )( 
             __RPC__in IInkCollector * This,
             /* [in] */ __RPC__in_opt IInkRenderer *NewInkRenderer);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_Ink)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ink )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **Ink);
         
+        DECLSPEC_XFGVIRT(IInkCollector, putref_Ink)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Ink )( 
             __RPC__in IInkCollector * This,
             /* [in] */ __RPC__in_opt IInkDisp *NewInk);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_AutoRedraw)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoRedraw )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *AutoRedraw);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_AutoRedraw)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoRedraw )( 
             __RPC__in IInkCollector * This,
             /* [in] */ VARIANT_BOOL AutoRedraw);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_CollectingInk)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CollectingInk )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Collecting);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_CollectionMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CollectionMode )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out InkCollectionMode *Mode);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_CollectionMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CollectionMode )( 
             __RPC__in IInkCollector * This,
             /* [in] */ InkCollectionMode Mode);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_DynamicRendering)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DynamicRendering )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Enabled);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_DynamicRendering)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DynamicRendering )( 
             __RPC__in IInkCollector * This,
             /* [in] */ VARIANT_BOOL Enabled);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_DesiredPacketDescription)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredPacketDescription )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out VARIANT *PacketGuids);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_DesiredPacketDescription)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredPacketDescription )( 
             __RPC__in IInkCollector * This,
             /* [in] */ VARIANT PacketGuids);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_MouseIcon)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MouseIcon )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IPictureDisp **MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_MouseIcon)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MouseIcon )( 
             __RPC__in IInkCollector * This,
             /* [unique][in] */ __RPC__in_opt IPictureDisp *MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkCollector, putref_MouseIcon)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_MouseIcon )( 
             __RPC__in IInkCollector * This,
             /* [unique][in] */ __RPC__in_opt IPictureDisp *MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_MousePointer)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MousePointer )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out InkMousePointer *MousePointer);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_MousePointer)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MousePointer )( 
             __RPC__in IInkCollector * This,
             /* [in] */ InkMousePointer MousePointer);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_Cursors)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cursors )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkCursors **Cursors);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_MarginX)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MarginX )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out long *MarginX);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_MarginX)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MarginX )( 
             __RPC__in IInkCollector * This,
             /* [in] */ long MarginX);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_MarginY)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MarginY )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out long *MarginY);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_MarginY)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MarginY )( 
             __RPC__in IInkCollector * This,
             /* [in] */ long MarginY);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_Tablet)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tablet )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkTablet **SingleTablet);
         
+        DECLSPEC_XFGVIRT(IInkCollector, get_SupportHighContrastInk)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportHighContrastInk )( 
             __RPC__in IInkCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Support);
         
+        DECLSPEC_XFGVIRT(IInkCollector, put_SupportHighContrastInk)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SupportHighContrastInk )( 
             __RPC__in IInkCollector * This,
             /* [in] */ VARIANT_BOOL Support);
         
+        DECLSPEC_XFGVIRT(IInkCollector, SetGestureStatus)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetGestureStatus )( 
             __RPC__in IInkCollector * This,
             /* [in] */ InkApplicationGesture Gesture,
             /* [in] */ VARIANT_BOOL Listen);
         
+        DECLSPEC_XFGVIRT(IInkCollector, GetGestureStatus)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGestureStatus )( 
             __RPC__in IInkCollector * This,
             /* [in] */ InkApplicationGesture Gesture,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Listening);
         
+        DECLSPEC_XFGVIRT(IInkCollector, GetWindowInputRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWindowInputRectangle )( 
             __RPC__in IInkCollector * This,
             /* [out][in] */ __RPC__deref_inout_opt IInkRectangle **WindowInputRectangle);
         
+        DECLSPEC_XFGVIRT(IInkCollector, SetWindowInputRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWindowInputRectangle )( 
             __RPC__in IInkCollector * This,
             /* [in] */ __RPC__in_opt IInkRectangle *WindowInputRectangle);
         
+        DECLSPEC_XFGVIRT(IInkCollector, SetAllTabletsMode)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAllTabletsMode )( 
             __RPC__in IInkCollector * This,
             /* [defaultvalue][in] */ VARIANT_BOOL UseMouseForInput);
         
+        DECLSPEC_XFGVIRT(IInkCollector, SetSingleTabletIntegratedMode)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSingleTabletIntegratedMode )( 
             __RPC__in IInkCollector * This,
             /* [in] */ __RPC__in_opt IInkTablet *Tablet);
         
+        DECLSPEC_XFGVIRT(IInkCollector, GetEventInterest)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetEventInterest )( 
             __RPC__in IInkCollector * This,
             /* [in] */ InkCollectorEventInterest EventId,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Listen);
         
+        DECLSPEC_XFGVIRT(IInkCollector, SetEventInterest)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetEventInterest )( 
             __RPC__in IInkCollector * This,
             /* [in] */ InkCollectorEventInterest EventId,
@@ -6896,28 +7294,34 @@ EXTERN_C const IID DIID__IInkCollectorEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IInkCollectorEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IInkCollectorEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IInkCollectorEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IInkCollectorEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IInkCollectorEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IInkCollectorEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6926,6 +7330,7 @@ EXTERN_C const IID DIID__IInkCollectorEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IInkCollectorEvents * This,
             /* [annotation][in] */ 
@@ -7181,28 +7586,34 @@ EXTERN_C const IID IID_IInkOverlay;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkOverlay * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkOverlay * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkOverlay * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7211,6 +7622,7 @@ EXTERN_C const IID IID_IInkOverlay;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkOverlay * This,
             /* [annotation][in] */ 
@@ -7230,223 +7642,277 @@ EXTERN_C const IID IID_IInkOverlay;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_hWnd)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_hWnd )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out LONG_PTR *CurrentWindow);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_hWnd)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_hWnd )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ LONG_PTR NewWindow);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_Enabled)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Collecting);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_Enabled)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ VARIANT_BOOL Collecting);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_DefaultDrawingAttributes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultDrawingAttributes )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDrawingAttributes **CurrentAttributes);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, putref_DefaultDrawingAttributes)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_DefaultDrawingAttributes )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in_opt IInkDrawingAttributes *NewAttributes);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_Renderer)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Renderer )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRenderer **CurrentInkRenderer);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, putref_Renderer)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Renderer )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in_opt IInkRenderer *NewInkRenderer);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_Ink)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ink )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **Ink);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, putref_Ink)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Ink )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in_opt IInkDisp *NewInk);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_AutoRedraw)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoRedraw )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *AutoRedraw);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_AutoRedraw)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoRedraw )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ VARIANT_BOOL AutoRedraw);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_CollectingInk)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CollectingInk )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Collecting);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_CollectionMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CollectionMode )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out InkCollectionMode *Mode);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_CollectionMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CollectionMode )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkCollectionMode Mode);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_DynamicRendering)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DynamicRendering )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Enabled);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_DynamicRendering)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DynamicRendering )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ VARIANT_BOOL Enabled);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_DesiredPacketDescription)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredPacketDescription )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out VARIANT *PacketGuids);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_DesiredPacketDescription)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredPacketDescription )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ VARIANT PacketGuids);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_MouseIcon)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MouseIcon )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__deref_out_opt IPictureDisp **MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_MouseIcon)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MouseIcon )( 
             __RPC__in IInkOverlay * This,
             /* [unique][in] */ __RPC__in_opt IPictureDisp *MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, putref_MouseIcon)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_MouseIcon )( 
             __RPC__in IInkOverlay * This,
             /* [unique][in] */ __RPC__in_opt IPictureDisp *MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_MousePointer)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MousePointer )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out InkMousePointer *MousePointer);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_MousePointer)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MousePointer )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkMousePointer MousePointer);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_EditingMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EditingMode )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out InkOverlayEditingMode *EditingMode);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_EditingMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EditingMode )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkOverlayEditingMode EditingMode);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_Selection)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Selection )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Selection);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_Selection)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Selection )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in_opt IInkStrokes *Selection);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_EraserMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EraserMode )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out InkOverlayEraserMode *EraserMode);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_EraserMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EraserMode )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkOverlayEraserMode EraserMode);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_EraserWidth)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EraserWidth )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out long *EraserWidth);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_EraserWidth)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EraserWidth )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ long newEraserWidth);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_AttachMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AttachMode )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out InkOverlayAttachMode *AttachMode);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_AttachMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AttachMode )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkOverlayAttachMode AttachMode);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_Cursors)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cursors )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkCursors **Cursors);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_MarginX)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MarginX )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out long *MarginX);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_MarginX)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MarginX )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ long MarginX);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_MarginY)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MarginY )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out long *MarginY);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_MarginY)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MarginY )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ long MarginY);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_Tablet)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tablet )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkTablet **SingleTablet);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_SupportHighContrastInk)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportHighContrastInk )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Support);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_SupportHighContrastInk)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SupportHighContrastInk )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ VARIANT_BOOL Support);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, get_SupportHighContrastSelectionUI)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportHighContrastSelectionUI )( 
             __RPC__in IInkOverlay * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Support);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, put_SupportHighContrastSelectionUI)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SupportHighContrastSelectionUI )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ VARIANT_BOOL Support);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, HitTestSelection)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HitTestSelection )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ long x,
             /* [in] */ long y,
             /* [retval][out] */ __RPC__out SelectionHitResult *SelArea);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, Draw)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Draw )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rect);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, SetGestureStatus)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetGestureStatus )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkApplicationGesture Gesture,
             /* [in] */ VARIANT_BOOL Listen);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, GetGestureStatus)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGestureStatus )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkApplicationGesture Gesture,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Listening);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, GetWindowInputRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWindowInputRectangle )( 
             __RPC__in IInkOverlay * This,
             /* [out][in] */ __RPC__deref_inout_opt IInkRectangle **WindowInputRectangle);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, SetWindowInputRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWindowInputRectangle )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in_opt IInkRectangle *WindowInputRectangle);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, SetAllTabletsMode)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAllTabletsMode )( 
             __RPC__in IInkOverlay * This,
             /* [defaultvalue][in] */ VARIANT_BOOL UseMouseForInput);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, SetSingleTabletIntegratedMode)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSingleTabletIntegratedMode )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ __RPC__in_opt IInkTablet *Tablet);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, GetEventInterest)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetEventInterest )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkCollectorEventInterest EventId,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Listen);
         
+        DECLSPEC_XFGVIRT(IInkOverlay, SetEventInterest)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetEventInterest )( 
             __RPC__in IInkOverlay * This,
             /* [in] */ InkCollectorEventInterest EventId,
@@ -7683,28 +8149,34 @@ EXTERN_C const IID DIID__IInkOverlayEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IInkOverlayEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IInkOverlayEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IInkOverlayEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IInkOverlayEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IInkOverlayEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IInkOverlayEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7713,6 +8185,7 @@ EXTERN_C const IID DIID__IInkOverlayEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IInkOverlayEvents * This,
             /* [annotation][in] */ 
@@ -7983,28 +8456,34 @@ EXTERN_C const IID IID_IInkPicture;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkPicture * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkPicture * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkPicture * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkPicture * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8013,6 +8492,7 @@ EXTERN_C const IID IID_IInkPicture;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkPicture * This,
             /* [annotation][in] */ 
@@ -8032,244 +8512,303 @@ EXTERN_C const IID IID_IInkPicture;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_hWnd)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_hWnd )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out LONG_PTR *CurrentWindow);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_DefaultDrawingAttributes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DefaultDrawingAttributes )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDrawingAttributes **CurrentAttributes);
         
+        DECLSPEC_XFGVIRT(IInkPicture, putref_DefaultDrawingAttributes)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_DefaultDrawingAttributes )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in_opt IInkDrawingAttributes *NewAttributes);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_Renderer)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Renderer )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRenderer **CurrentInkRenderer);
         
+        DECLSPEC_XFGVIRT(IInkPicture, putref_Renderer)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Renderer )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in_opt IInkRenderer *NewInkRenderer);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_Ink)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ink )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **Ink);
         
+        DECLSPEC_XFGVIRT(IInkPicture, putref_Ink)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Ink )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in_opt IInkDisp *NewInk);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_AutoRedraw)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoRedraw )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *AutoRedraw);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_AutoRedraw)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoRedraw )( 
             __RPC__in IInkPicture * This,
             /* [in] */ VARIANT_BOOL AutoRedraw);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_CollectingInk)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CollectingInk )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Collecting);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_CollectionMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CollectionMode )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out InkCollectionMode *Mode);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_CollectionMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CollectionMode )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkCollectionMode Mode);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_DynamicRendering)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DynamicRendering )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Enabled);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_DynamicRendering)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DynamicRendering )( 
             __RPC__in IInkPicture * This,
             /* [in] */ VARIANT_BOOL Enabled);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_DesiredPacketDescription)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DesiredPacketDescription )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out VARIANT *PacketGuids);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_DesiredPacketDescription)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DesiredPacketDescription )( 
             __RPC__in IInkPicture * This,
             /* [in] */ VARIANT PacketGuids);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_MouseIcon)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MouseIcon )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__deref_out_opt IPictureDisp **MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_MouseIcon)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MouseIcon )( 
             __RPC__in IInkPicture * This,
             /* [unique][in] */ __RPC__in_opt IPictureDisp *MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkPicture, putref_MouseIcon)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_MouseIcon )( 
             __RPC__in IInkPicture * This,
             /* [unique][in] */ __RPC__in_opt IPictureDisp *MouseIcon);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_MousePointer)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MousePointer )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out InkMousePointer *MousePointer);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_MousePointer)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MousePointer )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkMousePointer MousePointer);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_EditingMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EditingMode )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out InkOverlayEditingMode *EditingMode);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_EditingMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EditingMode )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkOverlayEditingMode EditingMode);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_Selection)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Selection )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Selection);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_Selection)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Selection )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in_opt IInkStrokes *Selection);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_EraserMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EraserMode )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out InkOverlayEraserMode *EraserMode);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_EraserMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EraserMode )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkOverlayEraserMode EraserMode);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_EraserWidth)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EraserWidth )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out long *EraserWidth);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_EraserWidth)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EraserWidth )( 
             __RPC__in IInkPicture * This,
             /* [in] */ long newEraserWidth);
         
+        DECLSPEC_XFGVIRT(IInkPicture, putref_Picture)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Picture )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in_opt IPictureDisp *pPicture);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_Picture)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Picture )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in_opt IPictureDisp *pPicture);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_Picture)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Picture )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__deref_out_opt IPictureDisp **ppPicture);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_SizeMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SizeMode )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkPictureSizeMode smNewSizeMode);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_SizeMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeMode )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out InkPictureSizeMode *smSizeMode);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_BackColor)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BackColor )( 
             __RPC__in IInkPicture * This,
             /* [in] */ OLE_COLOR newColor);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_BackColor)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BackColor )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out OLE_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_Cursors)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Cursors )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkCursors **Cursors);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_MarginX)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MarginX )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out long *MarginX);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_MarginX)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MarginX )( 
             __RPC__in IInkPicture * This,
             /* [in] */ long MarginX);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_MarginY)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MarginY )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out long *MarginY);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_MarginY)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MarginY )( 
             __RPC__in IInkPicture * This,
             /* [in] */ long MarginY);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_Tablet)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Tablet )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkTablet **SingleTablet);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_SupportHighContrastInk)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportHighContrastInk )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Support);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_SupportHighContrastInk)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SupportHighContrastInk )( 
             __RPC__in IInkPicture * This,
             /* [in] */ VARIANT_BOOL Support);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_SupportHighContrastSelectionUI)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportHighContrastSelectionUI )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Support);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_SupportHighContrastSelectionUI)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SupportHighContrastSelectionUI )( 
             __RPC__in IInkPicture * This,
             /* [in] */ VARIANT_BOOL Support);
         
+        DECLSPEC_XFGVIRT(IInkPicture, HitTestSelection)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *HitTestSelection )( 
             __RPC__in IInkPicture * This,
             /* [in] */ long x,
             /* [in] */ long y,
             /* [retval][out] */ __RPC__out SelectionHitResult *SelArea);
         
+        DECLSPEC_XFGVIRT(IInkPicture, SetGestureStatus)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetGestureStatus )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkApplicationGesture Gesture,
             /* [in] */ VARIANT_BOOL Listen);
         
+        DECLSPEC_XFGVIRT(IInkPicture, GetGestureStatus)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGestureStatus )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkApplicationGesture Gesture,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Listening);
         
+        DECLSPEC_XFGVIRT(IInkPicture, GetWindowInputRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetWindowInputRectangle )( 
             __RPC__in IInkPicture * This,
             /* [out][in] */ __RPC__deref_inout_opt IInkRectangle **WindowInputRectangle);
         
+        DECLSPEC_XFGVIRT(IInkPicture, SetWindowInputRectangle)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWindowInputRectangle )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in_opt IInkRectangle *WindowInputRectangle);
         
+        DECLSPEC_XFGVIRT(IInkPicture, SetAllTabletsMode)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetAllTabletsMode )( 
             __RPC__in IInkPicture * This,
             /* [defaultvalue][in] */ VARIANT_BOOL UseMouseForInput);
         
+        DECLSPEC_XFGVIRT(IInkPicture, SetSingleTabletIntegratedMode)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetSingleTabletIntegratedMode )( 
             __RPC__in IInkPicture * This,
             /* [in] */ __RPC__in_opt IInkTablet *Tablet);
         
+        DECLSPEC_XFGVIRT(IInkPicture, GetEventInterest)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetEventInterest )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkCollectorEventInterest EventId,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Listen);
         
+        DECLSPEC_XFGVIRT(IInkPicture, SetEventInterest)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetEventInterest )( 
             __RPC__in IInkPicture * This,
             /* [in] */ InkCollectorEventInterest EventId,
             /* [in] */ VARIANT_BOOL Listen);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_InkEnabled)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InkEnabled )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Collecting);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_InkEnabled)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InkEnabled )( 
             __RPC__in IInkPicture * This,
             /* [in] */ VARIANT_BOOL Collecting);
         
+        DECLSPEC_XFGVIRT(IInkPicture, get_Enabled)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IInkPicture * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbool);
         
+        DECLSPEC_XFGVIRT(IInkPicture, put_Enabled)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IInkPicture * This,
             /* [in] */ VARIANT_BOOL vbool);
@@ -8520,28 +9059,34 @@ EXTERN_C const IID DIID__IInkPictureEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IInkPictureEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IInkPictureEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IInkPictureEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IInkPictureEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IInkPictureEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IInkPictureEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8550,6 +9095,7 @@ EXTERN_C const IID DIID__IInkPictureEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IInkPictureEvents * This,
             /* [annotation][in] */ 
@@ -8658,28 +9204,34 @@ EXTERN_C const IID IID_IInkRecognizer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognizer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognizer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognizer * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognizer * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognizer * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognizer * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8688,6 +9240,7 @@ EXTERN_C const IID IID_IInkRecognizer;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognizer * This,
             /* [annotation][in] */ 
@@ -8707,30 +9260,37 @@ EXTERN_C const IID IID_IInkRecognizer;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer, get_Name)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IInkRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Name);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer, get_Vendor)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Vendor )( 
             __RPC__in IInkRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Vendor);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer, get_Capabilities)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Capabilities )( 
             __RPC__in IInkRecognizer * This,
             /* [retval][out] */ __RPC__out InkRecognizerCapabilities *CapabilitiesFlags);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer, get_Languages)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Languages )( 
             __RPC__in IInkRecognizer * This,
             /* [retval][out] */ __RPC__out VARIANT *Languages);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer, get_SupportedProperties)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedProperties )( 
             __RPC__in IInkRecognizer * This,
             /* [retval][out] */ __RPC__out VARIANT *SupportedProperties);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer, get_PreferredPacketDescription)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreferredPacketDescription )( 
             __RPC__in IInkRecognizer * This,
             /* [retval][out] */ __RPC__out VARIANT *PreferredPacketDescription);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer, CreateRecognizerContext)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateRecognizerContext )( 
             __RPC__in IInkRecognizer * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognizerContext **Context);
@@ -8833,28 +9393,34 @@ EXTERN_C const IID IID_IInkRecognizer2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognizer2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognizer2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognizer2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognizer2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognizer2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognizer2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8863,6 +9429,7 @@ EXTERN_C const IID IID_IInkRecognizer2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognizer2 * This,
             /* [annotation][in] */ 
@@ -8882,10 +9449,12 @@ EXTERN_C const IID IID_IInkRecognizer2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer2, get_Id)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IInkRecognizer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
+        DECLSPEC_XFGVIRT(IInkRecognizer2, get_UnicodeRanges)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UnicodeRanges )( 
             __RPC__in IInkRecognizer2 * This,
             /* [retval][out] */ __RPC__out VARIANT *UnicodeRanges);
@@ -8981,28 +9550,34 @@ EXTERN_C const IID IID_IInkRecognizers;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognizers * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognizers * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognizers * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognizers * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognizers * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognizers * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9011,6 +9586,7 @@ EXTERN_C const IID IID_IInkRecognizers;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognizers * This,
             /* [annotation][in] */ 
@@ -9030,19 +9606,23 @@ EXTERN_C const IID IID_IInkRecognizers;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognizers, get_Count)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IInkRecognizers * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(IInkRecognizers, get__NewEnum)
         /* [helpcontext][helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IInkRecognizers * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **_NewEnum);
         
+        DECLSPEC_XFGVIRT(IInkRecognizers, GetDefaultRecognizer)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDefaultRecognizer )( 
             __RPC__in IInkRecognizers * This,
             /* [defaultvalue][in] */ long lcid,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognizer **DefaultRecognizer);
         
+        DECLSPEC_XFGVIRT(IInkRecognizers, Item)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IInkRecognizers * This,
             /* [in] */ long Index,
@@ -9129,28 +9709,34 @@ EXTERN_C const IID DIID__IInkRecognitionEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IInkRecognitionEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IInkRecognitionEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IInkRecognitionEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IInkRecognitionEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IInkRecognitionEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IInkRecognitionEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9159,6 +9745,7 @@ EXTERN_C const IID DIID__IInkRecognitionEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IInkRecognitionEvents * This,
             /* [annotation][in] */ 
@@ -9318,28 +9905,34 @@ EXTERN_C const IID IID_IInkRecognizerContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognizerContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognizerContext * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognizerContext * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9348,6 +9941,7 @@ EXTERN_C const IID IID_IInkRecognizerContext;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognizerContext * This,
             /* [annotation][in] */ 
@@ -9367,97 +9961,121 @@ EXTERN_C const IID IID_IInkRecognizerContext;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_Strokes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Strokes )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, putref_Strokes)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Strokes )( 
             __RPC__in IInkRecognizerContext * This,
             /* [unique][in] */ __RPC__in_opt IInkStrokes *Strokes);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_CharacterAutoCompletionMode)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CharacterAutoCompletionMode )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__out InkRecognizerCharacterAutoCompletionMode *Mode);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, put_CharacterAutoCompletionMode)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CharacterAutoCompletionMode )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ InkRecognizerCharacterAutoCompletionMode Mode);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_Factoid)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Factoid )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Factoid);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, put_Factoid)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Factoid )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ __RPC__in BSTR factoid);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_Guide)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Guide )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognizerGuide **RecognizerGuide);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, putref_Guide)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Guide )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ __RPC__in_opt IInkRecognizerGuide *RecognizerGuide);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_PrefixText)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrefixText )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Prefix);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, put_PrefixText)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PrefixText )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ __RPC__in BSTR Prefix);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_SuffixText)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SuffixText )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Suffix);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, put_SuffixText)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SuffixText )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ __RPC__in BSTR Suffix);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_RecognitionFlags)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RecognitionFlags )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__out InkRecognitionModes *Modes);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, put_RecognitionFlags)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RecognitionFlags )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ InkRecognitionModes Modes);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_WordList)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WordList )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkWordList **WordList);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, putref_WordList)
         /* [helpcontext][helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_WordList )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ __RPC__in_opt IInkWordList *WordList);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, get_Recognizer)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recognizer )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognizer **Recognizer);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, Recognize)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Recognize )( 
             __RPC__in IInkRecognizerContext * This,
             /* [out][in] */ __RPC__inout InkRecognitionStatus *RecognitionStatus,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionResult **RecognitionResult);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, StopBackgroundRecognition)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *StopBackgroundRecognition )( 
             __RPC__in IInkRecognizerContext * This);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, EndInkInput)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EndInkInput )( 
             __RPC__in IInkRecognizerContext * This);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, BackgroundRecognize)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BackgroundRecognize )( 
             __RPC__in IInkRecognizerContext * This,
             /* [optional][in] */ VARIANT CustomData);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, BackgroundRecognizeWithAlternates)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *BackgroundRecognizeWithAlternates )( 
             __RPC__in IInkRecognizerContext * This,
             /* [optional][in] */ VARIANT CustomData);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, Clone)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IInkRecognizerContext * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognizerContext **RecoContext);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext, IsStringSupported)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsStringSupported )( 
             __RPC__in IInkRecognizerContext * This,
             /* [in] */ __RPC__in BSTR String,
@@ -9612,28 +10230,34 @@ EXTERN_C const IID IID_IInkRecognizerContext2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognizerContext2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognizerContext2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognizerContext2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognizerContext2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognizerContext2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognizerContext2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9642,6 +10266,7 @@ EXTERN_C const IID IID_IInkRecognizerContext2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognizerContext2 * This,
             /* [annotation][in] */ 
@@ -9661,10 +10286,12 @@ EXTERN_C const IID IID_IInkRecognizerContext2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext2, get_EnabledUnicodeRanges)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnabledUnicodeRanges )( 
             __RPC__in IInkRecognizerContext2 * This,
             /* [retval][out] */ __RPC__out VARIANT *UnicodeRanges);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerContext2, put_EnabledUnicodeRanges)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnabledUnicodeRanges )( 
             __RPC__in IInkRecognizerContext2 * This,
             /* [in] */ VARIANT UnicodeRanges);
@@ -9769,28 +10396,34 @@ EXTERN_C const IID IID_IInkRecognitionResult;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognitionResult * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognitionResult * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognitionResult * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognitionResult * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognitionResult * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognitionResult * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9799,6 +10432,7 @@ EXTERN_C const IID IID_IInkRecognitionResult;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognitionResult * This,
             /* [annotation][in] */ 
@@ -9818,22 +10452,27 @@ EXTERN_C const IID IID_IInkRecognitionResult;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionResult, get_TopString)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TopString )( 
             __RPC__in IInkRecognitionResult * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *TopString);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionResult, get_TopAlternate)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TopAlternate )( 
             __RPC__in IInkRecognitionResult * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionAlternate **TopAlternate);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionResult, get_TopConfidence)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TopConfidence )( 
             __RPC__in IInkRecognitionResult * This,
             /* [retval][out] */ __RPC__out InkRecognitionConfidence *TopConfidence);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionResult, get_Strokes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Strokes )( 
             __RPC__in IInkRecognitionResult * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionResult, AlternatesFromSelection)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AlternatesFromSelection )( 
             __RPC__in IInkRecognitionResult * This,
             /* [defaultvalue][in] */ long selectionStart,
@@ -9841,10 +10480,12 @@ EXTERN_C const IID IID_IInkRecognitionResult;
             /* [defaultvalue][in] */ long maximumAlternates,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionAlternates **AlternatesFromSelection);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionResult, ModifyTopAlternate)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ModifyTopAlternate )( 
             __RPC__in IInkRecognitionResult * This,
             /* [in] */ __RPC__in_opt IInkRecognitionAlternate *Alternate);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionResult, SetResultOnStrokes)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetResultOnStrokes )( 
             __RPC__in IInkRecognitionResult * This);
         
@@ -9992,28 +10633,34 @@ EXTERN_C const IID IID_IInkRecognitionAlternate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognitionAlternate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognitionAlternate * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10022,6 +10669,7 @@ EXTERN_C const IID IID_IInkRecognitionAlternate;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognitionAlternate * This,
             /* [annotation][in] */ 
@@ -10041,68 +10689,83 @@ EXTERN_C const IID IID_IInkRecognitionAlternate;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_String)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_String )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *RecoString);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_Confidence)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Confidence )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__out InkRecognitionConfidence *Confidence);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_Baseline)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Baseline )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__out VARIANT *Baseline);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_Midline)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Midline )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__out VARIANT *Midline);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_Ascender)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ascender )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__out VARIANT *Ascender);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_Descender)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Descender )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__out VARIANT *Descender);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_LineNumber)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LineNumber )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__out long *LineNumber);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_Strokes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Strokes )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_LineAlternates)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LineAlternates )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionAlternates **LineAlternates);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, get_ConfidenceAlternates)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ConfidenceAlternates )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionAlternates **ConfidenceAlternates);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, GetStrokesFromStrokeRanges)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetStrokesFromStrokeRanges )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [in] */ __RPC__in_opt IInkStrokes *Strokes,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **GetStrokesFromStrokeRanges);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, GetStrokesFromTextRange)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetStrokesFromTextRange )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [out][in] */ __RPC__inout long *selectionStart,
             /* [out][in] */ __RPC__inout long *selectionLength,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **GetStrokesFromTextRange);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, GetTextRangeFromStrokes)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetTextRangeFromStrokes )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [in] */ __RPC__in_opt IInkStrokes *Strokes,
             /* [out][in] */ __RPC__inout long *selectionStart,
             /* [out][in] */ __RPC__inout long *selectionLength);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, AlternatesWithConstantPropertyValues)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AlternatesWithConstantPropertyValues )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [in] */ __RPC__in BSTR PropertyType,
             /* [retval][out] */ __RPC__deref_out_opt IInkRecognitionAlternates **AlternatesWithConstantPropertyValues);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternate, GetPropertyValue)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPropertyValue )( 
             __RPC__in IInkRecognitionAlternate * This,
             /* [in] */ __RPC__in BSTR PropertyType,
@@ -10237,28 +10900,34 @@ EXTERN_C const IID IID_IInkRecognitionAlternates;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognitionAlternates * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognitionAlternates * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognitionAlternates * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognitionAlternates * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognitionAlternates * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognitionAlternates * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10267,6 +10936,7 @@ EXTERN_C const IID IID_IInkRecognitionAlternates;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognitionAlternates * This,
             /* [annotation][in] */ 
@@ -10286,18 +10956,22 @@ EXTERN_C const IID IID_IInkRecognitionAlternates;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternates, get_Count)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IInkRecognitionAlternates * This,
             /* [retval][out] */ __RPC__out long *Count);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternates, get__NewEnum)
         /* [helpcontext][helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IInkRecognitionAlternates * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **_NewEnum);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternates, get_Strokes)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Strokes )( 
             __RPC__in IInkRecognitionAlternates * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkStrokes **Strokes);
         
+        DECLSPEC_XFGVIRT(IInkRecognitionAlternates, Item)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IInkRecognitionAlternates * This,
             /* [in] */ long Index,
@@ -10422,28 +11096,34 @@ EXTERN_C const IID IID_IInkRecognizerGuide;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkRecognizerGuide * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkRecognizerGuide * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10452,6 +11132,7 @@ EXTERN_C const IID IID_IInkRecognizerGuide;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkRecognizerGuide * This,
             /* [annotation][in] */ 
@@ -10471,50 +11152,62 @@ EXTERN_C const IID IID_IInkRecognizerGuide;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, get_WritingBox)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WritingBox )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, put_WritingBox)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_WritingBox )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, get_DrawnBox)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DrawnBox )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkRectangle **Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, put_DrawnBox)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DrawnBox )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ __RPC__in_opt IInkRectangle *Rectangle);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, get_Rows)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Rows )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [retval][out] */ __RPC__out long *Units);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, put_Rows)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Rows )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ long Units);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, get_Columns)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Columns )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [retval][out] */ __RPC__out long *Units);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, put_Columns)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Columns )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ long Units);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, get_Midline)
         /* [helpcontext][helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Midline )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [retval][out] */ __RPC__out long *Units);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, put_Midline)
         /* [helpcontext][helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Midline )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ long Units);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, get_GuideData)
         /* [helpcontext][helpstring][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GuideData )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [retval][out] */ __RPC__out InkRecoGuide *pRecoGuide);
         
+        DECLSPEC_XFGVIRT(IInkRecognizerGuide, put_GuideData)
         /* [helpcontext][helpstring][hidden][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_GuideData )( 
             __RPC__in IInkRecognizerGuide * This,
             /* [in] */ InkRecoGuide recoGuide);
@@ -10635,28 +11328,34 @@ EXTERN_C const IID IID_IInkWordList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkWordList * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkWordList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkWordList * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkWordList * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkWordList * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkWordList * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10665,6 +11364,7 @@ EXTERN_C const IID IID_IInkWordList;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkWordList * This,
             /* [annotation][in] */ 
@@ -10684,14 +11384,17 @@ EXTERN_C const IID IID_IInkWordList;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkWordList, AddWord)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddWord )( 
             __RPC__in IInkWordList * This,
             /* [in] */ __RPC__in BSTR NewWord);
         
+        DECLSPEC_XFGVIRT(IInkWordList, RemoveWord)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveWord )( 
             __RPC__in IInkWordList * This,
             /* [in] */ __RPC__in BSTR RemoveWord);
         
+        DECLSPEC_XFGVIRT(IInkWordList, Merge)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Merge )( 
             __RPC__in IInkWordList * This,
             /* [in] */ __RPC__in_opt IInkWordList *MergeWordList);
@@ -10779,28 +11482,34 @@ EXTERN_C const IID IID_IInkWordList2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkWordList2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkWordList2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkWordList2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInkWordList2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInkWordList2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInkWordList2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10809,6 +11518,7 @@ EXTERN_C const IID IID_IInkWordList2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInkWordList2 * This,
             /* [annotation][in] */ 
@@ -10828,6 +11538,7 @@ EXTERN_C const IID IID_IInkWordList2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IInkWordList2, AddWords)
         /* [helpcontext][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddWords )( 
             __RPC__in IInkWordList2 * This,
             /* [in] */ __RPC__in BSTR NewWords);
@@ -11018,28 +11729,34 @@ EXTERN_C const IID IID_IInk;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInk * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInk * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInk * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IInk * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IInk * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IInk * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11048,6 +11765,7 @@ EXTERN_C const IID IID_IInk;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IInk * This,
             /* [annotation][in] */ 
@@ -11160,31 +11878,38 @@ EXTERN_C const IID IID_IInkLineInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IInkLineInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IInkLineInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IInkLineInfo * This);
         
+        DECLSPEC_XFGVIRT(IInkLineInfo, SetFormat)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetFormat )( 
             __RPC__in IInkLineInfo * This,
             __RPC__in INKMETRIC *pim);
         
+        DECLSPEC_XFGVIRT(IInkLineInfo, GetFormat)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFormat )( 
             __RPC__in IInkLineInfo * This,
             __RPC__in INKMETRIC *pim);
         
+        DECLSPEC_XFGVIRT(IInkLineInfo, GetInkExtent)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetInkExtent )( 
             __RPC__in IInkLineInfo * This,
             __RPC__in INKMETRIC *pim,
             __RPC__in UINT *pnWidth);
         
+        DECLSPEC_XFGVIRT(IInkLineInfo, GetCandidate)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCandidate )( 
             __RPC__in IInkLineInfo * This,
             UINT nCandidateNum,
@@ -11192,11 +11917,13 @@ EXTERN_C const IID IID_IInkLineInfo;
             __RPC__in UINT *pcwcRecogWord,
             DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IInkLineInfo, SetCandidate)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetCandidate )( 
             __RPC__in IInkLineInfo * This,
             UINT nCandidateNum,
             __RPC__in LPWSTR strRecogWord);
         
+        DECLSPEC_XFGVIRT(IInkLineInfo, Recognize)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Recognize )( 
             __RPC__in IInkLineInfo * This);
         
@@ -11276,28 +12003,34 @@ EXTERN_C const IID IID_ISketchInk;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISketchInk * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISketchInk * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISketchInk * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISketchInk * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISketchInk * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISketchInk * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11306,6 +12039,7 @@ EXTERN_C const IID IID_ISketchInk;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISketchInk * This,
             /* [annotation][in] */ 

@@ -56,3 +56,6 @@ typedef struct _OLD_LARGE_INTEGER {
 #include <diagnosticdataquery.h>
 #include <diagnosticdataquerytypes.h>
 #include <security.h>
+#include <licenseprotection.h>
+#include <softpub.h>
+#include <wdigest.h>

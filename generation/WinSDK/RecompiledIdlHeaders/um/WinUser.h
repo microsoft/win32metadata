@@ -498,19 +498,12 @@ wsprintfW(
 #define VK_KANA           0x15
 #define VK_HANGEUL        0x15  /* old name - should be here for compatibility */
 #define VK_HANGUL         0x15
-
-/*
- * 0x16 : unassigned
- */
-
+#define VK_IME_ON         0x16
 #define VK_JUNJA          0x17
 #define VK_FINAL          0x18
 #define VK_HANJA          0x19
 #define VK_KANJI          0x19
-
-/*
- * 0x1A : unassigned
- */
+#define VK_IME_OFF        0x1A
 
 #define VK_ESCAPE         0x1B
 
@@ -2467,7 +2460,6 @@ typedef struct {
 #define WM_GETDPISCALEDSIZE             0x02E4
 #endif /* WINVER >= 0x0605 */
 
-
 #define WM_CUT                          0x0300
 #define WM_COPY                         0x0301
 #define WM_PASTE                        0x0302
@@ -3620,6 +3612,8 @@ UnregisterHotKey(
 #define EWX_HYBRID_SHUTDOWN         0x00400000
 #define EWX_BOOTOPTIONS             0x01000000
 #define EWX_ARSO                    0x04000000
+#define EWX_CHECK_SAFE_FOR_SERVER   0x08000000
+#define EWX_SYSTEM_INITIATED        0x10000000
 
 
 #pragma region Desktop Family
@@ -4883,8 +4877,8 @@ IsZoomed(
 #define SWP_NOREPOSITION    SWP_NOOWNERZORDER
 
 #if(WINVER >= 0x0400)
-#define SWP_DEFERERASE      0x2000
-#define SWP_ASYNCWINDOWPOS  0x4000
+#define SWP_DEFERERASE      0x2000 // same as SWP_DEFERDRAWING
+#define SWP_ASYNCWINDOWPOS  0x4000 // same as SWP_CREATESPB
 #endif /* WINVER >= 0x0400 */
 
 
@@ -5308,7 +5302,6 @@ DefDlgProcW(
 #else
 #define DefDlgProc  DefDlgProcA
 #endif // !UNICODE
-
 
 typedef enum DIALOG_CONTROL_DPI_CHANGE_BEHAVIORS {
      DCDC_DEFAULT                  = 0x0000,
@@ -6295,7 +6288,7 @@ typedef UINT32 POINTER_FLAGS;
 #define POINTER_FLAG_THIRDBUTTON        0x00000040 // Third button
 #define POINTER_FLAG_FOURTHBUTTON       0x00000080 // Fourth button
 #define POINTER_FLAG_FIFTHBUTTON        0x00000100 // Fifth button
-#define POINTER_FLAG_PRIMARY            0x00002000 // Pointer is primary
+#define POINTER_FLAG_PRIMARY            0x00002000 // Pointer is primary for system
 #define POINTER_FLAG_CONFIDENCE         0x00004000 // Pointer is considered unlikely to be accidental
 #define POINTER_FLAG_CANCELED           0x00008000 // Pointer is departing in an abnormal manner
 #define POINTER_FLAG_DOWN               0x00010000 // Pointer transitioned to down state (made contact)
@@ -8728,11 +8721,11 @@ ScrollWindowEx(
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
-#define SW_SCROLLCHILDREN           0x0001  /* Scroll children within *lprcScroll. */
-#define SW_INVALIDATE               0x0002  /* Invalidate after scrolling */
-#define SW_ERASE                    0x0004  /* If SW_INVALIDATE, don't send WM_ERASEBACKGROUND */
+#define SW_SCROLLCHILDREN   0x0001  /* Scroll children within *lprcScroll. */
+#define SW_INVALIDATE       0x0002  /* Invalidate after scrolling */
+#define SW_ERASE            0x0004  /* If SW_INVALIDATE, don't send WM_ERASEBACKGROUND */
 #if(WINVER >= 0x0500)
-#define SW_SMOOTHSCROLL             0x0010  /* Use smooth scrolling */
+#define SW_SMOOTHSCROLL     0x0010  /* Use smooth scrolling */
 #endif /* WINVER >= 0x0500 */
 
 #pragma region Desktop Family
@@ -10322,6 +10315,7 @@ SetWindowsHookExW(
 #define SetWindowsHookEx  SetWindowsHookExA
 #endif // !UNICODE
 
+
 WINUSERAPI
 BOOL
 WINAPI
@@ -10791,6 +10785,21 @@ typedef struct tagCURSORSHAPE
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
+#pragma region Desktop or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES)
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+#define CURSOR_CREATION_SCALING_NONE    1
+#define CURSOR_CREATION_SCALING_DEFAULT 2
+
+WINUSERAPI
+UINT
+WINAPI
+SetThreadCursorCreationScaling(
+    UINT cursorDpi);
+#endif /* NTDDI_VERSION >= NTDDI_WIN10_CO */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
 #define IMAGE_BITMAP        0
 #define IMAGE_ICON          1
 #define IMAGE_CURSOR        2
@@ -11039,9 +11048,9 @@ GetIconInfoExW(
 
 #endif /* OEMRESOURCE */
 
-#define ORD_LANGDRIVER    1     /* The ordinal number for the entry point of
-                                ** language drivers.
-                                */
+
+// The ordinal number for the entry point of language drivers.
+#define ORD_LANGDRIVER    1
 
 #ifndef NOICONS
 
@@ -12560,6 +12569,10 @@ typedef struct tagTouchPredictionParameters
 #if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 #endif
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+/* constants for SPI_{GET|SET}WAKEONINPUTDEVICETYPES */
+#endif // NTDDI_VERSION >= NTDDI_WIN10_CO
+
 
 #if(WINVER >= 0x0500)
 #define SPI_GETACTIVEWINDOWTRACKING         0x1000
@@ -13618,7 +13631,6 @@ EnumDisplayMonitors(
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
-
 #ifndef NOWINABLE
 
 #pragma region Desktop Family
@@ -14447,6 +14459,7 @@ SetProcessDpiAwarenessContext(
 
 #endif /* WINVER >= 0x0605 */
 
+
 #if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 
 WINUSERAPI
@@ -14635,6 +14648,7 @@ typedef struct tagMENUBARINFO
     HWND hwndMenu;       // hwnd of item submenu if one
     BOOL fBarFocused:1;  // bar, popup has the focus
     BOOL fFocused:1;     // item has the focus
+    BOOL fUnused:30;     // reserved
 } MENUBARINFO, *PMENUBARINFO, *LPMENUBARINFO;
 
 WINUSERAPI

@@ -15,5 +15,11 @@
 <IncludeRoot>/um/gb18030.h
 <IncludeRoot>/um/icu.h
 <IncludeRoot>/um/dimm.h
+<IncludeRoot>/um/bcp47mrm.h
+<IncludeRoot>/um/elssrvc.h
+<IncludeRoot>/um/icucommon.h
+<IncludeRoot>/um/icui18n.h
+<IncludeRoot>/um/ime_cmodes.h
+<IncludeRoot>/um/mlang.h
 --namespace
 Windows.Win32.Globalization

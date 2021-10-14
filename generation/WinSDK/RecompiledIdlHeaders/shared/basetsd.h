@@ -143,6 +143,20 @@ typedef unsigned int DWORD32, *PDWORD32;
 #endif // midl64
 
 //
+// HANDLE64 uses 64 bits in both WIN32 and WIN64 platforms. This along with
+// HandleToHandle64 and Handle64ToHandle conversion macros, help simplify WOW
+// support while user mode and kernel mode communicate with a shared memory or
+// when we prefer to use fixed size types in both WIN32 and WIN64 for other
+// reasons.
+//
+
+#ifndef __HANDLE64_DEFINED__
+#define __HANDLE64_DEFINED__
+typedef void* POINTER_64 HANDLE64;
+typedef HANDLE64 *PHANDLE64;
+#endif
+
+//
 // HALF_PTR is half the size of a pointer it intended for use with
 // within structures which contain a pointer and two small fields.
 // UHALF_PTR is the unsigned variation.
@@ -357,7 +371,7 @@ PtrToPtr64(
     const void *p
     )
 {
-    return((void * POINTER_64) (unsigned __int64) (ULONG_PTR)p );
+    return((void * POINTER_64) (unsigned __int64) (ULONG_PTR) p );
 }
 
 __inline
@@ -370,18 +384,18 @@ Ptr64ToPtr(
 }
 
 __inline
-void * POINTER_64
+HANDLE64
 HandleToHandle64(
-    const void *h
+    const void * h
     )
 {
-    return((void * POINTER_64)(__int64)(LONG_PTR)h );
+    return((HANDLE64) (__int64) (LONG_PTR) h );
 }
 
 __inline
 void *
 Handle64ToHandle(
-    const void * POINTER_64 h
+    const HANDLE64 h
     )
 {
     return((void *) (ULONG_PTR) (unsigned __int64) h );

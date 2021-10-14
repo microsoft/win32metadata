@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -724,22 +732,27 @@ EXTERN_C const IID IID_IClockVectorElement;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IClockVectorElement * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IClockVectorElement * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IClockVectorElement * This);
         
+        DECLSPEC_XFGVIRT(IClockVectorElement, GetReplicaKey)
         HRESULT ( STDMETHODCALLTYPE *GetReplicaKey )( 
             IClockVectorElement * This,
             /* [out] */ DWORD *pdwReplicaKey);
         
+        DECLSPEC_XFGVIRT(IClockVectorElement, GetTickCount)
         HRESULT ( STDMETHODCALLTYPE *GetTickCount )( 
             IClockVectorElement * This,
             /* [out] */ ULONGLONG *pullTickCount);
@@ -824,30 +837,37 @@ EXTERN_C const IID IID_IFeedClockVectorElement;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFeedClockVectorElement * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFeedClockVectorElement * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IFeedClockVectorElement * This);
         
+        DECLSPEC_XFGVIRT(IClockVectorElement, GetReplicaKey)
         HRESULT ( STDMETHODCALLTYPE *GetReplicaKey )( 
             IFeedClockVectorElement * This,
             /* [out] */ DWORD *pdwReplicaKey);
         
+        DECLSPEC_XFGVIRT(IClockVectorElement, GetTickCount)
         HRESULT ( STDMETHODCALLTYPE *GetTickCount )( 
             IFeedClockVectorElement * This,
             /* [out] */ ULONGLONG *pullTickCount);
         
+        DECLSPEC_XFGVIRT(IFeedClockVectorElement, GetSyncTime)
         HRESULT ( STDMETHODCALLTYPE *GetSyncTime )( 
             IFeedClockVectorElement * This,
             /* [out] */ SYNC_TIME *pSyncTime);
         
+        DECLSPEC_XFGVIRT(IFeedClockVectorElement, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IFeedClockVectorElement * This,
             /* [out] */ BYTE *pbFlags);
@@ -930,23 +950,28 @@ EXTERN_C const IID IID_IClockVector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IClockVector * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IClockVector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IClockVector * This);
         
+        DECLSPEC_XFGVIRT(IClockVector, GetClockVectorElements)
         HRESULT ( STDMETHODCALLTYPE *GetClockVectorElements )( 
             IClockVector * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppiEnumClockVector);
         
+        DECLSPEC_XFGVIRT(IClockVector, GetClockVectorElementCount)
         HRESULT ( STDMETHODCALLTYPE *GetClockVectorElementCount )( 
             IClockVector * This,
             /* [out] */ DWORD *pdwCount);
@@ -1021,31 +1046,38 @@ EXTERN_C const IID IID_IFeedClockVector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFeedClockVector * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFeedClockVector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IFeedClockVector * This);
         
+        DECLSPEC_XFGVIRT(IClockVector, GetClockVectorElements)
         HRESULT ( STDMETHODCALLTYPE *GetClockVectorElements )( 
             IFeedClockVector * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppiEnumClockVector);
         
+        DECLSPEC_XFGVIRT(IClockVector, GetClockVectorElementCount)
         HRESULT ( STDMETHODCALLTYPE *GetClockVectorElementCount )( 
             IFeedClockVector * This,
             /* [out] */ DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IFeedClockVector, GetUpdateCount)
         HRESULT ( STDMETHODCALLTYPE *GetUpdateCount )( 
             IFeedClockVector * This,
             /* [out] */ DWORD *pdwUpdateCount);
         
+        DECLSPEC_XFGVIRT(IFeedClockVector, IsNoConflictsSpecified)
         HRESULT ( STDMETHODCALLTYPE *IsNoConflictsSpecified )( 
             IFeedClockVector * This,
             /* [out] */ BOOL *pfIsNoConflictsSpecified);
@@ -1134,31 +1166,38 @@ EXTERN_C const IID IID_IEnumClockVector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumClockVector * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumClockVector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumClockVector * This);
         
+        DECLSPEC_XFGVIRT(IEnumClockVector, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumClockVector * This,
             /* [range][in] */ ULONG cClockVectorElements,
             /* [length_is][size_is][out] */ IClockVectorElement **ppiClockVectorElements,
             /* [unique][out][in] */ ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumClockVector, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumClockVector * This,
             /* [in] */ ULONG cSyncVersions);
         
+        DECLSPEC_XFGVIRT(IEnumClockVector, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumClockVector * This);
         
+        DECLSPEC_XFGVIRT(IEnumClockVector, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumClockVector * This,
             /* [out] */ IEnumClockVector **ppiEnum);
@@ -1246,31 +1285,38 @@ EXTERN_C const IID IID_IEnumFeedClockVector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumFeedClockVector * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumFeedClockVector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumFeedClockVector * This);
         
+        DECLSPEC_XFGVIRT(IEnumFeedClockVector, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumFeedClockVector * This,
             /* [in] */ ULONG cClockVectorElements,
             /* [length_is][size_is][out] */ IFeedClockVectorElement **ppiClockVectorElements,
             /* [unique][out][in] */ ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumFeedClockVector, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumFeedClockVector * This,
             /* [in] */ ULONG cSyncVersions);
         
+        DECLSPEC_XFGVIRT(IEnumFeedClockVector, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumFeedClockVector * This);
         
+        DECLSPEC_XFGVIRT(IEnumFeedClockVector, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumFeedClockVector * This,
             /* [out] */ IEnumFeedClockVector **ppiEnum);
@@ -1362,36 +1408,44 @@ EXTERN_C const IID IID_ICoreFragment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICoreFragment * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICoreFragment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICoreFragment * This);
         
+        DECLSPEC_XFGVIRT(ICoreFragment, NextColumn)
         HRESULT ( STDMETHODCALLTYPE *NextColumn )( 
             ICoreFragment * This,
             /* [size_is][unique][out][in] */ BYTE *pChangeUnitId,
             /* [out][in] */ DWORD *pChangeUnitIdSize);
         
+        DECLSPEC_XFGVIRT(ICoreFragment, NextRange)
         HRESULT ( STDMETHODCALLTYPE *NextRange )( 
             ICoreFragment * This,
             /* [size_is][unique][out][in] */ BYTE *pItemId,
             /* [out][in] */ DWORD *pItemIdSize,
             /* [out] */ IClockVector **piClockVector);
         
+        DECLSPEC_XFGVIRT(ICoreFragment, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ICoreFragment * This);
         
+        DECLSPEC_XFGVIRT(ICoreFragment, GetColumnCount)
         HRESULT ( STDMETHODCALLTYPE *GetColumnCount )( 
             ICoreFragment * This,
             /* [out] */ DWORD *pColumnCount);
         
+        DECLSPEC_XFGVIRT(ICoreFragment, GetRangeCount)
         HRESULT ( STDMETHODCALLTYPE *GetRangeCount )( 
             ICoreFragment * This,
             /* [out] */ DWORD *pRangeCount);
@@ -1476,24 +1530,29 @@ EXTERN_C const IID IID_ICoreFragmentInspector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICoreFragmentInspector * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICoreFragmentInspector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICoreFragmentInspector * This);
         
+        DECLSPEC_XFGVIRT(ICoreFragmentInspector, NextCoreFragments)
         HRESULT ( STDMETHODCALLTYPE *NextCoreFragments )( 
             ICoreFragmentInspector * This,
             /* [in] */ ULONG requestedCount,
             /* [length_is][size_is][out] */ ICoreFragment **ppiCoreFragments,
             /* [out][in] */ ULONG *pFetchedCount);
         
+        DECLSPEC_XFGVIRT(ICoreFragmentInspector, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             ICoreFragmentInspector * This);
         
@@ -1573,28 +1632,34 @@ EXTERN_C const IID IID_IRangeException;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRangeException * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRangeException * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRangeException * This);
         
+        DECLSPEC_XFGVIRT(IRangeException, GetClosedRangeStart)
         HRESULT ( STDMETHODCALLTYPE *GetClosedRangeStart )( 
             IRangeException * This,
             /* [size_is][unique][out][in] */ BYTE *pbClosedRangeStart,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(IRangeException, GetClosedRangeEnd)
         HRESULT ( STDMETHODCALLTYPE *GetClosedRangeEnd )( 
             IRangeException * This,
             /* [size_is][unique][out][in] */ BYTE *pbClosedRangeEnd,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(IRangeException, GetClockVector)
         HRESULT ( STDMETHODCALLTYPE *GetClockVector )( 
             IRangeException * This,
             /* [in] */ REFIID riid,
@@ -1680,31 +1745,38 @@ EXTERN_C const IID IID_IEnumRangeExceptions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumRangeExceptions * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumRangeExceptions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumRangeExceptions * This);
         
+        DECLSPEC_XFGVIRT(IEnumRangeExceptions, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumRangeExceptions * This,
             /* [range][in] */ ULONG cExceptions,
             /* [length_is][size_is][out] */ IRangeException **ppRangeException,
             /* [unique][out][in] */ ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumRangeExceptions, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumRangeExceptions * This,
             /* [in] */ ULONG cExceptions);
         
+        DECLSPEC_XFGVIRT(IEnumRangeExceptions, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumRangeExceptions * This);
         
+        DECLSPEC_XFGVIRT(IEnumRangeExceptions, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumRangeExceptions * This,
             /* [out] */ IEnumRangeExceptions **ppEnum);
@@ -1787,23 +1859,28 @@ EXTERN_C const IID IID_ISingleItemException;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISingleItemException * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISingleItemException * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISingleItemException * This);
         
+        DECLSPEC_XFGVIRT(ISingleItemException, GetItemId)
         HRESULT ( STDMETHODCALLTYPE *GetItemId )( 
             ISingleItemException * This,
             /* [size_is][unique][out][in] */ BYTE *pbItemId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISingleItemException, GetClockVector)
         HRESULT ( STDMETHODCALLTYPE *GetClockVector )( 
             ISingleItemException * This,
             /* [in] */ REFIID riid,
@@ -1886,31 +1963,38 @@ EXTERN_C const IID IID_IEnumSingleItemExceptions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumSingleItemExceptions * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumSingleItemExceptions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumSingleItemExceptions * This);
         
+        DECLSPEC_XFGVIRT(IEnumSingleItemExceptions, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumSingleItemExceptions * This,
             /* [range][in] */ ULONG cExceptions,
             /* [length_is][size_is][out] */ ISingleItemException **ppSingleItemException,
             /* [unique][out][in] */ ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSingleItemExceptions, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumSingleItemExceptions * This,
             /* [in] */ ULONG cExceptions);
         
+        DECLSPEC_XFGVIRT(IEnumSingleItemExceptions, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumSingleItemExceptions * This);
         
+        DECLSPEC_XFGVIRT(IEnumSingleItemExceptions, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumSingleItemExceptions * This,
             /* [out] */ IEnumSingleItemExceptions **ppEnum);
@@ -1997,28 +2081,34 @@ EXTERN_C const IID IID_IChangeUnitException;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IChangeUnitException * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IChangeUnitException * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IChangeUnitException * This);
         
+        DECLSPEC_XFGVIRT(IChangeUnitException, GetItemId)
         HRESULT ( STDMETHODCALLTYPE *GetItemId )( 
             IChangeUnitException * This,
             /* [size_is][unique][out][in] */ BYTE *pbItemId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(IChangeUnitException, GetChangeUnitId)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitId )( 
             IChangeUnitException * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeUnitId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(IChangeUnitException, GetClockVector)
         HRESULT ( STDMETHODCALLTYPE *GetClockVector )( 
             IChangeUnitException * This,
             /* [in] */ REFIID riid,
@@ -2104,31 +2194,38 @@ EXTERN_C const IID IID_IEnumChangeUnitExceptions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumChangeUnitExceptions * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumChangeUnitExceptions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumChangeUnitExceptions * This);
         
+        DECLSPEC_XFGVIRT(IEnumChangeUnitExceptions, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumChangeUnitExceptions * This,
             /* [range][in] */ ULONG cExceptions,
             /* [length_is][size_is][out] */ IChangeUnitException **ppChangeUnitException,
             /* [unique][out][in] */ ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumChangeUnitExceptions, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumChangeUnitExceptions * This,
             /* [in] */ ULONG cExceptions);
         
+        DECLSPEC_XFGVIRT(IEnumChangeUnitExceptions, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumChangeUnitExceptions * This);
         
+        DECLSPEC_XFGVIRT(IEnumChangeUnitExceptions, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumChangeUnitExceptions * This,
             /* [out] */ IEnumChangeUnitExceptions **ppEnum);
@@ -2216,29 +2313,35 @@ EXTERN_C const IID IID_IReplicaKeyMap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IReplicaKeyMap * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IReplicaKeyMap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IReplicaKeyMap * This);
         
+        DECLSPEC_XFGVIRT(IReplicaKeyMap, LookupReplicaKey)
         HRESULT ( STDMETHODCALLTYPE *LookupReplicaKey )( 
             IReplicaKeyMap * This,
             /* [in] */ const BYTE *pbReplicaId,
             /* [out] */ DWORD *pdwReplicaKey);
         
+        DECLSPEC_XFGVIRT(IReplicaKeyMap, LookupReplicaId)
         HRESULT ( STDMETHODCALLTYPE *LookupReplicaId )( 
             IReplicaKeyMap * This,
             /* [in] */ DWORD dwReplicaKey,
             /* [size_is][unique][out][in] */ BYTE *pbReplicaId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(IReplicaKeyMap, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             IReplicaKeyMap * This,
             /* [size_is][unique][out][in] */ BYTE *pbReplicaKeyMap,
@@ -2315,18 +2418,22 @@ EXTERN_C const IID IID_IConstructReplicaKeyMap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IConstructReplicaKeyMap * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IConstructReplicaKeyMap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IConstructReplicaKeyMap * This);
         
+        DECLSPEC_XFGVIRT(IConstructReplicaKeyMap, FindOrAddReplica)
         HRESULT ( STDMETHODCALLTYPE *FindOrAddReplica )( 
             IConstructReplicaKeyMap * This,
             /* [in] */ const BYTE *pbReplicaId,
@@ -2494,39 +2601,47 @@ EXTERN_C const IID IID_ISyncKnowledge;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncKnowledge * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncKnowledge * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncKnowledge * This);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetOwnerReplicaId)
         HRESULT ( STDMETHODCALLTYPE *GetOwnerReplicaId )( 
             ISyncKnowledge * This,
             /* [size_is][unique][out][in] */ BYTE *pbReplicaId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncKnowledge * This,
             /* [in] */ BOOL fSerializeReplicaKeyMap,
             /* [size_is][unique][out][in] */ BYTE *pbKnowledge,
             /* [out][in] */ DWORD *pcbKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, SetLocalTickCount)
         HRESULT ( STDMETHODCALLTYPE *SetLocalTickCount )( 
             ISyncKnowledge * This,
             /* [in] */ ULONGLONG ullTickCount);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsChange)
         HRESULT ( STDMETHODCALLTYPE *ContainsChange )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbVersionOwnerReplicaId,
             /* [in] */ const BYTE *pgidItemId,
             /* [in] */ const SYNC_VERSION *pSyncVersion);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ContainsChangeUnit )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbVersionOwnerReplicaId,
@@ -2534,19 +2649,23 @@ EXTERN_C const IID IID_ISyncKnowledge;
             /* [in] */ const BYTE *pbChangeUnitId,
             /* [in] */ const SYNC_VERSION *pSyncVersion);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetScopeVector)
         HRESULT ( STDMETHODCALLTYPE *GetScopeVector )( 
             ISyncKnowledge * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetReplicaKeyMap)
         HRESULT ( STDMETHODCALLTYPE *GetReplicaKeyMap )( 
             ISyncKnowledge * This,
             /* [out] */ IReplicaKeyMap **ppReplicaKeyMap);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             ISyncKnowledge * This,
             /* [out] */ ISyncKnowledge **ppClonedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ConvertVersion)
         HRESULT ( STDMETHODCALLTYPE *ConvertVersion )( 
             ISyncKnowledge * This,
             /* [in] */ ISyncKnowledge *pKnowledgeIn,
@@ -2556,70 +2675,84 @@ EXTERN_C const IID IID_ISyncKnowledge;
             /* [out][in] */ DWORD *pcbIdSize,
             /* [out] */ SYNC_VERSION *pVersionOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, MapRemoteToLocal)
         HRESULT ( STDMETHODCALLTYPE *MapRemoteToLocal )( 
             ISyncKnowledge * This,
             /* [in] */ ISyncKnowledge *pRemoteKnowledge,
             /* [out] */ ISyncKnowledge **ppMappedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Union)
         HRESULT ( STDMETHODCALLTYPE *Union )( 
             ISyncKnowledge * This,
             /* [in] */ ISyncKnowledge *pKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoItem)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoItem )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoChangeUnit )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ const BYTE *pbChangeUnitId,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoRange)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoRange )( 
             ISyncKnowledge * This,
             /* [in] */ const SYNC_RANGE *psrngSyncRange,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ExcludeItem)
         HRESULT ( STDMETHODCALLTYPE *ExcludeItem )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbItemId);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ExcludeChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ExcludeChangeUnit )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ const BYTE *pbChangeUnitId);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsKnowledge)
         HRESULT ( STDMETHODCALLTYPE *ContainsKnowledge )( 
             ISyncKnowledge * This,
             /* [in] */ ISyncKnowledge *pKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindMinTickCountForReplica)
         HRESULT ( STDMETHODCALLTYPE *FindMinTickCountForReplica )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbReplicaId,
             /* [out] */ ULONGLONG *pullReplicaTickCount);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetRangeExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetRangeExceptions )( 
             ISyncKnowledge * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetSingleItemExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetSingleItemExceptions )( 
             ISyncKnowledge * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetChangeUnitExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitExceptions )( 
             ISyncKnowledge * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindClockVectorForItem)
         HRESULT ( STDMETHODCALLTYPE *FindClockVectorForItem )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindClockVectorForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *FindClockVectorForChangeUnit )( 
             ISyncKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
@@ -2627,6 +2760,7 @@ EXTERN_C const IID IID_ISyncKnowledge;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             ISyncKnowledge * This,
             /* [out] */ DWORD *pdwVersion);
@@ -2765,39 +2899,47 @@ EXTERN_C const IID IID_IForgottenKnowledge;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IForgottenKnowledge * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IForgottenKnowledge * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IForgottenKnowledge * This);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetOwnerReplicaId)
         HRESULT ( STDMETHODCALLTYPE *GetOwnerReplicaId )( 
             IForgottenKnowledge * This,
             /* [size_is][unique][out][in] */ BYTE *pbReplicaId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             IForgottenKnowledge * This,
             /* [in] */ BOOL fSerializeReplicaKeyMap,
             /* [size_is][unique][out][in] */ BYTE *pbKnowledge,
             /* [out][in] */ DWORD *pcbKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, SetLocalTickCount)
         HRESULT ( STDMETHODCALLTYPE *SetLocalTickCount )( 
             IForgottenKnowledge * This,
             /* [in] */ ULONGLONG ullTickCount);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsChange)
         HRESULT ( STDMETHODCALLTYPE *ContainsChange )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbVersionOwnerReplicaId,
             /* [in] */ const BYTE *pgidItemId,
             /* [in] */ const SYNC_VERSION *pSyncVersion);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ContainsChangeUnit )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbVersionOwnerReplicaId,
@@ -2805,19 +2947,23 @@ EXTERN_C const IID IID_IForgottenKnowledge;
             /* [in] */ const BYTE *pbChangeUnitId,
             /* [in] */ const SYNC_VERSION *pSyncVersion);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetScopeVector)
         HRESULT ( STDMETHODCALLTYPE *GetScopeVector )( 
             IForgottenKnowledge * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetReplicaKeyMap)
         HRESULT ( STDMETHODCALLTYPE *GetReplicaKeyMap )( 
             IForgottenKnowledge * This,
             /* [out] */ IReplicaKeyMap **ppReplicaKeyMap);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IForgottenKnowledge * This,
             /* [out] */ ISyncKnowledge **ppClonedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ConvertVersion)
         HRESULT ( STDMETHODCALLTYPE *ConvertVersion )( 
             IForgottenKnowledge * This,
             /* [in] */ ISyncKnowledge *pKnowledgeIn,
@@ -2827,70 +2973,84 @@ EXTERN_C const IID IID_IForgottenKnowledge;
             /* [out][in] */ DWORD *pcbIdSize,
             /* [out] */ SYNC_VERSION *pVersionOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, MapRemoteToLocal)
         HRESULT ( STDMETHODCALLTYPE *MapRemoteToLocal )( 
             IForgottenKnowledge * This,
             /* [in] */ ISyncKnowledge *pRemoteKnowledge,
             /* [out] */ ISyncKnowledge **ppMappedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Union)
         HRESULT ( STDMETHODCALLTYPE *Union )( 
             IForgottenKnowledge * This,
             /* [in] */ ISyncKnowledge *pKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoItem)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoItem )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoChangeUnit )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ const BYTE *pbChangeUnitId,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoRange)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoRange )( 
             IForgottenKnowledge * This,
             /* [in] */ const SYNC_RANGE *psrngSyncRange,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ExcludeItem)
         HRESULT ( STDMETHODCALLTYPE *ExcludeItem )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbItemId);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ExcludeChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ExcludeChangeUnit )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ const BYTE *pbChangeUnitId);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsKnowledge)
         HRESULT ( STDMETHODCALLTYPE *ContainsKnowledge )( 
             IForgottenKnowledge * This,
             /* [in] */ ISyncKnowledge *pKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindMinTickCountForReplica)
         HRESULT ( STDMETHODCALLTYPE *FindMinTickCountForReplica )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbReplicaId,
             /* [out] */ ULONGLONG *pullReplicaTickCount);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetRangeExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetRangeExceptions )( 
             IForgottenKnowledge * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetSingleItemExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetSingleItemExceptions )( 
             IForgottenKnowledge * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetChangeUnitExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitExceptions )( 
             IForgottenKnowledge * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindClockVectorForItem)
         HRESULT ( STDMETHODCALLTYPE *FindClockVectorForItem )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindClockVectorForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *FindClockVectorForChangeUnit )( 
             IForgottenKnowledge * This,
             /* [in] */ const BYTE *pbItemId,
@@ -2898,10 +3058,12 @@ EXTERN_C const IID IID_IForgottenKnowledge;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             IForgottenKnowledge * This,
             /* [out] */ DWORD *pdwVersion);
         
+        DECLSPEC_XFGVIRT(IForgottenKnowledge, ForgetToVersion)
         HRESULT ( STDMETHODCALLTYPE *ForgetToVersion )( 
             IForgottenKnowledge * This,
             /* [in] */ ISyncKnowledge *pKnowledge,
@@ -3108,39 +3270,47 @@ EXTERN_C const IID IID_ISyncKnowledge2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncKnowledge2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncKnowledge2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncKnowledge2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetOwnerReplicaId)
         HRESULT ( STDMETHODCALLTYPE *GetOwnerReplicaId )( 
             ISyncKnowledge2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbReplicaId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncKnowledge2 * This,
             /* [in] */ BOOL fSerializeReplicaKeyMap,
             /* [size_is][unique][out][in] */ BYTE *pbKnowledge,
             /* [out][in] */ DWORD *pcbKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, SetLocalTickCount)
         HRESULT ( STDMETHODCALLTYPE *SetLocalTickCount )( 
             ISyncKnowledge2 * This,
             /* [in] */ ULONGLONG ullTickCount);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsChange)
         HRESULT ( STDMETHODCALLTYPE *ContainsChange )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbVersionOwnerReplicaId,
             /* [in] */ const BYTE *pgidItemId,
             /* [in] */ const SYNC_VERSION *pSyncVersion);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ContainsChangeUnit )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbVersionOwnerReplicaId,
@@ -3148,19 +3318,23 @@ EXTERN_C const IID IID_ISyncKnowledge2;
             /* [in] */ const BYTE *pbChangeUnitId,
             /* [in] */ const SYNC_VERSION *pSyncVersion);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetScopeVector)
         HRESULT ( STDMETHODCALLTYPE *GetScopeVector )( 
             ISyncKnowledge2 * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetReplicaKeyMap)
         HRESULT ( STDMETHODCALLTYPE *GetReplicaKeyMap )( 
             ISyncKnowledge2 * This,
             /* [out] */ IReplicaKeyMap **ppReplicaKeyMap);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             ISyncKnowledge2 * This,
             /* [out] */ ISyncKnowledge **ppClonedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ConvertVersion)
         HRESULT ( STDMETHODCALLTYPE *ConvertVersion )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pKnowledgeIn,
@@ -3170,70 +3344,84 @@ EXTERN_C const IID IID_ISyncKnowledge2;
             /* [out][in] */ DWORD *pcbIdSize,
             /* [out] */ SYNC_VERSION *pVersionOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, MapRemoteToLocal)
         HRESULT ( STDMETHODCALLTYPE *MapRemoteToLocal )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pRemoteKnowledge,
             /* [out] */ ISyncKnowledge **ppMappedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, Union)
         HRESULT ( STDMETHODCALLTYPE *Union )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoItem)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoItem )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbItemId,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoChangeUnit )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ const BYTE *pbChangeUnitId,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ProjectOntoRange)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoRange )( 
             ISyncKnowledge2 * This,
             /* [in] */ const SYNC_RANGE *psrngSyncRange,
             /* [out] */ ISyncKnowledge **ppKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ExcludeItem)
         HRESULT ( STDMETHODCALLTYPE *ExcludeItem )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbItemId);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ExcludeChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ExcludeChangeUnit )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ const BYTE *pbChangeUnitId);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, ContainsKnowledge)
         HRESULT ( STDMETHODCALLTYPE *ContainsKnowledge )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindMinTickCountForReplica)
         HRESULT ( STDMETHODCALLTYPE *FindMinTickCountForReplica )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbReplicaId,
             /* [out] */ ULONGLONG *pullReplicaTickCount);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetRangeExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetRangeExceptions )( 
             ISyncKnowledge2 * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetSingleItemExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetSingleItemExceptions )( 
             ISyncKnowledge2 * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetChangeUnitExceptions)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitExceptions )( 
             ISyncKnowledge2 * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindClockVectorForItem)
         HRESULT ( STDMETHODCALLTYPE *FindClockVectorForItem )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, FindClockVectorForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *FindClockVectorForChangeUnit )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE *pbItemId,
@@ -3241,20 +3429,24 @@ EXTERN_C const IID IID_ISyncKnowledge2;
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppUnk);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge, GetVersion)
         HRESULT ( STDMETHODCALLTYPE *GetVersion )( 
             ISyncKnowledge2 * This,
             /* [out] */ DWORD *pdwVersion);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, GetIdParameters)
         HRESULT ( STDMETHODCALLTYPE *GetIdParameters )( 
             ISyncKnowledge2 * This,
             /* [out] */ ID_PARAMETERS *pIdParameters);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, ProjectOntoColumnSet)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoColumnSet )( 
             ISyncKnowledge2 * This,
             /* [in] */ const BYTE **ppColumns,
             /* [in] */ DWORD count,
             /* [out] */ ISyncKnowledge2 **ppiKnowledgeOut);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, SerializeWithOptions)
         HRESULT ( STDMETHODCALLTYPE *SerializeWithOptions )( 
             ISyncKnowledge2 * This,
             /* [in] */ SYNC_SERIALIZATION_VERSION targetFormatVersion,
@@ -3262,56 +3454,67 @@ EXTERN_C const IID IID_ISyncKnowledge2;
             /* [size_is][unique][out][in] */ BYTE *pbBuffer,
             /* [out][in] */ DWORD *pdwSerializedSize);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, GetLowestUncontainedId)
         HRESULT ( STDMETHODCALLTYPE *GetLowestUncontainedId )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge2 *piSyncKnowledge,
             /* [size_is][unique][out][in] */ BYTE *pbItemId,
             /* [out][in] */ DWORD *pcbItemIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, GetInspector)
         HRESULT ( STDMETHODCALLTYPE *GetInspector )( 
             ISyncKnowledge2 * This,
             /* [in] */ REFIID riid,
             /* [iid_is][out] */ void **ppiInspector);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, GetMinimumSupportedVersion)
         HRESULT ( STDMETHODCALLTYPE *GetMinimumSupportedVersion )( 
             ISyncKnowledge2 * This,
             /* [out] */ SYNC_SERIALIZATION_VERSION *pVersion);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, GetStatistics)
         HRESULT ( STDMETHODCALLTYPE *GetStatistics )( 
             ISyncKnowledge2 * This,
             /* [in] */ SYNC_STATISTICS which,
             /* [out] */ DWORD *pValue);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, ContainsKnowledgeForItem)
         HRESULT ( STDMETHODCALLTYPE *ContainsKnowledgeForItem )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pKnowledge,
             /* [in] */ const BYTE *pbItemId);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, ContainsKnowledgeForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *ContainsKnowledgeForChangeUnit )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pKnowledge,
             /* [in] */ const BYTE *pbItemId,
             /* [in] */ const BYTE *pbChangeUnitId);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, ProjectOntoKnowledgeWithPrerequisite)
         HRESULT ( STDMETHODCALLTYPE *ProjectOntoKnowledgeWithPrerequisite )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pPrerequisiteKnowledge,
             /* [in] */ ISyncKnowledge *pTemplateKnowledge,
             /* [out] */ ISyncKnowledge **ppProjectedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, Complement)
         HRESULT ( STDMETHODCALLTYPE *Complement )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pSyncKnowledge,
             /* [out] */ ISyncKnowledge **ppComplementedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, IntersectsWithKnowledge)
         HRESULT ( STDMETHODCALLTYPE *IntersectsWithKnowledge )( 
             ISyncKnowledge2 * This,
             /* [in] */ ISyncKnowledge *pSyncKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, GetKnowledgeCookie)
         HRESULT ( STDMETHODCALLTYPE *GetKnowledgeCookie )( 
             ISyncKnowledge2 * This,
             /* [out] */ IUnknown **ppKnowledgeCookie);
         
+        DECLSPEC_XFGVIRT(ISyncKnowledge2, CompareToKnowledgeCookie)
         HRESULT ( STDMETHODCALLTYPE *CompareToKnowledgeCookie )( 
             ISyncKnowledge2 * This,
             /* [in] */ IUnknown *pKnowledgeCookie,
@@ -3502,28 +3705,34 @@ EXTERN_C const IID IID_IRecoverableErrorData;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRecoverableErrorData * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRecoverableErrorData * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRecoverableErrorData * This);
         
+        DECLSPEC_XFGVIRT(IRecoverableErrorData, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IRecoverableErrorData * This,
             /* [unique][in] */ LPCWSTR pcszItemDisplayName,
             /* [unique][in] */ LPCWSTR pcszErrorDescription);
         
+        DECLSPEC_XFGVIRT(IRecoverableErrorData, GetItemDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetItemDisplayName )( 
             IRecoverableErrorData * This,
             /* [size_is][string][unique][out][in] */ LPWSTR pszItemDisplayName,
             /* [out][in] */ DWORD *pcchItemDisplayName);
         
+        DECLSPEC_XFGVIRT(IRecoverableErrorData, GetErrorDescription)
         HRESULT ( STDMETHODCALLTYPE *GetErrorDescription )( 
             IRecoverableErrorData * This,
             /* [size_is][string][unique][out][in] */ LPWSTR pszErrorDescription,
@@ -3624,35 +3833,43 @@ EXTERN_C const IID IID_IRecoverableError;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRecoverableError * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRecoverableError * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRecoverableError * This);
         
+        DECLSPEC_XFGVIRT(IRecoverableError, GetStage)
         HRESULT ( STDMETHODCALLTYPE *GetStage )( 
             IRecoverableError * This,
             /* [out] */ SYNC_PROGRESS_STAGE *pStage);
         
+        DECLSPEC_XFGVIRT(IRecoverableError, GetProvider)
         HRESULT ( STDMETHODCALLTYPE *GetProvider )( 
             IRecoverableError * This,
             /* [out] */ SYNC_PROVIDER_ROLE *pProviderRole);
         
+        DECLSPEC_XFGVIRT(IRecoverableError, GetChangeWithRecoverableError)
         HRESULT ( STDMETHODCALLTYPE *GetChangeWithRecoverableError )( 
             IRecoverableError * This,
             /* [out] */ ISyncChange **ppChangeWithRecoverableError);
         
+        DECLSPEC_XFGVIRT(IRecoverableError, GetRecoverableErrorDataForChange)
         HRESULT ( STDMETHODCALLTYPE *GetRecoverableErrorDataForChange )( 
             IRecoverableError * This,
             /* [out] */ HRESULT *phrError,
             /* [out] */ IRecoverableErrorData **ppErrorData);
         
+        DECLSPEC_XFGVIRT(IRecoverableError, GetRecoverableErrorDataForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *GetRecoverableErrorDataForChangeUnit )( 
             IRecoverableError * This,
             /* [in] */ ISyncChangeUnit *pChangeUnit,
@@ -3758,47 +3975,58 @@ EXTERN_C const IID IID_IChangeConflict;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IChangeConflict * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IChangeConflict * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IChangeConflict * This);
         
+        DECLSPEC_XFGVIRT(IChangeConflict, GetDestinationProviderConflictingChange)
         HRESULT ( STDMETHODCALLTYPE *GetDestinationProviderConflictingChange )( 
             IChangeConflict * This,
             /* [out] */ ISyncChange **ppConflictingChange);
         
+        DECLSPEC_XFGVIRT(IChangeConflict, GetSourceProviderConflictingChange)
         HRESULT ( STDMETHODCALLTYPE *GetSourceProviderConflictingChange )( 
             IChangeConflict * This,
             /* [out] */ ISyncChange **ppConflictingChange);
         
+        DECLSPEC_XFGVIRT(IChangeConflict, GetDestinationProviderConflictingData)
         HRESULT ( STDMETHODCALLTYPE *GetDestinationProviderConflictingData )( 
             IChangeConflict * This,
             /* [out] */ IUnknown **ppConflictingData);
         
+        DECLSPEC_XFGVIRT(IChangeConflict, GetSourceProviderConflictingData)
         HRESULT ( STDMETHODCALLTYPE *GetSourceProviderConflictingData )( 
             IChangeConflict * This,
             /* [out] */ IUnknown **ppConflictingData);
         
+        DECLSPEC_XFGVIRT(IChangeConflict, GetResolveActionForChange)
         HRESULT ( STDMETHODCALLTYPE *GetResolveActionForChange )( 
             IChangeConflict * This,
             /* [out] */ SYNC_RESOLVE_ACTION *pResolveAction);
         
+        DECLSPEC_XFGVIRT(IChangeConflict, SetResolveActionForChange)
         HRESULT ( STDMETHODCALLTYPE *SetResolveActionForChange )( 
             IChangeConflict * This,
             /* [in] */ SYNC_RESOLVE_ACTION resolveAction);
         
+        DECLSPEC_XFGVIRT(IChangeConflict, GetResolveActionForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *GetResolveActionForChangeUnit )( 
             IChangeConflict * This,
             /* [in] */ ISyncChangeUnit *pChangeUnit,
             /* [out] */ SYNC_RESOLVE_ACTION *pResolveAction);
         
+        DECLSPEC_XFGVIRT(IChangeConflict, SetResolveActionForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *SetResolveActionForChangeUnit )( 
             IChangeConflict * This,
             /* [in] */ ISyncChangeUnit *pChangeUnit,
@@ -3923,64 +4151,79 @@ EXTERN_C const IID IID_IConstraintConflict;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IConstraintConflict * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IConstraintConflict * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IConstraintConflict * This);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetDestinationProviderConflictingChange)
         HRESULT ( STDMETHODCALLTYPE *GetDestinationProviderConflictingChange )( 
             IConstraintConflict * This,
             /* [out] */ ISyncChange **ppConflictingChange);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetSourceProviderConflictingChange)
         HRESULT ( STDMETHODCALLTYPE *GetSourceProviderConflictingChange )( 
             IConstraintConflict * This,
             /* [out] */ ISyncChange **ppConflictingChange);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetDestinationProviderOriginalChange)
         HRESULT ( STDMETHODCALLTYPE *GetDestinationProviderOriginalChange )( 
             IConstraintConflict * This,
             /* [out] */ ISyncChange **ppOriginalChange);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetDestinationProviderConflictingData)
         HRESULT ( STDMETHODCALLTYPE *GetDestinationProviderConflictingData )( 
             IConstraintConflict * This,
             /* [out] */ IUnknown **ppConflictingData);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetSourceProviderConflictingData)
         HRESULT ( STDMETHODCALLTYPE *GetSourceProviderConflictingData )( 
             IConstraintConflict * This,
             /* [out] */ IUnknown **ppConflictingData);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetDestinationProviderOriginalData)
         HRESULT ( STDMETHODCALLTYPE *GetDestinationProviderOriginalData )( 
             IConstraintConflict * This,
             /* [out] */ IUnknown **ppOriginalData);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetConstraintResolveActionForChange)
         HRESULT ( STDMETHODCALLTYPE *GetConstraintResolveActionForChange )( 
             IConstraintConflict * This,
             /* [out] */ SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, SetConstraintResolveActionForChange)
         HRESULT ( STDMETHODCALLTYPE *SetConstraintResolveActionForChange )( 
             IConstraintConflict * This,
             /* [in] */ SYNC_CONSTRAINT_RESOLVE_ACTION constraintResolveAction);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetConstraintResolveActionForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *GetConstraintResolveActionForChangeUnit )( 
             IConstraintConflict * This,
             /* [in] */ ISyncChangeUnit *pChangeUnit,
             /* [out] */ SYNC_CONSTRAINT_RESOLVE_ACTION *pConstraintResolveAction);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, SetConstraintResolveActionForChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *SetConstraintResolveActionForChangeUnit )( 
             IConstraintConflict * This,
             /* [in] */ ISyncChangeUnit *pChangeUnit,
             /* [in] */ SYNC_CONSTRAINT_RESOLVE_ACTION constraintResolveAction);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, GetConstraintConflictReason)
         HRESULT ( STDMETHODCALLTYPE *GetConstraintConflictReason )( 
             IConstraintConflict * This,
             /* [out] */ CONSTRAINT_CONFLICT_REASON *pConstraintConflictReason);
         
+        DECLSPEC_XFGVIRT(IConstraintConflict, IsTemporary)
         HRESULT ( STDMETHODCALLTYPE *IsTemporary )( 
             IConstraintConflict * This);
         
@@ -4096,18 +4339,22 @@ EXTERN_C const IID IID_ISyncCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncCallback * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncCallback * This);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             ISyncCallback * This,
             /* [in] */ SYNC_PROVIDER_ROLE provider,
@@ -4115,18 +4362,22 @@ EXTERN_C const IID IID_ISyncCallback;
             /* [in] */ DWORD dwCompletedWork,
             /* [in] */ DWORD dwTotalWork);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnChange)
         HRESULT ( STDMETHODCALLTYPE *OnChange )( 
             ISyncCallback * This,
             /* [in] */ ISyncChange *pSyncChange);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnConflict)
         HRESULT ( STDMETHODCALLTYPE *OnConflict )( 
             ISyncCallback * This,
             /* [in] */ IChangeConflict *pConflict);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnFullEnumerationNeeded)
         HRESULT ( STDMETHODCALLTYPE *OnFullEnumerationNeeded )( 
             ISyncCallback * This,
             /* [out] */ SYNC_FULL_ENUMERATION_ACTION *pFullEnumerationAction);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnRecoverableError)
         HRESULT ( STDMETHODCALLTYPE *OnRecoverableError )( 
             ISyncCallback * This,
             /* [in] */ IRecoverableError *pRecoverableError);
@@ -4212,18 +4463,22 @@ EXTERN_C const IID IID_ISyncCallback2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncCallback2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncCallback2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncCallback2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             ISyncCallback2 * This,
             /* [in] */ SYNC_PROVIDER_ROLE provider,
@@ -4231,27 +4486,33 @@ EXTERN_C const IID IID_ISyncCallback2;
             /* [in] */ DWORD dwCompletedWork,
             /* [in] */ DWORD dwTotalWork);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnChange)
         HRESULT ( STDMETHODCALLTYPE *OnChange )( 
             ISyncCallback2 * This,
             /* [in] */ ISyncChange *pSyncChange);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnConflict)
         HRESULT ( STDMETHODCALLTYPE *OnConflict )( 
             ISyncCallback2 * This,
             /* [in] */ IChangeConflict *pConflict);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnFullEnumerationNeeded)
         HRESULT ( STDMETHODCALLTYPE *OnFullEnumerationNeeded )( 
             ISyncCallback2 * This,
             /* [out] */ SYNC_FULL_ENUMERATION_ACTION *pFullEnumerationAction);
         
+        DECLSPEC_XFGVIRT(ISyncCallback, OnRecoverableError)
         HRESULT ( STDMETHODCALLTYPE *OnRecoverableError )( 
             ISyncCallback2 * This,
             /* [in] */ IRecoverableError *pRecoverableError);
         
+        DECLSPEC_XFGVIRT(ISyncCallback2, OnChangeApplied)
         HRESULT ( STDMETHODCALLTYPE *OnChangeApplied )( 
             ISyncCallback2 * This,
             /* [in] */ DWORD dwChangesApplied,
             /* [in] */ DWORD dwChangesFailed);
         
+        DECLSPEC_XFGVIRT(ISyncCallback2, OnChangeFailed)
         HRESULT ( STDMETHODCALLTYPE *OnChangeFailed )( 
             ISyncCallback2 * This,
             /* [in] */ DWORD dwChangesApplied,
@@ -4340,18 +4601,22 @@ EXTERN_C const IID IID_ISyncConstraintCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncConstraintCallback * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncConstraintCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncConstraintCallback * This);
         
+        DECLSPEC_XFGVIRT(ISyncConstraintCallback, OnConstraintConflict)
         HRESULT ( STDMETHODCALLTYPE *OnConstraintConflict )( 
             ISyncConstraintCallback * This,
             /* [in] */ IConstraintConflict *pConflict);
@@ -4420,18 +4685,22 @@ EXTERN_C const IID IID_ISyncProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncProvider * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncProvider * This);
         
+        DECLSPEC_XFGVIRT(ISyncProvider, GetIdParameters)
         HRESULT ( STDMETHODCALLTYPE *GetIdParameters )( 
             ISyncProvider * This,
             /* [out] */ ID_PARAMETERS *pIdParameters);
@@ -4525,46 +4794,56 @@ EXTERN_C const IID IID_ISyncSessionState;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncSessionState * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncSessionState * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncSessionState * This);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, IsCanceled)
         HRESULT ( STDMETHODCALLTYPE *IsCanceled )( 
             ISyncSessionState * This,
             /* [out] */ BOOL *pfIsCanceled);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, GetInfoForChangeApplication)
         HRESULT ( STDMETHODCALLTYPE *GetInfoForChangeApplication )( 
             ISyncSessionState * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeApplierInfo,
             /* [out][in] */ DWORD *pcbChangeApplierInfo);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, LoadInfoFromChangeApplication)
         HRESULT ( STDMETHODCALLTYPE *LoadInfoFromChangeApplication )( 
             ISyncSessionState * This,
             /* [size_is][in] */ const BYTE *pbChangeApplierInfo,
             /* [in] */ DWORD cbChangeApplierInfo);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, GetForgottenKnowledgeRecoveryRangeStart)
         HRESULT ( STDMETHODCALLTYPE *GetForgottenKnowledgeRecoveryRangeStart )( 
             ISyncSessionState * This,
             /* [size_is][unique][out][in] */ BYTE *pbRangeStart,
             /* [out][in] */ DWORD *pcbRangeStart);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, GetForgottenKnowledgeRecoveryRangeEnd)
         HRESULT ( STDMETHODCALLTYPE *GetForgottenKnowledgeRecoveryRangeEnd )( 
             ISyncSessionState * This,
             /* [size_is][unique][out][in] */ BYTE *pbRangeEnd,
             /* [out][in] */ DWORD *pcbRangeEnd);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, SetForgottenKnowledgeRecoveryRange)
         HRESULT ( STDMETHODCALLTYPE *SetForgottenKnowledgeRecoveryRange )( 
             ISyncSessionState * This,
             /* [in] */ const SYNC_RANGE *pRange);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             ISyncSessionState * This,
             /* [in] */ SYNC_PROVIDER_ROLE provider,
@@ -4654,18 +4933,22 @@ EXTERN_C const IID IID_ISyncSessionExtendedErrorInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncSessionExtendedErrorInfo * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncSessionExtendedErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncSessionExtendedErrorInfo * This);
         
+        DECLSPEC_XFGVIRT(ISyncSessionExtendedErrorInfo, GetSyncProviderWithError)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProviderWithError )( 
             ISyncSessionExtendedErrorInfo * This,
             /* [retval][out] */ ISyncProvider **ppProviderWithError);
@@ -4737,46 +5020,56 @@ EXTERN_C const IID IID_ISyncSessionState2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncSessionState2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncSessionState2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncSessionState2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, IsCanceled)
         HRESULT ( STDMETHODCALLTYPE *IsCanceled )( 
             ISyncSessionState2 * This,
             /* [out] */ BOOL *pfIsCanceled);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, GetInfoForChangeApplication)
         HRESULT ( STDMETHODCALLTYPE *GetInfoForChangeApplication )( 
             ISyncSessionState2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeApplierInfo,
             /* [out][in] */ DWORD *pcbChangeApplierInfo);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, LoadInfoFromChangeApplication)
         HRESULT ( STDMETHODCALLTYPE *LoadInfoFromChangeApplication )( 
             ISyncSessionState2 * This,
             /* [size_is][in] */ const BYTE *pbChangeApplierInfo,
             /* [in] */ DWORD cbChangeApplierInfo);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, GetForgottenKnowledgeRecoveryRangeStart)
         HRESULT ( STDMETHODCALLTYPE *GetForgottenKnowledgeRecoveryRangeStart )( 
             ISyncSessionState2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbRangeStart,
             /* [out][in] */ DWORD *pcbRangeStart);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, GetForgottenKnowledgeRecoveryRangeEnd)
         HRESULT ( STDMETHODCALLTYPE *GetForgottenKnowledgeRecoveryRangeEnd )( 
             ISyncSessionState2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbRangeEnd,
             /* [out][in] */ DWORD *pcbRangeEnd);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, SetForgottenKnowledgeRecoveryRange)
         HRESULT ( STDMETHODCALLTYPE *SetForgottenKnowledgeRecoveryRange )( 
             ISyncSessionState2 * This,
             /* [in] */ const SYNC_RANGE *pRange);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             ISyncSessionState2 * This,
             /* [in] */ SYNC_PROVIDER_ROLE provider,
@@ -4784,10 +5077,12 @@ EXTERN_C const IID IID_ISyncSessionState2;
             /* [in] */ DWORD dwCompletedWork,
             /* [in] */ DWORD dwTotalWork);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState2, SetProviderWithError)
         HRESULT ( STDMETHODCALLTYPE *SetProviderWithError )( 
             ISyncSessionState2 * This,
             /* [in] */ BOOL fSelf);
         
+        DECLSPEC_XFGVIRT(ISyncSessionState2, GetSessionErrorStatus)
         HRESULT ( STDMETHODCALLTYPE *GetSessionErrorStatus )( 
             ISyncSessionState2 * This,
             /* [retval][out] */ HRESULT *phrSessionError);
@@ -4882,18 +5177,22 @@ EXTERN_C const IID IID_ISyncFilterInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncFilterInfo * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(ISyncFilterInfo, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncFilterInfo * This,
             /* [size_is][unique][out][in] */ BYTE *pbBuffer,
@@ -4975,23 +5274,28 @@ EXTERN_C const IID IID_ISyncFilterInfo2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncFilterInfo2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncFilterInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncFilterInfo2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncFilterInfo, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncFilterInfo2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbBuffer,
             /* [out][in] */ DWORD *pcbBuffer);
         
+        DECLSPEC_XFGVIRT(ISyncFilterInfo2, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             ISyncFilterInfo2 * This,
             /* [out] */ DWORD *pdwFlags);
@@ -5073,32 +5377,39 @@ EXTERN_C const IID IID_IChangeUnitListFilterInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IChangeUnitListFilterInfo * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IChangeUnitListFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IChangeUnitListFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(ISyncFilterInfo, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             IChangeUnitListFilterInfo * This,
             /* [size_is][unique][out][in] */ BYTE *pbBuffer,
             /* [out][in] */ DWORD *pcbBuffer);
         
+        DECLSPEC_XFGVIRT(IChangeUnitListFilterInfo, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IChangeUnitListFilterInfo * This,
             /* [size_is][in] */ const BYTE *const *ppbChangeUnitIds,
             /* [in] */ DWORD dwChangeUnitCount);
         
+        DECLSPEC_XFGVIRT(IChangeUnitListFilterInfo, GetChangeUnitIdCount)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitIdCount )( 
             IChangeUnitListFilterInfo * This,
             /* [retval][out] */ DWORD *pdwChangeUnitIdCount);
         
+        DECLSPEC_XFGVIRT(IChangeUnitListFilterInfo, GetChangeUnitId)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitId )( 
             IChangeUnitListFilterInfo * This,
             /* [in] */ DWORD dwChangeUnitIdIndex,
@@ -5183,22 +5494,27 @@ EXTERN_C const IID IID_ISyncFilter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncFilter * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncFilter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncFilter * This);
         
+        DECLSPEC_XFGVIRT(ISyncFilter, IsIdentical)
         HRESULT ( STDMETHODCALLTYPE *IsIdentical )( 
             ISyncFilter * This,
             /* [in] */ ISyncFilter *pSyncFilter);
         
+        DECLSPEC_XFGVIRT(ISyncFilter, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncFilter * This,
             /* [size_is][unique][out][in] */ BYTE *pbSyncFilter,
@@ -5273,18 +5589,22 @@ EXTERN_C const IID IID_ISyncFilterDeserializer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncFilterDeserializer * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncFilterDeserializer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncFilterDeserializer * This);
         
+        DECLSPEC_XFGVIRT(ISyncFilterDeserializer, DeserializeSyncFilter)
         HRESULT ( STDMETHODCALLTYPE *DeserializeSyncFilter )( 
             ISyncFilterDeserializer * This,
             /* [size_is][in] */ const BYTE *pbSyncFilter,
@@ -5355,23 +5675,28 @@ EXTERN_C const IID IID_ICustomFilterInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICustomFilterInfo * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICustomFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICustomFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(ISyncFilterInfo, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ICustomFilterInfo * This,
             /* [size_is][unique][out][in] */ BYTE *pbBuffer,
             /* [out][in] */ DWORD *pcbBuffer);
         
+        DECLSPEC_XFGVIRT(ICustomFilterInfo, GetSyncFilter)
         HRESULT ( STDMETHODCALLTYPE *GetSyncFilter )( 
             ICustomFilterInfo * This,
             /* [out] */ ISyncFilter **pISyncFilter);
@@ -5465,32 +5790,39 @@ EXTERN_C const IID IID_ICombinedFilterInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICombinedFilterInfo * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICombinedFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICombinedFilterInfo * This);
         
+        DECLSPEC_XFGVIRT(ISyncFilterInfo, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ICombinedFilterInfo * This,
             /* [size_is][unique][out][in] */ BYTE *pbBuffer,
             /* [out][in] */ DWORD *pcbBuffer);
         
+        DECLSPEC_XFGVIRT(ICombinedFilterInfo, GetFilterCount)
         HRESULT ( STDMETHODCALLTYPE *GetFilterCount )( 
             ICombinedFilterInfo * This,
             /* [out] */ DWORD *pdwFilterCount);
         
+        DECLSPEC_XFGVIRT(ICombinedFilterInfo, GetFilterInfo)
         HRESULT ( STDMETHODCALLTYPE *GetFilterInfo )( 
             ICombinedFilterInfo * This,
             /* [in] */ DWORD dwFilterIndex,
             /* [out] */ ISyncFilterInfo **ppIFilterInfo);
         
+        DECLSPEC_XFGVIRT(ICombinedFilterInfo, GetFilterCombinationType)
         HRESULT ( STDMETHODCALLTYPE *GetFilterCombinationType )( 
             ICombinedFilterInfo * This,
             /* [out] */ FILTER_COMBINATION_TYPE *pFilterCombinationType);
@@ -5579,31 +5911,38 @@ EXTERN_C const IID IID_IEnumSyncChanges;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumSyncChanges * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumSyncChanges * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumSyncChanges * This);
         
+        DECLSPEC_XFGVIRT(IEnumSyncChanges, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumSyncChanges * This,
             /* [range][in] */ ULONG cChanges,
             /* [length_is][size_is][out] */ ISyncChange **ppChange,
             /* [unique][out][in] */ ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSyncChanges, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumSyncChanges * This,
             /* [in] */ ULONG cChanges);
         
+        DECLSPEC_XFGVIRT(IEnumSyncChanges, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumSyncChanges * This);
         
+        DECLSPEC_XFGVIRT(IEnumSyncChanges, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumSyncChanges * This,
             /* [out] */ IEnumSyncChanges **ppEnum);
@@ -5682,18 +6021,22 @@ EXTERN_C const IID IID_ISyncChangeBuilder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeBuilder * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeBuilder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeBuilder * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBuilder, AddChangeUnitMetadata)
         HRESULT ( STDMETHODCALLTYPE *AddChangeUnitMetadata )( 
             ISyncChangeBuilder * This,
             /* [in] */ const BYTE *pbChangeUnitId,
@@ -5766,23 +6109,28 @@ EXTERN_C const IID IID_IFilterTrackingSyncChangeBuilder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFilterTrackingSyncChangeBuilder * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFilterTrackingSyncChangeBuilder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IFilterTrackingSyncChangeBuilder * This);
         
+        DECLSPEC_XFGVIRT(IFilterTrackingSyncChangeBuilder, AddFilterChange)
         HRESULT ( STDMETHODCALLTYPE *AddFilterChange )( 
             IFilterTrackingSyncChangeBuilder * This,
             /* [in] */ DWORD dwFilterKey,
             /* [in] */ const SYNC_FILTER_CHANGE *pFilterChange);
         
+        DECLSPEC_XFGVIRT(IFilterTrackingSyncChangeBuilder, SetAllChangeUnitsPresentFlag)
         HRESULT ( STDMETHODCALLTYPE *SetAllChangeUnitsPresentFlag )( 
             IFilterTrackingSyncChangeBuilder * This);
         
@@ -5910,43 +6258,53 @@ EXTERN_C const IID IID_ISyncChangeBatchBase;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeBatchBase * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeBatchBase * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeBatchBase * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetChangeEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetChangeEnumerator )( 
             ISyncChangeBatchBase * This,
             /* [out] */ IEnumSyncChanges **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetIsLastBatch)
         HRESULT ( STDMETHODCALLTYPE *GetIsLastBatch )( 
             ISyncChangeBatchBase * This,
             /* [out] */ BOOL *pfLastBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *GetWorkEstimateForBatch )( 
             ISyncChangeBatchBase * This,
             /* [out] */ DWORD *pdwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *GetRemainingWorkEstimateForSession )( 
             ISyncChangeBatchBase * This,
             /* [out] */ DWORD *pdwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, BeginOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginOrderedGroup )( 
             ISyncChangeBatchBase * This,
             /* [in] */ const BYTE *pbLowerBound);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, EndOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndOrderedGroup )( 
             ISyncChangeBatchBase * This,
             /* [in] */ const BYTE *pbUpperBound,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, AddItemMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddItemMetadataToGroup )( 
             ISyncChangeBatchBase * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -5957,29 +6315,36 @@ EXTERN_C const IID IID_ISyncChangeBatchBase;
             /* [in] */ DWORD dwWorkForChange,
             /* [unique][out][in] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledge )( 
             ISyncChangeBatchBase * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetPrerequisiteKnowledge )( 
             ISyncChangeBatchBase * This,
             /* [out] */ ISyncKnowledge **ppPrerequisteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetSourceForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetSourceForgottenKnowledge )( 
             ISyncChangeBatchBase * This,
             /* [out] */ IForgottenKnowledge **ppSourceForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetLastBatch)
         HRESULT ( STDMETHODCALLTYPE *SetLastBatch )( 
             ISyncChangeBatchBase * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *SetWorkEstimateForBatch )( 
             ISyncChangeBatchBase * This,
             /* [in] */ DWORD dwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *SetRemainingWorkEstimateForSession )( 
             ISyncChangeBatchBase * This,
             /* [in] */ DWORD dwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncChangeBatchBase * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeBatch,
@@ -6101,43 +6466,53 @@ EXTERN_C const IID IID_ISyncChangeBatch;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeBatch * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeBatch * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeBatch * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetChangeEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetChangeEnumerator )( 
             ISyncChangeBatch * This,
             /* [out] */ IEnumSyncChanges **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetIsLastBatch)
         HRESULT ( STDMETHODCALLTYPE *GetIsLastBatch )( 
             ISyncChangeBatch * This,
             /* [out] */ BOOL *pfLastBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *GetWorkEstimateForBatch )( 
             ISyncChangeBatch * This,
             /* [out] */ DWORD *pdwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *GetRemainingWorkEstimateForSession )( 
             ISyncChangeBatch * This,
             /* [out] */ DWORD *pdwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, BeginOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginOrderedGroup )( 
             ISyncChangeBatch * This,
             /* [in] */ const BYTE *pbLowerBound);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, EndOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndOrderedGroup )( 
             ISyncChangeBatch * This,
             /* [in] */ const BYTE *pbUpperBound,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, AddItemMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddItemMetadataToGroup )( 
             ISyncChangeBatch * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -6148,42 +6523,52 @@ EXTERN_C const IID IID_ISyncChangeBatch;
             /* [in] */ DWORD dwWorkForChange,
             /* [unique][out][in] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledge )( 
             ISyncChangeBatch * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetPrerequisiteKnowledge )( 
             ISyncChangeBatch * This,
             /* [out] */ ISyncKnowledge **ppPrerequisteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetSourceForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetSourceForgottenKnowledge )( 
             ISyncChangeBatch * This,
             /* [out] */ IForgottenKnowledge **ppSourceForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetLastBatch)
         HRESULT ( STDMETHODCALLTYPE *SetLastBatch )( 
             ISyncChangeBatch * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *SetWorkEstimateForBatch )( 
             ISyncChangeBatch * This,
             /* [in] */ DWORD dwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *SetRemainingWorkEstimateForSession )( 
             ISyncChangeBatch * This,
             /* [in] */ DWORD dwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncChangeBatch * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeBatch,
             /* [out][in] */ DWORD *pcbChangeBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatch, BeginUnorderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginUnorderedGroup )( 
             ISyncChangeBatch * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatch, EndUnorderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndUnorderedGroup )( 
             ISyncChangeBatch * This,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge,
             /* [in] */ BOOL fAllChangesForKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatch, AddLoggedConflict)
         HRESULT ( STDMETHODCALLTYPE *AddLoggedConflict )( 
             ISyncChangeBatch * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -6316,43 +6701,53 @@ EXTERN_C const IID IID_ISyncFullEnumerationChangeBatch;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncFullEnumerationChangeBatch * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncFullEnumerationChangeBatch * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetChangeEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetChangeEnumerator )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [out] */ IEnumSyncChanges **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetIsLastBatch)
         HRESULT ( STDMETHODCALLTYPE *GetIsLastBatch )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [out] */ BOOL *pfLastBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *GetWorkEstimateForBatch )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [out] */ DWORD *pdwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *GetRemainingWorkEstimateForSession )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [out] */ DWORD *pdwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, BeginOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginOrderedGroup )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [in] */ const BYTE *pbLowerBound);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, EndOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndOrderedGroup )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [in] */ const BYTE *pbUpperBound,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, AddItemMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddItemMetadataToGroup )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -6363,43 +6758,53 @@ EXTERN_C const IID IID_ISyncFullEnumerationChangeBatch;
             /* [in] */ DWORD dwWorkForChange,
             /* [unique][out][in] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledge )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetPrerequisiteKnowledge )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [out] */ ISyncKnowledge **ppPrerequisteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetSourceForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetSourceForgottenKnowledge )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [out] */ IForgottenKnowledge **ppSourceForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetLastBatch)
         HRESULT ( STDMETHODCALLTYPE *SetLastBatch )( 
             ISyncFullEnumerationChangeBatch * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *SetWorkEstimateForBatch )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [in] */ DWORD dwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *SetRemainingWorkEstimateForSession )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [in] */ DWORD dwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeBatch,
             /* [out][in] */ DWORD *pcbChangeBatch);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChangeBatch, GetLearnedKnowledgeAfterRecoveryComplete)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledgeAfterRecoveryComplete )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledgeAfterRecoveryComplete);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChangeBatch, GetClosedLowerBoundItemId)
         HRESULT ( STDMETHODCALLTYPE *GetClosedLowerBoundItemId )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [size_is][unique][out][in] */ BYTE *pbClosedLowerBoundItemId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChangeBatch, GetClosedUpperBoundItemId)
         HRESULT ( STDMETHODCALLTYPE *GetClosedUpperBoundItemId )( 
             ISyncFullEnumerationChangeBatch * This,
             /* [size_is][unique][out][in] */ BYTE *pbClosedUpperBoundItemId,
@@ -6525,43 +6930,53 @@ EXTERN_C const IID IID_ISyncChangeBatchWithPrerequisite;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeBatchWithPrerequisite * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeBatchWithPrerequisite * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetChangeEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetChangeEnumerator )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [out] */ IEnumSyncChanges **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetIsLastBatch)
         HRESULT ( STDMETHODCALLTYPE *GetIsLastBatch )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [out] */ BOOL *pfLastBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *GetWorkEstimateForBatch )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [out] */ DWORD *pdwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *GetRemainingWorkEstimateForSession )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [out] */ DWORD *pdwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, BeginOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginOrderedGroup )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [in] */ const BYTE *pbLowerBound);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, EndOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndOrderedGroup )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [in] */ const BYTE *pbUpperBound,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, AddItemMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddItemMetadataToGroup )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -6572,43 +6987,53 @@ EXTERN_C const IID IID_ISyncChangeBatchWithPrerequisite;
             /* [in] */ DWORD dwWorkForChange,
             /* [unique][out][in] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledge )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetPrerequisiteKnowledge )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [out] */ ISyncKnowledge **ppPrerequisteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetSourceForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetSourceForgottenKnowledge )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [out] */ IForgottenKnowledge **ppSourceForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetLastBatch)
         HRESULT ( STDMETHODCALLTYPE *SetLastBatch )( 
             ISyncChangeBatchWithPrerequisite * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *SetWorkEstimateForBatch )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [in] */ DWORD dwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *SetRemainingWorkEstimateForSession )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [in] */ DWORD dwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeBatch,
             /* [out][in] */ DWORD *pcbChangeBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithPrerequisite, SetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *SetPrerequisiteKnowledge )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [in] */ ISyncKnowledge *pPrerequisiteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithPrerequisite, GetLearnedKnowledgeWithPrerequisite)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledgeWithPrerequisite )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
             /* [out] */ ISyncKnowledge **ppLearnedWithPrerequisiteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithPrerequisite, GetLearnedForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedForgottenKnowledge )( 
             ISyncChangeBatchWithPrerequisite * This,
             /* [out] */ IForgottenKnowledge **ppLearnedForgottenKnowledge);
@@ -6729,43 +7154,53 @@ EXTERN_C const IID IID_ISyncChangeBatchBase2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeBatchBase2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeBatchBase2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeBatchBase2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetChangeEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetChangeEnumerator )( 
             ISyncChangeBatchBase2 * This,
             /* [out] */ IEnumSyncChanges **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetIsLastBatch)
         HRESULT ( STDMETHODCALLTYPE *GetIsLastBatch )( 
             ISyncChangeBatchBase2 * This,
             /* [out] */ BOOL *pfLastBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *GetWorkEstimateForBatch )( 
             ISyncChangeBatchBase2 * This,
             /* [out] */ DWORD *pdwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *GetRemainingWorkEstimateForSession )( 
             ISyncChangeBatchBase2 * This,
             /* [out] */ DWORD *pdwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, BeginOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginOrderedGroup )( 
             ISyncChangeBatchBase2 * This,
             /* [in] */ const BYTE *pbLowerBound);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, EndOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndOrderedGroup )( 
             ISyncChangeBatchBase2 * This,
             /* [in] */ const BYTE *pbUpperBound,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, AddItemMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddItemMetadataToGroup )( 
             ISyncChangeBatchBase2 * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -6776,34 +7211,42 @@ EXTERN_C const IID IID_ISyncChangeBatchBase2;
             /* [in] */ DWORD dwWorkForChange,
             /* [unique][out][in] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledge )( 
             ISyncChangeBatchBase2 * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetPrerequisiteKnowledge )( 
             ISyncChangeBatchBase2 * This,
             /* [out] */ ISyncKnowledge **ppPrerequisteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetSourceForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetSourceForgottenKnowledge )( 
             ISyncChangeBatchBase2 * This,
             /* [out] */ IForgottenKnowledge **ppSourceForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetLastBatch)
         HRESULT ( STDMETHODCALLTYPE *SetLastBatch )( 
             ISyncChangeBatchBase2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *SetWorkEstimateForBatch )( 
             ISyncChangeBatchBase2 * This,
             /* [in] */ DWORD dwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *SetRemainingWorkEstimateForSession )( 
             ISyncChangeBatchBase2 * This,
             /* [in] */ DWORD dwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncChangeBatchBase2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeBatch,
             /* [out][in] */ DWORD *pcbChangeBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase2, SerializeWithOptions)
         HRESULT ( STDMETHODCALLTYPE *SerializeWithOptions )( 
             ISyncChangeBatchBase2 * This,
             /* [in] */ SYNC_SERIALIZATION_VERSION targetFormatVersion,
@@ -6928,31 +7371,38 @@ EXTERN_C const IID IID_ISyncChangeBatchAdvanced;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeBatchAdvanced * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeBatchAdvanced * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeBatchAdvanced * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchAdvanced, GetFilterInfo)
         HRESULT ( STDMETHODCALLTYPE *GetFilterInfo )( 
             ISyncChangeBatchAdvanced * This,
             /* [out] */ ISyncFilterInfo **ppFilterInfo);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchAdvanced, ConvertFullEnumerationChangeBatchToRegularChangeBatch)
         HRESULT ( STDMETHODCALLTYPE *ConvertFullEnumerationChangeBatchToRegularChangeBatch )( 
             ISyncChangeBatchAdvanced * This,
             /* [out] */ ISyncChangeBatch **ppChangeBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchAdvanced, GetUpperBoundItemId)
         HRESULT ( STDMETHODCALLTYPE *GetUpperBoundItemId )( 
             ISyncChangeBatchAdvanced * This,
             /* [size_is][unique][out][in] */ BYTE *pbItemId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchAdvanced, GetBatchLevelKnowledgeShouldBeApplied)
         HRESULT ( STDMETHODCALLTYPE *GetBatchLevelKnowledgeShouldBeApplied )( 
             ISyncChangeBatchAdvanced * This,
             /* [out] */ BOOL *pfBatchKnowledgeShouldBeApplied);
@@ -7046,43 +7496,53 @@ EXTERN_C const IID IID_ISyncChangeBatch2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeBatch2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeBatch2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeBatch2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetChangeEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetChangeEnumerator )( 
             ISyncChangeBatch2 * This,
             /* [out] */ IEnumSyncChanges **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetIsLastBatch)
         HRESULT ( STDMETHODCALLTYPE *GetIsLastBatch )( 
             ISyncChangeBatch2 * This,
             /* [out] */ BOOL *pfLastBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *GetWorkEstimateForBatch )( 
             ISyncChangeBatch2 * This,
             /* [out] */ DWORD *pdwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *GetRemainingWorkEstimateForSession )( 
             ISyncChangeBatch2 * This,
             /* [out] */ DWORD *pdwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, BeginOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginOrderedGroup )( 
             ISyncChangeBatch2 * This,
             /* [in] */ const BYTE *pbLowerBound);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, EndOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndOrderedGroup )( 
             ISyncChangeBatch2 * This,
             /* [in] */ const BYTE *pbUpperBound,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, AddItemMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddItemMetadataToGroup )( 
             ISyncChangeBatch2 * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -7093,42 +7553,52 @@ EXTERN_C const IID IID_ISyncChangeBatch2;
             /* [in] */ DWORD dwWorkForChange,
             /* [unique][out][in] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledge )( 
             ISyncChangeBatch2 * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetPrerequisiteKnowledge )( 
             ISyncChangeBatch2 * This,
             /* [out] */ ISyncKnowledge **ppPrerequisteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetSourceForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetSourceForgottenKnowledge )( 
             ISyncChangeBatch2 * This,
             /* [out] */ IForgottenKnowledge **ppSourceForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetLastBatch)
         HRESULT ( STDMETHODCALLTYPE *SetLastBatch )( 
             ISyncChangeBatch2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *SetWorkEstimateForBatch )( 
             ISyncChangeBatch2 * This,
             /* [in] */ DWORD dwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *SetRemainingWorkEstimateForSession )( 
             ISyncChangeBatch2 * This,
             /* [in] */ DWORD dwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncChangeBatch2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeBatch,
             /* [out][in] */ DWORD *pcbChangeBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatch, BeginUnorderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginUnorderedGroup )( 
             ISyncChangeBatch2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatch, EndUnorderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndUnorderedGroup )( 
             ISyncChangeBatch2 * This,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge,
             /* [in] */ BOOL fAllChangesForKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatch, AddLoggedConflict)
         HRESULT ( STDMETHODCALLTYPE *AddLoggedConflict )( 
             ISyncChangeBatch2 * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -7140,6 +7610,7 @@ EXTERN_C const IID IID_ISyncChangeBatch2;
             /* [in] */ ISyncKnowledge *pConflictKnowledge,
             /* [out] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatch2, AddMergeTombstoneMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddMergeTombstoneMetadataToGroup )( 
             ISyncChangeBatch2 * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -7150,6 +7621,7 @@ EXTERN_C const IID IID_ISyncChangeBatch2;
             /* [in] */ DWORD dwWorkForChange,
             /* [unique][out][in] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatch2, AddMergeTombstoneLoggedConflict)
         HRESULT ( STDMETHODCALLTYPE *AddMergeTombstoneLoggedConflict )( 
             ISyncChangeBatch2 * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -7287,43 +7759,53 @@ EXTERN_C const IID IID_ISyncFullEnumerationChangeBatch2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncFullEnumerationChangeBatch2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncFullEnumerationChangeBatch2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetChangeEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetChangeEnumerator )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [out] */ IEnumSyncChanges **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetIsLastBatch)
         HRESULT ( STDMETHODCALLTYPE *GetIsLastBatch )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [out] */ BOOL *pfLastBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *GetWorkEstimateForBatch )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [out] */ DWORD *pdwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *GetRemainingWorkEstimateForSession )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [out] */ DWORD *pdwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, BeginOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *BeginOrderedGroup )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [in] */ const BYTE *pbLowerBound);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, EndOrderedGroup)
         HRESULT ( STDMETHODCALLTYPE *EndOrderedGroup )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [in] */ const BYTE *pbUpperBound,
             /* [in] */ ISyncKnowledge *pMadeWithKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, AddItemMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddItemMetadataToGroup )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -7334,48 +7816,59 @@ EXTERN_C const IID IID_ISyncFullEnumerationChangeBatch2;
             /* [in] */ DWORD dwWorkForChange,
             /* [unique][out][in] */ ISyncChangeBuilder **ppChangeBuilder);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledge )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetPrerequisiteKnowledge )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [out] */ ISyncKnowledge **ppPrerequisteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, GetSourceForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetSourceForgottenKnowledge )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [out] */ IForgottenKnowledge **ppSourceForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetLastBatch)
         HRESULT ( STDMETHODCALLTYPE *SetLastBatch )( 
             ISyncFullEnumerationChangeBatch2 * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetWorkEstimateForBatch)
         HRESULT ( STDMETHODCALLTYPE *SetWorkEstimateForBatch )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [in] */ DWORD dwWorkForBatch);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, SetRemainingWorkEstimateForSession)
         HRESULT ( STDMETHODCALLTYPE *SetRemainingWorkEstimateForSession )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [in] */ DWORD dwRemainingWorkForSession);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchBase, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeBatch,
             /* [out][in] */ DWORD *pcbChangeBatch);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChangeBatch, GetLearnedKnowledgeAfterRecoveryComplete)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledgeAfterRecoveryComplete )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledgeAfterRecoveryComplete);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChangeBatch, GetClosedLowerBoundItemId)
         HRESULT ( STDMETHODCALLTYPE *GetClosedLowerBoundItemId )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbClosedLowerBoundItemId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChangeBatch, GetClosedUpperBoundItemId)
         HRESULT ( STDMETHODCALLTYPE *GetClosedUpperBoundItemId )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [size_is][unique][out][in] */ BYTE *pbClosedUpperBoundItemId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChangeBatch2, AddMergeTombstoneMetadataToGroup)
         HRESULT ( STDMETHODCALLTYPE *AddMergeTombstoneMetadataToGroup )( 
             ISyncFullEnumerationChangeBatch2 * This,
             /* [in] */ const BYTE *pbOwnerReplicaId,
@@ -7538,32 +8031,39 @@ EXTERN_C const IID IID_IKnowledgeSyncProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IKnowledgeSyncProvider * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IKnowledgeSyncProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IKnowledgeSyncProvider * This);
         
+        DECLSPEC_XFGVIRT(ISyncProvider, GetIdParameters)
         HRESULT ( STDMETHODCALLTYPE *GetIdParameters )( 
             IKnowledgeSyncProvider * This,
             /* [out] */ ID_PARAMETERS *pIdParameters);
         
+        DECLSPEC_XFGVIRT(IKnowledgeSyncProvider, BeginSession)
         HRESULT ( STDMETHODCALLTYPE *BeginSession )( 
             IKnowledgeSyncProvider * This,
             /* [in] */ SYNC_PROVIDER_ROLE role,
             /* [in] */ ISyncSessionState *pSessionState);
         
+        DECLSPEC_XFGVIRT(IKnowledgeSyncProvider, GetSyncBatchParameters)
         HRESULT ( STDMETHODCALLTYPE *GetSyncBatchParameters )( 
             IKnowledgeSyncProvider * This,
             /* [out] */ ISyncKnowledge **ppSyncKnowledge,
             /* [out] */ DWORD *pdwRequestedBatchSize);
         
+        DECLSPEC_XFGVIRT(IKnowledgeSyncProvider, GetChangeBatch)
         HRESULT ( STDMETHODCALLTYPE *GetChangeBatch )( 
             IKnowledgeSyncProvider * This,
             /* [in] */ DWORD dwBatchSize,
@@ -7571,6 +8071,7 @@ EXTERN_C const IID IID_IKnowledgeSyncProvider;
             /* [out] */ ISyncChangeBatch **ppSyncChangeBatch,
             /* [out] */ IUnknown **ppUnkDataRetriever);
         
+        DECLSPEC_XFGVIRT(IKnowledgeSyncProvider, GetFullEnumerationChangeBatch)
         HRESULT ( STDMETHODCALLTYPE *GetFullEnumerationChangeBatch )( 
             IKnowledgeSyncProvider * This,
             /* [in] */ DWORD dwBatchSize,
@@ -7579,6 +8080,7 @@ EXTERN_C const IID IID_IKnowledgeSyncProvider;
             /* [out] */ ISyncFullEnumerationChangeBatch **ppSyncChangeBatch,
             /* [out] */ IUnknown **ppUnkDataRetriever);
         
+        DECLSPEC_XFGVIRT(IKnowledgeSyncProvider, ProcessChangeBatch)
         HRESULT ( STDMETHODCALLTYPE *ProcessChangeBatch )( 
             IKnowledgeSyncProvider * This,
             /* [in] */ CONFLICT_RESOLUTION_POLICY resolutionPolicy,
@@ -7587,6 +8089,7 @@ EXTERN_C const IID IID_IKnowledgeSyncProvider;
             /* [in] */ ISyncCallback *pCallback,
             /* [out][in] */ SYNC_SESSION_STATISTICS *pSyncSessionStatistics);
         
+        DECLSPEC_XFGVIRT(IKnowledgeSyncProvider, ProcessFullEnumerationChangeBatch)
         HRESULT ( STDMETHODCALLTYPE *ProcessFullEnumerationChangeBatch )( 
             IKnowledgeSyncProvider * This,
             /* [in] */ CONFLICT_RESOLUTION_POLICY resolutionPolicy,
@@ -7595,6 +8098,7 @@ EXTERN_C const IID IID_IKnowledgeSyncProvider;
             /* [in] */ ISyncCallback *pCallback,
             /* [out][in] */ SYNC_SESSION_STATISTICS *pSyncSessionStatistics);
         
+        DECLSPEC_XFGVIRT(IKnowledgeSyncProvider, EndSession)
         HRESULT ( STDMETHODCALLTYPE *EndSession )( 
             IKnowledgeSyncProvider * This,
             /* [in] */ ISyncSessionState *pSessionState);
@@ -7693,27 +8197,33 @@ EXTERN_C const IID IID_ISyncChangeUnit;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeUnit * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeUnit * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeUnit * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeUnit, GetItemChange)
         HRESULT ( STDMETHODCALLTYPE *GetItemChange )( 
             ISyncChangeUnit * This,
             /* [out] */ ISyncChange **ppSyncChange);
         
+        DECLSPEC_XFGVIRT(ISyncChangeUnit, GetChangeUnitId)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitId )( 
             ISyncChangeUnit * This,
             /* [size_is][unique][out][in] */ BYTE *pbChangeUnitId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncChangeUnit, GetChangeUnitVersion)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitVersion )( 
             ISyncChangeUnit * This,
             /* [in] */ const BYTE *pbCurrentReplicaId,
@@ -7799,31 +8309,38 @@ EXTERN_C const IID IID_IEnumSyncChangeUnits;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumSyncChangeUnits * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumSyncChangeUnits * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumSyncChangeUnits * This);
         
+        DECLSPEC_XFGVIRT(IEnumSyncChangeUnits, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumSyncChangeUnits * This,
             /* [range][in] */ ULONG cChanges,
             /* [length_is][size_is][out] */ ISyncChangeUnit **ppChangeUnit,
             /* [unique][out][in] */ ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSyncChangeUnits, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumSyncChangeUnits * This,
             /* [in] */ ULONG cChanges);
         
+        DECLSPEC_XFGVIRT(IEnumSyncChangeUnits, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumSyncChangeUnits * This);
         
+        DECLSPEC_XFGVIRT(IEnumSyncChangeUnits, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumSyncChangeUnits * This,
             /* [out] */ IEnumSyncChangeUnits **ppEnum);
@@ -7932,58 +8449,71 @@ EXTERN_C const IID IID_ISyncChange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChange * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChange * This);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetOwnerReplicaId)
         HRESULT ( STDMETHODCALLTYPE *GetOwnerReplicaId )( 
             ISyncChange * This,
             /* [size_is][unique][out][in] */ BYTE *pbReplicaId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetRootItemId)
         HRESULT ( STDMETHODCALLTYPE *GetRootItemId )( 
             ISyncChange * This,
             /* [size_is][unique][out][in] */ BYTE *pbRootItemId,
             /* [out][in] */ DWORD *pcbIdSize);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetChangeVersion)
         HRESULT ( STDMETHODCALLTYPE *GetChangeVersion )( 
             ISyncChange * This,
             /* [in] */ const BYTE *pbCurrentReplicaId,
             /* [out] */ SYNC_VERSION *pVersion);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetCreationVersion)
         HRESULT ( STDMETHODCALLTYPE *GetCreationVersion )( 
             ISyncChange * This,
             /* [in] */ const BYTE *pbCurrentReplicaId,
             /* [out] */ SYNC_VERSION *pVersion);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             ISyncChange * This,
             /* [out] */ DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetWorkEstimate)
         HRESULT ( STDMETHODCALLTYPE *GetWorkEstimate )( 
             ISyncChange * This,
             /* [out] */ DWORD *pdwWork);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetChangeUnits)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnits )( 
             ISyncChange * This,
             /* [out] */ IEnumSyncChangeUnits **ppEnum);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetMadeWithKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetMadeWithKnowledge )( 
             ISyncChange * This,
             /* [out] */ ISyncKnowledge **ppMadeWithKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChange, GetLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledge )( 
             ISyncChange * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChange, SetWorkEstimate)
         HRESULT ( STDMETHODCALLTYPE *SetWorkEstimate )( 
             ISyncChange * This,
             /* [in] */ DWORD dwWork);
@@ -8083,22 +8613,27 @@ EXTERN_C const IID IID_ISyncChangeWithPrerequisite;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeWithPrerequisite * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeWithPrerequisite * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeWithPrerequisite * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithPrerequisite, GetPrerequisiteKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetPrerequisiteKnowledge )( 
             ISyncChangeWithPrerequisite * This,
             /* [out] */ ISyncKnowledge **ppPrerequisiteKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithPrerequisite, GetLearnedKnowledgeWithPrerequisite)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledgeWithPrerequisite )( 
             ISyncChangeWithPrerequisite * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
@@ -8174,22 +8709,27 @@ EXTERN_C const IID IID_ISyncFullEnumerationChange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncFullEnumerationChange * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncFullEnumerationChange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncFullEnumerationChange * This);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChange, GetLearnedKnowledgeAfterRecoveryComplete)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedKnowledgeAfterRecoveryComplete )( 
             ISyncFullEnumerationChange * This,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncFullEnumerationChange, GetLearnedForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedForgottenKnowledge )( 
             ISyncFullEnumerationChange * This,
             /* [out] */ IForgottenKnowledge **ppLearnedForgottenKnowledge);
@@ -8262,18 +8802,22 @@ EXTERN_C const IID IID_ISyncMergeTombstoneChange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncMergeTombstoneChange * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncMergeTombstoneChange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncMergeTombstoneChange * This);
         
+        DECLSPEC_XFGVIRT(ISyncMergeTombstoneChange, GetWinnerItemId)
         HRESULT ( STDMETHODCALLTYPE *GetWinnerItemId )( 
             ISyncMergeTombstoneChange * This,
             /* [size_is][unique][out][in] */ BYTE *pbWinnerItemId,
@@ -8344,18 +8888,22 @@ EXTERN_C const IID IID_IEnumItemIds;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumItemIds * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumItemIds * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumItemIds * This);
         
+        DECLSPEC_XFGVIRT(IEnumItemIds, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumItemIds * This,
             /* [size_is][unique][out][in] */ BYTE *pbItemId,
@@ -8437,32 +8985,39 @@ EXTERN_C const IID IID_IFilterKeyMap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFilterKeyMap * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFilterKeyMap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IFilterKeyMap * This);
         
+        DECLSPEC_XFGVIRT(IFilterKeyMap, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             IFilterKeyMap * This,
             /* [out] */ DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IFilterKeyMap, AddFilter)
         HRESULT ( STDMETHODCALLTYPE *AddFilter )( 
             IFilterKeyMap * This,
             /* [in] */ ISyncFilter *pISyncFilter,
             /* [out] */ DWORD *pdwFilterKey);
         
+        DECLSPEC_XFGVIRT(IFilterKeyMap, GetFilter)
         HRESULT ( STDMETHODCALLTYPE *GetFilter )( 
             IFilterKeyMap * This,
             /* [in] */ DWORD dwFilterKey,
             /* [out] */ ISyncFilter **ppISyncFilter);
         
+        DECLSPEC_XFGVIRT(IFilterKeyMap, Serialize)
         HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             IFilterKeyMap * This,
             /* [size_is][unique][out][in] */ BYTE *pbFilterKeyMap,
@@ -8579,42 +9134,51 @@ EXTERN_C const IID IID_ISyncChangeWithFilterKeyMap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeWithFilterKeyMap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeWithFilterKeyMap * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetFilterCount)
         HRESULT ( STDMETHODCALLTYPE *GetFilterCount )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [out] */ DWORD *pdwFilterCount);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetFilterChange)
         HRESULT ( STDMETHODCALLTYPE *GetFilterChange )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [in] */ DWORD dwFilterKey,
             /* [out] */ SYNC_FILTER_CHANGE *pFilterChange);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetAllChangeUnitsPresentFlag)
         HRESULT ( STDMETHODCALLTYPE *GetAllChangeUnitsPresentFlag )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [out] */ BOOL *pfAllChangeUnitsPresent);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetFilterForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetFilterForgottenKnowledge )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [in] */ DWORD dwFilterKey,
             /* [out] */ ISyncKnowledge **ppIFilterForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetFilteredReplicaLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetFilteredReplicaLearnedKnowledge )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
             /* [in] */ IEnumItemIds *pNewMoveins,
             /* [out] */ ISyncKnowledge **ppLearnedKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetLearnedFilterForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedFilterForgottenKnowledge )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
@@ -8622,18 +9186,21 @@ EXTERN_C const IID IID_ISyncChangeWithFilterKeyMap;
             /* [in] */ DWORD dwFilterKey,
             /* [out] */ ISyncKnowledge **ppLearnedFilterForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetFilteredReplicaLearnedForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetFilteredReplicaLearnedForgottenKnowledge )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
             /* [in] */ IEnumItemIds *pNewMoveins,
             /* [out] */ ISyncKnowledge **ppLearnedForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete)
         HRESULT ( STDMETHODCALLTYPE *GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
             /* [in] */ IEnumItemIds *pNewMoveins,
             /* [out] */ ISyncKnowledge **ppLearnedForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeWithFilterKeyMap, GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete )( 
             ISyncChangeWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
@@ -8763,37 +9330,45 @@ EXTERN_C const IID IID_ISyncChangeBatchWithFilterKeyMap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncChangeBatchWithFilterKeyMap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncChangeBatchWithFilterKeyMap * This);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithFilterKeyMap, GetFilterKeyMap)
         HRESULT ( STDMETHODCALLTYPE *GetFilterKeyMap )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [out] */ IFilterKeyMap **ppIFilterKeyMap);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithFilterKeyMap, SetFilterKeyMap)
         HRESULT ( STDMETHODCALLTYPE *SetFilterKeyMap )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [in] */ IFilterKeyMap *pIFilterKeyMap);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithFilterKeyMap, SetFilterForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *SetFilterForgottenKnowledge )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [in] */ DWORD dwFilterKey,
             /* [in] */ ISyncKnowledge *pFilterForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithFilterKeyMap, GetFilteredReplicaLearnedKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetFilteredReplicaLearnedKnowledge )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
             /* [in] */ IEnumItemIds *pNewMoveins,
             /* [out] */ ISyncKnowledge **ppLearnedForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithFilterKeyMap, GetLearnedFilterForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedFilterForgottenKnowledge )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
@@ -8801,18 +9376,21 @@ EXTERN_C const IID IID_ISyncChangeBatchWithFilterKeyMap;
             /* [in] */ DWORD dwFilterKey,
             /* [out] */ ISyncKnowledge **ppLearnedFilterForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithFilterKeyMap, GetFilteredReplicaLearnedForgottenKnowledge)
         HRESULT ( STDMETHODCALLTYPE *GetFilteredReplicaLearnedForgottenKnowledge )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
             /* [in] */ IEnumItemIds *pNewMoveins,
             /* [out] */ ISyncKnowledge **ppLearnedForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithFilterKeyMap, GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete)
         HRESULT ( STDMETHODCALLTYPE *GetFilteredReplicaLearnedForgottenKnowledgeAfterRecoveryComplete )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
             /* [in] */ IEnumItemIds *pNewMoveins,
             /* [out] */ ISyncKnowledge **ppLearnedForgottenKnowledge);
         
+        DECLSPEC_XFGVIRT(ISyncChangeBatchWithFilterKeyMap, GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete)
         HRESULT ( STDMETHODCALLTYPE *GetLearnedFilterForgottenKnowledgeAfterRecoveryComplete )( 
             ISyncChangeBatchWithFilterKeyMap * This,
             /* [in] */ ISyncKnowledge *pDestinationKnowledge,
@@ -8908,22 +9486,27 @@ EXTERN_C const IID IID_IDataRetrieverCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDataRetrieverCallback * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDataRetrieverCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDataRetrieverCallback * This);
         
+        DECLSPEC_XFGVIRT(IDataRetrieverCallback, LoadChangeDataComplete)
         HRESULT ( STDMETHODCALLTYPE *LoadChangeDataComplete )( 
             IDataRetrieverCallback * This,
             /* [in] */ IUnknown *pUnkData);
         
+        DECLSPEC_XFGVIRT(IDataRetrieverCallback, LoadChangeDataError)
         HRESULT ( STDMETHODCALLTYPE *LoadChangeDataError )( 
             IDataRetrieverCallback * This,
             /* [in] */ HRESULT hrError);
@@ -9004,27 +9587,33 @@ EXTERN_C const IID IID_ILoadChangeContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ILoadChangeContext * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ILoadChangeContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ILoadChangeContext * This);
         
+        DECLSPEC_XFGVIRT(ILoadChangeContext, GetSyncChange)
         HRESULT ( STDMETHODCALLTYPE *GetSyncChange )( 
             ILoadChangeContext * This,
             /* [out] */ ISyncChange **ppSyncChange);
         
+        DECLSPEC_XFGVIRT(ILoadChangeContext, SetRecoverableErrorOnChange)
         HRESULT ( STDMETHODCALLTYPE *SetRecoverableErrorOnChange )( 
             ILoadChangeContext * This,
             /* [in] */ HRESULT hrError,
             /* [unique][in] */ IRecoverableErrorData *pErrorData);
         
+        DECLSPEC_XFGVIRT(ILoadChangeContext, SetRecoverableErrorOnChangeUnit)
         HRESULT ( STDMETHODCALLTYPE *SetRecoverableErrorOnChangeUnit )( 
             ILoadChangeContext * This,
             /* [in] */ HRESULT hrError,
@@ -9105,22 +9694,27 @@ EXTERN_C const IID IID_ISynchronousDataRetriever;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISynchronousDataRetriever * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISynchronousDataRetriever * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISynchronousDataRetriever * This);
         
+        DECLSPEC_XFGVIRT(ISynchronousDataRetriever, GetIdParameters)
         HRESULT ( STDMETHODCALLTYPE *GetIdParameters )( 
             ISynchronousDataRetriever * This,
             /* [out] */ ID_PARAMETERS *pIdParameters);
         
+        DECLSPEC_XFGVIRT(ISynchronousDataRetriever, LoadChangeData)
         HRESULT ( STDMETHODCALLTYPE *LoadChangeData )( 
             ISynchronousDataRetriever * This,
             /* [in] */ ILoadChangeContext *pLoadChangeContext,
@@ -9202,30 +9796,37 @@ EXTERN_C const IID IID_IAsynchronousDataRetriever;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAsynchronousDataRetriever * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAsynchronousDataRetriever * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAsynchronousDataRetriever * This);
         
+        DECLSPEC_XFGVIRT(IAsynchronousDataRetriever, GetIdParameters)
         HRESULT ( STDMETHODCALLTYPE *GetIdParameters )( 
             IAsynchronousDataRetriever * This,
             /* [out] */ ID_PARAMETERS *pIdParameters);
         
+        DECLSPEC_XFGVIRT(IAsynchronousDataRetriever, RegisterCallback)
         HRESULT ( STDMETHODCALLTYPE *RegisterCallback )( 
             IAsynchronousDataRetriever * This,
             /* [in] */ IDataRetrieverCallback *pDataRetrieverCallback);
         
+        DECLSPEC_XFGVIRT(IAsynchronousDataRetriever, RevokeCallback)
         HRESULT ( STDMETHODCALLTYPE *RevokeCallback )( 
             IAsynchronousDataRetriever * This,
             /* [in] */ IDataRetrieverCallback *pDataRetrieverCallback);
         
+        DECLSPEC_XFGVIRT(IAsynchronousDataRetriever, LoadChangeData)
         HRESULT ( STDMETHODCALLTYPE *LoadChangeData )( 
             IAsynchronousDataRetriever * This,
             /* [in] */ ILoadChangeContext *pLoadChangeContext);
@@ -9304,18 +9905,22 @@ EXTERN_C const IID IID_IFilterRequestCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFilterRequestCallback * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFilterRequestCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFilterRequestCallback * This);
         
+        DECLSPEC_XFGVIRT(IFilterRequestCallback, RequestFilter)
         HRESULT ( STDMETHODCALLTYPE *RequestFilter )( 
             __RPC__in IFilterRequestCallback * This,
             /* [in] */ __RPC__in_opt IUnknown *pFilter,
@@ -9385,18 +9990,22 @@ EXTERN_C const IID IID_IRequestFilteredSync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRequestFilteredSync * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRequestFilteredSync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRequestFilteredSync * This);
         
+        DECLSPEC_XFGVIRT(IRequestFilteredSync, SpecifyFilter)
         HRESULT ( STDMETHODCALLTYPE *SpecifyFilter )( 
             __RPC__in IRequestFilteredSync * This,
             /* [in] */ __RPC__in_opt IFilterRequestCallback *pCallback);
@@ -9466,18 +10075,22 @@ EXTERN_C const IID IID_ISupportFilteredSync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISupportFilteredSync * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISupportFilteredSync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISupportFilteredSync * This);
         
+        DECLSPEC_XFGVIRT(ISupportFilteredSync, AddFilter)
         HRESULT ( STDMETHODCALLTYPE *AddFilter )( 
             __RPC__in ISupportFilteredSync * This,
             /* [in] */ __RPC__in_opt IUnknown *pFilter,
@@ -9547,18 +10160,22 @@ EXTERN_C const IID IID_IFilterTrackingRequestCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFilterTrackingRequestCallback * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFilterTrackingRequestCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFilterTrackingRequestCallback * This);
         
+        DECLSPEC_XFGVIRT(IFilterTrackingRequestCallback, RequestTrackedFilter)
         HRESULT ( STDMETHODCALLTYPE *RequestTrackedFilter )( 
             __RPC__in IFilterTrackingRequestCallback * This,
             /* [in] */ __RPC__in_opt ISyncFilter *pFilter);
@@ -9630,22 +10247,27 @@ EXTERN_C const IID IID_IFilterTrackingProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFilterTrackingProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFilterTrackingProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFilterTrackingProvider * This);
         
+        DECLSPEC_XFGVIRT(IFilterTrackingProvider, SpecifyTrackedFilters)
         HRESULT ( STDMETHODCALLTYPE *SpecifyTrackedFilters )( 
             __RPC__in IFilterTrackingProvider * This,
             /* [in] */ __RPC__in_opt IFilterTrackingRequestCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IFilterTrackingProvider, AddTrackedFilter)
         HRESULT ( STDMETHODCALLTYPE *AddTrackedFilter )( 
             __RPC__in IFilterTrackingProvider * This,
             /* [in] */ __RPC__in_opt ISyncFilter *pFilter);
@@ -9723,23 +10345,28 @@ EXTERN_C const IID IID_ISupportLastWriteTime;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISupportLastWriteTime * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISupportLastWriteTime * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISupportLastWriteTime * This);
         
+        DECLSPEC_XFGVIRT(ISupportLastWriteTime, GetItemChangeTime)
         HRESULT ( STDMETHODCALLTYPE *GetItemChangeTime )( 
             ISupportLastWriteTime * This,
             /* [in] */ const BYTE *pbItemId,
             /* [out] */ ULONGLONG *pullTimestamp);
         
+        DECLSPEC_XFGVIRT(ISupportLastWriteTime, GetChangeUnitChangeTime)
         HRESULT ( STDMETHODCALLTYPE *GetChangeUnitChangeTime )( 
             ISupportLastWriteTime * This,
             /* [in] */ const BYTE *pbItemId,
@@ -9813,18 +10440,22 @@ EXTERN_C const IID IID_IProviderConverter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IProviderConverter * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IProviderConverter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IProviderConverter * This);
         
+        DECLSPEC_XFGVIRT(IProviderConverter, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IProviderConverter * This,
             /* [in] */ ISyncProvider *pISyncProvider);
@@ -9910,36 +10541,43 @@ EXTERN_C const IID IID_ISyncDataConverter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISyncDataConverter * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISyncDataConverter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISyncDataConverter * This);
         
+        DECLSPEC_XFGVIRT(ISyncDataConverter, ConvertDataRetrieverFromProviderFormat)
         HRESULT ( STDMETHODCALLTYPE *ConvertDataRetrieverFromProviderFormat )( 
             ISyncDataConverter * This,
             /* [in] */ IUnknown *pUnkDataRetrieverIn,
             /* [in] */ IEnumSyncChanges *pEnumSyncChanges,
             /* [out] */ IUnknown **ppUnkDataOut);
         
+        DECLSPEC_XFGVIRT(ISyncDataConverter, ConvertDataRetrieverToProviderFormat)
         HRESULT ( STDMETHODCALLTYPE *ConvertDataRetrieverToProviderFormat )( 
             ISyncDataConverter * This,
             /* [in] */ IUnknown *pUnkDataRetrieverIn,
             /* [in] */ IEnumSyncChanges *pEnumSyncChanges,
             /* [out] */ IUnknown **ppUnkDataOut);
         
+        DECLSPEC_XFGVIRT(ISyncDataConverter, ConvertDataFromProviderFormat)
         HRESULT ( STDMETHODCALLTYPE *ConvertDataFromProviderFormat )( 
             ISyncDataConverter * This,
             /* [in] */ ILoadChangeContext *pDataContext,
             /* [in] */ IUnknown *pUnkDataIn,
             /* [out] */ IUnknown **ppUnkDataOut);
         
+        DECLSPEC_XFGVIRT(ISyncDataConverter, ConvertDataToProviderFormat)
         HRESULT ( STDMETHODCALLTYPE *ConvertDataToProviderFormat )( 
             ISyncDataConverter * This,
             /* [in] */ ILoadChangeContext *pDataContext,

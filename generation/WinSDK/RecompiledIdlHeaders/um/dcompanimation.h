@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -121,6 +129,7 @@ EXTERN_C const IID IID_IDCompositionAnimation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDCompositionAnimation * This,
             /* [annotation][in] */ 
@@ -128,19 +137,24 @@ EXTERN_C const IID IID_IDCompositionAnimation;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDCompositionAnimation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDCompositionAnimation * This);
         
+        DECLSPEC_XFGVIRT(IDCompositionAnimation, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IDCompositionAnimation * This);
         
+        DECLSPEC_XFGVIRT(IDCompositionAnimation, SetAbsoluteBeginTime)
         HRESULT ( STDMETHODCALLTYPE *SetAbsoluteBeginTime )( 
             IDCompositionAnimation * This,
             LARGE_INTEGER beginTime);
         
+        DECLSPEC_XFGVIRT(IDCompositionAnimation, AddCubic)
         HRESULT ( STDMETHODCALLTYPE *AddCubic )( 
             IDCompositionAnimation * This,
             double beginOffset,
@@ -149,6 +163,7 @@ EXTERN_C const IID IID_IDCompositionAnimation;
             float quadraticCoefficient,
             float cubicCoefficient);
         
+        DECLSPEC_XFGVIRT(IDCompositionAnimation, AddSinusoidal)
         HRESULT ( STDMETHODCALLTYPE *AddSinusoidal )( 
             IDCompositionAnimation * This,
             double beginOffset,
@@ -157,11 +172,13 @@ EXTERN_C const IID IID_IDCompositionAnimation;
             float frequency,
             float phase);
         
+        DECLSPEC_XFGVIRT(IDCompositionAnimation, AddRepeat)
         HRESULT ( STDMETHODCALLTYPE *AddRepeat )( 
             IDCompositionAnimation * This,
             double beginOffset,
             double durationToRepeat);
         
+        DECLSPEC_XFGVIRT(IDCompositionAnimation, End)
         HRESULT ( STDMETHODCALLTYPE *End )( 
             IDCompositionAnimation * This,
             double endOffset,

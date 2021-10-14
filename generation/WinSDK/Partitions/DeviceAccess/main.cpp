@@ -7,3 +7,4 @@
 #include <sdkddkver.h>
 
 #include <deviceaccess.h>
+#include <edevdefs.h>

@@ -1,6 +1,6 @@
 /* Header file automatically generated from microsoft.diagnostics.appanalysis.idl */
 /*
- * File built with Microsoft(R) MIDLRT Compiler Engine Version 10.00.0229 
+ * File built with Microsoft(R) MIDLRT Compiler Engine Version 10.00.0231 
  */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -50,7 +50,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION 0x50000
+#define WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION 0x60000
 #endif // defined(WINDOWS_APPLICATIONMODEL_CALLS_CALLSPHONECONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
@@ -58,7 +58,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_NETWORKING_SOCKETS_CONTROLCHANNELTRIGGERCONTRACT_VERSION)
@@ -1090,7 +1090,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwEvent=_uuidof(IEtwEvent);
+                MIDL_CONST_ID IID & IID_IEtwEvent=_uuidof(IEtwEvent);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1130,7 +1130,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwEventFactory=_uuidof(IEtwEventFactory);
+                MIDL_CONST_ID IID & IID_IEtwEventFactory=_uuidof(IEtwEventFactory);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1176,7 +1176,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwProvider=_uuidof(IEtwProvider);
+                MIDL_CONST_ID IID & IID_IEtwProvider=_uuidof(IEtwProvider);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1220,7 +1220,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwProviderStatics=_uuidof(IEtwProviderStatics);
+                MIDL_CONST_ID IID & IID_IEtwProviderStatics=_uuidof(IEtwProviderStatics);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1253,7 +1253,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwEventRecordCallback=_uuidof(IEtwEventRecordCallback);
+                MIDL_CONST_ID IID & IID_IEtwEventRecordCallback=_uuidof(IEtwEventRecordCallback);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1291,7 +1291,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwEventWatcher=_uuidof(IEtwEventWatcher);
+                MIDL_CONST_ID IID & IID_IEtwEventWatcher=_uuidof(IEtwEventWatcher);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1333,7 +1333,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwRule=_uuidof(IEtwRule);
+                MIDL_CONST_ID IID & IID_IEtwRule=_uuidof(IEtwRule);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1372,7 +1372,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwRuleFactory=_uuidof(IEtwRuleFactory);
+                MIDL_CONST_ID IID & IID_IEtwRuleFactory=_uuidof(IEtwRuleFactory);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1410,7 +1410,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IResourceStringFactory=_uuidof(IResourceStringFactory);
+                MIDL_CONST_ID IID & IID_IResourceStringFactory=_uuidof(IResourceStringFactory);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1458,7 +1458,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IResourceString=_uuidof(IResourceString);
+                MIDL_CONST_ID IID & IID_IResourceString=_uuidof(IResourceString);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1497,7 +1497,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IResourceStringView=_uuidof(IResourceStringView);
+                MIDL_CONST_ID IID & IID_IResourceStringView=_uuidof(IResourceStringView);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1557,7 +1557,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IRule=_uuidof(IRule);
+                MIDL_CONST_ID IID & IID_IRule=_uuidof(IRule);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1638,7 +1638,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IEtwEventRecord=_uuidof(IEtwEventRecord);
+                MIDL_CONST_ID IID & IID_IEtwEventRecord=_uuidof(IEtwEventRecord);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1705,7 +1705,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IRuleTriggeredEventArgs=_uuidof(IRuleTriggeredEventArgs);
+                MIDL_CONST_ID IID & IID_IRuleTriggeredEventArgs=_uuidof(IRuleTriggeredEventArgs);
                 
             } /* AppAnalysis */
         } /* Diagnostics */
@@ -1747,7 +1747,7 @@ namespace ABI {
                     
                 };
 
-                extern MIDL_CONST_ID IID & IID_IRuleTriggeredEventArgsFactory=_uuidof(IRuleTriggeredEventArgsFactory);
+                MIDL_CONST_ID IID & IID_IRuleTriggeredEventArgsFactory=_uuidof(IRuleTriggeredEventArgsFactory);
                 
             } /* AppAnalysis */
         } /* Diagnostics */

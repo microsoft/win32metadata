@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -123,6 +131,7 @@ EXTERN_C const IID IID_ICertExit;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertExit * This,
             /* [annotation][in] */ 
@@ -130,17 +139,21 @@ EXTERN_C const IID IID_ICertExit;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertExit * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertExit * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertExit * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertExit * This,
             /* [annotation][in] */ 
@@ -150,6 +163,7 @@ EXTERN_C const IID IID_ICertExit;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertExit * This,
             /* [annotation][in] */ 
@@ -162,6 +176,7 @@ EXTERN_C const IID IID_ICertExit;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertExit * This,
             /* [annotation][in] */ 
@@ -181,6 +196,7 @@ EXTERN_C const IID IID_ICertExit;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertExit, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ICertExit * This,
             /* [annotation][in] */ 
@@ -188,6 +204,7 @@ EXTERN_C const IID IID_ICertExit;
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *pEventMask);
         
+        DECLSPEC_XFGVIRT(ICertExit, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in ICertExit * This,
             /* [annotation][in] */ 
@@ -195,6 +212,7 @@ EXTERN_C const IID IID_ICertExit;
             /* [annotation][in] */ 
             _In_  LONG Context);
         
+        DECLSPEC_XFGVIRT(ICertExit, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in ICertExit * This,
             /* [annotation][retval][out] */ 
@@ -284,6 +302,7 @@ EXTERN_C const IID IID_ICertExit2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertExit2 * This,
             /* [annotation][in] */ 
@@ -291,17 +310,21 @@ EXTERN_C const IID IID_ICertExit2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertExit2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertExit2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertExit2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertExit2 * This,
             /* [annotation][in] */ 
@@ -311,6 +334,7 @@ EXTERN_C const IID IID_ICertExit2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertExit2 * This,
             /* [annotation][in] */ 
@@ -323,6 +347,7 @@ EXTERN_C const IID IID_ICertExit2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertExit2 * This,
             /* [annotation][in] */ 
@@ -342,6 +367,7 @@ EXTERN_C const IID IID_ICertExit2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertExit, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ICertExit2 * This,
             /* [annotation][in] */ 
@@ -349,6 +375,7 @@ EXTERN_C const IID IID_ICertExit2;
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *pEventMask);
         
+        DECLSPEC_XFGVIRT(ICertExit, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in ICertExit2 * This,
             /* [annotation][in] */ 
@@ -356,11 +383,13 @@ EXTERN_C const IID IID_ICertExit2;
             /* [annotation][in] */ 
             _In_  LONG Context);
         
+        DECLSPEC_XFGVIRT(ICertExit, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in ICertExit2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pstrDescription);
         
+        DECLSPEC_XFGVIRT(ICertExit2, GetManageModule)
         HRESULT ( STDMETHODCALLTYPE *GetManageModule )( 
             __RPC__in ICertExit2 * This,
             /* [annotation][retval][out] */ 

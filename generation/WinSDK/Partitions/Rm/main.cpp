@@ -9,3 +9,5 @@
 #include <msdrmdefs.h>
 #include <msdrm.h>
 #include <msdrmerror.h>
+#include <msdrmerror.h>
+#include <msdrmgetinfo.h>

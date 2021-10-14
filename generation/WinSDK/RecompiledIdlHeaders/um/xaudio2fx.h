@@ -338,8 +338,8 @@ __inline void ReverbConvertI3DL2ToNative
     }
     pNative->ReverbDelay = (BYTE)reverbDelay;
 
-    pNative->ReflectionsGain = pI3DL2->Reflections / 100.0f;
-    pNative->ReverbGain = pI3DL2->Reverb / 100.0f;
+    pNative->ReflectionsGain = (float)pI3DL2->Reflections / 100.0f;
+    pNative->ReverbGain = (float)pI3DL2->Reverb / 100.0f;
     pNative->EarlyDiffusion = (BYTE)(15.0f * pI3DL2->Diffusion / 100.0f);
     pNative->LateDiffusion = pNative->EarlyDiffusion;
     pNative->Density = pI3DL2->Density;

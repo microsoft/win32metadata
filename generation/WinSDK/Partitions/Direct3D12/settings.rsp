@@ -3,5 +3,8 @@
 <IncludeRoot>/um/d3d12.h
 <IncludeRoot>/um/d3d12sdklayers.h
 <IncludeRoot>/um/d3d12shader.h
+<IncludeRoot>/um/d3d12compatibility.h
+<IncludeRoot>/um/d3d9on12.h
+<IncludeRoot>/um/mfd3d12.h
 --namespace
 Windows.Win32.Graphics.Direct3D12

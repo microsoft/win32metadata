@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -186,21 +194,26 @@ EXTERN_C const IID IID_IWPCProviderState;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWPCProviderState * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWPCProviderState * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWPCProviderState * This);
         
+        DECLSPEC_XFGVIRT(IWPCProviderState, Enable)
         HRESULT ( STDMETHODCALLTYPE *Enable )( 
             __RPC__in IWPCProviderState * This);
         
+        DECLSPEC_XFGVIRT(IWPCProviderState, Disable)
         HRESULT ( STDMETHODCALLTYPE *Disable )( 
             __RPC__in IWPCProviderState * This);
         
@@ -295,28 +308,34 @@ EXTERN_C const IID IID_IWPCProviderConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWPCProviderConfig * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWPCProviderConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWPCProviderConfig * This);
         
+        DECLSPEC_XFGVIRT(IWPCProviderConfig, GetUserSummary)
         HRESULT ( STDMETHODCALLTYPE *GetUserSummary )( 
             __RPC__in IWPCProviderConfig * This,
             /* [in] */ __RPC__in BSTR bstrSID,
             /* [string][out] */ __RPC__deref_out_opt_string BSTR *pbstrUserSummary);
         
+        DECLSPEC_XFGVIRT(IWPCProviderConfig, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             __RPC__in IWPCProviderConfig * This,
             /* [unique][in] */ __RPC__in_opt HWND hWnd,
             /* [string][in] */ __RPC__in_string BSTR bstrSID);
         
+        DECLSPEC_XFGVIRT(IWPCProviderConfig, RequestOverride)
         HRESULT ( STDMETHODCALLTYPE *RequestOverride )( 
             __RPC__in IWPCProviderConfig * This,
             /* [unique][in] */ __RPC__in_opt HWND hWnd,
@@ -420,26 +439,32 @@ EXTERN_C const IID IID_IWPCSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWPCSettings * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWPCSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWPCSettings * This);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, IsLoggingRequired)
         HRESULT ( STDMETHODCALLTYPE *IsLoggingRequired )( 
             __RPC__in IWPCSettings * This,
             /* [out] */ __RPC__out BOOL *pfRequired);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, GetLastSettingsChangeTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastSettingsChangeTime )( 
             __RPC__in IWPCSettings * This,
             /* [out] */ __RPC__out SYSTEMTIME *pTime);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, GetRestrictions)
         HRESULT ( STDMETHODCALLTYPE *GetRestrictions )( 
             __RPC__in IWPCSettings * This,
             /* [out] */ __RPC__out DWORD *pdwRestrictions);
@@ -515,30 +540,37 @@ EXTERN_C const IID IID_IWPCGamesSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWPCGamesSettings * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWPCGamesSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWPCGamesSettings * This);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, IsLoggingRequired)
         HRESULT ( STDMETHODCALLTYPE *IsLoggingRequired )( 
             __RPC__in IWPCGamesSettings * This,
             /* [out] */ __RPC__out BOOL *pfRequired);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, GetLastSettingsChangeTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastSettingsChangeTime )( 
             __RPC__in IWPCGamesSettings * This,
             /* [out] */ __RPC__out SYSTEMTIME *pTime);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, GetRestrictions)
         HRESULT ( STDMETHODCALLTYPE *GetRestrictions )( 
             __RPC__in IWPCGamesSettings * This,
             /* [out] */ __RPC__out DWORD *pdwRestrictions);
         
+        DECLSPEC_XFGVIRT(IWPCGamesSettings, IsBlocked)
         HRESULT ( STDMETHODCALLTYPE *IsBlocked )( 
             __RPC__in IWPCGamesSettings * This,
             /* [in] */ GUID guidAppID,
@@ -640,34 +672,42 @@ EXTERN_C const IID IID_IWPCWebSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWPCWebSettings * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWPCWebSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWPCWebSettings * This);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, IsLoggingRequired)
         HRESULT ( STDMETHODCALLTYPE *IsLoggingRequired )( 
             __RPC__in IWPCWebSettings * This,
             /* [out] */ __RPC__out BOOL *pfRequired);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, GetLastSettingsChangeTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastSettingsChangeTime )( 
             __RPC__in IWPCWebSettings * This,
             /* [out] */ __RPC__out SYSTEMTIME *pTime);
         
+        DECLSPEC_XFGVIRT(IWPCSettings, GetRestrictions)
         HRESULT ( STDMETHODCALLTYPE *GetRestrictions )( 
             __RPC__in IWPCWebSettings * This,
             /* [out] */ __RPC__out DWORD *pdwRestrictions);
         
+        DECLSPEC_XFGVIRT(IWPCWebSettings, GetSettings)
         HRESULT ( STDMETHODCALLTYPE *GetSettings )( 
             __RPC__in IWPCWebSettings * This,
             /* [out] */ __RPC__out DWORD *pdwSettings);
         
+        DECLSPEC_XFGVIRT(IWPCWebSettings, RequestURLOverride)
         HRESULT ( STDMETHODCALLTYPE *RequestURLOverride )( 
             __RPC__in IWPCWebSettings * This,
             /* [unique][in] */ __RPC__in_opt HWND hWnd,
@@ -780,32 +820,39 @@ EXTERN_C const IID IID_IWindowsParentalControlsCore;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWindowsParentalControlsCore * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWindowsParentalControlsCore * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWindowsParentalControlsCore * This);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControlsCore, GetVisibility)
         HRESULT ( STDMETHODCALLTYPE *GetVisibility )( 
             __RPC__in IWindowsParentalControlsCore * This,
             /* [out] */ __RPC__out WPCFLAG_VISIBILITY *peVisibility);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControlsCore, GetUserSettings)
         HRESULT ( STDMETHODCALLTYPE *GetUserSettings )( 
             __RPC__in IWindowsParentalControlsCore * This,
             /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pcszSID,
             /* [out] */ __RPC__deref_out_opt IWPCSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControlsCore, GetWebSettings)
         HRESULT ( STDMETHODCALLTYPE *GetWebSettings )( 
             __RPC__in IWindowsParentalControlsCore * This,
             /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pcszSID,
             /* [out] */ __RPC__deref_out_opt IWPCWebSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControlsCore, GetWebFilterInfo)
         HRESULT ( STDMETHODCALLTYPE *GetWebFilterInfo )( 
             __RPC__in IWindowsParentalControlsCore * This,
             /* [out] */ __RPC__out GUID *pguidID,
@@ -885,37 +932,45 @@ EXTERN_C const IID IID_IWindowsParentalControls;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWindowsParentalControls * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWindowsParentalControls * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWindowsParentalControls * This);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControlsCore, GetVisibility)
         HRESULT ( STDMETHODCALLTYPE *GetVisibility )( 
             __RPC__in IWindowsParentalControls * This,
             /* [out] */ __RPC__out WPCFLAG_VISIBILITY *peVisibility);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControlsCore, GetUserSettings)
         HRESULT ( STDMETHODCALLTYPE *GetUserSettings )( 
             __RPC__in IWindowsParentalControls * This,
             /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pcszSID,
             /* [out] */ __RPC__deref_out_opt IWPCSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControlsCore, GetWebSettings)
         HRESULT ( STDMETHODCALLTYPE *GetWebSettings )( 
             __RPC__in IWindowsParentalControls * This,
             /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pcszSID,
             /* [out] */ __RPC__deref_out_opt IWPCWebSettings **ppSettings);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControlsCore, GetWebFilterInfo)
         HRESULT ( STDMETHODCALLTYPE *GetWebFilterInfo )( 
             __RPC__in IWindowsParentalControls * This,
             /* [out] */ __RPC__out GUID *pguidID,
             /* [unique][out][in] */ __RPC__deref_opt_inout_opt LPWSTR *ppszName);
         
+        DECLSPEC_XFGVIRT(IWindowsParentalControls, GetGamesSettings)
         HRESULT ( STDMETHODCALLTYPE *GetGamesSettings )( 
             __RPC__in IWindowsParentalControls * This,
             /* [string][unique][in] */ __RPC__in_opt_string LPCWSTR pcszSID,
@@ -998,18 +1053,22 @@ EXTERN_C const IID IID_IWPCProviderSupport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWPCProviderSupport * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWPCProviderSupport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWPCProviderSupport * This);
         
+        DECLSPEC_XFGVIRT(IWPCProviderSupport, GetCurrent)
         HRESULT ( STDMETHODCALLTYPE *GetCurrent )( 
             __RPC__in IWPCProviderSupport * This,
             /* [out] */ __RPC__out GUID *pguidProvider);

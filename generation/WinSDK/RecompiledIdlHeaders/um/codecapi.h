@@ -391,6 +391,8 @@ Abstract:
     #define STATIC_CODECAPI_AVEncNoInputCopy                0xd2b46a2a, 0xe8ee, 0x4ec5, 0x86, 0x9e, 0x44, 0x9b, 0x6c, 0x62, 0xc8, 0x1a
 
     #define STATIC_CODECAPI_AVEncChromaEncodeMode           0x8a47ab5a, 0x4798, 0x4c93, 0xb5, 0xa5, 0x55, 0x4f, 0x9a, 0x3b, 0x9f, 0x50
+    #define STATIC_CODECAPI_AVEncProgressiveUpdateTime      0x649faf66, 0xafc6, 0x4828, 0x8f, 0xdc, 0x07, 0x71, 0xcd, 0x9a, 0xb1, 0x7d
+    #define STATIC_CODECAPI_AVEncChromaUpdateTime           0x4b4fd998, 0x4274, 0x40bb, 0x8e, 0xe4, 0x07, 0x55, 0x3e, 0x7e, 0x2d, 0x3a
 // end of static definitions }
 
 //
@@ -2062,6 +2064,18 @@ enum eAVEncChromaEncodeMode
 };
 DEFINE_CODECAPI_GUID( AVEncChromaEncodeMode, "8a47ab5a-4798-4c93-b5a5-554f9a3b9f50", 0x8a47ab5a, 0x4798, 0x4c93, 0xb5, 0xa5, 0x55, 0x4f, 0x9a, 0x3b, 0x9f, 0x50 )
 
+// AVEncNextProgressiveTime (UINT32)
+// Read-only
+// Provides the time until the encoder plans to update progressive
+// areas of the video frame.
+DEFINE_CODECAPI_GUID( AVEncProgressiveUpdateTime, "649faf66-afc6-4828-8fdc-0771cd9ab17d", 0x649faf66, 0xafc6, 0x4828, 0x8f, 0xdc, 0x07, 0x71, 0xcd, 0x9a, 0xb1, 0x7d )
+
+// AVEncNextChromaTime (UINT32)
+// Read-only
+// Provides the time until the encoder plans to update chroma
+// in the video frame.
+DEFINE_CODECAPI_GUID( AVEncChromaUpdateTime, "4b4fd998-4274-40bb-8ee4-07553e7e2d3a", 0x4b4fd998, 0x4274, 0x40bb, 0x8e, 0xe4, 0x07, 0x55, 0x3e, 0x7e, 0x2d, 0x3a )
+
 #ifndef UUID_GEN
 // { GUID refs
     #define CODECAPI_AVEncCommonFormatConstraint DEFINE_CODECAPI_GUIDNAMED( AVEncCommonFormatConstraint )
@@ -2392,6 +2406,8 @@ DEFINE_CODECAPI_GUID( AVEncChromaEncodeMode, "8a47ab5a-4798-4c93-b5a5-554f9a3b9f
     #define CODECAPI_AVEncNoInputCopy               DEFINE_CODECAPI_GUIDNAMED( AVEncNoInputCopy )
 
     #define CODECAPI_AVEncChromaEncodeMode          DEFINE_CODECAPI_GUIDNAMED( AVEncChromaEncodeMode )
+    #define CODECAPI_AVEncProgressiveUpdateTime     DEFINE_CODECAPI_GUIDNAMED( AVEncProgressiveUpdateTime )
+    #define CODECAPI_AVEncChromaUpdateTime          DEFINE_CODECAPI_GUIDNAMED( AVEncChromaUpdateTime )
 #endif
 
 

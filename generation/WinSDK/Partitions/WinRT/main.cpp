@@ -60,3 +60,6 @@
 #include <windows.ui.xaml.hosting.desktopwindowxamlsource.h>
 #include <windows.ui.xaml.hosting.referencetracker.h>
 #include <systemmediatransportcontrolsinterop.h>
+#include <sharewindowcommandsourceinterop.h>
+#include <windows.ui.viewmanagement.core.coreframeworkinputviewinterop.h>
+#include <windowsstoragecom.h>

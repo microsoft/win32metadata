@@ -226,7 +226,7 @@ EXTERN_C const IID IID_IISApplicationPool;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISApplicationPool * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -240,21 +240,21 @@ EXTERN_C const IID IID_IISApplicationPool;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISApplicationPool * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISApplicationPool * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISApplicationPool * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -262,13 +262,13 @@ EXTERN_C const IID IID_IISApplicationPool;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISApplicationPool * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
@@ -512,7 +512,7 @@ EXTERN_C const IID IID_IISApplicationPools;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISApplicationPools * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -526,21 +526,21 @@ EXTERN_C const IID IID_IISApplicationPools;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISApplicationPools * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISApplicationPools * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISApplicationPools * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -548,13 +548,13 @@ EXTERN_C const IID IID_IISApplicationPools;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISApplicationPools * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
@@ -787,7 +787,7 @@ EXTERN_C const IID IID_IISWebService;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISWebService * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -801,21 +801,21 @@ EXTERN_C const IID IID_IISWebService;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISWebService * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISWebService * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISWebService * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -823,13 +823,13 @@ EXTERN_C const IID IID_IISWebService;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISWebService * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
@@ -1369,7 +1369,7 @@ EXTERN_C const IID IID_IISDsCrMap;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISDsCrMap * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -1383,21 +1383,21 @@ EXTERN_C const IID IID_IISDsCrMap;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISDsCrMap * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISDsCrMap * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISDsCrMap * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -1405,13 +1405,13 @@ EXTERN_C const IID IID_IISDsCrMap;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISDsCrMap * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
@@ -1780,7 +1780,7 @@ EXTERN_C const IID IID_IISApp;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISApp * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -1794,21 +1794,21 @@ EXTERN_C const IID IID_IISApp;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISApp * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISApp * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISApp * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -1816,13 +1816,13 @@ EXTERN_C const IID IID_IISApp;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISApp * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
@@ -2193,7 +2193,7 @@ EXTERN_C const IID IID_IISApp2;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISApp2 * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -2207,21 +2207,21 @@ EXTERN_C const IID IID_IISApp2;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISApp2 * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISApp2 * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISApp2 * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -2229,13 +2229,13 @@ EXTERN_C const IID IID_IISApp2;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISApp2 * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
@@ -2521,7 +2521,7 @@ EXTERN_C const IID IID_IISApp3;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISApp3 * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -2535,21 +2535,21 @@ EXTERN_C const IID IID_IISApp3;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISApp3 * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISApp3 * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISApp3 * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -2557,13 +2557,13 @@ EXTERN_C const IID IID_IISApp3;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISApp3 * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
@@ -2865,7 +2865,7 @@ EXTERN_C const IID IID_IISComputer;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISComputer * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -2879,21 +2879,21 @@ EXTERN_C const IID IID_IISComputer;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISComputer * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISComputer * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISComputer * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -2901,13 +2901,13 @@ EXTERN_C const IID IID_IISComputer;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISComputer * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
@@ -3202,7 +3202,7 @@ EXTERN_C const IID IID_IISComputer2;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IISComputer2 * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [out][idldescattr] */ void **ppvObj,
             /* [retval][out] */ void *retval);
         
@@ -3216,21 +3216,21 @@ EXTERN_C const IID IID_IISComputer2;
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IISComputer2 * This,
-            /* [out][idldescattr] */ unsigned UINT *pctinfo,
+            /* [out][idldescattr] */ UINT *pctinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IISComputer2 * This,
-            /* [in][idldescattr] */ unsigned UINT itinfo,
+            /* [in][idldescattr] */ UINT itinfo,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ void **pptinfo,
             /* [retval][out] */ void *retval);
         
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IISComputer2 * This,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ signed char **rgszNames,
-            /* [in][idldescattr] */ unsigned UINT cNames,
+            /* [in][idldescattr] */ UINT cNames,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [out][idldescattr] */ signed long *rgdispid,
             /* [retval][out] */ void *retval);
@@ -3238,13 +3238,13 @@ EXTERN_C const IID IID_IISComputer2;
         /* [id][restricted][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IISComputer2 * This,
             /* [in][idldescattr] */ signed long dispidMember,
-            /* [in][idldescattr] */ struct GUID *riid,
+            /* [in][idldescattr] */ GUID *riid,
             /* [in][idldescattr] */ unsigned long lcid,
             /* [in][idldescattr] */ unsigned short wFlags,
-            /* [in][idldescattr] */ struct DISPPARAMS *pdispparams,
+            /* [in][idldescattr] */ DISPPARAMS *pdispparams,
             /* [out][idldescattr] */ VARIANT *pvarResult,
-            /* [out][idldescattr] */ struct EXCEPINFO *pexcepinfo,
-            /* [out][idldescattr] */ unsigned UINT *puArgErr,
+            /* [out][idldescattr] */ EXCEPINFO *pexcepinfo,
+            /* [out][idldescattr] */ UINT *puArgErr,
             /* [retval][out] */ void *retval);
         
         /* [id][propget][funcdescattr] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 

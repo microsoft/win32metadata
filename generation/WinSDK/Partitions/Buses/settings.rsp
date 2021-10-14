@@ -1,10 +1,14 @@
 --traverse
 <IncludeRoot>/shared/winusbio.h
+<IncludeRoot>/shared/genericusbfnioctl.h
 <IncludeRoot>/um/usbuser.h
 <IncludeRoot>/shared/usbiodef.h
 <IncludeRoot>/shared/usbspec.h
 <IncludeRoot>/shared/usb.h
 <IncludeRoot>/um/usb.h
 <IncludeRoot>/um/winusb.h
+<IncludeRoot>/shared/usbfnbase.h
+<IncludeRoot>/shared/usbioctl.h
+<IncludeRoot>/shared/usbscan.h
 --namespace
 Windows.Win32.Devices.Usb

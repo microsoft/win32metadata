@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -134,18 +142,22 @@ EXTERN_C const IID IID_IXpsPrintJobStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsPrintJobStream * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXpsPrintJobStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXpsPrintJobStream * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IXpsPrintJobStream * This,
             /* [annotation] */ 
@@ -155,6 +167,7 @@ EXTERN_C const IID IID_IXpsPrintJobStream;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             IXpsPrintJobStream * This,
             /* [annotation] */ 
@@ -164,6 +177,7 @@ EXTERN_C const IID IID_IXpsPrintJobStream;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IXpsPrintJobStream, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IXpsPrintJobStream * This);
         
@@ -240,21 +254,26 @@ EXTERN_C const IID IID_IXpsPrintJob;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXpsPrintJob * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXpsPrintJob * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXpsPrintJob * This);
         
+        DECLSPEC_XFGVIRT(IXpsPrintJob, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IXpsPrintJob * This);
         
+        DECLSPEC_XFGVIRT(IXpsPrintJob, GetJobStatus)
         HRESULT ( STDMETHODCALLTYPE *GetJobStatus )( 
             __RPC__in IXpsPrintJob * This,
             /* [retval][out] */ __RPC__out XPS_JOB_STATUS *jobStatus);

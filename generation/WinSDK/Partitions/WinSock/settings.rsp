@@ -23,5 +23,11 @@ _DL_EUI48
 <IncludeRoot>/um/wsipv6ok.h
 <IncludeRoot>/um/wsnwlink.h
 <IncludeRoot>/um/wsrm.h
+<IncludeRoot>/shared/afunix.h
+<IncludeRoot>/um/svcguid.h
+<IncludeRoot>/um/wshisotp.h
+<IncludeRoot>/um/wsipx.h
+<IncludeRoot>/um/wsnetbs.h
+<IncludeRoot>/um/wsvns.h
 --namespace
 Windows.Win32.Networking.WinSock

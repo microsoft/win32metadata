@@ -33,6 +33,8 @@ namespace Windows
                 {
                     typedef enum AccessibilityView AccessibilityView;
 
+                    typedef enum AutomationControlType AutomationControlType;
+
                     typedef enum AutomationHeadingLevel AutomationHeadingLevel;
 
                     typedef enum AutomationLandmarkType AutomationLandmarkType;
@@ -152,6 +154,8 @@ namespace Windows
                 interface IAutomationPropertiesStatics7;
 
                 interface IAutomationPropertiesStatics8;
+
+                interface IAutomationPropertiesStatics9;
 
                 interface IAutomationProperty;
 
@@ -869,6 +873,16 @@ namespace Windows
                     HRESULT SetIsDialog([in] Windows.UI.Xaml.DependencyObject* element, [in] boolean value);
                 }
 
+                [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+                [exclusiveto(Windows.UI.Xaml.Automation.AutomationProperties)]
+                [uuid(2F20B1D1-87B2-5562-8077-DA593EDAFD2D)]
+                interface IAutomationPropertiesStatics9 : IInspectable
+                {
+                    [propget] HRESULT AutomationControlTypeProperty([out] [retval] Windows.UI.Xaml.DependencyProperty** value);
+                    HRESULT GetAutomationControlType([in] Windows.UI.Xaml.UIElement* element, [out] [retval] Windows.UI.Xaml.Automation.Peers.AutomationControlType* result);
+                    HRESULT SetAutomationControlType([in] Windows.UI.Xaml.UIElement* element, [in] Windows.UI.Xaml.Automation.Peers.AutomationControlType value);
+                }
+
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                 [exclusiveto(Windows.UI.Xaml.Automation.AutomationProperty)]
                 [uuid(B627195B-3227-4E16-9534-DDECE30DDB46)]
@@ -1266,6 +1280,7 @@ namespace Windows
                 [static(Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6, Windows.Foundation.UniversalApiContract, 4.0)]
                 [static(Windows.UI.Xaml.Automation.IAutomationPropertiesStatics7, Windows.Foundation.UniversalApiContract, 6.0)]
                 [static(Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8, Windows.Foundation.UniversalApiContract, 7.0)]
+                [static(Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9, Windows.Foundation.UniversalApiContract, 14.0)]
                 [threading(both)]
                 runtimeclass AutomationProperties
                 {

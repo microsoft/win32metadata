@@ -50,7 +50,6 @@ CreateThreadpool(
     _Reserved_ PVOID reserved
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
@@ -58,7 +57,6 @@ SetThreadpoolThreadMaximum(
     _Inout_ PTP_POOL ptpp,
     _In_ DWORD cthrdMost
     );
-
 
 WINBASEAPI
 BOOL
@@ -68,7 +66,6 @@ SetThreadpoolThreadMinimum(
     _In_ DWORD cthrdMic
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -76,7 +73,6 @@ SetThreadpoolStackInformation(
     _Inout_ PTP_POOL ptpp,
     _In_ PTP_POOL_STACK_INFORMATION ptpsi
     );
-
 
 WINBASEAPI
 BOOL
@@ -86,14 +82,12 @@ QueryThreadpoolStackInformation(
     _Out_ PTP_POOL_STACK_INFORMATION ptpsi
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 CloseThreadpool(
     _Inout_ PTP_POOL ptpp
     );
-
 
 WINBASEAPI
 _Must_inspect_result_
@@ -102,7 +96,6 @@ WINAPI
 CreateThreadpoolCleanupGroup(
     VOID
     );
-
 
 WINBASEAPI
 VOID
@@ -113,14 +106,12 @@ CloseThreadpoolCleanupGroupMembers(
     _Inout_opt_ PVOID pvCleanupContext
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 CloseThreadpoolCleanupGroup(
     _Inout_ PTP_CLEANUP_GROUP ptpcg
     );
-
 
 WINBASEAPI
 VOID
@@ -129,7 +120,6 @@ SetEventWhenCallbackReturns(
     _Inout_ PTP_CALLBACK_INSTANCE pci,
     _In_ HANDLE evt
     );
-
 
 WINBASEAPI
 VOID
@@ -140,7 +130,6 @@ ReleaseSemaphoreWhenCallbackReturns(
     _In_ DWORD crel
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
@@ -148,7 +137,6 @@ ReleaseMutexWhenCallbackReturns(
     _Inout_ PTP_CALLBACK_INSTANCE pci,
     _In_ HANDLE mut
     );
-
 
 WINBASEAPI
 VOID
@@ -158,7 +146,6 @@ LeaveCriticalSectionWhenCallbackReturns(
     _Inout_ PCRITICAL_SECTION pcs
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
@@ -167,7 +154,6 @@ FreeLibraryWhenCallbackReturns(
     _In_ HMODULE mod
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -175,14 +161,12 @@ CallbackMayRunLong(
     _Inout_ PTP_CALLBACK_INSTANCE pci
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 DisassociateCurrentThreadFromCallback(
     _Inout_ PTP_CALLBACK_INSTANCE pci
     );
-
 
 WINBASEAPI
 _Must_inspect_result_
@@ -194,7 +178,6 @@ TrySubmitThreadpoolCallback(
     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
     );
 
-
 WINBASEAPI
 _Must_inspect_result_
 PTP_WORK
@@ -205,14 +188,12 @@ CreateThreadpoolWork(
     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 SubmitThreadpoolWork(
     _Inout_ PTP_WORK pwk
     );
-
 
 WINBASEAPI
 VOID
@@ -222,14 +203,12 @@ WaitForThreadpoolWorkCallbacks(
     _In_ BOOL fCancelPendingCallbacks
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 CloseThreadpoolWork(
     _Inout_ PTP_WORK pwk
     );
-
 
 WINBASEAPI
 _Must_inspect_result_
@@ -241,7 +220,6 @@ CreateThreadpoolTimer(
     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
@@ -252,14 +230,12 @@ SetThreadpoolTimer(
     _In_opt_ DWORD msWindowLength
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
 IsThreadpoolTimerSet(
     _Inout_ PTP_TIMER pti
     );
-
 
 WINBASEAPI
 VOID
@@ -269,14 +245,12 @@ WaitForThreadpoolTimerCallbacks(
     _In_ BOOL fCancelPendingCallbacks
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 CloseThreadpoolTimer(
     _Inout_ PTP_TIMER pti
     );
-
 
 WINBASEAPI
 _Must_inspect_result_
@@ -288,7 +262,6 @@ CreateThreadpoolWait(
     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
@@ -298,7 +271,6 @@ SetThreadpoolWait(
     _In_opt_ PFILETIME pftTimeout
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
@@ -307,14 +279,12 @@ WaitForThreadpoolWaitCallbacks(
     _In_ BOOL fCancelPendingCallbacks
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 CloseThreadpoolWait(
     _Inout_ PTP_WAIT pwa
     );
-
 
 WINBASEAPI
 _Must_inspect_result_
@@ -327,7 +297,6 @@ CreateThreadpoolIo(
     _In_opt_ PTP_CALLBACK_ENVIRON pcbe
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
@@ -335,14 +304,12 @@ StartThreadpoolIo(
     _Inout_ PTP_IO pio
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 CancelThreadpoolIo(
     _Inout_ PTP_IO pio
     );
-
 
 WINBASEAPI
 VOID
@@ -352,14 +319,12 @@ WaitForThreadpoolIoCallbacks(
     _In_ BOOL fCancelPendingCallbacks
     );
 
-
 WINBASEAPI
 VOID
 WINAPI
 CloseThreadpoolIo(
     _Inout_ PTP_IO pio
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -377,7 +342,6 @@ SetThreadpoolTimerEx(
     _In_opt_ DWORD msWindowLength
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -387,7 +351,6 @@ SetThreadpoolWaitEx(
     _In_opt_ PFILETIME pftTimeout,
     _Reserved_ PVOID Reserved
     );
-
 
 #endif  // _WIN32_WINNT >= 0x0600
 

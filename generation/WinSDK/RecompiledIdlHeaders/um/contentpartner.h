@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -581,39 +589,48 @@ EXTERN_C const IID IID_IWMPContentContainer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMPContentContainer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMPContentContainer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMPContentContainer * This);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainer, GetID)
         HRESULT ( STDMETHODCALLTYPE *GetID )( 
             __RPC__in IWMPContentContainer * This,
             /* [out] */ __RPC__out ULONG *pContentID);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainer, GetPrice)
         HRESULT ( STDMETHODCALLTYPE *GetPrice )( 
             __RPC__in IWMPContentContainer * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrPrice);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainer, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IWMPContentContainer * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainer, GetContentCount)
         HRESULT ( STDMETHODCALLTYPE *GetContentCount )( 
             __RPC__in IWMPContentContainer * This,
             /* [out] */ __RPC__out ULONG *pcContent);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainer, GetContentPrice)
         HRESULT ( STDMETHODCALLTYPE *GetContentPrice )( 
             __RPC__in IWMPContentContainer * This,
             /* [in] */ ULONG idxContent,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrPrice);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainer, GetContentID)
         HRESULT ( STDMETHODCALLTYPE *GetContentID )( 
             __RPC__in IWMPContentContainer * This,
             /* [in] */ ULONG idxContent,
@@ -749,26 +766,32 @@ EXTERN_C const IID IID_IWMPContentContainerList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMPContentContainerList * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMPContentContainerList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMPContentContainerList * This);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainerList, GetTransactionType)
         HRESULT ( STDMETHODCALLTYPE *GetTransactionType )( 
             __RPC__in IWMPContentContainerList * This,
             /* [out] */ __RPC__out WMPTransactionType *pwmptt);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainerList, GetContainerCount)
         HRESULT ( STDMETHODCALLTYPE *GetContainerCount )( 
             __RPC__in IWMPContentContainerList * This,
             /* [out] */ __RPC__out ULONG *pcContainer);
         
+        DECLSPEC_XFGVIRT(IWMPContentContainerList, GetContainer)
         HRESULT ( STDMETHODCALLTYPE *GetContainer )( 
             __RPC__in IWMPContentContainerList * This,
             /* [in] */ ULONG idxContainer,
@@ -1063,28 +1086,34 @@ EXTERN_C const IID IID_IWMPContentPartnerCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMPContentPartnerCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMPContentPartnerCallback * This);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ WMPCallbackNotification type,
             /* [in] */ __RPC__in VARIANT *pContext);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, BuyComplete)
         HRESULT ( STDMETHODCALLTYPE *BuyComplete )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ HRESULT hrResult,
             /* [in] */ DWORD dwBuyCookie);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, DownloadTrack)
         HRESULT ( STDMETHODCALLTYPE *DownloadTrack )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ DWORD cookie,
@@ -1093,55 +1122,65 @@ EXTERN_C const IID IID_IWMPContentPartnerCallback;
             /* [in] */ __RPC__in BSTR bstrDownloadParams,
             /* [in] */ HRESULT hrDownload);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, GetCatalogVersion)
         HRESULT ( STDMETHODCALLTYPE *GetCatalogVersion )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [out] */ __RPC__out DWORD *pdwVersion,
             /* [out] */ __RPC__out DWORD *pdwSchemaVersion,
             /* [out] */ __RPC__out LCID *plcid);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, UpdateDeviceComplete)
         HRESULT ( STDMETHODCALLTYPE *UpdateDeviceComplete )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ __RPC__in BSTR bstrDeviceName);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, ChangeView)
         HRESULT ( STDMETHODCALLTYPE *ChangeView )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ __RPC__in BSTR bstrType,
             /* [in] */ __RPC__in BSTR bstrID,
             /* [in] */ __RPC__in BSTR bstrFilter);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, AddListContents)
         HRESULT ( STDMETHODCALLTYPE *AddListContents )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ DWORD dwListCookie,
             /* [in] */ DWORD cItems,
             /* [size_is][in] */ __RPC__in_ecount_full(cItems) DWORD *prgItems);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, ListContentsComplete)
         HRESULT ( STDMETHODCALLTYPE *ListContentsComplete )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ DWORD dwListCookie,
             /* [in] */ HRESULT hrSuccess);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, SendMessageComplete)
         HRESULT ( STDMETHODCALLTYPE *SendMessageComplete )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ __RPC__in BSTR bstrMsg,
             /* [in] */ __RPC__in BSTR bstrParam,
             /* [in] */ __RPC__in BSTR bstrResult);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, GetContentIDsInLibrary)
         HRESULT ( STDMETHODCALLTYPE *GetContentIDsInLibrary )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [out] */ __RPC__out ULONG *pcContentIDs,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcContentIDs) ULONG **pprgIDs);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, RefreshLicenseComplete)
         HRESULT ( STDMETHODCALLTYPE *RefreshLicenseComplete )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ DWORD dwCookie,
             /* [in] */ ULONG contentID,
             /* [in] */ HRESULT hrRefresh);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, ShowPopup)
         HRESULT ( STDMETHODCALLTYPE *ShowPopup )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ long lIndex,
             /* [in] */ __RPC__in BSTR bstrParameters);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartnerCallback, VerifyPermissionComplete)
         HRESULT ( STDMETHODCALLTYPE *VerifyPermissionComplete )( 
             __RPC__in IWMPContentPartnerCallback * This,
             /* [in] */ __RPC__in BSTR bstrPermission,
@@ -1489,38 +1528,46 @@ EXTERN_C const IID IID_IWMPContentPartner;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWMPContentPartner * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWMPContentPartner * This);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, SetCallback)
         HRESULT ( STDMETHODCALLTYPE *SetCallback )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in_opt IWMPContentPartnerCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, Notify)
         HRESULT ( STDMETHODCALLTYPE *Notify )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ WMPPartnerNotification type,
             /* [in] */ __RPC__in VARIANT *pContext);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, GetItemInfo)
         HRESULT ( STDMETHODCALLTYPE *GetItemInfo )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in BSTR bstrInfoName,
             /* [in] */ __RPC__in VARIANT *pContext,
             /* [out] */ __RPC__out VARIANT *pData);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, GetContentPartnerInfo)
         HRESULT ( STDMETHODCALLTYPE *GetContentPartnerInfo )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in BSTR bstrInfoName,
             /* [out] */ __RPC__out VARIANT *pData);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, GetCommands)
         HRESULT ( STDMETHODCALLTYPE *GetCommands )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in BSTR location,
@@ -1531,6 +1578,7 @@ EXTERN_C const IID IID_IWMPContentPartner;
             /* [out] */ __RPC__out ULONG *pcItemIDs,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcItemIDs) WMPContextMenuInfo **pprgItems);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, InvokeCommand)
         HRESULT ( STDMETHODCALLTYPE *InvokeCommand )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ DWORD dwCommandID,
@@ -1540,34 +1588,40 @@ EXTERN_C const IID IID_IWMPContentPartner;
             /* [in] */ ULONG cItemIDs,
             /* [size_is][in] */ __RPC__in_ecount_full(cItemIDs) ULONG *rgItemIDs);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, CanBuySilent)
         HRESULT ( STDMETHODCALLTYPE *CanBuySilent )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in_opt IWMPContentContainerList *pInfo,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrTotalPrice,
             /* [out] */ __RPC__out VARIANT_BOOL *pSilentOK);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, Buy)
         HRESULT ( STDMETHODCALLTYPE *Buy )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in_opt IWMPContentContainerList *pInfo,
             /* [in] */ DWORD cookie);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, GetStreamingURL)
         HRESULT ( STDMETHODCALLTYPE *GetStreamingURL )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ WMPStreamingType st,
             /* [in] */ __RPC__in VARIANT *pStreamContext,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, Download)
         HRESULT ( STDMETHODCALLTYPE *Download )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in_opt IWMPContentContainerList *pInfo,
             /* [in] */ DWORD cookie);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, DownloadTrackComplete)
         HRESULT ( STDMETHODCALLTYPE *DownloadTrackComplete )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ HRESULT hrResult,
             /* [in] */ ULONG contentID,
             /* [in] */ __RPC__in BSTR downloadTrackParam);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, RefreshLicense)
         HRESULT ( STDMETHODCALLTYPE *RefreshLicense )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ DWORD dwCookie,
@@ -1578,6 +1632,7 @@ EXTERN_C const IID IID_IWMPContentPartner;
             /* [in] */ __RPC__in BSTR bstrRefreshReason,
             /* [in] */ __RPC__in VARIANT *pReasonContext);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, GetCatalogURL)
         HRESULT ( STDMETHODCALLTYPE *GetCatalogURL )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ DWORD dwCatalogVersion,
@@ -1587,6 +1642,7 @@ EXTERN_C const IID IID_IWMPContentPartner;
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrCatalogURL,
             /* [out] */ __RPC__out VARIANT *pExpirationDate);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, GetTemplate)
         HRESULT ( STDMETHODCALLTYPE *GetTemplate )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ WMPTaskType task,
@@ -1599,10 +1655,12 @@ EXTERN_C const IID IID_IWMPContentPartner;
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrTemplateURL,
             /* [out] */ __RPC__out WMPTemplateSize *pTemplateSize);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, UpdateDevice)
         HRESULT ( STDMETHODCALLTYPE *UpdateDevice )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in BSTR bstrDeviceName);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, GetListContents)
         HRESULT ( STDMETHODCALLTYPE *GetListContents )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in BSTR location,
@@ -1611,6 +1669,7 @@ EXTERN_C const IID IID_IWMPContentPartner;
             /* [in] */ __RPC__in BSTR bstrParams,
             /* [in] */ DWORD dwListCookie);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, Login)
         HRESULT ( STDMETHODCALLTYPE *Login )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ BLOB userInfo,
@@ -1618,19 +1677,23 @@ EXTERN_C const IID IID_IWMPContentPartner;
             /* [in] */ VARIANT_BOOL fUsedCachedCreds,
             /* [in] */ VARIANT_BOOL fOkToCache);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, Authenticate)
         HRESULT ( STDMETHODCALLTYPE *Authenticate )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ BLOB userInfo,
             /* [in] */ BLOB pwdInfo);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, Logout)
         HRESULT ( STDMETHODCALLTYPE *Logout )( 
             __RPC__in IWMPContentPartner * This);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, SendMessage)
         HRESULT ( STDMETHODCALLTYPE *SendMessage )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in BSTR bstrMsg,
             /* [in] */ __RPC__in BSTR bstrParam);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, StationEvent)
         HRESULT ( STDMETHODCALLTYPE *StationEvent )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in BSTR bstrStationEventType,
@@ -1640,12 +1703,14 @@ EXTERN_C const IID IID_IWMPContentPartner;
             /* [in] */ __RPC__in BSTR TrackData,
             /* [in] */ DWORD dwSecondsPlayed);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, CompareContainerListPrices)
         HRESULT ( STDMETHODCALLTYPE *CompareContainerListPrices )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in_opt IWMPContentContainerList *pListBase,
             /* [in] */ __RPC__in_opt IWMPContentContainerList *pListCompare,
             /* [out] */ __RPC__out long *pResult);
         
+        DECLSPEC_XFGVIRT(IWMPContentPartner, VerifyPermission)
         HRESULT ( STDMETHODCALLTYPE *VerifyPermission )( 
             __RPC__in IWMPContentPartner * This,
             /* [in] */ __RPC__in BSTR bstrPermission,

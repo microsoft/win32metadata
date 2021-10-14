@@ -280,6 +280,18 @@ class MSFT_StoragePool : MSFT_StorageObject {
         Values { "Windows Server 2012", "Windows Server 2012 R2 Preview", "Windows Server 2012 R2", "Pool Metadata Version" }]
     UInt16 Version;
 
+    [Read, Description(
+        "The size of the storage pool metadata in bytes."
+        ),
+        Units("Bytes")]
+    UInt64 MetadataLength;
+
+    [Read, Description(
+        "Indicates the smallest unit of allocation for this storage pool."
+        ),
+        Units("Bytes")]
+    UInt64 MinimumAllocationSize;
+
     [Description( "Default size of write cache for virtual disk creation" )]
     UInt64 WriteCacheSizeDefault;
 

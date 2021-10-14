@@ -33,7 +33,6 @@ IsEnclaveTypeSupported(
     _In_ DWORD flEnclaveType
     );
 
-
 WINBASEAPI
 _Ret_maybenull_
 _Post_writable_byte_size_(dwSize)
@@ -49,7 +48,6 @@ CreateEnclave(
     _In_ DWORD dwInfoLength,
     _Out_opt_ LPDWORD lpEnclaveError
     );
-
 
 WINBASEAPI
 _Success_(return != FALSE)
@@ -67,7 +65,6 @@ LoadEnclaveData(
     _Out_opt_ LPDWORD lpEnclaveError
     );
 
-
 WINBASEAPI
 _Success_(return != FALSE)
 BOOL
@@ -79,7 +76,6 @@ InitializeEnclave(
     _In_ DWORD dwInfoLength,
     _Out_opt_ LPDWORD lpEnclaveError
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_APP) */
 #pragma endregion
@@ -104,7 +100,6 @@ LoadEnclaveImageW(
     _In_ LPVOID lpEnclaveAddress,
     _In_ LPCWSTR lpImageName
     );
-
 #ifdef UNICODE
 #define LoadEnclaveImage  LoadEnclaveImageW
 #else
@@ -122,7 +117,6 @@ CallEnclave(
     _Out_ LPVOID* lpReturnValue
     );
 
-
 WINBASEAPI
 _Success_(return != FALSE)
 BOOL
@@ -132,7 +126,6 @@ TerminateEnclave(
     _In_ BOOL fWait
     );
 
-
 WINBASEAPI
 _Success_(return != FALSE)
 BOOL
@@ -140,7 +133,6 @@ WINAPI
 DeleteEnclave(
     _In_ LPVOID lpAddress
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion

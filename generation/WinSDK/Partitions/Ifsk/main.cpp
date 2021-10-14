@@ -8,3 +8,5 @@
 
 #include <fltuser.h>
 //#include <ntifs.h>
+#include <wnnc.h>
+

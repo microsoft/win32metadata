@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -223,6 +231,7 @@ EXTERN_C const IID IID_IFilter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFilter * This,
             /* [annotation][in] */ 
@@ -230,12 +239,15 @@ EXTERN_C const IID IID_IFilter;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFilter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFilter * This);
         
+        DECLSPEC_XFGVIRT(IFilter, Init)
         SCODE ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IFilter * This,
             /* [annotation][in] */ 
@@ -247,11 +259,13 @@ EXTERN_C const IID IID_IFilter;
             /* [annotation][out] */ 
             _Out_  ULONG *pFlags);
         
+        DECLSPEC_XFGVIRT(IFilter, GetChunk)
         SCODE ( STDMETHODCALLTYPE *GetChunk )( 
             __RPC__in IFilter * This,
             /* [annotation][out] */ 
             _Out_  STAT_CHUNK *pStat);
         
+        DECLSPEC_XFGVIRT(IFilter, GetText)
         SCODE ( STDMETHODCALLTYPE *GetText )( 
             __RPC__in IFilter * This,
             /* [annotation][out][in] */ 
@@ -259,11 +273,13 @@ EXTERN_C const IID IID_IFilter;
             /* [annotation][size_is][out] */ 
             _Out_writes_(*pcwcBuffer)  WCHAR *awcBuffer);
         
+        DECLSPEC_XFGVIRT(IFilter, GetValue)
         SCODE ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IFilter * This,
             /* [annotation][out] */ 
             _Out_  PROPVARIANT **ppPropValue);
         
+        DECLSPEC_XFGVIRT(IFilter, BindRegion)
         /* [local] */ SCODE ( STDMETHODCALLTYPE *BindRegion )( 
             IFilter * This,
             /* [annotation][in] */ 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -158,34 +166,42 @@ EXTERN_C const IID IID_IWiaVideo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaVideo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaVideo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaVideo * This);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, get_PreviewVisible)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreviewVisible )( 
             __RPC__in IWiaVideo * This,
             /* [retval][out] */ __RPC__out BOOL *pbPreviewVisible);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, put_PreviewVisible)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PreviewVisible )( 
             __RPC__in IWiaVideo * This,
             /* [in] */ BOOL bPreviewVisible);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, get_ImagesDirectory)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImagesDirectory )( 
             __RPC__in IWiaVideo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrImageDirectory);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, put_ImagesDirectory)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ImagesDirectory )( 
             __RPC__in IWiaVideo * This,
             /* [in] */ __RPC__in BSTR bstrImageDirectory);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, CreateVideoByWiaDevID)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateVideoByWiaDevID )( 
             __RPC__in IWiaVideo * This,
             /* [in] */ __RPC__in BSTR bstrWiaDeviceID,
@@ -193,6 +209,7 @@ EXTERN_C const IID IID_IWiaVideo;
             /* [in] */ BOOL bStretchToFitParent,
             /* [in] */ BOOL bAutoBeginPlayback);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, CreateVideoByDevNum)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateVideoByDevNum )( 
             __RPC__in IWiaVideo * This,
             /* [in] */ UINT uiDeviceNumber,
@@ -200,6 +217,7 @@ EXTERN_C const IID IID_IWiaVideo;
             /* [in] */ BOOL bStretchToFitParent,
             /* [in] */ BOOL bAutoBeginPlayback);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, CreateVideoByName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateVideoByName )( 
             __RPC__in IWiaVideo * This,
             /* [in] */ __RPC__in BSTR bstrFriendlyName,
@@ -207,23 +225,29 @@ EXTERN_C const IID IID_IWiaVideo;
             /* [in] */ BOOL bStretchToFitParent,
             /* [in] */ BOOL bAutoBeginPlayback);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, DestroyVideo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DestroyVideo )( 
             __RPC__in IWiaVideo * This);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, Play)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Play )( 
             __RPC__in IWiaVideo * This);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, Pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in IWiaVideo * This);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, TakePicture)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *TakePicture )( 
             __RPC__in IWiaVideo * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrNewImageFilename);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, ResizeVideo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ResizeVideo )( 
             __RPC__in IWiaVideo * This,
             /* [in] */ BOOL bStretchToFitParent);
         
+        DECLSPEC_XFGVIRT(IWiaVideo, GetCurrentState)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetCurrentState )( 
             __RPC__in IWiaVideo * This,
             /* [retval][out] */ __RPC__out WIAVIDEO_STATE *pState);

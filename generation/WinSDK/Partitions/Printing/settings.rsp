@@ -20,5 +20,8 @@
 <IncludeRoot>/um/winspool.h
 <IncludeRoot>/um/wsdxcv.h
 <IncludeRoot>/um/xpsrassvc.h
+<IncludeRoot>/um/imgerror.h
+<IncludeRoot>/um/printerextensiondispid.h
+<IncludeRoot>/um/printpreview.h
 --namespace
 Windows.Win32.Graphics.Printing

@@ -118,6 +118,8 @@ namespace Windows
     {
         namespace Holographic
         {
+            typedef enum HolographicDepthReprojectionMethod HolographicDepthReprojectionMethod;
+
             typedef enum HolographicFramePresentResult HolographicFramePresentResult;
 
             typedef enum HolographicFramePresentWaitBehavior HolographicFramePresentWaitBehavior;
@@ -155,6 +157,8 @@ namespace Windows
             interface IHolographicCameraRenderingParameters2;
 
             interface IHolographicCameraRenderingParameters3;
+
+            interface IHolographicCameraRenderingParameters4;
 
             interface IHolographicCameraViewportParameters;
 
@@ -210,6 +214,8 @@ namespace Windows
 
             interface IHolographicViewConfiguration;
 
+            interface IHolographicViewConfiguration2;
+
             runtimeclass HolographicCamera;
 
             runtimeclass HolographicCameraPose;
@@ -262,6 +268,8 @@ namespace Windows
 
                 interface Windows.Foundation.Collections.IIterable<Windows.Graphics.Holographic.HolographicCameraPose*>;
 
+                interface Windows.Foundation.Collections.IIterable<Windows.Graphics.Holographic.HolographicDepthReprojectionMethod>;
+
                 interface Windows.Foundation.Collections.IIterable<Windows.Graphics.Holographic.HolographicFramePresentationReport*>;
 
                 interface Windows.Foundation.Collections.IIterable<Windows.Graphics.Holographic.HolographicFrameScanoutReport*>;
@@ -272,6 +280,8 @@ namespace Windows
 
                 interface Windows.Foundation.Collections.IIterator<Windows.Graphics.Holographic.HolographicCameraPose*>;
 
+                interface Windows.Foundation.Collections.IIterator<Windows.Graphics.Holographic.HolographicDepthReprojectionMethod>;
+
                 interface Windows.Foundation.Collections.IIterator<Windows.Graphics.Holographic.HolographicFramePresentationReport*>;
 
                 interface Windows.Foundation.Collections.IIterator<Windows.Graphics.Holographic.HolographicFrameScanoutReport*>;
@@ -281,6 +291,8 @@ namespace Windows
                 interface Windows.Foundation.Collections.IVectorView<Windows.Graphics.Holographic.HolographicCamera*>;
 
                 interface Windows.Foundation.Collections.IVectorView<Windows.Graphics.Holographic.HolographicCameraPose*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Graphics.Holographic.HolographicDepthReprojectionMethod>;
 
                 interface Windows.Foundation.Collections.IVectorView<Windows.Graphics.Holographic.HolographicFramePresentationReport*>;
 
@@ -311,6 +323,13 @@ namespace Windows
     {
         namespace Holographic
         {
+            [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+            enum HolographicDepthReprojectionMethod
+            {
+                DepthReprojection = 0,
+                AutoPlanar        = 1
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             enum HolographicFramePresentResult
             {
@@ -493,6 +512,15 @@ namespace Windows
             {
                 [propget] HRESULT IsContentProtectionEnabled([out] [retval] boolean* value);
                 [propput] HRESULT IsContentProtectionEnabled([in] boolean value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+            [exclusiveto(Windows.Graphics.Holographic.HolographicCameraRenderingParameters)]
+            [uuid(0878FA4C-E163-57DC-82B7-C406AB3E0537)]
+            interface IHolographicCameraRenderingParameters4 : IInspectable
+            {
+                [propget] HRESULT DepthReprojectionMethod([out] [retval] Windows.Graphics.Holographic.HolographicDepthReprojectionMethod* value);
+                [propput] HRESULT DepthReprojectionMethod([in] Windows.Graphics.Holographic.HolographicDepthReprojectionMethod value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -780,6 +808,14 @@ namespace Windows
                 [propput] HRESULT IsEnabled([in] boolean value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+            [exclusiveto(Windows.Graphics.Holographic.HolographicViewConfiguration)]
+            [uuid(E241756E-E0D0-5019-9AF5-1B165BC2F54E)]
+            interface IHolographicViewConfiguration2 : IInspectable
+            {
+                [propget] HRESULT SupportedDepthReprojectionMethods([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.Graphics.Holographic.HolographicDepthReprojectionMethod>** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 2.0)]
             [marshaling_behavior(agile)]
             [threading(both)]
@@ -810,6 +846,7 @@ namespace Windows
                 [default] interface Windows.Graphics.Holographic.IHolographicCameraRenderingParameters;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.Graphics.Holographic.IHolographicCameraRenderingParameters2;
                 [contract(Windows.Foundation.UniversalApiContract, 5.0)] interface Windows.Graphics.Holographic.IHolographicCameraRenderingParameters3;
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)] interface Windows.Graphics.Holographic.IHolographicCameraRenderingParameters4;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -941,6 +978,7 @@ namespace Windows
             runtimeclass HolographicViewConfiguration
             {
                 [default] interface Windows.Graphics.Holographic.IHolographicViewConfiguration;
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)] interface Windows.Graphics.Holographic.IHolographicViewConfiguration2;
             }
         }
     }

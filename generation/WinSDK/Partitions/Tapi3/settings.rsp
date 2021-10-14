@@ -12,5 +12,7 @@
 <IncludeRoot>/um/MspAddr.h
 <IncludeRoot>/um/MspCall.h
 <IncludeRoot>/um/MspStrm.h
+<IncludeRoot>/um/tapi3err.h
+<IncludeRoot>/um/tnef.h
 --namespace
 Windows.Win32.Devices.Tapi

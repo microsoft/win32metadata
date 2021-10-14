@@ -31,6 +31,8 @@ namespace Windows
 
             interface IKnownSimpleHapticsControllerWaveformsStatics;
 
+            interface IKnownSimpleHapticsControllerWaveformsStatics2;
+
             interface ISimpleHapticsController;
 
             interface ISimpleHapticsControllerFeedback;
@@ -115,6 +117,23 @@ namespace Windows
                 [propget] HRESULT Release([out] [retval] UINT16* value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+            [exclusiveto(Windows.Devices.Haptics.KnownSimpleHapticsControllerWaveforms)]
+            [uuid(A7D24C27-B79D-510A-BF79-FF6D49173E1D)]
+            interface IKnownSimpleHapticsControllerWaveformsStatics2 : IInspectable
+            {
+                [propget] HRESULT BrushContinuous([out] [retval] UINT16* value);
+                [propget] HRESULT ChiselMarkerContinuous([out] [retval] UINT16* value);
+                [propget] HRESULT EraserContinuous([out] [retval] UINT16* value);
+                [propget] HRESULT Error([out] [retval] UINT16* value);
+                [propget] HRESULT GalaxyPenContinuous([out] [retval] UINT16* value);
+                [propget] HRESULT Hover([out] [retval] UINT16* value);
+                [propget] HRESULT InkContinuous([out] [retval] UINT16* value);
+                [propget] HRESULT MarkerContinuous([out] [retval] UINT16* value);
+                [propget] HRESULT PencilContinuous([out] [retval] UINT16* value);
+                [propget] HRESULT Success([out] [retval] UINT16* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             [exclusiveto(Windows.Devices.Haptics.SimpleHapticsController)]
             [uuid(3D577EF9-4CEE-11E6-B535-001BDC06AB3B)]
@@ -166,6 +185,7 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             [marshaling_behavior(agile)]
             [static(Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics, Windows.Foundation.UniversalApiContract, 4.0)]
+            [static(Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2, Windows.Foundation.UniversalApiContract, 14.0)]
             runtimeclass KnownSimpleHapticsControllerWaveforms
             {
             }

@@ -1801,6 +1801,9 @@ typedef struct _SUPPORTED_SECURITY_PROTOCOLS_PARAMETER_DATA {
 
 // Security protocols
 #define SECURITY_PROTOCOL_IEEE1667  0xEE
+#define TCG_SECURITY_PROTOCOL_ID_0  0x00
+#define TCG_SECURITY_PROTOCOL_ID_1  0x01
+#define TCG_SECURITY_PROTOCOL_ID_2  0x02
 
 ////////////////////////////////////////////////////////////////////////////////
 //
@@ -2482,6 +2485,7 @@ typedef struct _PERFORMANCE_DESCRIPTOR {
 #define SCSIOP_REMOVE_ELEMENT_AND_TRUNCATE 0x9E
 #define SCSIOP_SERVICE_ACTION_IN16      0x9E
 #define SCSIOP_SERVICE_ACTION_OUT16     0x9F
+
 
 // 32-byte commands
 #define SCSIOP_OPERATION32              0x7F
@@ -3245,11 +3249,25 @@ typedef struct _VPD_SUPPORTED_PAGES_PAGE {
 #define LOG_PAGE_CODE_READ_ERROR_COUNTERS           0x03
 #define LOG_PAGE_CODE_LOGICAL_BLOCK_PROVISIONING    0x0C
 #define LOG_PAGE_CODE_TEMPERATURE                   0x0D
+#define LOG_PAGE_CODE_ENVIRONMENTAL_REPORTING       0x0D
 #define LOG_PAGE_CODE_STARTSTOP_CYCLE_COUNTERS      0x0E
+#define LOG_PAGE_CODE_UTILIZATION                   0x0E
 #define LOG_PAGE_CODE_SELFTEST_RESULTS              0x10
 #define LOG_PAGE_CODE_SOLID_STATE_MEDIA             0x11
 #define LOG_PAGE_CODE_BACKGROUND_SCAN_RESULTS       0x15
 #define LOG_PAGE_CODE_INFORMATIONAL_EXCEPTIONS      0x2F
+
+#define LOG_SUBPAGE_CODE_WRITE_ERROR_COUNTERS       0x00
+#define LOG_SUBPAGE_CODE_READ_ERROR_COUNTERS        0x00
+#define LOG_SUBPAGE_CODE_LOGICAL_BLOCK_PROVISIONING 0x00
+#define LOG_SUBPAGE_CODE_TEMPERATURE                0x00
+#define LOG_SUBPAGE_CODE_ENVIRONMENTAL_REPORTING    0x01
+#define LOG_SUBPAGE_CODE_STARTSTOP_CYCLE_COUNTERS   0x00
+#define LOG_SUBPAGE_CODE_UTILIZATION                0x01
+#define LOG_SUBPAGE_CODE_SELFTEST_RESULTS           0x00
+#define LOG_SUBPAGE_CODE_SOLID_STATE_MEDIA          0x00
+#define LOG_SUBPAGE_CODE_BACKGROUND_SCAN_RESULTS    0x00
+#define LOG_SUBPAGE_CODE_INFORMATIONAL_EXCEPTIONS   0x00
 
 
 #pragma pack(push, log_page, 1)
@@ -3291,9 +3309,9 @@ typedef struct _LOG_PARAMETER {
         struct _THRESHOLD_RESOURCE_COUNT {
 
             UCHAR ResourceCount[4];             // Bytes 4-7
-            UCHAR Scope : 2;                    // Byte  5, bit 0-1
-            UCHAR Reserved1 : 6;                // Byte  5, bit 2-7
-            UCHAR Reserved2[3];                 // Byte  6
+            UCHAR Scope : 2;                    // Byte  8, bit 0-1
+            UCHAR Reserved1 : 6;                // Byte  8, bit 2-7
+            UCHAR Reserved2[3];                 // Byte  9
 
         } THRESHOLD_RESOURCE_COUNT;
 
@@ -3310,6 +3328,12 @@ typedef struct _LOG_PARAMETER {
             UCHAR Week[2];                      // Bytes 8-9
 
         } DATE_OF_MANUFACTURE;
+
+        struct _WORKLOAD_UTILIZATION {
+
+            UCHAR WorkloadUtilization[2];       // Bytes 4-5
+
+        } WORKLOAD_UTILIZATION;
 
         struct _SELF_TEST_RESULTS {
 
@@ -3444,6 +3468,8 @@ typedef struct _LOG_PAGE_LOGICAL_BLOCK_PROVISIONING {
 
 #define RESERVATION_ACTION_READ_KEYS                    0x00
 #define RESERVATION_ACTION_READ_RESERVATIONS            0x01
+#define RESERVATION_ACTION_REPORT_CAPABILITIES          0x02
+#define RESERVATION_ACTION_READ_FULL_STATUS             0x03
 
 #define RESERVATION_ACTION_REGISTER                     0x00
 #define RESERVATION_ACTION_RESERVE                      0x01
@@ -3452,6 +3478,8 @@ typedef struct _LOG_PAGE_LOGICAL_BLOCK_PROVISIONING {
 #define RESERVATION_ACTION_PREEMPT                      0x04
 #define RESERVATION_ACTION_PREEMPT_ABORT                0x05
 #define RESERVATION_ACTION_REGISTER_IGNORE_EXISTING     0x06
+#define RESERVATION_ACTION_REGISTER_AND_MOVE            0x07
+#define RESERVATION_ACTION_REPLACE_LOST_RESERVATION     0x08
 
 #define RESERVATION_SCOPE_LU                            0x00
 #define RESERVATION_SCOPE_ELEMENT                       0x02
@@ -3460,6 +3488,8 @@ typedef struct _LOG_PAGE_LOGICAL_BLOCK_PROVISIONING {
 #define RESERVATION_TYPE_EXCLUSIVE                      0x03
 #define RESERVATION_TYPE_WRITE_EXCLUSIVE_REGISTRANTS    0x05
 #define RESERVATION_TYPE_EXCLUSIVE_REGISTRANTS          0x06
+#define RESERVATION_TYPE_WRITE_EXCLUSIVE_ALL_REGISTRANTS    0x07
+#define RESERVATION_TYPE_EXCLUSIVE_ALL_REGISTRANTS      0x08
 
 //
 // Structures for reserve in command.
@@ -3490,6 +3520,67 @@ typedef struct {
     PRI_RESERVATION_DESCRIPTOR Reservations[0];
 #endif
 } PRI_RESERVATION_LIST, *PPRI_RESERVATION_LIST;
+
+typedef struct {
+    UCHAR ReservationKey[8];
+    UCHAR Reserved[4];
+    UCHAR ReservationHolder : 1;
+    UCHAR AllTargetPorts : 1;
+    UCHAR Reserved1 : 6;
+    UCHAR Type : 4;
+    UCHAR Scope : 4;
+    UCHAR Reserved2[4];
+    UCHAR RelativeTargetPortIdentifier[2];
+    UCHAR AdditionalDescriptorLength[4];
+} PRI_FULL_STATUS_DESCRIPTOR_HEADER, *PPRI_FULL_STATUS_DESCRIPTOR_HEADER;
+
+typedef struct {
+    PRI_FULL_STATUS_DESCRIPTOR_HEADER Header;
+    UCHAR TransportID[ANYSIZE_ARRAY];
+} PRI_FULL_STATUS_DESCRIPTOR, *PPRI_FULL_STATUS_DESCRIPTOR;
+
+typedef struct {
+    UCHAR Generation[4];
+    UCHAR AdditionalLength[4];
+} PRI_FULL_STATUS_LIST_HEADER, *PPRI_FULL_STATUS_LIST_HEADER;
+
+typedef struct {
+    UCHAR Generation[4];
+    UCHAR AdditionalLength[4];
+
+    //
+    // Since TransportID could be different sizes,
+    // we use PRI_FULL_STATUS_DESCRIPTOR_HEADER rather than PRI_FULL_STATUS_DESCRIPTOR
+    // as a place holder here.
+    //
+    PRI_FULL_STATUS_DESCRIPTOR_HEADER FullStatusDescriptors[ANYSIZE_ARRAY];
+} PRI_FULL_STATUS_LIST, *PPRI_FULL_STATUS_LIST;
+
+typedef struct {
+    UCHAR Length[2];
+    UCHAR PersistThroughPowerLossCapable : 1;
+    UCHAR Reserved : 1;
+    UCHAR AllTargetPortsCapable : 1;
+    UCHAR SpecifyInitiatorPortsCapable : 1;
+    UCHAR CompatibleReservationHandling : 1;
+    UCHAR Reserved1 : 2;
+    UCHAR ReplaceLostReservationCapable : 1;
+    UCHAR PersistThroughPowerLossActivated : 1;
+    UCHAR Reserved2 : 3;
+    UCHAR AllowCommands : 3;
+    UCHAR TypeMaskValid : 1;
+    UCHAR Reserved3 : 1;
+    UCHAR WriteExclusive : 1;
+    UCHAR Reserved4 : 1;
+    UCHAR ExclusiveAccess : 1;
+    UCHAR Reserved5 : 1;
+    UCHAR WriteExclusiveRegistrantsOnly : 1;
+    UCHAR ExclusiveAccessRegistrantsOnly : 1;
+    UCHAR WriteExclusiveAllRegistrants : 1;
+    UCHAR ExclusiveAccessAllRegistrants : 1;
+    UCHAR Reserved6 : 7;
+    UCHAR Reserved7[2];
+} PRI_REPORT_CAPABILITIES, *PPRI_REPORT_CAPABILITIES;
 #pragma pack(pop, reserve_in_stuff)
 
 //
@@ -3502,8 +3593,11 @@ typedef struct {
     UCHAR ServiceActionReservationKey[8];
     UCHAR ScopeSpecificAddress[4];
     UCHAR ActivatePersistThroughPowerLoss : 1;
-    UCHAR Reserved1 : 7;
-    UCHAR Reserved2;
+    UCHAR Reserved1 : 1;
+    UCHAR AllTargetPorts : 1;
+    UCHAR SpecifyInitiatorPorts : 1;
+    UCHAR Reserved2 : 4;
+    UCHAR Reserved3;
     UCHAR Obsolete[2];
 } PRO_PARAMETER_LIST, *PPRO_PARAMETER_LIST;
 #pragma pack(pop, reserve_out_stuff)

@@ -345,8 +345,13 @@ typedef enum _PROCESSINFOCLASS {
 } PROCESSINFOCLASS;
 
 typedef enum _THREADINFOCLASS {
-    ThreadIsIoPending = 16
+    ThreadIsIoPending = 16,
+    ThreadNameInformation = 38
 } THREADINFOCLASS;
+
+typedef struct _THREAD_NAME_INFORMATION {
+    UNICODE_STRING ThreadName;
+} THREAD_NAME_INFORMATION, *PTHREAD_NAME_INFORMATION;
 
 // bitmask values for CodeIntegrityOptions
 #define CODEINTEGRITY_OPTION_ENABLED                        0x01
@@ -646,6 +651,19 @@ NtQueryInformationThread (
     );
 
 //
+// use the Win32 API instead
+//     SetThreadDescription
+//
+__kernel_entry NTSTATUS
+NTAPI
+NtSetInformationThread (
+    _In_ HANDLE ThreadHandle,
+    _In_ THREADINFOCLASS ThreadInformationClass,
+    _In_reads_bytes_(ThreadInformationLength) PVOID ThreadInformation,
+    _In_ ULONG ThreadInformationLength
+    );
+
+//
 // use the Win32 APIs instead
 //     GetFileInformationByHandle
 //     GetFileInformationByHandleEx
@@ -688,6 +706,14 @@ __kernel_entry NTSTATUS
 NTAPI
 NtQuerySystemTime (
     OUT PLARGE_INTEGER SystemTime
+    );
+
+__kernel_entry NTSTATUS
+NTAPI
+NtQueryTimerResolution (
+    _Out_ PULONG MaximumTime,
+    _Out_ PULONG MinimumTime,
+    _Out_ PULONG CurrentTime
     );
 
 //
@@ -1000,6 +1026,13 @@ typedef BOOLEAN (WINAPI * PWINSTATIONQUERYINFORMATIONW)(
 #define FILE_OVERWRITTEN                0x00000003
 #define FILE_EXISTS                     0x00000004
 #define FILE_DOES_NOT_EXIST             0x00000005
+
+#ifndef __os_arm64x_get_x64_information
+#define __os_arm64x_get_x64_information __os_arm64x_rdtsc
+#endif
+#ifndef __os_arm64x_set_x64_information
+#define __os_arm64x_set_x64_information __os_arm64x_cpuidex
+#endif
 
 #ifdef __cplusplus
 }

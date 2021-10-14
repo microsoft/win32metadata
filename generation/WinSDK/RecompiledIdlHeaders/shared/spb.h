@@ -70,6 +70,11 @@ typedef enum SpbIoctl
     IOCTL_SPB_FULL_DUPLEX =        CTL_CODE(FILE_DEVICE_CONTROLLER,   
                                             0x605,                    
                                             METHOD_BUFFERED,          
+                                            FILE_ANY_ACCESS),
+
+    IOCTL_SPB_MULTI_SPI_TRANSFER = CTL_CODE(FILE_DEVICE_CONTROLLER,   
+                                            0x606,                    
+                                            METHOD_BUFFERED,          
                                             FILE_ANY_ACCESS)
 }
 SpbIoctl, *PSpbIoctl;
@@ -307,7 +312,7 @@ SPB_TRANSFER_LIST, *PSPB_TRANSFER_LIST;
 
 #define SPB_TRANSFER_LIST_AND_ENTRIES(n) struct { \
     SPB_TRANSFER_LIST List;                           \
-    SPB_TRANSFER_LIST_ENTRY ExtraTransfers[n-1];      \
+    SPB_TRANSFER_LIST_ENTRY ExtraTransfers[(n)-1];      \
 }
 
 VOID
@@ -323,6 +328,141 @@ SPB_TRANSFER_LIST_INIT(
             (sizeof(SPB_TRANSFER_LIST_ENTRY) * (TransferCount - 1))));
     TransferList->Size = sizeof(SPB_TRANSFER_LIST);
     TransferList->TransferCount = TransferCount;
+}
+
+typedef enum SPB_MULTI_SPI_TRANSFER_MODE
+{
+    SpbMultiSpiTransferModeInvalid,
+    SpbMultiSpiTransferModeDualSpi,
+    SpbMultiSpiTransferModeQuadSpi,
+    SpbMultiSpiTransferModeMax
+}
+SPB_MULTI_SPI_TRANSFER_MODE, *PSPB_MULTI_SPI_TRANSFER_MODE;
+
+//
+// A multi-SPI transfer operation header
+// This is the structure to be accessed by the SpbCx client (controller driver).
+//
+
+typedef struct SPB_MULTI_SPI_TRANSFER_HEADER
+{
+    //
+    // Structure size - must be set to sizeof(SPB_MULTI_SPI_TRANSFER)
+    //
+
+    _Field_range_(==, sizeof(struct SPB_MULTI_SPI_TRANSFER))
+    ULONG Size;
+
+    //
+    // Line mode
+    //
+
+    SPB_MULTI_SPI_TRANSFER_MODE Mode;
+
+    //
+    // The count of bytes at the beginning of the write phase to be
+    // transferred in single-SPI mode, before line mode switch to
+    // the mode specified in the Mode member of this struct.
+    //
+
+    ULONG WritePhaseSingleSpiByteCount;
+
+    //
+    // The number of wait cycles represented in bytes (representing multi-SPI
+    // transfer cycles - e.g. 1 byte => 2 wait cycles at quad-SPI), between the
+    // write phase and read phase of the transfer.
+    // These wait cycle bytes should be present, and of an undefined value
+    // at the end of the WritePhaseBuffer. This should be set to 0 if the
+    // transfer does not have a read phase.
+    //
+
+    ULONG WaitCycleByteCount;
+}
+SPB_MULTI_SPI_TRANSFER_HEADER, *PSPB_MULTI_SPI_TRANSFER_HEADER;
+
+//
+// Full representation of a multi-SPI transfer operation, including the
+// transfer list. This structure should not be used directly by the SpbCx client
+// (controller driver).
+//
+
+typedef struct SPB_MULTI_SPI_TRANSFER {
+
+    //
+    // Transfer header, containing parameters for the multi-SPI transfer
+    //
+
+    SPB_MULTI_SPI_TRANSFER_HEADER  Header;
+
+    //
+    // Number of transfer phases, either 1 for write, or 2 for read.
+    //
+
+    ULONG TransferPhaseCount;
+
+    //
+    // The transfer entries for write, and optionally read phase of the transfer.
+    //
+
+    _Field_size_(TransferPhaseCount) SPB_TRANSFER_LIST_ENTRY TransferPhases[1];
+}
+SPB_MULTI_SPI_TRANSFER, *PSPB_MULTI_SPI_TRANSFER;
+
+//
+// Structures & macros to simplify defining a multi-SPI transfer.
+//
+
+typedef struct SPB_MULTI_SPI_WRITE_TRANSFER {
+    SPB_MULTI_SPI_TRANSFER SpiTransfer;
+} SPB_MULTI_SPI_WRITE_TRANSFER, *PSPB_MULTI_SPI_WRITE_TRANSFER;
+
+typedef struct SPB_MULTI_SPI_READ_TRANSFER {
+    SPB_MULTI_SPI_TRANSFER SpiTransfer;
+    SPB_TRANSFER_LIST_ENTRY ExtraTransfer;
+} SPB_MULTI_SPI_READ_TRANSFER, *PSPB_MULTI_SPI_READ_TRANSFER;
+
+C_ASSERT(sizeof(SPB_MULTI_SPI_READ_TRANSFER) == sizeof(SPB_MULTI_SPI_TRANSFER) + sizeof(SPB_TRANSFER_LIST_ENTRY));
+
+VOID
+FORCEINLINE
+SPB_MULTI_SPI_TRANSFER_INIT(
+    _Out_ SPB_MULTI_SPI_TRANSFER *SpiTransfer,
+    _In_  SPB_MULTI_SPI_TRANSFER_MODE Mode,
+    _In_  ULONG TransferPhaseCount,
+    _In_  ULONG WritePhaseSingleSpiByteCount,
+    _In_  ULONG WaitCycleByteCount
+)
+{
+    memset(SpiTransfer, 0, sizeof(SPB_MULTI_SPI_TRANSFER) + (sizeof(SPB_TRANSFER_LIST_ENTRY) * (TransferPhaseCount - 1)));
+    SpiTransfer->Header.Size = sizeof(SPB_MULTI_SPI_TRANSFER);
+    SpiTransfer->Header.Mode = Mode;
+    SpiTransfer->Header.WritePhaseSingleSpiByteCount = WritePhaseSingleSpiByteCount;
+    SpiTransfer->Header.WaitCycleByteCount = WaitCycleByteCount;
+    SpiTransfer->TransferPhaseCount = TransferPhaseCount;
+}
+
+VOID
+FORCEINLINE
+SPB_MULTI_SPI_WRITE_TRANSFER_INIT(
+    _Out_ SPB_MULTI_SPI_WRITE_TRANSFER *SpiTransfer,
+    _In_  SPB_MULTI_SPI_TRANSFER_MODE Mode,
+    _In_  ULONG WritePhaseSingleSpiByteCount,
+    _In_  ULONG WaitCycleByteCount
+)
+{
+    SPB_MULTI_SPI_TRANSFER_INIT(&SpiTransfer->SpiTransfer, Mode, 1, WritePhaseSingleSpiByteCount, WaitCycleByteCount);
+}
+
+VOID
+FORCEINLINE
+SPB_MULTI_SPI_READ_TRANSFER_INIT(
+    _Out_ SPB_MULTI_SPI_READ_TRANSFER *SpiTransfer,
+    _In_  SPB_MULTI_SPI_TRANSFER_MODE Mode,
+    _In_  ULONG WritePhaseSingleSpiByteCount,
+    _In_  ULONG WaitCycleByteCount
+)
+{
+    SPB_MULTI_SPI_TRANSFER_INIT(&SpiTransfer->SpiTransfer, Mode, 2, WritePhaseSingleSpiByteCount, WaitCycleByteCount);
 }
 
 // begin_wpp config

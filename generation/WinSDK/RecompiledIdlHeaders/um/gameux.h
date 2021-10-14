@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -165,18 +173,22 @@ EXTERN_C const IID IID_IGameExplorer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGameExplorer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGameExplorer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGameExplorer * This);
         
+        DECLSPEC_XFGVIRT(IGameExplorer, AddGame)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddGame )( 
             __RPC__in IGameExplorer * This,
             /* [in] */ __RPC__in BSTR bstrGDFBinaryPath,
@@ -184,14 +196,17 @@ EXTERN_C const IID IID_IGameExplorer;
             /* [in] */ GAME_INSTALL_SCOPE installScope,
             /* [out][in] */ __RPC__inout GUID *pguidInstanceID);
         
+        DECLSPEC_XFGVIRT(IGameExplorer, RemoveGame)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveGame )( 
             __RPC__in IGameExplorer * This,
             /* [in] */ GUID guidInstanceID);
         
+        DECLSPEC_XFGVIRT(IGameExplorer, UpdateGame)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UpdateGame )( 
             __RPC__in IGameExplorer * This,
             /* [in] */ GUID guidInstanceID);
         
+        DECLSPEC_XFGVIRT(IGameExplorer, VerifyAccess)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *VerifyAccess )( 
             __RPC__in IGameExplorer * This,
             /* [in] */ __RPC__in BSTR bstrGDFBinaryPath,
@@ -333,48 +348,59 @@ EXTERN_C const IID IID_IGameStatistics;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGameStatistics * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGameStatistics * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGameStatistics * This);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, GetMaxCategoryLength)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetMaxCategoryLength )( 
             __RPC__in IGameStatistics * This,
             /* [retval][out] */ __RPC__out UINT *cch);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, GetMaxNameLength)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetMaxNameLength )( 
             __RPC__in IGameStatistics * This,
             /* [retval][out] */ __RPC__out UINT *cch);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, GetMaxValueLength)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetMaxValueLength )( 
             __RPC__in IGameStatistics * This,
             /* [retval][out] */ __RPC__out UINT *cch);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, GetMaxCategories)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetMaxCategories )( 
             __RPC__in IGameStatistics * This,
             /* [retval][out] */ __RPC__out WORD *pMax);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, GetMaxStatsPerCategory)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetMaxStatsPerCategory )( 
             __RPC__in IGameStatistics * This,
             /* [retval][out] */ __RPC__out WORD *pMax);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, SetCategoryTitle)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetCategoryTitle )( 
             __RPC__in IGameStatistics * This,
             /* [in] */ WORD categoryIndex,
             /* [string][in] */ __RPC__in_string LPCWSTR title);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, GetCategoryTitle)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCategoryTitle )( 
             __RPC__in IGameStatistics * This,
             /* [in] */ WORD categoryIndex,
             /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *pTitle);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, GetStatistic)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetStatistic )( 
             __RPC__in IGameStatistics * This,
             /* [in] */ WORD categoryIndex,
@@ -382,6 +408,7 @@ EXTERN_C const IID IID_IGameStatistics;
             /* [string][unique][out][in] */ __RPC__deref_opt_inout_opt_string LPWSTR *pName,
             /* [string][unique][out][in] */ __RPC__deref_opt_inout_opt_string LPWSTR *pValue);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, SetStatistic)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetStatistic )( 
             __RPC__in IGameStatistics * This,
             /* [in] */ WORD categoryIndex,
@@ -389,14 +416,17 @@ EXTERN_C const IID IID_IGameStatistics;
             /* [string][in] */ __RPC__in_string LPCWSTR name,
             /* [string][in] */ __RPC__in_string LPCWSTR value);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, Save)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IGameStatistics * This,
             /* [in] */ BOOL trackChanges);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, SetLastPlayedCategory)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetLastPlayedCategory )( 
             __RPC__in IGameStatistics * This,
             /* [in] */ UINT categoryIndex);
         
+        DECLSPEC_XFGVIRT(IGameStatistics, GetLastPlayedCategory)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLastPlayedCategory )( 
             __RPC__in IGameStatistics * This,
             /* [retval][out] */ __RPC__out UINT *pCategoryIndex);
@@ -504,18 +534,22 @@ EXTERN_C const IID IID_IGameStatisticsMgr;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGameStatisticsMgr * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGameStatisticsMgr * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGameStatisticsMgr * This);
         
+        DECLSPEC_XFGVIRT(IGameStatisticsMgr, GetGameStatistics)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGameStatistics )( 
             __RPC__in IGameStatisticsMgr * This,
             /* [string][in] */ __RPC__in_string LPCWSTR GDFBinaryPath,
@@ -523,6 +557,7 @@ EXTERN_C const IID IID_IGameStatisticsMgr;
             /* [out] */ __RPC__out GAMESTATS_OPEN_RESULT *pOpenResult,
             /* [retval][out] */ __RPC__deref_out_opt IGameStatistics **ppiStats);
         
+        DECLSPEC_XFGVIRT(IGameStatisticsMgr, RemoveGameStatistics)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemoveGameStatistics )( 
             __RPC__in IGameStatisticsMgr * This,
             /* [string][in] */ __RPC__in_string LPCWSTR GDFBinaryPath);
@@ -603,28 +638,34 @@ EXTERN_C const IID IID_IGameExplorer2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGameExplorer2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGameExplorer2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGameExplorer2 * This);
         
+        DECLSPEC_XFGVIRT(IGameExplorer2, InstallGame)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *InstallGame )( 
             __RPC__in IGameExplorer2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR binaryGDFPath,
             /* [unique][in] */ __RPC__in_opt LPCWSTR installDirectory,
             /* [in] */ GAME_INSTALL_SCOPE installScope);
         
+        DECLSPEC_XFGVIRT(IGameExplorer2, UninstallGame)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UninstallGame )( 
             __RPC__in IGameExplorer2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR binaryGDFPath);
         
+        DECLSPEC_XFGVIRT(IGameExplorer2, CheckAccess)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CheckAccess )( 
             __RPC__in IGameExplorer2 * This,
             /* [string][in] */ __RPC__in_string LPCWSTR binaryGDFPath,

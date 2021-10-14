@@ -430,7 +430,7 @@ typedef struct _D3DLINEPATTERN {
     WORD    wLinePattern;
 } D3DLINEPATTERN;
 
-#define D3DPMISCCAPS_LINEPATTERNREP     0x00000004L  
+#define D3DPMISCCAPS_LINEPATTERNREP     0x00000004L
 
 #endif /* DIRECT3D_VERSION >= 0x0900 */
 
@@ -1503,11 +1503,11 @@ typedef D3DHAL_DP2SETCONVOLUTIONKERNELMONO *LPD3DHAL_DP2SETCONVOLUTIONKERNELMONO
 
 typedef struct _D3DHAL_DP2COMPOSERECTS
 {
-    DWORD               SrcSurfaceHandle; 
+    DWORD               SrcSurfaceHandle;
     DWORD               DstSurfaceHandle;
-    DWORD               SrcRectDescsVBHandle;   
+    DWORD               SrcRectDescsVBHandle;
     UINT                NumRects;
-    DWORD               DstRectDescsVBHandle;   
+    DWORD               DstRectDescsVBHandle;
     D3DCOMPOSERECTSOP   Operation;
     INT                 XOffset;
     INT                 YOffset;
@@ -2655,7 +2655,7 @@ typedef enum _D3DVSD_TOKENTYPE
     D3DVSD_TOKEN_END = 7,           // end-of-array (requires all DWORD bits to be 1)
     D3DVSD_FORCE_DWORD = 0x7fffffff,// force 32-bit size enum
 } D3DVSD_TOKENTYPE;
-#endif __COMMONHALDEFINES
+#endif // __COMMONHALDEFINES
 
 #define D3DVSD_TOKENTYPESHIFT   29
 #define D3DVSD_TOKENTYPEMASK    (7 << D3DVSD_TOKENTYPESHIFT)

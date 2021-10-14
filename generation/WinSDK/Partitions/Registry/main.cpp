@@ -6,3 +6,4 @@
 #include <winnt.h>
 #include <winreg.h>
 #include <statehelpers.h>
+#include <regstr.h>

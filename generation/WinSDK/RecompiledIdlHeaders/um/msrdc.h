@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -559,6 +567,7 @@ EXTERN_C const IID IID_IRdcGeneratorParameters;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRdcGeneratorParameters * This,
             /* [annotation][in] */ 
@@ -566,17 +575,21 @@ EXTERN_C const IID IID_IRdcGeneratorParameters;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRdcGeneratorParameters * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRdcGeneratorParameters * This);
         
+        DECLSPEC_XFGVIRT(IRdcGeneratorParameters, GetGeneratorParametersType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGeneratorParametersType )( 
             __RPC__in IRdcGeneratorParameters * This,
             /* [annotation][out] */ 
             _Out_  GeneratorParametersType *parametersType);
         
+        DECLSPEC_XFGVIRT(IRdcGeneratorParameters, GetParametersVersion)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetParametersVersion )( 
             __RPC__in IRdcGeneratorParameters * This,
             /* [annotation][out] */ 
@@ -584,11 +597,13 @@ EXTERN_C const IID IID_IRdcGeneratorParameters;
             /* [annotation][out] */ 
             _Out_  ULONG *minimumCompatibleAppVersion);
         
+        DECLSPEC_XFGVIRT(IRdcGeneratorParameters, GetSerializeSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSerializeSize )( 
             __RPC__in IRdcGeneratorParameters * This,
             /* [annotation][out] */ 
             _Out_  ULONG *size);
         
+        DECLSPEC_XFGVIRT(IRdcGeneratorParameters, Serialize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Serialize )( 
             __RPC__in IRdcGeneratorParameters * This,
             /* [annotation][in] */ 
@@ -684,6 +699,7 @@ EXTERN_C const IID IID_IRdcGeneratorFilterMaxParameters;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRdcGeneratorFilterMaxParameters * This,
             /* [annotation][in] */ 
@@ -691,27 +707,33 @@ EXTERN_C const IID IID_IRdcGeneratorFilterMaxParameters;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRdcGeneratorFilterMaxParameters * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRdcGeneratorFilterMaxParameters * This);
         
+        DECLSPEC_XFGVIRT(IRdcGeneratorFilterMaxParameters, GetHorizonSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHorizonSize )( 
             IRdcGeneratorFilterMaxParameters * This,
             /* [annotation][out] */ 
             _Out_  ULONG *horizonSize);
         
+        DECLSPEC_XFGVIRT(IRdcGeneratorFilterMaxParameters, SetHorizonSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetHorizonSize )( 
             IRdcGeneratorFilterMaxParameters * This,
             /* [annotation][in] */ 
             _In_  ULONG horizonSize);
         
+        DECLSPEC_XFGVIRT(IRdcGeneratorFilterMaxParameters, GetHashWindowSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetHashWindowSize )( 
             IRdcGeneratorFilterMaxParameters * This,
             /* [annotation][out] */ 
             _Out_  ULONG *hashWindowSize);
         
+        DECLSPEC_XFGVIRT(IRdcGeneratorFilterMaxParameters, SetHashWindowSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetHashWindowSize )( 
             IRdcGeneratorFilterMaxParameters * This,
             /* [annotation][in] */ 
@@ -807,6 +829,7 @@ EXTERN_C const IID IID_IRdcGenerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRdcGenerator * This,
             /* [annotation][in] */ 
@@ -814,12 +837,15 @@ EXTERN_C const IID IID_IRdcGenerator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRdcGenerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRdcGenerator * This);
         
+        DECLSPEC_XFGVIRT(IRdcGenerator, GetGeneratorParameters)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetGeneratorParameters )( 
             IRdcGenerator * This,
             /* [annotation][in] */ 
@@ -827,6 +853,7 @@ EXTERN_C const IID IID_IRdcGenerator;
             /* [annotation][out] */ 
             _Out_  IRdcGeneratorParameters **iGeneratorParameters);
         
+        DECLSPEC_XFGVIRT(IRdcGenerator, Process)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Process )( 
             IRdcGenerator * This,
             /* [annotation][in] */ 
@@ -926,6 +953,7 @@ EXTERN_C const IID IID_IRdcFileReader;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRdcFileReader * This,
             /* [annotation][in] */ 
@@ -933,17 +961,21 @@ EXTERN_C const IID IID_IRdcFileReader;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRdcFileReader * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRdcFileReader * This);
         
+        DECLSPEC_XFGVIRT(IRdcFileReader, GetFileSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFileSize )( 
             IRdcFileReader * This,
             /* [annotation][out] */ 
             _Out_  ULONGLONG *fileSize);
         
+        DECLSPEC_XFGVIRT(IRdcFileReader, Read)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IRdcFileReader * This,
             /* [annotation][in] */ 
@@ -957,6 +989,7 @@ EXTERN_C const IID IID_IRdcFileReader;
             /* [annotation][out] */ 
             _Out_  BOOL *eof);
         
+        DECLSPEC_XFGVIRT(IRdcFileReader, GetFilePosition)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFilePosition )( 
             IRdcFileReader * This,
             /* [annotation][out] */ 
@@ -1041,6 +1074,7 @@ EXTERN_C const IID IID_IRdcFileWriter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRdcFileWriter * This,
             /* [annotation][in] */ 
@@ -1048,17 +1082,21 @@ EXTERN_C const IID IID_IRdcFileWriter;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRdcFileWriter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRdcFileWriter * This);
         
+        DECLSPEC_XFGVIRT(IRdcFileReader, GetFileSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFileSize )( 
             IRdcFileWriter * This,
             /* [annotation][out] */ 
             _Out_  ULONGLONG *fileSize);
         
+        DECLSPEC_XFGVIRT(IRdcFileReader, Read)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IRdcFileWriter * This,
             /* [annotation][in] */ 
@@ -1072,11 +1110,13 @@ EXTERN_C const IID IID_IRdcFileWriter;
             /* [annotation][out] */ 
             _Out_  BOOL *eof);
         
+        DECLSPEC_XFGVIRT(IRdcFileReader, GetFilePosition)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFilePosition )( 
             IRdcFileWriter * This,
             /* [annotation][out] */ 
             _Out_  ULONGLONG *offsetFromStart);
         
+        DECLSPEC_XFGVIRT(IRdcFileWriter, Write)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             IRdcFileWriter * This,
             /* [annotation][in] */ 
@@ -1086,9 +1126,11 @@ EXTERN_C const IID IID_IRdcFileWriter;
             /* [annotation][out] */ 
             _Out_  BYTE *buffer);
         
+        DECLSPEC_XFGVIRT(IRdcFileWriter, Truncate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Truncate )( 
             IRdcFileWriter * This);
         
+        DECLSPEC_XFGVIRT(IRdcFileWriter, DeleteOnClose)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeleteOnClose )( 
             IRdcFileWriter * This);
         
@@ -1179,6 +1221,7 @@ EXTERN_C const IID IID_IRdcSignatureReader;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRdcSignatureReader * This,
             /* [annotation][in] */ 
@@ -1186,17 +1229,21 @@ EXTERN_C const IID IID_IRdcSignatureReader;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRdcSignatureReader * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRdcSignatureReader * This);
         
+        DECLSPEC_XFGVIRT(IRdcSignatureReader, ReadHeader)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReadHeader )( 
             IRdcSignatureReader * This,
             /* [annotation][out] */ 
             _Out_  RDC_ErrorCode *rdc_ErrorCode);
         
+        DECLSPEC_XFGVIRT(IRdcSignatureReader, ReadSignatures)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReadSignatures )( 
             IRdcSignatureReader * This,
             /* [annotation][out][in] */ 
@@ -1280,6 +1327,7 @@ EXTERN_C const IID IID_IRdcComparator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRdcComparator * This,
             /* [annotation][in] */ 
@@ -1287,12 +1335,15 @@ EXTERN_C const IID IID_IRdcComparator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRdcComparator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRdcComparator * This);
         
+        DECLSPEC_XFGVIRT(IRdcComparator, Process)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Process )( 
             IRdcComparator * This,
             /* [annotation][in] */ 
@@ -1417,6 +1468,7 @@ EXTERN_C const IID IID_IRdcLibrary;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRdcLibrary * This,
             /* [annotation][in] */ 
@@ -1424,12 +1476,15 @@ EXTERN_C const IID IID_IRdcLibrary;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRdcLibrary * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRdcLibrary * This);
         
+        DECLSPEC_XFGVIRT(IRdcLibrary, ComputeDefaultRecursionDepth)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ComputeDefaultRecursionDepth )( 
             IRdcLibrary * This,
             /* [annotation][in] */ 
@@ -1437,6 +1492,7 @@ EXTERN_C const IID IID_IRdcLibrary;
             /* [annotation][out] */ 
             _Out_  ULONG *depth);
         
+        DECLSPEC_XFGVIRT(IRdcLibrary, CreateGeneratorParameters)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateGeneratorParameters )( 
             IRdcLibrary * This,
             /* [annotation][in] */ 
@@ -1446,6 +1502,7 @@ EXTERN_C const IID IID_IRdcLibrary;
             /* [annotation][out] */ 
             _Out_  IRdcGeneratorParameters **iGeneratorParameters);
         
+        DECLSPEC_XFGVIRT(IRdcLibrary, OpenGeneratorParameters)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OpenGeneratorParameters )( 
             IRdcLibrary * This,
             /* [annotation][in] */ 
@@ -1455,6 +1512,7 @@ EXTERN_C const IID IID_IRdcLibrary;
             /* [annotation][out] */ 
             _Out_  IRdcGeneratorParameters **iGeneratorParameters);
         
+        DECLSPEC_XFGVIRT(IRdcLibrary, CreateGenerator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateGenerator )( 
             IRdcLibrary * This,
             /* [annotation][in] */ 
@@ -1464,6 +1522,7 @@ EXTERN_C const IID IID_IRdcLibrary;
             /* [annotation][out] */ 
             _Out_  IRdcGenerator **iGenerator);
         
+        DECLSPEC_XFGVIRT(IRdcLibrary, CreateComparator)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateComparator )( 
             IRdcLibrary * This,
             /* [annotation][in] */ 
@@ -1473,6 +1532,7 @@ EXTERN_C const IID IID_IRdcLibrary;
             /* [annotation][out] */ 
             _Out_  IRdcComparator **iComparator);
         
+        DECLSPEC_XFGVIRT(IRdcLibrary, CreateSignatureReader)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateSignatureReader )( 
             IRdcLibrary * This,
             /* [annotation][in] */ 
@@ -1480,6 +1540,7 @@ EXTERN_C const IID IID_IRdcLibrary;
             /* [annotation][out] */ 
             _Out_  IRdcSignatureReader **iSignatureReader);
         
+        DECLSPEC_XFGVIRT(IRdcLibrary, GetRDCVersion)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRDCVersion )( 
             IRdcLibrary * This,
             /* [annotation][out] */ 
@@ -1570,6 +1631,7 @@ EXTERN_C const IID IID_ISimilarityReportProgress;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimilarityReportProgress * This,
             /* [annotation][in] */ 
@@ -1577,12 +1639,15 @@ EXTERN_C const IID IID_ISimilarityReportProgress;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISimilarityReportProgress * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISimilarityReportProgress * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityReportProgress, ReportProgress)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReportProgress )( 
             ISimilarityReportProgress * This,
             /* [annotation][in] */ 
@@ -1659,6 +1724,7 @@ EXTERN_C const IID IID_ISimilarityTableDumpState;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimilarityTableDumpState * This,
             /* [annotation][in] */ 
@@ -1666,12 +1732,15 @@ EXTERN_C const IID IID_ISimilarityTableDumpState;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISimilarityTableDumpState * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISimilarityTableDumpState * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityTableDumpState, GetNextData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextData )( 
             ISimilarityTableDumpState * This,
             /* [annotation][in] */ 
@@ -1764,6 +1833,7 @@ EXTERN_C const IID IID_ISimilarityTraitsMappedView;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimilarityTraitsMappedView * This,
             /* [annotation][in] */ 
@@ -1771,18 +1841,23 @@ EXTERN_C const IID IID_ISimilarityTraitsMappedView;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISimilarityTraitsMappedView * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISimilarityTraitsMappedView * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMappedView, Flush)
         /* [local][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Flush )( 
             ISimilarityTraitsMappedView * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMappedView, Unmap)
         /* [local][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Unmap )( 
             ISimilarityTraitsMappedView * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMappedView, Get)
         /* [local][helpstring] */ HRESULT ( STDMETHODCALLTYPE *Get )( 
             ISimilarityTraitsMappedView * This,
             /* [annotation][in] */ 
@@ -1794,6 +1869,7 @@ EXTERN_C const IID IID_ISimilarityTraitsMappedView;
             /* [annotation][out] */ 
             _Out_  SimilarityMappedViewInfo *viewInfo);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMappedView, GetView)
         /* [local][helpstring] */ void ( STDMETHODCALLTYPE *GetView )( 
             ISimilarityTraitsMappedView * This,
             /* [annotation][out] */ 
@@ -1913,6 +1989,7 @@ EXTERN_C const IID IID_ISimilarityTraitsMapping;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimilarityTraitsMapping * This,
             /* [annotation][in] */ 
@@ -1920,25 +1997,31 @@ EXTERN_C const IID IID_ISimilarityTraitsMapping;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISimilarityTraitsMapping * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISimilarityTraitsMapping * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMapping, CloseMapping)
         /* [local][helpstring] */ void ( STDMETHODCALLTYPE *CloseMapping )( 
             ISimilarityTraitsMapping * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMapping, SetFileSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetFileSize )( 
             ISimilarityTraitsMapping * This,
             /* [annotation][in] */ 
             _In_  unsigned __int64 fileSize);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMapping, GetFileSize)
         /* [local][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFileSize )( 
             ISimilarityTraitsMapping * This,
             /* [annotation][out] */ 
             _Out_  unsigned __int64 *fileSize);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMapping, OpenMapping)
         /* [local][helpstring] */ HRESULT ( STDMETHODCALLTYPE *OpenMapping )( 
             ISimilarityTraitsMapping * This,
             /* [annotation][in] */ 
@@ -1950,6 +2033,7 @@ EXTERN_C const IID IID_ISimilarityTraitsMapping;
             /* [annotation][out] */ 
             _Out_  unsigned __int64 *actualEnd);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMapping, ResizeMapping)
         /* [local][helpstring] */ HRESULT ( STDMETHODCALLTYPE *ResizeMapping )( 
             ISimilarityTraitsMapping * This,
             /* [annotation][in] */ 
@@ -1961,11 +2045,13 @@ EXTERN_C const IID IID_ISimilarityTraitsMapping;
             /* [annotation][out] */ 
             _Out_  unsigned __int64 *actualEnd);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMapping, GetPageSize)
         /* [local][helpstring] */ void ( STDMETHODCALLTYPE *GetPageSize )( 
             ISimilarityTraitsMapping * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pageSize);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsMapping, CreateView)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateView )( 
             ISimilarityTraitsMapping * This,
             /* [annotation][in] */ 
@@ -2101,6 +2187,7 @@ EXTERN_C const IID IID_ISimilarityTraitsTable;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimilarityTraitsTable * This,
             /* [annotation][in] */ 
@@ -2108,12 +2195,15 @@ EXTERN_C const IID IID_ISimilarityTraitsTable;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISimilarityTraitsTable * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISimilarityTraitsTable * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsTable, CreateTable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateTable )( 
             ISimilarityTraitsTable * This,
             /* [annotation][in] */ 
@@ -2125,6 +2215,7 @@ EXTERN_C const IID IID_ISimilarityTraitsTable;
             /* [annotation][out] */ 
             _Out_  RdcCreatedTables *isNew);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsTable, CreateTableIndirect)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateTableIndirect )( 
             ISimilarityTraitsTable * This,
             /* [annotation][in] */ 
@@ -2134,10 +2225,12 @@ EXTERN_C const IID IID_ISimilarityTraitsTable;
             /* [annotation][out] */ 
             _Out_  RdcCreatedTables *isNew);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsTable, CloseTable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CloseTable )( 
             ISimilarityTraitsTable * This,
             BOOL isValid);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsTable, Append)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             ISimilarityTraitsTable * This,
             /* [annotation][in] */ 
@@ -2145,6 +2238,7 @@ EXTERN_C const IID IID_ISimilarityTraitsTable;
             /* [annotation][in] */ 
             _In_  SimilarityFileIndexT fileIndex);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsTable, FindSimilarFileIndex)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindSimilarFileIndex )( 
             ISimilarityTraitsTable * This,
             /* [annotation][in] */ 
@@ -2158,11 +2252,13 @@ EXTERN_C const IID IID_ISimilarityTraitsTable;
             /* [annotation][out] */ 
             _Out_  DWORD *resultsUsed);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsTable, BeginDump)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *BeginDump )( 
             ISimilarityTraitsTable * This,
             /* [annotation][out] */ 
             _Out_  ISimilarityTableDumpState **similarityTableDumpState);
         
+        DECLSPEC_XFGVIRT(ISimilarityTraitsTable, GetLastIndex)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLastIndex )( 
             ISimilarityTraitsTable * This,
             /* [annotation][out] */ 
@@ -2292,6 +2388,7 @@ EXTERN_C const IID IID_ISimilarityFileIdTable;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimilarityFileIdTable * This,
             /* [annotation][in] */ 
@@ -2299,12 +2396,15 @@ EXTERN_C const IID IID_ISimilarityFileIdTable;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISimilarityFileIdTable * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISimilarityFileIdTable * This);
         
+        DECLSPEC_XFGVIRT(ISimilarityFileIdTable, CreateTable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateTable )( 
             ISimilarityFileIdTable * This,
             /* [annotation][in] */ 
@@ -2318,6 +2418,7 @@ EXTERN_C const IID IID_ISimilarityFileIdTable;
             /* [annotation][out] */ 
             _Out_  RdcCreatedTables *isNew);
         
+        DECLSPEC_XFGVIRT(ISimilarityFileIdTable, CreateTableIndirect)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateTableIndirect )( 
             ISimilarityFileIdTable * This,
             /* [annotation][in] */ 
@@ -2329,10 +2430,12 @@ EXTERN_C const IID IID_ISimilarityFileIdTable;
             /* [annotation][out] */ 
             _Out_  RdcCreatedTables *isNew);
         
+        DECLSPEC_XFGVIRT(ISimilarityFileIdTable, CloseTable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CloseTable )( 
             ISimilarityFileIdTable * This,
             BOOL isValid);
         
+        DECLSPEC_XFGVIRT(ISimilarityFileIdTable, Append)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             ISimilarityFileIdTable * This,
             /* [annotation][in] */ 
@@ -2340,6 +2443,7 @@ EXTERN_C const IID IID_ISimilarityFileIdTable;
             /* [annotation][out] */ 
             _Out_  SimilarityFileIndexT *similarityFileIndex);
         
+        DECLSPEC_XFGVIRT(ISimilarityFileIdTable, Lookup)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Lookup )( 
             ISimilarityFileIdTable * This,
             /* [annotation][in] */ 
@@ -2347,11 +2451,13 @@ EXTERN_C const IID IID_ISimilarityFileIdTable;
             /* [annotation][out] */ 
             _Out_  SimilarityFileId *similarityFileId);
         
+        DECLSPEC_XFGVIRT(ISimilarityFileIdTable, Invalidate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Invalidate )( 
             ISimilarityFileIdTable * This,
             /* [annotation][in] */ 
             _In_  SimilarityFileIndexT similarityFileIndex);
         
+        DECLSPEC_XFGVIRT(ISimilarityFileIdTable, GetRecordCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRecordCount )( 
             ISimilarityFileIdTable * This,
             /* [annotation][out] */ 
@@ -2442,6 +2548,7 @@ EXTERN_C const IID IID_IRdcSimilarityGenerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRdcSimilarityGenerator * This,
             /* [annotation][in] */ 
@@ -2449,15 +2556,19 @@ EXTERN_C const IID IID_IRdcSimilarityGenerator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRdcSimilarityGenerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRdcSimilarityGenerator * This);
         
+        DECLSPEC_XFGVIRT(IRdcSimilarityGenerator, EnableSimilarity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnableSimilarity )( 
             IRdcSimilarityGenerator * This);
         
+        DECLSPEC_XFGVIRT(IRdcSimilarityGenerator, Results)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Results )( 
             IRdcSimilarityGenerator * This,
             /* [annotation][out] */ 
@@ -2537,6 +2648,7 @@ EXTERN_C const IID IID_IFindSimilarResults;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IFindSimilarResults * This,
             /* [annotation][in] */ 
@@ -2544,17 +2656,21 @@ EXTERN_C const IID IID_IFindSimilarResults;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IFindSimilarResults * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IFindSimilarResults * This);
         
+        DECLSPEC_XFGVIRT(IFindSimilarResults, GetSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSize )( 
             IFindSimilarResults * This,
             /* [annotation][out] */ 
             _Out_  DWORD *size);
         
+        DECLSPEC_XFGVIRT(IFindSimilarResults, GetNextFileId)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextFileId )( 
             IFindSimilarResults * This,
             /* [annotation][out] */ 
@@ -2680,6 +2796,7 @@ EXTERN_C const IID IID_ISimilarity;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimilarity * This,
             /* [annotation][in] */ 
@@ -2687,12 +2804,15 @@ EXTERN_C const IID IID_ISimilarity;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISimilarity * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISimilarity * This);
         
+        DECLSPEC_XFGVIRT(ISimilarity, CreateTable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateTable )( 
             ISimilarity * This,
             /* [annotation][in] */ 
@@ -2706,6 +2826,7 @@ EXTERN_C const IID IID_ISimilarity;
             /* [annotation][out] */ 
             _Out_  RdcCreatedTables *isNew);
         
+        DECLSPEC_XFGVIRT(ISimilarity, CreateTableIndirect)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateTableIndirect )( 
             ISimilarity * This,
             /* [annotation][in] */ 
@@ -2719,11 +2840,13 @@ EXTERN_C const IID IID_ISimilarity;
             /* [annotation][out] */ 
             _Out_  RdcCreatedTables *isNew);
         
+        DECLSPEC_XFGVIRT(ISimilarity, CloseTable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CloseTable )( 
             ISimilarity * This,
             /* [annotation][in] */ 
             _In_  BOOL isValid);
         
+        DECLSPEC_XFGVIRT(ISimilarity, Append)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             ISimilarity * This,
             /* [annotation][in] */ 
@@ -2731,6 +2854,7 @@ EXTERN_C const IID IID_ISimilarity;
             /* [annotation][in] */ 
             _In_  SimilarityData *similarityData);
         
+        DECLSPEC_XFGVIRT(ISimilarity, FindSimilarFileId)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FindSimilarFileId )( 
             ISimilarity * This,
             /* [annotation][in] */ 
@@ -2742,6 +2866,7 @@ EXTERN_C const IID IID_ISimilarity;
             /* [annotation][out] */ 
             _Out_  IFindSimilarResults **findSimilarResults);
         
+        DECLSPEC_XFGVIRT(ISimilarity, CopyAndSwap)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CopyAndSwap )( 
             ISimilarity * This,
             /* [annotation][in] */ 
@@ -2749,6 +2874,7 @@ EXTERN_C const IID IID_ISimilarity;
             /* [annotation][in] */ 
             _In_  ISimilarityReportProgress *reportProgress);
         
+        DECLSPEC_XFGVIRT(ISimilarity, GetRecordCount)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetRecordCount )( 
             ISimilarity * This,
             /* [annotation][out] */ 

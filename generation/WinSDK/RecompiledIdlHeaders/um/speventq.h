@@ -86,7 +86,7 @@ public:
     // Clears the event and releases associated memory
     void Clear()
     {
-        if (elParamType != SPEI_UNDEFINED)
+        if (elParamType != SPET_LPARAM_IS_UNDEFINED)
         {
             if (elParamType == SPET_LPARAM_IS_POINTER ||
                 elParamType == SPET_LPARAM_IS_STRING)

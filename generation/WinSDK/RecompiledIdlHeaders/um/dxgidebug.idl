@@ -99,6 +99,8 @@ typedef struct DXGI_INFO_QUEUE_FILTER
     DXGI_INFO_QUEUE_FILTER_DESC DenyList;
 } DXGI_INFO_QUEUE_FILTER;
 
+
+
 cpp_quote("#define DXGI_INFO_QUEUE_DEFAULT_MESSAGE_COUNT_LIMIT 1024")
 
 cpp_quote( "HRESULT WINAPI DXGIGetDebugInterface(REFIID riid, void **ppDebug);" )

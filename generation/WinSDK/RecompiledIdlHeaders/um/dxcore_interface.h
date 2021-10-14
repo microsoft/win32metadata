@@ -1,6 +1,7 @@
 //
 // DXCore Interface
-// Copyright (C) Microsoft Corporation. All rights reserved.
+// Copyright (C) Microsoft Corporation.
+// Licensed under the MIT license.
 //
 
 #ifndef __dxcore_interface_h__
@@ -10,6 +11,8 @@
 #include "windows.h"
 #include "ole2.h"
 #endif /*COM_NO_WINDOWS_H*/
+
+#include <stdint.h>
 
 #ifdef __cplusplus
 
@@ -21,7 +24,7 @@ enum class DXCoreAdapterProperty : uint32_t
     InstanceLuid = 0,
     DriverVersion = 1,
     DriverDescription = 2,
-    HardwareID = 3,
+    HardwareID = 3, // Use HardwareIDParts instead, if available.
     KmdModelVersion = 4,
     ComputePreemptionGranularity = 5,
     GraphicsPreemptionGranularity = 6,
@@ -31,7 +34,8 @@ enum class DXCoreAdapterProperty : uint32_t
     AcgCompatible = 10,
     IsHardware = 11,
     IsIntegrated = 12,
-    IsDetachable = 13
+    IsDetachable = 13,
+    HardwareIDParts = 14
 };
 
 enum class DXCoreAdapterState : uint32_t
@@ -67,6 +71,15 @@ struct DXCoreHardwareID
     uint32_t deviceID;
     uint32_t subSysID;
     uint32_t revision;
+};
+
+struct DXCoreHardwareIDParts
+{
+    uint32_t vendorID;
+    uint32_t deviceID;
+    uint32_t subSystemID;
+    uint32_t subVendorID;
+    uint32_t revisionID;
 };
 
 struct DXCoreAdapterMemoryBudgetNodeSegmentGroup

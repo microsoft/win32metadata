@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -124,28 +132,34 @@ EXTERN_C const IID IID_IIisServiceControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIisServiceControl * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IIisServiceControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IIisServiceControl * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IIisServiceControl * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IIisServiceControl * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IIisServiceControl * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -154,6 +168,7 @@ EXTERN_C const IID IID_IIisServiceControl;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IIisServiceControl * This,
             /* [annotation][in] */ 
@@ -173,20 +188,24 @@ EXTERN_C const IID IID_IIisServiceControl;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IIisServiceControl, Stop)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IIisServiceControl * This,
             DWORD dwTimeoutMsecs,
             DWORD dwForce);
         
+        DECLSPEC_XFGVIRT(IIisServiceControl, Start)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in IIisServiceControl * This,
             DWORD dwTimeoutMsecs);
         
+        DECLSPEC_XFGVIRT(IIisServiceControl, Reboot)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Reboot )( 
             __RPC__in IIisServiceControl * This,
             DWORD dwTimeouMsecs,
             DWORD dwForceAppsClosed);
         
+        DECLSPEC_XFGVIRT(IIisServiceControl, Status)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Status )( 
             __RPC__in IIisServiceControl * This,
             /* [in] */ DWORD dwBufferSize,
@@ -194,6 +213,7 @@ EXTERN_C const IID IID_IIisServiceControl;
             /* [out] */ __RPC__out DWORD *pdwMDRequiredBufferSize,
             /* [out] */ __RPC__out DWORD *pdwNumServices);
         
+        DECLSPEC_XFGVIRT(IIisServiceControl, Kill)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Kill )( 
             __RPC__in IIisServiceControl * This);
         

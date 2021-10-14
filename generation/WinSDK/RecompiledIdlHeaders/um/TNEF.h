@@ -27,6 +27,18 @@
 extern "C" {
 #endif
 
+#ifndef WIN_NOEXCEPT
+	#ifdef __cplusplus
+		#if _MSC_VER >= 1900
+			#define WIN_NOEXCEPT noexcept
+		#else
+			#define WIN_NOEXCEPT throw()
+		#endif
+	#else
+		#define WIN_NOEXCEPT
+	#endif
+#endif
+
 
 #ifndef BEGIN_INTERFACE
 #define BEGIN_INTERFACE
@@ -135,7 +147,7 @@ STDMETHODIMP OpenTnefStream(
 	ULONG				ulFlags,
 	LPMESSAGE			lpMessage,
 	WORD				wKeyVal,
-	LPITNEF FAR *		lppTNEF);
+	LPITNEF FAR *		lppTNEF) WIN_NOEXCEPT;
 
 typedef 
 _Check_return_
@@ -157,7 +169,7 @@ STDMETHODIMP OpenTnefStreamEx(
 	LPMESSAGE			lpMessage,
 	WORD				wKeyVal,
 	LPADRBOOK			lpAdressBook,
-	LPITNEF FAR *		lppTNEF);
+	LPITNEF FAR *		lppTNEF) WIN_NOEXCEPT;
 
 typedef HRESULT (STDMETHODCALLTYPE FAR * LPOPENTNEFSTREAMEX) (
 	LPVOID				lpvSupport,
@@ -172,7 +184,7 @@ typedef HRESULT (STDMETHODCALLTYPE FAR * LPOPENTNEFSTREAMEX) (
 STDMETHODIMP GetTnefStreamCodepage (
 	LPSTREAM			lpStream,
 	ULONG FAR *			lpulCodepage,
-	ULONG FAR *			lpulSubCodepage);
+	ULONG FAR *			lpulSubCodepage) WIN_NOEXCEPT;
 
 typedef HRESULT (STDMETHODCALLTYPE FAR * LPGETTNEFSTREAMCODEPAGE) (
 	LPSTREAM			lpStream,

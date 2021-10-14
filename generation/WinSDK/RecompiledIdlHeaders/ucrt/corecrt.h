@@ -11,6 +11,53 @@
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //
+// Windows API Partitioning and ARM Desktop Support
+//
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+#ifndef _CRT_USE_WINAPI_FAMILY_DESKTOP_APP
+    #ifdef WINAPI_FAMILY
+        #include <winapifamily.h>
+        #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+            #define _CRT_USE_WINAPI_FAMILY_DESKTOP_APP
+        #else
+            #ifdef WINAPI_FAMILY_PHONE_APP
+                #if WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
+                    #define _CRT_USE_WINAPI_FAMILY_PHONE_APP
+                #endif
+            #endif
+
+            #ifdef WINAPI_FAMILY_GAMES
+                #if WINAPI_FAMILY == WINAPI_FAMILY_GAMES
+                    #define _CRT_USE_WINAPI_FAMILY_GAMES
+                #endif
+            #endif
+        #endif
+    #else
+        #define _CRT_USE_WINAPI_FAMILY_DESKTOP_APP
+    #endif
+#endif
+
+#ifndef _ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE
+    #define _ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE 1
+#endif
+
+#ifndef _CRT_BUILD_DESKTOP_APP
+    #ifdef _CRT_USE_WINAPI_FAMILY_DESKTOP_APP
+        #define _CRT_BUILD_DESKTOP_APP 1
+    #else
+        #define _CRT_BUILD_DESKTOP_APP 0
+    #endif
+#endif
+
+// Verify that the ARM Desktop SDK is available when building an ARM Desktop app
+#ifdef _M_ARM
+    #if _CRT_BUILD_DESKTOP_APP && !_ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE
+        #error Compiling Desktop applications for the ARM platform is not supported.
+    #endif
+#endif
+
+//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//
 // Warning Suppression
 //
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -33,6 +80,7 @@
 // C4324: structure was padded due to __declspec(align()) (/W4)
 // C4514: unreferenced inline function has been removed (/Wall)
 // C4574: 'MACRO' is defined to be '0': did you mean to use '#if MACRO'? (/Wall)
+// C4668: '__cplusplus' is not defined as a preprocessor macro (/Wall)
 // C4710: function not inlined (/Wall)
 // C4793: 'function' is compiled as native code (/Wall and /W1 under /clr:pure)
 // C4820: padding after data member (/Wall)
@@ -134,7 +182,7 @@ _CRT_BEGIN_C_HEADER
     #define _CRT_GUARDOVERFLOW
 #endif
 
-#if defined _DLL && defined _M_HYBRID && (defined _CORECRT_BUILD || defined _VCRT_BUILD)
+#if defined _DLL && (defined _M_HYBRID || defined _M_ARM64EC) && (defined _CORECRT_BUILD || defined _VCRT_BUILD)
     #define _CRT_HYBRIDPATCHABLE __declspec(hybrid_patchable)
 #else
     #define _CRT_HYBRIDPATCHABLE
@@ -188,6 +236,13 @@ _CRT_BEGIN_C_HEADER
     #define __crt_typefix(ctype)
 #endif
 
+#ifndef _CRT_NOEXCEPT
+    #ifdef __cplusplus
+        #define _CRT_NOEXCEPT noexcept
+    #else
+        #define _CRT_NOEXCEPT
+    #endif
+#endif
 
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
@@ -290,54 +345,13 @@ extern "C++"
  #endif /* _MSVC_LANG */
 #endif /* _CRT_HAS_CXX17 */
 
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-//
-// Windows API Partitioning and ARM Desktop Support
-//
-//-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
-#ifndef _CRT_USE_WINAPI_FAMILY_DESKTOP_APP
-    #ifdef WINAPI_FAMILY
-        #include <winapifamily.h>
-        #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
-            #define _CRT_USE_WINAPI_FAMILY_DESKTOP_APP
-        #else
-            #ifdef WINAPI_FAMILY_PHONE_APP
-                #if WINAPI_FAMILY == WINAPI_FAMILY_PHONE_APP
-                    #define _CRT_USE_WINAPI_FAMILY_PHONE_APP
-                #endif
-            #endif
-
-            #ifdef WINAPI_FAMILY_GAMES
-                #if WINAPI_FAMILY == WINAPI_FAMILY_GAMES
-                    #define _CRT_USE_WINAPI_FAMILY_GAMES
-                #endif
-            #endif
-        #endif
-    #else
-        #define _CRT_USE_WINAPI_FAMILY_DESKTOP_APP
-    #endif
-#endif
-
-#ifndef _ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE
-    #define _ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE 1
-#endif
-
-#ifndef _CRT_BUILD_DESKTOP_APP
-    #ifdef _CRT_USE_WINAPI_FAMILY_DESKTOP_APP
-        #define _CRT_BUILD_DESKTOP_APP 1
-    #else
-        #define _CRT_BUILD_DESKTOP_APP 0
-    #endif
-#endif
-
-// Verify that the ARM Desktop SDK is available when building an ARM Desktop app
-#ifdef _M_ARM
-    #if _CRT_BUILD_DESKTOP_APP && !_ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE
-        #error Compiling Desktop applications for the ARM platform is not supported.
-    #endif
-#endif
-
-
+#ifndef _CRT_HAS_C11
+ #if defined __STDC_VERSION__ && __STDC_VERSION__ >= 201112L
+   #define _CRT_HAS_C11 1
+ #else /* defined __STDC_VERSION__ && __STDC_VERSION__ >= 201112L */
+   #define _CRT_HAS_C11 0
+ #endif /* defined __STDC_VERSION__ && __STDC_VERSION__ >= 201112L */
+#endif /* _CRT_HAS_C11 */
 
 //-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
 //

@@ -413,7 +413,7 @@ typedef enum tagMSHCTX
     MSHCTX_DIFFERENTMACHINE = 2,// unmarshal context is on a different machine
     MSHCTX_INPROC = 3,          // unmarshal context is on different thread
     MSHCTX_CROSSCTX = 4,        // unmarshal context is on different context
-    MSHCTX_RESERVED1 = 5,       // reserved
+    MSHCTX_CONTAINER = 5,       // unmarshal context is in a different container
 } MSHCTX;
 
 // #######################################################################

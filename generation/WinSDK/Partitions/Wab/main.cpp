@@ -6,7 +6,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <wabdefs.h>
-#include <wabiab.h>
-#include <wabapi.h>
-#include <wabtags.h>
+#include <wab.h>
+#include <imapi2error.h>
+#include <imapi2fserror.h>

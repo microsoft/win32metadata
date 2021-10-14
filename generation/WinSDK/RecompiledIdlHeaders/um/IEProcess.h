@@ -140,7 +140,7 @@ struct IE80TabWindowExports
 ///     The table is invariant for the lifetime of the process.
 /// NULL if the process has no process exports.
 /// </returns>
-typedef const IETabWindowExports* (*IEGetTabWindowExports_t)();
+typedef const struct IETabWindowExports* (*IEGetTabWindowExports_t)();
 
 #if defined(__cplusplus) && !defined(NO_IEPROCESS_CLASS)
 /// <summary>

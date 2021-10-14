@@ -1,5 +1,6 @@
 --traverse
 <IncludeRoot>/um/statehelpers.h
 <IncludeRoot>/um/winreg.h
+<IncludeRoot>/um/regstr.h
 --namespace
 Windows.Win32.System.Registry

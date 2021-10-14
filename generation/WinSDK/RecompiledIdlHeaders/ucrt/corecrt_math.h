@@ -89,7 +89,13 @@ _CRT_BEGIN_C_HEADER
 #define HUGE_VAL   ((double)INFINITY)
 #define HUGE_VALF  ((float)INFINITY)
 #define HUGE_VALL  ((long double)INFINITY)
+#ifndef _UCRT_NEGATIVE_NAN
+// This operation creates a negative NAN adding a - to make it positive
+#define NAN        (-(float)(INFINITY * 0.0F))
+#else
+// Keep this for backwards compatibility
 #define NAN        ((float)(INFINITY * 0.0F))
+#endif
 
 #define _DENORM    (-2)
 #define _FINITE    (-1)
@@ -604,7 +610,7 @@ extern "C++"
 
 
 
-    #if defined _M_X64 || defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64 || defined _CORECRT_BUILD_APISET
+    #if defined _M_X64 || defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64 || defined _CORECRT_BUILD_APISET || defined _M_ARM64EC
 
         _Check_return_ _ACRTIMP float __cdecl acosf(_In_ float _X);
         _Check_return_ _ACRTIMP float __cdecl asinf(_In_ float _X);
@@ -659,7 +665,7 @@ extern "C++"
 
     #endif
 
-    #if defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64
+    #if defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64 || defined _M_ARM64EC
 
         _Check_return_ _CRT_JIT_INTRINSIC _ACRTIMP float __cdecl fabsf(_In_ float  _X);
 
@@ -672,7 +678,7 @@ extern "C++"
 
     #endif
 
-    #if defined _M_X64 || defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64
+    #if defined _M_X64 || defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64 || defined _M_ARM64EC
 
         _Check_return_ _ACRTIMP float __cdecl floorf(_In_ float _X);
         _Check_return_ _ACRTIMP float __cdecl fmodf(_In_ float _X, _In_ float _Y);
@@ -706,7 +712,7 @@ extern "C++"
         return (float)ldexp(_X, _Y);
     }
 
-    #if defined _M_X64 || defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64 || defined _CORECRT_BUILD_APISET
+    #if defined _M_X64 || defined _M_ARM || defined _M_ARM64 || defined _M_HYBRID_X86_ARM64 || defined _CORECRT_BUILD_APISET || defined _M_ARM64EC
 
         _Check_return_ _ACRTIMP float  __cdecl log10f(_In_ float _X);
         _Check_return_ _ACRTIMP float  __cdecl logf(_In_ float _X);

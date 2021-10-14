@@ -4,7 +4,11 @@
 #define DIRECTML_H
 #pragma once
 
+#ifdef _GAMING_XBOX
+#include "d3d12_xs.h"
+#else
 #include "d3d12.h"
+#endif
 
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
 
@@ -12,11 +16,30 @@
 #define DML_DECLARE_INTERFACE(iid) DECLSPEC_UUID(iid) DECLSPEC_NOVTABLE
 #endif
 
+#ifndef DML_TARGET_VERSION
+
+#if !defined(NTDDI_VERSION) || defined(DML_TARGET_VERSION_USE_LATEST) // Use the latest if using redist or no Windows target set.
+#define DML_TARGET_VERSION 0x4000
+#elif defined(NTDDI_WIN10_CO) && NTDDI_VERSION >= NTDDI_WIN10_CO
+#define DML_TARGET_VERSION 0x4000
+#elif defined(NTDDI_WIN10_FE) && NTDDI_VERSION >= NTDDI_WIN10_FE
+#define DML_TARGET_VERSION 0x3000
+#elif defined(NTDDI_WIN10_VB) && NTDDI_VERSION >= NTDDI_WIN10_VB // Windows 10 2004 Update
+#define DML_TARGET_VERSION 0x2000
+#else defined(NTDDI_WIN10_19H1) && NTDDI_VERSION >= NTDDI_WIN10_19H1 // Windows 10 1903 Update
+#define DML_TARGET_VERSION 0x1000
+#endif
+
+#endif // !defined(DML_TARGET_VERSION)
+
 // ===================================================================================================================
 //   DirectML constants
 // ===================================================================================================================
 
 static const UINT DML_TENSOR_DIMENSION_COUNT_MAX = 5;
+#if DML_TARGET_VERSION >= 0x3000
+static const UINT DML_TENSOR_DIMENSION_COUNT_MAX1 = 8;
+#endif
 
 static const UINT DML_TEMPORARY_BUFFER_ALIGNMENT = 256;
 static const UINT DML_PERSISTENT_BUFFER_ALIGNMENT = 256;
@@ -55,6 +78,9 @@ enum DML_TENSOR_DATA_TYPE
     DML_TENSOR_DATA_TYPE_INT32,
     DML_TENSOR_DATA_TYPE_INT16,
     DML_TENSOR_DATA_TYPE_INT8,
+    DML_TENSOR_DATA_TYPE_FLOAT64,
+    DML_TENSOR_DATA_TYPE_UINT64,
+    DML_TENSOR_DATA_TYPE_INT64,
 };
 
 enum DML_TENSOR_TYPE
@@ -177,7 +203,7 @@ enum DML_OPERATOR_TYPE
     DML_OPERATOR_LSTM,
     DML_OPERATOR_GRU,
 
-#if NTDDI_VERSION >= NTDDI_WIN10_VB
+#if DML_TARGET_VERSION >= 0x2000
     DML_OPERATOR_ELEMENT_WISE_SIGN,
     DML_OPERATOR_ELEMENT_WISE_IS_NAN,
     DML_OPERATOR_ELEMENT_WISE_ERF,
@@ -193,12 +219,77 @@ enum DML_OPERATOR_TYPE
     DML_OPERATOR_MAX_POOLING1,
     DML_OPERATOR_MAX_UNPOOLING,
     DML_OPERATOR_DIAGONAL_MATRIX,
-    DML_OPERATOR_SCATTER,
+    DML_OPERATOR_SCATTER_ELEMENTS,
+    DML_OPERATOR_SCATTER = DML_OPERATOR_SCATTER_ELEMENTS, // Alias name for backwards compatibility.
     DML_OPERATOR_ONE_HOT,
     DML_OPERATOR_RESAMPLE,
-#endif // NTDDI_VERSION >= NTDDI_WIN10_VB
-};
+#endif // DML_TARGET_VERSION >= 0x2000
 
+#if DML_TARGET_VERSION >= 0x2100
+    DML_OPERATOR_ELEMENT_WISE_BIT_SHIFT_LEFT,
+    DML_OPERATOR_ELEMENT_WISE_BIT_SHIFT_RIGHT,
+    DML_OPERATOR_ELEMENT_WISE_ROUND,
+    DML_OPERATOR_ELEMENT_WISE_IS_INFINITY,
+    DML_OPERATOR_ELEMENT_WISE_MODULUS_TRUNCATE,
+    DML_OPERATOR_ELEMENT_WISE_MODULUS_FLOOR,
+    DML_OPERATOR_FILL_VALUE_CONSTANT,
+    DML_OPERATOR_FILL_VALUE_SEQUENCE,
+    DML_OPERATOR_CUMULATIVE_SUMMATION,
+    DML_OPERATOR_REVERSE_SUBSEQUENCES,
+    DML_OPERATOR_GATHER_ELEMENTS,
+    DML_OPERATOR_GATHER_ND,
+    DML_OPERATOR_SCATTER_ND,
+    DML_OPERATOR_MAX_POOLING2,
+    DML_OPERATOR_SLICE1,
+    DML_OPERATOR_TOP_K1,
+    DML_OPERATOR_DEPTH_TO_SPACE1,
+    DML_OPERATOR_SPACE_TO_DEPTH1,
+    DML_OPERATOR_MEAN_VARIANCE_NORMALIZATION1,
+    DML_OPERATOR_RESAMPLE1,
+    DML_OPERATOR_MATRIX_MULTIPLY_INTEGER,
+    DML_OPERATOR_QUANTIZED_LINEAR_MATRIX_MULTIPLY,
+    DML_OPERATOR_CONVOLUTION_INTEGER,
+    DML_OPERATOR_QUANTIZED_LINEAR_CONVOLUTION,
+#endif // DML_TARGET_VERSION >= 0x2100
+
+#if DML_TARGET_VERSION >= 0x3000
+    DML_OPERATOR_ELEMENT_WISE_BIT_AND,
+    DML_OPERATOR_ELEMENT_WISE_BIT_OR,
+    DML_OPERATOR_ELEMENT_WISE_BIT_XOR,
+    DML_OPERATOR_ELEMENT_WISE_BIT_NOT,
+    DML_OPERATOR_ELEMENT_WISE_BIT_COUNT,
+    DML_OPERATOR_ELEMENT_WISE_LOGICAL_GREATER_THAN_OR_EQUAL,
+    DML_OPERATOR_ELEMENT_WISE_LOGICAL_LESS_THAN_OR_EQUAL,
+    DML_OPERATOR_ACTIVATION_CELU,
+    DML_OPERATOR_ACTIVATION_RELU_GRAD,
+    DML_OPERATOR_AVERAGE_POOLING_GRAD,
+    DML_OPERATOR_MAX_POOLING_GRAD,
+    DML_OPERATOR_RANDOM_GENERATOR,
+    DML_OPERATOR_NONZERO_COORDINATES,
+    DML_OPERATOR_RESAMPLE_GRAD,
+    DML_OPERATOR_SLICE_GRAD,
+    DML_OPERATOR_ADAM_OPTIMIZER,
+    DML_OPERATOR_ARGMIN,
+    DML_OPERATOR_ARGMAX,
+    DML_OPERATOR_ROI_ALIGN,
+    DML_OPERATOR_GATHER_ND1,
+#endif // DML_TARGET_VERSION >= 0x3000
+
+#if DML_TARGET_VERSION >= 0x3100
+    DML_OPERATOR_ELEMENT_WISE_ATAN_YX,
+    DML_OPERATOR_ELEMENT_WISE_CLIP_GRAD,
+    DML_OPERATOR_ELEMENT_WISE_DIFFERENCE_SQUARE,
+    DML_OPERATOR_LOCAL_RESPONSE_NORMALIZATION_GRAD,
+    DML_OPERATOR_CUMULATIVE_PRODUCT,
+    DML_OPERATOR_BATCH_NORMALIZATION_GRAD,
+#endif // DML_TARGET_VERSION >= 0x3100
+
+#if DML_TARGET_VERSION >= 0x4000
+    DML_OPERATOR_ELEMENT_WISE_QUANTIZED_LINEAR_ADD,
+    DML_OPERATOR_DYNAMIC_QUANTIZE_LINEAR,
+    DML_OPERATOR_ROI_ALIGN1,
+#endif // DML_TARGET_VERSION >= 0x4000
+};
 
 // ===================================================================================================================
 //   Operator enumerations and structures
@@ -243,6 +334,10 @@ enum DML_PADDING_MODE
     DML_PADDING_MODE_CONSTANT,
     DML_PADDING_MODE_EDGE,
     DML_PADDING_MODE_REFLECTION,
+
+#if DML_TARGET_VERSION >= 0x3000
+    DML_PADDING_MODE_SYMMETRIC,
+#endif
 };
 
 enum DML_INTERPOLATION_MODE
@@ -269,6 +364,60 @@ enum DML_RECURRENT_NETWORK_DIRECTION
     DML_RECURRENT_NETWORK_DIRECTION_BACKWARD,
     DML_RECURRENT_NETWORK_DIRECTION_BIDIRECTIONAL,
 };
+
+#if DML_TARGET_VERSION >= 0x2100
+
+enum DML_ROUNDING_MODE
+{
+    DML_ROUNDING_MODE_HALVES_TO_NEAREST_EVEN,
+    DML_ROUNDING_MODE_TOWARD_ZERO,
+    DML_ROUNDING_MODE_TOWARD_INFINITY,
+};
+
+enum DML_IS_INFINITY_MODE
+{
+    DML_IS_INFINITY_MODE_EITHER = 0,
+    DML_IS_INFINITY_MODE_POSITIVE = 1,
+    DML_IS_INFINITY_MODE_NEGATIVE = 2,
+};
+
+enum DML_AXIS_DIRECTION
+{
+    DML_AXIS_DIRECTION_INCREASING = 0,
+    DML_AXIS_DIRECTION_DECREASING = 1,
+};
+
+enum DML_DEPTH_SPACE_ORDER
+{
+    DML_DEPTH_SPACE_ORDER_DEPTH_COLUMN_ROW,
+    DML_DEPTH_SPACE_ORDER_COLUMN_ROW_DEPTH,
+};
+
+union DML_SCALAR_UNION
+{
+    BYTE   Bytes[8];
+    INT8   Int8;
+    UINT8  UInt8;
+    INT16  Int16;
+    UINT16 UInt16;
+    INT32  Int32;
+    UINT32 UInt32;
+    INT64  Int64;
+    UINT64 UInt64;
+    FLOAT  Float32;
+    DOUBLE Float64;
+};
+
+#endif // DML_TARGET_VERSION >= 0x2100
+
+#if DML_TARGET_VERSION >= 0x3000
+
+enum DML_RANDOM_GENERATOR_TYPE
+{
+    DML_RANDOM_GENERATOR_TYPE_PHILOX_4X32_10
+};
+
+#endif // DML_TARGET_VERSION >= 0x3000
 
 // ===================================================================================================================
 //   Operator descriptions
@@ -730,18 +879,6 @@ struct DML_MAX_POOLING_OPERATOR_DESC
     _Field_size_(DimensionCount) const UINT* EndPadding;
 };
 
-struct DML_MAX_POOLING1_OPERATOR_DESC
-{
-    const DML_TENSOR_DESC* InputTensor;
-    const DML_TENSOR_DESC* OutputTensor;
-    _Maybenull_ const DML_TENSOR_DESC* OutputIndicesTensor;
-    UINT DimensionCount;
-    _Field_size_(DimensionCount) const UINT* Strides;
-    _Field_size_(DimensionCount) const UINT* WindowSize;
-    _Field_size_(DimensionCount) const UINT* StartPadding;
-    _Field_size_(DimensionCount) const UINT* EndPadding;
-};
-
 struct DML_ROI_POOLING_OPERATOR_DESC
 {
     const DML_TENSOR_DESC* InputTensor;
@@ -948,7 +1085,7 @@ struct DML_GRU_OPERATOR_DESC
     BOOL LinearBeforeReset;
 };
 
-#if NTDDI_VERSION >= NTDDI_WIN10_VB
+#if DML_TARGET_VERSION >= 0x2000
 
 struct DML_ELEMENT_WISE_SIGN_OPERATOR_DESC
 {
@@ -1027,6 +1164,18 @@ struct DML_ACTIVATION_SHRINK_OPERATOR_DESC
     FLOAT Threshold;
 };
 
+struct DML_MAX_POOLING1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    _Maybenull_ const DML_TENSOR_DESC* OutputIndicesTensor;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const UINT* Strides;
+    _Field_size_(DimensionCount) const UINT* WindowSize;
+    _Field_size_(DimensionCount) const UINT* StartPadding;
+    _Field_size_(DimensionCount) const UINT* EndPadding;
+};
+
 struct DML_MAX_UNPOOLING_OPERATOR_DESC
 {
     const DML_TENSOR_DESC* InputTensor;
@@ -1067,29 +1216,563 @@ struct DML_RESAMPLE_OPERATOR_DESC
     _Field_size_(ScaleCount) const FLOAT* Scales;
 };
 
-#endif // NTDDI_VERSION >= NTDDI_WIN10_VB
+#endif // DML_TARGET_VERSION >= 0x2000
+
+#if DML_TARGET_VERSION >= 0x2100
+
+struct DML_ELEMENT_WISE_BIT_SHIFT_LEFT_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_BIT_SHIFT_RIGHT_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_ROUND_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    DML_ROUNDING_MODE RoundingMode;
+};
+
+struct DML_ELEMENT_WISE_IS_INFINITY_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    DML_IS_INFINITY_MODE InfinityMode;
+};
+
+struct DML_ELEMENT_WISE_MODULUS_TRUNCATE_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_MODULUS_FLOOR_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_FILL_VALUE_CONSTANT_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* OutputTensor;
+    DML_TENSOR_DATA_TYPE ValueDataType;
+    DML_SCALAR_UNION Value;
+};
+
+struct DML_FILL_VALUE_SEQUENCE_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* OutputTensor;
+    DML_TENSOR_DATA_TYPE ValueDataType;
+    DML_SCALAR_UNION ValueStart;
+    DML_SCALAR_UNION ValueDelta;
+};
+
+struct DML_CUMULATIVE_SUMMATION_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT Axis;
+    DML_AXIS_DIRECTION AxisDirection;
+    BOOL HasExclusiveSum;
+};
+
+struct DML_REVERSE_SUBSEQUENCES_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* SequenceLengthsTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT Axis;
+};
+
+struct DML_GATHER_ELEMENTS_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* IndicesTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT Axis;
+};
+
+#if 0 // win32metadata - removed as clangsharp can't deal with it
+// Alias existing operator, symmetric with DML_GATHER_ELEMENTS_OPERATOR_DESC.
+using DML_SCATTER_ELEMENTS_OPERATOR_DESC = DML_SCATTER_OPERATOR_DESC;
+#endif
+
+struct DML_GATHER_ND_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* IndicesTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT InputDimensionCount;
+    UINT IndicesDimensionCount;
+};
+
+struct DML_SCATTER_ND_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* IndicesTensor;
+    const DML_TENSOR_DESC* UpdatesTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT InputDimensionCount;
+    UINT IndicesDimensionCount;
+};
+
+struct DML_MAX_POOLING2_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    _Maybenull_ const DML_TENSOR_DESC* OutputIndicesTensor;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const UINT* Strides;
+    _Field_size_(DimensionCount) const UINT* WindowSize;
+    _Field_size_(DimensionCount) const UINT* StartPadding;
+    _Field_size_(DimensionCount) const UINT* EndPadding;
+    _Field_size_(DimensionCount) const UINT* Dilations;
+};
+
+struct DML_SLICE1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const UINT* InputWindowOffsets;
+    _Field_size_(DimensionCount) const UINT* InputWindowSizes;
+    _Field_size_(DimensionCount) const INT* InputWindowStrides;
+};
+
+struct DML_TOP_K1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputValueTensor;
+    const DML_TENSOR_DESC* OutputIndexTensor;
+    UINT Axis;
+    UINT K;
+    DML_AXIS_DIRECTION AxisDirection;
+};
+
+struct DML_DEPTH_TO_SPACE1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT BlockSize;
+    DML_DEPTH_SPACE_ORDER Order;
+};
+
+struct DML_SPACE_TO_DEPTH1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT BlockSize;
+    DML_DEPTH_SPACE_ORDER Order;
+};
+
+struct DML_MEAN_VARIANCE_NORMALIZATION1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    _Maybenull_ const DML_TENSOR_DESC* ScaleTensor;
+    _Maybenull_ const DML_TENSOR_DESC* BiasTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT AxisCount;
+    _Field_size_(AxisCount) const UINT* Axes;
+    BOOL NormalizeVariance;
+    FLOAT Epsilon;
+    _Maybenull_ const DML_OPERATOR_DESC* FusedActivation;
+};
+
+struct DML_RESAMPLE1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    DML_INTERPOLATION_MODE InterpolationMode;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const FLOAT* Scales;
+    _Field_size_(DimensionCount) const FLOAT* InputPixelOffsets;
+    _Field_size_(DimensionCount) const FLOAT* OutputPixelOffsets;
+};
+
+struct DML_MATRIX_MULTIPLY_INTEGER_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    _Maybenull_ const DML_TENSOR_DESC* AZeroPointTensor;
+    const DML_TENSOR_DESC* BTensor;
+    _Maybenull_ const DML_TENSOR_DESC* BZeroPointTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_QUANTIZED_LINEAR_MATRIX_MULTIPLY_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* AScaleTensor;
+    _Maybenull_ const DML_TENSOR_DESC* AZeroPointTensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* BScaleTensor; 
+    _Maybenull_ const DML_TENSOR_DESC* BZeroPointTensor;
+    const DML_TENSOR_DESC* OutputScaleTensor;
+    _Maybenull_ const DML_TENSOR_DESC* OutputZeroPointTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_CONVOLUTION_INTEGER_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    _Maybenull_ const DML_TENSOR_DESC* InputZeroPointTensor;
+    const DML_TENSOR_DESC* FilterTensor;
+    _Maybenull_ const DML_TENSOR_DESC* FilterZeroPointTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const UINT* Strides;
+    _Field_size_(DimensionCount) const UINT* Dilations;
+    _Field_size_(DimensionCount) const UINT* StartPadding;
+    _Field_size_(DimensionCount) const UINT* EndPadding;
+    UINT GroupCount;
+};
+
+struct DML_QUANTIZED_LINEAR_CONVOLUTION_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* InputScaleTensor;
+    _Maybenull_ const DML_TENSOR_DESC* InputZeroPointTensor;
+    const DML_TENSOR_DESC* FilterTensor;
+    const DML_TENSOR_DESC* FilterScaleTensor;
+    _Maybenull_ const DML_TENSOR_DESC* FilterZeroPointTensor;
+    _Maybenull_ const DML_TENSOR_DESC* BiasTensor;
+    const DML_TENSOR_DESC* OutputScaleTensor;
+    _Maybenull_ const DML_TENSOR_DESC* OutputZeroPointTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const UINT* Strides;
+    _Field_size_(DimensionCount) const UINT* Dilations;
+    _Field_size_(DimensionCount) const UINT* StartPadding;
+    _Field_size_(DimensionCount) const UINT* EndPadding;
+    UINT GroupCount;
+};
+
+#endif // DML_TARGET_VERSION >= 0x2100
+
+#if DML_TARGET_VERSION >= 0x3000
+
+struct DML_ELEMENT_WISE_BIT_AND_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_BIT_OR_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_BIT_XOR_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_BIT_NOT_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_BIT_COUNT_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_LOGICAL_GREATER_THAN_OR_EQUAL_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_LOGICAL_LESS_THAN_OR_EQUAL_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ACTIVATION_CELU_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    FLOAT Alpha;
+};
+
+struct DML_ACTIVATION_RELU_GRAD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* InputGradientTensor;
+    const DML_TENSOR_DESC* OutputGradientTensor;
+};
+
+struct DML_AVERAGE_POOLING_GRAD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputGradientTensor;
+    const DML_TENSOR_DESC* OutputGradientTensor;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const UINT* Strides;
+    _Field_size_(DimensionCount) const UINT* WindowSize;
+    _Field_size_(DimensionCount) const UINT* StartPadding;
+    _Field_size_(DimensionCount) const UINT* EndPadding;
+    BOOL IncludePadding;
+};
+
+struct DML_MAX_POOLING_GRAD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* InputGradientTensor;
+    const DML_TENSOR_DESC* OutputGradientTensor;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const UINT* Strides;
+    _Field_size_(DimensionCount) const UINT* WindowSize;
+    _Field_size_(DimensionCount) const UINT* StartPadding;
+    _Field_size_(DimensionCount) const UINT* EndPadding;
+    _Field_size_(DimensionCount) const UINT* Dilations;
+};
+
+struct DML_RANDOM_GENERATOR_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputStateTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    _Maybenull_ const DML_TENSOR_DESC* OutputStateTensor;
+    DML_RANDOM_GENERATOR_TYPE Type;
+};
+
+struct DML_NONZERO_COORDINATES_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputCountTensor;
+    const DML_TENSOR_DESC* OutputCoordinatesTensor;
+};
+
+struct DML_RESAMPLE_GRAD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputGradientTensor;
+    const DML_TENSOR_DESC* OutputGradientTensor;
+    DML_INTERPOLATION_MODE InterpolationMode;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const FLOAT* Scales;
+    _Field_size_(DimensionCount) const FLOAT* InputPixelOffsets;
+    _Field_size_(DimensionCount) const FLOAT* OutputPixelOffsets;
+};
+
+struct DML_SLICE_GRAD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputGradientTensor;
+    const DML_TENSOR_DESC* OutputGradientTensor;
+    UINT DimensionCount;
+    _Field_size_(DimensionCount) const UINT* InputWindowOffsets;
+    _Field_size_(DimensionCount) const UINT* InputWindowSizes;
+    _Field_size_(DimensionCount) const INT* InputWindowStrides;
+};
+
+struct DML_ADAM_OPTIMIZER_OPERATOR_DESC
+{ 
+    const DML_TENSOR_DESC* InputParametersTensor;
+    const DML_TENSOR_DESC* InputFirstMomentTensor;
+    const DML_TENSOR_DESC* InputSecondMomentTensor;
+    const DML_TENSOR_DESC* GradientTensor;
+    const DML_TENSOR_DESC* TrainingStepTensor;
+    const DML_TENSOR_DESC* OutputParametersTensor;
+    const DML_TENSOR_DESC* OutputFirstMomentTensor;
+    const DML_TENSOR_DESC* OutputSecondMomentTensor;
+    FLOAT LearningRate;
+    FLOAT Beta1;
+    FLOAT Beta2;
+    FLOAT Epsilon;
+};
+
+struct DML_ARGMIN_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT AxisCount;
+    _Field_size_(AxisCount) const UINT* Axes;
+    DML_AXIS_DIRECTION AxisDirection;
+};
+
+struct DML_ARGMAX_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT AxisCount;
+    _Field_size_(AxisCount) const UINT* Axes;
+    DML_AXIS_DIRECTION AxisDirection;
+};
+
+struct DML_ROI_ALIGN_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* ROITensor;
+    const DML_TENSOR_DESC* BatchIndicesTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    DML_REDUCE_FUNCTION ReductionFunction;
+    DML_INTERPOLATION_MODE InterpolationMode;
+    FLOAT SpatialScaleX;
+    FLOAT SpatialScaleY;
+    FLOAT OutOfBoundsInputValue;
+    UINT MinimumSamplesPerOutput;
+    UINT MaximumSamplesPerOutput;
+};
+
+struct DML_GATHER_ND1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* IndicesTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT InputDimensionCount;
+    UINT IndicesDimensionCount;
+    UINT BatchDimensionCount;
+};
+
+#endif // DML_TARGET_VERSION >= 0x3000
+
+#if DML_TARGET_VERSION >= 0x3100
+
+struct DML_ELEMENT_WISE_ATAN_YX_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_ELEMENT_WISE_CLIP_GRAD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* InputGradientTensor;
+    const DML_TENSOR_DESC* OutputGradientTensor;
+    FLOAT Min;
+    FLOAT Max;
+};
+
+struct DML_ELEMENT_WISE_DIFFERENCE_SQUARE_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_LOCAL_RESPONSE_NORMALIZATION_GRAD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* InputGradientTensor;
+    const DML_TENSOR_DESC* OutputGradientTensor;
+    BOOL CrossChannel;
+    UINT LocalSize;
+    FLOAT Alpha;
+    FLOAT Beta;
+    FLOAT Bias;
+};
+
+struct DML_CUMULATIVE_PRODUCT_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    UINT Axis;
+    DML_AXIS_DIRECTION AxisDirection;
+    BOOL HasExclusiveProduct;
+};
+
+struct DML_BATCH_NORMALIZATION_GRAD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* InputGradientTensor;
+    const DML_TENSOR_DESC* MeanTensor;
+    const DML_TENSOR_DESC* VarianceTensor;
+    const DML_TENSOR_DESC* ScaleTensor;
+
+    const DML_TENSOR_DESC* OutputGradientTensor;
+    const DML_TENSOR_DESC* OutputScaleGradientTensor;
+    const DML_TENSOR_DESC* OutputBiasGradientTensor;
+
+    FLOAT Epsilon;
+};
+
+#endif // DML_TARGET_VERSION >= 0x3100
+
+#if DML_TARGET_VERSION >= 0x4000
+struct DML_ELEMENT_WISE_QUANTIZED_LINEAR_ADD_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* ATensor;
+    const DML_TENSOR_DESC* AScaleTensor;
+    _Maybenull_ const DML_TENSOR_DESC* AZeroPointTensor;
+    const DML_TENSOR_DESC* BTensor;
+    const DML_TENSOR_DESC* BScaleTensor;
+    _Maybenull_ const DML_TENSOR_DESC* BZeroPointTensor;
+    const DML_TENSOR_DESC* OutputScaleTensor;                   // This is an input tensor
+    _Maybenull_ const DML_TENSOR_DESC* OutputZeroPointTensor;   // This is an input tensor
+    const DML_TENSOR_DESC* OutputTensor;
+};
+
+struct DML_DYNAMIC_QUANTIZE_LINEAR_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    const DML_TENSOR_DESC* OutputScaleTensor;                   // This is an output tensor
+    const DML_TENSOR_DESC* OutputZeroPointTensor;               // This is an output tensor
+};
+
+struct DML_ROI_ALIGN1_OPERATOR_DESC
+{
+    const DML_TENSOR_DESC* InputTensor;
+    const DML_TENSOR_DESC* ROITensor;
+    const DML_TENSOR_DESC* BatchIndicesTensor;
+    const DML_TENSOR_DESC* OutputTensor;
+    DML_REDUCE_FUNCTION ReductionFunction;
+    DML_INTERPOLATION_MODE InterpolationMode;
+    FLOAT SpatialScaleX;
+    FLOAT SpatialScaleY;
+    FLOAT InputPixelOffset;
+    FLOAT OutputPixelOffset;
+    FLOAT OutOfBoundsInputValue;
+    UINT MinimumSamplesPerOutput;
+    UINT MaximumSamplesPerOutput;
+    BOOL AlignRegionsToCorners;
+};
+
+#endif // DML_TARGET_VERSION >= 0x4000
 
 // ===================================================================================================================
 //   DML feature support queries
 // ===================================================================================================================
 
-#if NTDDI_VERSION >= NTDDI_WIN10_VB
+#if DML_TARGET_VERSION >= 0x2000
 
 enum DML_FEATURE_LEVEL
 {
     DML_FEATURE_LEVEL_1_0 = 0x1000,
     DML_FEATURE_LEVEL_2_0 = 0x2000,
+    DML_FEATURE_LEVEL_2_1 = 0x2100, 
+    DML_FEATURE_LEVEL_3_0 = 0x3000,
+    DML_FEATURE_LEVEL_3_1 = 0x3100,
+    DML_FEATURE_LEVEL_4_0 = 0x4000,
 };
 
-#endif // NTDDI_VERSION >= NTDDI_WIN10_VB
+#endif // DML_TARGET_VERSION >= 0x2000
 
 enum DML_FEATURE
 {
     DML_FEATURE_TENSOR_DATA_TYPE_SUPPORT,
 
-#if NTDDI_VERSION >= NTDDI_WIN10_VB
+#if DML_TARGET_VERSION >= 0x2000
     DML_FEATURE_FEATURE_LEVELS,
-#endif // NTDDI_VERSION >= NTDDI_WIN10_VB
+#endif // DML_TARGET_VERSION >= 0x2000
 };
 
 struct DML_FEATURE_QUERY_TENSOR_DATA_TYPE_SUPPORT
@@ -1102,7 +1785,7 @@ struct DML_FEATURE_DATA_TENSOR_DATA_TYPE_SUPPORT
     BOOL IsSupported;
 };
 
-#if NTDDI_VERSION >= NTDDI_WIN10_VB
+#if DML_TARGET_VERSION >= 0x2000
 
 struct DML_FEATURE_QUERY_FEATURE_LEVELS
 {
@@ -1115,7 +1798,7 @@ struct DML_FEATURE_DATA_FEATURE_LEVELS
     DML_FEATURE_LEVEL MaxSupportedFeatureLevel;
 };
 
-#endif // NTDDI_VERSION >= NTDDI_WIN10_VB
+#endif // DML_TARGET_VERSION >= 0x2000
 
 // ===================================================================================================================
 //   DML device functions, enumerations, and structures
@@ -1154,7 +1837,7 @@ STDAPI DMLCreateDevice(
     _COM_Outptr_opt_ void** ppv
     );
 
-#if NTDDI_VERSION >= NTDDI_WIN10_VB
+#if DML_TARGET_VERSION >= 0x2000
 
 STDAPI DMLCreateDevice1(
     ID3D12Device* d3d12Device,
@@ -1164,7 +1847,7 @@ STDAPI DMLCreateDevice1(
     _COM_Outptr_opt_ void** ppv
     );
 
-#endif // NTDDI_VERSION >= NTDDI_WIN10_VB
+#endif // DML_TARGET_VERSION >= 0x2000
 
 // ===================================================================================================================
 //   DML object
@@ -1403,6 +2086,100 @@ interface DML_DECLARE_INTERFACE("7d6f3ac9-394a-4ac3-92a7-390cc57a8217") IDMLDebu
         BOOL mute
         ) = 0;
 };
+
+
+// =================================================================================================================== 
+// DML graph 
+// =================================================================================================================== 
+
+#if DML_TARGET_VERSION >= 0x2100
+
+enum DML_GRAPH_EDGE_TYPE 
+{ 
+    DML_GRAPH_EDGE_TYPE_INVALID, 
+    DML_GRAPH_EDGE_TYPE_INPUT, 
+    DML_GRAPH_EDGE_TYPE_OUTPUT, 
+    DML_GRAPH_EDGE_TYPE_INTERMEDIATE, 
+}; 
+
+struct DML_GRAPH_EDGE_DESC 
+{ 
+    DML_GRAPH_EDGE_TYPE Type; 
+    _Field_size_(_Inexpressible_("Dependent on edge type")) const void* Desc; 
+}; 
+
+struct DML_INPUT_GRAPH_EDGE_DESC 
+{ 
+    UINT GraphInputIndex; 
+    UINT ToNodeIndex; 
+    UINT ToNodeInputIndex; 
+    _Field_z_ _Maybenull_ const char* Name; 
+}; 
+
+struct DML_OUTPUT_GRAPH_EDGE_DESC 
+{ 
+    UINT FromNodeIndex; 
+    UINT FromNodeOutputIndex; 
+    UINT GraphOutputIndex; 
+    _Field_z_ _Maybenull_ const char* Name; 
+}; 
+
+struct DML_INTERMEDIATE_GRAPH_EDGE_DESC 
+{ 
+    UINT FromNodeIndex; 
+    UINT FromNodeOutputIndex; 
+    UINT ToNodeIndex; 
+    UINT ToNodeInputIndex; 
+    _Field_z_ _Maybenull_ const char* Name; 
+}; 
+
+enum DML_GRAPH_NODE_TYPE 
+{ 
+    DML_GRAPH_NODE_TYPE_INVALID, 
+    DML_GRAPH_NODE_TYPE_OPERATOR, 
+}; 
+
+struct DML_GRAPH_NODE_DESC 
+{ 
+    DML_GRAPH_NODE_TYPE Type; 
+    _Field_size_(_Inexpressible_("Dependent on node type")) const void* Desc; 
+}; 
+
+struct DML_OPERATOR_GRAPH_NODE_DESC 
+{ 
+    IDMLOperator* Operator; 
+    _Field_z_ _Maybenull_ const char* Name; 
+}; 
+
+struct DML_GRAPH_DESC 
+{ 
+    UINT InputCount; 
+    UINT OutputCount; 
+
+    UINT NodeCount; 
+    _Field_size_(NodeCount) const DML_GRAPH_NODE_DESC* Nodes; 
+
+    UINT InputEdgeCount; 
+    _Field_size_opt_(InputEdgeCount) const DML_GRAPH_EDGE_DESC* InputEdges; 
+
+    UINT OutputEdgeCount; 
+    _Field_size_(OutputEdgeCount) const DML_GRAPH_EDGE_DESC* OutputEdges; 
+
+    UINT IntermediateEdgeCount; 
+    _Field_size_opt_(IntermediateEdgeCount) const DML_GRAPH_EDGE_DESC* IntermediateEdges; 
+}; 
+
+interface DML_DECLARE_INTERFACE("a0884f9a-d2be-4355-aa5d-5901281ad1d2") IDMLDevice1 : IDMLDevice 
+{ 
+    IFACEMETHOD(CompileGraph)( 
+        const DML_GRAPH_DESC* desc, 
+        DML_EXECUTION_FLAGS flags, 
+        REFIID riid, // expected: IDMLCompiledOperator 
+        _COM_Outptr_opt_ void** ppv 
+        ) = 0; 
+};
+
+#endif // DML_TARGET_VERSION >= 0x2100
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES)
 #endif // DIRECTML_H

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -181,6 +189,7 @@ EXTERN_C const IID IID_IEnumItemProperties;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumItemProperties * This,
             /* [annotation][in] */ 
@@ -188,12 +197,15 @@ EXTERN_C const IID IID_IEnumItemProperties;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumItemProperties * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumItemProperties * This);
         
+        DECLSPEC_XFGVIRT(IEnumItemProperties, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumItemProperties * This,
             /* [annotation][in] */ 
@@ -203,19 +215,23 @@ EXTERN_C const IID IID_IEnumItemProperties;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumItemProperties, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumItemProperties * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumItemProperties, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumItemProperties * This);
         
+        DECLSPEC_XFGVIRT(IEnumItemProperties, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumItemProperties * This,
             /* [annotation][out] */ 
             _Out_  IEnumItemProperties **ppenum);
         
+        DECLSPEC_XFGVIRT(IEnumItemProperties, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumItemProperties * This,
             /* [annotation][out] */ 
@@ -351,6 +367,7 @@ EXTERN_C const IID IID_ISubscriptionItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISubscriptionItem * This,
             /* [annotation][in] */ 
@@ -358,27 +375,33 @@ EXTERN_C const IID IID_ISubscriptionItem;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISubscriptionItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISubscriptionItem * This);
         
+        DECLSPEC_XFGVIRT(ISubscriptionItem, GetCookie)
         HRESULT ( STDMETHODCALLTYPE *GetCookie )( 
             __RPC__in ISubscriptionItem * This,
             /* [annotation][out] */ 
             _Out_  SUBSCRIPTIONCOOKIE *pCookie);
         
+        DECLSPEC_XFGVIRT(ISubscriptionItem, GetSubscriptionItemInfo)
         HRESULT ( STDMETHODCALLTYPE *GetSubscriptionItemInfo )( 
             __RPC__in ISubscriptionItem * This,
             /* [annotation][out] */ 
             _Out_  SUBSCRIPTIONITEMINFO *pSubscriptionItemInfo);
         
+        DECLSPEC_XFGVIRT(ISubscriptionItem, SetSubscriptionItemInfo)
         HRESULT ( STDMETHODCALLTYPE *SetSubscriptionItemInfo )( 
             __RPC__in ISubscriptionItem * This,
             /* [annotation][in] */ 
             _In_  const SUBSCRIPTIONITEMINFO *pSubscriptionItemInfo);
         
+        DECLSPEC_XFGVIRT(ISubscriptionItem, ReadProperties)
         HRESULT ( STDMETHODCALLTYPE *ReadProperties )( 
             __RPC__in ISubscriptionItem * This,
             ULONG nCount,
@@ -387,6 +410,7 @@ EXTERN_C const IID IID_ISubscriptionItem;
             /* [annotation][size_is][out] */ 
             _Out_writes_(nCount)  VARIANT rgValue[  ]);
         
+        DECLSPEC_XFGVIRT(ISubscriptionItem, WriteProperties)
         HRESULT ( STDMETHODCALLTYPE *WriteProperties )( 
             __RPC__in ISubscriptionItem * This,
             ULONG nCount,
@@ -395,11 +419,13 @@ EXTERN_C const IID IID_ISubscriptionItem;
             /* [annotation][size_is][in] */ 
             _In_reads_(nCount)  const VARIANT rgValue[  ]);
         
+        DECLSPEC_XFGVIRT(ISubscriptionItem, EnumProperties)
         HRESULT ( STDMETHODCALLTYPE *EnumProperties )( 
             __RPC__in ISubscriptionItem * This,
             /* [annotation][out] */ 
             _Out_  IEnumItemProperties **ppEnumItemProperties);
         
+        DECLSPEC_XFGVIRT(ISubscriptionItem, NotifyChanged)
         HRESULT ( STDMETHODCALLTYPE *NotifyChanged )( 
             __RPC__in ISubscriptionItem * This);
         
@@ -506,6 +532,7 @@ EXTERN_C const IID IID_IEnumSubscription;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSubscription * This,
             /* [annotation][in] */ 
@@ -513,12 +540,15 @@ EXTERN_C const IID IID_IEnumSubscription;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumSubscription * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumSubscription * This);
         
+        DECLSPEC_XFGVIRT(IEnumSubscription, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSubscription * This,
             /* [annotation][in] */ 
@@ -528,19 +558,23 @@ EXTERN_C const IID IID_IEnumSubscription;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSubscription, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSubscription * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumSubscription, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumSubscription * This);
         
+        DECLSPEC_XFGVIRT(IEnumSubscription, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSubscription * This,
             /* [annotation][out] */ 
             _Out_  IEnumSubscription **ppenum);
         
+        DECLSPEC_XFGVIRT(IEnumSubscription, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumSubscription * This,
             /* [annotation][out] */ 
@@ -756,6 +790,7 @@ EXTERN_C const IID IID_ISubscriptionMgr;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISubscriptionMgr * This,
             /* [annotation][in] */ 
@@ -763,12 +798,15 @@ EXTERN_C const IID IID_ISubscriptionMgr;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISubscriptionMgr * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISubscriptionMgr * This);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, DeleteSubscription)
         HRESULT ( STDMETHODCALLTYPE *DeleteSubscription )( 
             __RPC__in ISubscriptionMgr * This,
             /* [annotation][in] */ 
@@ -776,14 +814,17 @@ EXTERN_C const IID IID_ISubscriptionMgr;
             /* [annotation][unique][in] */ 
             _In_  HWND hwnd);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, UpdateSubscription)
         HRESULT ( STDMETHODCALLTYPE *UpdateSubscription )( 
             __RPC__in ISubscriptionMgr * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszURL);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, UpdateAll)
         HRESULT ( STDMETHODCALLTYPE *UpdateAll )( 
             __RPC__in ISubscriptionMgr * This);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, IsSubscribed)
         HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in ISubscriptionMgr * This,
             /* [annotation][in] */ 
@@ -791,6 +832,7 @@ EXTERN_C const IID IID_ISubscriptionMgr;
             /* [annotation][out] */ 
             _Out_  BOOL *pfSubscribed);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, GetSubscriptionInfo)
         HRESULT ( STDMETHODCALLTYPE *GetSubscriptionInfo )( 
             __RPC__in ISubscriptionMgr * This,
             /* [annotation][in] */ 
@@ -798,6 +840,7 @@ EXTERN_C const IID IID_ISubscriptionMgr;
             /* [annotation][out] */ 
             _Out_  SUBSCRIPTIONINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, GetDefaultInfo)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultInfo )( 
             __RPC__in ISubscriptionMgr * This,
             /* [annotation][in] */ 
@@ -805,6 +848,7 @@ EXTERN_C const IID IID_ISubscriptionMgr;
             /* [annotation][out] */ 
             _Out_  SUBSCRIPTIONINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, ShowSubscriptionProperties)
         HRESULT ( STDMETHODCALLTYPE *ShowSubscriptionProperties )( 
             __RPC__in ISubscriptionMgr * This,
             /* [annotation][in] */ 
@@ -812,6 +856,7 @@ EXTERN_C const IID IID_ISubscriptionMgr;
             /* [annotation][in] */ 
             _In_  HWND hwnd);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, CreateSubscription)
         HRESULT ( STDMETHODCALLTYPE *CreateSubscription )( 
             __RPC__in ISubscriptionMgr * This,
             /* [annotation][in] */ 
@@ -974,6 +1019,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -981,12 +1027,15 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISubscriptionMgr2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISubscriptionMgr2 * This);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, DeleteSubscription)
         HRESULT ( STDMETHODCALLTYPE *DeleteSubscription )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -994,14 +1043,17 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][unique][in] */ 
             _In_  HWND hwnd);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, UpdateSubscription)
         HRESULT ( STDMETHODCALLTYPE *UpdateSubscription )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pwszURL);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, UpdateAll)
         HRESULT ( STDMETHODCALLTYPE *UpdateAll )( 
             __RPC__in ISubscriptionMgr2 * This);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, IsSubscribed)
         HRESULT ( STDMETHODCALLTYPE *IsSubscribed )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1009,6 +1061,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][out] */ 
             _Out_  BOOL *pfSubscribed);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, GetSubscriptionInfo)
         HRESULT ( STDMETHODCALLTYPE *GetSubscriptionInfo )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1016,6 +1069,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][out] */ 
             _Out_  SUBSCRIPTIONINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, GetDefaultInfo)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultInfo )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1023,6 +1077,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][out] */ 
             _Out_  SUBSCRIPTIONINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, ShowSubscriptionProperties)
         HRESULT ( STDMETHODCALLTYPE *ShowSubscriptionProperties )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1030,6 +1085,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][in] */ 
             _In_  HWND hwnd);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr, CreateSubscription)
         HRESULT ( STDMETHODCALLTYPE *CreateSubscription )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1045,6 +1101,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][out][in] */ 
             _Inout_  SUBSCRIPTIONINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr2, GetItemFromURL)
         HRESULT ( STDMETHODCALLTYPE *GetItemFromURL )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1052,6 +1109,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][out] */ 
             _Out_  ISubscriptionItem **ppSubscriptionItem);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr2, GetItemFromCookie)
         HRESULT ( STDMETHODCALLTYPE *GetItemFromCookie )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1059,6 +1117,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][out] */ 
             _Out_  ISubscriptionItem **ppSubscriptionItem);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr2, GetSubscriptionRunState)
         HRESULT ( STDMETHODCALLTYPE *GetSubscriptionRunState )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1068,6 +1127,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(dwNumCookies)  DWORD *pdwRunState);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr2, EnumSubscriptions)
         HRESULT ( STDMETHODCALLTYPE *EnumSubscriptions )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1075,6 +1135,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][out] */ 
             _Out_  IEnumSubscription **ppEnumSubscriptions);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr2, UpdateItems)
         HRESULT ( STDMETHODCALLTYPE *UpdateItems )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1084,6 +1145,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][size_is][in] */ 
             _In_reads_(dwNumCookies)  const SUBSCRIPTIONCOOKIE *pCookies);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr2, AbortItems)
         HRESULT ( STDMETHODCALLTYPE *AbortItems )( 
             __RPC__in ISubscriptionMgr2 * This,
             /* [annotation][in] */ 
@@ -1091,6 +1153,7 @@ EXTERN_C const IID IID_ISubscriptionMgr2;
             /* [annotation][size_is][in] */ 
             _In_reads_(dwNumCookies)  const SUBSCRIPTIONCOOKIE *pCookies);
         
+        DECLSPEC_XFGVIRT(ISubscriptionMgr2, AbortAll)
         HRESULT ( STDMETHODCALLTYPE *AbortAll )( 
             __RPC__in ISubscriptionMgr2 * This);
         

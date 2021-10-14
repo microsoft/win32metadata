@@ -13,5 +13,6 @@ UiaRect
 <IncludeRoot>/um/Uxtheme.h
 <IncludeRoot>/um/CommCtrl.h
 <IncludeRoot>/um/vssym32.h
+<IncludeRoot>/um/custcntl.h
 --namespace
 Windows.Win32.UI.Controls

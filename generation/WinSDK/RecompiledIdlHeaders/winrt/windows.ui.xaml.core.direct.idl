@@ -135,7 +135,7 @@ namespace Windows
             {
                 namespace Direct
                 {
-                    [contractversion(2.0)]
+                    [contractversion(5.0)]
                     apicontract XamlDirectContract
                     {
                     }
@@ -1555,6 +1555,14 @@ namespace Windows
                         AutomationPeerAnnotation_Peer                                         = 1735,
                         AutomationPeerAnnotation_Type                                         = 1736,
                         Hyperlink_UnderlineStyle                                              = 1741,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_DisabledForeground                                       = 1742,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_TodayBackground                                          = 1743,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_TodayBlackoutBackground                                  = 1744,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_TodaySelectedInnerBorderBrush                            = 1747,
                         Control_IsFocusEngaged                                                = 1749,
                         Control_IsFocusEngagementEnabled                                      = 1752,
                         RichEditBox_ClipboardCopyFormat                                       = 1754,
@@ -1911,7 +1919,113 @@ namespace Windows
                         [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 2.0)]
                         CommandBarTemplateSettings_OverflowContentHiddenYTranslation          = 2385,
                         [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 2.0)]
-                        CommandBarTemplateSettings_OverflowContentMinimalYTranslation         = 2386
+                        CommandBarTemplateSettings_OverflowContentMinimalYTranslation         = 2386,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 3.0)]
+                        HandwritingView_IsCommandBarOpen                                      = 2395,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 3.0)]
+                        HandwritingView_IsSwitchToKeyboardEnabled                             = 2396,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectionIndicatorVisualEnabled                 = 2399,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectionIndicatorBrush                         = 2400,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectionIndicatorMode                          = 2401,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectionIndicatorPointerOverBrush              = 2402,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectionIndicatorPressedBrush                  = 2403,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectedBorderBrush                             = 2410,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectedInnerBorderBrush                        = 2411,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxCornerRadius                            = 2412,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectionIndicatorCornerRadius                  = 2413,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectedDisabledBorderBrush                     = 2414,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectedPressedBorderBrush                      = 2415,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectedDisabledBackground                      = 2416,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_PointerOverBorderBrush                          = 2417,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxPointerOverBrush                        = 2418,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxPressedBrush                            = 2419,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckDisabledBrush                              = 2420,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckPressedBrush                               = 2421,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxBorderBrush                             = 2422,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxDisabledBorderBrush                     = 2423,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxPressedBorderBrush                      = 2424,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxDisabledBrush                           = 2425,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxSelectedBrush                           = 2426,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxSelectedDisabledBrush                   = 2427,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxSelectedPointerOverBrush                = 2428,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxSelectedPressedBrush                    = 2429,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_CheckBoxPointerOverBorderBrush                  = 2430,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 4.0)]
+                        ListViewItemPresenter_SelectionIndicatorDisabledBrush                 = 2431,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_BlackoutBackground                                       = 2432,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_BlackoutStrikethroughBrush                               = 2433,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_CalendarItemCornerRadius                                 = 2434,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_CalendarItemDisabledBackground                           = 2435,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_CalendarItemHoverBackground                              = 2436,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_CalendarItemPressedBackground                            = 2437,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_DayItemMargin                                            = 2438,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_FirstOfMonthLabelMargin                                  = 2439,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_FirstOfYearDecadeLabelMargin                             = 2440,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_MonthYearItemMargin                                      = 2441,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_OutOfScopeHoverForeground                                = 2442,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_OutOfScopePressedForeground                              = 2443,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_SelectedDisabledBorderBrush                              = 2444,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_SelectedDisabledForeground                               = 2445,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_SelectedHoverForeground                                  = 2446,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_SelectedPressedForeground                                = 2447,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_TodayBlackoutForeground                                  = 2448,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_TodayDisabledBackground                                  = 2449,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_TodayHoverBackground                                     = 2450,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        CalendarView_TodayPressedBackground                                   = 2451,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        Popup_ActualPlacement                                                 = 2452,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        Popup_DesiredPlacement                                                = 2453,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        Popup_PlacementTarget                                                 = 2454,
+                        [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 5.0)]
+                        AutomationProperties_AutomationControlType                            = 2455
                     };
 
                     [contract(Windows.UI.Xaml.Core.Direct.XamlDirectContract, 1.0)]

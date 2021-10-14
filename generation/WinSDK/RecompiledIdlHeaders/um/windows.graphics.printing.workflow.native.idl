@@ -47,6 +47,17 @@ interface IPrintWorkflowXpsReceiver : IUnknown
 
 [
     object,
+    uuid(023BCC0C-DFAB-4A61-B074-490C6995580D),
+    pointer_default(unique)
+]
+interface IPrintWorkflowXpsReceiver2 : IPrintWorkflowXpsReceiver
+{
+     // Signals that there is an error in XPS processing with the error code for XPS processing.
+    HRESULT Failed([in] HRESULT XpsError);
+}
+
+[
+    object,
     uuid(68C9E477-993E-4052-8AC6-454EFF58DB9D),
     pointer_default(unique)
 ]

@@ -186,7 +186,7 @@ interface IAudioClient : IUnknown
     //     S_OK             If successful, failure otherwise.
     //     AUDCLNT_E_INITIALIZED, if already initialized.
     //     AUDCLNT_E_WRONG_ENDPOINT_TYPE, if loopback flag was set but endpoint isn't a render endpoint.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device was removed.
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device was removed.
     //     AUDCLNT_E_BUFDURATION_PERIOD_NOT_EQUAL, if AUDCLNT_STREAMFLAGS_EVENTCALLBACK StreamFlag is 
     //                                             supplied and share mode is AUDCLNT_SHAREMODE_EXCLUSIVE, 
     //                                             hnsBufferDuration and hnsPeriodicity must be equal
@@ -251,7 +251,7 @@ interface IAudioClient : IUnknown
     //     S_OK if successful, failure otherwise.
     //     AUDCLNT_E_NOT_INITIALIZED, if audio stream hasn't been successfully initialized.
     //     E_POINTER, if pNumBufferFrames is NULL.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //
     // Remarks:
     //
@@ -275,7 +275,7 @@ interface IAudioClient : IUnknown
     //
     //     S_OK if successful, failure otherwise.
     //     AUDCLNT_E_NOT_INITIALIZED if audio stream hasn't been successfully initialized.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //
     // Remarks:
     //
@@ -306,7 +306,7 @@ interface IAudioClient : IUnknown
     //
     //     S_OK if successful, failure otherwise.
     //     AUDCLNT_E_NOT_INITIALIZED if audio stream hasn't been successfully initialized.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed,
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed,
     //
     // Remarks:
     //
@@ -352,8 +352,8 @@ interface IAudioClient : IUnknown
     //     S_OK                         if format is supported.
     //     S_FALSE                      if input format is not supported but ppClosestMatch is.
     //     E_POINTER                    if ppClosestMatch is NULL & AUDCLNT_SHAREMODE_SHARED.
-    //     AUDCLNT_E_INVALIDTYPE        if type isn't supported.
-    //     AUDCLNT_E_DEVICEINVALIDATED  if WAS device was removed.
+    //     AUDCLNT_E_UNSUPPORTED_FORMAT if the offload connector is used and input format is not a compressed format.
+    //     AUDCLNT_E_DEVICE_INVALIDATED if WAS device was removed.
     //
     // Remarks:
     //
@@ -380,7 +380,7 @@ interface IAudioClient : IUnknown
     // Return Values:
     //
     //     S_OK if successful, failure otherwise.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device was removed.
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device was removed.
     //
     // Remarks:
     //
@@ -412,7 +412,7 @@ interface IAudioClient : IUnknown
     // Return Values:
     //
     //     S_OK if successful, failure otherwise.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device was removed.
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device was removed.
     //
     // Remarks:
     //
@@ -440,7 +440,7 @@ interface IAudioClient : IUnknown
     //     S_OK if successful, failure otherwise.
     //     AUDCLNT_E_NOT_INITIALIZED if client hasn't been successfully initialized.
     //     AUDCLNT_E_NOT_STOPPED if client hasn't been first stopped.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //     AUDCLNT_E_EVENTHANDLE_NOT_SET, if event callback stream flag is specified and the event
     //                                    handle was not set with SetEventHandle
     //
@@ -468,8 +468,8 @@ interface IAudioClient : IUnknown
     //
     //     S_OK if successful, failure otherwise.
     //     AUDCLNT_E_NOT_INITIALIZED if client hasn't been successfully initialized.
-    //     AUDCLNT_E_STOPPED if client is already stopped.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //     S_FALSE if client is already stopped.
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //
     // Remarks:
     //
@@ -491,7 +491,7 @@ interface IAudioClient : IUnknown
     //      S_OK if successful, failure otherwise.
     //      AUDCLNT_E_NOT_INITIALIZED if audio stream hasn't been successfully initialized.
     //      AUDCLNT_E_NOT_STOPPED if audio stream hasn't been stopped.
-    //      AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //      AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //
     // Remarks:
     //
@@ -515,7 +515,7 @@ interface IAudioClient : IUnknown
     //      S_OK if successful, failure otherwise.
     //      AUDCLNT_E_NOT_INITIALIZED if audio stream hasn't been successfully initialized.
     //      AUDCLNT_E_NOT_STOPPED if audio stream hasn't been stopped.
-    //      AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //      AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //      AUDCLNT_E_EVENTHANDLE_NOT_EXPECTED, if Initialize was not called with the 
     //                                          AUDCLNT_STREAMFLAGS_EVENTCALLBACK flag
     //
@@ -543,7 +543,7 @@ interface IAudioClient : IUnknown
     //      S_OK if successful, failure otherwise.
     //      AUDCLNT_E_NOT_INITIALIZED if audio stream hasn't been successfully initialized.
     //      AUDCLNT_E_NOT_STOPPED if audio stream hasn't been stopped.
-    //      AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //      AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //
     // Remarks:
     //
@@ -555,6 +555,8 @@ interface IAudioClient : IUnknown
     //  IAudioSessionControl
     //  ISimpleAudioVolume
     //  IChannelAudioVolume
+    //  IAudioClientDuckingControl
+    //  IAudioEffectsManager
     //
     HRESULT GetService([in, annotation("_In_")] REFIID riid, [out, iid_is(riid), annotation("_Out_")] void **ppv);
 
@@ -633,7 +635,7 @@ interface IAudioClient2 : IAudioClient
     //                          parameter 100-nanosecond units.
     //    
     //     S_OK if successful, failure otherwise.    
-    //     AUDCLNT_E_DEVICEINVALIDATED, if a device was removed.    
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if a device was removed.    
     //    
     // Remarks:    
     //    
@@ -777,10 +779,10 @@ interface IAudioRenderClient : IUnknown
     // Return Values:
     //
     //     S_OK if successful, error otherwise.
-    //     AUDCLNT_E_BUFFERTOOLARGE, if NumFramesRequested > (GetBufferSize() - GetCurrentPadding())
-    //     AUDCLNT_E_OUTOFORDER, if called while a previous IAudioRenderClient::GetBuffer() is still
+    //     AUDCLNT_E_BUFFER_TOO_LARGE, if NumFramesRequested > (GetBufferSize() - GetCurrentPadding())
+    //     AUDCLNT_E_OUT_OF_ORDER, if called while a previous IAudioRenderClient::GetBuffer() is still
     //     in effect.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed,
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed,
     //     E_POINTER, if ppData is NULL.
     //
     // Remarks:
@@ -831,8 +833,8 @@ interface IAudioRenderClient : IUnknown
     //      S_OK if successful, error otherwise.
     //      E_FAIL, if FramesWritten > count requested in previous GetBuffer() call.
     //      E_INVALIDARG, if invalid flag was used.
-    //      AUDCLNT_E_OUTOFORDER, if previous IAudioRenderClient streaming call wasn't GetBuffer().
-    //      AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //      AUDCLNT_E_OUT_OF_ORDER, if previous IAudioRenderClient streaming call wasn't GetBuffer().
+    //      AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //
     // Remarks:
     //      Please note: This function is a "finalizer".  As such,
@@ -885,11 +887,11 @@ interface IAudioCaptureClient : IUnknown
     // Return values:
     //
     //      S_OK if successful, error otherwise.
-    //      AUDCLNT_E_OUTOFORDER, if called while a previous IAudioCaptureClient::GetBuffer()
+    //      AUDCLNT_E_OUT_OF_ORDER, if called while a previous IAudioCaptureClient::GetBuffer()
     //      is still in effect.
     //      AUDCLNT_S_BUFFEREMPTY, if called when there's no available capture data. Note that
     //      this is a success code that the content of pFrameCount will be 0 in this case.
-    //      AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //      AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //
     // Remarks:
     //
@@ -943,8 +945,8 @@ interface IAudioCaptureClient : IUnknown
     //
     //      S_OK if successful, error otherwise.
     //      E_INVALIDARG, if NumFramesRead != [ value in buffer or 0 ].
-    //      AUDCLNT_E_OUTOFORDER, if previous IAudioCaptureClient streaming call wasn't GetBuffer().
-    //      AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //      AUDCLNT_E_OUT_OF_ORDER, if previous IAudioCaptureClient streaming call wasn't GetBuffer().
+    //      AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //
     // Remarks:
     //      Please note: This function is a "finalizer".  As such,
@@ -967,7 +969,7 @@ interface IAudioCaptureClient : IUnknown
     // Return values:
     //
     //     S_OK if successful, failure otherwise.
-    //     AUDCLNT_E_DEVICEINVALIDATED, if WAS device format was changed or device was removed.
+    //     AUDCLNT_E_DEVICE_INVALIDATED, if WAS device format was changed or device was removed.
     //     E_POINTER, if pNumFramesInNextPacket is NULL.
     //
     // Remarks:
@@ -1258,6 +1260,88 @@ interface ISimpleAudioVolume : IUnknown
     HRESULT GetMute([out, annotation("_Out_")] BOOL *pbMute);
 
 }
+
+typedef [v1_enum] enum AUDIO_DUCKING_OPTIONS
+{
+    AUDIO_DUCKING_OPTIONS_DEFAULT = 0x00,
+    AUDIO_DUCKING_OPTIONS_DO_NOT_DUCK_OTHER_STREAMS = 0x01
+} AUDIO_DUCKING_OPTIONS;
+cpp_quote("DEFINE_ENUM_FLAG_OPERATORS(AUDIO_DUCKING_OPTIONS);")
+
+//-----------------------------------------------------------------------------
+// Description: IAudioClientDuckingControl interface
+// Use IAudioClient::GetService to obtain this interface.
+//
+[
+    object,
+    uuid(C789D381-A28C-4168-B28F-D3A837924DC3),
+    pointer_default(unique),
+    local
+]
+interface IAudioClientDuckingControl : IUnknown
+{
+    //-------------------------------------------------------------------------
+    // Description:
+    //
+    // Set the AUDIO_DUCKING_OPTIONS_DO_NOT_DUCK_OTHER_STREAMS flag to disable any
+    // ducking that may be caused by the current stream.
+    // Specifying AUDIO_DUCKING_OPTIONS_DEFAULT lets Windows control if
+    // this stream should cause any other streams to be ducked.
+    //
+    // Return values:
+    //
+    // S_OK Successful completion.
+    //
+    //
+
+    HRESULT SetDuckingOptionsForCurrentStream([in] AUDIO_DUCKING_OPTIONS options);
+}
+
+typedef [v1_enum] enum AUDIO_EFFECT_STATE
+{
+    AUDIO_EFFECT_STATE_OFF = 0,
+    AUDIO_EFFECT_STATE_ON
+} AUDIO_EFFECT_STATE;
+
+typedef struct AUDIO_EFFECT
+{
+    GUID id;
+    BOOL canSetState;
+    AUDIO_EFFECT_STATE state;
+} AUDIO_EFFECT;
+
+[
+    object,
+    uuid(A5DED44F-3C5D-4B2B-BD1E-5DC1EE20BBF6),
+    pointer_default(unique),
+    local
+]
+interface IAudioEffectsChangedNotificationClient : IUnknown
+{
+    HRESULT OnAudioEffectsChanged();
+};
+
+//-----------------------------------------------------------------------------
+// Description: IAudioEffectsManager interface
+// Use IAudioClient::GetService to obtain this interface.
+//
+[
+    object,
+    uuid(4460B3AE-4B44-4527-8676-7548A8ACD260),
+    pointer_default(unique),
+    local
+]
+interface IAudioEffectsManager : IUnknown
+{
+    HRESULT RegisterAudioEffectsChangedNotificationCallback([in] IAudioEffectsChangedNotificationClient *client);
+
+    HRESULT UnregisterAudioEffectsChangedNotificationCallback([in] IAudioEffectsChangedNotificationClient *client);
+
+    HRESULT GetAudioEffects([out, size_is(,*numEffects), annotation("_Outptr_result_buffer_maybenull_(*numEffects)")] AUDIO_EFFECT **effects, [out] UINT32 *numEffects);
+
+    HRESULT SetAudioEffectState([in] GUID effectId, [in] AUDIO_EFFECT_STATE state);
+};
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 
 //////////////////////////////////////////////////////////////////////////////
@@ -1719,6 +1803,8 @@ cpp_quote("#define AUDCLNT_E_ENGINE_PERIODICITY_LOCKED    AUDCLNT_ERR(0x028)")
 cpp_quote("#define AUDCLNT_E_ENGINE_FORMAT_LOCKED         AUDCLNT_ERR(0x029)")
 cpp_quote("#define AUDCLNT_E_HEADTRACKING_ENABLED         AUDCLNT_ERR(0x030)")
 cpp_quote("#define AUDCLNT_E_HEADTRACKING_UNSUPPORTED     AUDCLNT_ERR(0x040)")
+cpp_quote("#define AUDCLNT_E_EFFECT_NOT_AVAILABLE         AUDCLNT_ERR(0x041)")
+cpp_quote("#define AUDCLNT_E_EFFECT_STATE_READ_ONLY       AUDCLNT_ERR(0x042)")
 cpp_quote("#define AUDCLNT_S_BUFFER_EMPTY                 AUDCLNT_SUCCESS(0x001)")
 cpp_quote("#define AUDCLNT_S_THREAD_ALREADY_REGISTERED    AUDCLNT_SUCCESS(0x002)")
 cpp_quote("#define AUDCLNT_S_POSITION_STALLED             AUDCLNT_SUCCESS(0x003)")

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -129,6 +137,7 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWebBrowserEventsService * This,
             /* [annotation][in] */ 
@@ -136,26 +145,33 @@ EXTERN_C const IID IID_IWebBrowserEventsService;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWebBrowserEventsService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWebBrowserEventsService * This);
         
+        DECLSPEC_XFGVIRT(IWebBrowserEventsService, FireBeforeNavigate2Event)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FireBeforeNavigate2Event )( 
             __RPC__in IWebBrowserEventsService * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pfCancel);
         
+        DECLSPEC_XFGVIRT(IWebBrowserEventsService, FireNavigateComplete2Event)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FireNavigateComplete2Event )( 
             __RPC__in IWebBrowserEventsService * This);
         
+        DECLSPEC_XFGVIRT(IWebBrowserEventsService, FireDownloadBeginEvent)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FireDownloadBeginEvent )( 
             __RPC__in IWebBrowserEventsService * This);
         
+        DECLSPEC_XFGVIRT(IWebBrowserEventsService, FireDownloadCompleteEvent)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FireDownloadCompleteEvent )( 
             __RPC__in IWebBrowserEventsService * This);
         
+        DECLSPEC_XFGVIRT(IWebBrowserEventsService, FireDocumentCompleteEvent)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *FireDocumentCompleteEvent )( 
             __RPC__in IWebBrowserEventsService * This);
         
@@ -236,6 +252,7 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWebBrowserEventsUrlService * This,
             /* [annotation][in] */ 
@@ -243,12 +260,15 @@ EXTERN_C const IID IID_IWebBrowserEventsUrlService;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWebBrowserEventsUrlService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWebBrowserEventsUrlService * This);
         
+        DECLSPEC_XFGVIRT(IWebBrowserEventsUrlService, GetUrlForEvents)
         /* [helpcontext][helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetUrlForEvents )( 
             __RPC__in IWebBrowserEventsUrlService * This,
             /* [annotation][retval][out] */ 

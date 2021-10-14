@@ -7,8 +7,6 @@
 //
 import "mfmediaengine.idl";
 
-cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN10_VB) ")
-
 #pragma region Application Family
 cpp_quote("#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)")
 
@@ -147,7 +145,7 @@ interface IMFContentDecryptionModule : IUnknown
 
     // Creates an IMFTrustedInput object that implements the decryption of content.
     // ContentInitData will only be used if initData from
-    // IMFContentDecryptionModuleSession::RequestAccess is not provided or incomplete.
+    // IMFContentDecryptionModuleSession::GenerateRequest is not provided or incomplete.
     // Initialization Data should be structured in PSSH Box Format. For more details, see
     // https://www.w3.org/TR/eme-initdata-cenc/#common-system
     HRESULT CreateTrustedInput(
@@ -276,5 +274,3 @@ cpp_quote("    );")
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */")
 #pragma endregion
-
-cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB) ")

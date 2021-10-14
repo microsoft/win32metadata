@@ -21,3 +21,8 @@
 #include <wsdclient.h>
 #include <wsddisco.h>
 #include <wsdattachment.h>
+
+#include <functiondiscovery.h>
+#include <functiondiscoverycategories.h>
+#include <functiondiscoveryconstraints.h>
+#include <functiondiscoveryerror.h>

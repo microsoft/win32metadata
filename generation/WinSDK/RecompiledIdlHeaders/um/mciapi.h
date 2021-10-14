@@ -1,6 +1,6 @@
 /********************************************************************************
 *                                                                               *
-* mciapi.h -- ApiSet Contract for api-ms-win-mm-mci-l1-1-0                      *  
+* mciapi.h -- ApiSet Contract for api-ms-win-mm-mci-l1-1-0                      *
 *                                                                               *
 * Copyright (c) Microsoft Corporation. All rights reserved.                     *
 *                                                                               *
@@ -15,7 +15,6 @@
 
 #include <apiset.h>
 #include <apisetcconv.h>
-
 
 #include <mmsyscom.h>
 
@@ -66,12 +65,12 @@ mciSendCommandW(
     _In_opt_ DWORD_PTR dwParam1,
     _In_opt_ DWORD_PTR dwParam2
     );
-
 #ifdef UNICODE
 #define mciSendCommand  mciSendCommandW
 #else
 #define mciSendCommand  mciSendCommandA
 #endif // !UNICODE
+
 WINMMAPI
 MCIERROR
 WINAPI
@@ -91,12 +90,12 @@ mciSendStringW(
     _In_ UINT uReturnLength,
     _In_opt_ HWND hwndCallback
     );
-
 #ifdef UNICODE
 #define mciSendString  mciSendStringW
 #else
 #define mciSendString  mciSendStringA
 #endif // !UNICODE
+
 WINMMAPI
 MCIDEVICEID
 WINAPI
@@ -110,12 +109,12 @@ WINAPI
 mciGetDeviceIDW(
     _In_ LPCWSTR pszDevice
     );
-
 #ifdef UNICODE
 #define mciGetDeviceID  mciGetDeviceIDW
 #else
 #define mciGetDeviceID  mciGetDeviceIDA
 #endif // !UNICODE
+
 WINMMAPI
 MCIDEVICEID
 WINAPI
@@ -131,12 +130,12 @@ mciGetDeviceIDFromElementIDW(
     _In_ DWORD dwElementID,
     _In_ LPCWSTR lpstrType
     );
-
 #ifdef UNICODE
 #define mciGetDeviceIDFromElementID  mciGetDeviceIDFromElementIDW
 #else
 #define mciGetDeviceIDFromElementID  mciGetDeviceIDFromElementIDA
 #endif // !UNICODE
+
 WINMMAPI
 BOOL
 WINAPI
@@ -154,7 +153,6 @@ mciGetErrorStringW(
     _Out_writes_(cchText) LPWSTR pszText,
     _In_ UINT cchText
     );
-
 #ifdef UNICODE
 #define mciGetErrorString  mciGetErrorStringW
 #else
@@ -177,8 +175,8 @@ mciSetYieldProc(
     _In_ DWORD dwYieldData
     );
 
-
 #if (WINVER >= 0x030a)
+
 WINMMAPI
 HTASK
 WINAPI
@@ -193,17 +191,16 @@ mciGetYieldProc(
     _In_ MCIDEVICEID mciId,
     _In_ LPDWORD pdwYieldData
     );
-
 #endif /* ifdef WINVER >= 0x030a */
 
 #if (WINVER < 0x030a)
+
 WINMMAPI
 BOOL
 WINAPI
 mciExecute(
     LPCSTR pszCommand
     );
-
 #endif /* ifdef WINVER < 0x030a */
 
 /* MCI error return values */
@@ -493,12 +490,10 @@ mciExecute(
 /* flags for dwFlags parameter of MCI_LOAD command message */
 #define MCI_LOAD_FILE                   0x00000100L
 
-
 /* generic parameter block for MCI command messages with no special parameters */
 typedef struct tagMCI_GENERIC_PARMS {
     DWORD_PTR   dwCallback;
 } MCI_GENERIC_PARMS, *PMCI_GENERIC_PARMS, FAR *LPMCI_GENERIC_PARMS;
-
 
 /* parameter block for MCI_OPEN command message */
 #ifdef _WIN32
@@ -538,7 +533,6 @@ typedef struct tagMCI_OPEN_PARMS {
 } MCI_OPEN_PARMS, FAR *LPMCI_OPEN_PARMS;
 #endif
 
-
 /* parameter block for MCI_PLAY command message */
 typedef struct tagMCI_PLAY_PARMS {
     DWORD_PTR   dwCallback;
@@ -546,13 +540,11 @@ typedef struct tagMCI_PLAY_PARMS {
     DWORD       dwTo;
 } MCI_PLAY_PARMS, *PMCI_PLAY_PARMS, FAR *LPMCI_PLAY_PARMS;
 
-
 /* parameter block for MCI_SEEK command message */
 typedef struct tagMCI_SEEK_PARMS {
     DWORD_PTR   dwCallback;
     DWORD       dwTo;
 } MCI_SEEK_PARMS, *PMCI_SEEK_PARMS, FAR *LPMCI_SEEK_PARMS;
-
 
 /* parameter block for MCI_STATUS command message */
 typedef struct tagMCI_STATUS_PARMS {
@@ -561,7 +553,6 @@ typedef struct tagMCI_STATUS_PARMS {
     DWORD       dwItem;
     DWORD       dwTrack;
 } MCI_STATUS_PARMS, *PMCI_STATUS_PARMS, FAR * LPMCI_STATUS_PARMS;
-
 
 /* parameter block for MCI_INFO command message */
 #ifdef _WIN32
@@ -592,14 +583,12 @@ typedef struct tagMCI_INFO_PARMS {
 } MCI_INFO_PARMS, FAR * LPMCI_INFO_PARMS;
 #endif
 
-
 /* parameter block for MCI_GETDEVCAPS command message */
 typedef struct tagMCI_GETDEVCAPS_PARMS {
     DWORD_PTR   dwCallback;
     DWORD       dwReturn;
     DWORD       dwItem;
 } MCI_GETDEVCAPS_PARMS, *PMCI_GETDEVCAPS_PARMS, FAR * LPMCI_GETDEVCAPS_PARMS;
-
 
 /* parameter block for MCI_SYSINFO command message */
 #ifdef _WIN32
@@ -638,14 +627,12 @@ typedef struct tagMCI_SYSINFO_PARMS {
 } MCI_SYSINFO_PARMS, FAR * LPMCI_SYSINFO_PARMS;
 #endif
 
-
 /* parameter block for MCI_SET command message */
 typedef struct tagMCI_SET_PARMS {
     DWORD_PTR   dwCallback;
     DWORD       dwTimeFormat;
     DWORD       dwAudio;
 } MCI_SET_PARMS, *PMCI_SET_PARMS, FAR *LPMCI_SET_PARMS;
-
 
 /* parameter block for MCI_BREAK command message */
 typedef struct tagMCI_BREAK_PARMS {
@@ -660,7 +647,6 @@ typedef struct tagMCI_BREAK_PARMS {
     WORD        wReserved1;             /* padding for Win 16 */
 #endif
 } MCI_BREAK_PARMS, *PMCI_BREAK_PARMS, FAR * LPMCI_BREAK_PARMS;
-
 
 /* parameter block for MCI_SAVE command message */
 #ifdef _WIN32
@@ -690,7 +676,6 @@ typedef struct tagMCI_SAVE_PARMS {
 } MCI_SAVE_PARMS, FAR * LPMCI_SAVE_PARMS;
 #endif
 
-
 /* parameter block for MCI_LOAD command message */
 #ifdef _WIN32
 
@@ -718,7 +703,6 @@ typedef struct tagMCI_LOAD_PARMS {
     LPCSTR  lpfilename;
 } MCI_LOAD_PARMS, FAR * LPMCI_LOAD_PARMS;
 #endif
-
 
 /* parameter block for MCI_RECORD command message */
 typedef struct tagMCI_RECORD_PARMS {
@@ -778,7 +762,6 @@ typedef struct tagMCI_RECORD_PARMS {
 /* flag for the MCI_ESCAPE command message */
 #define MCI_VD_ESCAPE_STRING            0x00000100L
 
-
 /* parameter block for MCI_PLAY command message */
 typedef struct tagMCI_VD_PLAY_PARMS {
     DWORD_PTR   dwCallback;
@@ -787,13 +770,11 @@ typedef struct tagMCI_VD_PLAY_PARMS {
     DWORD       dwSpeed;
 } MCI_VD_PLAY_PARMS, *PMCI_VD_PLAY_PARMS, FAR *LPMCI_VD_PLAY_PARMS;
 
-
 /* parameter block for MCI_STEP command message */
 typedef struct tagMCI_VD_STEP_PARMS {
     DWORD_PTR   dwCallback;
     DWORD       dwFrames;
 } MCI_VD_STEP_PARMS, *PMCI_VD_STEP_PARMS, FAR *LPMCI_VD_STEP_PARMS;
-
 
 /* parameter block for MCI_ESCAPE command message */
 #ifdef _WIN32
@@ -870,7 +851,6 @@ typedef struct tagMCI_VD_ESCAPE_PARMS {
 #define MCI_WAVE_GETDEVCAPS_INPUTS      0x00004001L
 #define MCI_WAVE_GETDEVCAPS_OUTPUTS     0x00004002L
 
-
 /* parameter block for MCI_OPEN command message */
 #ifdef _WIN32
 
@@ -912,14 +892,12 @@ typedef struct tagMCI_WAVE_OPEN_PARMS {
 } MCI_WAVE_OPEN_PARMS, FAR *LPMCI_WAVE_OPEN_PARMS;
 #endif
 
-
 /* parameter block for MCI_DELETE command message */
 typedef struct tagMCI_WAVE_DELETE_PARMS {
     DWORD_PTR   dwCallback;
     DWORD       dwFrom;
     DWORD       dwTo;
 } MCI_WAVE_DELETE_PARMS, *PMCI_WAVE_DELETE_PARMS, FAR *LPMCI_WAVE_DELETE_PARMS;
-
 
 /* parameter block for MCI_SET command message */
 typedef struct tagMCI_WAVE_SET_PARMS {
@@ -982,7 +960,6 @@ typedef struct tagMCI_WAVE_SET_PARMS {
 #define MCI_SEQ_SET_SLAVE               0x00040000L
 #define MCI_SEQ_SET_MASTER              0x00080000L
 #define MCI_SEQ_SET_OFFSET              0x01000000L
-
 
 /* parameter block for MCI_SET command message */
 typedef struct tagMCI_SEQ_SET_PARMS {
@@ -1060,7 +1037,6 @@ typedef struct tagMCI_SEQ_SET_PARMS {
 /* flags for dwFlags parameter of MCI_UPDATE command message */
 #define MCI_ANIM_UPDATE_HDC             0x00020000L
 
-
 /* parameter block for MCI_OPEN command message */
 #ifdef _WIN32
 
@@ -1106,7 +1082,6 @@ typedef struct tagMCI_ANIM_OPEN_PARMS {
 } MCI_ANIM_OPEN_PARMS, FAR *LPMCI_ANIM_OPEN_PARMS;
 #endif
 
-
 /* parameter block for MCI_PLAY command message */
 typedef struct tagMCI_ANIM_PLAY_PARMS {
     DWORD_PTR   dwCallback;
@@ -1115,13 +1090,11 @@ typedef struct tagMCI_ANIM_PLAY_PARMS {
     DWORD       dwSpeed;
 } MCI_ANIM_PLAY_PARMS, *PMCI_ANIM_PLAY_PARMS, FAR *LPMCI_ANIM_PLAY_PARMS;
 
-
 /* parameter block for MCI_STEP command message */
 typedef struct tagMCI_ANIM_STEP_PARMS {
     DWORD_PTR   dwCallback;
     DWORD       dwFrames;
 } MCI_ANIM_STEP_PARMS, *PMCI_ANIM_STEP_PARMS, FAR *LPMCI_ANIM_STEP_PARMS;
-
 
 /* parameter block for MCI_WINDOW command message */
 #ifdef _WIN32
@@ -1159,7 +1132,6 @@ typedef struct tagMCI_ANIM_WINDOW_PARMS {
 } MCI_ANIM_WINDOW_PARMS, FAR * LPMCI_ANIM_WINDOW_PARMS;
 #endif
 
-
 /* parameter block for MCI_PUT, MCI_UPDATE, MCI_WHERE command messages */
 typedef struct tagMCI_ANIM_RECT_PARMS {
     DWORD_PTR   dwCallback;
@@ -1172,7 +1144,6 @@ typedef struct tagMCI_ANIM_RECT_PARMS {
 } MCI_ANIM_RECT_PARMS;
 typedef MCI_ANIM_RECT_PARMS * PMCI_ANIM_RECT_PARMS;
 typedef MCI_ANIM_RECT_PARMS FAR * LPMCI_ANIM_RECT_PARMS;
-
 
 /* parameter block for MCI_UPDATE PARMS */
 typedef struct tagMCI_ANIM_UPDATE_PARMS {
@@ -1222,7 +1193,6 @@ typedef struct tagMCI_ANIM_UPDATE_PARMS {
 #define MCI_OVLY_WHERE_FRAME            0x00080000L
 #define MCI_OVLY_WHERE_VIDEO            0x00100000L
 
-
 /* parameter block for MCI_OPEN command message */
 #ifdef _WIN32
 
@@ -1268,7 +1238,6 @@ typedef struct tagMCI_OVLY_OPEN_PARMS {
 } MCI_OVLY_OPEN_PARMS, FAR *LPMCI_OVLY_OPEN_PARMS;
 #endif
 
-
 /* parameter block for MCI_WINDOW command message */
 #ifdef _WIN32
 
@@ -1304,7 +1273,6 @@ typedef struct tagMCI_OVLY_WINDOW_PARMS {
 } MCI_OVLY_WINDOW_PARMS, FAR * LPMCI_OVLY_WINDOW_PARMS;
 #endif
 
-
 /* parameter block for MCI_PUT, MCI_UPDATE, and MCI_WHERE command messages */
 typedef struct tagMCI_OVLY_RECT_PARMS {
     DWORD_PTR   dwCallback;
@@ -1315,7 +1283,6 @@ typedef struct tagMCI_OVLY_RECT_PARMS {
     RECT    rc;
 #endif  /* ifdef MCI_USE_OFFEXT */
 } MCI_OVLY_RECT_PARMS, *PMCI_OVLY_RECT_PARMS, FAR * LPMCI_OVLY_RECT_PARMS;
-
 
 /* parameter block for MCI_SAVE command message */
 #ifdef _WIN32
@@ -1347,7 +1314,6 @@ typedef struct tagMCI_OVLY_SAVE_PARMS {
 } MCI_OVLY_SAVE_PARMS, FAR * LPMCI_OVLY_SAVE_PARMS;
 #endif
 
-
 /* parameter block for MCI_LOAD command message */
 #ifdef _WIN32
 
@@ -1378,9 +1344,10 @@ typedef struct tagMCI_OVLY_LOAD_PARMS {
 } MCI_OVLY_LOAD_PARMS, FAR * LPMCI_OVLY_LOAD_PARMS;
 #endif
 
-// 
+//
 // APIs moved from mmddk.h - function prototypes for MCI driver functions
 //
+
 DWORD_PTR
 APIENTRY
 mciGetDriverData(
@@ -1422,7 +1389,6 @@ mciFreeCommandResource(
     UINT wTable
     );
 
-
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 #pragma endregion
 
@@ -1431,5 +1397,4 @@ mciFreeCommandResource(
 #endif
 
 #endif // _MCIAPI_H_
-
 

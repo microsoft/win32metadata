@@ -25,6 +25,9 @@
 extern	"C"	{
 #endif
 
+struct FIO_CONTEXT;
+struct FH_OVERLAPPED;
+
 typedef	VOID
 (*PFN_IO_COMPLETION)(
 		IN	struct	FIO_CONTEXT*	pContext,
@@ -95,7 +98,7 @@ struct	FIO_CONTEXT	{
 	DWORD       m_dwHeaderLength;
 } ;
 
-typedef	FIO_CONTEXT*	PFIO_CONTEXT ;
+typedef	struct	FIO_CONTEXT*	PFIO_CONTEXT ;
 
 
 #ifdef	_FILEHC_IMPLEMENTATION_
@@ -134,7 +137,7 @@ FIOReadFile(
     IN  PFIO_CONTEXT	pContext,
     _In_reads_bytes_(BytesToRead) IN  LPVOID			lpBuffer,
     IN  DWORD			BytesToRead,
-    _Inout_ IN  FH_OVERLAPPED *	lpo
+    _Inout_ IN struct FH_OVERLAPPED *	lpo
     );
 
 //
@@ -149,7 +152,7 @@ FIOReadFileEx(
     _In_reads_bytes_(BytesToRead) IN  LPVOID			lpBuffer,
     IN  DWORD			BytesToRead,
 	IN	DWORD			BytesAvailable, // must be >= BytesToWrite - number of bytes I can mess with.
-    _Inout_ IN  FH_OVERLAPPED *	lpo,
+    _Inout_ IN struct FH_OVERLAPPED *	lpo,
 	IN	BOOL			fFinalWrite,	// Is this the final write ? 
 	IN	BOOL			fIncludeTerminator	// if TRUE contains CRLF.CRLF terminator which shouldn't be stuffed
     );
@@ -164,7 +167,7 @@ FIOWriteFile(
     IN  PFIO_CONTEXT	pContext,
     _Inout_updates_bytes_(BytesToWrite) IN  LPCVOID			lpBuffer,
     IN  DWORD			BytesToWrite,
-    _Inout_ IN  FH_OVERLAPPED * lpo
+    _Inout_ IN struct FH_OVERLAPPED * lpo
     );
 
 //
@@ -179,7 +182,7 @@ FIOWriteFileEx(
 	_Inout_updates_bytes_(BytesAvailable) IN	LPVOID			lpBuffer,
 	IN	DWORD			BytesToWrite,
 	IN	DWORD			BytesAvailable, // must be >= BytesToWrite - number of bytes I can mess with.
-	_Inout_ IN	FH_OVERLAPPED*	lpo,
+	_Inout_ IN	struct FH_OVERLAPPED*	lpo,
 	IN	BOOL			fFinalWrite,	// Is this the final write ? 
 	IN	BOOL			fIncludeTerminator	// if TRUE contains CRLF.CRLF terminator which shouldn't be stuffed
 	) ;
@@ -318,7 +321,7 @@ CloseNonCachedFile(	PFIO_CONTEXT	) ;
 //	CreateFile().
 //
 FILEHC_EXPORT
-FIO_CONTEXT*	__stdcall
+struct FIO_CONTEXT*	__stdcall
 CacheCreateFile(	_In_ IN	LPSTR	lpstrName, 
 					IN	FCACHE_CREATE_CALLBACK	pfnCallBack, 
 					_In_ IN	LPVOID	lpv, 
@@ -331,7 +334,7 @@ CacheCreateFile(	_In_ IN	LPSTR	lpstrName,
 //	the cache !
 //
 FILEHC_EXPORT
-FIO_CONTEXT*	__stdcall
+struct FIO_CONTEXT*	__stdcall
 CacheRichCreateFile(	_In_ IN	LPSTR	lpstrName, 
 						IN	FCACHE_RICHCREATE_CALLBACK	pfnCallBack, 
 						IN	LPVOID	lpv, 
@@ -363,7 +366,7 @@ CacheRemoveFiles(	_In_ IN	LPSTR	lpstrName,
 FILEHC_EXPORT
 BOOL	__stdcall	
 InsertFile(		_In_ IN	LPSTR	lpstrName, 
-				IN	FIO_CONTEXT*	pContext,
+				IN	struct FIO_CONTEXT*	pContext,
 				IN	BOOL	fKeepReference 
 				) ;
 
@@ -372,7 +375,7 @@ InsertFile(		_In_ IN	LPSTR	lpstrName,
 //
 FILEHC_EXPORT
 DWORD	__stdcall
-GetFileSizeFromContext(	IN	FIO_CONTEXT*	pContext, 
+GetFileSizeFromContext(	IN	struct FIO_CONTEXT*	pContext, 
 						_Out_ OUT	DWORD*			pcbFileSizeHigh
 						) ;
 
@@ -579,7 +582,7 @@ FindContextFromName(
 					//	We have a separate mechanism for returning the FIO_CONTEXT
 					//	from the cache.
 					//
-					OUT	FIO_CONTEXT**	ppContext
+					OUT	struct FIO_CONTEXT**	ppContext
 					) ;
 
 
@@ -626,7 +629,7 @@ FindSyncContextFromName(
 					//	We have a separate mechanism for returning the FIO_CONTEXT
 					//	from the cache.
 					//
-					OUT	FIO_CONTEXT**	ppContext
+					OUT	struct FIO_CONTEXT**	ppContext
 					) ;
 
 
@@ -662,7 +665,7 @@ AssociateContextWithName(
 					//
 					//	User provides the FIO_CONTEXT that the name should reference
 					//
-					_In_opt_ FIO_CONTEXT*		pContext,
+					_In_opt_ struct FIO_CONTEXT*		pContext,
 					//
 					//	User specifies whether they wish to keep their reference on the FIO_CONTEXT
 					//
@@ -715,8 +718,8 @@ InvalidateName(
 //
 //
 FILEHC_EXPORT
-FIO_CONTEXT*	__stdcall
-ProduceDotStuffedContext(	IN	FIO_CONTEXT*	pContext,
+struct FIO_CONTEXT*	__stdcall
+ProduceDotStuffedContext(	IN	struct FIO_CONTEXT*	pContext,
                                                  _In_ IN  LPSTR           lpstrName,
 							IN  BOOL			fWantItDotStuffed // if TRUE add dots, if FALSE remove dots
 							) ;
@@ -737,8 +740,8 @@ ProduceDotStuffedContext(	IN	FIO_CONTEXT*	pContext,
 FILEHC_EXPORT
 BOOL	__stdcall
 ProduceDotStuffedContextInContext(
-							IN	FIO_CONTEXT*	pContextSource,
-							IN	FIO_CONTEXT*	pContextDestination,
+							IN	struct FIO_CONTEXT*	pContextSource,
+							IN	struct FIO_CONTEXT*	pContextDestination,
 							IN	BOOL			fWantItDotStuffed, 
 							_Out_opt_ OUT	BOOL*			pfModified
 							) ;
@@ -751,14 +754,14 @@ ProduceDotStuffedContextInContext(
 //
 FILEHC_EXPORT
 BOOL	__stdcall
-GetIsFileDotTerminated(	IN	FIO_CONTEXT*	pContext ) ;
+GetIsFileDotTerminated(	IN	struct FIO_CONTEXT*	pContext ) ;
 
 //
 //	Set whether the file has a terminating 'CRLF.CRLF' sequence !
 //
 FILEHC_EXPORT
 void	__stdcall
-SetIsFileDotTerminated(	IN	FIO_CONTEXT*	pContext,
+SetIsFileDotTerminated(	IN	struct FIO_CONTEXT*	pContext,
 						IN	BOOL			fIsDotTerminated 
 						) ;
 
@@ -778,7 +781,7 @@ SetIsFileDotTerminated(	IN	FIO_CONTEXT*	pContext,
 //
 FILEHC_EXPORT
 BOOL	__stdcall
-SetDotStuffingOnWrites(	IN	FIO_CONTEXT*	pContext, 
+SetDotStuffingOnWrites(	IN	struct FIO_CONTEXT*	pContext, 
 						//
 						//	fEnable == FALSE means ignore fStripDots, and writes are unmodified
 						//
@@ -796,7 +799,7 @@ SetDotStuffingOnWrites(	IN	FIO_CONTEXT*	pContext,
 //
 FILEHC_EXPORT
 BOOL	__stdcall
-SetDotStuffingOnReads(	IN	FIO_CONTEXT*	pContext,
+SetDotStuffingOnReads(	IN	struct FIO_CONTEXT*	pContext,
 						IN	BOOL			fEnable,
 						IN	BOOL			fStripDots
 						) ;
@@ -812,7 +815,7 @@ SetDotStuffingOnReads(	IN	FIO_CONTEXT*	pContext,
 //
 FILEHC_EXPORT
 BOOL	__stdcall
-SetDotScanningOnWrites(	IN	FIO_CONTEXT*	pContext, 
+SetDotScanningOnWrites(	IN	struct FIO_CONTEXT*	pContext, 
 						IN	BOOL			fEnable
 						) ;
 
@@ -829,7 +832,7 @@ SetDotScanningOnWrites(	IN	FIO_CONTEXT*	pContext,
 //
 FILEHC_EXPORT
 void	__stdcall
-CompleteDotStuffingOnWrites(	IN	FIO_CONTEXT*	pContext, 
+CompleteDotStuffingOnWrites(	IN	struct FIO_CONTEXT*	pContext, 
 								IN	BOOL			fStripDots
 								) ;
 
@@ -842,7 +845,7 @@ CompleteDotStuffingOnWrites(	IN	FIO_CONTEXT*	pContext,
 //
 FILEHC_EXPORT
 BOOL	__stdcall
-SetDotScanningOnReads(	IN	FIO_CONTEXT*	pContext, 
+SetDotScanningOnReads(	IN	struct FIO_CONTEXT*	pContext, 
 						IN	BOOL			fEnable
 						) ;
 							
@@ -862,7 +865,7 @@ SetDotScanningOnReads(	IN	FIO_CONTEXT*	pContext,
 //
 FILEHC_EXPORT
 BOOL	__stdcall
-GetDotStuffState(		IN	FIO_CONTEXT*	pContext, 
+GetDotStuffState(		IN	struct FIO_CONTEXT*	pContext, 
 						IN	BOOL			fReads,
 						_Inout_ OUT	BOOL*			pfStuffed,
 						_Out_ OUT	BOOL*			pfStoredWithDots
@@ -875,7 +878,7 @@ GetDotStuffState(		IN	FIO_CONTEXT*	pContext,
 //
 FILEHC_EXPORT
 void	__stdcall
-SetDotStuffState(		IN	FIO_CONTEXT*	pContext, 
+SetDotStuffState(		IN	struct FIO_CONTEXT*	pContext, 
 						//
 						//	fIsStuffed is only relevant when fKnown == TRUE
 						//

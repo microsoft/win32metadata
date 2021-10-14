@@ -279,6 +279,8 @@ typedef struct _RAS_AUTH_ATTRIBUTE
 
 #define RAS_EAP_FLAG_SAVE_CREDMAN           0x00200000   // Save credentials to CredMan
 
+#define RAS_EAP_FLAG_SERVER_VALIDATION_REQUIRED  0x02000000  // Certificate server validation must be performed
+
 typedef struct _PPP_EAP_PACKET
 {
     BYTE    Code;       // 1-Request, 2-Response, 3-Success, 4-Failure

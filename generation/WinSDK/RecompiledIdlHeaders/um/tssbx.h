@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -247,6 +255,7 @@ EXTERN_C const IID IID_IWTSSBPlugin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWTSSBPlugin * This,
             /* [annotation][in] */ 
@@ -254,17 +263,21 @@ EXTERN_C const IID IID_IWTSSBPlugin;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWTSSBPlugin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWTSSBPlugin * This);
         
+        DECLSPEC_XFGVIRT(IWTSSBPlugin, Initialize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IWTSSBPlugin * This,
             /* [annotation][out] */ 
             _Out_  DWORD *PluginCapabilities);
         
+        DECLSPEC_XFGVIRT(IWTSSBPlugin, WTSSBX_MachineChangeNotification)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WTSSBX_MachineChangeNotification )( 
             __RPC__in IWTSSBPlugin * This,
             /* [annotation][in] */ 
@@ -274,6 +287,7 @@ EXTERN_C const IID IID_IWTSSBPlugin;
             /* [annotation][in] */ 
             _In_  WTSSBX_MACHINE_INFO *pMachineInfo);
         
+        DECLSPEC_XFGVIRT(IWTSSBPlugin, WTSSBX_SessionChangeNotification)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WTSSBX_SessionChangeNotification )( 
             __RPC__in IWTSSBPlugin * This,
             /* [annotation][in] */ 
@@ -285,6 +299,7 @@ EXTERN_C const IID IID_IWTSSBPlugin;
             /* [annotation][size_is][in] */ 
             _In_reads_(NumOfSessions)  WTSSBX_SESSION_INFO SessionInfo[  ]);
         
+        DECLSPEC_XFGVIRT(IWTSSBPlugin, WTSSBX_GetMostSuitableServer)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WTSSBX_GetMostSuitableServer )( 
             __RPC__in IWTSSBPlugin * This,
             /* [annotation][string][in] */ 
@@ -298,9 +313,11 @@ EXTERN_C const IID IID_IWTSSBPlugin;
             /* [annotation][out][in] */ 
             _Inout_  long *pMachineId);
         
+        DECLSPEC_XFGVIRT(IWTSSBPlugin, Terminated)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Terminated )( 
             __RPC__in IWTSSBPlugin * This);
         
+        DECLSPEC_XFGVIRT(IWTSSBPlugin, WTSSBX_GetUserExternalSession)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *WTSSBX_GetUserExternalSession )( 
             __RPC__in IWTSSBPlugin * This,
             /* [annotation][string][in] */ 

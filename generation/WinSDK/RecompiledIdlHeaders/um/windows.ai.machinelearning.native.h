@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -37,6 +37,14 @@
 #pragma once
 #endif
 
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
+#endif
+
 /* Forward Declarations */ 
 
 #ifndef __ITensorNative_FWD_DEFINED__
@@ -58,6 +66,13 @@ typedef interface ITensorStaticsNative ITensorStaticsNative;
 typedef interface ILearningModelDeviceFactoryNative ILearningModelDeviceFactoryNative;
 
 #endif 	/* __ILearningModelDeviceFactoryNative_FWD_DEFINED__ */
+
+
+#ifndef __ILearningModelSessionOptionsNative_FWD_DEFINED__
+#define __ILearningModelSessionOptionsNative_FWD_DEFINED__
+typedef interface ILearningModelSessionOptionsNative ILearningModelSessionOptionsNative;
+
+#endif 	/* __ILearningModelSessionOptionsNative_FWD_DEFINED__ */
 
 
 /* header files for imported files */
@@ -120,6 +135,7 @@ EXTERN_C const IID IID_ITensorNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITensorNative * This,
             /* [annotation][in] */ 
@@ -127,12 +143,15 @@ EXTERN_C const IID IID_ITensorNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITensorNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITensorNative * This);
         
+        DECLSPEC_XFGVIRT(ITensorNative, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             ITensorNative * This,
             /* [annotation][size_is][size_is][out] */ 
@@ -140,6 +159,7 @@ EXTERN_C const IID IID_ITensorNative;
             /* [annotation][out] */ 
             _Out_  UINT32 *capacity);
         
+        DECLSPEC_XFGVIRT(ITensorNative, GetD3D12Resource)
         HRESULT ( STDMETHODCALLTYPE *GetD3D12Resource )( 
             ITensorNative * This,
             /* [annotation][out] */ 
@@ -215,6 +235,7 @@ EXTERN_C const IID IID_ITensorStaticsNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITensorStaticsNative * This,
             /* [annotation][in] */ 
@@ -222,12 +243,15 @@ EXTERN_C const IID IID_ITensorStaticsNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITensorStaticsNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITensorStaticsNative * This);
         
+        DECLSPEC_XFGVIRT(ITensorStaticsNative, CreateFromD3D12Resource)
         HRESULT ( STDMETHODCALLTYPE *CreateFromD3D12Resource )( 
             ITensorStaticsNative * This,
             ID3D12Resource *value,
@@ -301,6 +325,7 @@ EXTERN_C const IID IID_ILearningModelDeviceFactoryNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ILearningModelDeviceFactoryNative * This,
             /* [annotation][in] */ 
@@ -308,12 +333,15 @@ EXTERN_C const IID IID_ILearningModelDeviceFactoryNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ILearningModelDeviceFactoryNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ILearningModelDeviceFactoryNative * This);
         
+        DECLSPEC_XFGVIRT(ILearningModelDeviceFactoryNative, CreateFromD3D12CommandQueue)
         HRESULT ( STDMETHODCALLTYPE *CreateFromD3D12CommandQueue )( 
             ILearningModelDeviceFactoryNative * This,
             ID3D12CommandQueue *value,
@@ -357,14 +385,99 @@ EXTERN_C const IID IID_ILearningModelDeviceFactoryNative;
 #endif 	/* __ILearningModelDeviceFactoryNative_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0003 */
+#ifndef __ILearningModelSessionOptionsNative_INTERFACE_DEFINED__
+#define __ILearningModelSessionOptionsNative_INTERFACE_DEFINED__
+
+/* interface ILearningModelSessionOptionsNative */
+/* [local][object][uuid] */ 
+
+
+EXTERN_C const IID IID_ILearningModelSessionOptionsNative;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("c71e953f-37b4-4564-8658-d8396866db0d")
+    ILearningModelSessionOptionsNative : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE SetIntraOpNumThreadsOverride( 
+            UINT32 intraOpNumThreads) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct ILearningModelSessionOptionsNativeVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            ILearningModelSessionOptionsNative * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            ILearningModelSessionOptionsNative * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            ILearningModelSessionOptionsNative * This);
+        
+        DECLSPEC_XFGVIRT(ILearningModelSessionOptionsNative, SetIntraOpNumThreadsOverride)
+        HRESULT ( STDMETHODCALLTYPE *SetIntraOpNumThreadsOverride )( 
+            ILearningModelSessionOptionsNative * This,
+            UINT32 intraOpNumThreads);
+        
+        END_INTERFACE
+    } ILearningModelSessionOptionsNativeVtbl;
+
+    interface ILearningModelSessionOptionsNative
+    {
+        CONST_VTBL struct ILearningModelSessionOptionsNativeVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define ILearningModelSessionOptionsNative_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define ILearningModelSessionOptionsNative_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define ILearningModelSessionOptionsNative_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define ILearningModelSessionOptionsNative_SetIntraOpNumThreadsOverride(This,intraOpNumThreads)	\
+    ( (This)->lpVtbl -> SetIntraOpNumThreadsOverride(This,intraOpNumThreads) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __ILearningModelSessionOptionsNative_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0004 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 
 
-extern RPC_IF_HANDLE __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0003_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0003_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0004_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_windows2Eai2Emachinelearning2Enative_0000_0004_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

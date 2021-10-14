@@ -73,10 +73,9 @@ Revision History:
 //
 // Define the facility codes
 //
-#define FACILITY_RPC_RUNTIME             0x2
-#define FACILITY_RPC_STUBS               0x3
 #define FACILITY_IO_ERROR_CODE           0x4
 #define FACILITY_MCA_ERROR_CODE          0x5
+#define FACILITY_VOLMGR                  0x38
 
 
 //
@@ -426,6 +425,12 @@ Revision History:
 //
 #define IO_WARNING_DISK_FIRMWARE_UPDATED ((NTSTATUS)0x4004009FL)
 
+////////////////////////////////////////////////////////
+// Facility IO
+//
+//
+// SUCCESS codes
+//
 //
 // MessageId: IO_ERR_RETRY_SUCCEEDED
 //
@@ -436,6 +441,228 @@ Revision History:
 #define IO_ERR_RETRY_SUCCEEDED           ((NTSTATUS)0x00040001L)
 
 //
+// MessageId: IO_DUMP_CREATION_SUCCESS
+//
+// MessageText:
+//
+// Dump file generation succeded.
+//
+#define IO_DUMP_CREATION_SUCCESS         ((NTSTATUS)0x000400A2L)
+
+//
+// INFORMATIONAL codes
+//
+//
+// MessageId: IO_FILE_QUOTA_THRESHOLD
+//
+// MessageText:
+//
+// A user hit their quota threshold on volume %2.
+//
+#define IO_FILE_QUOTA_THRESHOLD          ((NTSTATUS)0x40040024L)
+
+//
+// MessageId: IO_FILE_QUOTA_LIMIT
+//
+// MessageText:
+//
+// A user hit their quota limit on volume %2.
+//
+#define IO_FILE_QUOTA_LIMIT              ((NTSTATUS)0x40040025L)
+
+//
+// MessageId: IO_FILE_QUOTA_STARTED
+//
+// MessageText:
+//
+// The system has started rebuilding the user disk quota information on
+// device %1 with label "%2".
+//
+#define IO_FILE_QUOTA_STARTED            ((NTSTATUS)0x40040026L)
+
+//
+// MessageId: IO_FILE_QUOTA_SUCCEEDED
+//
+// MessageText:
+//
+// The system has successfully rebuilt the user disk quota information on
+// device %1 with label "%2".
+//
+#define IO_FILE_QUOTA_SUCCEEDED          ((NTSTATUS)0x40040027L)
+
+//
+// MessageId: IO_INFO_THROTTLE_COMPLETE
+//
+// MessageText:
+//
+// The driver for device %1 delayed non-paging Io requests for %2 ms to recover from a low memory condition.
+//
+#define IO_INFO_THROTTLE_COMPLETE        ((NTSTATUS)0x40040077L)
+
+//
+// MessageId: IO_CDROM_EXCLUSIVE_LOCK
+//
+// MessageText:
+//
+// Device %1 is locked for exclusive access.
+//
+#define IO_CDROM_EXCLUSIVE_LOCK          ((NTSTATUS)0x40040085L)
+
+
+// codes 0x9f defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// MessageId: IO_WARNING_ADAPTER_FIRMWARE_UPDATED
+//
+// MessageText:
+//
+// Firmware update for Adapter %1 is completed.
+//
+#define IO_WARNING_ADAPTER_FIRMWARE_UPDATED ((NTSTATUS)0x400400A0L)
+
+//
+// WARNING codes
+//
+
+// codes 0x1a, 0x20-0x22 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// MessageId: IO_FILE_QUOTA_FAILED
+//
+// MessageText:
+//
+// The system has encounted an error rebuilding the user disk quota
+// information on device %1 with label "%2".
+//
+#define IO_FILE_QUOTA_FAILED             ((NTSTATUS)0x80040028L)
+
+//
+// MessageId: IO_LOST_DELAYED_WRITE
+//
+// MessageText:
+//
+// {Delayed Write Failed}
+// Windows was unable to save all the data for the file %2. The data has been lost.
+// This error may be caused by a failure of your computer hardware or network connection. Please try to save this file elsewhere.
+//
+#define IO_LOST_DELAYED_WRITE            ((NTSTATUS)0x80040032L)
+
+
+// codes 0x33, 0x34 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// MessageId: IO_WARNING_INTERRUPT_STILL_PENDING
+//
+// MessageText:
+//
+// A pending interrupt was detected on device %1 during a timeout operation.  A
+// large number of these warnings may indicate that the system is not correctly
+// receiving or processing interrupts from the device.
+//
+#define IO_WARNING_INTERRUPT_STILL_PENDING ((NTSTATUS)0x80040035L)
+
+//
+// MessageId: IO_DRIVER_CANCEL_TIMEOUT
+//
+// MessageText:
+//
+// An Io Request to the device %1 did not complete or canceled within the
+// specific timeout. This can occur if the device driver does not set a
+// cancel routine for a given IO request packet.
+//
+#define IO_DRIVER_CANCEL_TIMEOUT         ((NTSTATUS)0x80040036L)
+
+
+// codes 0x38 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// MessageId: IO_WARNING_LOG_FLUSH_FAILED
+//
+// MessageText:
+//
+// The system failed to flush data to the transaction log. Corruption may occur.
+//
+#define IO_WARNING_LOG_FLUSH_FAILED      ((NTSTATUS)0x80040039L)
+
+
+// codes 0x3a, 0x3b defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// MessageId: IO_WARNING_BUS_RESET
+//
+// MessageText:
+//
+// The driver for device %1 performed a bus reset upon request.
+//
+#define IO_WARNING_BUS_RESET             ((NTSTATUS)0x80040076L)
+
+//
+// MessageId: IO_WARNING_RESET
+//
+// MessageText:
+//
+// Reset to device, %1, was issued.
+//
+#define IO_WARNING_RESET                 ((NTSTATUS)0x80040081L)
+
+
+// codes 0x84 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// MessageId: IO_LOST_DELAYED_WRITE_NETWORK_DISCONNECTED
+//
+// MessageText:
+//
+// {Delayed Write Failed}
+// Windows was unable to save all the data for the file %2; the data has been lost.
+// This error may be caused by network connectivity issues. Please try to save this file elsewhere.
+//
+#define IO_LOST_DELAYED_WRITE_NETWORK_DISCONNECTED ((NTSTATUS)0x8004008BL)
+
+//
+// MessageId: IO_LOST_DELAYED_WRITE_NETWORK_SERVER_ERROR
+//
+// MessageText:
+//
+// {Delayed Write Failed}
+// Windows was unable to save all the data for the file %2; the data has been lost.
+// This error was returned by the server on which the file exists. Please try to save this file elsewhere.
+//
+#define IO_LOST_DELAYED_WRITE_NETWORK_SERVER_ERROR ((NTSTATUS)0x8004008CL)
+
+//
+// MessageId: IO_LOST_DELAYED_WRITE_NETWORK_LOCAL_DISK_ERROR
+//
+// MessageText:
+//
+// {Delayed Write Failed}
+// Windows was unable to save all the data for the file %2; the data has been lost.
+// This error may be caused if the device has been removed or the media is write-protected.
+//
+#define IO_LOST_DELAYED_WRITE_NETWORK_LOCAL_DISK_ERROR ((NTSTATUS)0x8004008DL)
+
+
+// codes 0x8e-0x95, 0x97-0x99, 0x9b defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// MessageId: IO_WARNING_DUMP_DISABLED_DEVICE_GONE
+//
+// MessageText:
+//
+// Crash dump is disabled. Crash dump device is not present in the system.
+//
+#define IO_WARNING_DUMP_DISABLED_DEVICE_GONE ((NTSTATUS)0x8004009CL)
+
+
+// codes 0x9e defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// ERROR codes
+//
+
+// codes 0x2 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
 // MessageId: IO_ERR_CONFIGURATION_ERROR
 //
 // MessageText:
@@ -443,6 +670,9 @@ Revision History:
 // Driver or device is incorrectly configured for %1.
 //
 #define IO_ERR_CONFIGURATION_ERROR       ((NTSTATUS)0xC0040003L)
+
+
+// codes 0x4 defined in minkernel\nlsmsg_base\ntiologc_base.mc
 
 //
 // MessageId: IO_ERR_PARITY
@@ -453,6 +683,9 @@ Revision History:
 //
 #define IO_ERR_PARITY                    ((NTSTATUS)0xC0040005L)
 
+
+// codes 0x6,0x7 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
 //
 // MessageId: IO_ERR_OVERRUN_ERROR
 //
@@ -462,6 +695,9 @@ Revision History:
 //
 #define IO_ERR_OVERRUN_ERROR             ((NTSTATUS)0xC0040008L)
 
+
+// codes 0x9 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
 //
 // MessageId: IO_ERR_SEQUENCE
 //
@@ -470,6 +706,9 @@ Revision History:
 // The driver detected an unexpected sequence by the device, %1.
 //
 #define IO_ERR_SEQUENCE                  ((NTSTATUS)0xC004000AL)
+
+
+// codes 0xb defined in minkernel\nlsmsg_base\ntiologc_base.mc
 
 //
 // MessageId: IO_ERR_INTERNAL_ERROR
@@ -498,6 +737,9 @@ Revision History:
 //
 #define IO_ERR_INVALID_IOBASE            ((NTSTATUS)0xC004000EL)
 
+
+// codes 0xf, 0x10 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
 //
 // MessageId: IO_ERR_VERSION
 //
@@ -515,6 +757,9 @@ Revision History:
 // The driver beneath this one has failed in some way for %1.
 //
 #define IO_ERR_LAYERED_FAILURE           ((NTSTATUS)0xC0040012L)
+
+
+// codes 0x13 defined in minkernel\nlsmsg_base\ntiologc_base.mc
 
 //
 // MessageId: IO_ERR_PROTOCOL
@@ -572,6 +817,9 @@ Revision History:
 //
 #define IO_ERR_IRQ_CONFLICT_DETECTED     ((NTSTATUS)0xC0040018L)
 
+
+// codes 0x19 defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
 //
 // MessageId: IO_ERR_DMA_RESOURCE_CONFLICT
 //
@@ -624,54 +872,6 @@ Revision History:
 // The file %2 on device %1 contains a bad disk block.
 //
 #define IO_BAD_BLOCK_WITH_NAME           ((NTSTATUS)0xC004001FL)
-
-//
-// MessageId: IO_FILE_QUOTA_THRESHOLD
-//
-// MessageText:
-//
-// A user hit their quota threshold on volume %2.
-//
-#define IO_FILE_QUOTA_THRESHOLD          ((NTSTATUS)0x40040024L)
-
-//
-// MessageId: IO_FILE_QUOTA_LIMIT
-//
-// MessageText:
-//
-// A user hit their quota limit on volume %2.
-//
-#define IO_FILE_QUOTA_LIMIT              ((NTSTATUS)0x40040025L)
-
-//
-// MessageId: IO_FILE_QUOTA_STARTED
-//
-// MessageText:
-//
-// The system has started rebuilding the user disk quota information on
-// device %1 with label "%2".
-//
-#define IO_FILE_QUOTA_STARTED            ((NTSTATUS)0x40040026L)
-
-//
-// MessageId: IO_FILE_QUOTA_SUCCEEDED
-//
-// MessageText:
-//
-// The system has successfully rebuilt the user disk quota information on
-// device %1 with label "%2".
-//
-#define IO_FILE_QUOTA_SUCCEEDED          ((NTSTATUS)0x40040027L)
-
-//
-// MessageId: IO_FILE_QUOTA_FAILED
-//
-// MessageText:
-//
-// The system has encounted an error rebuilding the user disk quota
-// information on device %1 with label "%2".
-//
-#define IO_FILE_QUOTA_FAILED             ((NTSTATUS)0x80040028L)
 
 //
 // MessageId: IO_FILE_SYSTEM_CORRUPT
@@ -765,39 +965,6 @@ Revision History:
 #define IO_DUMP_PAGE_CONFIG_FAILED       ((NTSTATUS)0xC0040031L)
 
 //
-// MessageId: IO_LOST_DELAYED_WRITE
-//
-// MessageText:
-//
-// {Delayed Write Failed}
-// Windows was unable to save all the data for the file %2. The data has been lost.
-// This error may be caused by a failure of your computer hardware or network connection. Please try to save this file elsewhere.
-//
-#define IO_LOST_DELAYED_WRITE            ((NTSTATUS)0x80040032L)
-
-//
-// MessageId: IO_WARNING_INTERRUPT_STILL_PENDING
-//
-// MessageText:
-//
-// A pending interrupt was detected on device %1 during a timeout operation.  A
-// large number of these warnings may indicate that the system is not correctly
-// receiving or processing interrupts from the device.
-//
-#define IO_WARNING_INTERRUPT_STILL_PENDING ((NTSTATUS)0x80040035L)
-
-//
-// MessageId: IO_DRIVER_CANCEL_TIMEOUT
-//
-// MessageText:
-//
-// An Io Request to the device %1 did not complete or canceled within the
-// specific timeout. This can occur if the device driver does not set a
-// cancel routine for a given IO request packet.
-//
-#define IO_DRIVER_CANCEL_TIMEOUT         ((NTSTATUS)0x80040036L)
-
-//
 // MessageId: IO_FILE_SYSTEM_CORRUPT_WITH_NAME
 //
 // MessageText:
@@ -806,447 +973,6 @@ Revision History:
 // Please run the chkdsk utility on the volume %2.
 //
 #define IO_FILE_SYSTEM_CORRUPT_WITH_NAME ((NTSTATUS)0xC0040037L)
-
-//
-// MessageId: IO_WARNING_LOG_FLUSH_FAILED
-//
-// MessageText:
-//
-// The system failed to flush data to the transaction log. Corruption may occur.
-//
-#define IO_WARNING_LOG_FLUSH_FAILED      ((NTSTATUS)0x80040039L)
-
-//
-// MessageId: MCA_WARNING_CACHE
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected level %3 Cache error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_CACHE                ((NTSTATUS)0x8005003CL)
-
-//
-// MessageId: MCA_ERROR_CACHE
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal level %3 Cache error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_CACHE                  ((NTSTATUS)0xC005003DL)
-
-//
-// MessageId: MCA_WARNING_TLB
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected level %3 translation Buffer error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_TLB                  ((NTSTATUS)0x8005003EL)
-
-//
-// MessageId: MCA_ERROR_TLB
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal level %3 translation Buffer error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_TLB                    ((NTSTATUS)0xC005003FL)
-
-//
-// MessageId: MCA_WARNING_CPU_BUS
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected External/Internal bus error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_CPU_BUS              ((NTSTATUS)0x80050040L)
-
-//
-// MessageId: MCA_ERROR_CPU_BUS
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal External/Internal bus error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_CPU_BUS                ((NTSTATUS)0xC0050041L)
-
-//
-// MessageId: MCA_WARNING_REGISTER_FILE
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected internal CPU register access error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_REGISTER_FILE        ((NTSTATUS)0x80050042L)
-
-//
-// MessageId: MCA_ERROR_REGISTER_FILE
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal internal CPU register access error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_REGISTER_FILE          ((NTSTATUS)0xC0050043L)
-
-//
-// MessageId: MCA_WARNING_MAS
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected Micro Architecture Structure error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_MAS                  ((NTSTATUS)0x80050044L)
-
-//
-// MessageId: MCA_ERROR_MAS
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal Micro Architecture Structure error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_MAS                    ((NTSTATUS)0xC0050045L)
-
-//
-// MessageId: MCA_WARNING_MEM_UNKNOWN
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected ECC memory error at an unknown physical address reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_MEM_UNKNOWN          ((NTSTATUS)0x80050046L)
-
-//
-// MessageId: MCA_ERROR_MEM_UNKNOWN
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal ECC memory error at an unknown physical address reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_MEM_UNKNOWN            ((NTSTATUS)0xC0050047L)
-
-//
-// MessageId: MCA_WARNING_MEM_1_2
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected ECC memory error at physical address %3 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_MEM_1_2              ((NTSTATUS)0x80050048L)
-
-//
-// MessageId: MCA_ERROR_MEM_1_2
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal ECC memory error at physical address %3 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_MEM_1_2                ((NTSTATUS)0xC0050049L)
-
-//
-// MessageId: MCA_WARNING_MEM_1_2_5
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected ECC memory error at physical address %3 on memory module %4 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_MEM_1_2_5            ((NTSTATUS)0x8005004AL)
-
-//
-// MessageId: MCA_ERROR_MEM_1_2_5
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal ECC memory error at physical address %3 on memory module %4 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_MEM_1_2_5              ((NTSTATUS)0xC005004BL)
-
-//
-// MessageId: MCA_WARNING_MEM_1_2_5_4
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected ECC memory error at physical address %3 on memory module %4 on memory card %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_MEM_1_2_5_4          ((NTSTATUS)0x8005004CL)
-
-//
-// MessageId: MCA_ERROR_MEM_1_2_5_4
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal ECC memory error at physical address %3 on memory module %4 on memory card %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_MEM_1_2_5_4            ((NTSTATUS)0xC005004DL)
-
-//
-// MessageId: MCA_WARNING_SYSTEM_EVENT
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected System Event error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_SYSTEM_EVENT         ((NTSTATUS)0x8005004EL)
-
-//
-// MessageId: MCA_ERROR_SYSTEM_EVENT
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal System Event error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_SYSTEM_EVENT           ((NTSTATUS)0xC005004FL)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_PARITY
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI bus Parity error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_PARITY       ((NTSTATUS)0x80050050L)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_PARITY
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI bus Parity error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_PARITY         ((NTSTATUS)0xC0050051L)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_PARITY_NO_INFO
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI bus Parity error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_PARITY_NO_INFO ((NTSTATUS)0x80050052L)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_PARITY_NO_INFO
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI bus Parity error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_PARITY_NO_INFO ((NTSTATUS)0xC0050053L)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_SERR
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI bus SERR error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_SERR         ((NTSTATUS)0x80050054L)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_SERR
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI bus SERR error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_SERR           ((NTSTATUS)0xC0050055L)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_SERR_NO_INFO
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI bus SERR error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_SERR_NO_INFO ((NTSTATUS)0x80050056L)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_SERR_NO_INFO
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI bus SERR error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_SERR_NO_INFO   ((NTSTATUS)0xC0050057L)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_MASTER_ABORT
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI bus Master abort error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_MASTER_ABORT ((NTSTATUS)0x80050058L)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_MASTER_ABORT
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI bus Master abort error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_MASTER_ABORT   ((NTSTATUS)0xC0050059L)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_MASTER_ABORT_NO_INFO
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI bus Master abort error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_MASTER_ABORT_NO_INFO ((NTSTATUS)0x8005005AL)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_MASTER_ABORT_NO_INFO
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI bus Master abort error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_MASTER_ABORT_NO_INFO ((NTSTATUS)0xC005005BL)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_TIMEOUT
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI bus Timeout error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_TIMEOUT      ((NTSTATUS)0x8005005CL)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_TIMEOUT
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI bus Timeout error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_TIMEOUT        ((NTSTATUS)0xC005005DL)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_TIMEOUT_NO_INFO
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI bus Timeout error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_TIMEOUT_NO_INFO ((NTSTATUS)0x8005005EL)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_TIMEOUT_NO_INFO
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI bus Timeout error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_TIMEOUT_NO_INFO ((NTSTATUS)0xC005005FL)
-
-//
-// MessageId: MCA_WARNING_PCI_BUS_UNKNOWN
-//
-// MessageText:
-//
-// Machine Check Event reported is an unknown corrected PCI bus error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_BUS_UNKNOWN      ((NTSTATUS)0x80050060L)
-
-//
-// MessageId: MCA_ERROR_PCI_BUS_UNKNOWN
-//
-// MessageText:
-//
-// Machine Check Event reported is an unknown fatal PCI bus error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_BUS_UNKNOWN        ((NTSTATUS)0xC0050061L)
-
-//
-// MessageId: MCA_WARNING_PCI_DEVICE
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected PCI component error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PCI_DEVICE           ((NTSTATUS)0x80050062L)
-
-//
-// MessageId: MCA_ERROR_PCI_DEVICE
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal PCI component error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PCI_DEVICE             ((NTSTATUS)0xC0050063L)
-
-//
-// MessageId: MCA_WARNING_SMBIOS
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected SMBIOS Device Type %3 error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_SMBIOS               ((NTSTATUS)0x80050064L)
-
-//
-// MessageId: MCA_ERROR_SMBIOS
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal SMBIOS Device Type %3 error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_SMBIOS                 ((NTSTATUS)0xC0050065L)
-
-//
-// MessageId: MCA_WARNING_PLATFORM_SPECIFIC
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected Platform Specific error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_WARNING_PLATFORM_SPECIFIC    ((NTSTATUS)0x80050066L)
-
-//
-// MessageId: MCA_ERROR_PLATFORM_SPECIFIC
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal Platform Specific error reported to CPU %1. %2 additional error(s) are contained within the record.
-//
-#define MCA_ERROR_PLATFORM_SPECIFIC      ((NTSTATUS)0xC0050067L)
-
-//
-// MessageId: MCA_WARNING_UNKNOWN
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected error reported to CPU %1.
-//
-#define MCA_WARNING_UNKNOWN              ((NTSTATUS)0x80050068L)
-
-//
-// MessageId: MCA_ERROR_UNKNOWN
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal error reported to CPU %1.
-//
-#define MCA_ERROR_UNKNOWN                ((NTSTATUS)0xC0050069L)
-
-//
-// MessageId: MCA_WARNING_UNKNOWN_NO_CPU
-//
-// MessageText:
-//
-// Machine Check Event reported is a corrected error.
-//
-#define MCA_WARNING_UNKNOWN_NO_CPU       ((NTSTATUS)0x8005006AL)
-
-//
-// MessageId: MCA_ERROR_UNKNOWN_NO_CPU
-//
-// MessageText:
-//
-// Machine Check Event reported is a fatal error.
-//
-#define MCA_ERROR_UNKNOWN_NO_CPU         ((NTSTATUS)0xC005006BL)
 
 //
 // MessageId: IO_ERR_THREAD_STUCK_IN_DEVICE_DRIVER
@@ -1259,6 +985,288 @@ Revision History:
 // hardware device vendor for any driver updates.
 //
 #define IO_ERR_THREAD_STUCK_IN_DEVICE_DRIVER ((NTSTATUS)0xC004006CL)
+
+//
+// MessageId: IO_ERR_PORT_TIMEOUT
+//
+// MessageText:
+//
+// The driver for device %1 detected a port timeout due to prolonged inactivity. All associated busses were reset in an effort to clear the condition.
+//
+#define IO_ERR_PORT_TIMEOUT              ((NTSTATUS)0xC0040075L)
+
+
+// codes 0x96, 0x9a defined in minkernel\nlsmsg_base\ntiologc_base.mc
+
+//
+// MessageId: IO_ERROR_DUMP_CREATION_ERROR
+//
+// MessageText:
+//
+// Dump file creation failed due to error during dump creation.
+//
+#define IO_ERROR_DUMP_CREATION_ERROR     ((NTSTATUS)0xC00400A1L)
+
+//
+// MessageId: IO_DUMP_CALLBACK_EXCEPTION
+//
+// MessageText:
+//
+// A callback exception was logged during dump. See DumpStack.log for details.
+//
+#define IO_DUMP_CALLBACK_EXCEPTION       ((NTSTATUS)0xC00400A3L)
+
+////////////////////////////////////////////////////////
+// Facility MCA
+//
+//
+// INFORMATIONAL codes
+//
+//
+// MessageId: MCA_INFO_CPU_THERMAL_THROTTLING_REMOVED
+//
+// MessageText:
+//
+// Machine Check Event reported is a CPU thermal throttling event reported from CPU %1. The CPU has dropped below the temperature limit and throttling has been removed. %2 additional error(s) are contained within the record.
+//
+#define MCA_INFO_CPU_THERMAL_THROTTLING_REMOVED ((NTSTATUS)0x40050070L)
+
+//
+// MessageId: MCA_INFO_NO_MORE_CORRECTED_ERROR_LOGS
+//
+// MessageText:
+//
+// The maximum number of Machine Check Event corrected error events that can be saved to the Event Log has been reached. Logging of these events has been disabled.
+//
+#define MCA_INFO_NO_MORE_CORRECTED_ERROR_LOGS ((NTSTATUS)0x40050073L)
+
+//
+// MessageId: MCA_INFO_MEMORY_PAGE_MARKED_BAD
+//
+// MessageText:
+//
+// The memory page at physical address %1 has encountered multiple corrected hardware error events. As a result it will no longer be used by Windows.
+//
+#define MCA_INFO_MEMORY_PAGE_MARKED_BAD  ((NTSTATUS)0x40050074L)
+
+//
+// WARNING codes
+//
+//
+// MessageId: MCA_WARNING_CACHE
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected level %3 Cache error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_CACHE                ((NTSTATUS)0x8005003CL)
+
+//
+// MessageId: MCA_WARNING_TLB
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected level %3 translation Buffer error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_TLB                  ((NTSTATUS)0x8005003EL)
+
+//
+// MessageId: MCA_WARNING_CPU_BUS
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected External/Internal bus error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_CPU_BUS              ((NTSTATUS)0x80050040L)
+
+//
+// MessageId: MCA_WARNING_REGISTER_FILE
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected internal CPU register access error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_REGISTER_FILE        ((NTSTATUS)0x80050042L)
+
+//
+// MessageId: MCA_WARNING_MAS
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected Micro Architecture Structure error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_MAS                  ((NTSTATUS)0x80050044L)
+
+//
+// MessageId: MCA_WARNING_MEM_UNKNOWN
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected ECC memory error at an unknown physical address reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_MEM_UNKNOWN          ((NTSTATUS)0x80050046L)
+
+//
+// MessageId: MCA_WARNING_MEM_1_2
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected ECC memory error at physical address %3 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_MEM_1_2              ((NTSTATUS)0x80050048L)
+
+//
+// MessageId: MCA_WARNING_MEM_1_2_5
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected ECC memory error at physical address %3 on memory module %4 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_MEM_1_2_5            ((NTSTATUS)0x8005004AL)
+
+//
+// MessageId: MCA_WARNING_MEM_1_2_5_4
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected ECC memory error at physical address %3 on memory module %4 on memory card %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_MEM_1_2_5_4          ((NTSTATUS)0x8005004CL)
+
+//
+// MessageId: MCA_WARNING_SYSTEM_EVENT
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected System Event error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_SYSTEM_EVENT         ((NTSTATUS)0x8005004EL)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_PARITY
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI bus Parity error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_PARITY       ((NTSTATUS)0x80050050L)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_PARITY_NO_INFO
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI bus Parity error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_PARITY_NO_INFO ((NTSTATUS)0x80050052L)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_SERR
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI bus SERR error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_SERR         ((NTSTATUS)0x80050054L)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_SERR_NO_INFO
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI bus SERR error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_SERR_NO_INFO ((NTSTATUS)0x80050056L)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_MASTER_ABORT
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI bus Master abort error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_MASTER_ABORT ((NTSTATUS)0x80050058L)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_MASTER_ABORT_NO_INFO
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI bus Master abort error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_MASTER_ABORT_NO_INFO ((NTSTATUS)0x8005005AL)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_TIMEOUT
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI bus Timeout error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_TIMEOUT      ((NTSTATUS)0x8005005CL)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_TIMEOUT_NO_INFO
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI bus Timeout error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_TIMEOUT_NO_INFO ((NTSTATUS)0x8005005EL)
+
+//
+// MessageId: MCA_WARNING_PCI_BUS_UNKNOWN
+//
+// MessageText:
+//
+// Machine Check Event reported is an unknown corrected PCI bus error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_BUS_UNKNOWN      ((NTSTATUS)0x80050060L)
+
+//
+// MessageId: MCA_WARNING_PCI_DEVICE
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected PCI component error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PCI_DEVICE           ((NTSTATUS)0x80050062L)
+
+//
+// MessageId: MCA_WARNING_SMBIOS
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected SMBIOS Device Type %3 error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_SMBIOS               ((NTSTATUS)0x80050064L)
+
+//
+// MessageId: MCA_WARNING_PLATFORM_SPECIFIC
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected Platform Specific error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_WARNING_PLATFORM_SPECIFIC    ((NTSTATUS)0x80050066L)
+
+//
+// MessageId: MCA_WARNING_UNKNOWN
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected error reported to CPU %1.
+//
+#define MCA_WARNING_UNKNOWN              ((NTSTATUS)0x80050068L)
+
+//
+// MessageId: MCA_WARNING_UNKNOWN_NO_CPU
+//
+// MessageText:
+//
+// Machine Check Event reported is a corrected error.
+//
+#define MCA_WARNING_UNKNOWN_NO_CPU       ((NTSTATUS)0x8005006AL)
 
 //
 // MessageId: MCA_WARNING_CMC_THRESHOLD_EXCEEDED
@@ -1288,15 +1296,6 @@ Revision History:
 #define MCA_WARNING_CPU_THERMAL_THROTTLED ((NTSTATUS)0x8005006FL)
 
 //
-// MessageId: MCA_INFO_CPU_THERMAL_THROTTLING_REMOVED
-//
-// MessageText:
-//
-// Machine Check Event reported is a CPU thermal throttling event reported from CPU %1. The CPU has dropped below the temperature limit and throttling has been removed. %2 additional error(s) are contained within the record.
-//
-#define MCA_INFO_CPU_THERMAL_THROTTLING_REMOVED ((NTSTATUS)0x40050070L)
-
-//
 // MessageId: MCA_WARNING_CPU
 //
 // MessageText:
@@ -1306,6 +1305,225 @@ Revision History:
 #define MCA_WARNING_CPU                  ((NTSTATUS)0x80050071L)
 
 //
+// ERROR codes
+//
+//
+// MessageId: MCA_ERROR_CACHE
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal level %3 Cache error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_CACHE                  ((NTSTATUS)0xC005003DL)
+
+//
+// MessageId: MCA_ERROR_TLB
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal level %3 translation Buffer error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_TLB                    ((NTSTATUS)0xC005003FL)
+
+//
+// MessageId: MCA_ERROR_CPU_BUS
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal External/Internal bus error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_CPU_BUS                ((NTSTATUS)0xC0050041L)
+
+//
+// MessageId: MCA_ERROR_REGISTER_FILE
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal internal CPU register access error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_REGISTER_FILE          ((NTSTATUS)0xC0050043L)
+
+//
+// MessageId: MCA_ERROR_MAS
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal Micro Architecture Structure error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_MAS                    ((NTSTATUS)0xC0050045L)
+
+//
+// MessageId: MCA_ERROR_MEM_UNKNOWN
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal ECC memory error at an unknown physical address reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_MEM_UNKNOWN            ((NTSTATUS)0xC0050047L)
+
+//
+// MessageId: MCA_ERROR_MEM_1_2
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal ECC memory error at physical address %3 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_MEM_1_2                ((NTSTATUS)0xC0050049L)
+
+//
+// MessageId: MCA_ERROR_MEM_1_2_5
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal ECC memory error at physical address %3 on memory module %4 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_MEM_1_2_5              ((NTSTATUS)0xC005004BL)
+
+//
+// MessageId: MCA_ERROR_MEM_1_2_5_4
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal ECC memory error at physical address %3 on memory module %4 on memory card %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_MEM_1_2_5_4            ((NTSTATUS)0xC005004DL)
+
+//
+// MessageId: MCA_ERROR_SYSTEM_EVENT
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal System Event error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_SYSTEM_EVENT           ((NTSTATUS)0xC005004FL)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_PARITY
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI bus Parity error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_PARITY         ((NTSTATUS)0xC0050051L)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_PARITY_NO_INFO
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI bus Parity error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_PARITY_NO_INFO ((NTSTATUS)0xC0050053L)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_SERR
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI bus SERR error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_SERR           ((NTSTATUS)0xC0050055L)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_SERR_NO_INFO
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI bus SERR error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_SERR_NO_INFO   ((NTSTATUS)0xC0050057L)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_MASTER_ABORT
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI bus Master abort error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_MASTER_ABORT   ((NTSTATUS)0xC0050059L)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_MASTER_ABORT_NO_INFO
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI bus Master abort error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_MASTER_ABORT_NO_INFO ((NTSTATUS)0xC005005BL)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_TIMEOUT
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI bus Timeout error during a transaction type %3 at address %4 on PCI bus %5 reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_TIMEOUT        ((NTSTATUS)0xC005005DL)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_TIMEOUT_NO_INFO
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI bus Timeout error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_TIMEOUT_NO_INFO ((NTSTATUS)0xC005005FL)
+
+//
+// MessageId: MCA_ERROR_PCI_BUS_UNKNOWN
+//
+// MessageText:
+//
+// Machine Check Event reported is an unknown fatal PCI bus error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_BUS_UNKNOWN        ((NTSTATUS)0xC0050061L)
+
+//
+// MessageId: MCA_ERROR_PCI_DEVICE
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal PCI component error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PCI_DEVICE             ((NTSTATUS)0xC0050063L)
+
+//
+// MessageId: MCA_ERROR_SMBIOS
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal SMBIOS Device Type %3 error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_SMBIOS                 ((NTSTATUS)0xC0050065L)
+
+//
+// MessageId: MCA_ERROR_PLATFORM_SPECIFIC
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal Platform Specific error reported to CPU %1. %2 additional error(s) are contained within the record.
+//
+#define MCA_ERROR_PLATFORM_SPECIFIC      ((NTSTATUS)0xC0050067L)
+
+//
+// MessageId: MCA_ERROR_UNKNOWN
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal error reported to CPU %1.
+//
+#define MCA_ERROR_UNKNOWN                ((NTSTATUS)0xC0050069L)
+
+//
+// MessageId: MCA_ERROR_UNKNOWN_NO_CPU
+//
+// MessageText:
+//
+// Machine Check Event reported is a fatal error.
+//
+#define MCA_ERROR_UNKNOWN_NO_CPU         ((NTSTATUS)0xC005006BL)
+
+//
 // MessageId: MCA_ERROR_CPU
 //
 // MessageText:
@@ -1313,51 +1531,6 @@ Revision History:
 // Machine Check Event reported is a fatal CPU error reported to CPU %1. %2 additional error(s) are contained within the record.
 //
 #define MCA_ERROR_CPU                    ((NTSTATUS)0xC0050072L)
-
-//
-// MessageId: MCA_INFO_NO_MORE_CORRECTED_ERROR_LOGS
-//
-// MessageText:
-//
-// The maximum number of Machine Check Event corrected error events that can be saved to the Event Log has been reached. Logging of these events has been disabled.
-//
-#define MCA_INFO_NO_MORE_CORRECTED_ERROR_LOGS ((NTSTATUS)0x40050073L)
-
-//
-// MessageId: MCA_INFO_MEMORY_PAGE_MARKED_BAD
-//
-// MessageText:
-//
-// The memory page at physical address %1 has encountered multiple corrected hardware error events. As a result it will no longer be used by Windows.
-//
-#define MCA_INFO_MEMORY_PAGE_MARKED_BAD  ((NTSTATUS)0x40050074L)
-
-//
-// MessageId: IO_ERR_PORT_TIMEOUT
-//
-// MessageText:
-//
-// The driver for device %1 detected a port timeout due to prolonged inactivity. All associated busses were reset in an effort to clear the condition.
-//
-#define IO_ERR_PORT_TIMEOUT              ((NTSTATUS)0xC0040075L)
-
-//
-// MessageId: IO_WARNING_BUS_RESET
-//
-// MessageText:
-//
-// The driver for device %1 performed a bus reset upon request.
-//
-#define IO_WARNING_BUS_RESET             ((NTSTATUS)0x80040076L)
-
-//
-// MessageId: IO_INFO_THROTTLE_COMPLETE
-//
-// MessageText:
-//
-// The driver for device %1 delayed non-paging Io requests for %2 ms to recover from a low memory condition.
-//
-#define IO_INFO_THROTTLE_COMPLETE        ((NTSTATUS)0x40040077L)
 
 //
 // MessageId: MCA_MEMORYHIERARCHY_ERROR
@@ -1431,83 +1604,38 @@ Revision History:
 //
 #define MCA_FRC_ERROR                    ((NTSTATUS)0xC0050080L)
 
+////////////////////////////////////////////////////////
+// Facility VOLMGR
 //
-// MessageId: IO_WARNING_RESET
+//
+// WARNING codes
+//
+//
+// MessageId: VOLMGR_KSR_ERROR
 //
 // MessageText:
 //
-// Reset to device, %1, was issued.
+// There was an error validating KSR data - operation %2 status %3.
 //
-#define IO_WARNING_RESET                 ((NTSTATUS)0x80040081L)
+#define VOLMGR_KSR_ERROR                 ((NTSTATUS)0x80380001L)
 
 //
-// MessageId: IO_CDROM_EXCLUSIVE_LOCK
+// MessageId: VOLMGR_KSR_READ_ERROR
 //
 // MessageText:
 //
-// Device %1 is locked for exclusive access.
+// Failed to read KSR data - disk %2 sector %3 operation %4 status %5.
 //
-#define IO_CDROM_EXCLUSIVE_LOCK          ((NTSTATUS)0x40040085L)
+#define VOLMGR_KSR_READ_ERROR            ((NTSTATUS)0x80380002L)
 
 //
-// MessageId: IO_LOST_DELAYED_WRITE_NETWORK_DISCONNECTED
+// MessageId: VOLMGR_KSR_BYPASS
 //
 // MessageText:
 //
-// {Delayed Write Failed}
-// Windows was unable to save all the data for the file %2; the data has been lost.
-// This error may be caused by network connectivity issues. Please try to save this file elsewhere.
+// A %2 operation took place during KSR - disk %3 offset %4.
 //
-#define IO_LOST_DELAYED_WRITE_NETWORK_DISCONNECTED ((NTSTATUS)0x8004008BL)
-
-//
-// MessageId: IO_LOST_DELAYED_WRITE_NETWORK_SERVER_ERROR
-//
-// MessageText:
-//
-// {Delayed Write Failed}
-// Windows was unable to save all the data for the file %2; the data has been lost.
-// This error was returned by the server on which the file exists. Please try to save this file elsewhere.
-//
-#define IO_LOST_DELAYED_WRITE_NETWORK_SERVER_ERROR ((NTSTATUS)0x8004008CL)
-
-//
-// MessageId: IO_LOST_DELAYED_WRITE_NETWORK_LOCAL_DISK_ERROR
-//
-// MessageText:
-//
-// {Delayed Write Failed}
-// Windows was unable to save all the data for the file %2; the data has been lost.
-// This error may be caused if the device has been removed or the media is write-protected.
-//
-#define IO_LOST_DELAYED_WRITE_NETWORK_LOCAL_DISK_ERROR ((NTSTATUS)0x8004008DL)
-
-//
-// MessageId: IO_WARNING_DUMP_DISABLED_DEVICE_GONE
-//
-// MessageText:
-//
-// Crash dump is disabled. Crash dump device is not present in the system.
-//
-#define IO_WARNING_DUMP_DISABLED_DEVICE_GONE ((NTSTATUS)0x8004009CL)
-
-//
-// MessageId: IO_WARNING_ADAPTER_FIRMWARE_UPDATED
-//
-// MessageText:
-//
-// Firmware update for Adapter %1 is completed.
-//
-#define IO_WARNING_ADAPTER_FIRMWARE_UPDATED ((NTSTATUS)0x400400A0L)
-
-//
-// MessageId: IO_ERROR_DUMP_CREATION_ERROR
-//
-// MessageText:
-//
-// Dump file creation failed due to error during dump creation.
-//
-#define IO_ERROR_DUMP_CREATION_ERROR     ((NTSTATUS)0xC00400A1L)
+#define VOLMGR_KSR_BYPASS                ((NTSTATUS)0x80380003L)
 
 #endif /* _NTIOLOGC_ */
 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -1026,28 +1034,34 @@ EXTERN_C const IID IID_IMSMQQuery;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQuery * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQuery * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQuery * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQuery * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQuery * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQuery * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1056,6 +1070,7 @@ EXTERN_C const IID IID_IMSMQQuery;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQuery * This,
             /* [annotation][in] */ 
@@ -1075,6 +1090,7 @@ EXTERN_C const IID IID_IMSMQQuery;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery, LookupQueue)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *LookupQueue )( 
             __RPC__in IMSMQQuery * This,
             /* [optional][in] */ __RPC__in VARIANT *QueueGuid,
@@ -1252,28 +1268,34 @@ EXTERN_C const IID IID_IMSMQQueueInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1282,6 +1304,7 @@ EXTERN_C const IID IID_IMSMQQueueInfo;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueInfo * This,
             /* [annotation][in] */ 
@@ -1301,123 +1324,153 @@ EXTERN_C const IID IID_IMSMQQueueInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_QueueGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueGuid )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_ServiceTypeGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceTypeGuid )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidServiceType);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_ServiceTypeGuid)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_ServiceTypeGuid )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ __RPC__in BSTR bstrGuidServiceType);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_Label)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_Label)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Label )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ __RPC__in BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_PathName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PathName )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_PathName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PathName )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ __RPC__in BSTR bstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_FormatName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_FormatName )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_FormatName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_FormatName )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ __RPC__in BSTR bstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_IsTransactional)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsTransactional )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out Boolean *pisTransactional);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_PrivLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivLevel )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out long *plPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_PrivLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PrivLevel )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ long lPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_Journal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Journal )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out long *plJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_Journal)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Journal )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ long lJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_Quota)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Quota )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out long *plQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_Quota)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Quota )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ long lQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_BasePriority)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BasePriority )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out long *plBasePriority);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_BasePriority)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_BasePriority )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ long lBasePriority);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_CreateTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CreateTime )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarCreateTime);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_ModifyTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ModifyTime )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarModifyTime);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_Authenticate)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Authenticate )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out long *plAuthenticate);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_Authenticate)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Authenticate )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ long lAuthenticate);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_JournalQuota)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_JournalQuota )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out long *plJournalQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, put_JournalQuota)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_JournalQuota )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ long lJournalQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, get_IsWorldReadable)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsWorldReadable )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [retval][out] */ __RPC__out Boolean *pisWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, Create)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [optional][in] */ __RPC__in VARIANT *IsTransactional,
             /* [optional][in] */ __RPC__in VARIANT *IsWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, Delete)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IMSMQQueueInfo * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, Open)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IMSMQQueueInfo * This,
             /* [in] */ long Access,
             /* [in] */ long ShareMode,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueue **ppq);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, Refresh)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IMSMQQueueInfo * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo, Update)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in IMSMQQueueInfo * This);
         
@@ -1684,28 +1737,34 @@ EXTERN_C const IID IID_IMSMQQueueInfo2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1714,6 +1773,7 @@ EXTERN_C const IID IID_IMSMQQueueInfo2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueInfo2 * This,
             /* [annotation][in] */ 
@@ -1733,138 +1793,172 @@ EXTERN_C const IID IID_IMSMQQueueInfo2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_QueueGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueGuid )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_ServiceTypeGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceTypeGuid )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidServiceType);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_ServiceTypeGuid)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_ServiceTypeGuid )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ __RPC__in BSTR bstrGuidServiceType);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_Label)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_Label)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Label )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ __RPC__in BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_PathName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PathName )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_PathName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PathName )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ __RPC__in BSTR bstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_FormatName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_FormatName )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_FormatName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_FormatName )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ __RPC__in BSTR bstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_IsTransactional)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsTransactional )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out Boolean *pisTransactional);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_PrivLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivLevel )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out long *plPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_PrivLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PrivLevel )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ long lPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_Journal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Journal )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out long *plJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_Journal)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Journal )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ long lJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_Quota)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Quota )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out long *plQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_Quota)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Quota )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ long lQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_BasePriority)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BasePriority )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out long *plBasePriority);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_BasePriority)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_BasePriority )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ long lBasePriority);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_CreateTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CreateTime )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarCreateTime);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_ModifyTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ModifyTime )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarModifyTime);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_Authenticate)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Authenticate )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out long *plAuthenticate);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_Authenticate)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Authenticate )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ long lAuthenticate);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_JournalQuota)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_JournalQuota )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out long *plJournalQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_JournalQuota)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_JournalQuota )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ long lJournalQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_IsWorldReadable)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsWorldReadable )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out Boolean *pisWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, Create)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [optional][in] */ __RPC__in VARIANT *IsTransactional,
             /* [optional][in] */ __RPC__in VARIANT *IsWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, Delete)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IMSMQQueueInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, Open)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ long Access,
             /* [in] */ long ShareMode,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueue2 **ppq);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, Refresh)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IMSMQQueueInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, Update)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in IMSMQQueueInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_PathNameDNS)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PathNameDNS )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathNameDNS);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, get_Security)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Security )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSecurity);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo2, put_Security)
         /* [id][propput][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_Security )( 
             __RPC__in IMSMQQueueInfo2 * This,
             /* [in] */ VARIANT varSecurity);
@@ -2159,28 +2253,34 @@ EXTERN_C const IID IID_IMSMQQueueInfo3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueInfo3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueInfo3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2189,6 +2289,7 @@ EXTERN_C const IID IID_IMSMQQueueInfo3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueInfo3 * This,
             /* [annotation][in] */ 
@@ -2208,158 +2309,197 @@ EXTERN_C const IID IID_IMSMQQueueInfo3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_QueueGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueGuid )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_ServiceTypeGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceTypeGuid )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidServiceType);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_ServiceTypeGuid)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_ServiceTypeGuid )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ __RPC__in BSTR bstrGuidServiceType);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_Label)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_Label)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Label )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ __RPC__in BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_PathName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PathName )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_PathName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PathName )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ __RPC__in BSTR bstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_FormatName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_FormatName )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_FormatName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_FormatName )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ __RPC__in BSTR bstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_IsTransactional)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsTransactional )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out Boolean *pisTransactional);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_PrivLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivLevel )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out long *plPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_PrivLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PrivLevel )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ long lPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_Journal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Journal )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out long *plJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_Journal)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Journal )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ long lJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_Quota)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Quota )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out long *plQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_Quota)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Quota )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ long lQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_BasePriority)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BasePriority )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out long *plBasePriority);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_BasePriority)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_BasePriority )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ long lBasePriority);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_CreateTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CreateTime )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarCreateTime);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_ModifyTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ModifyTime )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarModifyTime);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_Authenticate)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Authenticate )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out long *plAuthenticate);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_Authenticate)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Authenticate )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ long lAuthenticate);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_JournalQuota)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_JournalQuota )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out long *plJournalQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_JournalQuota)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_JournalQuota )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ long lJournalQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_IsWorldReadable)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsWorldReadable )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out Boolean *pisWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, Create)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [optional][in] */ __RPC__in VARIANT *IsTransactional,
             /* [optional][in] */ __RPC__in VARIANT *IsWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, Delete)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IMSMQQueueInfo3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, Open)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ long Access,
             /* [in] */ long ShareMode,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueue3 **ppq);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, Refresh)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IMSMQQueueInfo3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, Update)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in IMSMQQueueInfo3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_PathNameDNS)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PathNameDNS )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathNameDNS);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_Security)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Security )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSecurity);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_Security)
         /* [id][propput][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_Security )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ VARIANT varSecurity);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_IsTransactional2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsTransactional2 )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisTransactional);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_IsWorldReadable2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsWorldReadable2 )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_MulticastAddress)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MulticastAddress )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMulticastAddress);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, put_MulticastAddress)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MulticastAddress )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [in] */ __RPC__in BSTR bstrMulticastAddress);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo3, get_ADsPath)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ADsPath )( 
             __RPC__in IMSMQQueueInfo3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrADsPath);
@@ -2669,28 +2809,34 @@ EXTERN_C const IID IID_IMSMQQueueInfo4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueInfo4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueInfo4 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2699,6 +2845,7 @@ EXTERN_C const IID IID_IMSMQQueueInfo4;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueInfo4 * This,
             /* [annotation][in] */ 
@@ -2718,158 +2865,197 @@ EXTERN_C const IID IID_IMSMQQueueInfo4;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_QueueGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueGuid )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_ServiceTypeGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ServiceTypeGuid )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidServiceType);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_ServiceTypeGuid)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_ServiceTypeGuid )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ __RPC__in BSTR bstrGuidServiceType);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_Label)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_Label)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Label )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ __RPC__in BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_PathName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PathName )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_PathName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PathName )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ __RPC__in BSTR bstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_FormatName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_FormatName )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_FormatName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_FormatName )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ __RPC__in BSTR bstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_IsTransactional)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsTransactional )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out Boolean *pisTransactional);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_PrivLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivLevel )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out long *plPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_PrivLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PrivLevel )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ long lPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_Journal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Journal )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out long *plJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_Journal)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Journal )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ long lJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_Quota)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Quota )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out long *plQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_Quota)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Quota )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ long lQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_BasePriority)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BasePriority )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out long *plBasePriority);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_BasePriority)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_BasePriority )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ long lBasePriority);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_CreateTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CreateTime )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarCreateTime);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_ModifyTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ModifyTime )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarModifyTime);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_Authenticate)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Authenticate )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out long *plAuthenticate);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_Authenticate)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Authenticate )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ long lAuthenticate);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_JournalQuota)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_JournalQuota )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out long *plJournalQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_JournalQuota)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_JournalQuota )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ long lJournalQuota);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_IsWorldReadable)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsWorldReadable )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out Boolean *pisWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, Create)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [optional][in] */ __RPC__in VARIANT *IsTransactional,
             /* [optional][in] */ __RPC__in VARIANT *IsWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, Delete)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IMSMQQueueInfo4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, Open)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ long Access,
             /* [in] */ long ShareMode,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueue4 **ppq);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, Refresh)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IMSMQQueueInfo4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, Update)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in IMSMQQueueInfo4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_PathNameDNS)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PathNameDNS )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathNameDNS);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_Security)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Security )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSecurity);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_Security)
         /* [id][propput][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_Security )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ VARIANT varSecurity);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_IsTransactional2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsTransactional2 )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisTransactional);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_IsWorldReadable2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsWorldReadable2 )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisWorldReadable);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_MulticastAddress)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MulticastAddress )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMulticastAddress);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, put_MulticastAddress)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MulticastAddress )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [in] */ __RPC__in BSTR bstrMulticastAddress);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfo4, get_ADsPath)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ADsPath )( 
             __RPC__in IMSMQQueueInfo4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrADsPath);
@@ -3118,28 +3304,34 @@ EXTERN_C const IID IID_IMSMQQueue;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueue * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueue * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueue * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueue * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueue * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueue * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3148,6 +3340,7 @@ EXTERN_C const IID IID_IMSMQQueue;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueue * This,
             /* [annotation][in] */ 
@@ -3167,29 +3360,36 @@ EXTERN_C const IID IID_IMSMQQueue;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, get_Access)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Access )( 
             __RPC__in IMSMQQueue * This,
             /* [retval][out] */ __RPC__out long *plAccess);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, get_ShareMode)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ShareMode )( 
             __RPC__in IMSMQQueue * This,
             /* [retval][out] */ __RPC__out long *plShareMode);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, get_QueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueInfo )( 
             __RPC__in IMSMQQueue * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfo);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, get_Handle)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in IMSMQQueue * This,
             /* [retval][out] */ __RPC__out long *plHandle);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, get_IsOpen)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsOpen )( 
             __RPC__in IMSMQQueue * This,
             /* [retval][out] */ __RPC__out Boolean *pisOpen);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, Close)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IMSMQQueue * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, Receive)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Receive )( 
             __RPC__in IMSMQQueue * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -3198,6 +3398,7 @@ EXTERN_C const IID IID_IMSMQQueue;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, Peek)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Peek )( 
             __RPC__in IMSMQQueue * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3205,15 +3406,18 @@ EXTERN_C const IID IID_IMSMQQueue;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, EnableNotification)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *EnableNotification )( 
             __RPC__in IMSMQQueue * This,
             /* [in] */ __RPC__in_opt IMSMQEvent *Event,
             /* [optional][in] */ __RPC__in VARIANT *Cursor,
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, Reset)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMSMQQueue * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, ReceiveCurrent)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveCurrent )( 
             __RPC__in IMSMQQueue * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -3222,6 +3426,7 @@ EXTERN_C const IID IID_IMSMQQueue;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, PeekNext)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNext )( 
             __RPC__in IMSMQQueue * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3229,6 +3434,7 @@ EXTERN_C const IID IID_IMSMQQueue;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue, PeekCurrent)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekCurrent )( 
             __RPC__in IMSMQQueue * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3442,28 +3648,34 @@ EXTERN_C const IID IID_IMSMQQueue2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueue2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueue2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueue2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueue2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueue2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueue2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3472,6 +3684,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueue2 * This,
             /* [annotation][in] */ 
@@ -3491,29 +3704,36 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, get_Access)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Access )( 
             __RPC__in IMSMQQueue2 * This,
             /* [retval][out] */ __RPC__out long *plAccess);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, get_ShareMode)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ShareMode )( 
             __RPC__in IMSMQQueue2 * This,
             /* [retval][out] */ __RPC__out long *plShareMode);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, get_QueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueInfo )( 
             __RPC__in IMSMQQueue2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfo);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, get_Handle)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in IMSMQQueue2 * This,
             /* [retval][out] */ __RPC__out long *plHandle);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, get_IsOpen)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsOpen )( 
             __RPC__in IMSMQQueue2 * This,
             /* [retval][out] */ __RPC__out Boolean *pisOpen);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, Close)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IMSMQQueue2 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, Receive_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Receive_v1 )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -3522,6 +3742,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, Peek_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Peek_v1 )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3529,15 +3750,18 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, EnableNotification)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *EnableNotification )( 
             __RPC__in IMSMQQueue2 * This,
             /* [in] */ __RPC__in_opt IMSMQEvent2 *Event,
             /* [optional][in] */ __RPC__in VARIANT *Cursor,
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, Reset)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMSMQQueue2 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, ReceiveCurrent_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveCurrent_v1 )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -3546,6 +3770,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, PeekNext_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNext_v1 )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3553,6 +3778,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, PeekCurrent_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekCurrent_v1 )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3560,6 +3786,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, Receive)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Receive )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -3569,6 +3796,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage2 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, Peek)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Peek )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3577,6 +3805,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage2 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, ReceiveCurrent)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveCurrent )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -3586,6 +3815,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage2 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, PeekNext)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNext )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3594,6 +3824,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage2 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, PeekCurrent)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekCurrent )( 
             __RPC__in IMSMQQueue2 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3602,6 +3833,7 @@ EXTERN_C const IID IID_IMSMQQueue2;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage2 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueue2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -3909,28 +4141,34 @@ EXTERN_C const IID IID_IMSMQQueue3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueue3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueue3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueue3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3939,6 +4177,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueue3 * This,
             /* [annotation][in] */ 
@@ -3958,29 +4197,36 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, get_Access)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Access )( 
             __RPC__in IMSMQQueue3 * This,
             /* [retval][out] */ __RPC__out long *plAccess);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, get_ShareMode)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ShareMode )( 
             __RPC__in IMSMQQueue3 * This,
             /* [retval][out] */ __RPC__out long *plShareMode);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, get_QueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueInfo )( 
             __RPC__in IMSMQQueue3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo3 **ppqinfo);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, get_Handle)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in IMSMQQueue3 * This,
             /* [retval][out] */ __RPC__out long *plHandle);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, get_IsOpen)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsOpen )( 
             __RPC__in IMSMQQueue3 * This,
             /* [retval][out] */ __RPC__out Boolean *pisOpen);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, Close)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IMSMQQueue3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, Receive_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Receive_v1 )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -3989,6 +4235,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, Peek_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Peek_v1 )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -3996,15 +4243,18 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, EnableNotification)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *EnableNotification )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ __RPC__in_opt IMSMQEvent3 *Event,
             /* [optional][in] */ __RPC__in VARIANT *Cursor,
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, Reset)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMSMQQueue3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, ReceiveCurrent_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveCurrent_v1 )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4013,6 +4263,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekNext_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNext_v1 )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4020,6 +4271,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekCurrent_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekCurrent_v1 )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4027,6 +4279,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, Receive)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Receive )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4036,6 +4289,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, Peek)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Peek )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4044,6 +4298,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, ReceiveCurrent)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveCurrent )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4053,6 +4308,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekNext)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNext )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4061,6 +4317,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekCurrent)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekCurrent )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4069,14 +4326,17 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueue3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, get_Handle2)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Handle2 )( 
             __RPC__in IMSMQQueue3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarHandle);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, ReceiveByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ VARIANT LookupId,
@@ -4086,6 +4346,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, ReceiveNextByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveNextByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ VARIANT LookupId,
@@ -4095,6 +4356,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, ReceivePreviousByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceivePreviousByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ VARIANT LookupId,
@@ -4104,6 +4366,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, ReceiveFirstByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveFirstByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4112,6 +4375,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, ReceiveLastByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveLastByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4120,6 +4384,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ VARIANT LookupId,
@@ -4128,6 +4393,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekNextByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNextByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ VARIANT LookupId,
@@ -4136,6 +4402,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekPreviousByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekPreviousByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [in] */ VARIANT LookupId,
@@ -4144,6 +4411,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekFirstByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekFirstByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4151,6 +4419,7 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, PeekLastByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekLastByLookupId )( 
             __RPC__in IMSMQQueue3 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4158,9 +4427,11 @@ EXTERN_C const IID IID_IMSMQQueue3;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage3 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, Purge)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Purge )( 
             __RPC__in IMSMQQueue3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue3, get_IsOpen2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsOpen2 )( 
             __RPC__in IMSMQQueue3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisOpen);
@@ -4515,28 +4786,34 @@ EXTERN_C const IID IID_IMSMQQueue4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueue4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueue4 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueue4 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4545,6 +4822,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueue4 * This,
             /* [annotation][in] */ 
@@ -4564,29 +4842,36 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, get_Access)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Access )( 
             __RPC__in IMSMQQueue4 * This,
             /* [retval][out] */ __RPC__out long *plAccess);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, get_ShareMode)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ShareMode )( 
             __RPC__in IMSMQQueue4 * This,
             /* [retval][out] */ __RPC__out long *plShareMode);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, get_QueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueInfo )( 
             __RPC__in IMSMQQueue4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo4 **ppqinfo);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, get_Handle)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in IMSMQQueue4 * This,
             /* [retval][out] */ __RPC__out long *plHandle);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, get_IsOpen)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsOpen )( 
             __RPC__in IMSMQQueue4 * This,
             /* [retval][out] */ __RPC__out Boolean *pisOpen);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, Close)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IMSMQQueue4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, Receive_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Receive_v1 )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4595,6 +4880,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, Peek_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Peek_v1 )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4602,15 +4888,18 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, EnableNotification)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *EnableNotification )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ __RPC__in_opt IMSMQEvent3 *Event,
             /* [optional][in] */ __RPC__in VARIANT *Cursor,
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, Reset)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMSMQQueue4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, ReceiveCurrent_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveCurrent_v1 )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4619,6 +4908,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekNext_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNext_v1 )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4626,6 +4916,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekCurrent_v1)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekCurrent_v1 )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4633,6 +4924,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *ReceiveTimeout,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, Receive)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Receive )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4642,6 +4934,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, Peek)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Peek )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4650,6 +4943,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, ReceiveCurrent)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveCurrent )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4659,6 +4953,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekNext)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNext )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4667,6 +4962,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekCurrent)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekCurrent )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4675,14 +4971,17 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueue4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, get_Handle2)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Handle2 )( 
             __RPC__in IMSMQQueue4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarHandle);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, ReceiveByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ VARIANT LookupId,
@@ -4692,6 +4991,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, ReceiveNextByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveNextByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ VARIANT LookupId,
@@ -4701,6 +5001,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, ReceivePreviousByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceivePreviousByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ VARIANT LookupId,
@@ -4710,6 +5011,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, ReceiveFirstByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveFirstByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4718,6 +5020,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, ReceiveLastByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveLastByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *Transaction,
@@ -4726,6 +5029,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ VARIANT LookupId,
@@ -4734,6 +5038,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekNextByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekNextByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ VARIANT LookupId,
@@ -4742,6 +5047,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekPreviousByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekPreviousByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ VARIANT LookupId,
@@ -4750,6 +5056,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekFirstByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekFirstByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4757,6 +5064,7 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, PeekLastByLookupId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *PeekLastByLookupId )( 
             __RPC__in IMSMQQueue4 * This,
             /* [optional][in] */ __RPC__in VARIANT *WantDestinationQueue,
@@ -4764,13 +5072,16 @@ EXTERN_C const IID IID_IMSMQQueue4;
             /* [optional][in] */ __RPC__in VARIANT *WantConnectorType,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQMessage4 **ppmsg);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, Purge)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Purge )( 
             __RPC__in IMSMQQueue4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, get_IsOpen2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsOpen2 )( 
             __RPC__in IMSMQQueue4 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisOpen);
         
+        DECLSPEC_XFGVIRT(IMSMQQueue4, ReceiveByLookupIdAllowPeek)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *ReceiveByLookupIdAllowPeek )( 
             __RPC__in IMSMQQueue4 * This,
             /* [in] */ VARIANT LookupId,
@@ -5097,28 +5408,34 @@ EXTERN_C const IID IID_IMSMQMessage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQMessage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQMessage * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQMessage * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5127,6 +5444,7 @@ EXTERN_C const IID IID_IMSMQMessage;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQMessage * This,
             /* [annotation][in] */ 
@@ -5146,199 +5464,248 @@ EXTERN_C const IID IID_IMSMQMessage;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Class)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Class )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_PrivLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivLevel )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_PrivLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PrivLevel )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_AuthLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthLevel )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plAuthLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_AuthLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthLevel )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lAuthLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_IsAuthenticated)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsAuthenticated )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out Boolean *pisAuthenticated);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Delivery)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Delivery )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plDelivery);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_Delivery)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Delivery )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lDelivery);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Trace)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Trace )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plTrace);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_Trace)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Trace )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lTrace);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Priority)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plPriority);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_Priority)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lPriority);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Journal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Journal )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_Journal)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Journal )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_ResponseQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, putref_ResponseQueueInfo)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_AppSpecific)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AppSpecific )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plAppSpecific);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_AppSpecific)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AppSpecific )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lAppSpecific);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_SourceMachineGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SourceMachineGuid )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_BodyLength)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BodyLength )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *pcbBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Body)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Body )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_Body)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Body )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ VARIANT varBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_AdminQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, putref_AdminQueueInfo)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Id)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_CorrelationId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CorrelationId )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_CorrelationId)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_CorrelationId )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ VARIANT varMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Ack)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Ack )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plAck);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_Ack)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Ack )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lAck);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_Label)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_Label)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Label )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ __RPC__in BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_MaxTimeToReachQueue)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MaxTimeToReachQueue )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plMaxTimeToReachQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_MaxTimeToReachQueue)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MaxTimeToReachQueue )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lMaxTimeToReachQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_MaxTimeToReceive)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MaxTimeToReceive )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plMaxTimeToReceive);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_MaxTimeToReceive)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MaxTimeToReceive )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lMaxTimeToReceive);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_HashAlgorithm)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plHashAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_HashAlgorithm)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lHashAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_EncryptAlgorithm)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_EncryptAlgorithm )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plEncryptAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_EncryptAlgorithm)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_EncryptAlgorithm )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lEncryptAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_SentTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SentTime )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSentTime);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_ArrivedTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ArrivedTime )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out VARIANT *plArrivedTime);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_DestinationQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationQueueInfo )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoDest);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_SenderCertificate)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderCertificate )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSenderCert);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_SenderCertificate)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderCertificate )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ VARIANT varSenderCert);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_SenderId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderId )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSenderId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, get_SenderIdType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderIdType )( 
             __RPC__in IMSMQMessage * This,
             /* [retval][out] */ __RPC__out long *plSenderIdType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, put_SenderIdType)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderIdType )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ long lSenderIdType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, Send)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Send )( 
             __RPC__in IMSMQMessage * This,
             /* [in] */ __RPC__in_opt IMSMQQueue *DestinationQueue,
             /* [optional][in] */ __RPC__in VARIANT *Transaction);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage, AttachCurrentSecurityContext)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *AttachCurrentSecurityContext )( 
             __RPC__in IMSMQMessage * This);
         
@@ -5565,28 +5932,34 @@ EXTERN_C const IID IID_IMSMQQueueInfos;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueInfos * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueInfos * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueInfos * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueInfos * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueInfos * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueInfos * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5595,6 +5968,7 @@ EXTERN_C const IID IID_IMSMQQueueInfos;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueInfos * This,
             /* [annotation][in] */ 
@@ -5614,9 +5988,11 @@ EXTERN_C const IID IID_IMSMQQueueInfos;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos, Reset)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMSMQQueueInfos * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos, Next)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IMSMQQueueInfos * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoNext);
@@ -5706,28 +6082,34 @@ EXTERN_C const IID IID_IMSMQQueueInfos2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueInfos2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueInfos2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueInfos2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueInfos2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueInfos2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueInfos2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5736,6 +6118,7 @@ EXTERN_C const IID IID_IMSMQQueueInfos2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueInfos2 * This,
             /* [annotation][in] */ 
@@ -5755,13 +6138,16 @@ EXTERN_C const IID IID_IMSMQQueueInfos2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos2, Reset)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMSMQQueueInfos2 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos2, Next)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IMSMQQueueInfos2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoNext);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueueInfos2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -5854,28 +6240,34 @@ EXTERN_C const IID IID_IMSMQQueueInfos3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueInfos3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueInfos3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueInfos3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueInfos3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueInfos3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueInfos3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5884,6 +6276,7 @@ EXTERN_C const IID IID_IMSMQQueueInfos3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueInfos3 * This,
             /* [annotation][in] */ 
@@ -5903,13 +6296,16 @@ EXTERN_C const IID IID_IMSMQQueueInfos3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos3, Reset)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMSMQQueueInfos3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos3, Next)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IMSMQQueueInfos3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo3 **ppqinfoNext);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos3, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueueInfos3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -6002,28 +6398,34 @@ EXTERN_C const IID IID_IMSMQQueueInfos4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueInfos4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueInfos4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueInfos4 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueInfos4 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueInfos4 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueInfos4 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6032,6 +6434,7 @@ EXTERN_C const IID IID_IMSMQQueueInfos4;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueInfos4 * This,
             /* [annotation][in] */ 
@@ -6051,13 +6454,16 @@ EXTERN_C const IID IID_IMSMQQueueInfos4;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos4, Reset)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IMSMQQueueInfos4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos4, Next)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IMSMQQueueInfos4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo4 **ppqinfoNext);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueInfos4, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQueueInfos4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -6142,28 +6548,34 @@ EXTERN_C const IID IID_IMSMQEvent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQEvent * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQEvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQEvent * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQEvent * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQEvent * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQEvent * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6172,6 +6584,7 @@ EXTERN_C const IID IID_IMSMQEvent;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQEvent * This,
             /* [annotation][in] */ 
@@ -6265,28 +6678,34 @@ EXTERN_C const IID IID_IMSMQEvent2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQEvent2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQEvent2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQEvent2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQEvent2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQEvent2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQEvent2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6295,6 +6714,7 @@ EXTERN_C const IID IID_IMSMQEvent2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQEvent2 * This,
             /* [annotation][in] */ 
@@ -6314,6 +6734,7 @@ EXTERN_C const IID IID_IMSMQEvent2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQEvent2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQEvent2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -6393,28 +6814,34 @@ EXTERN_C const IID IID_IMSMQEvent3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQEvent3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQEvent3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQEvent3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQEvent3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQEvent3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQEvent3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6423,6 +6850,7 @@ EXTERN_C const IID IID_IMSMQEvent3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQEvent3 * This,
             /* [annotation][in] */ 
@@ -6442,6 +6870,7 @@ EXTERN_C const IID IID_IMSMQEvent3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQEvent2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQEvent3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -6534,28 +6963,34 @@ EXTERN_C const IID IID_IMSMQTransaction;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQTransaction * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQTransaction * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQTransaction * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQTransaction * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQTransaction * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQTransaction * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6564,6 +6999,7 @@ EXTERN_C const IID IID_IMSMQTransaction;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQTransaction * This,
             /* [annotation][in] */ 
@@ -6583,16 +7019,19 @@ EXTERN_C const IID IID_IMSMQTransaction;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, get_Transaction)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Transaction )( 
             __RPC__in IMSMQTransaction * This,
             /* [retval][out] */ __RPC__out long *plTransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, Commit)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IMSMQTransaction * This,
             /* [optional][in] */ __RPC__in VARIANT *fRetaining,
             /* [optional][in] */ __RPC__in VARIANT *grfTC,
             /* [optional][in] */ __RPC__in VARIANT *grfRM);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, Abort)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Abort )( 
             __RPC__in IMSMQTransaction * This,
             /* [optional][in] */ __RPC__in VARIANT *fRetaining,
@@ -6681,28 +7120,34 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6711,6 +7156,7 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQCoordinatedTransactionDispenser * This,
             /* [annotation][in] */ 
@@ -6730,6 +7176,7 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQCoordinatedTransactionDispenser, BeginTransaction)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *BeginTransaction )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQTransaction **ptransaction);
@@ -6811,28 +7258,34 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQTransactionDispenser * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQTransactionDispenser * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQTransactionDispenser * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQTransactionDispenser * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQTransactionDispenser * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQTransactionDispenser * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6841,6 +7294,7 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQTransactionDispenser * This,
             /* [annotation][in] */ 
@@ -6860,6 +7314,7 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQTransactionDispenser, BeginTransaction)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *BeginTransaction )( 
             __RPC__in IMSMQTransactionDispenser * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQTransaction **ptransaction);
@@ -6953,28 +7408,34 @@ EXTERN_C const IID IID_IMSMQQuery2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQuery2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQuery2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQuery2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQuery2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQuery2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQuery2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6983,6 +7444,7 @@ EXTERN_C const IID IID_IMSMQQuery2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQuery2 * This,
             /* [annotation][in] */ 
@@ -7002,6 +7464,7 @@ EXTERN_C const IID IID_IMSMQQuery2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery2, LookupQueue)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *LookupQueue )( 
             __RPC__in IMSMQQuery2 * This,
             /* [optional][in] */ __RPC__in VARIANT *QueueGuid,
@@ -7015,6 +7478,7 @@ EXTERN_C const IID IID_IMSMQQuery2;
             /* [optional][in] */ __RPC__in VARIANT *RelModifyTime,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfos2 **ppqinfos);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQuery2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -7125,28 +7589,34 @@ EXTERN_C const IID IID_IMSMQQuery3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQuery3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQuery3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQuery3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQuery3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQuery3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQuery3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7155,6 +7625,7 @@ EXTERN_C const IID IID_IMSMQQuery3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQuery3 * This,
             /* [annotation][in] */ 
@@ -7174,6 +7645,7 @@ EXTERN_C const IID IID_IMSMQQuery3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery3, LookupQueue_v2)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *LookupQueue_v2 )( 
             __RPC__in IMSMQQuery3 * This,
             /* [optional][in] */ __RPC__in VARIANT *QueueGuid,
@@ -7187,10 +7659,12 @@ EXTERN_C const IID IID_IMSMQQuery3;
             /* [optional][in] */ __RPC__in VARIANT *RelModifyTime,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfos3 **ppqinfos);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery3, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQuery3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery3, LookupQueue)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *LookupQueue )( 
             __RPC__in IMSMQQuery3 * This,
             /* [optional][in] */ __RPC__in VARIANT *QueueGuid,
@@ -7315,28 +7789,34 @@ EXTERN_C const IID IID_IMSMQQuery4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQuery4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQuery4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQuery4 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQuery4 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQuery4 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQuery4 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7345,6 +7825,7 @@ EXTERN_C const IID IID_IMSMQQuery4;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQuery4 * This,
             /* [annotation][in] */ 
@@ -7364,6 +7845,7 @@ EXTERN_C const IID IID_IMSMQQuery4;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery4, LookupQueue_v2)
         /* [hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *LookupQueue_v2 )( 
             __RPC__in IMSMQQuery4 * This,
             /* [optional][in] */ __RPC__in VARIANT *QueueGuid,
@@ -7377,10 +7859,12 @@ EXTERN_C const IID IID_IMSMQQuery4;
             /* [optional][in] */ __RPC__in VARIANT *RelModifyTime,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfos4 **ppqinfos);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery4, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQQuery4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQQuery4, LookupQueue)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *LookupQueue )( 
             __RPC__in IMSMQQuery4 * This,
             /* [optional][in] */ __RPC__in VARIANT *QueueGuid,
@@ -7709,28 +8193,34 @@ EXTERN_C const IID IID_IMSMQMessage2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQMessage2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7739,6 +8229,7 @@ EXTERN_C const IID IID_IMSMQMessage2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQMessage2 * This,
             /* [annotation][in] */ 
@@ -7758,302 +8249,377 @@ EXTERN_C const IID IID_IMSMQMessage2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Class)
         /* [id][propget][hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Class )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_PrivLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivLevel )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_PrivLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PrivLevel )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_AuthLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthLevel )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plAuthLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_AuthLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthLevel )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lAuthLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_IsAuthenticated)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsAuthenticated )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out Boolean *pisAuthenticated);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Delivery)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Delivery )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plDelivery);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Delivery)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Delivery )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lDelivery);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Trace)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Trace )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plTrace);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Trace)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Trace )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lTrace);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Priority)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plPriority);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Priority)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lPriority);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Journal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Journal )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Journal)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Journal )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_ResponseQueueInfo_v1)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo_v1 )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, putref_ResponseQueueInfo_v1)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo_v1 )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_AppSpecific)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AppSpecific )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plAppSpecific);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_AppSpecific)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AppSpecific )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lAppSpecific);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_SourceMachineGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SourceMachineGuid )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_BodyLength)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BodyLength )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *pcbBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Body)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Body )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Body)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Body )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ VARIANT varBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_AdminQueueInfo_v1)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo_v1 )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, putref_AdminQueueInfo_v1)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo_v1 )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Id)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_CorrelationId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CorrelationId )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_CorrelationId)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_CorrelationId )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ VARIANT varMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Ack)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Ack )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plAck);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Ack)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Ack )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lAck);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Label)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Label)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Label )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_MaxTimeToReachQueue)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MaxTimeToReachQueue )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plMaxTimeToReachQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_MaxTimeToReachQueue)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MaxTimeToReachQueue )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lMaxTimeToReachQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_MaxTimeToReceive)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MaxTimeToReceive )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plMaxTimeToReceive);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_MaxTimeToReceive)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MaxTimeToReceive )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lMaxTimeToReceive);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_HashAlgorithm)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plHashAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_HashAlgorithm)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lHashAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_EncryptAlgorithm)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_EncryptAlgorithm )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plEncryptAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_EncryptAlgorithm)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_EncryptAlgorithm )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lEncryptAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_SentTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SentTime )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSentTime);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_ArrivedTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ArrivedTime )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *plArrivedTime);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_DestinationQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationQueueInfo )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoDest);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_SenderCertificate)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderCertificate )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSenderCert);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_SenderCertificate)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderCertificate )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ VARIANT varSenderCert);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_SenderId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderId )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSenderId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_SenderIdType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderIdType )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plSenderIdType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_SenderIdType)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderIdType )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lSenderIdType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, Send)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Send )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in_opt IMSMQQueue2 *DestinationQueue,
             /* [optional][in] */ __RPC__in VARIANT *Transaction);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, AttachCurrentSecurityContext)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *AttachCurrentSecurityContext )( 
             __RPC__in IMSMQMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_SenderVersion)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderVersion )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plSenderVersion);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Extension)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Extension )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarExtension);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Extension)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Extension )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ VARIANT varExtension);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_ConnectorTypeGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectorTypeGuid )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidConnectorType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_ConnectorTypeGuid)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectorTypeGuid )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrGuidConnectorType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_TransactionStatusQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionStatusQueueInfo )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoXactStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_DestinationSymmetricKey)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationSymmetricKey )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDestSymmKey);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_DestinationSymmetricKey)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationSymmetricKey )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ VARIANT varDestSymmKey);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Signature)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Signature )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSignature);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_Signature)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Signature )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ VARIANT varSignature);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_AuthenticationProviderType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationProviderType )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plAuthProvType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_AuthenticationProviderType)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationProviderType )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lAuthProvType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_AuthenticationProviderName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationProviderName )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAuthProvName);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_AuthenticationProviderName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationProviderName )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrAuthProvName);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_SenderId)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderId )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ VARIANT varSenderId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_MsgClass)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MsgClass )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out long *plMsgClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, put_MsgClass)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MsgClass )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ long lMsgClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_TransactionId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionId )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarXactId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_IsFirstInTransaction)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsFirstInTransaction )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out Boolean *pisFirstInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_IsLastInTransaction)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsLastInTransaction )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out Boolean *pisLastInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_ResponseQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, putref_ResponseQueueInfo)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo2 *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_AdminQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, putref_AdminQueueInfo)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo )( 
             __RPC__in IMSMQMessage2 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo2 *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage2, get_ReceivedAuthenticationLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ReceivedAuthenticationLevel )( 
             __RPC__in IMSMQMessage2 * This,
             /* [retval][out] */ __RPC__out short *psReceivedAuthenticationLevel);
@@ -8626,28 +9192,34 @@ EXTERN_C const IID IID_IMSMQMessage3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQMessage3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQMessage3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQMessage3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8656,6 +9228,7 @@ EXTERN_C const IID IID_IMSMQMessage3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQMessage3 * This,
             /* [annotation][in] */ 
@@ -8675,365 +9248,456 @@ EXTERN_C const IID IID_IMSMQMessage3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Class)
         /* [id][propget][hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Class )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_PrivLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivLevel )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_PrivLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PrivLevel )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_AuthLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthLevel )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plAuthLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_AuthLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthLevel )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lAuthLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_IsAuthenticated)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsAuthenticated )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out Boolean *pisAuthenticated);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Delivery)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Delivery )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plDelivery);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Delivery)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Delivery )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lDelivery);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Trace)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Trace )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plTrace);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Trace)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Trace )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lTrace);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Priority)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plPriority);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Priority)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lPriority);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Journal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Journal )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Journal)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Journal )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_ResponseQueueInfo_v1)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo_v1 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, putref_ResponseQueueInfo_v1)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo_v1 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_AppSpecific)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AppSpecific )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plAppSpecific);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_AppSpecific)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AppSpecific )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lAppSpecific);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_SourceMachineGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SourceMachineGuid )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_BodyLength)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BodyLength )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *pcbBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Body)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Body )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Body)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Body )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ VARIANT varBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_AdminQueueInfo_v1)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo_v1 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, putref_AdminQueueInfo_v1)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo_v1 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Id)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_CorrelationId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CorrelationId )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_CorrelationId)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_CorrelationId )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ VARIANT varMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Ack)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Ack )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plAck);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Ack)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Ack )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lAck);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Label)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Label)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Label )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_MaxTimeToReachQueue)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MaxTimeToReachQueue )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plMaxTimeToReachQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_MaxTimeToReachQueue)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MaxTimeToReachQueue )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lMaxTimeToReachQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_MaxTimeToReceive)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MaxTimeToReceive )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plMaxTimeToReceive);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_MaxTimeToReceive)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MaxTimeToReceive )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lMaxTimeToReceive);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_HashAlgorithm)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plHashAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_HashAlgorithm)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lHashAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_EncryptAlgorithm)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_EncryptAlgorithm )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plEncryptAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_EncryptAlgorithm)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_EncryptAlgorithm )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lEncryptAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_SentTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SentTime )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSentTime);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_ArrivedTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ArrivedTime )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *plArrivedTime);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_DestinationQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationQueueInfo )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo3 **ppqinfoDest);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_SenderCertificate)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderCertificate )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSenderCert);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_SenderCertificate)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderCertificate )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ VARIANT varSenderCert);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_SenderId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderId )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSenderId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_SenderIdType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderIdType )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plSenderIdType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_SenderIdType)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderIdType )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lSenderIdType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, Send)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Send )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in_opt IDispatch *DestinationQueue,
             /* [optional][in] */ __RPC__in VARIANT *Transaction);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, AttachCurrentSecurityContext)
         /* [helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *AttachCurrentSecurityContext )( 
             __RPC__in IMSMQMessage3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_SenderVersion)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderVersion )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plSenderVersion);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Extension)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Extension )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarExtension);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Extension)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Extension )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ VARIANT varExtension);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_ConnectorTypeGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectorTypeGuid )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidConnectorType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_ConnectorTypeGuid)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectorTypeGuid )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in BSTR bstrGuidConnectorType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_TransactionStatusQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionStatusQueueInfo )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo3 **ppqinfoXactStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_DestinationSymmetricKey)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationSymmetricKey )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDestSymmKey);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_DestinationSymmetricKey)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationSymmetricKey )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ VARIANT varDestSymmKey);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Signature)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Signature )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSignature);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_Signature)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Signature )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ VARIANT varSignature);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_AuthenticationProviderType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationProviderType )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plAuthProvType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_AuthenticationProviderType)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationProviderType )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lAuthProvType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_AuthenticationProviderName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationProviderName )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAuthProvName);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_AuthenticationProviderName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationProviderName )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in BSTR bstrAuthProvName);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_SenderId)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderId )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ VARIANT varSenderId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_MsgClass)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MsgClass )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out long *plMsgClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_MsgClass)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MsgClass )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ long lMsgClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_TransactionId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionId )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarXactId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_IsFirstInTransaction)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsFirstInTransaction )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out Boolean *pisFirstInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_IsLastInTransaction)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsLastInTransaction )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out Boolean *pisLastInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_ResponseQueueInfo_v2)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo_v2 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, putref_ResponseQueueInfo_v2)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo_v2 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo2 *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_AdminQueueInfo_v2)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo_v2 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, putref_AdminQueueInfo_v2)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo_v2 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo2 *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_ReceivedAuthenticationLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ReceivedAuthenticationLevel )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out short *psReceivedAuthenticationLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_ResponseQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo3 **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, putref_ResponseQueueInfo)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo3 *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_AdminQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo3 **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, putref_AdminQueueInfo)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo3 *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_ResponseDestination)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseDestination )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdestResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, putref_ResponseDestination)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseDestination )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in_opt IDispatch *pdestResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_Destination)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Destination )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdestDestination);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_LookupId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_LookupId )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarLookupId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_IsAuthenticated2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsAuthenticated2 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisAuthenticated);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_IsFirstInTransaction2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsFirstInTransaction2 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisFirstInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_IsLastInTransaction2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsLastInTransaction2 )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisLastInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, AttachCurrentSecurityContext2)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *AttachCurrentSecurityContext2 )( 
             __RPC__in IMSMQMessage3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_SoapEnvelope)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SoapEnvelope )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSoapEnvelope);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, get_CompoundMessage)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CompoundMessage )( 
             __RPC__in IMSMQMessage3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarCompoundMessage);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_SoapHeader)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SoapHeader )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in BSTR bstrSoapHeader);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage3, put_SoapBody)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SoapBody )( 
             __RPC__in IMSMQMessage3 * This,
             /* [in] */ __RPC__in BSTR bstrSoapBody);
@@ -9654,28 +10318,34 @@ EXTERN_C const IID IID_IMSMQMessage4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQMessage4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQMessage4 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQMessage4 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9684,6 +10354,7 @@ EXTERN_C const IID IID_IMSMQMessage4;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQMessage4 * This,
             /* [annotation][in] */ 
@@ -9703,365 +10374,456 @@ EXTERN_C const IID IID_IMSMQMessage4;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Class)
         /* [id][propget][hidden][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Class )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_PrivLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivLevel )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_PrivLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PrivLevel )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lPrivLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_AuthLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthLevel )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plAuthLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_AuthLevel)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthLevel )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lAuthLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_IsAuthenticated)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsAuthenticated )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out Boolean *pisAuthenticated);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Delivery)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Delivery )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plDelivery);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Delivery)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Delivery )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lDelivery);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Trace)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Trace )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plTrace);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Trace)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Trace )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lTrace);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Priority)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plPriority);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Priority)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lPriority);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Journal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Journal )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Journal)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Journal )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_ResponseQueueInfo_v1)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo_v1 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, putref_ResponseQueueInfo_v1)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo_v1 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_AppSpecific)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AppSpecific )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plAppSpecific);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_AppSpecific)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AppSpecific )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lAppSpecific);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_SourceMachineGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SourceMachineGuid )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidSrcMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_BodyLength)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BodyLength )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *pcbBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Body)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Body )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Body)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Body )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ VARIANT varBody);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_AdminQueueInfo_v1)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo_v1 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, putref_AdminQueueInfo_v1)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo_v1 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Id)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_CorrelationId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CorrelationId )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_CorrelationId)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_CorrelationId )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ VARIANT varMsgId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Ack)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Ack )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plAck);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Ack)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Ack )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lAck);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Label)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Label )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Label)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Label )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in BSTR bstrLabel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_MaxTimeToReachQueue)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MaxTimeToReachQueue )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plMaxTimeToReachQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_MaxTimeToReachQueue)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MaxTimeToReachQueue )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lMaxTimeToReachQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_MaxTimeToReceive)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MaxTimeToReceive )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plMaxTimeToReceive);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_MaxTimeToReceive)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MaxTimeToReceive )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lMaxTimeToReceive);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_HashAlgorithm)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plHashAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_HashAlgorithm)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lHashAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_EncryptAlgorithm)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_EncryptAlgorithm )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plEncryptAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_EncryptAlgorithm)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_EncryptAlgorithm )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lEncryptAlg);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_SentTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SentTime )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSentTime);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_ArrivedTime)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ArrivedTime )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *plArrivedTime);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_DestinationQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationQueueInfo )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo4 **ppqinfoDest);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_SenderCertificate)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderCertificate )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSenderCert);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_SenderCertificate)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderCertificate )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ VARIANT varSenderCert);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_SenderId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderId )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSenderId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_SenderIdType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderIdType )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plSenderIdType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_SenderIdType)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderIdType )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lSenderIdType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, Send)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Send )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in_opt IDispatch *DestinationQueue,
             /* [optional][in] */ __RPC__in VARIANT *Transaction);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, AttachCurrentSecurityContext)
         /* [helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *AttachCurrentSecurityContext )( 
             __RPC__in IMSMQMessage4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_SenderVersion)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SenderVersion )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plSenderVersion);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Extension)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Extension )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarExtension);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Extension)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Extension )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ VARIANT varExtension);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_ConnectorTypeGuid)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ConnectorTypeGuid )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuidConnectorType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_ConnectorTypeGuid)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_ConnectorTypeGuid )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in BSTR bstrGuidConnectorType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_TransactionStatusQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionStatusQueueInfo )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo4 **ppqinfoXactStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_DestinationSymmetricKey)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_DestinationSymmetricKey )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarDestSymmKey);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_DestinationSymmetricKey)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_DestinationSymmetricKey )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ VARIANT varDestSymmKey);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Signature)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Signature )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarSignature);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_Signature)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Signature )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ VARIANT varSignature);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_AuthenticationProviderType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationProviderType )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plAuthProvType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_AuthenticationProviderType)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationProviderType )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lAuthProvType);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_AuthenticationProviderName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationProviderName )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAuthProvName);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_AuthenticationProviderName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationProviderName )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in BSTR bstrAuthProvName);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_SenderId)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SenderId )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ VARIANT varSenderId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_MsgClass)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MsgClass )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out long *plMsgClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_MsgClass)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_MsgClass )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ long lMsgClass);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_TransactionId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionId )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarXactId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_IsFirstInTransaction)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsFirstInTransaction )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out Boolean *pisFirstInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_IsLastInTransaction)
         /* [id][propget][helpstringcontext][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IsLastInTransaction )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out Boolean *pisLastInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_ResponseQueueInfo_v2)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo_v2 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, putref_ResponseQueueInfo_v2)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo_v2 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo2 *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_AdminQueueInfo_v2)
         /* [hidden][id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo_v2 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo2 **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, putref_AdminQueueInfo_v2)
         /* [hidden][id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo_v2 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo2 *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_ReceivedAuthenticationLevel)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ReceivedAuthenticationLevel )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out short *psReceivedAuthenticationLevel);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_ResponseQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseQueueInfo )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo4 **ppqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, putref_ResponseQueueInfo)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseQueueInfo )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo4 *pqinfoResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_AdminQueueInfo)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_AdminQueueInfo )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQQueueInfo4 **ppqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, putref_AdminQueueInfo)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_AdminQueueInfo )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in_opt IMSMQQueueInfo4 *pqinfoAdmin);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_ResponseDestination)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ResponseDestination )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdestResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, putref_ResponseDestination)
         /* [id][propputref][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *putref_ResponseDestination )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in_opt IDispatch *pdestResponse);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_Destination)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Destination )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppdestDestination);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_LookupId)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_LookupId )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarLookupId);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_IsAuthenticated2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsAuthenticated2 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisAuthenticated);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_IsFirstInTransaction2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsFirstInTransaction2 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisFirstInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_IsLastInTransaction2)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsLastInTransaction2 )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pisLastInXact);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, AttachCurrentSecurityContext2)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *AttachCurrentSecurityContext2 )( 
             __RPC__in IMSMQMessage4 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_SoapEnvelope)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_SoapEnvelope )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSoapEnvelope);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, get_CompoundMessage)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_CompoundMessage )( 
             __RPC__in IMSMQMessage4 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarCompoundMessage);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_SoapHeader)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SoapHeader )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in BSTR bstrSoapHeader);
         
+        DECLSPEC_XFGVIRT(IMSMQMessage4, put_SoapBody)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_SoapBody )( 
             __RPC__in IMSMQMessage4 * This,
             /* [in] */ __RPC__in BSTR bstrSoapBody);
@@ -10438,28 +11200,34 @@ EXTERN_C const IID IID_IMSMQPrivateEvent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQPrivateEvent * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQPrivateEvent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQPrivateEvent * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQPrivateEvent * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQPrivateEvent * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQPrivateEvent * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10468,6 +11236,7 @@ EXTERN_C const IID IID_IMSMQPrivateEvent;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQPrivateEvent * This,
             /* [annotation][in] */ 
@@ -10487,15 +11256,18 @@ EXTERN_C const IID IID_IMSMQPrivateEvent;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQPrivateEvent, get_Hwnd)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Hwnd )( 
             __RPC__in IMSMQPrivateEvent * This,
             /* [retval][out] */ __RPC__out long *phwnd);
         
+        DECLSPEC_XFGVIRT(IMSMQPrivateEvent, FireArrivedEvent)
         HRESULT ( STDMETHODCALLTYPE *FireArrivedEvent )( 
             __RPC__in IMSMQPrivateEvent * This,
             /* [in] */ __RPC__in_opt IMSMQQueue *pq,
             /* [in] */ long msgcursor);
         
+        DECLSPEC_XFGVIRT(IMSMQPrivateEvent, FireArrivedErrorEvent)
         HRESULT ( STDMETHODCALLTYPE *FireArrivedErrorEvent )( 
             __RPC__in IMSMQPrivateEvent * This,
             /* [in] */ __RPC__in_opt IMSMQQueue *pq,
@@ -10580,28 +11352,34 @@ EXTERN_C const IID DIID__DMSMQEventEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _DMSMQEventEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _DMSMQEventEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _DMSMQEventEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _DMSMQEventEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _DMSMQEventEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _DMSMQEventEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10610,6 +11388,7 @@ EXTERN_C const IID DIID__DMSMQEventEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _DMSMQEventEvents * This,
             /* [annotation][in] */ 
@@ -10727,28 +11506,34 @@ EXTERN_C const IID IID_IMSMQTransaction2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQTransaction2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQTransaction2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10757,6 +11542,7 @@ EXTERN_C const IID IID_IMSMQTransaction2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQTransaction2 * This,
             /* [annotation][in] */ 
@@ -10776,25 +11562,30 @@ EXTERN_C const IID IID_IMSMQTransaction2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, get_Transaction)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Transaction )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [retval][out] */ __RPC__out long *plTransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, Commit)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [optional][in] */ __RPC__in VARIANT *fRetaining,
             /* [optional][in] */ __RPC__in VARIANT *grfTC,
             /* [optional][in] */ __RPC__in VARIANT *grfRM);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, Abort)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Abort )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [optional][in] */ __RPC__in VARIANT *fRetaining,
             /* [optional][in] */ __RPC__in VARIANT *fAsync);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction2, InitNew)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *InitNew )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [in] */ VARIANT varTransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQTransaction2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -10889,28 +11680,34 @@ EXTERN_C const IID IID_IMSMQTransaction3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQTransaction3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQTransaction3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10919,6 +11716,7 @@ EXTERN_C const IID IID_IMSMQTransaction3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQTransaction3 * This,
             /* [annotation][in] */ 
@@ -10938,29 +11736,35 @@ EXTERN_C const IID IID_IMSMQTransaction3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, get_Transaction)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Transaction )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [retval][out] */ __RPC__out long *plTransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, Commit)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [optional][in] */ __RPC__in VARIANT *fRetaining,
             /* [optional][in] */ __RPC__in VARIANT *grfTC,
             /* [optional][in] */ __RPC__in VARIANT *grfRM);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction, Abort)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Abort )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [optional][in] */ __RPC__in VARIANT *fRetaining,
             /* [optional][in] */ __RPC__in VARIANT *fAsync);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction2, InitNew)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *InitNew )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [in] */ VARIANT varTransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQTransaction3, get_ITransaction)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ITransaction )( 
             __RPC__in IMSMQTransaction3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarITransaction);
@@ -11070,28 +11874,34 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11100,6 +11910,7 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQCoordinatedTransactionDispenser2 * This,
             /* [annotation][in] */ 
@@ -11119,10 +11930,12 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQCoordinatedTransactionDispenser2, BeginTransaction)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *BeginTransaction )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQTransaction2 **ptransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQCoordinatedTransactionDispenser2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -11210,28 +12023,34 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11240,6 +12059,7 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQCoordinatedTransactionDispenser3 * This,
             /* [annotation][in] */ 
@@ -11259,10 +12079,12 @@ EXTERN_C const IID IID_IMSMQCoordinatedTransactionDispenser3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQCoordinatedTransactionDispenser3, BeginTransaction)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *BeginTransaction )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQTransaction3 **ptransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQCoordinatedTransactionDispenser3, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQCoordinatedTransactionDispenser3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -11358,28 +12180,34 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQTransactionDispenser2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQTransactionDispenser2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQTransactionDispenser2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQTransactionDispenser2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQTransactionDispenser2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQTransactionDispenser2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11388,6 +12216,7 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQTransactionDispenser2 * This,
             /* [annotation][in] */ 
@@ -11407,10 +12236,12 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQTransactionDispenser2, BeginTransaction)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *BeginTransaction )( 
             __RPC__in IMSMQTransactionDispenser2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQTransaction2 **ptransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQTransactionDispenser2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQTransactionDispenser2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -11498,28 +12329,34 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQTransactionDispenser3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQTransactionDispenser3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQTransactionDispenser3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQTransactionDispenser3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQTransactionDispenser3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQTransactionDispenser3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11528,6 +12365,7 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQTransactionDispenser3 * This,
             /* [annotation][in] */ 
@@ -11547,10 +12385,12 @@ EXTERN_C const IID IID_IMSMQTransactionDispenser3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQTransactionDispenser3, BeginTransaction)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *BeginTransaction )( 
             __RPC__in IMSMQTransactionDispenser3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQTransaction3 **ptransaction);
         
+        DECLSPEC_XFGVIRT(IMSMQTransactionDispenser3, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQTransactionDispenser3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -11644,28 +12484,34 @@ EXTERN_C const IID IID_IMSMQApplication;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQApplication * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQApplication * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQApplication * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQApplication * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQApplication * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQApplication * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11674,6 +12520,7 @@ EXTERN_C const IID IID_IMSMQApplication;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQApplication * This,
             /* [annotation][in] */ 
@@ -11693,6 +12540,7 @@ EXTERN_C const IID IID_IMSMQApplication;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication, MachineIdOfMachineName)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *MachineIdOfMachineName )( 
             __RPC__in IMSMQApplication * This,
             /* [in] */ __RPC__in BSTR MachineName,
@@ -11795,28 +12643,34 @@ EXTERN_C const IID IID_IMSMQApplication2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQApplication2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQApplication2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQApplication2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQApplication2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQApplication2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQApplication2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11825,6 +12679,7 @@ EXTERN_C const IID IID_IMSMQApplication2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQApplication2 * This,
             /* [annotation][in] */ 
@@ -11844,37 +12699,45 @@ EXTERN_C const IID IID_IMSMQApplication2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication, MachineIdOfMachineName)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *MachineIdOfMachineName )( 
             __RPC__in IMSMQApplication2 * This,
             /* [in] */ __RPC__in BSTR MachineName,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuid);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, RegisterCertificate)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *RegisterCertificate )( 
             __RPC__in IMSMQApplication2 * This,
             /* [optional][in] */ __RPC__in VARIANT *Flags,
             /* [optional][in] */ __RPC__in VARIANT *ExternalCertificate);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, MachineNameOfMachineId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *MachineNameOfMachineId )( 
             __RPC__in IMSMQApplication2 * This,
             /* [in] */ __RPC__in BSTR bstrGuid,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachineName);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_MSMQVersionMajor)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MSMQVersionMajor )( 
             __RPC__in IMSMQApplication2 * This,
             /* [retval][out] */ __RPC__out short *psMSMQVersionMajor);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_MSMQVersionMinor)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MSMQVersionMinor )( 
             __RPC__in IMSMQApplication2 * This,
             /* [retval][out] */ __RPC__out short *psMSMQVersionMinor);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_MSMQVersionBuild)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MSMQVersionBuild )( 
             __RPC__in IMSMQApplication2 * This,
             /* [retval][out] */ __RPC__out short *psMSMQVersionBuild);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_IsDsEnabled)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsDsEnabled )( 
             __RPC__in IMSMQApplication2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsDsEnabled);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQApplication2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -12002,28 +12865,34 @@ EXTERN_C const IID IID_IMSMQApplication3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQApplication3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQApplication3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQApplication3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQApplication3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQApplication3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQApplication3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12032,6 +12901,7 @@ EXTERN_C const IID IID_IMSMQApplication3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQApplication3 * This,
             /* [annotation][in] */ 
@@ -12051,75 +12921,93 @@ EXTERN_C const IID IID_IMSMQApplication3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication, MachineIdOfMachineName)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *MachineIdOfMachineName )( 
             __RPC__in IMSMQApplication3 * This,
             /* [in] */ __RPC__in BSTR MachineName,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGuid);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, RegisterCertificate)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *RegisterCertificate )( 
             __RPC__in IMSMQApplication3 * This,
             /* [optional][in] */ __RPC__in VARIANT *Flags,
             /* [optional][in] */ __RPC__in VARIANT *ExternalCertificate);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, MachineNameOfMachineId)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *MachineNameOfMachineId )( 
             __RPC__in IMSMQApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrGuid,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachineName);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_MSMQVersionMajor)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MSMQVersionMajor )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__out short *psMSMQVersionMajor);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_MSMQVersionMinor)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MSMQVersionMinor )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__out short *psMSMQVersionMinor);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_MSMQVersionBuild)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MSMQVersionBuild )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__out short *psMSMQVersionBuild);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_IsDsEnabled)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsDsEnabled )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsDsEnabled);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication2, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, get_ActiveQueues)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveQueues )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvActiveQueues);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, get_PrivateQueues)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateQueues )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvPrivateQueues);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, get_DirectoryServiceServer)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_DirectoryServiceServer )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDirectoryServiceServer);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, get_IsConnected)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsConnected )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsConnected);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, get_BytesInAllQueues)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BytesInAllQueues )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvBytesInAllQueues);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, put_Machine)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_Machine )( 
             __RPC__in IMSMQApplication3 * This,
             /* [in] */ __RPC__in BSTR bstrMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, get_Machine)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Machine )( 
             __RPC__in IMSMQApplication3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, Connect)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IMSMQApplication3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, Disconnect)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IMSMQApplication3 * This);
         
+        DECLSPEC_XFGVIRT(IMSMQApplication3, Tidy)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Tidy )( 
             __RPC__in IMSMQApplication3 * This);
         
@@ -12298,28 +13186,34 @@ EXTERN_C const IID IID_IMSMQDestination;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQDestination * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQDestination * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQDestination * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQDestination * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQDestination * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQDestination * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12328,6 +13222,7 @@ EXTERN_C const IID IID_IMSMQDestination;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQDestination * This,
             /* [annotation][in] */ 
@@ -12347,56 +13242,70 @@ EXTERN_C const IID IID_IMSMQDestination;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, Open)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in IMSMQDestination * This);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, Close)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IMSMQDestination * This);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, get_IsOpen)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsOpen )( 
             __RPC__in IMSMQDestination * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsOpen);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, get_IADs)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_IADs )( 
             __RPC__in IMSMQDestination * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppIADs);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, putref_IADs)
         /* [id][propputref][hidden] */ HRESULT ( STDMETHODCALLTYPE *putref_IADs )( 
             __RPC__in IMSMQDestination * This,
             /* [in] */ __RPC__in_opt IDispatch *pIADs);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, get_ADsPath)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ADsPath )( 
             __RPC__in IMSMQDestination * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrADsPath);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, put_ADsPath)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_ADsPath )( 
             __RPC__in IMSMQDestination * This,
             /* [in] */ __RPC__in BSTR bstrADsPath);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, get_PathName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_PathName )( 
             __RPC__in IMSMQDestination * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, put_PathName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_PathName )( 
             __RPC__in IMSMQDestination * This,
             /* [in] */ __RPC__in BSTR bstrPathName);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, get_FormatName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_FormatName )( 
             __RPC__in IMSMQDestination * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, put_FormatName)
         /* [id][propput][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *put_FormatName )( 
             __RPC__in IMSMQDestination * This,
             /* [in] */ __RPC__in BSTR bstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, get_Destinations)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Destinations )( 
             __RPC__in IMSMQDestination * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppDestinations);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, putref_Destinations)
         /* [id][propputref][hidden] */ HRESULT ( STDMETHODCALLTYPE *putref_Destinations )( 
             __RPC__in IMSMQDestination * This,
             /* [in] */ __RPC__in_opt IDispatch *pDestinations);
         
+        DECLSPEC_XFGVIRT(IMSMQDestination, get_Properties)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in IMSMQDestination * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppcolProperties);
@@ -12520,28 +13429,34 @@ EXTERN_C const IID IID_IMSMQPrivateDestination;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQPrivateDestination * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQPrivateDestination * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQPrivateDestination * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQPrivateDestination * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQPrivateDestination * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQPrivateDestination * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12550,6 +13465,7 @@ EXTERN_C const IID IID_IMSMQPrivateDestination;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQPrivateDestination * This,
             /* [annotation][in] */ 
@@ -12569,10 +13485,12 @@ EXTERN_C const IID IID_IMSMQPrivateDestination;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQPrivateDestination, get_Handle)
         /* [id][propget][hidden] */ HRESULT ( STDMETHODCALLTYPE *get_Handle )( 
             __RPC__in IMSMQPrivateDestination * This,
             /* [retval][out] */ __RPC__out VARIANT *pvarHandle);
         
+        DECLSPEC_XFGVIRT(IMSMQPrivateDestination, put_Handle)
         /* [id][propput][hidden] */ HRESULT ( STDMETHODCALLTYPE *put_Handle )( 
             __RPC__in IMSMQPrivateDestination * This,
             /* [in] */ VARIANT varHandle);
@@ -12672,28 +13590,34 @@ EXTERN_C const IID IID_IMSMQCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12702,6 +13626,7 @@ EXTERN_C const IID IID_IMSMQCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQCollection * This,
             /* [annotation][in] */ 
@@ -12721,15 +13646,18 @@ EXTERN_C const IID IID_IMSMQCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQCollection, Item)
         /* [id][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IMSMQCollection * This,
             /* [in] */ __RPC__in VARIANT *Index,
             /* [retval][out] */ __RPC__out VARIANT *pvarRet);
         
+        DECLSPEC_XFGVIRT(IMSMQCollection, get_Count)
         /* [propget][id][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IMSMQCollection * This,
             /* [retval][out] */ __RPC__out long *pCount);
         
+        DECLSPEC_XFGVIRT(IMSMQCollection, _NewEnum)
         /* [restricted][id] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in IMSMQCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppunk);
@@ -12851,28 +13779,34 @@ EXTERN_C const IID IID_IMSMQManagement;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQManagement * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQManagement * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQManagement * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQManagement * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQManagement * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQManagement * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12881,6 +13815,7 @@ EXTERN_C const IID IID_IMSMQManagement;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQManagement * This,
             /* [annotation][in] */ 
@@ -12900,40 +13835,49 @@ EXTERN_C const IID IID_IMSMQManagement;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, Init)
         /* [id][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IMSMQManagement * This,
             /* [optional][in] */ __RPC__in VARIANT *Machine,
             /* [optional][in] */ __RPC__in VARIANT *Pathname,
             /* [optional][in] */ __RPC__in VARIANT *FormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_FormatName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_FormatName )( 
             __RPC__in IMSMQManagement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_Machine)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Machine )( 
             __RPC__in IMSMQManagement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_MessageCount)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MessageCount )( 
             __RPC__in IMSMQManagement * This,
             /* [retval][out] */ __RPC__out long *plMessageCount);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_ForeignStatus)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ForeignStatus )( 
             __RPC__in IMSMQManagement * This,
             /* [retval][out] */ __RPC__out long *plForeignStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_QueueType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueType )( 
             __RPC__in IMSMQManagement * This,
             /* [retval][out] */ __RPC__out long *plQueueType);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_IsLocal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsLocal )( 
             __RPC__in IMSMQManagement * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsLocal);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_TransactionalStatus)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionalStatus )( 
             __RPC__in IMSMQManagement * This,
             /* [retval][out] */ __RPC__out long *plTransactionalStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_BytesInQueue)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BytesInQueue )( 
             __RPC__in IMSMQManagement * This,
             /* [retval][out] */ __RPC__out VARIANT *pvBytesInQueue);
@@ -13059,28 +14003,34 @@ EXTERN_C const IID IID_IMSMQOutgoingQueueManagement;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQOutgoingQueueManagement * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQOutgoingQueueManagement * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13089,6 +14039,7 @@ EXTERN_C const IID IID_IMSMQOutgoingQueueManagement;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQOutgoingQueueManagement * This,
             /* [annotation][in] */ 
@@ -13108,62 +14059,77 @@ EXTERN_C const IID IID_IMSMQOutgoingQueueManagement;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, Init)
         /* [id][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [optional][in] */ __RPC__in VARIANT *Machine,
             /* [optional][in] */ __RPC__in VARIANT *Pathname,
             /* [optional][in] */ __RPC__in VARIANT *FormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_FormatName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_FormatName )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_Machine)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Machine )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_MessageCount)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MessageCount )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plMessageCount);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_ForeignStatus)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ForeignStatus )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plForeignStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_QueueType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueType )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plQueueType);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_IsLocal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsLocal )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsLocal);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_TransactionalStatus)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionalStatus )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plTransactionalStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_BytesInQueue)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BytesInQueue )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__out VARIANT *pvBytesInQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQOutgoingQueueManagement, get_State)
         /* [propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plState);
         
+        DECLSPEC_XFGVIRT(IMSMQOutgoingQueueManagement, get_NextHops)
         /* [propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_NextHops )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__out VARIANT *pvNextHops);
         
+        DECLSPEC_XFGVIRT(IMSMQOutgoingQueueManagement, EodGetSendInfo)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *EodGetSendInfo )( 
             __RPC__in IMSMQOutgoingQueueManagement * This,
             /* [retval][out] */ __RPC__deref_out_opt IMSMQCollection **ppCollection);
         
+        DECLSPEC_XFGVIRT(IMSMQOutgoingQueueManagement, Resume)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in IMSMQOutgoingQueueManagement * This);
         
+        DECLSPEC_XFGVIRT(IMSMQOutgoingQueueManagement, Pause)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in IMSMQOutgoingQueueManagement * This);
         
+        DECLSPEC_XFGVIRT(IMSMQOutgoingQueueManagement, EodResend)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *EodResend )( 
             __RPC__in IMSMQOutgoingQueueManagement * This);
         
@@ -13301,28 +14267,34 @@ EXTERN_C const IID IID_IMSMQQueueManagement;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSMQQueueManagement * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSMQQueueManagement * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13331,6 +14303,7 @@ EXTERN_C const IID IID_IMSMQQueueManagement;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMSMQQueueManagement * This,
             /* [annotation][in] */ 
@@ -13350,52 +14323,64 @@ EXTERN_C const IID IID_IMSMQQueueManagement;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, Init)
         /* [id][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [optional][in] */ __RPC__in VARIANT *Machine,
             /* [optional][in] */ __RPC__in VARIANT *Pathname,
             /* [optional][in] */ __RPC__in VARIANT *FormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_FormatName)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_FormatName )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFormatName);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_Machine)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_Machine )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrMachine);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_MessageCount)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_MessageCount )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plMessageCount);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_ForeignStatus)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_ForeignStatus )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plForeignStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_QueueType)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_QueueType )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plQueueType);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_IsLocal)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_IsLocal )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfIsLocal);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_TransactionalStatus)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_TransactionalStatus )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plTransactionalStatus);
         
+        DECLSPEC_XFGVIRT(IMSMQManagement, get_BytesInQueue)
         /* [id][propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BytesInQueue )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out VARIANT *pvBytesInQueue);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueManagement, get_JournalMessageCount)
         /* [propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_JournalMessageCount )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out long *plJournalMessageCount);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueManagement, get_BytesInJournal)
         /* [propget][helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *get_BytesInJournal )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out VARIANT *pvBytesInJournal);
         
+        DECLSPEC_XFGVIRT(IMSMQQueueManagement, EodGetReceiveInfo)
         /* [helpstringcontext] */ HRESULT ( STDMETHODCALLTYPE *EodGetReceiveInfo )( 
             __RPC__in IMSMQQueueManagement * This,
             /* [retval][out] */ __RPC__out VARIANT *pvCollection);

@@ -1,5 +1,7 @@
 --traverse
 <IncludeRoot>/um/msdrmdefs.h
 <IncludeRoot>/um/msdrm.h
+<IncludeRoot>/um/msdrmerror.h
+<IncludeRoot>/um/msdrmgetinfo.h
 --namespace
 Windows.Win32.Data.RightsManagement

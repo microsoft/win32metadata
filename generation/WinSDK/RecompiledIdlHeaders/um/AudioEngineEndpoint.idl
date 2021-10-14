@@ -592,7 +592,7 @@ interface IAudioOutputEndpointRT : IUnknown{
     //  This method returns a pointer to a buffer into which to place the data
     //  that is output from the engine.
     //
-    //  The data won’t be valid except during the duration of the
+    //  The data wonâ€™t be valid except during the duration of the
     //  ReleaseOutputDataPointer method.
     //
     //  The returned pointer must be frame-aligned.
@@ -602,7 +602,7 @@ interface IAudioOutputEndpointRT : IUnknown{
     //  must be <= to the frame count returned in IAudioEndpoint::GetFramesPerPacket.
     //
     //  In the case where there is internally not enough
-    //  room to satisfy the client’s request for a buffer pointer, a glitch may
+    //  room to satisfy the clientâ€™s request for a buffer pointer, a glitch may
     //  occur. In this case, the endpoint should still return an address which can
     //  be written to, however, when ReleaseOutputDataPointer is called this
     //  data will be lost. The glitch should be logged with the wmi logging
@@ -1015,6 +1015,10 @@ cpp_quote("DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin_DataFlow,       0x12d8
 // DEVPKEY_AudioEndpointPlugin_PnPInterface: Specifies name of PnP Interface for audio endpoint plugin.
 // vartype = VT_LPWSTR
 cpp_quote("DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin_PnPInterface,   0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 3); ")
+
+// DEVPKEY_AudioEndpointPlugin2_FactoryCLSID: Specifies the CLSID of the audio endpoint plugin factory
+// vartype = VT_CLSID
+cpp_quote("DEFINE_PROPERTYKEY(DEVPKEY_AudioEndpointPlugin2_FactoryCLSID,   0x12d83bd7, 0xcf12, 0x46be, 0x85, 0x40, 0x81, 0x27, 0x10, 0xd3, 0x2, 0x1c, 4); ")
 
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 #pragma endregion

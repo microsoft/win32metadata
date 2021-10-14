@@ -66,9 +66,11 @@ cpp_quote("#if (NTDDI_VERSION >= NTDDI_THRESHOLD)")
     [object, uuid(7a5b6fd1-cd73-4b6c-9cf4-2e869eaf470a)]
     interface ICoreWindowAdapterInterop : IInspectable
     {
+        [propget] HRESULT AppActivationClientAdapter([out, retval] IUnknown** value);
         [propget] HRESULT ApplicationViewClientAdapter([out, retval] IUnknown** value);
         [propget] HRESULT CoreApplicationViewClientAdapter([out, retval] IUnknown** value);
         [propget] HRESULT HoloViewClientAdapter([out, retval] IUnknown** value);
+        [propget] HRESULT PositionerClientAdapter([out, retval] IUnknown** value);
         [propget] HRESULT SystemNavigationClientAdapter([out, retval] IUnknown** value);
         [propget] HRESULT TitleBarClientAdapter([out, retval] IUnknown** value);
         

@@ -38,7 +38,7 @@
 
 #ifdef CLFS_KERNEL_MODE
 #   undef CLFS_KERNEL_MODE
-#endif CLFS_KERNEL_MODE
+#endif // CLFS_KERNEL_MODE
 
 #include <clfs.h>
 
@@ -840,7 +840,7 @@ CLFSUSER_API BOOL WINAPI GetLogIoStatistics (
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_BOOTABLESKU) */
 #pragma endregion
 
-#endif  __CLFSW32_H__
+#endif // __CLFSW32_H__
 
 //-----------------------------------------------------------------------------
 //                                      END OF FILE

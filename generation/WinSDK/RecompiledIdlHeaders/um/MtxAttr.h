@@ -42,4 +42,4 @@
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
-#endif _MTXATTR_H_
+#endif // _MTXATTR_H_

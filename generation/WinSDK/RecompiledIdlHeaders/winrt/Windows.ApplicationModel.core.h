@@ -88,7 +88,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x10000
+#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_STARTUPTASKCONTRACT_VERSION)
@@ -116,7 +116,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -189,6 +189,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3 ABI::Windows::ApplicationModel::Core::IAppListEntry3
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Core {
+                interface IAppListEntry4;
+            } /* Core */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4 ABI::Windows::ApplicationModel::Core::IAppListEntry4
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCore_CICoreApplication_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCore_CICoreApplication_FWD_DEFINED__
@@ -1097,6 +1112,27 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CIAppDisplayInfo_FWD_DEFINED__
 
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            class AppInfo;
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CIAppInfo_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CIAppInfo_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            interface IAppInfo;
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CIAppInfo ABI::Windows::ApplicationModel::IAppInfo
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CIAppInfo_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
 namespace ABI {
@@ -1384,6 +1420,42 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Core.IAppListEntry4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Core.AppListEntry
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Core_IAppListEntry4[] = L"Windows.ApplicationModel.Core.IAppListEntry4";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace Core {
+                MIDL_INTERFACE("2a131ed2-56f5-487c-8697-5166f3b33da0")
+                IAppListEntry4 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_AppInfo(
+                        ABI::Windows::ApplicationModel::IAppInfo** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IAppListEntry4 = _uuidof(IAppListEntry4);
+            } /* Core */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 /*
  *
@@ -2240,6 +2312,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCore_CIUnhandledError
  *    Windows.ApplicationModel.Core.IAppListEntry ** Default Interface **
  *    Windows.ApplicationModel.Core.IAppListEntry2
  *    Windows.ApplicationModel.Core.IAppListEntry3
+ *    Windows.ApplicationModel.Core.IAppListEntry4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2260,15 +2333,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUseCount interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUnhandledError interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationExit interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUseCount interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUnhandledError interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2398,6 +2471,12 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry2 __x_A
 typedef interface __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3 __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4 __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCore_CICoreApplication_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCore_CICoreApplication_FWD_DEFINED__
@@ -3480,6 +3559,12 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CIAppDisplayInfo __x_ABI_CW
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CIAppDisplayInfo_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CIAppInfo_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CIAppInfo_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CIAppInfo __x_ABI_CWindows_CApplicationModel_CIAppInfo;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CIAppInfo_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
 #define ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet;
@@ -3751,6 +3836,75 @@ interface __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry3_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.Core.IAppListEntry4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.Core.AppListEntry
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_Core_IAppListEntry4[] = L"Windows.ApplicationModel.Core.IAppListEntry4";
+typedef struct __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_AppInfo)(__x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4* This,
+        __x_ABI_CWindows_CApplicationModel_CIAppInfo** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_get_AppInfo(This, value) \
+    ((This)->lpVtbl->get_AppInfo(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 /*
  *
@@ -5357,6 +5511,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CCore_CIUnhandledError
  *    Windows.ApplicationModel.Core.IAppListEntry ** Default Interface **
  *    Windows.ApplicationModel.Core.IAppListEntry2
  *    Windows.ApplicationModel.Core.IAppListEntry3
+ *    Windows.ApplicationModel.Core.IAppListEntry4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -5377,15 +5532,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUseCount interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication2 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUnhandledError interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplication3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationExit interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUseCount interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreApplicationUnhandledError interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.ApplicationModel.Core.ICoreImmersiveApplication2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

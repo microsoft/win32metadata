@@ -160,6 +160,81 @@ STDAPI DCompositionAttachMouseDragToHwnd(
     _In_ BOOL enable
     );
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
+
+//+-----------------------------------------------------------------------------
+//
+//  Function:
+//      DCompositionGetCurrentFrameId
+//
+//  Synopsis:
+//      Returns the frameId of the most recently started composition frame.
+//
+//------------------------------------------------------------------------------
+STDAPI DCompositionGetFrameId(
+    _In_ COMPOSITION_FRAME_ID_TYPE frameIdType,
+    _Out_ COMPOSITION_FRAME_ID* frameId);
+
+//+-----------------------------------------------------------------------------
+//
+//  Function:
+//      DCompositionGetStatistics
+//
+//  Synopsis:
+//      Returns statistics for the requested frame, as well as an optional list
+//      of all target ids that existed at that time.
+//
+//------------------------------------------------------------------------------
+STDAPI DCompositionGetStatistics(
+    _In_ COMPOSITION_FRAME_ID frameId,
+    _Out_ COMPOSITION_FRAME_STATS* frameStats,
+    _In_ UINT targetIdCount,
+    _Out_writes_opt_(targetCount) COMPOSITION_TARGET_ID* targetIds,
+    _Out_opt_ UINT* actualTargetIdCount);
+
+//+-----------------------------------------------------------------------------
+//
+//  Function:
+//      DCompositionGetCompositorStatistics
+//
+//  Synopsis:
+//      Returns compositor target statistics for the requested frame.
+//
+//------------------------------------------------------------------------------
+STDAPI DCompositionGetTargetStatistics(
+    _In_ COMPOSITION_FRAME_ID frameId,
+    _In_ const COMPOSITION_TARGET_ID* targetId,
+    _Out_ COMPOSITION_TARGET_STATS* targetStats);
+
+//+-----------------------------------------------------------------------------
+//
+//  Function:
+//      DCompositionBoostCompositorClock
+//
+//  Synopsis:
+//      Requests compositor to temporarily increase framerate.
+//
+//------------------------------------------------------------------------------
+STDAPI DCompositionBoostCompositorClock(
+    _In_ BOOL enable);
+
+//+-----------------------------------------------------------------------------
+//
+//  Function:
+//      DCompositionWaitForCompositorClock
+//
+//  Synopsis:
+//      Waits for a compositor clock tick, other events, or a timeout.
+//
+//------------------------------------------------------------------------------
+STDAPI_(DWORD) DCompositionWaitForCompositorClock(
+    _In_range_(0, DCOMPOSITION_MAX_WAITFORCOMPOSITORCLOCK_OBJECTS) UINT count,
+    _In_reads_opt_(count) const HANDLE* handles,
+    _In_ DWORD timeoutInMs);
+
+#endif  // (NTDDI_VERSION >= NTDDI_WIN10_CO)
+
 //+-----------------------------------------------------------------------------
 //
 //  Interface:
@@ -2259,6 +2334,76 @@ DECLARE_INTERFACE_IID_(IDCompositionAffineTransform2DEffect, IDCompositionFilter
 
     STDMETHOD(SetSharpness)(THIS_
         _In_ IDCompositionAnimation *animation
+        ) PURE;
+};
+
+struct DCompositionInkTrailPoint
+{
+    float x;
+    float y;
+    float radius;
+};
+
+//+-----------------------------------------------------------------------------
+//
+//  Interface:
+//      IDCompositionDelegatedInkTrail
+//
+//  Synopsis:
+//      An IDCompositionDelegatedInkTrail interface represents low latency ink 
+//      that the system renders on behalf of the app.
+//
+//------------------------------------------------------------------------------
+#undef INTERFACE
+#define INTERFACE IDCompositionDelegatedInkTrail
+DECLARE_INTERFACE_IID_(IDCompositionDelegatedInkTrail, IUnknown, "C2448E9B-547D-4057-8CF5-8144EDE1C2DA")
+{
+    // Returns a generation id to be used when removing points later
+    STDMETHOD(AddTrailPoints)(THIS_
+        _In_reads_(inkPointsCount) const DCompositionInkTrailPoint* inkPoints,
+        UINT inkPointsCount,
+        _Out_ UINT* generationId
+        ) PURE;
+
+    // Returns a generation id to be used when removing points later
+    STDMETHOD(AddTrailPointsWithPrediction)(THIS_
+        _In_reads_(inkPointsCount) const DCompositionInkTrailPoint* inkPoints,
+        UINT inkPointsCount,
+        _In_reads_(predictedInkPointsCount) const DCompositionInkTrailPoint* predictedInkPoints,
+        UINT predictedInkPointsCount,
+        _Out_ UINT* generationId
+        ) PURE;
+
+    STDMETHOD(RemoveTrailPoints)(THIS_
+        UINT generationId
+        ) PURE;
+
+    STDMETHOD(StartNewTrail)(THIS_
+        const D2D1_COLOR_F& color
+        ) PURE;
+};
+
+//+-----------------------------------------------------------------------------
+//
+//  Interface:
+//      IDCompositionInkTrailDevice
+//
+//  Synopsis:
+//      An IDCompositionInkTrailDevice interface is the factory for
+//      creating DelegatedInkTrail objects
+//
+//------------------------------------------------------------------------------
+#undef INTERFACE
+#define INTERFACE IDCompositionInkTrailDevice
+DECLARE_INTERFACE_IID_(IDCompositionInkTrailDevice, IUnknown, "DF0C7CEC-CDEB-4D4A-B91C-721BF22F4E6C")
+{
+    STDMETHOD(CreateDelegatedInkTrail)(
+        _Out_ IDCompositionDelegatedInkTrail** inkTrail
+        ) PURE;
+
+    STDMETHOD(CreateDelegatedInkTrailForSwapChain)(
+        _In_ IUnknown* swapChain,
+        _Out_ IDCompositionDelegatedInkTrail** inkTrail
         ) PURE;
 };
 

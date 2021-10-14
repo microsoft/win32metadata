@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -133,6 +141,7 @@ EXTERN_C const IID IID_ID3D10Debug;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D10Debug * This,
             /* [annotation][in] */ 
@@ -140,36 +149,45 @@ EXTERN_C const IID IID_ID3D10Debug;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D10Debug * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D10Debug * This);
         
+        DECLSPEC_XFGVIRT(ID3D10Debug, SetFeatureMask)
         HRESULT ( STDMETHODCALLTYPE *SetFeatureMask )( 
             ID3D10Debug * This,
             UINT Mask);
         
+        DECLSPEC_XFGVIRT(ID3D10Debug, GetFeatureMask)
         UINT ( STDMETHODCALLTYPE *GetFeatureMask )( 
             ID3D10Debug * This);
         
+        DECLSPEC_XFGVIRT(ID3D10Debug, SetPresentPerRenderOpDelay)
         HRESULT ( STDMETHODCALLTYPE *SetPresentPerRenderOpDelay )( 
             ID3D10Debug * This,
             UINT Milliseconds);
         
+        DECLSPEC_XFGVIRT(ID3D10Debug, GetPresentPerRenderOpDelay)
         UINT ( STDMETHODCALLTYPE *GetPresentPerRenderOpDelay )( 
             ID3D10Debug * This);
         
+        DECLSPEC_XFGVIRT(ID3D10Debug, SetSwapChain)
         HRESULT ( STDMETHODCALLTYPE *SetSwapChain )( 
             ID3D10Debug * This,
             /* [annotation] */ 
             _In_opt_  IDXGISwapChain *pSwapChain);
         
+        DECLSPEC_XFGVIRT(ID3D10Debug, GetSwapChain)
         HRESULT ( STDMETHODCALLTYPE *GetSwapChain )( 
             ID3D10Debug * This,
             /* [annotation] */ 
             _Out_  IDXGISwapChain **ppSwapChain);
         
+        DECLSPEC_XFGVIRT(ID3D10Debug, Validate)
         HRESULT ( STDMETHODCALLTYPE *Validate )( 
             ID3D10Debug * This);
         
@@ -257,6 +275,7 @@ EXTERN_C const IID IID_ID3D10SwitchToRef;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D10SwitchToRef * This,
             /* [annotation][in] */ 
@@ -264,16 +283,20 @@ EXTERN_C const IID IID_ID3D10SwitchToRef;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D10SwitchToRef * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D10SwitchToRef * This);
         
+        DECLSPEC_XFGVIRT(ID3D10SwitchToRef, SetUseRef)
         BOOL ( STDMETHODCALLTYPE *SetUseRef )( 
             ID3D10SwitchToRef * This,
             BOOL UseRef);
         
+        DECLSPEC_XFGVIRT(ID3D10SwitchToRef, GetUseRef)
         BOOL ( STDMETHODCALLTYPE *GetUseRef )( 
             ID3D10SwitchToRef * This);
         
@@ -1059,6 +1082,7 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D10InfoQueue * This,
             /* [annotation][in] */ 
@@ -1066,20 +1090,25 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, SetMessageCountLimit)
         HRESULT ( STDMETHODCALLTYPE *SetMessageCountLimit )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  UINT64 MessageCountLimit);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, ClearStoredMessages)
         void ( STDMETHODCALLTYPE *ClearStoredMessages )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetMessage)
         HRESULT ( STDMETHODCALLTYPE *GetMessage )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
@@ -1089,29 +1118,37 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation] */ 
             _Inout_  SIZE_T *pMessageByteLength);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetNumMessagesAllowedByStorageFilter)
         UINT64 ( STDMETHODCALLTYPE *GetNumMessagesAllowedByStorageFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetNumMessagesDeniedByStorageFilter)
         UINT64 ( STDMETHODCALLTYPE *GetNumMessagesDeniedByStorageFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetNumStoredMessages)
         UINT64 ( STDMETHODCALLTYPE *GetNumStoredMessages )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetNumStoredMessagesAllowedByRetrievalFilter)
         UINT64 ( STDMETHODCALLTYPE *GetNumStoredMessagesAllowedByRetrievalFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetNumMessagesDiscardedByMessageCountLimit)
         UINT64 ( STDMETHODCALLTYPE *GetNumMessagesDiscardedByMessageCountLimit )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetMessageCountLimit)
         UINT64 ( STDMETHODCALLTYPE *GetMessageCountLimit )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, AddStorageFilterEntries)
         HRESULT ( STDMETHODCALLTYPE *AddStorageFilterEntries )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  D3D10_INFO_QUEUE_FILTER *pFilter);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetStorageFilter)
         HRESULT ( STDMETHODCALLTYPE *GetStorageFilter )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
@@ -1119,31 +1156,39 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation] */ 
             _Inout_  SIZE_T *pFilterByteLength);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, ClearStorageFilter)
         void ( STDMETHODCALLTYPE *ClearStorageFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, PushEmptyStorageFilter)
         HRESULT ( STDMETHODCALLTYPE *PushEmptyStorageFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, PushCopyOfStorageFilter)
         HRESULT ( STDMETHODCALLTYPE *PushCopyOfStorageFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, PushStorageFilter)
         HRESULT ( STDMETHODCALLTYPE *PushStorageFilter )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  D3D10_INFO_QUEUE_FILTER *pFilter);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, PopStorageFilter)
         void ( STDMETHODCALLTYPE *PopStorageFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetStorageFilterStackSize)
         UINT ( STDMETHODCALLTYPE *GetStorageFilterStackSize )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, AddRetrievalFilterEntries)
         HRESULT ( STDMETHODCALLTYPE *AddRetrievalFilterEntries )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  D3D10_INFO_QUEUE_FILTER *pFilter);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetRetrievalFilter)
         HRESULT ( STDMETHODCALLTYPE *GetRetrievalFilter )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
@@ -1151,26 +1196,33 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation] */ 
             _Inout_  SIZE_T *pFilterByteLength);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, ClearRetrievalFilter)
         void ( STDMETHODCALLTYPE *ClearRetrievalFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, PushEmptyRetrievalFilter)
         HRESULT ( STDMETHODCALLTYPE *PushEmptyRetrievalFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, PushCopyOfRetrievalFilter)
         HRESULT ( STDMETHODCALLTYPE *PushCopyOfRetrievalFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, PushRetrievalFilter)
         HRESULT ( STDMETHODCALLTYPE *PushRetrievalFilter )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  D3D10_INFO_QUEUE_FILTER *pFilter);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, PopRetrievalFilter)
         void ( STDMETHODCALLTYPE *PopRetrievalFilter )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetRetrievalFilterStackSize)
         UINT ( STDMETHODCALLTYPE *GetRetrievalFilterStackSize )( 
             ID3D10InfoQueue * This);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, AddMessage)
         HRESULT ( STDMETHODCALLTYPE *AddMessage )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
@@ -1182,6 +1234,7 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation] */ 
             _In_  LPCSTR pDescription);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, AddApplicationMessage)
         HRESULT ( STDMETHODCALLTYPE *AddApplicationMessage )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
@@ -1189,6 +1242,7 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation] */ 
             _In_  LPCSTR pDescription);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, SetBreakOnCategory)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnCategory )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
@@ -1196,6 +1250,7 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation] */ 
             _In_  BOOL bEnable);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, SetBreakOnSeverity)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnSeverity )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
@@ -1203,6 +1258,7 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation] */ 
             _In_  BOOL bEnable);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, SetBreakOnID)
         HRESULT ( STDMETHODCALLTYPE *SetBreakOnID )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
@@ -1210,26 +1266,31 @@ EXTERN_C const IID IID_ID3D10InfoQueue;
             /* [annotation] */ 
             _In_  BOOL bEnable);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetBreakOnCategory)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnCategory )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  D3D10_MESSAGE_CATEGORY Category);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetBreakOnSeverity)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnSeverity )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  D3D10_MESSAGE_SEVERITY Severity);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetBreakOnID)
         BOOL ( STDMETHODCALLTYPE *GetBreakOnID )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  D3D10_MESSAGE_ID ID);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, SetMuteDebugOutput)
         void ( STDMETHODCALLTYPE *SetMuteDebugOutput )( 
             ID3D10InfoQueue * This,
             /* [annotation] */ 
             _In_  BOOL bMute);
         
+        DECLSPEC_XFGVIRT(ID3D10InfoQueue, GetMuteDebugOutput)
         BOOL ( STDMETHODCALLTYPE *GetMuteDebugOutput )( 
             ID3D10InfoQueue * This);
         

@@ -49,7 +49,11 @@ extern "C" {
 
 #include <basetsd.h>
 
-#if defined(_M_ARM64)
+// TODO-ARM64X: Determine whether we want to broadly favor x64 or ARM64 behavior for RPC internals
+#if defined(_M_ARM64EC)
+#define __RPC_ARM64__
+#define __RPC_WIN64__
+#elif defined(_M_ARM64)
 #define __RPC_ARM64__
 #elif defined(_M_IA64) || defined(_M_AMD64)
 #define __RPC_WIN64__
@@ -57,7 +61,7 @@ extern "C" {
 #define __RPC_ARM32__
 #else
 #define __RPC_WIN32__
-#endif // defined(_M_ARM64)
+#endif // defined(_M_ARM64EC)
 
 #endif // defined( MAC ) || defined( _MAC )
 

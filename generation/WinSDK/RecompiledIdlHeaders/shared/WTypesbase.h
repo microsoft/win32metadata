@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -428,7 +436,7 @@ enum tagMSHCTX
         MSHCTX_DIFFERENTMACHINE	= 2,
         MSHCTX_INPROC	= 3,
         MSHCTX_CROSSCTX	= 4,
-        MSHCTX_RESERVED1	= 5
+        MSHCTX_CONTAINER	= 5
     } 	MSHCTX;
 
 typedef struct _BYTE_BLOB

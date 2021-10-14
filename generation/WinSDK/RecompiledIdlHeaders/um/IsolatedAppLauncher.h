@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -116,6 +124,7 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IIsolatedAppLauncher * This,
             /* [annotation][in] */ 
@@ -123,12 +132,15 @@ EXTERN_C const IID IID_IIsolatedAppLauncher;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IIsolatedAppLauncher * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IIsolatedAppLauncher * This);
         
+        DECLSPEC_XFGVIRT(IIsolatedAppLauncher, Launch)
         HRESULT ( STDMETHODCALLTYPE *Launch )( 
             __RPC__in IIsolatedAppLauncher * This,
             /* [annotation][string][in] */ 
@@ -201,7 +213,9 @@ IsolatedAppLauncher;
 #pragma endregion
 #pragma region App Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
+#if (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 STDAPI IsProcessInWDAGContainer(_In_ PVOID Reserved, _Out_ BOOL *isProcessInWDAGContainer);
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
 STDAPI IsProcessInIsolatedContainer(_Out_ BOOL *isProcessInIsolatedContainer);
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion

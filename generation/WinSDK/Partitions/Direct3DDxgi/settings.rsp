@@ -12,5 +12,7 @@ _D3DCOLORVALUE
 <IncludeRoot>/um/dxgidebug.h
 <IncludeRoot>/shared/dxgi1_3.h
 <IncludeRoot>/shared/dxgi1_5.h
+<IncludeRoot>/um/dxgimessages.h
+<IncludeRoot>/um/dxprogrammablecapture.h
 --namespace
 Windows.Win32.Graphics.Dxgi

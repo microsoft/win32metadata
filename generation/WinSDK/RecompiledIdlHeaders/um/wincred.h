@@ -776,7 +776,44 @@ typedef PCREDUI_INFOA PCREDUI_INFO;
 #define CREDUIWIN_SECURE_PROMPT             0x00001000  // The Credui prompt should be displayed on the secure desktop
 #define CREDUIWIN_PREPROMPTING              0X00002000  // CredUI is invoked by SspiPromptForCredentials and the client is prompting before a prior handshake
 #define CREDUIWIN_PACK_32_WOW               0x10000000  // Tell the credential provider it should be packing its Auth Blob 32 bit even though it is running 64 native
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS1)
+#define CREDUIWIN_IGNORE_CLOUDAUTHORITY_NAME            0x00040000  // Tell the credential provider it should not pack AAD authority name
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+#define CREDUIWIN_DOWNLEVEL_HELLO_AS_SMART_CARD         0x80000000  // Force collected Hello credentials to be packed in a smart card auth buffer.
+#endif
 
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_RS5)
+
+#define CREDUIWIN_VALID_FLAGS            ( \
+        CREDUIWIN_GENERIC                | \
+        CREDUIWIN_CHECKBOX               | \
+        CREDUIWIN_AUTHPACKAGE_ONLY       | \
+        CREDUIWIN_IN_CRED_ONLY           | \
+        CREDUIWIN_ENUMERATE_ADMINS       | \
+        CREDUIWIN_ENUMERATE_CURRENT_USER | \
+        CREDUIWIN_SECURE_PROMPT          | \
+        CREDUIWIN_PREPROMPTING           | \
+        CREDUIWIN_PACK_32_WOW            | \
+        CREDUIWIN_IGNORE_CLOUDAUTHORITY_NAME    | \
+        CREDUIWIN_DOWNLEVEL_HELLO_AS_SMART_CARD )
+
+#elif (NTDDI_VERSION >= NTDDI_WIN10_RS1)
+
+#define CREDUIWIN_VALID_FLAGS            ( \
+        CREDUIWIN_GENERIC                | \
+        CREDUIWIN_CHECKBOX               | \
+        CREDUIWIN_AUTHPACKAGE_ONLY       | \
+        CREDUIWIN_IN_CRED_ONLY           | \
+        CREDUIWIN_ENUMERATE_ADMINS       | \
+        CREDUIWIN_ENUMERATE_CURRENT_USER | \
+        CREDUIWIN_SECURE_PROMPT          | \
+        CREDUIWIN_PREPROMPTING           | \
+        CREDUIWIN_PACK_32_WOW            | \
+        CREDUIWIN_IGNORE_CLOUDAUTHORITY_NAME    )
+
+#else
 
 #define CREDUIWIN_VALID_FLAGS            ( \
         CREDUIWIN_GENERIC                | \
@@ -788,6 +825,8 @@ typedef PCREDUI_INFOA PCREDUI_INFO;
         CREDUIWIN_SECURE_PROMPT          | \
         CREDUIWIN_PREPROMPTING           | \
         CREDUIWIN_PACK_32_WOW            )
+
+#endif
 
 
 //-----------------------------------------------------------------------------

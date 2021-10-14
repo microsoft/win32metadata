@@ -35,6 +35,10 @@ _NavigateToPidl=_NavigateToPidl2
 <IncludeRoot>/um/IntShCut.h
 <IncludeRoot>/um/appnotify.h
 <IncludeRoot>/um/propkeydef.h
+<IncludeRoot>/um/animationcoordinator.h
+<IncludeRoot>/um/cplext.h
+<IncludeRoot>/um/shdispid.h
+<IncludeRoot>/um/sherrors.h
 --with-attribute
 SIIGBF=Flags
 --namespace

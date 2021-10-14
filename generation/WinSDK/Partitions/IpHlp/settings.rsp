@@ -36,5 +36,6 @@ _DL_EUI48
 <IncludeRoot>/um/IPExport.h
 <IncludeRoot>/um/iphlpapi.h
 <IncludeRoot>/um/iptypes.h
+<IncludeRoot>/um/ipinfoid.h
 --namespace
 Windows.Win32.NetworkManagement.IpHelper

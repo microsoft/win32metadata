@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -125,6 +133,7 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This,
             /* [annotation][in] */ 
@@ -132,25 +141,31 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentInterop;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This,
             /* [out] */ ULONG *iidCount,
             /* [size_is][size_is][out] */ IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This,
             /* [out] */ HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This,
             /* [out] */ TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusAttachmentInterop, get_Win32Handle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Win32Handle )( 
             IWindowsDevicesAllJoynBusAttachmentInterop * This,
             /* [annotation][retval][out] */ 
@@ -237,6 +252,7 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This,
             /* [annotation][in] */ 
@@ -244,25 +260,31 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusAttachmentFactoryInterop;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This,
             /* [out] */ ULONG *iidCount,
             /* [size_is][size_is][out] */ IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This,
             /* [out] */ HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This,
             /* [out] */ TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusAttachmentFactoryInterop, CreateFromWin32Handle)
         HRESULT ( STDMETHODCALLTYPE *CreateFromWin32Handle )( 
             IWindowsDevicesAllJoynBusAttachmentFactoryInterop * This,
             /* [annotation][in] */ 
@@ -373,6 +395,7 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
             /* [annotation][in] */ 
@@ -380,25 +403,31 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWindowsDevicesAllJoynBusObjectInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWindowsDevicesAllJoynBusObjectInterop * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
             /* [out] */ ULONG *iidCount,
             /* [size_is][size_is][out] */ IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
             /* [out] */ HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
             /* [out] */ TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusObjectInterop, AddPropertyGetHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertyGetHandler )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
             /* [annotation][in] */ 
@@ -412,6 +441,7 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
                 HSTRING propertyName,
                 alljoyn_msgarg value));
         
+        DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusObjectInterop, AddPropertySetHandler)
         HRESULT ( STDMETHODCALLTYPE *AddPropertySetHandler )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
             /* [annotation][in] */ 
@@ -425,6 +455,7 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectInterop;
                 HSTRING propertyName,
                 alljoyn_msgarg value));
         
+        DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusObjectInterop, get_Win32Handle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Win32Handle )( 
             IWindowsDevicesAllJoynBusObjectInterop * This,
             /* [annotation][retval][out] */ 
@@ -515,6 +546,7 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectFactoryInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This,
             /* [annotation][in] */ 
@@ -522,25 +554,31 @@ EXTERN_C const IID IID_IWindowsDevicesAllJoynBusObjectFactoryInterop;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This,
             /* [out] */ ULONG *iidCount,
             /* [size_is][size_is][out] */ IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This,
             /* [out] */ HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This,
             /* [out] */ TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IWindowsDevicesAllJoynBusObjectFactoryInterop, CreateFromWin32Handle)
         HRESULT ( STDMETHODCALLTYPE *CreateFromWin32Handle )( 
             IWindowsDevicesAllJoynBusObjectFactoryInterop * This,
             /* [annotation][in] */ 

@@ -10,6 +10,7 @@
            xmlns:uap3="http://schemas.microsoft.com/appx/manifest/uap/windows10/3"
            xmlns:uap7="http://schemas.microsoft.com/appx/manifest/uap/windows10/7"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+           xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            xmlns:rescap3="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/3"
            >
 
@@ -18,6 +19,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/7"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/3"/>
 
   <xs:element name="Capability" substitutionGroup="f:CapabilityChoice">
@@ -60,6 +62,7 @@
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Uap2" use="required"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
+      <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
     </xs:complexType>
   </xs:element>
 

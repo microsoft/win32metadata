@@ -29,9 +29,18 @@ Abstract:
 #define WLDP_SETDYNAMICCODETRUST_FN         "WldpSetDynamicCodeTrust"
 #define WLDP_ISDYNAMICCODEPOLICYENABLED_FN  "WldpIsDynamicCodePolicyEnabled"
 #define WLDP_QUERYDANAMICCODETRUST_FN       "WldpQueryDynamicCodeTrust"
+#define WLDP_QUERYDYNAMICCODETRUST_FN       "WldpQueryDynamicCodeTrust"
 #define WLDP_QUERYWINDOWSLOCKDOWNMODE_FN    "WldpQueryWindowsLockdownMode"
 #define WLDP_SETWINDOWSLOCKDOWNRESTRICTION_FN "WldpSetWindowsLockdownRestriction"
+#define WLDP_QUERYDEVICESECURITYINFORMATION_FN "WldpQueryDeviceSecurityInformation"
 #define WLDP_QUERYWINDOWSLOCKDOWNRESTRICTION_FN "WldpQueryWindowsLockdownRestriction"
+#define WLDP_ISAPPAPPROVEDBYPOLICY_FN       "WldpIsAppApprovedByPolicy"
+#define WLDP_QUERYPOLICYSETTINGENABLED_FN   "WldpQueryPolicySettingEnabled"
+#define WLDP_QUERYPOLICYSETTINGENABLED2_FN   "WldpQueryPolicySettingEnabled2"
+#define WLDP_ISWCOSPRODUCTIONCONFIGURATION_FN     "WldpIsWcosProductionConfiguration"
+#define WLDP_RESETWCOSPRODUCTIONCONFIGURATION_FN     "WldpResetWcosProductionConfiguration"
+#define WLDP_ISPRODUCTIONCONFIGURATION_FN   "WldpIsProductionConfiguration"
+#define WLDP_RESETPRODUCTIONCONFIGURATION_FN   "WldpResetProductionConfiguration"
 
 //
 //  Policy state bits.
@@ -213,6 +222,15 @@ typedef enum WLDP_WINDOWS_LOCKDOWN_RESTRICTION
 } WLDP_WINDOWS_LOCKDOWN_RESTRICTION, *PWLDP_WINDOWS_LOCKDOWN_RESTRICTION;
 
 //
+// WldpQueryPolicySettingEnabled Setting Enum
+//
+
+typedef enum WLDP_POLICY_SETTING
+{
+    WLDP_POLICY_SETTING_AV_PERF_MODE = 1000,
+} WLDP_POLICY_SETTING, *PWLDP_POLICY_SETTING;
+
+//
 //  WLDP_HOST_INFORMATION Version.
 //
 
@@ -229,6 +247,18 @@ typedef struct WLDP_HOST_INFORMATION
     PCWSTR szSource;       // Full path and script name with extension. NULL for WLDP_HOST_ID_GLOBAL or manual script execution.
     HANDLE hSource;        // Additionally to the name, the caller may specify a handle to the file that is used for validation.
 } WLDP_HOST_INFORMATION, *PWLDP_HOST_INFORMATION;
+
+//
+//  Device Security Information.
+//
+
+typedef struct WLDP_DEVICE_SECURITY_INFORMATION
+{
+    DWORD UnlockIdSize; // UnlockId size in byte
+    PBYTE UnlockId; // Device specific UnlockId if exists
+    DWORD ManufacturerIDLength; // ManufacturerId string size in byte
+    PWSTR _Field_size_bytes_(ManufacturerIDLength) ManufacturerID; // ManufacturerID on device if exists
+} WLDP_DEVICE_SECURITY_INFORMATION, *PWLDP_DEVICE_SECURITY_INFORMATION;
 
 //
 // Call the library to get the lockdown state relative to the host and script/msi to be used.
@@ -332,6 +362,23 @@ typedef HRESULT(WINAPI *PWLDP_QUERYWINDOWSLOCKDOWNMODE_API)(
     _Out_ PWLDP_WINDOWS_LOCKDOWN_MODE lockdownMode);
 
 //
+// This routine queries Device Security Information
+//
+
+
+STDAPI
+WldpQueryDeviceSecurityInformation(
+    _Out_writes_to_opt_(informationLength, *returnLength) PWLDP_DEVICE_SECURITY_INFORMATION information,
+    _In_ DWORD informationLength,
+    _Out_ DWORD* returnLength
+    );
+
+typedef HRESULT(WINAPI* PWLDP_QUERYDEVICESECURITYINFORMATION_API)(
+    _Out_writes_to_opt_(informationLength, *returnLength) PWLDP_DEVICE_SECURITY_INFORMATION information,
+    _In_ DWORD informationLength,
+    _Out_ DWORD* returnLength);
+
+//
 // This routine queries CI lock down restriction. 
 //
 
@@ -371,12 +418,74 @@ WldpIsAppApprovedByPolicy(
     _In_ ULONGLONG PackageVersion
 );
 
-typedef HRESULT(WINAPI *PWLDP_WLDPISAPPAPPROVEDBYPOLICY_API)(
+typedef HRESULT(WINAPI *PWLDP_ISAPPAPPROVEDBYPOLICY_API)(
     _In_ PCWSTR PackageFamilyName,
     _In_ ULONGLONG PackageVersion
     );
 
 #endif /* NTDDI_VERSION >= NTDDI_WIN10_RS5 */
+
+#if NTDDI_VERSION >= NTDDI_WIN10_MN
+
+HRESULT
+WINAPI
+WldpQueryPolicySettingEnabled(
+    _In_ WLDP_POLICY_SETTING Setting,
+    _Out_ PBOOL Enabled
+);
+
+typedef HRESULT(WINAPI *PWLDP_QUERYPOLICYSETTINGENABLED_API)(
+    _In_ WLDP_POLICY_SETTING Setting,
+    _Out_ PBOOL Enabled
+    );
+
+HRESULT
+WINAPI
+WldpQueryPolicySettingEnabled2(
+    _In_ PCWSTR SettingString,
+    _Out_ PBOOL Enabled
+);
+
+typedef HRESULT(WINAPI *PWLDP_QUERYPOLICYSETTINGENABLED2_API)(
+    _In_ PCWSTR Setting,
+    _Out_ PBOOL Enabled
+    );
+
+//
+//    This function checks the security watermark state of 10x system
+//
+HRESULT
+WINAPI
+WldpIsWcosProductionConfiguration(
+    _Out_ PBOOL IsProductionConfiguration
+);
+
+typedef HRESULT(WINAPI *PWLDP_ISWCOSPRODUCTIONCONFIGURATION_API)(_Out_ PBOOL IsProductionConfiguration);
+
+HRESULT
+WINAPI
+WldpResetWcosProductionConfiguration();
+
+typedef HRESULT(WINAPI *PWLDP_RESETWCOSPRODUCTIONCONFIGURATION_API)();
+
+//
+//    This function checks the security configuration state of the non-10x system
+//
+HRESULT
+WINAPI
+WldpIsProductionConfiguration(
+    _Out_ PBOOL IsProductionConfiguration
+);
+
+typedef HRESULT(WINAPI *PWLDP_ISPRODUCTIONCONFIGURATION_API)(_Out_ PBOOL IsProductionConfiguration);
+
+HRESULT
+WINAPI
+WldpResetProductionConfiguration(VOID);
+
+typedef HRESULT(WINAPI *PWLDP_RESETPRODUCTIONCONFIGURATION_API)(VOID);
+
+#endif /* NTDDI_VERSION >= NTDDI_WIN10_MN */
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion

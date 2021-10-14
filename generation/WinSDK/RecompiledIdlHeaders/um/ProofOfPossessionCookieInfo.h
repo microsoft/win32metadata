@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -137,6 +145,7 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProofOfPossessionCookieInfoManager * This,
             /* [annotation][in] */ 
@@ -144,12 +153,15 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProofOfPossessionCookieInfoManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProofOfPossessionCookieInfoManager * This);
         
+        DECLSPEC_XFGVIRT(IProofOfPossessionCookieInfoManager, GetCookieInfoForUri)
         HRESULT ( STDMETHODCALLTYPE *GetCookieInfoForUri )( 
             __RPC__in IProofOfPossessionCookieInfoManager * This,
             /* [annotation][in] */ 
@@ -230,6 +242,7 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProofOfPossessionCookieInfoManager2 * This,
             /* [annotation][in] */ 
@@ -237,12 +250,15 @@ EXTERN_C const IID IID_IProofOfPossessionCookieInfoManager2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProofOfPossessionCookieInfoManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProofOfPossessionCookieInfoManager2 * This);
         
+        DECLSPEC_XFGVIRT(IProofOfPossessionCookieInfoManager2, GetCookieInfoWithUriForAccount)
         HRESULT ( STDMETHODCALLTYPE *GetCookieInfoWithUriForAccount )( 
             __RPC__in IProofOfPossessionCookieInfoManager2 * This,
             /* [annotation][in] */ 

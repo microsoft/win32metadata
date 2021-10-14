@@ -326,7 +326,7 @@ typedef struct _CAINFO
     DWORD   fAdvancedServer;   
 } CAINFO;
 
-#endif __ENUM_CATYPES__
+#endif // __ENUM_CATYPES__
 
 // Default value for wszREGCLOCKSKEWMINUTES
 #define CCLOCKSKEWMINUTESDEFAULT	      10

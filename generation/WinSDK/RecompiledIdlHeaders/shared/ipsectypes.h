@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -324,7 +332,7 @@ typedef struct IPSEC_TUNNEL_ENDPOINTS2_
     /* [size_is] */ IPSEC_TUNNEL_ENDPOINT0 *remoteAddresses;
     } 	IPSEC_TUNNEL_ENDPOINTS2;
 
-#endif (NTDDI_VERSION >= NTDDI_WIN8)
+#endif // (NTDDI_VERSION >= NTDDI_WIN8)
 #if (NTDDI_VERSION >= NTDDI_WIN7)
 typedef struct IPSEC_TUNNEL_ENDPOINTS1_
     {

@@ -24,6 +24,10 @@
 #pragma warning(disable:4820) /* padding added after data member */
 #endif
 
+// Support NOMINMAX by defining local min max macros 
+#define GDIPLUS_MIN(a,b) (((a) < (b)) ? (a) : (b))
+#define GDIPLUS_MAX(a,b) (((a) > (b)) ? (a) : (b))
+
 //--------------------------------------------------------------------------
 // Callback functions
 //--------------------------------------------------------------------------
@@ -476,10 +480,10 @@ public:
                           IN const RectF& a,
                           IN const RectF& b)
     {
-        REAL right = min(a.GetRight(), b.GetRight());
-        REAL bottom = min(a.GetBottom(), b.GetBottom());
-        REAL left = max(a.GetLeft(), b.GetLeft());
-        REAL top = max(a.GetTop(), b.GetTop());
+        REAL right = GDIPLUS_MIN(a.GetRight(), b.GetRight());
+        REAL bottom = GDIPLUS_MIN(a.GetBottom(), b.GetBottom());
+        REAL left = GDIPLUS_MAX(a.GetLeft(), b.GetLeft());
+        REAL top = GDIPLUS_MAX(a.GetTop(), b.GetTop());
 
         c.X = left;
         c.Y = top;
@@ -500,10 +504,10 @@ public:
                       IN const RectF& a,
                       IN const RectF& b)
     {
-        REAL right = max(a.GetRight(), b.GetRight());
-        REAL bottom = max(a.GetBottom(), b.GetBottom());
-        REAL left = min(a.GetLeft(), b.GetLeft());
-        REAL top = min(a.GetTop(), b.GetTop());
+        REAL right = GDIPLUS_MAX(a.GetRight(), b.GetRight());
+        REAL bottom = GDIPLUS_MAX(a.GetBottom(), b.GetBottom());
+        REAL left = GDIPLUS_MIN(a.GetLeft(), b.GetLeft());
+        REAL top = GDIPLUS_MIN(a.GetTop(), b.GetTop());
 
         c.X = left;
         c.Y = top;
@@ -664,10 +668,10 @@ public:
                           IN const Rect& a,
                           IN const Rect& b)
     {
-        INT right = min(a.GetRight(), b.GetRight());
-        INT bottom = min(a.GetBottom(), b.GetBottom());
-        INT left = max(a.GetLeft(), b.GetLeft());
-        INT top = max(a.GetTop(), b.GetTop());
+        INT right = GDIPLUS_MIN(a.GetRight(), b.GetRight());
+        INT bottom = GDIPLUS_MIN(a.GetBottom(), b.GetBottom());
+        INT left = GDIPLUS_MAX(a.GetLeft(), b.GetLeft());
+        INT top = GDIPLUS_MAX(a.GetTop(), b.GetTop());
 
         c.X = left;
         c.Y = top;
@@ -688,10 +692,10 @@ public:
                       IN const Rect& a,
                       IN const Rect& b)
     {
-        INT right = max(a.GetRight(), b.GetRight());
-        INT bottom = max(a.GetBottom(), b.GetBottom());
-        INT left = min(a.GetLeft(), b.GetLeft());
-        INT top = min(a.GetTop(), b.GetTop());
+        INT right = GDIPLUS_MAX(a.GetRight(), b.GetRight());
+        INT bottom = GDIPLUS_MAX(a.GetBottom(), b.GetBottom());
+        INT left = GDIPLUS_MIN(a.GetLeft(), b.GetLeft());
+        INT top = GDIPLUS_MIN(a.GetTop(), b.GetTop());
 
         c.X = left;
         c.Y = top;
@@ -777,6 +781,9 @@ public:
     INT First;
     INT Length;
 };
+
+#undef GDIPLUS_MIN
+#undef GDIPLUS_MAX
 
 #if _MSC_VER >= 1200
 #pragma warning(pop)

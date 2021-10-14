@@ -1,0 +1,7 @@
+--traverse
+<IncludeRoot>/um/sti.h
+<IncludeRoot>/um/stierr.h
+<IncludeRoot>/um/stireg.h
+<IncludeRoot>/um/stiusd.h
+--namespace
+Windows.Win32.Devices.Fax

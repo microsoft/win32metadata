@@ -6,5 +6,9 @@
 <IncludeRoot>/um/functiondiscoveryapi.h
 <IncludeRoot>/um/functiondiscoveryprovider.h
 <IncludeRoot>/um/PNPXAssoc.h
+<IncludeRoot>/um/functiondiscovery.h
+<IncludeRoot>/um/functiondiscoverycategories.h
+<IncludeRoot>/um/functiondiscoveryconstraints.h
+<IncludeRoot>/um/functiondiscoveryerror.h
 --namespace
 Windows.Win32.Devices.FunctionDiscovery

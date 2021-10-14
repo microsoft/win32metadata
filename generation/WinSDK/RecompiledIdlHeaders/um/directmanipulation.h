@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -403,7 +411,7 @@ DEFINE_GUID(CLSID_HorizontalIndicatorContent, 0xe7d18cf5, 0x3ec7, 0x44d5, 0xa7, 
 DEFINE_GUID(CLSID_VirtualViewportContent, 0x3206a19a, 0x86f0, 0x4cb4, 0xa7, 0xf3, 0x16, 0xe3, 0xb7, 0xe2, 0xd8, 0x52);
 DEFINE_GUID(CLSID_DragDropConfigurationBehavior, 0x09b01b3e, 0xba6c, 0x454d, 0x82, 0xe8, 0x95, 0xe3, 0x52, 0x32, 0x9f, 0x23);
 DEFINE_GUID(CLSID_AutoScrollBehavior, 0x26126a51, 0x3c70, 0x4c9a, 0xae, 0xc2, 0x94, 0x88, 0x49, 0xee, 0xb0, 0x93);
-DEFINE_GUID(CLSID_DeferContactService , 0xd7b67cf4, 0x84bb, 0x434e, 0x86, 0xae, 0x65, 0x92, 0xbb, 0xc9, 0xab, 0xd9);
+DEFINE_GUID(CLSID_DeferContactService, 0xd7b67cf4, 0x84bb, 0x434e, 0x86, 0xae, 0x65, 0x92, 0xbb, 0xc9, 0xab, 0xd9);
 
 
 extern RPC_IF_HANDLE __MIDL_itf_directmanipulation_0000_0000_v0_0_c_ifspec;
@@ -481,6 +489,7 @@ EXTERN_C const IID IID_IDirectManipulationManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationManager * This,
             /* [annotation][in] */ 
@@ -488,22 +497,27 @@ EXTERN_C const IID IID_IDirectManipulationManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationManager * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             IDirectManipulationManager * This,
             /* [annotation][in] */ 
             _In_  HWND window);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             IDirectManipulationManager * This,
             /* [annotation][in] */ 
             _In_  HWND window);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, RegisterHitTestTarget)
         HRESULT ( STDMETHODCALLTYPE *RegisterHitTestTarget )( 
             IDirectManipulationManager * This,
             /* [annotation][in] */ 
@@ -513,6 +527,7 @@ EXTERN_C const IID IID_IDirectManipulationManager;
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_HITTEST_TYPE type);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, ProcessInput)
         HRESULT ( STDMETHODCALLTYPE *ProcessInput )( 
             IDirectManipulationManager * This,
             /* [annotation][in] */ 
@@ -520,6 +535,7 @@ EXTERN_C const IID IID_IDirectManipulationManager;
             /* [annotation][retval][out] */ 
             _Out_  BOOL *handled);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, GetUpdateManager)
         HRESULT ( STDMETHODCALLTYPE *GetUpdateManager )( 
             IDirectManipulationManager * This,
             /* [annotation][in] */ 
@@ -527,6 +543,7 @@ EXTERN_C const IID IID_IDirectManipulationManager;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, CreateViewport)
         HRESULT ( STDMETHODCALLTYPE *CreateViewport )( 
             IDirectManipulationManager * This,
             /* [annotation][in] */ 
@@ -538,6 +555,7 @@ EXTERN_C const IID IID_IDirectManipulationManager;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, CreateContent)
         HRESULT ( STDMETHODCALLTYPE *CreateContent )( 
             IDirectManipulationManager * This,
             /* [annotation][in] */ 
@@ -636,6 +654,7 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
@@ -643,22 +662,27 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationManager2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
             _In_  HWND window);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
             _In_  HWND window);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, RegisterHitTestTarget)
         HRESULT ( STDMETHODCALLTYPE *RegisterHitTestTarget )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
@@ -668,6 +692,7 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_HITTEST_TYPE type);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, ProcessInput)
         HRESULT ( STDMETHODCALLTYPE *ProcessInput )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
@@ -675,6 +700,7 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
             /* [annotation][retval][out] */ 
             _Out_  BOOL *handled);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, GetUpdateManager)
         HRESULT ( STDMETHODCALLTYPE *GetUpdateManager )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
@@ -682,6 +708,7 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, CreateViewport)
         HRESULT ( STDMETHODCALLTYPE *CreateViewport )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
@@ -693,6 +720,7 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, CreateContent)
         HRESULT ( STDMETHODCALLTYPE *CreateContent )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
@@ -704,6 +732,7 @@ EXTERN_C const IID IID_IDirectManipulationManager2;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager2, CreateBehavior)
         HRESULT ( STDMETHODCALLTYPE *CreateBehavior )( 
             IDirectManipulationManager2 * This,
             /* [annotation][in] */ 
@@ -804,6 +833,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
@@ -811,22 +841,27 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationManager3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationManager3 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, Activate)
         HRESULT ( STDMETHODCALLTYPE *Activate )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
             _In_  HWND window);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, Deactivate)
         HRESULT ( STDMETHODCALLTYPE *Deactivate )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
             _In_  HWND window);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, RegisterHitTestTarget)
         HRESULT ( STDMETHODCALLTYPE *RegisterHitTestTarget )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
@@ -836,6 +871,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_HITTEST_TYPE type);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, ProcessInput)
         HRESULT ( STDMETHODCALLTYPE *ProcessInput )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
@@ -843,6 +879,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
             /* [annotation][retval][out] */ 
             _Out_  BOOL *handled);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, GetUpdateManager)
         HRESULT ( STDMETHODCALLTYPE *GetUpdateManager )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
@@ -850,6 +887,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, CreateViewport)
         HRESULT ( STDMETHODCALLTYPE *CreateViewport )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
@@ -861,6 +899,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager, CreateContent)
         HRESULT ( STDMETHODCALLTYPE *CreateContent )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
@@ -872,6 +911,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager2, CreateBehavior)
         HRESULT ( STDMETHODCALLTYPE *CreateBehavior )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
@@ -881,6 +921,7 @@ EXTERN_C const IID IID_IDirectManipulationManager3;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationManager3, GetService)
         HRESULT ( STDMETHODCALLTYPE *GetService )( 
             IDirectManipulationManager3 * This,
             /* [annotation][in] */ 
@@ -1103,6 +1144,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
@@ -1110,36 +1152,45 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationViewport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationViewport * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, Enable)
         HRESULT ( STDMETHODCALLTYPE *Enable )( 
             IDirectManipulationViewport * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, Disable)
         HRESULT ( STDMETHODCALLTYPE *Disable )( 
             IDirectManipulationViewport * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetContact)
         HRESULT ( STDMETHODCALLTYPE *SetContact )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  UINT32 pointerId);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, ReleaseContact)
         HRESULT ( STDMETHODCALLTYPE *ReleaseContact )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  UINT32 pointerId);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, ReleaseAllContacts)
         HRESULT ( STDMETHODCALLTYPE *ReleaseAllContacts )( 
             IDirectManipulationViewport * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             IDirectManipulationViewport * This,
             /* [annotation][retval][out] */ 
             _Out_  DIRECTMANIPULATION_STATUS *status);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
@@ -1149,6 +1200,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
             /* [annotation][out] */ 
             _Out_opt_  UINT32 *id);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetTag)
         HRESULT ( STDMETHODCALLTYPE *SetTag )( 
             IDirectManipulationViewport * This,
             /* [annotation][unique][in] */ 
@@ -1156,16 +1208,19 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
             /* [annotation][in] */ 
             _In_  UINT32 id);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, GetViewportRect)
         HRESULT ( STDMETHODCALLTYPE *GetViewportRect )( 
             IDirectManipulationViewport * This,
             /* [annotation][retval][out] */ 
             _Out_  RECT *viewport);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetViewportRect)
         HRESULT ( STDMETHODCALLTYPE *SetViewportRect )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  const RECT *viewport);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, ZoomToRect)
         HRESULT ( STDMETHODCALLTYPE *ZoomToRect )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
@@ -1179,6 +1234,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
             /* [annotation][in] */ 
             _In_  BOOL animate);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetViewportTransform)
         HRESULT ( STDMETHODCALLTYPE *SetViewportTransform )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
@@ -1186,6 +1242,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
             /* [annotation][in] */ 
             _In_  DWORD pointCount);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SyncDisplayTransform)
         HRESULT ( STDMETHODCALLTYPE *SyncDisplayTransform )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
@@ -1193,6 +1250,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
             /* [annotation][in] */ 
             _In_  DWORD pointCount);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, GetPrimaryContent)
         HRESULT ( STDMETHODCALLTYPE *GetPrimaryContent )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
@@ -1200,46 +1258,55 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, AddContent)
         HRESULT ( STDMETHODCALLTYPE *AddContent )( 
             IDirectManipulationViewport * This,
             /* [annotation][unique][in] */ 
             _In_  IDirectManipulationContent *content);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, RemoveContent)
         HRESULT ( STDMETHODCALLTYPE *RemoveContent )( 
             IDirectManipulationViewport * This,
             /* [annotation][unique][in] */ 
             _In_  IDirectManipulationContent *content);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetViewportOptions)
         HRESULT ( STDMETHODCALLTYPE *SetViewportOptions )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_VIEWPORT_OPTIONS options);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, AddConfiguration)
         HRESULT ( STDMETHODCALLTYPE *AddConfiguration )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, RemoveConfiguration)
         HRESULT ( STDMETHODCALLTYPE *RemoveConfiguration )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, ActivateConfiguration)
         HRESULT ( STDMETHODCALLTYPE *ActivateConfiguration )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetManualGesture)
         HRESULT ( STDMETHODCALLTYPE *SetManualGesture )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_GESTURE_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetChaining)
         HRESULT ( STDMETHODCALLTYPE *SetChaining )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_MOTION_TYPES enabledTypes);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, AddEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddEventHandler )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
@@ -1249,24 +1316,29 @@ EXTERN_C const IID IID_IDirectManipulationViewport;
             /* [annotation][retval][out] */ 
             _Out_  DWORD *cookie);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, RemoveEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveEventHandler )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DWORD cookie);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetInputMode)
         HRESULT ( STDMETHODCALLTYPE *SetInputMode )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_INPUT_MODE mode);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetUpdateMode)
         HRESULT ( STDMETHODCALLTYPE *SetUpdateMode )( 
             IDirectManipulationViewport * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_INPUT_MODE mode);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             IDirectManipulationViewport * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, Abandon)
         HRESULT ( STDMETHODCALLTYPE *Abandon )( 
             IDirectManipulationViewport * This);
         
@@ -1424,6 +1496,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
@@ -1431,36 +1504,45 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationViewport2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationViewport2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, Enable)
         HRESULT ( STDMETHODCALLTYPE *Enable )( 
             IDirectManipulationViewport2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, Disable)
         HRESULT ( STDMETHODCALLTYPE *Disable )( 
             IDirectManipulationViewport2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetContact)
         HRESULT ( STDMETHODCALLTYPE *SetContact )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  UINT32 pointerId);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, ReleaseContact)
         HRESULT ( STDMETHODCALLTYPE *ReleaseContact )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  UINT32 pointerId);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, ReleaseAllContacts)
         HRESULT ( STDMETHODCALLTYPE *ReleaseAllContacts )( 
             IDirectManipulationViewport2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][retval][out] */ 
             _Out_  DIRECTMANIPULATION_STATUS *status);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
@@ -1470,6 +1552,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][out] */ 
             _Out_opt_  UINT32 *id);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetTag)
         HRESULT ( STDMETHODCALLTYPE *SetTag )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][unique][in] */ 
@@ -1477,16 +1560,19 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][in] */ 
             _In_  UINT32 id);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, GetViewportRect)
         HRESULT ( STDMETHODCALLTYPE *GetViewportRect )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][retval][out] */ 
             _Out_  RECT *viewport);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetViewportRect)
         HRESULT ( STDMETHODCALLTYPE *SetViewportRect )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  const RECT *viewport);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, ZoomToRect)
         HRESULT ( STDMETHODCALLTYPE *ZoomToRect )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
@@ -1500,6 +1586,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][in] */ 
             _In_  BOOL animate);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetViewportTransform)
         HRESULT ( STDMETHODCALLTYPE *SetViewportTransform )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
@@ -1507,6 +1594,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][in] */ 
             _In_  DWORD pointCount);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SyncDisplayTransform)
         HRESULT ( STDMETHODCALLTYPE *SyncDisplayTransform )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
@@ -1514,6 +1602,7 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][in] */ 
             _In_  DWORD pointCount);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, GetPrimaryContent)
         HRESULT ( STDMETHODCALLTYPE *GetPrimaryContent )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
@@ -1521,46 +1610,55 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, AddContent)
         HRESULT ( STDMETHODCALLTYPE *AddContent )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][unique][in] */ 
             _In_  IDirectManipulationContent *content);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, RemoveContent)
         HRESULT ( STDMETHODCALLTYPE *RemoveContent )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][unique][in] */ 
             _In_  IDirectManipulationContent *content);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetViewportOptions)
         HRESULT ( STDMETHODCALLTYPE *SetViewportOptions )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_VIEWPORT_OPTIONS options);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, AddConfiguration)
         HRESULT ( STDMETHODCALLTYPE *AddConfiguration )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, RemoveConfiguration)
         HRESULT ( STDMETHODCALLTYPE *RemoveConfiguration )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, ActivateConfiguration)
         HRESULT ( STDMETHODCALLTYPE *ActivateConfiguration )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetManualGesture)
         HRESULT ( STDMETHODCALLTYPE *SetManualGesture )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_GESTURE_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetChaining)
         HRESULT ( STDMETHODCALLTYPE *SetChaining )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_MOTION_TYPES enabledTypes);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, AddEventHandler)
         HRESULT ( STDMETHODCALLTYPE *AddEventHandler )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
@@ -1570,27 +1668,33 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][retval][out] */ 
             _Out_  DWORD *cookie);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, RemoveEventHandler)
         HRESULT ( STDMETHODCALLTYPE *RemoveEventHandler )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DWORD cookie);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetInputMode)
         HRESULT ( STDMETHODCALLTYPE *SetInputMode )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_INPUT_MODE mode);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, SetUpdateMode)
         HRESULT ( STDMETHODCALLTYPE *SetUpdateMode )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_INPUT_MODE mode);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             IDirectManipulationViewport2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport, Abandon)
         HRESULT ( STDMETHODCALLTYPE *Abandon )( 
             IDirectManipulationViewport2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport2, AddBehavior)
         HRESULT ( STDMETHODCALLTYPE *AddBehavior )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][unique][in] */ 
@@ -1598,11 +1702,13 @@ EXTERN_C const IID IID_IDirectManipulationViewport2;
             /* [annotation][retval][out] */ 
             _Out_  DWORD *cookie);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport2, RemoveBehavior)
         HRESULT ( STDMETHODCALLTYPE *RemoveBehavior )( 
             IDirectManipulationViewport2 * This,
             /* [annotation][in] */ 
             _In_  DWORD cookie);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewport2, RemoveAllBehaviors)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllBehaviors )( 
             IDirectManipulationViewport2 * This);
         
@@ -1776,6 +1882,7 @@ EXTERN_C const IID IID_IDirectManipulationViewportEventHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationViewportEventHandler * This,
             /* [annotation][in] */ 
@@ -1783,12 +1890,15 @@ EXTERN_C const IID IID_IDirectManipulationViewportEventHandler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationViewportEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationViewportEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewportEventHandler, OnViewportStatusChanged)
         HRESULT ( STDMETHODCALLTYPE *OnViewportStatusChanged )( 
             IDirectManipulationViewportEventHandler * This,
             /* [annotation][in] */ 
@@ -1798,11 +1908,13 @@ EXTERN_C const IID IID_IDirectManipulationViewportEventHandler;
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_STATUS previous);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewportEventHandler, OnViewportUpdated)
         HRESULT ( STDMETHODCALLTYPE *OnViewportUpdated )( 
             IDirectManipulationViewportEventHandler * This,
             /* [annotation][in] */ 
             _In_  IDirectManipulationViewport *viewport);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationViewportEventHandler, OnContentUpdated)
         HRESULT ( STDMETHODCALLTYPE *OnContentUpdated )( 
             IDirectManipulationViewportEventHandler * This,
             /* [annotation][in] */ 
@@ -1923,6 +2035,7 @@ EXTERN_C const IID IID_IDirectManipulationContent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationContent * This,
             /* [annotation][in] */ 
@@ -1930,22 +2043,27 @@ EXTERN_C const IID IID_IDirectManipulationContent;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationContent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationContent * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationContent, GetContentRect)
         HRESULT ( STDMETHODCALLTYPE *GetContentRect )( 
             IDirectManipulationContent * This,
             /* [annotation][out] */ 
             _Out_  RECT *contentSize);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationContent, SetContentRect)
         HRESULT ( STDMETHODCALLTYPE *SetContentRect )( 
             IDirectManipulationContent * This,
             /* [annotation][in] */ 
             _In_  const RECT *contentSize);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationContent, GetViewport)
         HRESULT ( STDMETHODCALLTYPE *GetViewport )( 
             IDirectManipulationContent * This,
             /* [annotation][in] */ 
@@ -1953,6 +2071,7 @@ EXTERN_C const IID IID_IDirectManipulationContent;
             /* [annotation][retval][iid_is][out] */ 
             _COM_Outptr_  void **object);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationContent, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IDirectManipulationContent * This,
             /* [annotation][in] */ 
@@ -1962,6 +2081,7 @@ EXTERN_C const IID IID_IDirectManipulationContent;
             /* [annotation][out] */ 
             _Out_opt_  UINT32 *id);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationContent, SetTag)
         HRESULT ( STDMETHODCALLTYPE *SetTag )( 
             IDirectManipulationContent * This,
             /* [annotation][unique][in] */ 
@@ -1969,6 +2089,7 @@ EXTERN_C const IID IID_IDirectManipulationContent;
             /* [annotation][in] */ 
             _In_  UINT32 id);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationContent, GetOutputTransform)
         HRESULT ( STDMETHODCALLTYPE *GetOutputTransform )( 
             IDirectManipulationContent * This,
             /* [annotation][out] */ 
@@ -1976,6 +2097,7 @@ EXTERN_C const IID IID_IDirectManipulationContent;
             /* [annotation][in] */ 
             _In_  DWORD pointCount);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationContent, GetContentTransform)
         HRESULT ( STDMETHODCALLTYPE *GetContentTransform )( 
             IDirectManipulationContent * This,
             /* [annotation][out] */ 
@@ -1983,6 +2105,7 @@ EXTERN_C const IID IID_IDirectManipulationContent;
             /* [annotation][in] */ 
             _In_  DWORD pointCount);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationContent, SyncContentTransform)
         HRESULT ( STDMETHODCALLTYPE *SyncContentTransform )( 
             IDirectManipulationContent * This,
             /* [annotation][in] */ 
@@ -2128,6 +2251,7 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][in] */ 
@@ -2135,12 +2259,15 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationPrimaryContent * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationPrimaryContent * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, SetSnapInterval)
         HRESULT ( STDMETHODCALLTYPE *SetSnapInterval )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][in] */ 
@@ -2150,6 +2277,7 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
             /* [annotation][in] */ 
             _In_  float offset);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, SetSnapPoints)
         HRESULT ( STDMETHODCALLTYPE *SetSnapPoints )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][in] */ 
@@ -2159,6 +2287,7 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
             /* [annotation][in] */ 
             _In_  DWORD pointCount);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, SetSnapType)
         HRESULT ( STDMETHODCALLTYPE *SetSnapType )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][in] */ 
@@ -2166,6 +2295,7 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_SNAPPOINT_TYPE type);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, SetSnapCoordinate)
         HRESULT ( STDMETHODCALLTYPE *SetSnapCoordinate )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][in] */ 
@@ -2175,6 +2305,7 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
             /* [annotation][in] */ 
             _In_  float origin);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, SetZoomBoundaries)
         HRESULT ( STDMETHODCALLTYPE *SetZoomBoundaries )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][in] */ 
@@ -2182,16 +2313,19 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
             /* [annotation][in] */ 
             _In_  float zoomMaximum);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, SetHorizontalAlignment)
         HRESULT ( STDMETHODCALLTYPE *SetHorizontalAlignment )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_HORIZONTALALIGNMENT alignment);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, SetVerticalAlignment)
         HRESULT ( STDMETHODCALLTYPE *SetVerticalAlignment )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_VERTICALALIGNMENT alignment);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, GetInertiaEndTransform)
         HRESULT ( STDMETHODCALLTYPE *GetInertiaEndTransform )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][out] */ 
@@ -2199,6 +2333,7 @@ EXTERN_C const IID IID_IDirectManipulationPrimaryContent;
             /* [annotation][in] */ 
             _In_  DWORD pointCount);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationPrimaryContent, GetCenterPoint)
         HRESULT ( STDMETHODCALLTYPE *GetCenterPoint )( 
             IDirectManipulationPrimaryContent * This,
             /* [annotation][out] */ 
@@ -2318,6 +2453,7 @@ EXTERN_C const IID IID_IDirectManipulationDragDropEventHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationDragDropEventHandler * This,
             /* [annotation][in] */ 
@@ -2325,12 +2461,15 @@ EXTERN_C const IID IID_IDirectManipulationDragDropEventHandler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationDragDropEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationDragDropEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationDragDropEventHandler, OnDragDropStatusChange)
         HRESULT ( STDMETHODCALLTYPE *OnDragDropStatusChange )( 
             IDirectManipulationDragDropEventHandler * This,
             /* [annotation][in] */ 
@@ -2428,6 +2567,7 @@ EXTERN_C const IID IID_IDirectManipulationDragDropBehavior;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationDragDropBehavior * This,
             /* [annotation][in] */ 
@@ -2435,17 +2575,21 @@ EXTERN_C const IID IID_IDirectManipulationDragDropBehavior;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationDragDropBehavior * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationDragDropBehavior * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationDragDropBehavior, SetConfiguration)
         HRESULT ( STDMETHODCALLTYPE *SetConfiguration )( 
             IDirectManipulationDragDropBehavior * This,
             /* [annotation][in] */ 
             _In_  DIRECTMANIPULATION_DRAG_DROP_CONFIGURATION configuration);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationDragDropBehavior, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             IDirectManipulationDragDropBehavior * This,
             /* [annotation][retval][out] */ 
@@ -2541,6 +2685,7 @@ EXTERN_C const IID IID_IDirectManipulationInteractionEventHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationInteractionEventHandler * This,
             /* [annotation][in] */ 
@@ -2548,12 +2693,15 @@ EXTERN_C const IID IID_IDirectManipulationInteractionEventHandler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationInteractionEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationInteractionEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationInteractionEventHandler, OnInteraction)
         HRESULT ( STDMETHODCALLTYPE *OnInteraction )( 
             IDirectManipulationInteractionEventHandler * This,
             /* [annotation][in] */ 
@@ -2630,6 +2778,7 @@ EXTERN_C const IID IID_IDirectManipulationFrameInfoProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationFrameInfoProvider * This,
             /* [annotation][in] */ 
@@ -2637,12 +2786,15 @@ EXTERN_C const IID IID_IDirectManipulationFrameInfoProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationFrameInfoProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationFrameInfoProvider * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationFrameInfoProvider, GetNextFrameInfo)
         HRESULT ( STDMETHODCALLTYPE *GetNextFrameInfo )( 
             IDirectManipulationFrameInfoProvider * This,
             /* [annotation][out] */ 
@@ -2733,6 +2885,7 @@ EXTERN_C const IID IID_IDirectManipulationCompositor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationCompositor * This,
             /* [annotation][in] */ 
@@ -2740,12 +2893,15 @@ EXTERN_C const IID IID_IDirectManipulationCompositor;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationCompositor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationCompositor * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor, AddContent)
         HRESULT ( STDMETHODCALLTYPE *AddContent )( 
             IDirectManipulationCompositor * This,
             /* [annotation][in] */ 
@@ -2757,16 +2913,19 @@ EXTERN_C const IID IID_IDirectManipulationCompositor;
             /* [annotation][in] */ 
             _In_opt_  IUnknown *childVisual);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor, RemoveContent)
         HRESULT ( STDMETHODCALLTYPE *RemoveContent )( 
             IDirectManipulationCompositor * This,
             /* [annotation][in] */ 
             _In_  IDirectManipulationContent *content);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor, SetUpdateManager)
         HRESULT ( STDMETHODCALLTYPE *SetUpdateManager )( 
             IDirectManipulationCompositor * This,
             /* [annotation][in] */ 
             _In_  IDirectManipulationUpdateManager *updateManager);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor, Flush)
         HRESULT ( STDMETHODCALLTYPE *Flush )( 
             IDirectManipulationCompositor * This);
         
@@ -2850,6 +3009,7 @@ EXTERN_C const IID IID_IDirectManipulationCompositor2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationCompositor2 * This,
             /* [annotation][in] */ 
@@ -2857,12 +3017,15 @@ EXTERN_C const IID IID_IDirectManipulationCompositor2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationCompositor2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationCompositor2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor, AddContent)
         HRESULT ( STDMETHODCALLTYPE *AddContent )( 
             IDirectManipulationCompositor2 * This,
             /* [annotation][in] */ 
@@ -2874,19 +3037,23 @@ EXTERN_C const IID IID_IDirectManipulationCompositor2;
             /* [annotation][in] */ 
             _In_opt_  IUnknown *childVisual);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor, RemoveContent)
         HRESULT ( STDMETHODCALLTYPE *RemoveContent )( 
             IDirectManipulationCompositor2 * This,
             /* [annotation][in] */ 
             _In_  IDirectManipulationContent *content);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor, SetUpdateManager)
         HRESULT ( STDMETHODCALLTYPE *SetUpdateManager )( 
             IDirectManipulationCompositor2 * This,
             /* [annotation][in] */ 
             _In_  IDirectManipulationUpdateManager *updateManager);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor, Flush)
         HRESULT ( STDMETHODCALLTYPE *Flush )( 
             IDirectManipulationCompositor2 * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationCompositor2, AddContentWithCrossProcessChaining)
         HRESULT ( STDMETHODCALLTYPE *AddContentWithCrossProcessChaining )( 
             IDirectManipulationCompositor2 * This,
             /* [annotation][in] */ 
@@ -2974,6 +3141,7 @@ EXTERN_C const IID IID_IDirectManipulationUpdateHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationUpdateHandler * This,
             /* [annotation][in] */ 
@@ -2981,12 +3149,15 @@ EXTERN_C const IID IID_IDirectManipulationUpdateHandler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationUpdateHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationUpdateHandler * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationUpdateHandler, Update)
         HRESULT ( STDMETHODCALLTYPE *Update )( 
             IDirectManipulationUpdateHandler * This);
         
@@ -3067,6 +3238,7 @@ EXTERN_C const IID IID_IDirectManipulationUpdateManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationUpdateManager * This,
             /* [annotation][in] */ 
@@ -3074,12 +3246,15 @@ EXTERN_C const IID IID_IDirectManipulationUpdateManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationUpdateManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationUpdateManager * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationUpdateManager, RegisterWaitHandleCallback)
         HRESULT ( STDMETHODCALLTYPE *RegisterWaitHandleCallback )( 
             IDirectManipulationUpdateManager * This,
             /* [annotation][in] */ 
@@ -3089,11 +3264,13 @@ EXTERN_C const IID IID_IDirectManipulationUpdateManager;
             /* [annotation][out] */ 
             _Out_  DWORD *cookie);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationUpdateManager, UnregisterWaitHandleCallback)
         HRESULT ( STDMETHODCALLTYPE *UnregisterWaitHandleCallback )( 
             IDirectManipulationUpdateManager * This,
             /* [annotation][in] */ 
             _In_  DWORD cookie);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationUpdateManager, Update)
         HRESULT ( STDMETHODCALLTYPE *Update )( 
             IDirectManipulationUpdateManager * This,
             /* [annotation][in] */ 
@@ -3188,6 +3365,7 @@ EXTERN_C const IID IID_IDirectManipulationAutoScrollBehavior;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationAutoScrollBehavior * This,
             /* [annotation][in] */ 
@@ -3195,12 +3373,15 @@ EXTERN_C const IID IID_IDirectManipulationAutoScrollBehavior;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationAutoScrollBehavior * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationAutoScrollBehavior * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationAutoScrollBehavior, SetConfiguration)
         HRESULT ( STDMETHODCALLTYPE *SetConfiguration )( 
             IDirectManipulationAutoScrollBehavior * This,
             /* [annotation][in] */ 
@@ -3283,6 +3464,7 @@ EXTERN_C const IID IID_IDirectManipulationDeferContactService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDirectManipulationDeferContactService * This,
             /* [annotation][in] */ 
@@ -3290,12 +3472,15 @@ EXTERN_C const IID IID_IDirectManipulationDeferContactService;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDirectManipulationDeferContactService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDirectManipulationDeferContactService * This);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationDeferContactService, DeferContact)
         HRESULT ( STDMETHODCALLTYPE *DeferContact )( 
             IDirectManipulationDeferContactService * This,
             /* [annotation][in] */ 
@@ -3303,11 +3488,13 @@ EXTERN_C const IID IID_IDirectManipulationDeferContactService;
             /* [annotation][in] */ 
             _In_  UINT32 timeout);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationDeferContactService, CancelContact)
         HRESULT ( STDMETHODCALLTYPE *CancelContact )( 
             IDirectManipulationDeferContactService * This,
             /* [annotation][in] */ 
             _In_  UINT32 pointerId);
         
+        DECLSPEC_XFGVIRT(IDirectManipulationDeferContactService, CancelDeferral)
         HRESULT ( STDMETHODCALLTYPE *CancelDeferral )( 
             IDirectManipulationDeferContactService * This,
             /* [annotation][in] */ 

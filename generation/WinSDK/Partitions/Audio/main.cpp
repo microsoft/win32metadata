@@ -17,3 +17,7 @@
 #include <audiomediatype.h>
 //#include <baseaudioprocessingobject.h> contains only C++ class implementation
 #include <msapofxproxy.h>
+#include <dls1.h>
+#include <dls2.h>
+#include <dsconf.h>
+#include <dv.h>

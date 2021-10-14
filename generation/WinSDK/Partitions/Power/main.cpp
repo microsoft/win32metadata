@@ -9,3 +9,5 @@
 #include <poclass.h>
 #include <powersetting.h>
 #include <powerbase.h>
+#include <batclass.h>
+#include <emi.h>

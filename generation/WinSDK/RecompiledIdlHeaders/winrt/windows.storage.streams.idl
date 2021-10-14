@@ -18,6 +18,16 @@ namespace Windows
 {
     namespace Foundation
     {
+        namespace Collections
+        {
+            interface IPropertySet;
+        }
+    }
+}
+namespace Windows
+{
+    namespace Foundation
+    {
         typedef struct DateTime DateTime;
 
         interface IClosable;
@@ -92,6 +102,8 @@ namespace Windows
             interface IInputStreamReference;
 
             interface IOutputStream;
+
+            interface IPropertySetSerializer;
 
             interface IRandomAccessStream;
 
@@ -417,6 +429,14 @@ namespace Windows
             {
                 HRESULT WriteAsync([in] Windows.Storage.Streams.IBuffer* buffer, [out] [retval] Windows.Foundation.IAsyncOperationWithProgress<UINT32, UINT32>** operation);
                 HRESULT FlushAsync([out] [retval] Windows.Foundation.IAsyncOperation<boolean>** operation);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [uuid(6E8EBF1C-EF3D-4376-B20E-5BE638AEAC77)]
+            interface IPropertySetSerializer : IInspectable
+            {
+                HRESULT Serialize([in] Windows.Foundation.Collections.IPropertySet* propertySet, [out] [retval] Windows.Storage.Streams.IBuffer** result);
+                HRESULT Deserialize([in] Windows.Foundation.Collections.IPropertySet* propertySet, [in] Windows.Storage.Streams.IBuffer* buffer);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

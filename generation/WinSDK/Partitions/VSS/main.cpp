@@ -20,6 +20,7 @@
 //#include <vsbackup.h> This contains C++ classes instead of COM interfaces
 #include <vsadmin.h>
 #include <vsprov.h>
+#include <vsserror.h>
 
 // End of area needing to be close to COM headers
 //

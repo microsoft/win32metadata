@@ -41,7 +41,6 @@ Notes:
 #pragma once
 #endif
 
-
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -252,7 +251,6 @@ typedef struct _SHARE_INFO_1503 {
     GUID shi1503_sharefilter;
 } SHARE_INFO_1503, *PSHARE_INFO_1503, *LPSHARE_INFO_1503;
 
-
 //
 // NetShareAlias functions
 //
@@ -327,7 +325,6 @@ typedef struct _SERVER_ALIAS_INFO_0 {
 #define SHI1_NUM_ELEMENTS       4
 #define SHI2_NUM_ELEMENTS       10
 
-
 //
 // Share types (shi1_type and shi2_type fields).
 //
@@ -340,7 +337,7 @@ typedef struct _SERVER_ALIAS_INFO_0 {
 #define STYPE_MASK              0x000000FF              // AND with shi_type to
 
 #define STYPE_RESERVED1         0x01000000              // Reserved for internal processing
-#define STYPE_RESERVED2         0x02000000            
+#define STYPE_RESERVED2         0x02000000
 #define STYPE_RESERVED3         0x04000000
 #define STYPE_RESERVED4         0x08000000
 #define STYPE_RESERVED5         0x00100000
@@ -365,18 +362,19 @@ typedef struct _SERVER_ALIAS_INFO_0 {
 #define CSC_CACHE_VDO           0x0020    // no need to flow opens
 #define CSC_CACHE_NONE          0x0030    // no CSC for this share
 
-#define SHI1005_FLAGS_RESTRICT_EXCLUSIVE_OPENS  0x00100          // Used to disallow read-deny read behavior
-#define SHI1005_FLAGS_FORCE_SHARED_DELETE       0x00200          // Used to allows force shared delete
-#define SHI1005_FLAGS_ALLOW_NAMESPACE_CACHING   0x00400          // The clients may cache the namespace
-#define SHI1005_FLAGS_ACCESS_BASED_DIRECTORY_ENUM 0x00800        // Trim visible files in enumerations based on access
-#define SHI1005_FLAGS_FORCE_LEVELII_OPLOCK      0x01000          // Only issue level2 oplock
-#define SHI1005_FLAGS_ENABLE_HASH               0x02000          // Enable hash generation and retrieval requests from share
-#define SHI1005_FLAGS_ENABLE_CA                 0x04000          // Enable continuously available
-#define SHI1005_FLAGS_ENCRYPT_DATA              0x08000          // Require encryption
-#define SHI1005_FLAGS_RESERVED                  0x10000          // Reserved for internal use
-#define SHI1005_FLAGS_DISABLE_CLIENT_BUFFERING  0x20000          // Used to set the allowed client buffering
-#define SHI1005_FLAGS_IDENTITY_REMOTING         0x40000          // Allows auth tunneling
-#define SHI1005_FLAGS_CLUSTER_MANAGED           0x80000          // Used to prevent share from being modified by users 
+#define SHI1005_FLAGS_RESTRICT_EXCLUSIVE_OPENS    0x000100          // Used to disallow read-deny read behavior
+#define SHI1005_FLAGS_FORCE_SHARED_DELETE         0x000200          // Used to allows force shared delete
+#define SHI1005_FLAGS_ALLOW_NAMESPACE_CACHING     0x000400          // The clients may cache the namespace
+#define SHI1005_FLAGS_ACCESS_BASED_DIRECTORY_ENUM 0x000800          // Trim visible files in enumerations based on access
+#define SHI1005_FLAGS_FORCE_LEVELII_OPLOCK        0x001000          // Only issue level2 oplock
+#define SHI1005_FLAGS_ENABLE_HASH                 0x002000          // Enable hash generation and retrieval requests from share
+#define SHI1005_FLAGS_ENABLE_CA                   0x004000          // Enable continuously available
+#define SHI1005_FLAGS_ENCRYPT_DATA                0x008000          // Require encryption
+#define SHI1005_FLAGS_RESERVED                    0x010000          // Reserved for internal use
+#define SHI1005_FLAGS_DISABLE_CLIENT_BUFFERING    0x020000          // Used to set the allowed client buffering
+#define SHI1005_FLAGS_IDENTITY_REMOTING           0x040000          // Allows auth tunneling
+#define SHI1005_FLAGS_CLUSTER_MANAGED             0x080000          // Used to prevent share from being modified by users
+#define SHI1005_FLAGS_COMPRESS_DATA               0x100000          // Request compression
 
 //
 // The subset of 1005 infolevel flags that can be set via the API
@@ -389,12 +387,13 @@ typedef struct _SERVER_ALIAS_INFO_0 {
                                     SHI1005_FLAGS_ACCESS_BASED_DIRECTORY_ENUM|  \
                                     SHI1005_FLAGS_FORCE_LEVELII_OPLOCK|         \
                                     SHI1005_FLAGS_ENABLE_HASH|                  \
-                                    SHI1005_FLAGS_ENABLE_CA |                        \
+                                    SHI1005_FLAGS_ENABLE_CA |                   \
                                     SHI1005_FLAGS_ENCRYPT_DATA |                \
                                     SHI1005_FLAGS_DISABLE_CLIENT_BUFFERING |    \
                                     SHI1005_FLAGS_IDENTITY_REMOTING |           \
                                     SHI1005_FLAGS_CLUSTER_MANAGED |             \
-                                    SHI1005_FLAGS_RESERVED)
+                                    SHI1005_FLAGS_RESERVED |                    \
+                                    SHI1005_FLAGS_COMPRESS_DATA )
 
 #endif // _LMSHARE_
 
@@ -451,7 +450,6 @@ NetSessionGetInfo(
     LPBYTE *bufptr
     );
 
-
 //
 // Data Structures - Session
 //
@@ -497,11 +495,9 @@ typedef struct _SESSION_INFO_502 {
     LMSTR     sesi502_transport;
 } SESSION_INFO_502, *PSESSION_INFO_502, *LPSESSION_INFO_502;
 
-
 //
 // Special Values and Constants - Session
 //
-
 
 //
 // Bits defined in sesi1_user_flags.
@@ -562,9 +558,6 @@ typedef struct _CONNECTION_INFO_1 {
 } CONNECTION_INFO_1, *PCONNECTION_INFO_1, *LPCONNECTION_INFO_1;
 
 #endif // _LMCONNECTION_
-
-
-
 
 //
 // FILE API
@@ -650,7 +643,9 @@ typedef struct _SERVER_CERTIFICATE_INFO_0 {
     LMSTR      srvci0_notafter;
     LMSTR      srvci0_storelocation;
     LMSTR      srvci0_storename;
+    LMSTR      srvci0_renewalchain;
     DWORD      srvci0_type;
+    DWORD      srvci0_flags;
 } SERVER_CERTIFICATE_INFO_0, *PSERVER_CERTIFICATE_INFO_0, *LPSERVER_CERTIFICATE_INFO_0;
 
 //
@@ -665,11 +660,9 @@ typedef struct _SERVER_CERTIFICATE_INFO_0 {
 #define PERM_FILE_WRITE     0x2 // user has write access
 #define PERM_FILE_CREATE    0x4 // user has create access
 
-
 #ifdef __cplusplus
 }
 #endif
-
 
 #endif // _LMFILE_
 

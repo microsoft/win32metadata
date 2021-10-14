@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -210,6 +218,7 @@ EXTERN_C const IID IID_IWSDDeviceHost;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
@@ -217,12 +226,15 @@ EXTERN_C const IID IID_IWSDDeviceHost;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDDeviceHost * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDDeviceHost * This);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
@@ -234,6 +246,7 @@ EXTERN_C const IID IID_IWSDDeviceHost;
             /* [annotation][optional][in] */ 
             _In_opt_  DWORD dwHostAddressCount);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
@@ -243,17 +256,21 @@ EXTERN_C const IID IID_IWSDDeviceHost;
             /* [annotation][optional][in] */ 
             _In_opt_  IWSDDeviceHostNotify *pNotificationSink);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             IWSDDeviceHost * This);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, Terminate)
         HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             IWSDDeviceHost * This);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, RegisterPortType)
         HRESULT ( STDMETHODCALLTYPE *RegisterPortType )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
             _In_  const WSD_PORT_TYPE *pPortType);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, SetMetadata)
         HRESULT ( STDMETHODCALLTYPE *SetMetadata )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
@@ -265,6 +282,7 @@ EXTERN_C const IID IID_IWSDDeviceHost;
             /* [annotation][optional][in] */ 
             _In_opt_  const WSD_METADATA_SECTION_LIST *pCustomMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, RegisterService)
         HRESULT ( STDMETHODCALLTYPE *RegisterService )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
@@ -272,11 +290,13 @@ EXTERN_C const IID IID_IWSDDeviceHost;
             /* [annotation][in] */ 
             _In_  IUnknown *pService);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, RetireService)
         HRESULT ( STDMETHODCALLTYPE *RetireService )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pszServiceId);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, AddDynamicService)
         HRESULT ( STDMETHODCALLTYPE *AddDynamicService )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
@@ -292,11 +312,13 @@ EXTERN_C const IID IID_IWSDDeviceHost;
             /* [annotation][optional][in] */ 
             _In_opt_  IUnknown *pService);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, RemoveDynamicService)
         HRESULT ( STDMETHODCALLTYPE *RemoveDynamicService )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pszServiceId);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, SetServiceDiscoverable)
         HRESULT ( STDMETHODCALLTYPE *SetServiceDiscoverable )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
@@ -304,6 +326,7 @@ EXTERN_C const IID IID_IWSDDeviceHost;
             /* [annotation][in] */ 
             _In_  BOOL fDiscoverable);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHost, SignalEvent)
         HRESULT ( STDMETHODCALLTYPE *SignalEvent )( 
             IWSDDeviceHost * This,
             /* [annotation][in] */ 
@@ -415,6 +438,7 @@ EXTERN_C const IID IID_IWSDDeviceHostNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWSDDeviceHostNotify * This,
             /* [annotation][in] */ 
@@ -422,12 +446,15 @@ EXTERN_C const IID IID_IWSDDeviceHostNotify;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWSDDeviceHostNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWSDDeviceHostNotify * This);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceHostNotify, GetService)
         HRESULT ( STDMETHODCALLTYPE *GetService )( 
             __RPC__in IWSDDeviceHostNotify * This,
             /* [annotation][in] */ 
@@ -512,6 +539,7 @@ EXTERN_C const IID IID_IWSDServiceMessaging;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDServiceMessaging * This,
             /* [annotation][in] */ 
@@ -519,12 +547,15 @@ EXTERN_C const IID IID_IWSDServiceMessaging;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDServiceMessaging * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDServiceMessaging * This);
         
+        DECLSPEC_XFGVIRT(IWSDServiceMessaging, SendResponse)
         HRESULT ( STDMETHODCALLTYPE *SendResponse )( 
             IWSDServiceMessaging * This,
             /* [annotation][in] */ 
@@ -534,6 +565,7 @@ EXTERN_C const IID IID_IWSDServiceMessaging;
             /* [annotation][in] */ 
             _In_  IWSDMessageParameters *pMessageParameters);
         
+        DECLSPEC_XFGVIRT(IWSDServiceMessaging, FaultRequest)
         HRESULT ( STDMETHODCALLTYPE *FaultRequest )( 
             IWSDServiceMessaging * This,
             /* [annotation][in] */ 

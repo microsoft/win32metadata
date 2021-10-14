@@ -50,10 +50,16 @@ typedef enum _DOT11_AUTH_ALGORITHM {
     DOT11_AUTH_ALGO_WPA_NONE            = 5,               // used in NatSTA only
     DOT11_AUTH_ALGO_RSNA                = 6,
     DOT11_AUTH_ALGO_RSNA_PSK            = 7,
-    DOT11_AUTH_ALGO_WPA3                = 8,
+    DOT11_AUTH_ALGO_WPA3                = 8,               // means WPA3 Enterprise 192 bits
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+    DOT11_AUTH_ALGO_WPA3_ENT_192        = DOT11_AUTH_ALGO_WPA3,
+#endif
     DOT11_AUTH_ALGO_WPA3_SAE            = 9,
 #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
     DOT11_AUTH_ALGO_OWE                 = 10,
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+    DOT11_AUTH_ALGO_WPA3_ENT            = 11,
 #endif
     DOT11_AUTH_ALGO_IHV_START           = 0x80000000,
     DOT11_AUTH_ALGO_IHV_END             = 0xffffffff
@@ -67,9 +73,15 @@ typedef enum _DOT11_AUTH_ALGORITHM {
 #define DOT11_AUTH_ALGORITHM_RSNA               DOT11_AUTH_ALGO_RSNA
 #define DOT11_AUTH_ALGORITHM_RSNA_PSK           DOT11_AUTH_ALGO_RSNA_PSK
 #define DOT11_AUTH_ALGORITHM_WPA3               DOT11_AUTH_ALGO_WPA3
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+#define DOT11_AUTH_ALGORITHM_WPA3_ENT_192       DOT11_AUTH_ALGO_WPA3_ENT_192
+#endif
 #define DOT11_AUTH_ALGORITHM_WPA3_SAE           DOT11_AUTH_ALGO_WPA3_SAE
 #if (NTDDI_VERSION >= NTDDI_WIN10_VB)
 #define DOT11_AUTH_ALGORITHM_OWE                DOT11_AUTH_ALGO_OWE
+#endif
+#if (NTDDI_VERSION >= NTDDI_WIN10_FE)
+#define DOT11_AUTH_ALGORITHM_WPA3_ENT           DOT11_AUTH_ALGO_WPA3_ENT
 #endif
 // Cipher algorithm Ids (for little endian platform)
 #ifdef __midl

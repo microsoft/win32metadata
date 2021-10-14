@@ -86,15 +86,15 @@ private:
     Brush& operator=(const Brush& brush);
 protected:
 
-    Brush(GpBrush* nativeBrush, Status status)
+    Brush(GpBrush* nativeBrushArg, Status status)
     {
         lastResult = status;
-        SetNativeBrush(nativeBrush);
+        SetNativeBrush(nativeBrushArg);
     }
 
-    VOID SetNativeBrush(GpBrush* nativeBrush)
+    VOID SetNativeBrush(GpBrush* nativeBrushArg)
     {
-        this->nativeBrush = nativeBrush;
+        this->nativeBrush = nativeBrushArg;
     }
 
     Status SetStatus(Status status) const

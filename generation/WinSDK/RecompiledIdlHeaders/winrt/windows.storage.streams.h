@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -110,6 +110,8 @@
 #include "Windows.Foundation.h"
 #include "Windows.Storage.h"
 #include "Windows.System.h"
+// Importing Collections header
+#include <windows.foundation.collections.h>
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
 /* Forward Declarations */
@@ -307,6 +309,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CStorage_CStreams_CIOutputStream ABI::Windows::Storage::Streams::IOutputStream
 
 #endif // ____x_ABI_CWindows_CStorage_CStreams_CIOutputStream_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_FWD_DEFINED__
+#define ____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Storage {
+            namespace Streams {
+                interface IPropertySetSerializer;
+            } /* Streams */
+        } /* Storage */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer ABI::Windows::Storage::Streams::IPropertySetSerializer
+
+#endif // ____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CStorage_CStreams_CIRandomAccessStream_FWD_DEFINED__
 #define ____x_ABI_CWindows_CStorage_CStreams_CIRandomAccessStream_FWD_DEFINED__
@@ -953,6 +970,21 @@ typedef IAsyncOperationProgressHandler<ABI::Windows::Storage::Streams::IBuffer*,
 #endif /* DEF___FIAsyncOperationProgressHandler_2_Windows__CStorage__CStreams__CIBuffer_UINT32_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#ifndef ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Foundation {
+            namespace Collections {
+                interface IPropertySet;
+            } /* Collections */
+        } /* Foundation */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet ABI::Windows::Foundation::Collections::IPropertySet
+
+#endif // ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
 
 namespace ABI {
     namespace Windows {
@@ -1965,6 +1997,45 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CStreams_CIOutputStream;
 
 /*
  *
+ * Interface Windows.Storage.Streams.IPropertySetSerializer
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Storage_Streams_IPropertySetSerializer[] = L"Windows.Storage.Streams.IPropertySetSerializer";
+namespace ABI {
+    namespace Windows {
+        namespace Storage {
+            namespace Streams {
+                MIDL_INTERFACE("6e8ebf1c-ef3d-4376-b20e-5be638aeac77")
+                IPropertySetSerializer : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE Serialize(
+                        ABI::Windows::Foundation::Collections::IPropertySet* propertySet,
+                        ABI::Windows::Storage::Streams::IBuffer** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE Deserialize(
+                        ABI::Windows::Foundation::Collections::IPropertySet* propertySet,
+                        ABI::Windows::Storage::Streams::IBuffer* buffer
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IPropertySetSerializer = _uuidof(IPropertySetSerializer);
+            } /* Streams */
+        } /* Storage */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer;
+#endif /* !defined(____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.Storage.Streams.IRandomAccessStream
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -2276,8 +2347,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Storage.Streams.IDataWriterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.Streams.IDataWriter ** Default Interface **
@@ -2587,6 +2658,12 @@ typedef interface __x_ABI_CWindows_CStorage_CStreams_CIInputStreamReference __x_
 typedef interface __x_ABI_CWindows_CStorage_CStreams_CIOutputStream __x_ABI_CWindows_CStorage_CStreams_CIOutputStream;
 
 #endif // ____x_ABI_CWindows_CStorage_CStreams_CIOutputStream_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_FWD_DEFINED__
+#define ____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer;
+
+#endif // ____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CStorage_CStreams_CIRandomAccessStream_FWD_DEFINED__
 #define ____x_ABI_CWindows_CStorage_CStreams_CIRandomAccessStream_FWD_DEFINED__
@@ -3915,6 +3992,12 @@ interface __FIAsyncOperationProgressHandler_2_Windows__CStorage__CStreams__CIBuf
 
 #endif // ____FIAsyncOperationProgressHandler_2_Windows__CStorage__CStreams__CIBuffer_UINT32_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
+
+#ifndef ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+#define ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet;
+
+#endif // ____x_ABI_CWindows_CFoundation_CCollections_CIPropertySet_FWD_DEFINED__
 
 typedef struct __x_ABI_CWindows_CFoundation_CDateTime __x_ABI_CWindows_CFoundation_CDateTime;
 
@@ -5271,6 +5354,80 @@ EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CStreams_CIOutputStream;
 
 /*
  *
+ * Interface Windows.Storage.Streams.IPropertySetSerializer
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Storage_Streams_IPropertySetSerializer[] = L"Windows.Storage.Streams.IPropertySetSerializer";
+typedef struct __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializerVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* Serialize)(__x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer* This,
+        __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet* propertySet,
+        __x_ABI_CWindows_CStorage_CStreams_CIBuffer** result);
+    HRESULT (STDMETHODCALLTYPE* Deserialize)(__x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer* This,
+        __x_ABI_CWindows_CFoundation_CCollections_CIPropertySet* propertySet,
+        __x_ABI_CWindows_CStorage_CStreams_CIBuffer* buffer);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializerVtbl;
+
+interface __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer
+{
+    CONST_VTBL struct __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializerVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_Serialize(This, propertySet, result) \
+    ((This)->lpVtbl->Serialize(This, propertySet, result))
+
+#define __x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_Deserialize(This, propertySet, buffer) \
+    ((This)->lpVtbl->Deserialize(This, propertySet, buffer))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer;
+#endif /* !defined(____x_ABI_CWindows_CStorage_CStreams_CIPropertySetSerializer_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.Storage.Streams.IRandomAccessStream
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -5769,8 +5926,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via the Windows.Storage.Streams.IDataWriterFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Storage.Streams.IDataWriter ** Default Interface **

@@ -26,6 +26,12 @@
 #include <muiload.h>
 #include <gb18030.h>
 #include <icu.h>
+#include <bcp47mrm.h>
+#include <elssrvc.h>
+#include <icucommon.h>
+#include <icui18n.h>
+#include <ime_cmodes.h>
+#include <mlang.h>
 
 #define _DDKIMM_H_ // Keeps INPUTCONTEXT and IMEINFO from coming in again
 #include <dimm.h>

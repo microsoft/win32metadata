@@ -233,7 +233,10 @@ typedef union _WHEA_ERROR_RECORD_HEADER_FLAGS {
         ULONG DeviceDriver:1;
         ULONG CriticalEvent:1;
         ULONG PersistPfn:1;
-        ULONG Reserved:26;
+        ULONG SectionsTruncated:1;
+        ULONG RecoveryInProgress:1;
+        ULONG Throttle:1;
+        ULONG Reserved:23;
     } DUMMYSTRUCTNAME;
     ULONG AsULONG;
 } WHEA_ERROR_RECORD_HEADER_FLAGS, *PWHEA_ERROR_RECORD_HEADER_FLAGS;
@@ -262,7 +265,14 @@ typedef struct _WHEA_ERROR_RECORD_HEADER {
     ULONGLONG RecordId;
     WHEA_ERROR_RECORD_HEADER_FLAGS Flags;
     WHEA_PERSISTENCE_INFO PersistenceInfo;
-    UCHAR Reserved[12];
+    union {
+        struct {
+            ULONG OsBuildNumber; // Pupulated by AzPshedPi, not in vanilla windows
+            UCHAR Reserved2[8];
+        };
+
+        UCHAR Reserved[12];
+    };
 } WHEA_ERROR_RECORD_HEADER, *PWHEA_ERROR_RECORD_HEADER;
 
 //
@@ -307,7 +317,8 @@ typedef union _WHEA_ERROR_RECORD_SECTION_DESCRIPTOR_FLAGS {
         ULONG ResourceNotAvailable:1;
         ULONG LatentError:1;
         ULONG Propagated:1;
-        ULONG Reserved:25;
+        ULONG FruTextByPlugin:1;
+        ULONG Reserved:24;
     } DUMMYSTRUCTNAME;
     ULONG AsULONG;
 } WHEA_ERROR_RECORD_SECTION_DESCRIPTOR_FLAGS,
@@ -320,6 +331,7 @@ typedef union _WHEA_ERROR_RECORD_SECTION_DESCRIPTOR_FLAGS {
 #define WHEA_SECTION_DESCRIPTOR_FLAGS_RESOURCENA         0x00000010
 #define WHEA_SECTION_DESCRIPTOR_FLAGS_LATENTERROR        0x00000020
 #define WHEA_SECTION_DESCRIPTOR_FLAGS_PROPAGATED         0x00000040
+#define WHEA_SECTION_DESCRIPTOR_FLAGS_FRU_TEXT_BY_PLUGIN 0x00000080
 
 typedef union _WHEA_ERROR_RECORD_SECTION_DESCRIPTOR_VALIDBITS {
     struct {
@@ -423,7 +435,7 @@ typedef union _WHEA_PROCESSOR_FAMILY_INFO {
         ULONG ExtendedModel:4;
         ULONG ExtendedFamily:8;
         ULONG Reserved2:4;
-        ULONG Reserved3;
+        ULONG NativeModelId;
     } DUMMYSTRUCTNAME;
     ULONGLONG AsULONGLONG;
 } WHEA_PROCESSOR_FAMILY_INFO, *PWHEA_PROCESSOR_FAMILY_INFO;
@@ -443,7 +455,8 @@ typedef union _WHEA_PROCESSOR_GENERIC_ERROR_SECTION_VALIDBITS {
         ULONGLONG RequesterId:1;
         ULONGLONG ResponderId:1;
         ULONGLONG InstructionPointer:1;
-        ULONGLONG Reserved:51;
+        ULONGLONG NativeModelId:1;
+        ULONGLONG Reserved:50;
     } DUMMYSTRUCTNAME;
     ULONGLONG ValidBits;
 } WHEA_PROCESSOR_GENERIC_ERROR_SECTION_VALIDBITS,
@@ -1098,6 +1111,90 @@ CPER_FIELD_CHECK(WHEA_PMEM_ERROR_SECTION, ErrorStatus,         72, 8);
 CPER_FIELD_CHECK(WHEA_PMEM_ERROR_SECTION, NFITHandle,          80, 4);
 CPER_FIELD_CHECK(WHEA_PMEM_ERROR_SECTION, PageRangeCount,      84, 4);
 
+//----------------------------------------- WHEA_PCIE_CORRECTABLE_ERROR_SECTION
+
+#define WHEA_PCIE_CORRECTABLE_ERROR_SECTION_COUNT_SIZE 32
+
+typedef struct _WHEA_PCIE_ADDRESS {
+    UINT32 Segment;
+    UINT32 Bus;
+    UINT32 Device;
+    UINT32 Function;
+} WHEA_PCIE_ADDRESS, *PWHEA_PCIE_ADDRESS;
+
+typedef union _WHEA_PCIE_CORRECTABLE_ERROR_DEVICES_VALIDBITS {
+    struct {
+        ULONGLONG Segment:1;
+        ULONGLONG Bus:1;
+        ULONGLONG Device:1;
+        ULONGLONG Function:1;
+        ULONGLONG Mask:1;
+        ULONGLONG CorrectableErrorCount:1;
+        ULONGLONG Reserved:58;
+    } DUMMYSTRUCTNAME;
+    ULONGLONG ValidBits;
+} WHEA_PCIE_CORRECTABLE_ERROR_DEVICES_VALIDBITS,
+  *PWHEA_PCIE_CORRECTABLE_ERROR_DEVICES_VALIDBITS;
+
+typedef struct _WHEA_PCIE_CORRECTABLE_ERROR_DEVICES {
+    WHEA_PCIE_CORRECTABLE_ERROR_DEVICES_VALIDBITS ValidBits;
+    WHEA_PCIE_ADDRESS Address;
+    UINT32 Mask;
+    UINT32 CorrectableErrorCount
+               [WHEA_PCIE_CORRECTABLE_ERROR_SECTION_COUNT_SIZE];
+} WHEA_PCIE_CORRECTABLE_ERROR_DEVICES, *PWHEA_PCIE_CORRECTABLE_ERROR_DEVICES;
+
+typedef struct _WHEA_PCIE_CORRECTABLE_ERROR_SECTION_HEADER {
+    UINT16 Version;
+    UINT16 Count;
+} WHEA_PCIE_CORRECTABLE_ERROR_SECTION_HEADER, 
+      *PWHEA_PCIE_CORRECTABLE_ERROR_SECTION_HEADER;
+
+typedef struct _WHEA_PCIE_CORRECTABLE_ERROR_SECTION {
+    WHEA_PCIE_CORRECTABLE_ERROR_SECTION_HEADER Header;
+    _Field_size_(Header.Count)
+        WHEA_PCIE_CORRECTABLE_ERROR_DEVICES Devices[ANYSIZE_ARRAY];
+} WHEA_PCIE_CORRECTABLE_ERROR_SECTION, *PWHEA_PCIE_CORRECTABLE_ERROR_SECTION;
+
+CPER_FIELD_CHECK(WHEA_PCIE_CORRECTABLE_ERROR_SECTION, Header,  0,   4);
+CPER_FIELD_CHECK(WHEA_PCIE_CORRECTABLE_ERROR_SECTION, Devices, 4, 156);
+
+//----------------------------------------- WHEA_MEMORY_CORRECTABLE_ERROR_SECTION
+
+typedef union _WHEA_MEMORY_CORRECTABLE_ERROR_SECTION_VALIDBITS {
+    struct {
+        ULONGLONG SocketId:1;
+        ULONGLONG ChannelId:1;
+        ULONGLONG DimmSlot:1;
+        ULONGLONG CorrectableErrorCount:1;
+        ULONGLONG Reserved:60;
+    } DUMMYSTRUCTNAME;
+    ULONGLONG ValidBits;
+} WHEA_MEMORY_CORRECTABLE_ERROR_SECTION_VALIDBITS,
+  *PWHEA_MEMORY_CORRECTABLE_ERROR_SECTION_VALIDBITS;
+
+typedef struct _WHEA_MEMORY_CORRECTABLE_ERROR_HEADER {
+    UINT16 Version;
+    UINT16 Count;
+} WHEA_MEMORY_CORRECTABLE_ERROR_HEADER, *PWHEA_MEMORY_CORRECTABLE_ERROR_HEADER;
+
+typedef struct _WHEA_MEMORY_CORRECTABLE_ERROR_DATA {
+    WHEA_MEMORY_CORRECTABLE_ERROR_SECTION_VALIDBITS ValidBits;
+    UINT32 SocketId;
+    UINT32 ChannelId;
+    UINT32 DimmSlot;
+    UINT32 CorrectableErrorCount;
+} WHEA_MEMORY_CORRECTABLE_ERROR_DATA, *PWHEA_MEMORY_CORRECTABLE_ERROR_DATA;
+
+typedef struct _WHEA_MEMORY_CORRECTABLE_ERROR_SECTION {
+    WHEA_MEMORY_CORRECTABLE_ERROR_HEADER Header;
+    WHEA_MEMORY_CORRECTABLE_ERROR_DATA Data[ANYSIZE_ARRAY];
+} WHEA_MEMORY_CORRECTABLE_ERROR_SECTION, 
+    *PWHEA_MEMORY_CORRECTABLE_ERROR_SECTION;
+
+CPER_FIELD_CHECK(WHEA_MEMORY_CORRECTABLE_ERROR_SECTION, Header, 0,  4);
+CPER_FIELD_CHECK(WHEA_MEMORY_CORRECTABLE_ERROR_SECTION, Data,   4,  24);
+
 //----------------------------------------------- WHEA_PCIEXPRESS_ERROR_SECTION
 
 typedef union _WHEA_PCIEXPRESS_ERROR_SECTION_VALIDBITS {
@@ -1487,7 +1584,8 @@ typedef enum _WHEA_CPU_VENDOR {
 
 #define WHEA_XPF_MCA_EXTREG_MAX_COUNT            24
 #define WHEA_XPF_MCA_SECTION_VERSION_2           2
-#define WHEA_XPF_MCA_SECTION_VERSION             WHEA_XPF_MCA_SECTION_VERSION_2
+#define WHEA_XPF_MCA_SECTION_VERSION_3           3
+#define WHEA_XPF_MCA_SECTION_VERSION             WHEA_XPF_MCA_SECTION_VERSION_3
 #define WHEA_AMD_EXT_REG_NUM                     10
 
 //
@@ -1504,10 +1602,41 @@ typedef struct _WHEA_AMD_EXTENDED_REGISTERS {
     ULONGLONG MISC1;
     ULONGLONG MISC2;
     ULONGLONG MISC3;
-    ULONGLONG MISC4;   
-    ULONGLONG RasCap;       
+    ULONGLONG MISC4;
+    ULONGLONG RasCap;
     ULONGLONG Reserved[WHEA_XPF_MCA_EXTREG_MAX_COUNT - WHEA_AMD_EXT_REG_NUM];
 } WHEA_AMD_EXTENDED_REGISTERS, *PWHEA_AMD_EXTENDED_REGISTERS;
+
+typedef struct _XPF_RECOVERY_INFO {
+    struct {
+        UINT32 NotSupported : 1;
+        UINT32 Overflow : 1;
+        UINT32 ContextCorrupt : 1;
+        UINT32 RestartIpErrorIpNotValid : 1;
+        UINT32 NoRecoveryContext : 1;
+        UINT32 MiscOrAddrNotValid : 1;
+        UINT32 InvalidAddressMode : 1;
+        UINT32 HighIrql : 1;
+        UINT32 InterruptsDisabled : 1;
+        UINT32 SwapBusy : 1;
+        UINT32 StackOverflow : 1;
+        UINT32 Reserved : 21;
+    } FailureReason;
+
+    struct {
+        UINT32 RecoveryAttempted : 1;
+        UINT32 HvHandled : 1;
+        UINT32 Reserved : 30;
+    } Action;
+
+    BOOLEAN ActionRequired;
+    BOOLEAN RecoverySucceeded;
+    BOOLEAN RecoveryKernel;
+    UINT8 Reserved;
+    UINT16 Reserved2;
+    UINT16 Reserved3;
+    UINT32 Reserved4;
+} XPF_RECOVERY_INFO, *PXPF_RECOVERY_INFO;
 
 typedef struct _WHEA_XPF_MCA_SECTION {
     ULONG VersionNumber;
@@ -1526,7 +1655,13 @@ typedef struct _WHEA_XPF_MCA_SECTION {
         ULONGLONG ExtendedRegisters[WHEA_XPF_MCA_EXTREG_MAX_COUNT];
         WHEA_AMD_EXTENDED_REGISTERS AMDExtendedRegisters;
     };
-    MCG_CAP             GlobalCapability;
+    MCG_CAP GlobalCapability;
+
+    //
+    // Version 3 Fields follow.
+    //
+
+    XPF_RECOVERY_INFO RecoveryInfo;
 } WHEA_XPF_MCA_SECTION, *PWHEA_XPF_MCA_SECTION;
 
 //------------------------------------------------------ WHEA_NMI_ERROR_SECTION
@@ -1602,6 +1737,56 @@ CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_SECTION, MIDR_EL1,                    
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_SECTION, RunningState,                 32,   4);
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_SECTION, PSCIState,                    36,   4);
 CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_SECTION, Data,                         40,   1);
+
+//--------------------------------------------------------------- ERROR RECOVERY_INFO_SECTION
+
+typedef enum _WHEA_RECOVERY_TYPE {
+    WheaRecoveryTypeSrar = 1,
+    WheaRecoveryTypeSrao,
+    WheaRecoveryTypeMax
+} WHEA_RECOVERY_TYPE, *PWHEA_RECOVERY_TYPE;
+
+typedef union _WHEA_RECOVERY_ACTION {
+    struct {
+        ULONG NoneAttempted : 1;
+        ULONG TerminateProcess : 1;
+        ULONG ForwardedToVm : 1;
+        ULONG MarkPageBad : 1;
+        ULONG Reserved : 29;
+    } DUMMYSTRUCTNAME;
+
+    ULONG AsULONG;
+} WHEA_RECOVERY_ACTION, *PWHEA_RECOVERY_ACTION;
+
+typedef enum _WHEA_RECOVERY_FAILURE_REASON {
+    WheaRecoveryFailureReasonKernelCouldNotMarkMemoryBad = 1,
+    WheaRecoveryFailureReasonKernelMarkMemoryBadTimedOut,
+    WheaRecoveryFailureReasonNoRecoveryContext,
+    WheaRecoveryFailureReasonNotContinuable,
+    WheaRecoveryFailureReasonPcc,
+    WheaRecoveryFailureReasonOverflow,
+    WheaRecoveryFailureReasonNotSupported,
+    WheaRecoveryFailureReasonMiscOrAddrNotValid,
+    WheaRecoveryFailureReasonInvalidAddressMode,
+    WheaRecoveryFailureReasonHighIrql,
+    WheaRecoveryFailureReasonInsufficientAltContextWrappers,
+    WheaRecoveryFailureReasonInterruptsDisabled,
+    WheaRecoveryFailureReasonSwapBusy,
+    WheaRecoveryFailureReasonStackOverflow,
+    WheaRecoveryFailureReasonUnexpectedFailure,
+    WheaRecoveryFailureReasonKernelWillPageFaultBCAtCurrentIrql,
+    WheaRecoveryFailureReasonMax
+} WHEA_RECOVERY_FAILURE_REASON, *PWHEA_RECOVERY_FAILURE_REASON;
+
+typedef struct _WHEA_ERROR_RECOVERY_INFO_SECTION {
+    BOOLEAN RecoveryKernel;
+    WHEA_RECOVERY_ACTION RecoveryAction;
+    WHEA_RECOVERY_TYPE RecoveryType;
+    KIRQL Irql;
+    BOOLEAN RecoverySucceeded;
+    WHEA_RECOVERY_FAILURE_REASON FailureReason;
+    CCHAR ProcessName[20];
+} WHEA_ERROR_RECOVERY_INFO_SECTION, *PWHEA_ERROR_RECOVERY_INFO_SECTION;
 
 //------------------------------------------------------ WHEA_ARM_PROCESSOR_ERROR_INFORMATION
 
@@ -1930,4 +2115,3 @@ CPER_FIELD_CHECK(WHEA_ARM_PROCESSOR_ERROR_CONTEXT_INFORMATION_HEADER, RegisterAr
 #pragma endregion
 
 #endif // #ifndef _CPER_H_
-

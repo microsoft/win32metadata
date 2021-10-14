@@ -3,5 +3,6 @@
 <IncludeRoot>/um/ddrawi.h
 <IncludeRoot>/um/ddrawint.h
 <IncludeRoot>/um/dvp.h
+<IncludeRoot>/um/dxmini.h
 --namespace
 Windows.Win32.Graphics.DirectDraw

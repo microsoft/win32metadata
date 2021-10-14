@@ -569,6 +569,8 @@ namespace Windows
                     NameOrPhoneNumber       = 59,
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                     EmailNameOrAddress      = 60,
+                    [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                    Private                 = 61,
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                     Maps                    = 62,
                     [contract(Windows.Foundation.UniversalApiContract, 1.0)]

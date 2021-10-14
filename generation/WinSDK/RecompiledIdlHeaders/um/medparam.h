@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -215,6 +223,7 @@ EXTERN_C const IID IID_IMediaParamInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMediaParamInfo * This,
             /* [annotation][in] */ 
@@ -222,17 +231,21 @@ EXTERN_C const IID IID_IMediaParamInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMediaParamInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMediaParamInfo * This);
         
+        DECLSPEC_XFGVIRT(IMediaParamInfo, GetParamCount)
         HRESULT ( STDMETHODCALLTYPE *GetParamCount )( 
             __RPC__in IMediaParamInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwParams);
         
+        DECLSPEC_XFGVIRT(IMediaParamInfo, GetParamInfo)
         HRESULT ( STDMETHODCALLTYPE *GetParamInfo )( 
             __RPC__in IMediaParamInfo * This,
             /* [annotation][in] */ 
@@ -240,6 +253,7 @@ EXTERN_C const IID IID_IMediaParamInfo;
             /* [annotation][out] */ 
             _Out_  MP_PARAMINFO *pInfo);
         
+        DECLSPEC_XFGVIRT(IMediaParamInfo, GetParamText)
         HRESULT ( STDMETHODCALLTYPE *GetParamText )( 
             __RPC__in IMediaParamInfo * This,
             /* [annotation][in] */ 
@@ -247,11 +261,13 @@ EXTERN_C const IID IID_IMediaParamInfo;
             /* [annotation][out] */ 
             _Out_  WCHAR **ppwchText);
         
+        DECLSPEC_XFGVIRT(IMediaParamInfo, GetNumTimeFormats)
         HRESULT ( STDMETHODCALLTYPE *GetNumTimeFormats )( 
             __RPC__in IMediaParamInfo * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwNumTimeFormats);
         
+        DECLSPEC_XFGVIRT(IMediaParamInfo, GetSupportedTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *GetSupportedTimeFormat )( 
             __RPC__in IMediaParamInfo * This,
             /* [annotation][in] */ 
@@ -259,6 +275,7 @@ EXTERN_C const IID IID_IMediaParamInfo;
             /* [annotation][out] */ 
             _Out_  GUID *pguidTimeFormat);
         
+        DECLSPEC_XFGVIRT(IMediaParamInfo, GetCurrentTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentTimeFormat )( 
             __RPC__in IMediaParamInfo * This,
             /* [annotation][out] */ 
@@ -376,6 +393,7 @@ EXTERN_C const IID IID_IMediaParams;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMediaParams * This,
             /* [annotation][in] */ 
@@ -383,12 +401,15 @@ EXTERN_C const IID IID_IMediaParams;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMediaParams * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMediaParams * This);
         
+        DECLSPEC_XFGVIRT(IMediaParams, GetParam)
         HRESULT ( STDMETHODCALLTYPE *GetParam )( 
             __RPC__in IMediaParams * This,
             /* [annotation][in] */ 
@@ -396,6 +417,7 @@ EXTERN_C const IID IID_IMediaParams;
             /* [annotation][out] */ 
             _Out_  MP_DATA *pValue);
         
+        DECLSPEC_XFGVIRT(IMediaParams, SetParam)
         HRESULT ( STDMETHODCALLTYPE *SetParam )( 
             __RPC__in IMediaParams * This,
             /* [annotation][in] */ 
@@ -403,6 +425,7 @@ EXTERN_C const IID IID_IMediaParams;
             /* [annotation][in] */ 
             _In_  MP_DATA value);
         
+        DECLSPEC_XFGVIRT(IMediaParams, AddEnvelope)
         HRESULT ( STDMETHODCALLTYPE *AddEnvelope )( 
             __RPC__in IMediaParams * This,
             /* [annotation][in] */ 
@@ -412,6 +435,7 @@ EXTERN_C const IID IID_IMediaParams;
             /* [annotation][in] */ 
             _In_  MP_ENVELOPE_SEGMENT *pEnvelopeSegments);
         
+        DECLSPEC_XFGVIRT(IMediaParams, FlushEnvelope)
         HRESULT ( STDMETHODCALLTYPE *FlushEnvelope )( 
             __RPC__in IMediaParams * This,
             /* [annotation][in] */ 
@@ -421,6 +445,7 @@ EXTERN_C const IID IID_IMediaParams;
             /* [annotation][in] */ 
             _In_  REFERENCE_TIME refTimeEnd);
         
+        DECLSPEC_XFGVIRT(IMediaParams, SetTimeFormat)
         HRESULT ( STDMETHODCALLTYPE *SetTimeFormat )( 
             __RPC__in IMediaParams * This,
             /* [annotation][in] */ 

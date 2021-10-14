@@ -40,5 +40,14 @@
 <IncludeRoot>/um/ddstream.h
 <IncludeRoot>/um/mmstream.h
 <IncludeRoot>/um/vfwmsgs.h
+<IncludeRoot>/um/activecf.h
+<IncludeRoot>/um/dxva.h
+<IncludeRoot>/um/dxva2swdev.h
+<IncludeRoot>/um/dxva2trace.h
+<IncludeRoot>/um/mediaerr.h
+<IncludeRoot>/um/mpeg2error.h
+<IncludeRoot>/um/pbdaerrors.h
+<IncludeRoot>/um/playlist.h
+<IncludeRoot>/um/xprtdefs.h
 --namespace
 Windows.Win32.Graphics.DirectShow

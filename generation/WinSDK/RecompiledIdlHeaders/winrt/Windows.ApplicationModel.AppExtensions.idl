@@ -55,6 +55,8 @@ namespace Windows
         {
             interface IAppExtension;
 
+            interface IAppExtension2;
+
             interface IAppExtensionCatalog;
 
             interface IAppExtensionCatalogStatics;
@@ -138,6 +140,14 @@ namespace Windows
                 HRESULT GetPublicFolderAsync([out] [retval] Windows.Foundation.IAsyncOperation<Windows.Storage.StorageFolder*>** operation);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.ApplicationModel.AppExtensions.AppExtension)]
+            [uuid(AB3B15F0-14F9-4B9F-9419-A349A242EF38)]
+            interface IAppExtension2 : IInspectable
+            {
+                [propget] HRESULT AppUserModelId([out] [retval] HSTRING* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
             [exclusiveto(Windows.ApplicationModel.AppExtensions.AppExtensionCatalog)]
             [uuid(97872032-8426-4AD1-9084-92E88C2DA200)]
@@ -218,6 +228,7 @@ namespace Windows
             runtimeclass AppExtension
             {
                 [default] interface Windows.ApplicationModel.AppExtensions.IAppExtension;
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.ApplicationModel.AppExtensions.IAppExtension2;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]

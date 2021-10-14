@@ -34,6 +34,8 @@ EXTERN_C const MSDAORADECLSPEC CLSID CLSID_MSDAORA_ERROR  = {0xE8CC4CBF,0xFDFF,0
 EXTERN_C const MSDAORADECLSPEC CLSID CLSID_MSDAORA8       = {0x7f06a373,0xdd6a,0x43db,{0xb4,0xe0,0x1f,0xc1,0x21,0xe5,0xe6,0x2b}};
 EXTERN_C const MSDAORADECLSPEC CLSID CLSID_MSDAORA8_ERROR = {0x7f06a374,0xdd6a,0x43db,{0xb4,0xe0,0x1f,0xc1,0x21,0xe5,0xe6,0x2b}};
 
+#ifdef __cplusplus
+
 class DECLSPEC_UUID("E8CC4CBE-FDFF-11D0-B865-00A0C9081C1D")
 MSDAORA;
 
@@ -45,6 +47,8 @@ MSDAORA8;
 
 class DECLSPEC_UUID("7F06A374-DD6A-43db-B4E0-1FC121E5E62B")
 MSDAORA8_ERROR;
+
+#endif // __cplusplus
 
 //----------------------------------------------------------------------------
 // MSDAORA specific properties

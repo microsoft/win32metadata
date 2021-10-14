@@ -1,4 +1,6 @@
 --traverse
 <IncludeRoot>/um/commdlg.h
+<IncludeRoot>/shared/cderr.h
+<IncludeRoot>/um/colordlg.h
 --namespace
 Windows.Win32.UI.WindowsAndMessaging

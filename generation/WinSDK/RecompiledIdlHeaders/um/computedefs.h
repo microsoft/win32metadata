@@ -138,10 +138,14 @@ typedef enum HCS_NOTIFICATIONS
     HcsNotificationSystemSaveCompleted = 0x00000008,
     HcsNotificationSystemRdpEnhancedModeStateChanged = 0x00000009,
     HcsNotificationSystemShutdownFailed = 0x0000000A,
+    HcsNotificationSystemShutdownCompleted = 0x0000000A,
     HcsNotificationSystemGetPropertiesCompleted = 0x0000000B,
     HcsNotificationSystemModifyCompleted = 0x0000000C,
     HcsNotificationSystemCrashInitiated =  0x0000000D,
     HcsNotificationSystemGuestConnectionClosed = 0x0000000E,
+    HcsNotificationSystemOperationCompletion = 0x0000000F,
+
+    HcsNotificationSystemPassThru = 0x00000010,
 
     // Notifications for HCS_PROCESS handles
     HcsNotificationProcessExited = 0x00010000,
@@ -189,5 +193,6 @@ typedef struct
     void*                   CallbackContext;
     HCS_EVENT_CALLBACK      Callback;
 } HCS_CREATE_OPTIONS_1;
+
 
 #endif // _HYPERV_COMPUTEDEFS_H_

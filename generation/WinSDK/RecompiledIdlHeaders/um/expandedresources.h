@@ -38,19 +38,16 @@ HasExpandedResources(
     _Out_ BOOL* hasExpandedResources
     );
 
-
 HRESULT
 WINAPI
 GetExpandedResourceExclusiveCpuCount(
     _Out_ ULONG* exclusiveCpuCount
     );
 
-
 HRESULT
 WINAPI
 ReleaseExclusiveCpuSets(
     );
-
 
 #if defined(__cplusplus)
 } // end extern "C"

@@ -63,6 +63,8 @@ namespace Windows
         runtimeclass UIContentRoot;
 
         runtimeclass UIContext;
+
+        typedef struct WindowId WindowId;
     }
 }
 namespace Windows
@@ -117,6 +119,8 @@ namespace Windows
 
             interface IFullScreenPresentationConfiguration;
 
+            interface IWindowServicesStatics;
+
             interface IWindowingEnvironment;
 
             interface IWindowingEnvironmentAddedEventArgs;
@@ -154,6 +158,8 @@ namespace Windows
             runtimeclass DisplayRegion;
 
             runtimeclass FullScreenPresentationConfiguration;
+
+            runtimeclass WindowServices;
 
             runtimeclass WindowingEnvironment;
 
@@ -475,6 +481,14 @@ namespace Windows
                 [propput] HRESULT IsExclusive([in] boolean value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.UI.WindowManagement.WindowServices)]
+            [uuid(CFF4D519-50A6-5C64-97F6-C2D96ADD7F42)]
+            interface IWindowServicesStatics : IInspectable
+            {
+                HRESULT FindAllTopLevelWindowIds([out] [retval] Windows.Foundation.Collections.IVectorView<Windows.UI.WindowId>** result);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 8.0)]
             [exclusiveto(Windows.UI.WindowManagement.WindowingEnvironment)]
             [uuid(264363C0-2A49-5417-B3AE-48A71C63A3BD)]
@@ -627,6 +641,14 @@ namespace Windows
             runtimeclass FullScreenPresentationConfiguration : Windows.UI.WindowManagement.AppWindowPresentationConfiguration
             {
                 [default] interface Windows.UI.WindowManagement.IFullScreenPresentationConfiguration;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.WindowManagement.IWindowServicesStatics, Windows.Foundation.UniversalApiContract, 12.0)]
+            [threading(both)]
+            runtimeclass WindowServices
+            {
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 8.0)]

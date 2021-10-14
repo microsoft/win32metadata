@@ -458,15 +458,15 @@ private:
     Pen& operator=(const Pen &);
 
 protected:
-    Pen(GpPen* nativePen, Status status)
+    Pen(GpPen* nativePenArg, Status status)
     {
         lastResult = status;
-        SetNativePen(nativePen);
+        SetNativePen(nativePenArg);
     }
 
-    VOID SetNativePen(GpPen* nativePen)
+    VOID SetNativePen(GpPen* nativePenArg)
     {
-        this->nativePen = nativePen;
+        this->nativePen = nativePenArg;
     }
     
     Status SetStatus(Status status) const

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -213,6 +221,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBackgroundCopyJob1 * This,
             /* [annotation][in] */ 
@@ -220,15 +229,19 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBackgroundCopyJob1 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBackgroundCopyJob1 * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJob1, CancelJob)
         HRESULT ( STDMETHODCALLTYPE *CancelJob )( 
             __RPC__in IBackgroundCopyJob1 * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJob1, GetProgress)
         HRESULT ( STDMETHODCALLTYPE *GetProgress )( 
             __RPC__in IBackgroundCopyJob1 * This,
             /* [annotation][in] */ 
@@ -236,6 +249,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwProgress);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJob1, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IBackgroundCopyJob1 * This,
             /* [annotation][out] */ 
@@ -247,6 +261,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwNumOfRetries);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJob1, AddFiles)
         HRESULT ( STDMETHODCALLTYPE *AddFiles )( 
             __RPC__in IBackgroundCopyJob1 * This,
             /* [annotation][in] */ 
@@ -254,6 +269,7 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
             /* [annotation][size_is][in] */ 
             _In_reads_(cFileCount)  FILESETINFO **ppFileSet);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJob1, GetFile)
         HRESULT ( STDMETHODCALLTYPE *GetFile )( 
             __RPC__in IBackgroundCopyJob1 * This,
             /* [annotation][in] */ 
@@ -261,14 +277,17 @@ EXTERN_C const IID IID_IBackgroundCopyJob1;
             /* [annotation][out] */ 
             _Out_  FILESETINFO *pFileInfo);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJob1, GetFileCount)
         HRESULT ( STDMETHODCALLTYPE *GetFileCount )( 
             __RPC__in IBackgroundCopyJob1 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwFileCount);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJob1, SwitchToForeground)
         HRESULT ( STDMETHODCALLTYPE *SwitchToForeground )( 
             __RPC__in IBackgroundCopyJob1 * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyJob1, get_JobID)
         HRESULT ( STDMETHODCALLTYPE *get_JobID )( 
             __RPC__in IBackgroundCopyJob1 * This,
             /* [annotation][out] */ 
@@ -378,6 +397,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs1;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumBackgroundCopyJobs1 * This,
             /* [annotation][in] */ 
@@ -385,12 +405,15 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs1;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumBackgroundCopyJobs1 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumBackgroundCopyJobs1 * This);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyJobs1, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumBackgroundCopyJobs1 * This,
             /* [annotation][in] */ 
@@ -400,19 +423,23 @@ EXTERN_C const IID IID_IEnumBackgroundCopyJobs1;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyJobs1, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumBackgroundCopyJobs1 * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyJobs1, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumBackgroundCopyJobs1 * This);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyJobs1, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumBackgroundCopyJobs1 * This,
             /* [annotation][out] */ 
             _Out_  IEnumBackgroundCopyJobs1 **ppenum);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyJobs1, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumBackgroundCopyJobs1 * This,
             /* [annotation][out] */ 
@@ -579,6 +606,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -586,12 +614,15 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBackgroundCopyGroup * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBackgroundCopyGroup * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, GetProp)
         HRESULT ( STDMETHODCALLTYPE *GetProp )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -599,6 +630,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][out] */ 
             _Out_  VARIANT *pvarVal);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, SetProp)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetProp )( 
             IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -606,6 +638,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][in] */ 
             _In_  VARIANT *pvarVal);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, GetProgress)
         HRESULT ( STDMETHODCALLTYPE *GetProgress )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -613,6 +646,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwProgress);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, GetStatus)
         HRESULT ( STDMETHODCALLTYPE *GetStatus )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][out] */ 
@@ -620,6 +654,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwJobIndex);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, GetJob)
         HRESULT ( STDMETHODCALLTYPE *GetJob )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -627,25 +662,31 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][out] */ 
             _Out_  IBackgroundCopyJob1 **ppJob);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, SuspendGroup)
         HRESULT ( STDMETHODCALLTYPE *SuspendGroup )( 
             __RPC__in IBackgroundCopyGroup * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, ResumeGroup)
         HRESULT ( STDMETHODCALLTYPE *ResumeGroup )( 
             __RPC__in IBackgroundCopyGroup * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, CancelGroup)
         HRESULT ( STDMETHODCALLTYPE *CancelGroup )( 
             __RPC__in IBackgroundCopyGroup * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, get_Size)
         HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwSize);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, get_GroupID)
         HRESULT ( STDMETHODCALLTYPE *get_GroupID )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][out] */ 
             _Out_  GUID *pguidGroupID);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, CreateJob)
         HRESULT ( STDMETHODCALLTYPE *CreateJob )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -653,6 +694,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][out] */ 
             _Out_  IBackgroundCopyJob1 **ppJob);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, EnumJobs)
         HRESULT ( STDMETHODCALLTYPE *EnumJobs )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -660,9 +702,11 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][out] */ 
             _Out_  IEnumBackgroundCopyJobs1 **ppEnumJobs);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, SwitchToForeground)
         HRESULT ( STDMETHODCALLTYPE *SwitchToForeground )( 
             __RPC__in IBackgroundCopyGroup * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, QueryNewJobInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryNewJobInterface )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -670,6 +714,7 @@ EXTERN_C const IID IID_IBackgroundCopyGroup;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  IUnknown **pUnk);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyGroup, SetNotificationPointer)
         HRESULT ( STDMETHODCALLTYPE *SetNotificationPointer )( 
             __RPC__in IBackgroundCopyGroup * This,
             /* [annotation][in] */ 
@@ -817,6 +862,7 @@ EXTERN_C const IID IID_IEnumBackgroundCopyGroups;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumBackgroundCopyGroups * This,
             /* [annotation][in] */ 
@@ -824,12 +870,15 @@ EXTERN_C const IID IID_IEnumBackgroundCopyGroups;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumBackgroundCopyGroups * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumBackgroundCopyGroups * This);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyGroups, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumBackgroundCopyGroups * This,
             /* [annotation][in] */ 
@@ -839,19 +888,23 @@ EXTERN_C const IID IID_IEnumBackgroundCopyGroups;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyGroups, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumBackgroundCopyGroups * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyGroups, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumBackgroundCopyGroups * This);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyGroups, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumBackgroundCopyGroups * This,
             /* [annotation][out] */ 
             _Out_  IEnumBackgroundCopyGroups **ppenum);
         
+        DECLSPEC_XFGVIRT(IEnumBackgroundCopyGroups, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IEnumBackgroundCopyGroups * This,
             /* [annotation][out] */ 
@@ -974,6 +1027,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback1;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBackgroundCopyCallback1 * This,
             /* [annotation][in] */ 
@@ -981,12 +1035,15 @@ EXTERN_C const IID IID_IBackgroundCopyCallback1;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBackgroundCopyCallback1 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBackgroundCopyCallback1 * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyCallback1, OnStatus)
         HRESULT ( STDMETHODCALLTYPE *OnStatus )( 
             __RPC__in IBackgroundCopyCallback1 * This,
             /* [annotation][in] */ 
@@ -1004,6 +1061,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback1;
             /* [annotation][in] */ 
             _In_  DWORD dwTransportResult);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyCallback1, OnProgress)
         HRESULT ( STDMETHODCALLTYPE *OnProgress )( 
             __RPC__in IBackgroundCopyCallback1 * This,
             /* [annotation][in] */ 
@@ -1017,6 +1075,7 @@ EXTERN_C const IID IID_IBackgroundCopyCallback1;
             /* [annotation][in] */ 
             _In_  DWORD dwProgressValue);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyCallback1, OnProgressEx)
         HRESULT ( STDMETHODCALLTYPE *OnProgressEx )( 
             __RPC__in IBackgroundCopyCallback1 * This,
             /* [annotation][in] */ 
@@ -1119,6 +1178,7 @@ EXTERN_C const IID IID_IBackgroundCopyQMgr;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBackgroundCopyQMgr * This,
             /* [annotation][in] */ 
@@ -1126,12 +1186,15 @@ EXTERN_C const IID IID_IBackgroundCopyQMgr;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBackgroundCopyQMgr * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBackgroundCopyQMgr * This);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyQMgr, CreateGroup)
         HRESULT ( STDMETHODCALLTYPE *CreateGroup )( 
             __RPC__in IBackgroundCopyQMgr * This,
             /* [annotation][in] */ 
@@ -1139,6 +1202,7 @@ EXTERN_C const IID IID_IBackgroundCopyQMgr;
             /* [annotation][out] */ 
             _Out_  IBackgroundCopyGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyQMgr, GetGroup)
         HRESULT ( STDMETHODCALLTYPE *GetGroup )( 
             __RPC__in IBackgroundCopyQMgr * This,
             /* [annotation][in] */ 
@@ -1146,6 +1210,7 @@ EXTERN_C const IID IID_IBackgroundCopyQMgr;
             /* [annotation][out] */ 
             _Out_  IBackgroundCopyGroup **ppGroup);
         
+        DECLSPEC_XFGVIRT(IBackgroundCopyQMgr, EnumGroups)
         HRESULT ( STDMETHODCALLTYPE *EnumGroups )( 
             __RPC__in IBackgroundCopyQMgr * This,
             /* [annotation][in] */ 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -216,6 +224,7 @@ EXTERN_C const IID IID_IMultiMediaStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMultiMediaStream * This,
             /* [annotation][in] */ 
@@ -223,12 +232,15 @@ EXTERN_C const IID IID_IMultiMediaStream;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMultiMediaStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMultiMediaStream * This);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, GetInformation)
         HRESULT ( STDMETHODCALLTYPE *GetInformation )( 
             IMultiMediaStream * This,
             /* [annotation][out] */ 
@@ -236,6 +248,7 @@ EXTERN_C const IID IID_IMultiMediaStream;
             /* [annotation][out] */ 
             _Out_  STREAM_TYPE *pStreamType);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, GetMediaStream)
         HRESULT ( STDMETHODCALLTYPE *GetMediaStream )( 
             IMultiMediaStream * This,
             /* [annotation][in] */ 
@@ -243,6 +256,7 @@ EXTERN_C const IID IID_IMultiMediaStream;
             /* [annotation][out] */ 
             _Out_  IMediaStream **ppMediaStream);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, EnumMediaStreams)
         HRESULT ( STDMETHODCALLTYPE *EnumMediaStreams )( 
             IMultiMediaStream * This,
             /* [annotation][in] */ 
@@ -250,31 +264,37 @@ EXTERN_C const IID IID_IMultiMediaStream;
             /* [annotation][out] */ 
             _Out_  IMediaStream **ppMediaStream);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, GetState)
         HRESULT ( STDMETHODCALLTYPE *GetState )( 
             IMultiMediaStream * This,
             /* [annotation][out] */ 
             _Out_  STREAM_STATE *pCurrentState);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, SetState)
         HRESULT ( STDMETHODCALLTYPE *SetState )( 
             IMultiMediaStream * This,
             /* [annotation][in] */ 
             _In_  STREAM_STATE NewState);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, GetTime)
         HRESULT ( STDMETHODCALLTYPE *GetTime )( 
             IMultiMediaStream * This,
             /* [annotation][out] */ 
             _Out_  STREAM_TIME *pCurrentTime);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, GetDuration)
         HRESULT ( STDMETHODCALLTYPE *GetDuration )( 
             IMultiMediaStream * This,
             /* [annotation][out] */ 
             _Out_  STREAM_TIME *pDuration);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, Seek)
         HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IMultiMediaStream * This,
             /* [annotation][in] */ 
             _In_  STREAM_TIME SeekTime);
         
+        DECLSPEC_XFGVIRT(IMultiMediaStream, GetEndOfStreamEventHandle)
         HRESULT ( STDMETHODCALLTYPE *GetEndOfStreamEventHandle )( 
             IMultiMediaStream * This,
             /* [annotation][out] */ 
@@ -398,6 +418,7 @@ EXTERN_C const IID IID_IMediaStream;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMediaStream * This,
             /* [annotation][in] */ 
@@ -405,17 +426,21 @@ EXTERN_C const IID IID_IMediaStream;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMediaStream * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMediaStream * This);
         
+        DECLSPEC_XFGVIRT(IMediaStream, GetMultiMediaStream)
         HRESULT ( STDMETHODCALLTYPE *GetMultiMediaStream )( 
             __RPC__in IMediaStream * This,
             /* [annotation][out] */ 
             _Out_  IMultiMediaStream **ppMultiMediaStream);
         
+        DECLSPEC_XFGVIRT(IMediaStream, GetInformation)
         HRESULT ( STDMETHODCALLTYPE *GetInformation )( 
             __RPC__in IMediaStream * This,
             /* [annotation][out] */ 
@@ -423,6 +448,7 @@ EXTERN_C const IID IID_IMediaStream;
             /* [annotation][out] */ 
             _Out_  STREAM_TYPE *pType);
         
+        DECLSPEC_XFGVIRT(IMediaStream, SetSameFormat)
         HRESULT ( STDMETHODCALLTYPE *SetSameFormat )( 
             __RPC__in IMediaStream * This,
             /* [annotation][in] */ 
@@ -430,6 +456,7 @@ EXTERN_C const IID IID_IMediaStream;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(IMediaStream, AllocateSample)
         HRESULT ( STDMETHODCALLTYPE *AllocateSample )( 
             __RPC__in IMediaStream * This,
             /* [annotation][in] */ 
@@ -437,6 +464,7 @@ EXTERN_C const IID IID_IMediaStream;
             /* [annotation][out] */ 
             _Out_  IStreamSample **ppSample);
         
+        DECLSPEC_XFGVIRT(IMediaStream, CreateSharedSample)
         HRESULT ( STDMETHODCALLTYPE *CreateSharedSample )( 
             __RPC__in IMediaStream * This,
             /* [annotation][in] */ 
@@ -446,6 +474,7 @@ EXTERN_C const IID IID_IMediaStream;
             /* [annotation][out] */ 
             _Out_  IStreamSample **ppNewSample);
         
+        DECLSPEC_XFGVIRT(IMediaStream, SendEndOfStream)
         HRESULT ( STDMETHODCALLTYPE *SendEndOfStream )( 
             __RPC__in IMediaStream * This,
             DWORD dwFlags);
@@ -560,6 +589,7 @@ EXTERN_C const IID IID_IStreamSample;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IStreamSample * This,
             /* [annotation][in] */ 
@@ -567,17 +597,21 @@ EXTERN_C const IID IID_IStreamSample;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IStreamSample * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IStreamSample * This);
         
+        DECLSPEC_XFGVIRT(IStreamSample, GetMediaStream)
         HRESULT ( STDMETHODCALLTYPE *GetMediaStream )( 
             IStreamSample * This,
             /* [annotation][in] */ 
             _In_  IMediaStream **ppMediaStream);
         
+        DECLSPEC_XFGVIRT(IStreamSample, GetSampleTimes)
         HRESULT ( STDMETHODCALLTYPE *GetSampleTimes )( 
             IStreamSample * This,
             /* [annotation][out] */ 
@@ -587,6 +621,7 @@ EXTERN_C const IID IID_IStreamSample;
             /* [annotation][out] */ 
             _Out_  STREAM_TIME *pCurrentTime);
         
+        DECLSPEC_XFGVIRT(IStreamSample, SetSampleTimes)
         HRESULT ( STDMETHODCALLTYPE *SetSampleTimes )( 
             IStreamSample * This,
             /* [annotation][in] */ 
@@ -594,6 +629,7 @@ EXTERN_C const IID IID_IStreamSample;
             /* [annotation][in] */ 
             _In_  const STREAM_TIME *pEndTime);
         
+        DECLSPEC_XFGVIRT(IStreamSample, Update)
         HRESULT ( STDMETHODCALLTYPE *Update )( 
             IStreamSample * This,
             /* [annotation][in] */ 
@@ -605,6 +641,7 @@ EXTERN_C const IID IID_IStreamSample;
             /* [annotation][in] */ 
             _In_  DWORD_PTR dwAPCData);
         
+        DECLSPEC_XFGVIRT(IStreamSample, CompletionStatus)
         HRESULT ( STDMETHODCALLTYPE *CompletionStatus )( 
             IStreamSample * This,
             /* [annotation][in] */ 

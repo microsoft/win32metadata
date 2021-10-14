@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -205,6 +213,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFunctionDiscoveryProvider * This,
             /* [annotation][in] */ 
@@ -212,12 +221,15 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFunctionDiscoveryProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFunctionDiscoveryProvider * This);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IFunctionDiscoveryProvider * This,
             /* [annotation][in] */ 
@@ -229,6 +241,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwStgAccessCapabilities);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, Query)
         HRESULT ( STDMETHODCALLTYPE *Query )( 
             __RPC__in IFunctionDiscoveryProvider * This,
             /* [annotation][in] */ 
@@ -236,9 +249,11 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
             /* [annotation][out] */ 
             _Out_  IFunctionInstanceCollection **ppIFunctionInstanceCollection);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, EndQuery)
         HRESULT ( STDMETHODCALLTYPE *EndQuery )( 
             __RPC__in IFunctionDiscoveryProvider * This);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstancePropertyStoreValidateAccess)
         HRESULT ( STDMETHODCALLTYPE *InstancePropertyStoreValidateAccess )( 
             __RPC__in IFunctionDiscoveryProvider * This,
             /* [annotation][in] */ 
@@ -248,6 +263,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
             /* [annotation][in] */ 
             _In_  const DWORD dwStgAccess);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstancePropertyStoreOpen)
         HRESULT ( STDMETHODCALLTYPE *InstancePropertyStoreOpen )( 
             __RPC__in IFunctionDiscoveryProvider * This,
             /* [annotation][in] */ 
@@ -259,6 +275,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
             /* [annotation][out] */ 
             _Out_  IPropertyStore **ppIPropertyStore);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstancePropertyStoreFlush)
         HRESULT ( STDMETHODCALLTYPE *InstancePropertyStoreFlush )( 
             __RPC__in IFunctionDiscoveryProvider * This,
             /* [annotation][in] */ 
@@ -266,6 +283,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
             /* [annotation][in] */ 
             _In_  INT_PTR iProviderInstanceContext);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstanceQueryService)
         HRESULT ( STDMETHODCALLTYPE *InstanceQueryService )( 
             __RPC__in IFunctionDiscoveryProvider * This,
             /* [annotation][in] */ 
@@ -279,6 +297,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  IUnknown **ppIUnknown);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProvider, InstanceReleased)
         HRESULT ( STDMETHODCALLTYPE *InstanceReleased )( 
             __RPC__in IFunctionDiscoveryProvider * This,
             /* [annotation][in] */ 
@@ -406,6 +425,7 @@ EXTERN_C const IID IID_IProviderProperties;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProviderProperties * This,
             /* [annotation][in] */ 
@@ -413,12 +433,15 @@ EXTERN_C const IID IID_IProviderProperties;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProviderProperties * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProviderProperties * This);
         
+        DECLSPEC_XFGVIRT(IProviderProperties, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IProviderProperties * This,
             /* [annotation][in] */ 
@@ -428,6 +451,7 @@ EXTERN_C const IID IID_IProviderProperties;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IProviderProperties, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in IProviderProperties * This,
             /* [annotation][in] */ 
@@ -439,6 +463,7 @@ EXTERN_C const IID IID_IProviderProperties;
             /* [annotation][out] */ 
             _Out_  PROPERTYKEY *pKey);
         
+        DECLSPEC_XFGVIRT(IProviderProperties, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IProviderProperties * This,
             /* [annotation][in] */ 
@@ -450,6 +475,7 @@ EXTERN_C const IID IID_IProviderProperties;
             /* [annotation][out] */ 
             _Out_  PROPVARIANT *ppropVar);
         
+        DECLSPEC_XFGVIRT(IProviderProperties, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IProviderProperties * This,
             /* [annotation][in] */ 
@@ -549,6 +575,7 @@ EXTERN_C const IID IID_IProviderPublishing;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProviderPublishing * This,
             /* [annotation][in] */ 
@@ -556,12 +583,15 @@ EXTERN_C const IID IID_IProviderPublishing;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProviderPublishing * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProviderPublishing * This);
         
+        DECLSPEC_XFGVIRT(IProviderPublishing, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IProviderPublishing * This,
             /* [annotation][in] */ 
@@ -573,6 +603,7 @@ EXTERN_C const IID IID_IProviderPublishing;
             /* [annotation][out] */ 
             _Out_  IFunctionInstance **ppIFunctionInstance);
         
+        DECLSPEC_XFGVIRT(IProviderPublishing, RemoveInstance)
         HRESULT ( STDMETHODCALLTYPE *RemoveInstance )( 
             __RPC__in IProviderPublishing * This,
             /* [annotation][in] */ 
@@ -668,6 +699,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This,
             /* [annotation][in] */ 
@@ -675,17 +707,21 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderFactory, CreatePropertyStore)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertyStore )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This,
             /* [annotation][out] */ 
             _Out_  IPropertyStore **ppIPropertyStore);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderFactory, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This,
             /* [annotation][unique][string][in] */ 
@@ -701,6 +737,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderFactory;
             /* [annotation][out] */ 
             _Out_  IFunctionInstance **ppIFunctionInstance);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderFactory, CreateFunctionInstanceCollection)
         HRESULT ( STDMETHODCALLTYPE *CreateFunctionInstanceCollection )( 
             __RPC__in IFunctionDiscoveryProviderFactory * This,
             /* [annotation][out] */ 
@@ -793,6 +830,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderQuery;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
             /* [annotation][in] */ 
@@ -800,12 +838,15 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderQuery;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderQuery, IsInstanceQuery)
         HRESULT ( STDMETHODCALLTYPE *IsInstanceQuery )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
             /* [annotation][out] */ 
@@ -813,6 +854,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderQuery;
             /* [annotation][string][out] */ 
             _Out_  WCHAR **ppszConstraintValue);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderQuery, IsSubcategoryQuery)
         HRESULT ( STDMETHODCALLTYPE *IsSubcategoryQuery )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
             /* [annotation][out] */ 
@@ -820,11 +862,13 @@ EXTERN_C const IID IID_IFunctionDiscoveryProviderQuery;
             /* [annotation][string][out] */ 
             _Out_  WCHAR **ppszConstraintValue);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderQuery, GetQueryConstraints)
         HRESULT ( STDMETHODCALLTYPE *GetQueryConstraints )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
             /* [annotation][out] */ 
             _Out_  IProviderQueryConstraintCollection **ppIProviderQueryConstraints);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryProviderQuery, GetPropertyConstraints)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyConstraints )( 
             __RPC__in IFunctionDiscoveryProviderQuery * This,
             /* [annotation][out] */ 
@@ -928,6 +972,7 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProviderQueryConstraintCollection * This,
             /* [annotation][in] */ 
@@ -935,17 +980,21 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProviderQueryConstraintCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProviderQueryConstraintCollection * This);
         
+        DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IProviderQueryConstraintCollection * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Get)
         HRESULT ( STDMETHODCALLTYPE *Get )( 
             __RPC__in IProviderQueryConstraintCollection * This,
             /* [annotation][string][in] */ 
@@ -953,6 +1002,7 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
             /* [annotation][string][out] */ 
             _Out_  WCHAR **ppszConstraintValue);
         
+        DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Item)
         HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IProviderQueryConstraintCollection * This,
             /* [annotation][in] */ 
@@ -962,6 +1012,7 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
             /* [annotation][string][out] */ 
             _Out_  WCHAR **ppszConstraintValue);
         
+        DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IProviderQueryConstraintCollection * This,
             /* [annotation][string][out] */ 
@@ -969,9 +1020,11 @@ EXTERN_C const IID IID_IProviderQueryConstraintCollection;
             /* [annotation][string][out] */ 
             _Out_  WCHAR **ppszConstraintValue);
         
+        DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IProviderQueryConstraintCollection * This);
         
+        DECLSPEC_XFGVIRT(IProviderQueryConstraintCollection, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IProviderQueryConstraintCollection * This);
         
@@ -1085,6 +1138,7 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
             /* [annotation][in] */ 
@@ -1092,17 +1146,21 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IProviderPropertyConstraintCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IProviderPropertyConstraintCollection * This);
         
+        DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwCount);
         
+        DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Get)
         HRESULT ( STDMETHODCALLTYPE *Get )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
             /* [annotation][in] */ 
@@ -1112,6 +1170,7 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwPropertyConstraint);
         
+        DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Item)
         HRESULT ( STDMETHODCALLTYPE *Item )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
             /* [annotation][in] */ 
@@ -1123,6 +1182,7 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwPropertyConstraint);
         
+        DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IProviderPropertyConstraintCollection * This,
             /* [annotation][out] */ 
@@ -1132,9 +1192,11 @@ EXTERN_C const IID IID_IProviderPropertyConstraintCollection;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwPropertyConstraint);
         
+        DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IProviderPropertyConstraintCollection * This);
         
+        DECLSPEC_XFGVIRT(IProviderPropertyConstraintCollection, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IProviderPropertyConstraintCollection * This);
         
@@ -1222,6 +1284,7 @@ EXTERN_C const IID IID_IFunctionDiscoveryServiceProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFunctionDiscoveryServiceProvider * This,
             /* [annotation][in] */ 
@@ -1229,12 +1292,15 @@ EXTERN_C const IID IID_IFunctionDiscoveryServiceProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFunctionDiscoveryServiceProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFunctionDiscoveryServiceProvider * This);
         
+        DECLSPEC_XFGVIRT(IFunctionDiscoveryServiceProvider, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IFunctionDiscoveryServiceProvider * This,
             /* [annotation][in] */ 

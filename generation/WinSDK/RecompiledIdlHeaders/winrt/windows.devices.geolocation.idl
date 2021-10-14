@@ -63,11 +63,15 @@ namespace Windows
 
             interface IGeocoordinateSatelliteData;
 
+            interface IGeocoordinateSatelliteData2;
+
             interface IGeocoordinateWithPoint;
 
             interface IGeocoordinateWithPositionData;
 
             interface IGeocoordinateWithPositionSourceTimestamp;
+
+            interface IGeocoordinateWithRemoteSource;
 
             interface IGeolocator;
 
@@ -391,6 +395,15 @@ namespace Windows
                 [propget] HRESULT VerticalDilutionOfPrecision([out] [retval] Windows.Foundation.IReference<DOUBLE>** ppValue);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+            [exclusiveto(Windows.Devices.Geolocation.GeocoordinateSatelliteData)]
+            [uuid(761C8CFD-A19D-5A51-80F5-71676115483E)]
+            interface IGeocoordinateSatelliteData2 : IInspectable
+            {
+                [propget] HRESULT GeometricDilutionOfPrecision([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+                [propget] HRESULT TimeDilutionOfPrecision([out] [retval] Windows.Foundation.IReference<DOUBLE>** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Devices.Geolocation.Geocoordinate)]
             [uuid(FEEA0525-D22C-4D46-B527-0B96066FC7DB)]
@@ -416,6 +429,14 @@ namespace Windows
             interface IGeocoordinateWithPositionSourceTimestamp : IInspectable
             {
                 [propget] HRESULT PositionSourceTimestamp([out] [retval] Windows.Foundation.IReference<Windows.Foundation.DateTime>** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 14.0)]
+            [exclusiveto(Windows.Devices.Geolocation.Geocoordinate)]
+            [uuid(397CEBD7-EE38-5F3B-8900-C4A7BC9CF953)]
+            interface IGeocoordinateWithRemoteSource : IInspectable
+            {
+                [propget] HRESULT IsRemoteSource([out] [retval] boolean* value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -651,6 +672,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.Devices.Geolocation.IGeocoordinateWithPositionData;
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.Devices.Geolocation.IGeocoordinateWithPoint;
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)] interface Windows.Devices.Geolocation.IGeocoordinateWithPositionSourceTimestamp;
+                [contract(Windows.Foundation.UniversalApiContract, 14.0)] interface Windows.Devices.Geolocation.IGeocoordinateWithRemoteSource;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -658,6 +680,7 @@ namespace Windows
             runtimeclass GeocoordinateSatelliteData
             {
                 [default] interface Windows.Devices.Geolocation.IGeocoordinateSatelliteData;
+                [contract(Windows.Foundation.UniversalApiContract, 12.0)] interface Windows.Devices.Geolocation.IGeocoordinateSatelliteData2;
             }
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]

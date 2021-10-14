@@ -14,3 +14,4 @@
 #include <msaatext.h>
 #include <ctfspui.h>
 #include <msctfmonitorapi.h>
+#include <tsattrs.h>

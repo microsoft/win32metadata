@@ -4,5 +4,8 @@
 <IncludeRoot>/shared/windef.h
 <IncludeRoot>/shared/winerror.h
 <IncludeRoot>/um/handleapi.h
+<IncludeRoot>/um/cierror.h
+<IncludeRoot>/um/mprerror.h
+<IncludeRoot>/um/winsdkver.h
 --namespace
 Windows.Win32.Foundation

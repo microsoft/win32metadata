@@ -643,7 +643,7 @@ namespace Windows
                 [propput] HRESULT Data([in] Windows.ApplicationModel.DataTransfer.DataPackage* value);
                 [propget] HRESULT Deadline([out] [retval] Windows.Foundation.DateTime* value);
                 HRESULT FailWithDisplayText([in] HSTRING value);
-                HRESULT GetDeferral([out] [retval] Windows.ApplicationModel.DataTransfer.DataRequestDeferral** value);
+                HRESULT GetDeferral([out] [retval] Windows.ApplicationModel.DataTransfer.DataRequestDeferral** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -667,10 +667,10 @@ namespace Windows
             [uuid(A5CAEE9B-8708-49D1-8D36-67D25A8DA00C)]
             interface IDataTransferManager : IInspectable
             {
-                [eventadd] HRESULT DataRequested([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.DataTransferManager*, Windows.ApplicationModel.DataTransfer.DataRequestedEventArgs*>* eventHandler, [out] [retval] EventRegistrationToken* eventCookie);
-                [eventremove] HRESULT DataRequested([in] EventRegistrationToken eventCookie);
-                [eventadd] HRESULT TargetApplicationChosen([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.DataTransferManager*, Windows.ApplicationModel.DataTransfer.TargetApplicationChosenEventArgs*>* eventHandler, [out] [retval] EventRegistrationToken* eventCookie);
-                [eventremove] HRESULT TargetApplicationChosen([in] EventRegistrationToken eventCookie);
+                [eventadd] HRESULT DataRequested([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.DataTransferManager*, Windows.ApplicationModel.DataTransfer.DataRequestedEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT DataRequested([in] EventRegistrationToken token);
+                [eventadd] HRESULT TargetApplicationChosen([in] Windows.Foundation.TypedEventHandler<Windows.ApplicationModel.DataTransfer.DataTransferManager*, Windows.ApplicationModel.DataTransfer.TargetApplicationChosenEventArgs*>* handler, [out] [retval] EventRegistrationToken* token);
+                [eventremove] HRESULT TargetApplicationChosen([in] EventRegistrationToken token);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -688,7 +688,7 @@ namespace Windows
             interface IDataTransferManagerStatics : IInspectable
             {
                 HRESULT ShowShareUI();
-                HRESULT GetForCurrentView([out] [retval] Windows.ApplicationModel.DataTransfer.DataTransferManager** value);
+                HRESULT GetForCurrentView([out] [retval] Windows.ApplicationModel.DataTransfer.DataTransferManager** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 3.0)]
@@ -696,7 +696,7 @@ namespace Windows
             [uuid(C54EC2EC-9F97-4D63-9868-395E271AD8F5)]
             interface IDataTransferManagerStatics2 : IInspectable
             {
-                HRESULT IsSupported([out] [retval] boolean* value);
+                HRESULT IsSupported([out] [retval] boolean* result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
@@ -777,7 +777,7 @@ namespace Windows
             {
                 [propget] HRESULT Providers([out] [retval] Windows.Foundation.Collections.IVector<Windows.ApplicationModel.DataTransfer.ShareProvider*>** value);
                 [propget] HRESULT Data([out] [retval] Windows.ApplicationModel.DataTransfer.DataPackageView** value);
-                HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** value);
+                HRESULT GetDeferral([out] [retval] Windows.Foundation.Deferral** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -974,6 +974,7 @@ namespace Windows
             [static(Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics, Windows.Foundation.UniversalApiContract, 1.0)]
             [static(Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics2, Windows.Foundation.UniversalApiContract, 3.0)]
             [static(Windows.ApplicationModel.DataTransfer.IDataTransferManagerStatics3, Windows.Foundation.UniversalApiContract, 5.0)]
+            [threading(both)]
             runtimeclass DataTransferManager
             {
                 [default] interface Windows.ApplicationModel.DataTransfer.IDataTransferManager;

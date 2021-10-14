@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_SHELL_SECURITYAPPMANAGERCONTRACT_VERSION)
@@ -109,6 +109,7 @@
 #include "windowscontracts.h"
 #include "Windows.Foundation.h"
 #include "Windows.ApplicationModel.Core.h"
+#include "Windows.UI.h"
 #include "Windows.UI.StartScreen.h"
 
 #if defined(__cplusplus) && !defined(CINTERFACE)
@@ -157,6 +158,51 @@ namespace ABI {
 #define __x_ABI_CWindows_CUI_CShell_CISecurityAppManager ABI::Windows::UI::Shell::ISecurityAppManager
 
 #endif // ____x_ABI_CWindows_CUI_CShell_CISecurityAppManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                interface IShareWindowCommandEventArgs;
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs ABI::Windows::UI::Shell::IShareWindowCommandEventArgs
+
+#endif // ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                interface IShareWindowCommandSource;
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource ABI::Windows::UI::Shell::IShareWindowCommandSource
+
+#endif // ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                interface IShareWindowCommandSourceStatics;
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics ABI::Windows::UI::Shell::IShareWindowCommandSourceStatics
+
+#endif // ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CShell_CITaskbarManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CShell_CITaskbarManager_FWD_DEFINED__
@@ -258,6 +304,55 @@ typedef IAsyncOperationCompletedHandler<bool> __FIAsyncOperationCompletedHandler
 
 namespace ABI {
     namespace Windows {
+        namespace UI {
+            namespace Shell {
+                class ShareWindowCommandSource;
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                class ShareWindowCommandEventArgs;
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_USE
+#define DEF___FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("e42513f4-d11b-511d-aedc-9f44ee28df04"))
+ITypedEventHandler<ABI::Windows::UI::Shell::ShareWindowCommandSource*, ABI::Windows::UI::Shell::ShareWindowCommandEventArgs*> : ITypedEventHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::Shell::ShareWindowCommandSource*, ABI::Windows::UI::Shell::IShareWindowCommandSource*>, ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::UI::Shell::ShareWindowCommandEventArgs*, ABI::Windows::UI::Shell::IShareWindowCommandEventArgs*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.TypedEventHandler`2<Windows.UI.Shell.ShareWindowCommandSource, Windows.UI.Shell.ShareWindowCommandEventArgs>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef ITypedEventHandler<ABI::Windows::UI::Shell::ShareWindowCommandSource*, ABI::Windows::UI::Shell::ShareWindowCommandEventArgs*> __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_t;
+#define __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs ABI::Windows::Foundation::__FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+namespace ABI {
+    namespace Windows {
         namespace ApplicationModel {
             namespace Core {
                 class AppListEntry;
@@ -330,6 +425,14 @@ namespace ABI {
 namespace ABI {
     namespace Windows {
         namespace UI {
+            typedef struct WindowId WindowId;
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
             namespace Shell {
                 typedef enum SecurityAppKind : int SecurityAppKind;
             } /* Shell */
@@ -352,6 +455,16 @@ namespace ABI {
         namespace UI {
             namespace Shell {
                 typedef enum SecurityAppSubstatus : int SecurityAppSubstatus;
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                typedef enum ShareWindowCommand : int ShareWindowCommand;
             } /* Shell */
         } /* UI */
     } /* Windows */
@@ -436,6 +549,30 @@ namespace ABI {
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_UI_SHELL_SECURITYAPPMANAGERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.UI.Shell.ShareWindowCommand
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                enum ShareWindowCommand : int
+                {
+                    ShareWindowCommand_None = 0,
+                    ShareWindowCommand_StartSharing = 1,
+                    ShareWindowCommand_StopSharing = 2,
+                };
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -556,6 +693,134 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CShell_CISecurityAppManager;
 #endif /* !defined(____x_ABI_CWindows_CUI_CShell_CISecurityAppManager_INTERFACE_DEFINED__) */
 #endif // WINDOWS_UI_SHELL_SECURITYAPPMANAGERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.UI.Shell.IShareWindowCommandEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Shell.ShareWindowCommandEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Shell_IShareWindowCommandEventArgs[] = L"Windows.UI.Shell.IShareWindowCommandEventArgs";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                MIDL_INTERFACE("4578dc09-a523-5756-a995-e4feb991fff0")
+                IShareWindowCommandEventArgs : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_WindowId(
+                        ABI::Windows::UI::WindowId* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Command(
+                        ABI::Windows::UI::Shell::ShareWindowCommand* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_Command(
+                        ABI::Windows::UI::Shell::ShareWindowCommand value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IShareWindowCommandEventArgs = _uuidof(IShareWindowCommandEventArgs);
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.Shell.IShareWindowCommandSource
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Shell.ShareWindowCommandSource
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Shell_IShareWindowCommandSource[] = L"Windows.UI.Shell.IShareWindowCommandSource";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                MIDL_INTERFACE("cb3b7ae3-6b9c-561e-bccc-61e68e0abfef")
+                IShareWindowCommandSource : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE Start(void) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE Stop(void) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE ReportCommandChanged(void) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_CommandRequested(
+                        __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_CommandRequested(
+                        EventRegistrationToken token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE add_CommandInvoked(
+                        __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs* handler,
+                        EventRegistrationToken* token
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE remove_CommandInvoked(
+                        EventRegistrationToken token
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IShareWindowCommandSource = _uuidof(IShareWindowCommandSource);
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource;
+#endif /* !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.Shell.IShareWindowCommandSourceStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Shell.ShareWindowCommandSource
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Shell_IShareWindowCommandSourceStatics[] = L"Windows.UI.Shell.IShareWindowCommandSourceStatics";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Shell {
+                MIDL_INTERFACE("b0eb6656-9cac-517c-b6c7-8ef715084295")
+                IShareWindowCommandSourceStatics : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetForCurrentView(
+                        ABI::Windows::UI::Shell::IShareWindowCommandSource** result
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IShareWindowCommandSourceStatics = _uuidof(IShareWindowCommandSourceStatics);
+            } /* Shell */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -741,6 +1006,49 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.UI.Shell.ShareWindowCommandEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.Shell.IShareWindowCommandEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_Shell_ShareWindowCommandEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_UI_Shell_ShareWindowCommandEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Shell_ShareWindowCommandEventArgs[] = L"Windows.UI.Shell.ShareWindowCommandEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.UI.Shell.ShareWindowCommandSource
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Shell.IShareWindowCommandSourceStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.Shell.IShareWindowCommandSource ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_Shell_ShareWindowCommandSource_DEFINED
+#define RUNTIMECLASS_Windows_UI_Shell_ShareWindowCommandSource_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Shell_ShareWindowCommandSource[] = L"Windows.UI.Shell.ShareWindowCommandSource";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.UI.Shell.TaskbarManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 5.0
@@ -783,6 +1091,24 @@ typedef interface __x_ABI_CWindows_CUI_CShell_CIAdaptiveCardBuilderStatics __x_A
 typedef interface __x_ABI_CWindows_CUI_CShell_CISecurityAppManager __x_ABI_CWindows_CUI_CShell_CISecurityAppManager;
 
 #endif // ____x_ABI_CWindows_CUI_CShell_CISecurityAppManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs;
+
+#endif // ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource;
+
+#endif // ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics;
+
+#endif // ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CShell_CITaskbarManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CShell_CITaskbarManager_FWD_DEFINED__
@@ -927,6 +1253,57 @@ interface __FIAsyncOperationCompletedHandler_1_boolean
 
 #endif // ____FIAsyncOperationCompletedHandler_1_boolean_INTERFACE_DEFINED__
 
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_INTERFACE_DEFINED__)
+#define ____FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_INTERFACE_DEFINED__
+
+typedef interface __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs;
+
+typedef struct __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs* This,
+        __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* sender,
+        __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* args);
+
+    END_INTERFACE
+} __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgsVtbl;
+
+interface __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs
+{
+    CONST_VTBL struct __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_Invoke(This, sender, args) \
+    ((This)->lpVtbl->Invoke(This, sender, args))
+
+#endif /* COBJMACROS */
+
+#endif // ____FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry __x_ABI_CWindows_CApplicationModel_CCore_CIAppListEntry;
@@ -945,11 +1322,15 @@ typedef interface __x_ABI_CWindows_CUI_CStartScreen_CISecondaryTile __x_ABI_CWin
 
 #endif // ____x_ABI_CWindows_CUI_CStartScreen_CISecondaryTile_FWD_DEFINED__
 
+typedef struct __x_ABI_CWindows_CUI_CWindowId __x_ABI_CWindows_CUI_CWindowId;
+
 typedef enum __x_ABI_CWindows_CUI_CShell_CSecurityAppKind __x_ABI_CWindows_CUI_CShell_CSecurityAppKind;
 
 typedef enum __x_ABI_CWindows_CUI_CShell_CSecurityAppState __x_ABI_CWindows_CUI_CShell_CSecurityAppState;
 
 typedef enum __x_ABI_CWindows_CUI_CShell_CSecurityAppSubstatus __x_ABI_CWindows_CUI_CShell_CSecurityAppSubstatus;
+
+typedef enum __x_ABI_CWindows_CUI_CShell_CShareWindowCommand __x_ABI_CWindows_CUI_CShell_CShareWindowCommand;
 
 /*
  *
@@ -996,6 +1377,22 @@ enum __x_ABI_CWindows_CUI_CShell_CSecurityAppSubstatus
     SecurityAppSubstatus_ActionNeeded = 3,
 };
 #endif // WINDOWS_UI_SHELL_SECURITYAPPMANAGERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Struct Windows.UI.Shell.ShareWindowCommand
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CUI_CShell_CShareWindowCommand
+{
+    ShareWindowCommand_None = 0,
+    ShareWindowCommand_StartSharing = 1,
+    ShareWindowCommand_StopSharing = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -1219,6 +1616,252 @@ interface __x_ABI_CWindows_CUI_CShell_CISecurityAppManager
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CShell_CISecurityAppManager;
 #endif /* !defined(____x_ABI_CWindows_CUI_CShell_CISecurityAppManager_INTERFACE_DEFINED__) */
 #endif // WINDOWS_UI_SHELL_SECURITYAPPMANAGERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Interface Windows.UI.Shell.IShareWindowCommandEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Shell.ShareWindowCommandEventArgs
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Shell_IShareWindowCommandEventArgs[] = L"Windows.UI.Shell.IShareWindowCommandEventArgs";
+typedef struct __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_WindowId)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This,
+        struct __x_ABI_CWindows_CUI_CWindowId* value);
+    HRESULT (STDMETHODCALLTYPE* get_Command)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This,
+        enum __x_ABI_CWindows_CUI_CShell_CShareWindowCommand* value);
+    HRESULT (STDMETHODCALLTYPE* put_Command)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs* This,
+        enum __x_ABI_CWindows_CUI_CShell_CShareWindowCommand value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgsVtbl;
+
+interface __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_get_WindowId(This, value) \
+    ((This)->lpVtbl->get_WindowId(This, value))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_get_Command(This, value) \
+    ((This)->lpVtbl->get_Command(This, value))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_put_Command(This, value) \
+    ((This)->lpVtbl->put_Command(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs;
+#endif /* !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandEventArgs_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.Shell.IShareWindowCommandSource
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Shell.ShareWindowCommandSource
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Shell_IShareWindowCommandSource[] = L"Windows.UI.Shell.IShareWindowCommandSource";
+typedef struct __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* Start)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This);
+    HRESULT (STDMETHODCALLTYPE* Stop)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This);
+    HRESULT (STDMETHODCALLTYPE* ReportCommandChanged)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This);
+    HRESULT (STDMETHODCALLTYPE* add_CommandRequested)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This,
+        __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_CommandRequested)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This,
+        EventRegistrationToken token);
+    HRESULT (STDMETHODCALLTYPE* add_CommandInvoked)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This,
+        __FITypedEventHandler_2_Windows__CUI__CShell__CShareWindowCommandSource_Windows__CUI__CShell__CShareWindowCommandEventArgs* handler,
+        EventRegistrationToken* token);
+    HRESULT (STDMETHODCALLTYPE* remove_CommandInvoked)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource* This,
+        EventRegistrationToken token);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceVtbl;
+
+interface __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_Start(This) \
+    ((This)->lpVtbl->Start(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_Stop(This) \
+    ((This)->lpVtbl->Stop(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_ReportCommandChanged(This) \
+    ((This)->lpVtbl->ReportCommandChanged(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_add_CommandRequested(This, handler, token) \
+    ((This)->lpVtbl->add_CommandRequested(This, handler, token))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_remove_CommandRequested(This, token) \
+    ((This)->lpVtbl->remove_CommandRequested(This, token))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_add_CommandInvoked(This, handler, token) \
+    ((This)->lpVtbl->add_CommandInvoked(This, handler, token))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_remove_CommandInvoked(This, token) \
+    ((This)->lpVtbl->remove_CommandInvoked(This, token))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource;
+#endif /* !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.UI.Shell.IShareWindowCommandSourceStatics
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Shell.ShareWindowCommandSource
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Shell_IShareWindowCommandSourceStatics[] = L"Windows.UI.Shell.IShareWindowCommandSourceStatics";
+typedef struct __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStaticsVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetForCurrentView)(__x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics* This,
+        __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSource** result);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStaticsVtbl;
+
+interface __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStaticsVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_GetForCurrentView(This, result) \
+    ((This)->lpVtbl->GetForCurrentView(This, result))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics;
+#endif /* !defined(____x_ABI_CWindows_CUI_CShell_CIShareWindowCommandSourceStatics_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -1514,6 +2157,49 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Shell_SecurityAppManager[] = L"Windows.UI.Shell.SecurityAppManager";
 #endif
 #endif // WINDOWS_UI_SHELL_SECURITYAPPMANAGERCONTRACT_VERSION >= 0x10000
+
+/*
+ *
+ * Class Windows.UI.Shell.ShareWindowCommandEventArgs
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.Shell.IShareWindowCommandEventArgs ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_Shell_ShareWindowCommandEventArgs_DEFINED
+#define RUNTIMECLASS_Windows_UI_Shell_ShareWindowCommandEventArgs_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Shell_ShareWindowCommandEventArgs[] = L"Windows.UI.Shell.ShareWindowCommandEventArgs";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Class Windows.UI.Shell.ShareWindowCommandSource
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Shell.IShareWindowCommandSourceStatics interface starting with version 13.0 of the Windows.Foundation.UniversalApiContract API contract
+ *
+ * Class implements the following interfaces:
+ *    Windows.UI.Shell.IShareWindowCommandSource ** Default Interface **
+ *
+ * Class Threading Model:  Both Single and Multi Threaded Apartment
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_UI_Shell_ShareWindowCommandSource_DEFINED
+#define RUNTIMECLASS_Windows_UI_Shell_ShareWindowCommandSource_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_UI_Shell_ShareWindowCommandSource[] = L"Windows.UI.Shell.ShareWindowCommandSource";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *

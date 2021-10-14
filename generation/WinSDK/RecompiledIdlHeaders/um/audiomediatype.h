@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -121,6 +129,7 @@ EXTERN_C const IID IID_IAudioMediaType;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioMediaType * This,
             /* [annotation][in] */ 
@@ -128,17 +137,21 @@ EXTERN_C const IID IID_IAudioMediaType;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioMediaType * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioMediaType * This);
         
+        DECLSPEC_XFGVIRT(IAudioMediaType, IsCompressedFormat)
         HRESULT ( STDMETHODCALLTYPE *IsCompressedFormat )( 
             IAudioMediaType * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfCompressed);
         
+        DECLSPEC_XFGVIRT(IAudioMediaType, IsEqual)
         HRESULT ( STDMETHODCALLTYPE *IsEqual )( 
             IAudioMediaType * This,
             /* [annotation][in] */ 
@@ -146,9 +159,11 @@ EXTERN_C const IID IID_IAudioMediaType;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IAudioMediaType, GetAudioFormat)
         const WAVEFORMATEX *( STDMETHODCALLTYPE *GetAudioFormat )( 
             IAudioMediaType * This);
         
+        DECLSPEC_XFGVIRT(IAudioMediaType, GetUncompressedAudioFormat)
         HRESULT ( STDMETHODCALLTYPE *GetUncompressedAudioFormat )( 
             IAudioMediaType * This,
             /* [annotation][out] */ 

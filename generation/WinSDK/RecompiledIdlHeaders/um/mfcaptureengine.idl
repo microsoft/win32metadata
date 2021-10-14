@@ -78,6 +78,9 @@ enum
     MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_RECORD   = 0xFFFFFFF9,    //The preferred stream for recording video
     MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_PHOTO   = 0xFFFFFFF8,//The first independent photo stream if present, or else the same stream chosen by MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_VIDEO_PREVIEW 
     MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_AUDIO   = 0xFFFFFFF7,//The first available audio stream
+#if(NTDDI_VERSION > NTDDI_WIN10_FE)
+    MF_CAPTURE_ENGINE_PREFERRED_SOURCE_STREAM_FOR_METADATA = 0xFFFFFFF6,//The first available metadata stream
+#endif
     MF_CAPTURE_ENGINE_MEDIASOURCE          = 0xFFFFFFFF,
 };
 
@@ -115,7 +118,13 @@ typedef enum MF_CAPTURE_ENGINE_STREAM_CATEGORY
      /// <summary>
     /// Unsupported stream
     /// </summary>
-    MF_CAPTURE_ENGINE_STREAM_CATEGORY_UNSUPPORTED   =  0x00000005
+    MF_CAPTURE_ENGINE_STREAM_CATEGORY_UNSUPPORTED   =  0x00000005,
+#if(NTDDI_VERSION > NTDDI_WIN10_FE)
+    /// <summary>
+    /// Video Metadata stream
+    /// </summary>
+    MF_CAPTURE_ENGINE_STREAM_CATEGORY_METADATA   =  0x00000006
+#endif
 }MF_CAPTURE_ENGINE_STREAM_CATEGORY;
 
 
@@ -149,6 +158,20 @@ typedef enum MF_CAPTURE_ENGINE_MEDIA_CATEGORY_TYPE
     /// Speech capture category
     /// </summary>
     MF_CAPTURE_ENGINE_MEDIA_CATEGORY_TYPE_SPEECH = 4,
+#if NTDDI_VERSION >= NTDDI_WIN10_FE
+    /// <summary>
+    /// Capture Audio located in the 'far field' for the purpose of speech recognition
+    /// </summary>
+    MF_CAPTURE_ENGINE_MEDIA_CATEGORY_TYPE_FARFIELDSPEECH = 5,
+    /// <summary>
+    /// Consistent speech processing for the captured Audio. Used for Machine Learning
+    /// </summary>
+    MF_CAPTURE_ENGINE_MEDIA_CATEGORY_TYPE_UNIFORMSPEECH = 6,
+    /// <summary>
+    /// Capture Audio with the intent of enabling dictation or typing by voice
+    /// </summary>
+    MF_CAPTURE_ENGINE_MEDIA_CATEGORY_TYPE_VOICETYPING = 7,
+#endif 
 }MF_CAPTURE_ENGINE_MEDIA_CATEGORY_TYPE;
 
 

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -286,6 +294,7 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeServiceCallback * This,
             /* [annotation][in] */ 
@@ -293,12 +302,15 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVisualTreeServiceCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVisualTreeServiceCallback * This);
         
+        DECLSPEC_XFGVIRT(IVisualTreeServiceCallback, OnVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *OnVisualTreeChange )( 
             __RPC__in IVisualTreeServiceCallback * This,
             /* [annotation][in] */ 
@@ -377,6 +389,7 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeServiceCallback2 * This,
             /* [annotation][in] */ 
@@ -384,12 +397,15 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVisualTreeServiceCallback2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVisualTreeServiceCallback2 * This);
         
+        DECLSPEC_XFGVIRT(IVisualTreeServiceCallback, OnVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *OnVisualTreeChange )( 
             __RPC__in IVisualTreeServiceCallback2 * This,
             /* [annotation][in] */ 
@@ -399,6 +415,7 @@ EXTERN_C const IID IID_IVisualTreeServiceCallback2;
             /* [annotation][in] */ 
             _In_  VisualMutationType mutationType);
         
+        DECLSPEC_XFGVIRT(IVisualTreeServiceCallback2, OnElementStateChanged)
         HRESULT ( STDMETHODCALLTYPE *OnElementStateChanged )( 
             __RPC__in IVisualTreeServiceCallback2 * This,
             /* [annotation][in] */ 
@@ -555,6 +572,7 @@ EXTERN_C const IID IID_IVisualTreeService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -562,22 +580,27 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVisualTreeService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVisualTreeService * This);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, AdviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *AdviseVisualTreeChange )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
             _In_  IVisualTreeServiceCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, UnadviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *UnadviseVisualTreeChange )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
             _In_  IVisualTreeServiceCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetEnums)
         HRESULT ( STDMETHODCALLTYPE *GetEnums )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][out] */ 
@@ -585,6 +608,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pCount)  EnumType **ppEnums);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -594,6 +618,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][retval][out] */ 
             _Out_retval_  InstanceHandle *pInstanceHandle);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetPropertyValuesChain)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValuesChain )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -607,6 +632,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pPropertyCount)  PropertyChainValue **ppPropertyValues);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -616,6 +642,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][in] */ 
             _In_  unsigned int propertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, ClearProperty)
         HRESULT ( STDMETHODCALLTYPE *ClearProperty )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -623,6 +650,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][in] */ 
             _In_  unsigned int propertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionCount)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionCount )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -630,6 +658,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][out] */ 
             _Out_  unsigned int *pCollectionSize);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionElements)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionElements )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -641,6 +670,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pElementCount)  CollectionElementValue **ppElementValues);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, AddChild)
         HRESULT ( STDMETHODCALLTYPE *AddChild )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -650,6 +680,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][in] */ 
             _In_  unsigned int index);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, RemoveChild)
         HRESULT ( STDMETHODCALLTYPE *RemoveChild )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -657,6 +688,7 @@ EXTERN_C const IID IID_IVisualTreeService;
             /* [annotation][in] */ 
             _In_  unsigned int index);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, ClearChildren)
         HRESULT ( STDMETHODCALLTYPE *ClearChildren )( 
             __RPC__in IVisualTreeService * This,
             /* [annotation][in] */ 
@@ -798,6 +830,7 @@ EXTERN_C const IID IID_IXamlDiagnostics;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][in] */ 
@@ -805,27 +838,33 @@ EXTERN_C const IID IID_IXamlDiagnostics;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXamlDiagnostics * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXamlDiagnostics * This);
         
+        DECLSPEC_XFGVIRT(IXamlDiagnostics, GetDispatcher)
         HRESULT ( STDMETHODCALLTYPE *GetDispatcher )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IInspectable **ppDispatcher);
         
+        DECLSPEC_XFGVIRT(IXamlDiagnostics, GetUiLayer)
         HRESULT ( STDMETHODCALLTYPE *GetUiLayer )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IInspectable **ppLayer);
         
+        DECLSPEC_XFGVIRT(IXamlDiagnostics, GetApplication)
         HRESULT ( STDMETHODCALLTYPE *GetApplication )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IInspectable **ppApplication);
         
+        DECLSPEC_XFGVIRT(IXamlDiagnostics, GetIInspectableFromHandle)
         HRESULT ( STDMETHODCALLTYPE *GetIInspectableFromHandle )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][in] */ 
@@ -833,6 +872,7 @@ EXTERN_C const IID IID_IXamlDiagnostics;
             /* [annotation][retval][out] */ 
             _Out_retval_  IInspectable **ppInstance);
         
+        DECLSPEC_XFGVIRT(IXamlDiagnostics, GetHandleFromIInspectable)
         HRESULT ( STDMETHODCALLTYPE *GetHandleFromIInspectable )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][in] */ 
@@ -840,6 +880,7 @@ EXTERN_C const IID IID_IXamlDiagnostics;
             /* [annotation][retval][out] */ 
             _Out_retval_  InstanceHandle *pHandle);
         
+        DECLSPEC_XFGVIRT(IXamlDiagnostics, HitTest)
         HRESULT ( STDMETHODCALLTYPE *HitTest )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][in] */ 
@@ -849,6 +890,7 @@ EXTERN_C const IID IID_IXamlDiagnostics;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pCount)  InstanceHandle **ppInstanceHandles);
         
+        DECLSPEC_XFGVIRT(IXamlDiagnostics, RegisterInstance)
         HRESULT ( STDMETHODCALLTYPE *RegisterInstance )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][in] */ 
@@ -856,6 +898,7 @@ EXTERN_C const IID IID_IXamlDiagnostics;
             /* [annotation][retval][out] */ 
             _Out_retval_  InstanceHandle *pInstanceHandle);
         
+        DECLSPEC_XFGVIRT(IXamlDiagnostics, GetInitializationData)
         HRESULT ( STDMETHODCALLTYPE *GetInitializationData )( 
             __RPC__in IXamlDiagnostics * This,
             /* [annotation][retval][out] */ 
@@ -965,6 +1008,7 @@ EXTERN_C const IID IID_IBitmapData;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBitmapData * This,
             /* [annotation][in] */ 
@@ -972,12 +1016,15 @@ EXTERN_C const IID IID_IBitmapData;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBitmapData * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBitmapData * This);
         
+        DECLSPEC_XFGVIRT(IBitmapData, CopyBytesTo)
         HRESULT ( STDMETHODCALLTYPE *CopyBytesTo )( 
             __RPC__in IBitmapData * This,
             /* [annotation][in] */ 
@@ -989,16 +1036,19 @@ EXTERN_C const IID IID_IBitmapData;
             /* [annotation][out] */ 
             _Out_  unsigned int *numberOfBytesCopied);
         
+        DECLSPEC_XFGVIRT(IBitmapData, GetStride)
         HRESULT ( STDMETHODCALLTYPE *GetStride )( 
             __RPC__in IBitmapData * This,
             /* [annotation][out] */ 
             _Out_  unsigned int *pStride);
         
+        DECLSPEC_XFGVIRT(IBitmapData, GetBitmapDescription)
         HRESULT ( STDMETHODCALLTYPE *GetBitmapDescription )( 
             __RPC__in IBitmapData * This,
             /* [annotation][out] */ 
             _Out_  BitmapDescription *pBitmapDescription);
         
+        DECLSPEC_XFGVIRT(IBitmapData, GetSourceBitmapDescription)
         HRESULT ( STDMETHODCALLTYPE *GetSourceBitmapDescription )( 
             __RPC__in IBitmapData * This,
             /* [annotation][out] */ 
@@ -1110,6 +1160,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1117,22 +1168,27 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVisualTreeService2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVisualTreeService2 * This);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, AdviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *AdviseVisualTreeChange )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
             _In_  IVisualTreeServiceCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, UnadviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *UnadviseVisualTreeChange )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
             _In_  IVisualTreeServiceCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetEnums)
         HRESULT ( STDMETHODCALLTYPE *GetEnums )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][out] */ 
@@ -1140,6 +1196,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pCount)  EnumType **ppEnums);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1149,6 +1206,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][retval][out] */ 
             _Out_retval_  InstanceHandle *pInstanceHandle);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetPropertyValuesChain)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValuesChain )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1162,6 +1220,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pPropertyCount)  PropertyChainValue **ppPropertyValues);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1171,6 +1230,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][in] */ 
             _In_  unsigned int propertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, ClearProperty)
         HRESULT ( STDMETHODCALLTYPE *ClearProperty )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1178,6 +1238,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][in] */ 
             _In_  unsigned int propertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionCount)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionCount )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1185,6 +1246,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][out] */ 
             _Out_  unsigned int *pCollectionSize);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionElements)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionElements )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1196,6 +1258,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pElementCount)  CollectionElementValue **ppElementValues);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, AddChild)
         HRESULT ( STDMETHODCALLTYPE *AddChild )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1205,6 +1268,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][in] */ 
             _In_  unsigned int index);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, RemoveChild)
         HRESULT ( STDMETHODCALLTYPE *RemoveChild )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1212,11 +1276,13 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][in] */ 
             _In_  unsigned int index);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, ClearChildren)
         HRESULT ( STDMETHODCALLTYPE *ClearChildren )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
             _In_  InstanceHandle parent);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService2, GetPropertyIndex)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyIndex )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1226,6 +1292,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][out] */ 
             _Out_  unsigned int *pPropertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService2, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1235,6 +1302,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][out] */ 
             _Out_  InstanceHandle *pValue);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService2, ReplaceResource)
         HRESULT ( STDMETHODCALLTYPE *ReplaceResource )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1244,6 +1312,7 @@ EXTERN_C const IID IID_IVisualTreeService2;
             /* [annotation][in] */ 
             _In_  InstanceHandle newValue);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService2, RenderTargetBitmap)
         HRESULT ( STDMETHODCALLTYPE *RenderTargetBitmap )( 
             __RPC__in IVisualTreeService2 * This,
             /* [annotation][in] */ 
@@ -1398,6 +1467,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1405,22 +1475,27 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVisualTreeService3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVisualTreeService3 * This);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, AdviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *AdviseVisualTreeChange )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
             _In_  IVisualTreeServiceCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, UnadviseVisualTreeChange)
         HRESULT ( STDMETHODCALLTYPE *UnadviseVisualTreeChange )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
             _In_  IVisualTreeServiceCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetEnums)
         HRESULT ( STDMETHODCALLTYPE *GetEnums )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][out] */ 
@@ -1428,6 +1503,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pCount)  EnumType **ppEnums);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, CreateInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateInstance )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1437,6 +1513,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][retval][out] */ 
             _Out_retval_  InstanceHandle *pInstanceHandle);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetPropertyValuesChain)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyValuesChain )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1450,6 +1527,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pPropertyCount)  PropertyChainValue **ppPropertyValues);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1459,6 +1537,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][in] */ 
             _In_  unsigned int propertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, ClearProperty)
         HRESULT ( STDMETHODCALLTYPE *ClearProperty )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1466,6 +1545,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][in] */ 
             _In_  unsigned int propertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionCount)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionCount )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1473,6 +1553,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][out] */ 
             _Out_  unsigned int *pCollectionSize);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, GetCollectionElements)
         HRESULT ( STDMETHODCALLTYPE *GetCollectionElements )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1484,6 +1565,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*pElementCount)  CollectionElementValue **ppElementValues);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, AddChild)
         HRESULT ( STDMETHODCALLTYPE *AddChild )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1493,6 +1575,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][in] */ 
             _In_  unsigned int index);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, RemoveChild)
         HRESULT ( STDMETHODCALLTYPE *RemoveChild )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1500,11 +1583,13 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][in] */ 
             _In_  unsigned int index);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService, ClearChildren)
         HRESULT ( STDMETHODCALLTYPE *ClearChildren )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
             _In_  InstanceHandle parent);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService2, GetPropertyIndex)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyIndex )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1514,6 +1599,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][out] */ 
             _Out_  unsigned int *pPropertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService2, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1523,6 +1609,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][out] */ 
             _Out_  InstanceHandle *pValue);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService2, ReplaceResource)
         HRESULT ( STDMETHODCALLTYPE *ReplaceResource )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1532,6 +1619,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][in] */ 
             _In_  InstanceHandle newValue);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService2, RenderTargetBitmap)
         HRESULT ( STDMETHODCALLTYPE *RenderTargetBitmap )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1545,6 +1633,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][out] */ 
             _Out_  IBitmapData **ppBitmapData);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService3, ResolveResource)
         HRESULT ( STDMETHODCALLTYPE *ResolveResource )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1556,6 +1645,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][in] */ 
             _In_  unsigned int propertyIndex);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService3, GetDictionaryItem)
         HRESULT ( STDMETHODCALLTYPE *GetDictionaryItem )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1567,6 +1657,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][out] */ 
             _Out_  InstanceHandle *resourceHandle);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService3, AddDictionaryItem)
         HRESULT ( STDMETHODCALLTYPE *AddDictionaryItem )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 
@@ -1576,6 +1667,7 @@ EXTERN_C const IID IID_IVisualTreeService3;
             /* [annotation][in] */ 
             _In_  InstanceHandle resourceHandle);
         
+        DECLSPEC_XFGVIRT(IVisualTreeService3, RemoveDictionaryItem)
         HRESULT ( STDMETHODCALLTYPE *RemoveDictionaryItem )( 
             __RPC__in IVisualTreeService3 * This,
             /* [annotation][in] */ 

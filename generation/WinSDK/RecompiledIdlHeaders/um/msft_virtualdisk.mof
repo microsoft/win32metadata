@@ -276,6 +276,16 @@ class MSFT_VirtualDisk : MSFT_StorageObject {
         )]
     Boolean IsManualAttach;
 
+    [Read, Description(
+        "This parameter indicates the maximum IOPS supported by the virtual disk."
+        )]
+    UInt64 MaxIops;
+
+    [Read, Description(
+        "This parameter indicates the maximum IO bandwidth supported by the virtual disk."
+        )]
+    UInt64 MaxIoBandwidth;
+
     [Read]
     Boolean IsDeduplicationEnabled;
 
@@ -1032,6 +1042,12 @@ class MSFT_VirtualDisk : MSFT_StorageObject {
 
         [In]
         UInt64 Interleave,
+
+        [In]
+        UInt64 MaxIops,
+
+        [In]
+        UInt64 MaxIoBandwidth,
 
         [Out, EmbeddedInstance("MSFT_StorageExtendedStatus")]
         String ExtendedStatus

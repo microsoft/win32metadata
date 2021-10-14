@@ -87,6 +87,44 @@ DEFINE_GUID(GUID_DEVINTERFACE_IPPUSB_PRINT, 0xf2f40381, 0xf46d, 0x4e51, 0xbc, 0x
                                                       METHOD_BUFFERED,  \
                                                       FILE_ANY_ACCESS)
 
+//
+// Set the port number for this interface.
+//
+#define IOCTL_USBPRINT_SET_PORT_NUMBER       CTL_CODE(FILE_DEVICE_UNKNOWN,  \
+                                                   USBPRINT_IOCTL_INDEX+20,\
+                                                   METHOD_BUFFERED,  \
+                                                   FILE_ANY_ACCESS)
+
+//
+// Mark whether the MSIPP compat id should be added.
+//
+#define IOCTL_USBPRINT_ADD_MSIPP_COMPAT_ID   CTL_CODE(FILE_DEVICE_UNKNOWN,  \
+                                                   USBPRINT_IOCTL_INDEX+21,\
+                                                   METHOD_BUFFERED,  \
+                                                   FILE_ANY_ACCESS)
+
+//
+// Set the device id string based on the specified 1284 id string.
+//
+#define IOCTL_USBPRINT_SET_DEVICE_ID         CTL_CODE(FILE_DEVICE_UNKNOWN,  \
+                                                   USBPRINT_IOCTL_INDEX+22,\
+                                                   METHOD_BUFFERED,  \
+                                                   FILE_ANY_ACCESS)
+
+//
+// Add the child devnode which informs PNP printer driver matching.
+//
+#define IOCTL_USBPRINT_ADD_CHILD_DEVICE      CTL_CODE(FILE_DEVICE_UNKNOWN,  \
+                                                   USBPRINT_IOCTL_INDEX+23,\
+                                                   METHOD_BUFFERED,  \
+                                                   FILE_ANY_ACCESS)
+
+#define IOCTL_USBPRINT_CYCLE_PORT            CTL_CODE(FILE_DEVICE_UNKNOWN,  \
+                                                   USBPRINT_IOCTL_INDEX+24,\
+                                                   METHOD_BUFFERED,  \
+                                                   FILE_ANY_ACCESS)
+
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 

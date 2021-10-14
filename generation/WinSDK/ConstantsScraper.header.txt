@@ -10,3 +10,19 @@ using static Windows.Win32.UI.WindowsAndMessaging.Apis; // For WM_USER
 using static Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS; // For FILE_* constants
 using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE; // For MAKE_HRESULT constants
 using static Windows.Win32.Graphics.Direct3D9.D3DFORMAT; // For D3DFMT_* constants
+using static Windows.Win32.System.OleAutomation.Apis; // Various constants
+using static Windows.Win32.UI.Controls.Apis; // Various constants
+using static Windows.Win32.System.Com.Apis; // Various constants
+using static Windows.Win32.System.SystemInformation.Apis; // Various constants
+using static Windows.Win32.NetworkManagement.Ndis.Apis; // Various constants
+using static Windows.Win32.Devices.DeviceAccess.Apis; // Various constants
+using static Windows.Win32.Networking.WinHttp.Apis; // Various constants
+using static Windows.Win32.System.Registry.Apis; // Various constants
+using static Windows.Win32.Data.Xml.MsXml.Apis; // Various constants
+using static Windows.Win32.System.Kernel.Apis; // Various constants
+using static Windows.Win32.System.Threading.Apis; // Various constants
+using static Windows.Win32.NetworkManagement.Dns.Apis; // Various constants
+using static Windows.Win32.NetworkManagement.IpHelper.Apis; // Various constants
+using static Windows.Win32.Networking.Clustering.Apis; // Various constants
+
+

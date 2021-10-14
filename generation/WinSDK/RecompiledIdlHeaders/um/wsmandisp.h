@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -378,6 +386,7 @@ EXTERN_C const IID IID_IWSMan;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSMan * This,
             /* [annotation][in] */ 
@@ -385,17 +394,21 @@ EXTERN_C const IID IID_IWSMan;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSMan * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSMan * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSMan * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSMan * This,
             /* [annotation][in] */ 
@@ -405,6 +418,7 @@ EXTERN_C const IID IID_IWSMan;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSMan * This,
             /* [annotation][in] */ 
@@ -417,6 +431,7 @@ EXTERN_C const IID IID_IWSMan;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSMan * This,
             /* [annotation][in] */ 
@@ -436,6 +451,7 @@ EXTERN_C const IID IID_IWSMan;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSMan, CreateSession)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             IWSMan * This,
             /* [annotation][defaultvalue][in] */ 
@@ -447,16 +463,19 @@ EXTERN_C const IID IID_IWSMan;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **session);
         
+        DECLSPEC_XFGVIRT(IWSMan, CreateConnectionOptions)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionOptions )( 
             IWSMan * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **connectionOptions);
         
+        DECLSPEC_XFGVIRT(IWSMan, get_CommandLine)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandLine )( 
             IWSMan * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *value);
         
+        DECLSPEC_XFGVIRT(IWSMan, get_Error)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             IWSMan * This,
             /* [annotation][retval][out] */ 
@@ -629,6 +648,7 @@ EXTERN_C const IID IID_IWSManEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManEx * This,
             /* [annotation][in] */ 
@@ -636,17 +656,21 @@ EXTERN_C const IID IID_IWSManEx;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManEx * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManEx * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManEx * This,
             /* [annotation][in] */ 
@@ -656,6 +680,7 @@ EXTERN_C const IID IID_IWSManEx;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManEx * This,
             /* [annotation][in] */ 
@@ -668,6 +693,7 @@ EXTERN_C const IID IID_IWSManEx;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManEx * This,
             /* [annotation][in] */ 
@@ -687,6 +713,7 @@ EXTERN_C const IID IID_IWSManEx;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSMan, CreateSession)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             IWSManEx * This,
             /* [annotation][defaultvalue][in] */ 
@@ -698,21 +725,25 @@ EXTERN_C const IID IID_IWSManEx;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **session);
         
+        DECLSPEC_XFGVIRT(IWSMan, CreateConnectionOptions)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionOptions )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **connectionOptions);
         
+        DECLSPEC_XFGVIRT(IWSMan, get_CommandLine)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandLine )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *value);
         
+        DECLSPEC_XFGVIRT(IWSMan, get_Error)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *value);
         
+        DECLSPEC_XFGVIRT(IWSManEx, CreateResourceLocator)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateResourceLocator )( 
             IWSManEx * This,
             /* [annotation][defaultvalue][in] */ 
@@ -720,76 +751,91 @@ EXTERN_C const IID IID_IWSManEx;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **newResourceLocator);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUTF8)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUTF8 )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagCredUsernamePassword)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagCredUsernamePassword )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagSkipCACheck)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCACheck )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagSkipCNCheck)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCNCheck )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseDigest)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseDigest )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseNegotiate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNegotiate )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseBasic)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseBasic )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseKerberos)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseKerberos )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagNoEncryption)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagNoEncryption )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagEnableSPNServerPort)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagEnableSPNServerPort )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseNoAuthentication)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNoAuthentication )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagNonXmlText)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagNonXmlText )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnEPR)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnEPR )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnObjectAndEPR)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObjectAndEPR )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, GetErrorMessage)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetErrorMessage )( 
             IWSManEx * This,
             /* [annotation][in] */ 
@@ -797,21 +843,25 @@ EXTERN_C const IID IID_IWSManEx;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *errorMessage);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyDeep)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeep )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyShallow)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyShallow )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyDeepBasePropsOnly)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeepBasePropsOnly )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnObject)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObject )( 
             IWSManEx * This,
             /* [annotation][retval][out] */ 
@@ -965,6 +1015,7 @@ EXTERN_C const IID IID_IWSManEx2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManEx2 * This,
             /* [annotation][in] */ 
@@ -972,17 +1023,21 @@ EXTERN_C const IID IID_IWSManEx2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManEx2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManEx2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManEx2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManEx2 * This,
             /* [annotation][in] */ 
@@ -992,6 +1047,7 @@ EXTERN_C const IID IID_IWSManEx2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManEx2 * This,
             /* [annotation][in] */ 
@@ -1004,6 +1060,7 @@ EXTERN_C const IID IID_IWSManEx2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManEx2 * This,
             /* [annotation][in] */ 
@@ -1023,6 +1080,7 @@ EXTERN_C const IID IID_IWSManEx2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSMan, CreateSession)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             IWSManEx2 * This,
             /* [annotation][defaultvalue][in] */ 
@@ -1034,21 +1092,25 @@ EXTERN_C const IID IID_IWSManEx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **session);
         
+        DECLSPEC_XFGVIRT(IWSMan, CreateConnectionOptions)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionOptions )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **connectionOptions);
         
+        DECLSPEC_XFGVIRT(IWSMan, get_CommandLine)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandLine )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *value);
         
+        DECLSPEC_XFGVIRT(IWSMan, get_Error)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *value);
         
+        DECLSPEC_XFGVIRT(IWSManEx, CreateResourceLocator)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateResourceLocator )( 
             IWSManEx2 * This,
             /* [annotation][defaultvalue][in] */ 
@@ -1056,76 +1118,91 @@ EXTERN_C const IID IID_IWSManEx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **newResourceLocator);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUTF8)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUTF8 )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagCredUsernamePassword)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagCredUsernamePassword )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagSkipCACheck)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCACheck )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagSkipCNCheck)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCNCheck )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseDigest)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseDigest )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseNegotiate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNegotiate )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseBasic)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseBasic )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseKerberos)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseKerberos )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagNoEncryption)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagNoEncryption )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagEnableSPNServerPort)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagEnableSPNServerPort )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseNoAuthentication)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNoAuthentication )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagNonXmlText)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagNonXmlText )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnEPR)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnEPR )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnObjectAndEPR)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObjectAndEPR )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, GetErrorMessage)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetErrorMessage )( 
             IWSManEx2 * This,
             /* [annotation][in] */ 
@@ -1133,26 +1210,31 @@ EXTERN_C const IID IID_IWSManEx2;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *errorMessage);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyDeep)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeep )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyShallow)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyShallow )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyDeepBasePropsOnly)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeepBasePropsOnly )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnObject)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObject )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx2, SessionFlagUseClientCertificate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseClientCertificate )( 
             IWSManEx2 * This,
             /* [annotation][retval][out] */ 
@@ -1334,6 +1416,7 @@ EXTERN_C const IID IID_IWSManEx3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManEx3 * This,
             /* [annotation][in] */ 
@@ -1341,17 +1424,21 @@ EXTERN_C const IID IID_IWSManEx3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManEx3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManEx3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManEx3 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManEx3 * This,
             /* [annotation][in] */ 
@@ -1361,6 +1448,7 @@ EXTERN_C const IID IID_IWSManEx3;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManEx3 * This,
             /* [annotation][in] */ 
@@ -1373,6 +1461,7 @@ EXTERN_C const IID IID_IWSManEx3;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManEx3 * This,
             /* [annotation][in] */ 
@@ -1392,6 +1481,7 @@ EXTERN_C const IID IID_IWSManEx3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSMan, CreateSession)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             IWSManEx3 * This,
             /* [annotation][defaultvalue][in] */ 
@@ -1403,21 +1493,25 @@ EXTERN_C const IID IID_IWSManEx3;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **session);
         
+        DECLSPEC_XFGVIRT(IWSMan, CreateConnectionOptions)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateConnectionOptions )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **connectionOptions);
         
+        DECLSPEC_XFGVIRT(IWSMan, get_CommandLine)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CommandLine )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *value);
         
+        DECLSPEC_XFGVIRT(IWSMan, get_Error)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *value);
         
+        DECLSPEC_XFGVIRT(IWSManEx, CreateResourceLocator)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *CreateResourceLocator )( 
             IWSManEx3 * This,
             /* [annotation][defaultvalue][in] */ 
@@ -1425,76 +1519,91 @@ EXTERN_C const IID IID_IWSManEx3;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **newResourceLocator);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUTF8)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUTF8 )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagCredUsernamePassword)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagCredUsernamePassword )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagSkipCACheck)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCACheck )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagSkipCNCheck)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipCNCheck )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseDigest)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseDigest )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseNegotiate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNegotiate )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseBasic)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseBasic )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseKerberos)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseKerberos )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagNoEncryption)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagNoEncryption )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagEnableSPNServerPort)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagEnableSPNServerPort )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, SessionFlagUseNoAuthentication)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseNoAuthentication )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagNonXmlText)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagNonXmlText )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnEPR)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnEPR )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnObjectAndEPR)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObjectAndEPR )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, GetErrorMessage)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *GetErrorMessage )( 
             IWSManEx3 * This,
             /* [annotation][in] */ 
@@ -1502,61 +1611,73 @@ EXTERN_C const IID IID_IWSManEx3;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *errorMessage);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyDeep)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeep )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyShallow)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyShallow )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagHierarchyDeepBasePropsOnly)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagHierarchyDeepBasePropsOnly )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx, EnumerationFlagReturnObject)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagReturnObject )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx2, SessionFlagUseClientCertificate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseClientCertificate )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx3, SessionFlagUTF16)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUTF16 )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx3, SessionFlagUseCredSsp)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseCredSsp )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx3, EnumerationFlagAssociationInstance)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagAssociationInstance )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx3, EnumerationFlagAssociatedInstance)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *EnumerationFlagAssociatedInstance )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx3, SessionFlagSkipRevocationCheck)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagSkipRevocationCheck )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx3, SessionFlagAllowNegotiateImplicitCredentials)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagAllowNegotiateImplicitCredentials )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *flags);
         
+        DECLSPEC_XFGVIRT(IWSManEx3, SessionFlagUseSsl)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionFlagUseSsl )( 
             IWSManEx3 * This,
             /* [annotation][retval][out] */ 
@@ -1744,6 +1865,7 @@ EXTERN_C const IID IID_IWSManConnectionOptions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManConnectionOptions * This,
             /* [annotation][in] */ 
@@ -1751,17 +1873,21 @@ EXTERN_C const IID IID_IWSManConnectionOptions;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManConnectionOptions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManConnectionOptions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManConnectionOptions * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManConnectionOptions * This,
             /* [annotation][in] */ 
@@ -1771,6 +1897,7 @@ EXTERN_C const IID IID_IWSManConnectionOptions;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManConnectionOptions * This,
             /* [annotation][in] */ 
@@ -1783,6 +1910,7 @@ EXTERN_C const IID IID_IWSManConnectionOptions;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManConnectionOptions * This,
             /* [annotation][in] */ 
@@ -1802,16 +1930,19 @@ EXTERN_C const IID IID_IWSManConnectionOptions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, get_UserName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserName )( 
             IWSManConnectionOptions * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *name);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, put_UserName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserName )( 
             IWSManConnectionOptions * This,
             /* [annotation][in] */ 
             _In_  BSTR name);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, put_Password)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Password )( 
             IWSManConnectionOptions * This,
             /* [annotation][in] */ 
@@ -1905,6 +2036,7 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][in] */ 
@@ -1912,17 +2044,21 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManConnectionOptionsEx * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManConnectionOptionsEx * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][in] */ 
@@ -1932,6 +2068,7 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][in] */ 
@@ -1944,6 +2081,7 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][in] */ 
@@ -1963,26 +2101,31 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, get_UserName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserName )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *name);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, put_UserName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserName )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][in] */ 
             _In_  BSTR name);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, put_Password)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Password )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][in] */ 
             _In_  BSTR password);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx, get_CertificateThumbprint)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CertificateThumbprint )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *thumbprint);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx, put_CertificateThumbprint)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CertificateThumbprint )( 
             IWSManConnectionOptionsEx * This,
             /* [annotation][in] */ 
@@ -2113,6 +2256,7 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][in] */ 
@@ -2120,17 +2264,21 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManConnectionOptionsEx2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManConnectionOptionsEx2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][in] */ 
@@ -2140,6 +2288,7 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][in] */ 
@@ -2152,6 +2301,7 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][in] */ 
@@ -2171,31 +2321,37 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, get_UserName)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_UserName )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *name);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, put_UserName)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_UserName )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][in] */ 
             _In_  BSTR name);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptions, put_Password)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Password )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][in] */ 
             _In_  BSTR password);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx, get_CertificateThumbprint)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_CertificateThumbprint )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *thumbprint);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx, put_CertificateThumbprint)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_CertificateThumbprint )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][in] */ 
             _In_  BSTR thumbprint);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx2, SetProxy)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SetProxy )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][defaultvalue][in] */ 
@@ -2207,36 +2363,43 @@ EXTERN_C const IID IID_IWSManConnectionOptionsEx2;
             /* [annotation][defaultvalue][in] */ 
             _In_  BSTR password);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx2, ProxyIEConfig)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyIEConfig )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *value);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx2, ProxyWinHttpConfig)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyWinHttpConfig )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *value);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx2, ProxyAutoDetect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyAutoDetect )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *value);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx2, ProxyNoProxyServer)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyNoProxyServer )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *value);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx2, ProxyAuthenticationUseNegotiate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyAuthenticationUseNegotiate )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *value);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx2, ProxyAuthenticationUseBasic)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyAuthenticationUseBasic )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *value);
         
+        DECLSPEC_XFGVIRT(IWSManConnectionOptionsEx2, ProxyAuthenticationUseDigest)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ProxyAuthenticationUseDigest )( 
             IWSManConnectionOptionsEx2 * This,
             /* [annotation][retval][out] */ 
@@ -2438,6 +2601,7 @@ EXTERN_C const IID IID_IWSManSession;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2445,17 +2609,21 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManSession * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManSession * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManSession * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2465,6 +2633,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2477,6 +2646,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2496,6 +2666,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSManSession, Get)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Get )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2505,6 +2676,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *resource);
         
+        DECLSPEC_XFGVIRT(IWSManSession, Put)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Put )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2516,6 +2688,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *resultResource);
         
+        DECLSPEC_XFGVIRT(IWSManSession, Create)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Create )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2527,6 +2700,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *newUri);
         
+        DECLSPEC_XFGVIRT(IWSManSession, Delete)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2534,6 +2708,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][defaultvalue][in] */ 
             _In_  long flags);
         
+        DECLSPEC_XFGVIRT(IWSManSession, Invoke)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2547,6 +2722,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *result);
         
+        DECLSPEC_XFGVIRT(IWSManSession, Enumerate)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Enumerate )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2560,6 +2736,7 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][retval][out] */ 
             _Out_retval_  IDispatch **resultSet);
         
+        DECLSPEC_XFGVIRT(IWSManSession, Identify)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Identify )( 
             IWSManSession * This,
             /* [annotation][defaultvalue][in] */ 
@@ -2567,26 +2744,31 @@ EXTERN_C const IID IID_IWSManSession;
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *result);
         
+        DECLSPEC_XFGVIRT(IWSManSession, get_Error)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             IWSManSession * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *value);
         
+        DECLSPEC_XFGVIRT(IWSManSession, get_BatchItems)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_BatchItems )( 
             IWSManSession * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *value);
         
+        DECLSPEC_XFGVIRT(IWSManSession, put_BatchItems)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_BatchItems )( 
             IWSManSession * This,
             /* [annotation][in] */ 
             _In_  long value);
         
+        DECLSPEC_XFGVIRT(IWSManSession, get_Timeout)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Timeout )( 
             IWSManSession * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *value);
         
+        DECLSPEC_XFGVIRT(IWSManSession, put_Timeout)
         /* [propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_Timeout )( 
             IWSManSession * This,
             /* [annotation][in] */ 
@@ -2711,6 +2893,7 @@ EXTERN_C const IID IID_IWSManEnumerator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManEnumerator * This,
             /* [annotation][in] */ 
@@ -2718,17 +2901,21 @@ EXTERN_C const IID IID_IWSManEnumerator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManEnumerator * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManEnumerator * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManEnumerator * This,
             /* [annotation][in] */ 
@@ -2738,6 +2925,7 @@ EXTERN_C const IID IID_IWSManEnumerator;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManEnumerator * This,
             /* [annotation][in] */ 
@@ -2750,6 +2938,7 @@ EXTERN_C const IID IID_IWSManEnumerator;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManEnumerator * This,
             /* [annotation][in] */ 
@@ -2769,16 +2958,19 @@ EXTERN_C const IID IID_IWSManEnumerator;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSManEnumerator, ReadItem)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ReadItem )( 
             IWSManEnumerator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *resource);
         
+        DECLSPEC_XFGVIRT(IWSManEnumerator, get_AtEndOfStream)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_AtEndOfStream )( 
             IWSManEnumerator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *eos);
         
+        DECLSPEC_XFGVIRT(IWSManEnumerator, get_Error)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             IWSManEnumerator * This,
             /* [annotation][retval][out] */ 
@@ -2918,6 +3110,7 @@ EXTERN_C const IID IID_IWSManResourceLocator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
@@ -2925,17 +3118,21 @@ EXTERN_C const IID IID_IWSManResourceLocator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManResourceLocator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManResourceLocator * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManResourceLocator * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
@@ -2945,6 +3142,7 @@ EXTERN_C const IID IID_IWSManResourceLocator;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
@@ -2957,6 +3155,7 @@ EXTERN_C const IID IID_IWSManResourceLocator;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
@@ -2976,16 +3175,19 @@ EXTERN_C const IID IID_IWSManResourceLocator;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, put_ResourceURI)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_ResourceURI )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
             _In_  BSTR uri);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, get_ResourceURI)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_ResourceURI )( 
             IWSManResourceLocator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *uri);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, AddSelector)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddSelector )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
@@ -2993,29 +3195,35 @@ EXTERN_C const IID IID_IWSManResourceLocator;
             /* [annotation][in] */ 
             _In_  VARIANT selValue);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, ClearSelectors)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearSelectors )( 
             IWSManResourceLocator * This);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, get_FragmentPath)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FragmentPath )( 
             IWSManResourceLocator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *text);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, put_FragmentPath)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_FragmentPath )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
             _In_  BSTR text);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, get_FragmentDialect)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_FragmentDialect )( 
             IWSManResourceLocator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *text);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, put_FragmentDialect)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_FragmentDialect )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
             _In_  BSTR text);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, AddOption)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddOption )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
@@ -3025,19 +3233,23 @@ EXTERN_C const IID IID_IWSManResourceLocator;
             /* [annotation][defaultvalue][in] */ 
             _In_  BOOL mustComply);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, put_MustUnderstandOptions)
         /* [helpstring][propput][id] */ HRESULT ( STDMETHODCALLTYPE *put_MustUnderstandOptions )( 
             IWSManResourceLocator * This,
             /* [annotation][in] */ 
             _In_  BOOL mustUnderstand);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, get_MustUnderstandOptions)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_MustUnderstandOptions )( 
             IWSManResourceLocator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *mustUnderstand);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, ClearOptions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearOptions )( 
             IWSManResourceLocator * This);
         
+        DECLSPEC_XFGVIRT(IWSManResourceLocator, get_Error)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Error )( 
             IWSManResourceLocator * This,
             /* [annotation][retval][out] */ 
@@ -3153,6 +3365,7 @@ EXTERN_C const IID IID_IWSManResourceLocatorInternal;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManResourceLocatorInternal * This,
             /* [annotation][in] */ 
@@ -3160,9 +3373,11 @@ EXTERN_C const IID IID_IWSManResourceLocatorInternal;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManResourceLocatorInternal * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManResourceLocatorInternal * This);
         
@@ -3242,6 +3457,7 @@ EXTERN_C const IID IID_IWSManInternal;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSManInternal * This,
             /* [annotation][in] */ 
@@ -3249,17 +3465,21 @@ EXTERN_C const IID IID_IWSManInternal;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSManInternal * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSManInternal * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWSManInternal * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWSManInternal * This,
             /* [annotation][in] */ 
@@ -3269,6 +3489,7 @@ EXTERN_C const IID IID_IWSManInternal;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWSManInternal * This,
             /* [annotation][in] */ 
@@ -3281,6 +3502,7 @@ EXTERN_C const IID IID_IWSManInternal;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWSManInternal * This,
             /* [annotation][in] */ 
@@ -3300,6 +3522,7 @@ EXTERN_C const IID IID_IWSManInternal;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWSManInternal, ConfigSDDL)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConfigSDDL )( 
             IWSManInternal * This,
             /* [annotation][in] */ 

@@ -28,7 +28,6 @@
 #include <minwinbase.h>
 #include <wct.h>
 #include <minidumpapiset.h>
-//#include <imagehlp.h> // Can't use with dbghelp.h
 #include <winioctl.h>
 #include <ioevent.h>
 #include <storprop.h>
@@ -41,3 +40,7 @@
 #include <realtimeapiset.h>
 
 #include <devpkey.h>
+#include <apdevpkey.h>
+#include <ntiologc.h>
+#include <dlnadeviceinterfaceids.h>
+#include <dlnametadataproviderproperties.h>

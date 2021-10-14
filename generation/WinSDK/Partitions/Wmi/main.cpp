@@ -10,3 +10,8 @@
 #include <wbemcli.h>
 #include <wbemprov.h>
 #include <wbemdisp.h>
+#include <wbemads.h>
+//#include <wbemglue.h> -- c++ classes
+#include <wbemidl.h>
+//#include <wbemtime.h> -- c++ classes
+#include <wbemtran.h>

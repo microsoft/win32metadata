@@ -92,11 +92,11 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_XAML_HOSTING_HOSTINGCONTRACT_VERSION)
-#define WINDOWS_UI_XAML_HOSTING_HOSTINGCONTRACT_VERSION 0x40000
+#define WINDOWS_UI_XAML_HOSTING_HOSTINGCONTRACT_VERSION 0x50000
 #endif // defined(WINDOWS_UI_XAML_HOSTING_HOSTINGCONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -2292,9 +2292,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Hosting.IElementCompositionPreview ** Default Interface **
@@ -4948,9 +4948,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics3 interface starting with version 8.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Hosting.IElementCompositionPreviewStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Hosting.IElementCompositionPreview ** Default Interface **

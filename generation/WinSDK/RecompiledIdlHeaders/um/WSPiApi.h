@@ -746,13 +746,13 @@ Return Value
     
 
     // sanity check ptSocketAddress and tSocketLength.
-    if ((!ptSocketAddress) || (tSocketLength < sizeof(struct sockaddr)))
+    if ((!ptSocketAddress) || (tSocketLength < (socklen_t)sizeof(struct sockaddr)))
         return EAI_FAIL;
     
     if (ptSocketAddress->sa_family != AF_INET)
         return EAI_FAMILY;
 
-    if (tSocketLength < sizeof(struct sockaddr_in))
+    if (tSocketLength < (socklen_t)sizeof(struct sockaddr_in))
         return EAI_FAIL;
     
     if (!(pszNodeName && tNodeLength) &&

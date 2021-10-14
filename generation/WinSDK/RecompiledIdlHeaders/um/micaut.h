@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -198,28 +206,34 @@ EXTERN_C const IID IID_IMathInputControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMathInputControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMathInputControl * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMathInputControl * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -228,6 +242,7 @@ EXTERN_C const IID IID_IMathInputControl;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMathInputControl * This,
             /* [annotation][in] */ 
@@ -247,16 +262,20 @@ EXTERN_C const IID IID_IMathInputControl;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, Show)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Show )( 
             __RPC__in IMathInputControl * This);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, Hide)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Hide )( 
             __RPC__in IMathInputControl * This);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, IsVisible)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsVisible )( 
             __RPC__in IMathInputControl * This,
             /* [out] */ __RPC__out VARIANT_BOOL *pvbShown);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, GetPosition)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPosition )( 
             __RPC__in IMathInputControl * This,
             /* [out] */ __RPC__out LONG *Left,
@@ -264,6 +283,7 @@ EXTERN_C const IID IID_IMathInputControl;
             /* [out] */ __RPC__out LONG *Right,
             /* [out] */ __RPC__out LONG *Bottom);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, SetPosition)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetPosition )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ LONG Left,
@@ -271,50 +291,62 @@ EXTERN_C const IID IID_IMathInputControl;
             /* [in] */ LONG Right,
             /* [in] */ LONG Bottom);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, Clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IMathInputControl * This);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, SetCustomPaint)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetCustomPaint )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ LONG Element,
             /* [in] */ VARIANT_BOOL Paint);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, SetCaptionText)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetCaptionText )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ __RPC__in BSTR CaptionText);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, LoadInk)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LoadInk )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ __RPC__in_opt IInkDisp *Ink);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, SetOwnerWindow)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetOwnerWindow )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ LONG_PTR OwnerWindow);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, EnableExtendedButtons)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableExtendedButtons )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ VARIANT_BOOL Extended);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, GetPreviewHeight)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetPreviewHeight )( 
             __RPC__in IMathInputControl * This,
             /* [out] */ __RPC__out LONG *Height);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, SetPreviewHeight)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetPreviewHeight )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ LONG Height);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, EnableAutoGrow)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableAutoGrow )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ VARIANT_BOOL AutoGrow);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, AddFunctionName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddFunctionName )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ __RPC__in BSTR FunctionName);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, RemoveFunctionName)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveFunctionName )( 
             __RPC__in IMathInputControl * This,
             /* [in] */ __RPC__in BSTR FunctionName);
         
+        DECLSPEC_XFGVIRT(IMathInputControl, GetHoverIcon)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetHoverIcon )( 
             __RPC__in IMathInputControl * This,
             /* [out] */ __RPC__deref_out_opt IPictureDisp **HoverImage);
@@ -449,28 +481,34 @@ EXTERN_C const IID DIID__IMathInputControlEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IMathInputControlEvents * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IMathInputControlEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IMathInputControlEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IMathInputControlEvents * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IMathInputControlEvents * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IMathInputControlEvents * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -479,6 +517,7 @@ EXTERN_C const IID DIID__IMathInputControlEvents;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IMathInputControlEvents * This,
             /* [annotation][in] */ 

@@ -5,6 +5,8 @@ DumpLogRecords
 <IncludeRoot>/shared/clfs.h
 <IncludeRoot>/shared/ktmtypes.h
 <IncludeRoot>/shared/ntddvol.h
+<IncludeRoot>/shared/diskguid.h
+<IncludeRoot>/shared/fttypes.h
 <IncludeRoot>/um/clfsmgmt.h
 <IncludeRoot>/um/clfsmgmtw32.h
 <IncludeRoot>/um/clfsw32.h
@@ -24,5 +26,7 @@ DumpLogRecords
 <IncludeRoot>/um/winefs.h
 <IncludeRoot>/um/winver.h
 <IncludeRoot>/um/wofapi.h
+<IncludeRoot>/um/ioringapi.h
+<IncludeRoot>/um/ntioring_x.h
 --namespace
 Windows.Win32.Storage.FileSystem

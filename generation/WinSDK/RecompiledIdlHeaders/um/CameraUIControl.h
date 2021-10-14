@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -176,6 +184,7 @@ EXTERN_C const IID IID_ICameraUIControlEventCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICameraUIControlEventCallback * This,
             /* [annotation][in] */ 
@@ -183,28 +192,35 @@ EXTERN_C const IID IID_ICameraUIControlEventCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICameraUIControlEventCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICameraUIControlEventCallback * This);
         
+        DECLSPEC_XFGVIRT(ICameraUIControlEventCallback, OnStartupComplete)
         void ( STDMETHODCALLTYPE *OnStartupComplete )( 
             ICameraUIControlEventCallback * This);
         
+        DECLSPEC_XFGVIRT(ICameraUIControlEventCallback, OnSuspendComplete)
         void ( STDMETHODCALLTYPE *OnSuspendComplete )( 
             ICameraUIControlEventCallback * This);
         
+        DECLSPEC_XFGVIRT(ICameraUIControlEventCallback, OnItemCaptured)
         void ( STDMETHODCALLTYPE *OnItemCaptured )( 
             ICameraUIControlEventCallback * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pszPath);
         
+        DECLSPEC_XFGVIRT(ICameraUIControlEventCallback, OnItemDeleted)
         void ( STDMETHODCALLTYPE *OnItemDeleted )( 
             ICameraUIControlEventCallback * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pszPath);
         
+        DECLSPEC_XFGVIRT(ICameraUIControlEventCallback, OnClosed)
         void ( STDMETHODCALLTYPE *OnClosed )( 
             ICameraUIControlEventCallback * This);
         
@@ -323,6 +339,7 @@ EXTERN_C const IID IID_ICameraUIControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICameraUIControl * This,
             /* [annotation][in] */ 
@@ -330,12 +347,15 @@ EXTERN_C const IID IID_ICameraUIControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICameraUIControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICameraUIControl * This);
         
+        DECLSPEC_XFGVIRT(ICameraUIControl, Show)
         HRESULT ( STDMETHODCALLTYPE *Show )( 
             ICameraUIControl * This,
             /* [annotation][in] */ 
@@ -355,32 +375,39 @@ EXTERN_C const IID IID_ICameraUIControl;
             /* [annotation][in] */ 
             _In_opt_  ICameraUIControlEventCallback *pEventCallback);
         
+        DECLSPEC_XFGVIRT(ICameraUIControl, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             ICameraUIControl * This);
         
+        DECLSPEC_XFGVIRT(ICameraUIControl, Suspend)
         HRESULT ( STDMETHODCALLTYPE *Suspend )( 
             ICameraUIControl * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbDeferralRequired);
         
+        DECLSPEC_XFGVIRT(ICameraUIControl, Resume)
         HRESULT ( STDMETHODCALLTYPE *Resume )( 
             ICameraUIControl * This);
         
+        DECLSPEC_XFGVIRT(ICameraUIControl, GetCurrentViewType)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentViewType )( 
             ICameraUIControl * This,
             /* [annotation][out] */ 
             _Out_  CameraUIControlViewType *pViewType);
         
+        DECLSPEC_XFGVIRT(ICameraUIControl, GetActiveItem)
         HRESULT ( STDMETHODCALLTYPE *GetActiveItem )( 
             ICameraUIControl * This,
             /* [annotation][out] */ 
             _Outptr_opt_  BSTR *pbstrActiveItemPath);
         
+        DECLSPEC_XFGVIRT(ICameraUIControl, GetSelectedItems)
         HRESULT ( STDMETHODCALLTYPE *GetSelectedItems )( 
             ICameraUIControl * This,
             /* [annotation][out] */ 
             _Outptr_  SAFEARRAY **ppSelectedItemPaths);
         
+        DECLSPEC_XFGVIRT(ICameraUIControl, RemoveCapturedItem)
         HRESULT ( STDMETHODCALLTYPE *RemoveCapturedItem )( 
             ICameraUIControl * This,
             /* [annotation][in] */ 

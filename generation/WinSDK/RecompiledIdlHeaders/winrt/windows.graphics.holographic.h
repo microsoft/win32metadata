@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_UI_CORE_COREWINDOWDIALOGSCONTRACT_VERSION)
@@ -283,6 +283,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3 ABI::Windows::Graphics::Holographic::IHolographicCameraRenderingParameters3
 
 #endif // ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Holographic {
+                interface IHolographicCameraRenderingParameters4;
+            } /* Holographic */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4 ABI::Windows::Graphics::Holographic::IHolographicCameraRenderingParameters4
+
+#endif // ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraViewportParameters_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraViewportParameters_FWD_DEFINED__
@@ -689,6 +704,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Holographic {
+                interface IHolographicViewConfiguration2;
+            } /* Holographic */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2 ABI::Windows::Graphics::Holographic::IHolographicViewConfiguration2
+
+#endif // ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_FWD_DEFINED__
+
 // Parameterized interface forward declarations (C++)
 
 // Collection interface definitions
@@ -883,6 +913,70 @@ typedef IIterable<ABI::Windows::Graphics::Holographic::HolographicCameraPose*> _
 #endif /* DEF___FIIterable_1_Windows__CGraphics__CHolographic__CHolographicCameraPose_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Holographic {
+                typedef enum HolographicDepthReprojectionMethod : int HolographicDepthReprojectionMethod;
+            } /* Holographic */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+#ifndef DEF___FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE
+#define DEF___FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("e2486838-8e17-52a2-b3b2-8db3de6412b7"))
+IIterator<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod> : IIterator_impl<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterator`1<Windows.Graphics.Holographic.HolographicDepthReprojectionMethod>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterator<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod> __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_t;
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod ABI::Windows::Foundation::Collections::__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+#ifndef DEF___FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE
+#define DEF___FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("2803c19f-8082-52c0-aad1-68ab51ed287f"))
+IIterable<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod> : IIterable_impl<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterable`1<Windows.Graphics.Holographic.HolographicDepthReprojectionMethod>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterable<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod> __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_t;
+#define __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod ABI::Windows::Foundation::Collections::__FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 namespace ABI {
     namespace Windows {
@@ -1156,6 +1250,33 @@ typedef IVectorView<ABI::Windows::Graphics::Holographic::HolographicCameraPose*>
 #endif /* DEF___FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicCameraPose_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+#ifndef DEF___FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE
+#define DEF___FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("7ac6dc9e-ea0b-594a-b0ed-2d1764ec58e9"))
+IVectorView<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod> : IVectorView_impl<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IVectorView`1<Windows.Graphics.Holographic.HolographicDepthReprojectionMethod>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IVectorView<enum ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod> __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_t;
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod ABI::Windows::Foundation::Collections::__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
 
@@ -1919,6 +2040,29 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.Graphics.Holographic.HolographicDepthReprojectionMethod
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Holographic {
+                enum HolographicDepthReprojectionMethod : int
+                {
+                    HolographicDepthReprojectionMethod_DepthReprojection = 0,
+                    HolographicDepthReprojectionMethod_AutoPlanar = 1,
+                };
+            } /* Holographic */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+/*
+ *
  * Struct Windows.Graphics.Holographic.HolographicFramePresentResult
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
@@ -2609,6 +2753,45 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
+
+/*
+ *
+ * Interface Windows.Graphics.Holographic.IHolographicCameraRenderingParameters4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Holographic.HolographicCameraRenderingParameters
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Holographic_IHolographicCameraRenderingParameters4[] = L"Windows.Graphics.Holographic.IHolographicCameraRenderingParameters4";
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Holographic {
+                MIDL_INTERFACE("0878fa4c-e163-57dc-82b7-c406ab3e0537")
+                IHolographicCameraRenderingParameters4 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_DepthReprojectionMethod(
+                        ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE put_DepthReprojectionMethod(
+                        ABI::Windows::Graphics::Holographic::HolographicDepthReprojectionMethod value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IHolographicCameraRenderingParameters4 = _uuidof(IHolographicCameraRenderingParameters4);
+            } /* Holographic */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 /*
  *
@@ -3817,6 +4000,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CHolographic_CIHolographicView
 
 /*
  *
+ * Interface Windows.Graphics.Holographic.IHolographicViewConfiguration2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Holographic.HolographicViewConfiguration
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Holographic_IHolographicViewConfiguration2[] = L"Windows.Graphics.Holographic.IHolographicViewConfiguration2";
+namespace ABI {
+    namespace Windows {
+        namespace Graphics {
+            namespace Holographic {
+                MIDL_INTERFACE("e241756e-e0d0-5019-9af5-1b165bc2f54e")
+                IHolographicViewConfiguration2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_SupportedDepthReprojectionMethods(
+                        __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IHolographicViewConfiguration2 = _uuidof(IHolographicViewConfiguration2);
+            } /* Holographic */
+        } /* Graphics */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+/*
+ *
  * Class Windows.Graphics.Holographic.HolographicCamera
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
@@ -3873,6 +4092,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Graphics.Holographic.IHolographicCameraRenderingParameters ** Default Interface **
  *    Windows.Graphics.Holographic.IHolographicCameraRenderingParameters2
  *    Windows.Graphics.Holographic.IHolographicCameraRenderingParameters3
+ *    Windows.Graphics.Holographic.IHolographicCameraRenderingParameters4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -4134,9 +4354,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Holographic.IHolographicSpace ** Default Interface **
@@ -4205,6 +4425,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Holographic.IHolographicViewConfiguration ** Default Interface **
+ *    Windows.Graphics.Holographic.IHolographicViewConfiguration2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -4283,6 +4504,12 @@ typedef interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRen
 typedef interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3 __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3;
 
 #endif // ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4 __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4;
+
+#endif // ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraViewportParameters_FWD_DEFINED__
 #define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraViewportParameters_FWD_DEFINED__
@@ -4445,6 +4672,12 @@ typedef interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicSpaceStat
 typedef interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration;
 
 #endif // ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2 __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2;
+
+#endif // ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -4886,6 +5119,153 @@ interface __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicCameraPos
 
 #endif // ____FIIterable_1_Windows__CGraphics__CHolographic__CHolographicCameraPose_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+
+typedef enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__)
+#define ____FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__
+
+typedef interface __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod;
+
+typedef struct __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Current)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod* result);
+    HRESULT (STDMETHODCALLTYPE* get_HasCurrent)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* MoveNext)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        UINT32 itemsLength,
+        enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod* items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl;
+
+interface __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod
+{
+    CONST_VTBL struct __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_get_Current(This, result) \
+    ((This)->lpVtbl->get_Current(This, result))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_get_HasCurrent(This, result) \
+    ((This)->lpVtbl->get_HasCurrent(This, result))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_MoveNext(This, result) \
+    ((This)->lpVtbl->MoveNext(This, result))
+
+#define __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetMany(This, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__)
+#define ____FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__
+
+typedef interface __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod;
+
+typedef struct __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* First)(__FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        __FIIterator_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod** result);
+
+    END_INTERFACE
+} __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl;
+
+interface __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod
+{
+    CONST_VTBL struct __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_First(This, result) \
+    ((This)->lpVtbl->First(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterable_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
 #if !defined(____FIIterator_1_Windows__CGraphics__CHolographic__CHolographicFramePresentationReport_INTERFACE_DEFINED__)
@@ -5576,6 +5956,91 @@ interface __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicCameraP
 
 #endif // ____FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicCameraPose_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x20000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__)
+#define ____FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__
+
+typedef interface __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod;
+
+typedef struct __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        UINT32 index,
+        enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod* result);
+    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod value,
+        UINT32* index,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod* This,
+        UINT32 startIndex,
+        UINT32 itemsLength,
+        enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod* items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl;
+
+interface __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod
+{
+    CONST_VTBL struct __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethodVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetAt(This, index, result) \
+    ((This)->lpVtbl->GetAt(This, index, result))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_get_Size(This, result) \
+    ((This)->lpVtbl->get_Size(This, result))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_IndexOf(This, value, index, result) \
+    ((This)->lpVtbl->IndexOf(This, value, index, result))
+
+#define __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_GetMany(This, startIndex, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x60000
 #if !defined(____FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicFramePresentationReport_INTERFACE_DEFINED__)
@@ -6495,6 +6960,21 @@ typedef enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicViewConfigurati
 typedef struct __x_ABI_CWindows_CGraphics_CHolographic_CHolographicAdapterId __x_ABI_CWindows_CGraphics_CHolographic_CHolographicAdapterId;
 
 typedef struct __x_ABI_CWindows_CGraphics_CHolographic_CHolographicFrameId __x_ABI_CWindows_CGraphics_CHolographic_CHolographicFrameId;
+
+/*
+ *
+ * Struct Windows.Graphics.Holographic.HolographicDepthReprojectionMethod
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod
+{
+    HolographicDepthReprojectionMethod_DepthReprojection = 0,
+    HolographicDepthReprojectionMethod_AutoPlanar = 1,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 /*
  *
@@ -7545,6 +8025,80 @@ interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingPa
 EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3;
 #endif /* !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters3_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x50000
+
+/*
+ *
+ * Interface Windows.Graphics.Holographic.IHolographicCameraRenderingParameters4
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Holographic.HolographicCameraRenderingParameters
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Holographic_IHolographicCameraRenderingParameters4[] = L"Windows.Graphics.Holographic.IHolographicCameraRenderingParameters4";
+typedef struct __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_DepthReprojectionMethod)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4* This,
+        enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod* value);
+    HRESULT (STDMETHODCALLTYPE* put_DepthReprojectionMethod)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4* This,
+        enum __x_ABI_CWindows_CGraphics_CHolographic_CHolographicDepthReprojectionMethod value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4Vtbl;
+
+interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4
+{
+    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_get_DepthReprojectionMethod(This, value) \
+    ((This)->lpVtbl->get_DepthReprojectionMethod(This, value))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_put_DepthReprojectionMethod(This, value) \
+    ((This)->lpVtbl->put_DepthReprojectionMethod(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicCameraRenderingParameters4_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
 
 /*
  *
@@ -9792,6 +10346,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CHolographic_CIHolographicView
 
 /*
  *
+ * Interface Windows.Graphics.Holographic.IHolographicViewConfiguration2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.Graphics.Holographic.HolographicViewConfiguration
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Graphics_Holographic_IHolographicViewConfiguration2[] = L"Windows.Graphics.Holographic.IHolographicViewConfiguration2";
+typedef struct __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_SupportedDepthReprojectionMethods)(__x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2* This,
+        __FIVectorView_1_Windows__CGraphics__CHolographic__CHolographicDepthReprojectionMethod** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2Vtbl;
+
+interface __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_get_SupportedDepthReprojectionMethods(This, value) \
+    ((This)->lpVtbl->get_SupportedDepthReprojectionMethods(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2;
+#endif /* !defined(____x_ABI_CWindows_CGraphics_CHolographic_CIHolographicViewConfiguration2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+/*
+ *
  * Class Windows.Graphics.Holographic.HolographicCamera
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
@@ -9848,6 +10471,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *    Windows.Graphics.Holographic.IHolographicCameraRenderingParameters ** Default Interface **
  *    Windows.Graphics.Holographic.IHolographicCameraRenderingParameters2
  *    Windows.Graphics.Holographic.IHolographicCameraRenderingParameters3
+ *    Windows.Graphics.Holographic.IHolographicCameraRenderingParameters4
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -10109,9 +10733,9 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 2.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics3 interface starting with version 5.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics2 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Graphics.Holographic.IHolographicSpaceStatics interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Holographic.IHolographicSpace ** Default Interface **
@@ -10180,6 +10804,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Graphics.Holographic.IHolographicViewConfiguration ** Default Interface **
+ *    Windows.Graphics.Holographic.IHolographicViewConfiguration2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

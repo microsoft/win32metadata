@@ -27,7 +27,7 @@ Abstract:
     
     Finally, the SCM bus driver is responsible for enumerating all physical and logical persistent memory
     devices on the system. The IOCTLs and structures related to it have "SCM_BUS" in their names.
-    
+
 
 --*/
 
@@ -116,10 +116,18 @@ DEFINE_GUID(GUID_SCM_PD_PASSTHROUGH_INVDIMM, 0x4309AC30, 0x0D11, 0x11E4, 0x91, 0
 //
 // Persistent memory (SCM) bus device IOCTLs.
 //
-//
+
 #define IOCTL_SCM_BUS_GET_LOGICAL_DEVICES           CTL_CODE(IOCTL_SCMBUS_BASE, SCMBUS_FUNCTION(0x00), METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define IOCTL_SCM_BUS_GET_PHYSICAL_DEVICES          CTL_CODE(IOCTL_SCMBUS_BASE, SCMBUS_FUNCTION(0x01), METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define IOCTL_SCM_BUS_GET_REGIONS                   CTL_CODE(IOCTL_SCMBUS_BASE, SCMBUS_FUNCTION(0x02), METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define IOCTL_SCM_BUS_QUERY_PROPERTY                CTL_CODE(IOCTL_SCMBUS_BASE, SCMBUS_FUNCTION(0x03), METHOD_BUFFERED, FILE_ANY_ACCESS)
+#define IOCTL_SCM_BUS_SET_PROPERTY                  CTL_CODE(IOCTL_SCMBUS_BASE, SCMBUS_FUNCTION(0x05), METHOD_BUFFERED, FILE_WRITE_ACCESS)
+
+//
+// This IOCTL does not require any input nor produce any output data.
+//
+#define IOCTL_SCM_BUS_RUNTIME_FW_ACTIVATE           CTL_CODE(IOCTL_SCMBUS_BASE, SCMBUS_FUNCTION(0x04), METHOD_BUFFERED, FILE_WRITE_ACCESS)
+
 
 //
 // Logical persistent memory device IOCTLs.
@@ -136,6 +144,7 @@ DEFINE_GUID(GUID_SCM_PD_PASSTHROUGH_INVDIMM, 0x4309AC30, 0x0D11, 0x11E4, 0x91, 0
 #define IOCTL_SCM_PD_PASSTHROUGH                    CTL_CODE(IOCTL_SCMBUS_BASE, SCM_PHYSICAL_DEVICE_FUNCTION(0x03), METHOD_BUFFERED, FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 #define IOCTL_SCM_PD_UPDATE_MANAGEMENT_STATUS       CTL_CODE(IOCTL_SCMBUS_BASE, SCM_PHYSICAL_DEVICE_FUNCTION(0x04), METHOD_BUFFERED, FILE_ANY_ACCESS)
 #define IOCTL_SCM_PD_REINITIALIZE_MEDIA             CTL_CODE(IOCTL_SCMBUS_BASE, SCM_PHYSICAL_DEVICE_FUNCTION(0x05), METHOD_BUFFERED, FILE_WRITE_ACCESS)
+#define IOCTL_SCM_PD_SET_PROPERTY                   CTL_CODE(IOCTL_SCMBUS_BASE, SCM_PHYSICAL_DEVICE_FUNCTION(0x06), METHOD_BUFFERED, FILE_WRITE_ACCESS)
 
 
 //
@@ -169,7 +178,7 @@ typedef struct _SCM_PD_HEALTH_NOTIFICATION_DATA {
 #define SCM_MAX_SYMLINK_LEN_IN_CHARS 256
 
 typedef struct _SCM_LOGICAL_DEVICE_INSTANCE {
-    
+
     //
     // Sizeof() of this structure serves as the version.
     //
@@ -193,7 +202,7 @@ typedef struct _SCM_LOGICAL_DEVICE_INSTANCE {
 } SCM_LOGICAL_DEVICE_INSTANCE, *PSCM_LOGICAL_DEVICE_INSTANCE;
 
 typedef struct _SCM_LOGICAL_DEVICES {
-    
+
     //
     // Sizeof() of this structure serves as the version.
     //
@@ -400,6 +409,313 @@ typedef struct _SCM_REGIONS {
 
 } SCM_REGIONS, *PSCM_REGIONS;
 
+//
+// IOCTL_SCM_BUS_QUERY_PROPERTY
+//
+// Input Buffer:
+//      An SCM_BUS_PROPERTY_QUERY structure that describes the type of query
+//      being done, the property being queried, and any additional parameters
+//      the query requires.
+//
+//  Output Buffer:
+//      Contains a buffer to place the results of the query into. Since all
+//      property descriptors can be cast into an SCM_BUS_DESCRIPTOR_HEADER,
+//      the IOCTL can be called once with a small buffer then again using
+//      a buffer as large as the header reports is necessary.
+//
+
+
+//
+// Types of queries
+//
+
+typedef enum _SCM_BUS_QUERY_TYPE {
+    ScmBusQuery_Descriptor = 0, // Retrieves the descriptor
+    ScmBusQuery_IsSupported,    // Used to test whether the descriptor is supported
+
+    ScmBusQuery_Max
+} SCM_BUS_QUERY_TYPE, *PSCM_BUS_QUERY_TYPE;
+
+
+//
+// IOCTL_SCM_BUS_SET_PROPERTY
+//
+// Input Buffer:
+//      An SCM_BUS_PROPERTY_SET structure that describes the type of set
+//      being done, the property being set, and any additional parameters
+//      the set requires.
+//
+//  Output Buffer:
+//      Contains a buffer to place the results of the set into. Since all
+//      property descriptors can be cast into an SCM_BUS_DESCRIPTOR_HEADER,
+//      the IOCTL can be called once with a small buffer then again using
+//      a buffer as large as the header reports is necessary.
+//
+
+
+//
+// Types of sets
+//
+
+typedef enum _SCM_BUS_SET_TYPE {
+    ScmBusSet_Descriptor = 0, // Retrieves the descriptor
+    ScmBusSet_IsSupported,    // Used to test whether the descriptor is supported
+
+    ScmBusSet_Max
+} SCM_BUS_SET_TYPE, *PSCM_BUS_SET_TYPE;
+
+
+typedef enum _SCM_BUS_PROPERTY_ID {
+
+    //
+    // Runtime Firmware Activation Information.
+    //
+    ScmBusProperty_RuntimeFwActivationInfo = 0,
+
+    //
+    // Dedicated Memory Information.
+    //
+    ScmBusProperty_DedicatedMemoryInfo = 1,
+
+    //
+    // Activate/Deactivate the Dedicated Memory.
+    //
+    ScmBusProperty_DedicatedMemoryState = 2,
+
+    ScmBusProperty_Max
+} SCM_BUS_PROPERTY_ID, *PSCM_BUS_PROPERTY_ID;
+
+//
+// Query structure - additional parameters for specific queries can follow
+// the header
+//
+
+typedef struct _SCM_BUS_PROPERTY_QUERY {
+
+    //
+    // Sizeof() of this structure serves as the version.
+    //
+    ULONG Version;
+
+    //
+    // The size of this structure, including any additional
+    // parameters.
+    //
+    ULONG Size;
+
+    //
+    // ID of the property being retrieved.
+    //
+    SCM_BUS_PROPERTY_ID PropertyId;
+
+    //
+    // The type of query being performed.
+    //
+    SCM_BUS_QUERY_TYPE QueryType;
+
+    //
+    // Space for additional parameters if necessary.
+    //
+    UCHAR AdditionalParameters[ANYSIZE_ARRAY];
+
+} SCM_BUS_PROPERTY_QUERY, *PSCM_BUS_PROPERTY_QUERY;
+
+//
+// Output buffer for ScmBusProperty_RuntimeFwActivationInfo
+//
+
+//
+// ScmBus Firmware Activation State
+//
+typedef enum _SCM_BUS_FIRMWARE_ACTIVATION_STATE {
+    ScmBusFirmwareActivationState_Idle = 0,     // NVDIMM is Idle for firmware update
+    ScmBusFirmwareActivationState_Armed = 1,    // NVDIMM is armed to activate the staging firmware
+    ScmBusFirmwareActivationState_Busy = 2      // NVDIMM firmware activation is underway
+
+} SCM_BUS_FIRMWARE_ACTIVATION_STATE, *PSCM_BUS_FIRMWARE_ACTIVATION_STATE;
+
+typedef struct _SCM_BUS_RUNTIME_FW_ACTIVATION_INFO {
+
+    //
+    // Sizeof() of this structure serves as the version.
+    //
+    ULONG Version;
+
+    //
+    // Size of the data contained in this structure. If the output buffer is too small
+    // to contain the requested information, the Size field indicates the length of the
+    // output buffer the caller should provide in order to retrieve all the data.
+    //
+    ULONG Size;
+
+    //
+    // Indicates if runtime firmware activation is supported or not.
+    //
+    BOOLEAN RuntimeFwActivationSupported;
+
+    //
+    // Indicates the current Firmware activation state of the DIMMs.
+    // Note: If any one of the NVDIMMs is Armed, the state is Armed.
+    //
+    SCM_BUS_FIRMWARE_ACTIVATION_STATE FirmwareActivationState;
+
+    //
+    // Firmware activation capabilities.
+    //
+    struct {
+
+        //
+        // Live activation supported with platform firmware managed processor and I/O quiesce.
+        //
+        ULONG FwManagedIoQuiesceFwActivationSupported : 1;
+
+        //
+        // Live activation supported with OS managed I/O quiesce (device idle) and platform managed processor quiesce.
+        //
+        ULONG OsManagedIoQuiesceFwActivationSupported : 1;
+
+        //
+        // Warm reset-based activation supported.
+        //
+        ULONG WarmResetBasedFwActivationSupported : 1;
+
+        ULONG Reserved : 29;
+    } FirmwareActivationCapability;
+
+    //
+    // Estimated firmware activation time in micro seconds.
+    //
+    ULONGLONG EstimatedFirmwareActivationTimeInUSecs;
+
+    //
+    // Estimated processor quiesce time during firmware activation in micro seconds.
+    // 0 - no processor quiesce required.
+    //
+    ULONGLONG EstimatedProcessorAccessQuiesceTimeInUSecs;
+
+    //
+    // Estimated I/O access to host memory quiesce time during firmware activation in micro seconds.
+    // 0 - no I/O quiesce required.
+    //
+    ULONGLONG EstimatedIOAccessQuiesceTimeInUSecs;
+
+    //
+    // Platform firmware supported Max I/O access to memory quiesce time during firmware activation in micro seconds.
+    // 0 - Informaiton not available.
+    //
+    ULONGLONG PlatformSupportedMaxIOAccessQuiesceTimeInUSecs;
+
+} SCM_BUS_RUNTIME_FW_ACTIVATION_INFO, *PSCM_BUS_RUNTIME_FW_ACTIVATION_INFO;
+
+//
+// Output buffer for ScmBusProperty_DedicatedMemoryInfo
+//
+typedef struct _SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO {
+
+    //
+    // The dedicated memory device GUID.
+    //
+    GUID DeviceGuid;
+
+    //
+    // The dedicated memory device number.
+    //
+    ULONG DeviceNumber;
+
+    struct {
+
+        //
+        // Indicates if the dedicated memory is created by registry settings.
+        //
+        ULONG ForcedByRegistry : 1;
+
+        //
+        // Indicates if the dedicated memory is initialized.
+        //
+        ULONG Initialized : 1;
+
+        ULONG Reserved : 30;
+    } Flags;
+
+    //
+    // The dedicated memory device size in bytes.
+    //
+    ULONGLONG DeviceSize;
+
+} SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO, *PSCM_BUS_DEDICATED_MEMORY_DEVICE_INFO;
+
+typedef struct _SCM_BUS_DEDICATED_MEMORY_DEVICES_INFO {
+
+    //
+    // Sizeof() of this structure serves as the version.
+    //
+    ULONG Version;
+
+    //
+    // The total size of the data structure, including all the elements in the
+    // Devices array.
+    //
+    ULONG Size;
+
+    //
+    // The number of valid elements in the Devices array.
+    //
+    ULONG DeviceCount;
+
+    //
+    // Array of dedicated memory devices info.
+    //
+    SCM_BUS_DEDICATED_MEMORY_DEVICE_INFO Devices[ANYSIZE_ARRAY];
+
+} SCM_BUS_DEDICATED_MEMORY_DEVICES_INFO, *PSCM_BUS_DEDICATED_MEMORY_DEVICES_INFO;
+
+
+//
+// Set structure - additional parameters for specific sets can follow
+// the header
+//
+
+typedef struct _SCM_BUS_PROPERTY_SET {
+
+    //
+    // Sizeof() of this structure serves as the version.
+    //
+    ULONG Version;
+
+    //
+    // The size of this structure, including any additional
+    // parameters.
+    //
+    ULONG Size;
+
+    //
+    // ID of the property being set.
+    //
+    SCM_BUS_PROPERTY_ID PropertyId;
+
+    //
+    // The type of set being performed.
+    //
+    SCM_BUS_SET_TYPE SetType;
+
+    //
+    // Space for additional parameters if necessary.
+    //
+    UCHAR AdditionalParameters[ANYSIZE_ARRAY];
+
+} SCM_BUS_PROPERTY_SET, *PSCM_BUS_PROPERTY_SET;
+
+//
+// Input AdditionalParameters for ScmBusProperty_DedicatedMemoryState
+//
+
+typedef struct _SCM_BUS_DEDICATED_MEMORY_STATE {
+
+    //
+    // Dedicated Memory state (Deactivate - FALSE, Activate - TRUE).
+    //
+    BOOLEAN ActivateState;
+} SCM_BUS_DEDICATED_MEMORY_STATE, *PSCM_BUS_DEDICATED_MEMORY_STATE;
 
 
 //
@@ -453,7 +769,7 @@ typedef struct _SCM_LD_INTERLEAVE_SET_INFO {
     // The number of elements in the InterleaveSet array.
     //
     ULONG InterleaveSetSize;
-    
+
     //
     // Information about the physical devices that make up this interleave
     // set.
@@ -490,44 +806,89 @@ typedef struct _SCM_LD_INTERLEAVE_SET_INFO {
 typedef enum _SCM_PD_QUERY_TYPE {
     ScmPhysicalDeviceQuery_Descriptor = 0, // Retrieves the descriptor
     ScmPhysicalDeviceQuery_IsSupported, // Used to test whether the descriptor is supported
-    
+
     ScmPhysicalDeviceQuery_Max
 } SCM_PD_QUERY_TYPE, *PSCM_PD_QUERY_TYPE;
 
+
+//
+// IOCTL_SCM_PD_SET_PROPERTY
+//
+// Input Buffer:
+//      An SCM_PD_PROPERTY_SET structure that describes the type of set
+//      being done, the property being set, and any additional parameters
+//      the set requires.
+//
+//  Output Buffer:
+//      Contains a buffer to place the results of the set into. Since all
+//      property descriptors can be cast into an SCM_PD_DESCRIPTOR_HEADER,
+//      the IOCTL can be called once with a small buffer then again using
+//      a buffer as large as the header reports is necessary.
+//
+
+
+//
+// Types of sets
+//
+
+typedef enum _SCM_PD_SET_TYPE {
+    ScmPhysicalDeviceSet_Descriptor = 0, // Retrieves the descriptor
+    ScmPhysicalDeviceSet_IsSupported, // Used to test whether the descriptor is supported
+
+    ScmPhysicalDeviceSet_Max
+} SCM_PD_SET_TYPE, *PSCM_PD_SET_TYPE;
+
+
 typedef enum _SCM_PD_PROPERTY_ID {
-    
+
     //
     // General information about the device.
     //
     ScmPhysicalDeviceProperty_DeviceInfo = 0,
-    
+
     //
     // Information about the device's health.
     //
     ScmPhysicalDeviceProperty_ManagementStatus,
-    
+
     //
     // Firmware-related information.
     //
     ScmPhysicalDeviceProperty_FirmwareInfo,
-    
+
     //
     // Returns a string that identifies where the device is located
     // on the local system.
     //
     ScmPhysicalDeviceProperty_LocationString,
-    
+
     //
     // Returns a series of device-specific information, which give more detail
     // on the device's status.
     //
     ScmPhysicalDeviceProperty_DeviceSpecificInfo,
-    
+
     //
     // Returns a identifying handle of the physical device, which comes from
     // the NFIT table.
     //
     ScmPhysicalDeviceProperty_DeviceHandle,
+
+    //
+    // Returns a string that identifies the replacement unit housing
+    // the device on the local system.
+    //
+    ScmPhysicalDeviceProperty_FruIdString,
+
+    //
+    // Returns runtime firmware activation information.
+    //
+    ScmPhysicalDeviceProperty_RuntimeFwActivationInfo,
+
+    //
+    // Runtime firmware activation arm state.
+    //
+    ScmPhysicalDeviceProperty_RuntimeFwActivationArmState,
 
     ScmPhysicalDeviceProperty_Max
 } SCM_PD_PROPERTY_ID, *PSCM_PD_PROPERTY_ID;
@@ -569,6 +930,53 @@ typedef struct _SCM_PD_PROPERTY_QUERY {
 } SCM_PD_PROPERTY_QUERY, *PSCM_PD_PROPERTY_QUERY;
 
 //
+// Set structure - additional parameters for specific sets can follow
+// the header
+//
+
+typedef struct _SCM_PD_PROPERTY_SET {
+
+    //
+    // Sizeof() of this structure serves as the version.
+    //
+    ULONG Version;
+
+    //
+    // The size of this structure, including any additional
+    // parameters.
+    //
+    ULONG Size;
+
+    //
+    // ID of the property being retrieved.
+    //
+    SCM_PD_PROPERTY_ID PropertyId;
+
+    //
+    // The type of set being performed.
+    //
+    SCM_PD_SET_TYPE SetType;
+
+    //
+    // Space for additional parameters if necessary.
+    //
+    UCHAR AdditionalParameters[ANYSIZE_ARRAY];
+
+} SCM_PD_PROPERTY_SET, *PSCM_PD_PROPERTY_SET;
+
+//
+// Input AdditionalParameters for ScmPhysicalDeviceProperty_RuntimeFwActivationArmState
+//
+
+typedef struct _SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE {
+
+    //
+    // Runtime firmware activation arm state (Disarm - FALSE, Arm - TRUE).
+    //
+    BOOLEAN ArmState;
+} SCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE, *PSCM_PD_RUNTIME_FW_ACTIVATION_ARM_STATE;
+
+//
 // Standard property descriptor header. All property pages should use this
 // as their first element or should contain these two elements
 //
@@ -579,7 +987,7 @@ typedef struct _SCM_PD_DESCRIPTOR_HEADER {
     // The sizeof() of the entire descriptor (not just the header).
     //
     ULONG Version;
-    
+
     //
     // The size of the entire descriptor (not just the header).
     //
@@ -877,7 +1285,8 @@ typedef enum _SCM_PD_OPERATIONAL_STATUS_REASON {
     ScmPhysicalDeviceOpReason_MediaRemainingSpareBlock,
     ScmPhysicalDeviceOpReason_PerformanceDegradation,
     ScmPhysicalDeviceOpReason_ExcessiveTemperature,
-    
+    ScmPhysicalDeviceOpReason_InternalFailure,
+
     ScmPhysicalDeviceOpReason_Max
 } SCM_PD_OPERATIONAL_STATUS_REASON, *PSCM_PD_OPERATIONAL_STATUS_REASON;
 
@@ -954,6 +1363,32 @@ typedef struct _SCM_PD_LOCATION_STRING {
     WCHAR Location[ANYSIZE_ARRAY];
 
 } SCM_PD_LOCATION_STRING, *PSCM_PD_LOCATION_STRING;
+
+//
+// Output buffer for ScmPhysicalDeviceQuery_Descriptor & ScmPhysicalDeviceProperty_FruIdString
+//
+typedef struct _SCM_PD_FRU_ID_STRING {
+
+    //
+    // Sizeof() of this structure serves as the version.
+    //
+    ULONG Version;
+
+    //
+    // The total size of the structure, including the buffer for the fru id string.
+    // If the output buffer is too small to contain the requested information,
+    // the Size field indicates the length of the output buffer the caller should provide
+    // in order to retrieve all the data.
+    //
+    ULONG Size;
+
+    //
+    // The string that represents the fru id of this physical device.
+    //
+    ULONG IdentifierSize;
+    UCHAR Identifier[ANYSIZE_ARRAY];
+
+} SCM_PD_FRU_ID_STRING, *PSCM_PD_FRU_ID_STRING;
 
 //
 // Firmware update IOCTLs.
@@ -1037,6 +1472,61 @@ typedef struct _SCM_PD_FIRMWARE_ACTIVATE {
     UCHAR Slot;
 
 } SCM_PD_FIRMWARE_ACTIVATE, *PSCM_PD_FIRMWARE_ACTIVATE;
+
+//
+// Output buffer for ScmPhysicalDeviceProperty_RuntimeFwActivationInfo
+//
+
+//
+// ScmBus Physical Device Last Firmware Activation Status
+//
+typedef enum _SCM_PD_LAST_FW_ACTIVATION_STATUS {
+    ScmPdLastFwActivationStatus_None = 0,                   // No Firmware Activation performed. Reset to None on boot
+    ScmPdLastFwActivationStatus_Success = 1,                // Success
+    ScmPdLastFwActivationStatus_FwNotFound = 2,             // No new staged firmware to activate
+    ScmPdLastFwActivationStatus_ColdRebootRequired = 3,     // NVDIMM Reset required to activate staged firmware
+    ScmPdLastFwActivaitonStatus_ActivationInProgress = 4,   // Media disabled during firmware activation
+    ScmPdLastFwActivaitonStatus_Retry = 5,                  // Activation aborted due to throttling. Retry recommended
+    ScmPdLastFwActivaitonStatus_FwUnsupported = 6,          // Staged firmware version does not meet activation requirements
+    ScmPdLastFwActivaitonStatus_UnknownError = 7            // Unclassified firmware activation error
+
+} SCM_PD_LAST_FW_ACTIVATION_STATUS, *PSCM_PD_LAST_FW_ACTIVATION_STATUS;
+
+//
+// ScmBus Physical Device Firmware Activation State
+//
+typedef enum _SCM_PD_FIRMWARE_ACTIVATION_STATE {
+    ScmPdFirmwareActivationState_Idle = 0,  // NVDIMM is Idle for firmware update
+    ScmPdFirmwareActivationState_Armed = 1, // NVDIMM is armed to activate the staging firmware
+    ScmPdFirmwareActivationState_Busy = 2   // NVDIMM firmware activation is underway
+
+} SCM_PD_FIRMWARE_ACTIVATION_STATE, *PSCM_PD_FIRMWARE_ACTIVATION_STATE;
+
+typedef struct _SCM_PD_RUNTIME_FW_ACTIVATION_INFO {
+
+    //
+    // Sizeof() of this structure serves as the version.
+    //
+    ULONG Version;
+
+    //
+    // Size of the data contained in this structure. If the output buffer is too small
+    // to contain the requested information, the Size field indicates the length of the
+    // output buffer the caller should provide in order to retrieve all the data.
+    //
+    ULONG Size;
+
+    //
+    // This provides the previous Firmware Activation status.
+    //
+    SCM_PD_LAST_FW_ACTIVATION_STATUS LastFirmwareActivationStatus;
+
+    //
+    // Indicates the current Firmware activation state of the DIMM.
+    //
+    SCM_PD_FIRMWARE_ACTIVATION_STATE FirmwareActivationState;
+
+} SCM_PD_RUNTIME_FW_ACTIVATION_INFO, *PSCM_PD_RUNTIME_FW_ACTIVATION_INFO;
 
 //
 // IOCTL_SCM_PD_PASSTHROUGH

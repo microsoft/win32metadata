@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -116,22 +124,27 @@ EXTERN_C const IID IID_IEVRVideoStreamControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEVRVideoStreamControl * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEVRVideoStreamControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEVRVideoStreamControl * This);
         
+        DECLSPEC_XFGVIRT(IEVRVideoStreamControl, SetStreamActiveState)
         HRESULT ( STDMETHODCALLTYPE *SetStreamActiveState )( 
             IEVRVideoStreamControl * This,
             /* [in] */ BOOL fActive);
         
+        DECLSPEC_XFGVIRT(IEVRVideoStreamControl, GetStreamActiveState)
         HRESULT ( STDMETHODCALLTYPE *GetStreamActiveState )( 
             IEVRVideoStreamControl * This,
             /* [annotation][out] */ 
@@ -245,70 +258,85 @@ EXTERN_C const IID IID_IMFVideoProcessor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMFVideoProcessor * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMFVideoProcessor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMFVideoProcessor * This);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, GetAvailableVideoProcessorModes)
         HRESULT ( STDMETHODCALLTYPE *GetAvailableVideoProcessorModes )( 
             __RPC__in IMFVideoProcessor * This,
             /* [out][in] */ __RPC__inout UINT *lpdwNumProcessingModes,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*lpdwNumProcessingModes) GUID **ppVideoProcessingModes);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, GetVideoProcessorCaps)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessorCaps )( 
             __RPC__in IMFVideoProcessor * This,
             /* [in] */ __RPC__in LPGUID lpVideoProcessorMode,
             /* [out] */ __RPC__out DXVA2_VideoProcessorCaps *lpVideoProcessorCaps);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, GetVideoProcessorMode)
         HRESULT ( STDMETHODCALLTYPE *GetVideoProcessorMode )( 
             __RPC__in IMFVideoProcessor * This,
             /* [out] */ __RPC__out LPGUID lpMode);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, SetVideoProcessorMode)
         HRESULT ( STDMETHODCALLTYPE *SetVideoProcessorMode )( 
             __RPC__in IMFVideoProcessor * This,
             /* [in] */ __RPC__in LPGUID lpMode);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, GetProcAmpRange)
         HRESULT ( STDMETHODCALLTYPE *GetProcAmpRange )( 
             __RPC__in IMFVideoProcessor * This,
             DWORD dwProperty,
             /* [out] */ __RPC__out DXVA2_ValueRange *pPropRange);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, GetProcAmpValues)
         HRESULT ( STDMETHODCALLTYPE *GetProcAmpValues )( 
             __RPC__in IMFVideoProcessor * This,
             DWORD dwFlags,
             /* [out] */ __RPC__out DXVA2_ProcAmpValues *Values);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, SetProcAmpValues)
         HRESULT ( STDMETHODCALLTYPE *SetProcAmpValues )( 
             __RPC__in IMFVideoProcessor * This,
             DWORD dwFlags,
             /* [in] */ __RPC__in DXVA2_ProcAmpValues *pValues);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, GetFilteringRange)
         HRESULT ( STDMETHODCALLTYPE *GetFilteringRange )( 
             __RPC__in IMFVideoProcessor * This,
             DWORD dwProperty,
             /* [out] */ __RPC__out DXVA2_ValueRange *pPropRange);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, GetFilteringValue)
         HRESULT ( STDMETHODCALLTYPE *GetFilteringValue )( 
             __RPC__in IMFVideoProcessor * This,
             DWORD dwProperty,
             /* [out] */ __RPC__out DXVA2_Fixed32 *pValue);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, SetFilteringValue)
         HRESULT ( STDMETHODCALLTYPE *SetFilteringValue )( 
             __RPC__in IMFVideoProcessor * This,
             DWORD dwProperty,
             /* [in] */ __RPC__in DXVA2_Fixed32 *pValue);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, GetBackgroundColor)
         HRESULT ( STDMETHODCALLTYPE *GetBackgroundColor )( 
             __RPC__in IMFVideoProcessor * This,
             /* [out] */ __RPC__out COLORREF *lpClrBkg);
         
+        DECLSPEC_XFGVIRT(IMFVideoProcessor, SetBackgroundColor)
         HRESULT ( STDMETHODCALLTYPE *SetBackgroundColor )( 
             __RPC__in IMFVideoProcessor * This,
             COLORREF ClrBkg);
@@ -460,29 +488,36 @@ EXTERN_C const IID IID_IMFVideoMixerBitmap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFVideoMixerBitmap * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFVideoMixerBitmap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFVideoMixerBitmap * This);
         
+        DECLSPEC_XFGVIRT(IMFVideoMixerBitmap, SetAlphaBitmap)
         HRESULT ( STDMETHODCALLTYPE *SetAlphaBitmap )( 
             IMFVideoMixerBitmap * This,
             /* [in] */ const MFVideoAlphaBitmap *pBmpParms);
         
+        DECLSPEC_XFGVIRT(IMFVideoMixerBitmap, ClearAlphaBitmap)
         HRESULT ( STDMETHODCALLTYPE *ClearAlphaBitmap )( 
             IMFVideoMixerBitmap * This);
         
+        DECLSPEC_XFGVIRT(IMFVideoMixerBitmap, UpdateAlphaBitmapParameters)
         HRESULT ( STDMETHODCALLTYPE *UpdateAlphaBitmapParameters )( 
             IMFVideoMixerBitmap * This,
             /* [in] */ const MFVideoAlphaBitmapParams *pBmpParms);
         
+        DECLSPEC_XFGVIRT(IMFVideoMixerBitmap, GetAlphaBitmapParameters)
         HRESULT ( STDMETHODCALLTYPE *GetAlphaBitmapParameters )( 
             IMFVideoMixerBitmap * This,
             /* [annotation][out] */ 

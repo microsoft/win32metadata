@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -222,6 +230,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpenServiceActivityInput * This,
             /* [annotation][in] */ 
@@ -229,12 +238,15 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOpenServiceActivityInput * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOpenServiceActivityInput * This);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityInput, GetVariable)
         HRESULT ( STDMETHODCALLTYPE *GetVariable )( 
             __RPC__in IOpenServiceActivityInput * This,
             /* [annotation][in] */ 
@@ -244,6 +256,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrVariableContent);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityInput, HasVariable)
         HRESULT ( STDMETHODCALLTYPE *HasVariable )( 
             __RPC__in IOpenServiceActivityInput * This,
             /* [annotation][in] */ 
@@ -253,6 +266,7 @@ EXTERN_C const IID IID_IOpenServiceActivityInput;
             /* [annotation][out] */ 
             _Out_  BOOL *pfHasVariable);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityInput, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             __RPC__in IOpenServiceActivityInput * This,
             /* [annotation][out] */ 
@@ -347,6 +361,7 @@ EXTERN_C const IID IID_IOpenServiceActivityOutputContext;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpenServiceActivityOutputContext * This,
             /* [annotation][in] */ 
@@ -354,12 +369,15 @@ EXTERN_C const IID IID_IOpenServiceActivityOutputContext;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOpenServiceActivityOutputContext * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOpenServiceActivityOutputContext * This);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityOutputContext, Navigate)
         HRESULT ( STDMETHODCALLTYPE *Navigate )( 
             __RPC__in IOpenServiceActivityOutputContext * This,
             /* [annotation][in] */ 
@@ -371,6 +389,7 @@ EXTERN_C const IID IID_IOpenServiceActivityOutputContext;
             /* [annotation][unique][in] */ 
             _In_  IStream *pPostData);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityOutputContext, CanNavigate)
         HRESULT ( STDMETHODCALLTYPE *CanNavigate )( 
             __RPC__in IOpenServiceActivityOutputContext * This,
             /* [annotation][in] */ 
@@ -462,6 +481,7 @@ EXTERN_C const IID IID_IOpenService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpenService * This,
             /* [annotation][in] */ 
@@ -469,17 +489,21 @@ EXTERN_C const IID IID_IOpenService;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOpenService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOpenService * This);
         
+        DECLSPEC_XFGVIRT(IOpenService, IsDefault)
         HRESULT ( STDMETHODCALLTYPE *IsDefault )( 
             __RPC__in IOpenService * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfIsDefault);
         
+        DECLSPEC_XFGVIRT(IOpenService, SetDefault)
         HRESULT ( STDMETHODCALLTYPE *SetDefault )( 
             __RPC__in IOpenService * This,
             /* [annotation][in] */ 
@@ -487,6 +511,7 @@ EXTERN_C const IID IID_IOpenService;
             /* [annotation][in] */ 
             _In_  HWND hwnd);
         
+        DECLSPEC_XFGVIRT(IOpenService, GetID)
         HRESULT ( STDMETHODCALLTYPE *GetID )( 
             __RPC__in IOpenService * This,
             /* [annotation][out] */ 
@@ -575,6 +600,7 @@ EXTERN_C const IID IID_IOpenServiceManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpenServiceManager * This,
             /* [annotation][in] */ 
@@ -582,12 +608,15 @@ EXTERN_C const IID IID_IOpenServiceManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOpenServiceManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOpenServiceManager * This);
         
+        DECLSPEC_XFGVIRT(IOpenServiceManager, InstallService)
         HRESULT ( STDMETHODCALLTYPE *InstallService )( 
             __RPC__in IOpenServiceManager * This,
             /* [annotation][in] */ 
@@ -595,11 +624,13 @@ EXTERN_C const IID IID_IOpenServiceManager;
             /* [annotation][out] */ 
             _Out_  IOpenService **ppService);
         
+        DECLSPEC_XFGVIRT(IOpenServiceManager, UninstallService)
         HRESULT ( STDMETHODCALLTYPE *UninstallService )( 
             __RPC__in IOpenServiceManager * This,
             /* [annotation][in] */ 
             _In_  IOpenService *pService);
         
+        DECLSPEC_XFGVIRT(IOpenServiceManager, GetServiceByID)
         HRESULT ( STDMETHODCALLTYPE *GetServiceByID )( 
             __RPC__in IOpenServiceManager * This,
             /* [annotation][in] */ 
@@ -793,6 +824,7 @@ EXTERN_C const IID IID_IOpenServiceActivity;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -800,17 +832,21 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOpenServiceActivity * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOpenServiceActivity * This);
         
+        DECLSPEC_XFGVIRT(IOpenService, IsDefault)
         HRESULT ( STDMETHODCALLTYPE *IsDefault )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfIsDefault);
         
+        DECLSPEC_XFGVIRT(IOpenService, SetDefault)
         HRESULT ( STDMETHODCALLTYPE *SetDefault )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -818,11 +854,13 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][in] */ 
             _In_  HWND hwnd);
         
+        DECLSPEC_XFGVIRT(IOpenService, GetID)
         HRESULT ( STDMETHODCALLTYPE *GetID )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrID);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, Execute)
         HRESULT ( STDMETHODCALLTYPE *Execute )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -830,6 +868,7 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][in] */ 
             _In_  IOpenServiceActivityOutputContext *pOutput);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, CanExecute)
         HRESULT ( STDMETHODCALLTYPE *CanExecute )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -839,6 +878,7 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][out] */ 
             _Out_  BOOL *pfCanExecute);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, CanExecuteType)
         HRESULT ( STDMETHODCALLTYPE *CanExecuteType )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -846,6 +886,7 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][out] */ 
             _Out_  BOOL *pfCanExecute);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, Preview)
         HRESULT ( STDMETHODCALLTYPE *Preview )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -853,6 +894,7 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][in] */ 
             _In_  IOpenServiceActivityOutputContext *pOutput);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, CanPreview)
         HRESULT ( STDMETHODCALLTYPE *CanPreview )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -862,6 +904,7 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][out] */ 
             _Out_  BOOL *pfCanPreview);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, CanPreviewType)
         HRESULT ( STDMETHODCALLTYPE *CanPreviewType )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -869,6 +912,7 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][out] */ 
             _Out_  BOOL *pfCanPreview);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetStatusText)
         HRESULT ( STDMETHODCALLTYPE *GetStatusText )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -876,31 +920,37 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrStatusText);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetHomepageUrl)
         HRESULT ( STDMETHODCALLTYPE *GetHomepageUrl )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrHomepageUrl);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrDisplayName);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDescription )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetCategoryName)
         HRESULT ( STDMETHODCALLTYPE *GetCategoryName )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrCategoryName);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetIconPath)
         HRESULT ( STDMETHODCALLTYPE *GetIconPath )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrIconPath);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetIcon)
         HRESULT ( STDMETHODCALLTYPE *GetIcon )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -908,26 +958,31 @@ EXTERN_C const IID IID_IOpenServiceActivity;
             /* [annotation][out] */ 
             _Out_  HICON *phIcon);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetDescriptionFilePath)
         HRESULT ( STDMETHODCALLTYPE *GetDescriptionFilePath )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrXmlPath);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetDownloadUrl)
         HRESULT ( STDMETHODCALLTYPE *GetDownloadUrl )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrXmlUri);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, GetInstallUrl)
         HRESULT ( STDMETHODCALLTYPE *GetInstallUrl )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrInstallUri);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, IsEnabled)
         HRESULT ( STDMETHODCALLTYPE *IsEnabled )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfIsEnabled);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivity, SetEnabled)
         HRESULT ( STDMETHODCALLTYPE *SetEnabled )( 
             __RPC__in IOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -1075,6 +1130,7 @@ EXTERN_C const IID IID_IEnumOpenServiceActivity;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -1082,12 +1138,15 @@ EXTERN_C const IID IID_IEnumOpenServiceActivity;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumOpenServiceActivity * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumOpenServiceActivity * This);
         
+        DECLSPEC_XFGVIRT(IEnumOpenServiceActivity, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumOpenServiceActivity * This,
             /* [annotation][in] */ 
@@ -1097,14 +1156,17 @@ EXTERN_C const IID IID_IEnumOpenServiceActivity;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumOpenServiceActivity, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumOpenServiceActivity * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumOpenServiceActivity, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumOpenServiceActivity * This);
         
+        DECLSPEC_XFGVIRT(IEnumOpenServiceActivity, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumOpenServiceActivity * This,
             /* [annotation][out] */ 
@@ -1206,6 +1268,7 @@ EXTERN_C const IID IID_IOpenServiceActivityCategory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpenServiceActivityCategory * This,
             /* [annotation][in] */ 
@@ -1213,22 +1276,27 @@ EXTERN_C const IID IID_IOpenServiceActivityCategory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOpenServiceActivityCategory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOpenServiceActivityCategory * This);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityCategory, HasDefaultActivity)
         HRESULT ( STDMETHODCALLTYPE *HasDefaultActivity )( 
             __RPC__in IOpenServiceActivityCategory * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pfHasDefaultActivity);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityCategory, GetDefaultActivity)
         HRESULT ( STDMETHODCALLTYPE *GetDefaultActivity )( 
             __RPC__in IOpenServiceActivityCategory * This,
             /* [annotation][out] */ 
             _Out_  IOpenServiceActivity **ppDefaultActivity);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityCategory, SetDefaultActivity)
         HRESULT ( STDMETHODCALLTYPE *SetDefaultActivity )( 
             __RPC__in IOpenServiceActivityCategory * This,
             /* [annotation][in] */ 
@@ -1236,11 +1304,13 @@ EXTERN_C const IID IID_IOpenServiceActivityCategory;
             /* [annotation][in] */ 
             _In_  HWND hwnd);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityCategory, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             __RPC__in IOpenServiceActivityCategory * This,
             /* [annotation][out] */ 
             _Out_  BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityCategory, GetActivityEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetActivityEnumerator )( 
             __RPC__in IOpenServiceActivityCategory * This,
             /* [annotation][in] */ 
@@ -1343,6 +1413,7 @@ EXTERN_C const IID IID_IEnumOpenServiceActivityCategory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumOpenServiceActivityCategory * This,
             /* [annotation][in] */ 
@@ -1350,12 +1421,15 @@ EXTERN_C const IID IID_IEnumOpenServiceActivityCategory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumOpenServiceActivityCategory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumOpenServiceActivityCategory * This);
         
+        DECLSPEC_XFGVIRT(IEnumOpenServiceActivityCategory, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumOpenServiceActivityCategory * This,
             /* [annotation][in] */ 
@@ -1365,14 +1439,17 @@ EXTERN_C const IID IID_IEnumOpenServiceActivityCategory;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumOpenServiceActivityCategory, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumOpenServiceActivityCategory * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumOpenServiceActivityCategory, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumOpenServiceActivityCategory * This);
         
+        DECLSPEC_XFGVIRT(IEnumOpenServiceActivityCategory, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumOpenServiceActivityCategory * This,
             /* [annotation][out] */ 
@@ -1472,6 +1549,7 @@ EXTERN_C const IID IID_IOpenServiceActivityManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IOpenServiceActivityManager * This,
             /* [annotation][in] */ 
@@ -1479,12 +1557,15 @@ EXTERN_C const IID IID_IOpenServiceActivityManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IOpenServiceActivityManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IOpenServiceActivityManager * This);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityManager, GetCategoryEnumerator)
         HRESULT ( STDMETHODCALLTYPE *GetCategoryEnumerator )( 
             __RPC__in IOpenServiceActivityManager * This,
             /* [annotation][in] */ 
@@ -1492,6 +1573,7 @@ EXTERN_C const IID IID_IOpenServiceActivityManager;
             /* [annotation][out] */ 
             _Out_  IEnumOpenServiceActivityCategory **ppEnum);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityManager, GetActivityByID)
         HRESULT ( STDMETHODCALLTYPE *GetActivityByID )( 
             __RPC__in IOpenServiceActivityManager * This,
             /* [annotation][in] */ 
@@ -1499,6 +1581,7 @@ EXTERN_C const IID IID_IOpenServiceActivityManager;
             /* [annotation][out] */ 
             _Out_  IOpenServiceActivity **ppActivity);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityManager, GetActivityByHomepageAndCategory)
         HRESULT ( STDMETHODCALLTYPE *GetActivityByHomepageAndCategory )( 
             __RPC__in IOpenServiceActivityManager * This,
             /* [annotation][in] */ 
@@ -1508,6 +1591,7 @@ EXTERN_C const IID IID_IOpenServiceActivityManager;
             /* [annotation][out] */ 
             _Out_  IOpenServiceActivity **ppActivity);
         
+        DECLSPEC_XFGVIRT(IOpenServiceActivityManager, GetVersionCookie)
         HRESULT ( STDMETHODCALLTYPE *GetVersionCookie )( 
             __RPC__in IOpenServiceActivityManager * This,
             /* [annotation][out] */ 

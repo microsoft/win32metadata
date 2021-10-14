@@ -643,7 +643,7 @@ typedef wchar_t *   PTBYTE;
 _Check_return_ __inline size_t __CRTDECL _tclen(_In_z_ const wchar_t *_Cpc)
 {
     /* avoid compiler warning */
-    (void *)_Cpc;
+    (void)_Cpc;
     return 1;
 }
 __inline void __CRTDECL _tccpy(_Out_ wchar_t *_Pc1, _In_z_ const wchar_t *_Cpc2) { *_Pc1 = (wchar_t)*_Cpc2; }

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -165,65 +173,79 @@ EXTERN_C const IID IID_IAMPlayListItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAMPlayListItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAMPlayListItem * This);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             __RPC__in IAMPlayListItem * This,
             /* [out] */ __RPC__out DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetSourceCount)
         HRESULT ( STDMETHODCALLTYPE *GetSourceCount )( 
             __RPC__in IAMPlayListItem * This,
             /* [out] */ __RPC__out DWORD *pdwSources);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetSourceURL)
         HRESULT ( STDMETHODCALLTYPE *GetSourceURL )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ DWORD dwSourceIndex,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetSourceStart)
         HRESULT ( STDMETHODCALLTYPE *GetSourceStart )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ DWORD dwSourceIndex,
             /* [out] */ __RPC__out REFERENCE_TIME *prtStart);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetSourceDuration)
         HRESULT ( STDMETHODCALLTYPE *GetSourceDuration )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ DWORD dwSourceIndex,
             /* [out] */ __RPC__out REFERENCE_TIME *prtDuration);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetSourceStartMarker)
         HRESULT ( STDMETHODCALLTYPE *GetSourceStartMarker )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ DWORD dwSourceIndex,
             /* [out] */ __RPC__out DWORD *pdwMarker);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetSourceEndMarker)
         HRESULT ( STDMETHODCALLTYPE *GetSourceEndMarker )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ DWORD dwSourceIndex,
             /* [out] */ __RPC__out DWORD *pdwMarker);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetSourceStartMarkerName)
         HRESULT ( STDMETHODCALLTYPE *GetSourceStartMarkerName )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ DWORD dwSourceIndex,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrStartMarker);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetSourceEndMarkerName)
         HRESULT ( STDMETHODCALLTYPE *GetSourceEndMarkerName )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ DWORD dwSourceIndex,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrEndMarker);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetLinkURL)
         HRESULT ( STDMETHODCALLTYPE *GetLinkURL )( 
             __RPC__in IAMPlayListItem * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IAMPlayListItem, GetScanDuration)
         HRESULT ( STDMETHODCALLTYPE *GetScanDuration )( 
             __RPC__in IAMPlayListItem * This,
             /* [in] */ DWORD dwSourceIndex,
@@ -364,31 +386,38 @@ EXTERN_C const IID IID_IAMPlayList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAMPlayList * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAMPlayList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAMPlayList * This);
         
+        DECLSPEC_XFGVIRT(IAMPlayList, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             __RPC__in IAMPlayList * This,
             /* [out] */ __RPC__out DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IAMPlayList, GetItemCount)
         HRESULT ( STDMETHODCALLTYPE *GetItemCount )( 
             __RPC__in IAMPlayList * This,
             /* [out] */ __RPC__out DWORD *pdwItems);
         
+        DECLSPEC_XFGVIRT(IAMPlayList, GetItem)
         HRESULT ( STDMETHODCALLTYPE *GetItem )( 
             __RPC__in IAMPlayList * This,
             /* [in] */ DWORD dwItemIndex,
             /* [out] */ __RPC__deref_out_opt IAMPlayListItem **ppItem);
         
+        DECLSPEC_XFGVIRT(IAMPlayList, GetNamedEvent)
         HRESULT ( STDMETHODCALLTYPE *GetNamedEvent )( 
             __RPC__in IAMPlayList * This,
             /* [in] */ __RPC__in WCHAR *pwszEventName,
@@ -396,6 +425,7 @@ EXTERN_C const IID IID_IAMPlayList;
             /* [out] */ __RPC__deref_out_opt IAMPlayListItem **ppItem,
             /* [out] */ __RPC__out DWORD *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IAMPlayList, GetRepeatInfo)
         HRESULT ( STDMETHODCALLTYPE *GetRepeatInfo )( 
             __RPC__in IAMPlayList * This,
             /* [out] */ __RPC__out DWORD *pdwRepeatCount,
@@ -479,18 +509,22 @@ EXTERN_C const IID IID_ISpecifyParticularPages;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISpecifyParticularPages * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISpecifyParticularPages * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISpecifyParticularPages * This);
         
+        DECLSPEC_XFGVIRT(ISpecifyParticularPages, GetPages)
         HRESULT ( STDMETHODCALLTYPE *GetPages )( 
             __RPC__in ISpecifyParticularPages * This,
             /* [in] */ __RPC__in REFGUID guidWhatPages,
@@ -559,18 +593,22 @@ EXTERN_C const IID IID_IAMRebuild;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAMRebuild * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAMRebuild * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAMRebuild * This);
         
+        DECLSPEC_XFGVIRT(IAMRebuild, RebuildNow)
         HRESULT ( STDMETHODCALLTYPE *RebuildNow )( 
             IAMRebuild * This);
         
@@ -641,22 +679,27 @@ EXTERN_C const IID IID_IBufferingTime;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IBufferingTime * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IBufferingTime * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IBufferingTime * This);
         
+        DECLSPEC_XFGVIRT(IBufferingTime, GetBufferingTime)
         HRESULT ( STDMETHODCALLTYPE *GetBufferingTime )( 
             IBufferingTime * This,
             DWORD *pdwMilliseconds);
         
+        DECLSPEC_XFGVIRT(IBufferingTime, SetBufferingTime)
         HRESULT ( STDMETHODCALLTYPE *SetBufferingTime )( 
             IBufferingTime * This,
             DWORD dwMilliseconds);

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -162,6 +170,7 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupReadFileCallback * This,
             /* [annotation][in] */ 
@@ -169,12 +178,15 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDedupReadFileCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDedupReadFileCallback * This);
         
+        DECLSPEC_XFGVIRT(IDedupReadFileCallback, ReadBackupFile)
         HRESULT ( STDMETHODCALLTYPE *ReadBackupFile )( 
             __RPC__in IDedupReadFileCallback * This,
             /* [annotation][in] */ 
@@ -190,6 +202,7 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
             /* [annotation][in] */ 
             _In_  DWORD Flags);
         
+        DECLSPEC_XFGVIRT(IDedupReadFileCallback, OrderContainersRestore)
         HRESULT ( STDMETHODCALLTYPE *OrderContainersRestore )( 
             __RPC__in IDedupReadFileCallback * This,
             /* [annotation][in] */ 
@@ -201,6 +214,7 @@ EXTERN_C const IID IID_IDedupReadFileCallback;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*ReadPlanEntries)  DEDUP_CONTAINER_EXTENT **ReadPlan);
         
+        DECLSPEC_XFGVIRT(IDedupReadFileCallback, PreviewContainerRead)
         HRESULT ( STDMETHODCALLTYPE *PreviewContainerRead )( 
             __RPC__in IDedupReadFileCallback * This,
             /* [annotation][in] */ 
@@ -289,6 +303,7 @@ EXTERN_C const IID IID_IDedupBackupSupport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDedupBackupSupport * This,
             /* [annotation][in] */ 
@@ -296,12 +311,15 @@ EXTERN_C const IID IID_IDedupBackupSupport;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDedupBackupSupport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDedupBackupSupport * This);
         
+        DECLSPEC_XFGVIRT(IDedupBackupSupport, RestoreFiles)
         HRESULT ( STDMETHODCALLTYPE *RestoreFiles )( 
             __RPC__in IDedupBackupSupport * This,
             /* [annotation][in] */ 

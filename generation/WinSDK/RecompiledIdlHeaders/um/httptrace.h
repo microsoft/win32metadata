@@ -120,7 +120,7 @@ struct HTTP_TRACE_EVENT
     // the event
     //
     _Field_size_full_(cEventItems)
-    HTTP_TRACE_EVENT_ITEM * pEventItems;
+    struct HTTP_TRACE_EVENT_ITEM * pEventItems;
 };
 
 
@@ -136,7 +136,7 @@ struct HTTP_TRACE_EVENT_ITEM
     //
     // Data type that pbData is pointed to
     //
-    HTTP_TRACE_TYPE  dwDataType;
+    enum HTTP_TRACE_TYPE dwDataType;
     //
     // Pointer to the actual data (needs to be casted based on the dwDataType)
     // For example the HTTP_TRACE_EVENT_ITEM describing HTTP request URL would have

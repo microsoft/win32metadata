@@ -16570,6 +16570,11 @@ CryptVerifyMessageSignatureWithKey(
     _Inout_opt_ DWORD *pcbDecoded
     );
 
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP|WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Application Family or Wintrust Package or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 //+=========================================================================
 //  System Certificate Store Data Structures and APIs
@@ -16616,6 +16621,12 @@ CertOpenSystemStoreW(
 #else
 #define CertOpenSystemStore  CertOpenSystemStoreA
 #endif // !UNICODE
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Desktop Family or OneCore or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP|WINAPI_PARTITION_PHONE_RESTRICTED | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 WINCRYPT32API
 BOOL
@@ -18501,6 +18512,10 @@ CryptCreateKeyIdentifierFromCSP(
 // errors aren't returned.
 // #define CERT_CHAIN_ENABLE_ONLY_WEAK_LOGGING_FLAG    0x00000008
 
+// The following flag is set to disable ECC certificates using
+// key parameters instead of normal key curve name OID.
+#define CERT_CHAIN_DISABLE_ECC_PARA_FLAG                0x00000010
+
 // In addition to setting the above CERT_CHAIN_ENABLE_WEAK_SETTINGS_FLAG flag,
 // the following flags corresponding to the EKU must be set to disable weak
 // signature or enable weak hash hygiene checks:
@@ -18581,6 +18596,7 @@ CryptCreateKeyIdentifierFromCSP(
 
 
 #define CERT_CHAIN_DISABLE_WEAK_FLAGS (                 \
+    CERT_CHAIN_DISABLE_ECC_PARA_FLAG |                  \
     CERT_CHAIN_DISABLE_ALL_EKU_WEAK_FLAG |              \
     CERT_CHAIN_DISABLE_SERVER_AUTH_WEAK_FLAG |          \
     CERT_CHAIN_DISABLE_OPT_IN_SERVER_AUTH_WEAK_FLAG |   \

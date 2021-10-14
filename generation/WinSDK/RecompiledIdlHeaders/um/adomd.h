@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -293,28 +301,34 @@ EXTERN_C const IID IID_ICatalog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICatalog * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICatalog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICatalog * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICatalog * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICatalog * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICatalog * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -323,6 +337,7 @@ EXTERN_C const IID IID_ICatalog;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICatalog * This,
             /* [annotation][in] */ 
@@ -342,22 +357,27 @@ EXTERN_C const IID IID_ICatalog;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICatalog, get_Name)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ICatalog * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICatalog, putref_ActiveConnection)
         /* [helpcontext][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveConnection )( 
             __RPC__in ICatalog * This,
             /* [in] */ __RPC__in_opt IDispatch *pconn);
         
+        DECLSPEC_XFGVIRT(ICatalog, put_ActiveConnection)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
             __RPC__in ICatalog * This,
             /* [in] */ __RPC__in BSTR bstrConn);
         
+        DECLSPEC_XFGVIRT(ICatalog, get_ActiveConnection)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
             __RPC__in ICatalog * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppConn);
         
+        DECLSPEC_XFGVIRT(ICatalog, get_CubeDefs)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CubeDefs )( 
             __RPC__in ICatalog * This,
             /* [retval][out] */ __RPC__deref_out_opt CubeDefs **ppvObject);
@@ -488,28 +508,34 @@ EXTERN_C const IID IID_ICellset;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICellset * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICellset * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICellset * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICellset * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICellset * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICellset * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -518,6 +544,7 @@ EXTERN_C const IID IID_ICellset;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICellset * This,
             /* [annotation][in] */ 
@@ -537,55 +564,68 @@ EXTERN_C const IID IID_ICellset;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICellset, get_Item)
         /* [helpcontext][id][vararg][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ICellset * This,
             /* [in] */ __RPC__deref_in_opt SAFEARRAY * *idx,
             /* [retval][out] */ __RPC__deref_out_opt Cell **ppvObject);
         
+        DECLSPEC_XFGVIRT(ICellset, Open)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Open )( 
             __RPC__in ICellset * This,
             /* [optional][in] */ VARIANT DataSource,
             /* [optional][in] */ VARIANT ActiveConnection);
         
+        DECLSPEC_XFGVIRT(ICellset, Close)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in ICellset * This);
         
+        DECLSPEC_XFGVIRT(ICellset, putref_Source)
         /* [helpcontext][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Source )( 
             __RPC__in ICellset * This,
             /* [in] */ __RPC__in_opt IDispatch *pcmd);
         
+        DECLSPEC_XFGVIRT(ICellset, put_Source)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Source )( 
             __RPC__in ICellset * This,
             /* [in] */ __RPC__in BSTR bstrCmd);
         
+        DECLSPEC_XFGVIRT(ICellset, get_Source)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Source )( 
             __RPC__in ICellset * This,
             /* [retval][out] */ __RPC__out VARIANT *pvSource);
         
+        DECLSPEC_XFGVIRT(ICellset, putref_ActiveConnection)
         /* [helpcontext][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ActiveConnection )( 
             __RPC__in ICellset * This,
             /* [in] */ __RPC__in_opt IDispatch *pconn);
         
+        DECLSPEC_XFGVIRT(ICellset, put_ActiveConnection)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ActiveConnection )( 
             __RPC__in ICellset * This,
             /* [in] */ __RPC__in BSTR bstrConn);
         
+        DECLSPEC_XFGVIRT(ICellset, get_ActiveConnection)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveConnection )( 
             __RPC__in ICellset * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppConn);
         
+        DECLSPEC_XFGVIRT(ICellset, get_State)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in ICellset * This,
             /* [retval][out] */ __RPC__out LONG *plState);
         
+        DECLSPEC_XFGVIRT(ICellset, get_Axes)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Axes )( 
             __RPC__in ICellset * This,
             /* [retval][out] */ __RPC__deref_out_opt Axes **ppvObject);
         
+        DECLSPEC_XFGVIRT(ICellset, get_FilterAxis)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilterAxis )( 
             __RPC__in ICellset * This,
             /* [retval][out] */ __RPC__deref_out_opt Axis **ppvObject);
         
+        DECLSPEC_XFGVIRT(ICellset, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in ICellset * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
@@ -721,28 +761,34 @@ EXTERN_C const IID IID_Cell;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Cell * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Cell * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Cell * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Cell * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Cell * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Cell * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -751,6 +797,7 @@ EXTERN_C const IID IID_Cell;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Cell * This,
             /* [annotation][in] */ 
@@ -770,30 +817,37 @@ EXTERN_C const IID IID_Cell;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Cell, get_Value)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in Cell * This,
             /* [retval][out] */ __RPC__out VARIANT *pvar);
         
+        DECLSPEC_XFGVIRT(Cell, put_Value)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in Cell * This,
             /* [in] */ VARIANT var);
         
+        DECLSPEC_XFGVIRT(Cell, get_Positions)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Positions )( 
             __RPC__in Cell * This,
             /* [retval][out] */ __RPC__deref_out_opt Positions **ppvObject);
         
+        DECLSPEC_XFGVIRT(Cell, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Cell * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
         
+        DECLSPEC_XFGVIRT(Cell, get_FormattedValue)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FormattedValue )( 
             __RPC__in Cell * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Cell, put_FormattedValue)
         /* [helpcontext][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FormattedValue )( 
             __RPC__in Cell * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(Cell, get_Ordinal)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ordinal )( 
             __RPC__in Cell * This,
             /* [retval][out] */ __RPC__out long *pl);
@@ -902,28 +956,34 @@ EXTERN_C const IID IID_Axis;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Axis * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Axis * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Axis * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Axis * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Axis * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Axis * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -932,6 +992,7 @@ EXTERN_C const IID IID_Axis;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Axis * This,
             /* [annotation][in] */ 
@@ -951,18 +1012,22 @@ EXTERN_C const IID IID_Axis;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Axis, get_Name)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in Axis * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Axis, get_DimensionCount)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DimensionCount )( 
             __RPC__in Axis * This,
             /* [retval][out] */ __RPC__out long *pl);
         
+        DECLSPEC_XFGVIRT(Axis, get_Positions)
         /* [id][helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Positions )( 
             __RPC__in Axis * This,
             /* [retval][out] */ __RPC__deref_out_opt Positions **ppvObject);
         
+        DECLSPEC_XFGVIRT(Axis, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Axis * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
@@ -1056,28 +1121,34 @@ EXTERN_C const IID IID_Position;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Position * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Position * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Position * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Position * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Position * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Position * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1086,6 +1157,7 @@ EXTERN_C const IID IID_Position;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Position * This,
             /* [annotation][in] */ 
@@ -1105,10 +1177,12 @@ EXTERN_C const IID IID_Position;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Position, get_Ordinal)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ordinal )( 
             __RPC__in Position * This,
             /* [retval][out] */ __RPC__out long *pl);
         
+        DECLSPEC_XFGVIRT(Position, get_Members)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in Position * This,
             /* [retval][out] */ __RPC__deref_out_opt Members **ppvObject);
@@ -1229,28 +1303,34 @@ EXTERN_C const IID IID_Member;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Member * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Member * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Member * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Member * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Member * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Member * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1259,6 +1339,7 @@ EXTERN_C const IID IID_Member;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Member * This,
             /* [annotation][in] */ 
@@ -1278,54 +1359,67 @@ EXTERN_C const IID IID_Member;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Member, get_Name)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Member, get_UniqueName)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Member, get_Caption)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Caption )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Member, get_Description)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Member, get_Parent)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Parent )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__deref_out_opt Member **ppvObject);
         
+        DECLSPEC_XFGVIRT(Member, get_LevelDepth)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LevelDepth )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__out long *pl);
         
+        DECLSPEC_XFGVIRT(Member, get_LevelName)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LevelName )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Member, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
         
+        DECLSPEC_XFGVIRT(Member, get_Type)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Type )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__out MemberTypeEnum *ptype);
         
+        DECLSPEC_XFGVIRT(Member, get_ChildCount)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChildCount )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__out long *pl);
         
+        DECLSPEC_XFGVIRT(Member, get_DrilledDown)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DrilledDown )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pf);
         
+        DECLSPEC_XFGVIRT(Member, get_ParentSameAsPrev)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ParentSameAsPrev )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pf);
         
+        DECLSPEC_XFGVIRT(Member, get_Children)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Children )( 
             __RPC__in Member * This,
             /* [retval][out] */ __RPC__deref_out_opt Members **ppvObject);
@@ -1461,28 +1555,34 @@ EXTERN_C const IID IID_Level;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Level * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Level * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Level * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Level * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Level * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Level * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1491,6 +1591,7 @@ EXTERN_C const IID IID_Level;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Level * This,
             /* [annotation][in] */ 
@@ -1510,30 +1611,37 @@ EXTERN_C const IID IID_Level;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Level, get_Name)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in Level * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Level, get_UniqueName)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in Level * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Level, get_Caption)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Caption )( 
             __RPC__in Level * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Level, get_Description)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in Level * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Level, get_Depth)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Depth )( 
             __RPC__in Level * This,
             /* [retval][out] */ __RPC__out short *pw);
         
+        DECLSPEC_XFGVIRT(Level, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Level * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
         
+        DECLSPEC_XFGVIRT(Level, get_Members)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Members )( 
             __RPC__in Level * This,
             /* [retval][out] */ __RPC__deref_out_opt Members **ppvObject);
@@ -1642,28 +1750,34 @@ EXTERN_C const IID IID_CubeDef25;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in CubeDef25 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in CubeDef25 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in CubeDef25 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in CubeDef25 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in CubeDef25 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in CubeDef25 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1672,6 +1786,7 @@ EXTERN_C const IID IID_CubeDef25;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             CubeDef25 * This,
             /* [annotation][in] */ 
@@ -1691,18 +1806,22 @@ EXTERN_C const IID IID_CubeDef25;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(CubeDef25, get_Name)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in CubeDef25 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(CubeDef25, get_Description)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in CubeDef25 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(CubeDef25, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in CubeDef25 * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
         
+        DECLSPEC_XFGVIRT(CubeDef25, get_Dimensions)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dimensions )( 
             __RPC__in CubeDef25 * This,
             /* [retval][out] */ __RPC__deref_out_opt Dimensions **ppvObject);
@@ -1795,28 +1914,34 @@ EXTERN_C const IID IID_CubeDef;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in CubeDef * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in CubeDef * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in CubeDef * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in CubeDef * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in CubeDef * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in CubeDef * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1825,6 +1950,7 @@ EXTERN_C const IID IID_CubeDef;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             CubeDef * This,
             /* [annotation][in] */ 
@@ -1844,22 +1970,27 @@ EXTERN_C const IID IID_CubeDef;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(CubeDef25, get_Name)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in CubeDef * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(CubeDef25, get_Description)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in CubeDef * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(CubeDef25, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in CubeDef * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
         
+        DECLSPEC_XFGVIRT(CubeDef25, get_Dimensions)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Dimensions )( 
             __RPC__in CubeDef * This,
             /* [retval][out] */ __RPC__deref_out_opt Dimensions **ppvObject);
         
+        DECLSPEC_XFGVIRT(CubeDef, GetSchemaObject)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *GetSchemaObject )( 
             __RPC__in CubeDef * This,
             /* [in] */ SchemaObjectTypeEnum eObjType,
@@ -1968,28 +2099,34 @@ EXTERN_C const IID IID_Dimension;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Dimension * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Dimension * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Dimension * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Dimension * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Dimension * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Dimension * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1998,6 +2135,7 @@ EXTERN_C const IID IID_Dimension;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Dimension * This,
             /* [annotation][in] */ 
@@ -2017,22 +2155,27 @@ EXTERN_C const IID IID_Dimension;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Dimension, get_Name)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in Dimension * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Dimension, get_UniqueName)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in Dimension * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Dimension, get_Description)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in Dimension * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Dimension, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Dimension * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
         
+        DECLSPEC_XFGVIRT(Dimension, get_Hierarchies)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Hierarchies )( 
             __RPC__in Dimension * This,
             /* [retval][out] */ __RPC__deref_out_opt Hierarchies **ppvObject);
@@ -2138,28 +2281,34 @@ EXTERN_C const IID IID_Hierarchy;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Hierarchy * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Hierarchy * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Hierarchy * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Hierarchy * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Hierarchy * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Hierarchy * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2168,6 +2317,7 @@ EXTERN_C const IID IID_Hierarchy;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Hierarchy * This,
             /* [annotation][in] */ 
@@ -2187,22 +2337,27 @@ EXTERN_C const IID IID_Hierarchy;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(Hierarchy, get_Name)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in Hierarchy * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Hierarchy, get_UniqueName)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in Hierarchy * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Hierarchy, get_Description)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in Hierarchy * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(Hierarchy, get_Properties)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in Hierarchy * This,
             /* [retval][out] */ __RPC__deref_out_opt /* external definition not present */ Properties **ppvObject);
         
+        DECLSPEC_XFGVIRT(Hierarchy, get_Levels)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Levels )( 
             __RPC__in Hierarchy * This,
             /* [retval][out] */ __RPC__deref_out_opt Levels **ppvObject);
@@ -2301,28 +2456,34 @@ EXTERN_C const IID IID_MD_Collection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in MD_Collection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in MD_Collection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in MD_Collection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in MD_Collection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in MD_Collection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in MD_Collection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2331,6 +2492,7 @@ EXTERN_C const IID IID_MD_Collection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             MD_Collection * This,
             /* [annotation][in] */ 
@@ -2350,13 +2512,16 @@ EXTERN_C const IID IID_MD_Collection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(MD_Collection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in MD_Collection * This);
         
+        DECLSPEC_XFGVIRT(MD_Collection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in MD_Collection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(MD_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in MD_Collection * This,
             /* [retval][out] */ __RPC__out long *c);
@@ -2445,28 +2610,34 @@ EXTERN_C const IID IID_Members;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Members * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Members * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Members * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Members * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Members * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Members * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2475,6 +2646,7 @@ EXTERN_C const IID IID_Members;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Members * This,
             /* [annotation][in] */ 
@@ -2494,17 +2666,21 @@ EXTERN_C const IID IID_Members;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(MD_Collection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in Members * This);
         
+        DECLSPEC_XFGVIRT(MD_Collection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in Members * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(MD_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in Members * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(Members, get_Item)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Members * This,
             /* [in] */ VARIANT Index,
@@ -2598,28 +2774,34 @@ EXTERN_C const IID IID_Levels;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Levels * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Levels * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Levels * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Levels * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Levels * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Levels * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2628,6 +2810,7 @@ EXTERN_C const IID IID_Levels;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Levels * This,
             /* [annotation][in] */ 
@@ -2647,17 +2830,21 @@ EXTERN_C const IID IID_Levels;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(MD_Collection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in Levels * This);
         
+        DECLSPEC_XFGVIRT(MD_Collection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in Levels * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(MD_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in Levels * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(Levels, get_Item)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Levels * This,
             /* [in] */ VARIANT Index,
@@ -2751,28 +2938,34 @@ EXTERN_C const IID IID_Axes;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Axes * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Axes * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Axes * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Axes * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Axes * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Axes * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2781,6 +2974,7 @@ EXTERN_C const IID IID_Axes;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Axes * This,
             /* [annotation][in] */ 
@@ -2800,17 +2994,21 @@ EXTERN_C const IID IID_Axes;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(MD_Collection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in Axes * This);
         
+        DECLSPEC_XFGVIRT(MD_Collection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in Axes * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(MD_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in Axes * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(Axes, get_Item)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Axes * This,
             /* [in] */ VARIANT Index,
@@ -2904,28 +3102,34 @@ EXTERN_C const IID IID_Positions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Positions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Positions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Positions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Positions * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Positions * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Positions * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2934,6 +3138,7 @@ EXTERN_C const IID IID_Positions;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Positions * This,
             /* [annotation][in] */ 
@@ -2953,17 +3158,21 @@ EXTERN_C const IID IID_Positions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(MD_Collection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in Positions * This);
         
+        DECLSPEC_XFGVIRT(MD_Collection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in Positions * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(MD_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in Positions * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(Positions, get_Item)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Positions * This,
             /* [in] */ VARIANT Index,
@@ -3057,28 +3266,34 @@ EXTERN_C const IID IID_Hierarchies;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Hierarchies * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Hierarchies * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Hierarchies * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Hierarchies * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Hierarchies * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Hierarchies * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3087,6 +3302,7 @@ EXTERN_C const IID IID_Hierarchies;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Hierarchies * This,
             /* [annotation][in] */ 
@@ -3106,17 +3322,21 @@ EXTERN_C const IID IID_Hierarchies;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(MD_Collection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in Hierarchies * This);
         
+        DECLSPEC_XFGVIRT(MD_Collection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in Hierarchies * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(MD_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in Hierarchies * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(Hierarchies, get_Item)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Hierarchies * This,
             /* [in] */ VARIANT Index,
@@ -3210,28 +3430,34 @@ EXTERN_C const IID IID_Dimensions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in Dimensions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in Dimensions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in Dimensions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in Dimensions * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in Dimensions * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in Dimensions * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3240,6 +3466,7 @@ EXTERN_C const IID IID_Dimensions;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             Dimensions * This,
             /* [annotation][in] */ 
@@ -3259,17 +3486,21 @@ EXTERN_C const IID IID_Dimensions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(MD_Collection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in Dimensions * This);
         
+        DECLSPEC_XFGVIRT(MD_Collection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in Dimensions * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(MD_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in Dimensions * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(Dimensions, get_Item)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in Dimensions * This,
             /* [in] */ VARIANT Index,
@@ -3363,28 +3594,34 @@ EXTERN_C const IID IID_CubeDefs;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in CubeDefs * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in CubeDefs * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in CubeDefs * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in CubeDefs * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in CubeDefs * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in CubeDefs * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3393,6 +3630,7 @@ EXTERN_C const IID IID_CubeDefs;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             CubeDefs * This,
             /* [annotation][in] */ 
@@ -3412,17 +3650,21 @@ EXTERN_C const IID IID_CubeDefs;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(MD_Collection, Refresh)
         /* [helpcontext] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in CubeDefs * This);
         
+        DECLSPEC_XFGVIRT(MD_Collection, _NewEnum)
         /* [id][restricted] */ HRESULT ( STDMETHODCALLTYPE *_NewEnum )( 
             __RPC__in CubeDefs * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppvObject);
         
+        DECLSPEC_XFGVIRT(MD_Collection, get_Count)
         /* [helpcontext][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in CubeDefs * This,
             /* [retval][out] */ __RPC__out long *c);
         
+        DECLSPEC_XFGVIRT(CubeDefs, get_Item)
         /* [helpcontext][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in CubeDefs * This,
             /* [in] */ VARIANT Index,

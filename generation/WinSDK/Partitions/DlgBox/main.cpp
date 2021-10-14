@@ -8,3 +8,5 @@
 
 #include <winuser.h>
 #include <commdlg.h>
+#include <cderr.h>
+#include <colordlg.h>

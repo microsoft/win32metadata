@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -793,28 +801,34 @@ EXTERN_C const IID IID_IDataCollectorSet;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDataCollectorSet * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDataCollectorSet * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDataCollectorSet * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -823,6 +837,7 @@ EXTERN_C const IID IID_IDataCollectorSet;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDataCollectorSet * This,
             /* [annotation][in] */ 
@@ -842,220 +857,274 @@ EXTERN_C const IID IID_IDataCollectorSet;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_DataCollectors)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectors )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollectorCollection **collectors);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Duration)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Duration )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out unsigned long *seconds);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_Duration)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Duration )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ unsigned long seconds);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR description);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_DescriptionUnresolved)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DescriptionUnresolved )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Descr);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_DisplayName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *DisplayName);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_DisplayName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR DisplayName);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_DisplayNameUnresolved)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayNameUnresolved )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Keywords)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Keywords )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *keywords);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_Keywords)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Keywords )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in SAFEARRAY * keywords);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_LatestOutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatestOutputLocation )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_LatestOutputLocation)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LatestOutputLocation )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR path);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Name)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_OutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutputLocation )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_RootPath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootPath )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *folder);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_RootPath)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootPath )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR folder);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Segment)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Segment )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *segment);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_Segment)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Segment )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ VARIANT_BOOL segment);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_SegmentMaxDuration)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SegmentMaxDuration )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out unsigned long *seconds);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_SegmentMaxDuration)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SegmentMaxDuration )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ unsigned long seconds);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_SegmentMaxSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SegmentMaxSize )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out unsigned long *size);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_SegmentMaxSize)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SegmentMaxSize )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ unsigned long size);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_SerialNumber)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SerialNumber )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out unsigned long *index);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_SerialNumber)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SerialNumber )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ unsigned long index);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Server)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Server )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *server);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Status)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out DataCollectorSetStatus *status);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Subdirectory)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subdirectory )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *folder);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_Subdirectory)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Subdirectory )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR folder);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_SubdirectoryFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubdirectoryFormat )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out AutoPathFormat *format);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_SubdirectoryFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SubdirectoryFormat )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ AutoPathFormat format);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_SubdirectoryFormatPattern)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubdirectoryFormatPattern )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_SubdirectoryFormatPattern)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SubdirectoryFormatPattern )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Task)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Task )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *task);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_Task)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Task )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR task);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_TaskRunAsSelf)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TaskRunAsSelf )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *RunAsSelf);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_TaskRunAsSelf)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TaskRunAsSelf )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ VARIANT_BOOL RunAsSelf);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_TaskArguments)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TaskArguments )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *task);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_TaskArguments)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TaskArguments )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR task);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_TaskUserTextArguments)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TaskUserTextArguments )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *UserText);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_TaskUserTextArguments)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TaskUserTextArguments )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR UserText);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Schedules)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Schedules )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt IScheduleCollection **ppSchedules);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_SchedulesEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SchedulesEnabled )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_SchedulesEnabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SchedulesEnabled )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_UserAccount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UserAccount )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *user);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Xml)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Xml )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *xml);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_Security)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Security )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSecurity);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_Security)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Security )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR bstrSecurity);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_StopOnCompletion)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StopOnCompletion )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *Stop);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, put_StopOnCompletion)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_StopOnCompletion )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ VARIANT_BOOL Stop);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, get_DataManager)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataManager )( 
             __RPC__in IDataCollectorSet * This,
             /* [retval][out] */ __RPC__deref_out_opt IDataManager **DataManager);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, SetCredentials)
         HRESULT ( STDMETHODCALLTYPE *SetCredentials )( 
             __RPC__in IDataCollectorSet * This,
             __RPC__in BSTR user,
             __RPC__in BSTR password);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, Query)
         HRESULT ( STDMETHODCALLTYPE *Query )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR name,
             /* [unique][in] */ __RPC__in_opt BSTR server);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR name,
@@ -1063,27 +1132,33 @@ EXTERN_C const IID IID_IDataCollectorSet;
             CommitMode mode,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **validation);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IDataCollectorSet * This);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ VARIANT_BOOL Synchronous);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ VARIANT_BOOL Synchronous);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, SetXml)
         HRESULT ( STDMETHODCALLTYPE *SetXml )( 
             __RPC__in IDataCollectorSet * This,
             /* [in] */ __RPC__in BSTR xml,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **validation);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in IDataCollectorSet * This,
             __RPC__in BSTR key,
             __RPC__in BSTR value);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSet, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in IDataCollectorSet * This,
             __RPC__in BSTR key,
@@ -1418,28 +1493,34 @@ EXTERN_C const IID IID_IDataManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDataManager * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDataManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDataManager * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDataManager * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDataManager * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDataManager * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1448,6 +1529,7 @@ EXTERN_C const IID IID_IDataManager;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDataManager * This,
             /* [annotation][in] */ 
@@ -1467,104 +1549,129 @@ EXTERN_C const IID IID_IDataManager;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_Enabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfEnabled);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_Enabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IDataManager * This,
             /* [in] */ VARIANT_BOOL fEnabled);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_CheckBeforeRunning)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CheckBeforeRunning )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pfCheck);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_CheckBeforeRunning)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CheckBeforeRunning )( 
             __RPC__in IDataManager * This,
             /* [in] */ VARIANT_BOOL fCheck);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_MinFreeDisk)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinFreeDisk )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__out ULONG *MinFreeDisk);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_MinFreeDisk)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinFreeDisk )( 
             __RPC__in IDataManager * This,
             /* [in] */ ULONG MinFreeDisk);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_MaxSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxSize )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__out ULONG *pulMaxSize);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_MaxSize)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxSize )( 
             __RPC__in IDataManager * This,
             /* [in] */ ULONG ulMaxSize);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_MaxFolderCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxFolderCount )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__out ULONG *pulMaxFolderCount);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_MaxFolderCount)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxFolderCount )( 
             __RPC__in IDataManager * This,
             /* [in] */ ULONG ulMaxFolderCount);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_ResourcePolicy)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ResourcePolicy )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__out ResourcePolicy *pPolicy);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_ResourcePolicy)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ResourcePolicy )( 
             __RPC__in IDataManager * This,
             /* [in] */ ResourcePolicy Policy);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_FolderActions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FolderActions )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__deref_out_opt IFolderActionCollection **Actions);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_ReportSchema)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportSchema )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *ReportSchema);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_ReportSchema)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportSchema )( 
             __RPC__in IDataManager * This,
             /* [in] */ __RPC__in BSTR ReportSchema);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_ReportFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReportFileName )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFilename);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_ReportFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReportFileName )( 
             __RPC__in IDataManager * This,
             /* [in] */ __RPC__in BSTR pbstrFilename);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_RuleTargetFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RuleTargetFileName )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Filename);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_RuleTargetFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RuleTargetFileName )( 
             __RPC__in IDataManager * This,
             /* [in] */ __RPC__in BSTR Filename);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_EventsFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventsFileName )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFilename);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_EventsFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventsFileName )( 
             __RPC__in IDataManager * This,
             /* [in] */ __RPC__in BSTR pbstrFilename);
         
+        DECLSPEC_XFGVIRT(IDataManager, get_Rules)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Rules )( 
             __RPC__in IDataManager * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrXml);
         
+        DECLSPEC_XFGVIRT(IDataManager, put_Rules)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Rules )( 
             __RPC__in IDataManager * This,
             /* [in] */ __RPC__in BSTR bstrXml);
         
+        DECLSPEC_XFGVIRT(IDataManager, Run)
         HRESULT ( STDMETHODCALLTYPE *Run )( 
             __RPC__in IDataManager * This,
             /* [in] */ DataManagerSteps Steps,
             /* [in] */ __RPC__in BSTR bstrFolder,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **Errors);
         
+        DECLSPEC_XFGVIRT(IDataManager, Extract)
         HRESULT ( STDMETHODCALLTYPE *Extract )( 
             __RPC__in IDataManager * This,
             /* [in] */ __RPC__in BSTR CabFilename,
@@ -1740,28 +1847,34 @@ EXTERN_C const IID IID_IFolderAction;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFolderAction * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFolderAction * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFolderAction * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFolderAction * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFolderAction * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFolderAction * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1770,6 +1883,7 @@ EXTERN_C const IID IID_IFolderAction;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFolderAction * This,
             /* [annotation][in] */ 
@@ -1789,34 +1903,42 @@ EXTERN_C const IID IID_IFolderAction;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFolderAction, get_Age)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Age )( 
             __RPC__in IFolderAction * This,
             /* [retval][out] */ __RPC__out ULONG *pulAge);
         
+        DECLSPEC_XFGVIRT(IFolderAction, put_Age)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Age )( 
             __RPC__in IFolderAction * This,
             /* [in] */ ULONG ulAge);
         
+        DECLSPEC_XFGVIRT(IFolderAction, get_Size)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFolderAction * This,
             /* [retval][out] */ __RPC__out ULONG *pulAge);
         
+        DECLSPEC_XFGVIRT(IFolderAction, put_Size)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Size )( 
             __RPC__in IFolderAction * This,
             /* [in] */ ULONG ulAge);
         
+        DECLSPEC_XFGVIRT(IFolderAction, get_Actions)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Actions )( 
             __RPC__in IFolderAction * This,
             /* [retval][out] */ __RPC__out FolderActionSteps *Steps);
         
+        DECLSPEC_XFGVIRT(IFolderAction, put_Actions)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Actions )( 
             __RPC__in IFolderAction * This,
             /* [in] */ FolderActionSteps Steps);
         
+        DECLSPEC_XFGVIRT(IFolderAction, get_SendCabTo)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SendCabTo )( 
             __RPC__in IFolderAction * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDestination);
         
+        DECLSPEC_XFGVIRT(IFolderAction, put_SendCabTo)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SendCabTo )( 
             __RPC__in IFolderAction * This,
             /* [in] */ __RPC__in BSTR bstrDestination);
@@ -1940,28 +2062,34 @@ EXTERN_C const IID IID_IFolderActionCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFolderActionCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFolderActionCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFolderActionCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFolderActionCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFolderActionCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFolderActionCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1970,6 +2098,7 @@ EXTERN_C const IID IID_IFolderActionCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFolderActionCollection * This,
             /* [annotation][in] */ 
@@ -1989,34 +2118,42 @@ EXTERN_C const IID IID_IFolderActionCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFolderActionCollection, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFolderActionCollection * This,
             /* [retval][out] */ __RPC__out ULONG *Count);
         
+        DECLSPEC_XFGVIRT(IFolderActionCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFolderActionCollection * This,
             /* [in] */ VARIANT Index,
             /* [retval][out] */ __RPC__deref_out_opt IFolderAction **Action);
         
+        DECLSPEC_XFGVIRT(IFolderActionCollection, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFolderActionCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **Enum);
         
+        DECLSPEC_XFGVIRT(IFolderActionCollection, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFolderActionCollection * This,
             __RPC__in_opt IFolderAction *Action);
         
+        DECLSPEC_XFGVIRT(IFolderActionCollection, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFolderActionCollection * This,
             VARIANT Index);
         
+        DECLSPEC_XFGVIRT(IFolderActionCollection, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IFolderActionCollection * This);
         
+        DECLSPEC_XFGVIRT(IFolderActionCollection, AddRange)
         HRESULT ( STDMETHODCALLTYPE *AddRange )( 
             __RPC__in IFolderActionCollection * This,
             __RPC__in_opt IFolderActionCollection *Actions);
         
+        DECLSPEC_XFGVIRT(IFolderActionCollection, CreateFolderAction)
         HRESULT ( STDMETHODCALLTYPE *CreateFolderAction )( 
             __RPC__in IFolderActionCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IFolderAction **FolderAction);
@@ -2193,28 +2330,34 @@ EXTERN_C const IID IID_IDataCollector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDataCollector * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDataCollector * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2223,6 +2366,7 @@ EXTERN_C const IID IID_IDataCollector;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDataCollector * This,
             /* [annotation][in] */ 
@@ -2242,103 +2386,128 @@ EXTERN_C const IID IID_IDataCollector;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorSet )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollectorSet **group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_DataCollectorSet)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataCollectorSet )( 
             __RPC__in IDataCollector * This,
             /* [in] */ __RPC__in_opt IDataCollectorSet *group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorType )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__out DataCollectorType *type);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileName )( 
             __RPC__in IDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormat )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__out AutoPathFormat *format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormat )( 
             __RPC__in IDataCollector * This,
             /* [in] */ AutoPathFormat format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormatPattern)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormatPattern )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormatPattern)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormatPattern )( 
             __RPC__in IDataCollector * This,
             /* [in] */ __RPC__in BSTR pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LatestOutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatestOutputLocation )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LatestOutputLocation)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LatestOutputLocation )( 
             __RPC__in IDataCollector * This,
             /* [in] */ __RPC__in BSTR path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogAppend)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogAppend )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogAppend)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogAppend )( 
             __RPC__in IDataCollector * This,
             /* [in] */ VARIANT_BOOL append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogCircular)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogCircular )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogCircular)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogCircular )( 
             __RPC__in IDataCollector * This,
             /* [in] */ VARIANT_BOOL circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogOverwrite)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogOverwrite )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogOverwrite)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogOverwrite )( 
             __RPC__in IDataCollector * This,
             /* [in] */ VARIANT_BOOL overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_OutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutputLocation )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Index)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__out long *index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Index)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Index )( 
             __RPC__in IDataCollector * This,
             /* [in] */ long index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Xml)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Xml )( 
             __RPC__in IDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Xml);
         
+        DECLSPEC_XFGVIRT(IDataCollector, SetXml)
         HRESULT ( STDMETHODCALLTYPE *SetXml )( 
             __RPC__in IDataCollector * This,
             /* [in] */ __RPC__in BSTR Xml,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **Validation);
         
+        DECLSPEC_XFGVIRT(IDataCollector, CreateOutputLocation)
         HRESULT ( STDMETHODCALLTYPE *CreateOutputLocation )( 
             __RPC__in IDataCollector * This,
             /* [in] */ VARIANT_BOOL Latest,
@@ -2520,28 +2689,34 @@ EXTERN_C const IID IID_IPerformanceCounterDataCollector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPerformanceCounterDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPerformanceCounterDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2550,6 +2725,7 @@ EXTERN_C const IID IID_IPerformanceCounterDataCollector;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IPerformanceCounterDataCollector * This,
             /* [annotation][in] */ 
@@ -2569,144 +2745,179 @@ EXTERN_C const IID IID_IPerformanceCounterDataCollector;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorSet )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollectorSet **group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_DataCollectorSet)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataCollectorSet )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in_opt IDataCollectorSet *group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorType )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out DataCollectorType *type);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileName )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormat )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out AutoPathFormat *format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormat )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ AutoPathFormat format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormatPattern)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormatPattern )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormatPattern)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormatPattern )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in BSTR pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LatestOutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatestOutputLocation )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LatestOutputLocation)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LatestOutputLocation )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in BSTR path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogAppend)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogAppend )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogAppend)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogAppend )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ VARIANT_BOOL append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogCircular)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogCircular )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogCircular)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogCircular )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ VARIANT_BOOL circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogOverwrite)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogOverwrite )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogOverwrite)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogOverwrite )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ VARIANT_BOOL overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_OutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutputLocation )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Index)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out long *index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Index)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Index )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ long index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Xml)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Xml )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Xml);
         
+        DECLSPEC_XFGVIRT(IDataCollector, SetXml)
         HRESULT ( STDMETHODCALLTYPE *SetXml )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in BSTR Xml,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **Validation);
         
+        DECLSPEC_XFGVIRT(IDataCollector, CreateOutputLocation)
         HRESULT ( STDMETHODCALLTYPE *CreateOutputLocation )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ VARIANT_BOOL Latest,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Location);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, get_DataSourceName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataSourceName )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *dsn);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, put_DataSourceName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataSourceName )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in BSTR dsn);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, get_PerformanceCounters)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PerformanceCounters )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *counters);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, put_PerformanceCounters)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PerformanceCounters )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ __RPC__in SAFEARRAY * counters);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, get_LogFileFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogFileFormat )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out FileFormat *format);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, put_LogFileFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogFileFormat )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ FileFormat format);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, get_SampleInterval)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SampleInterval )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *interval);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, put_SampleInterval)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SampleInterval )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ unsigned long interval);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, get_SegmentMaxRecords)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SegmentMaxRecords )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *records);
         
+        DECLSPEC_XFGVIRT(IPerformanceCounterDataCollector, put_SegmentMaxRecords)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SegmentMaxRecords )( 
             __RPC__in IPerformanceCounterDataCollector * This,
             /* [in] */ unsigned long records);
@@ -3008,28 +3219,34 @@ EXTERN_C const IID IID_ITraceDataCollector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITraceDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITraceDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITraceDataCollector * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3038,6 +3255,7 @@ EXTERN_C const IID IID_ITraceDataCollector;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITraceDataCollector * This,
             /* [annotation][in] */ 
@@ -3057,264 +3275,329 @@ EXTERN_C const IID IID_ITraceDataCollector;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorSet )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollectorSet **group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_DataCollectorSet)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataCollectorSet )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in_opt IDataCollectorSet *group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorType )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out DataCollectorType *type);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileName )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormat )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out AutoPathFormat *format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormat )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ AutoPathFormat format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormatPattern)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormatPattern )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormatPattern)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormatPattern )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in BSTR pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LatestOutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatestOutputLocation )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LatestOutputLocation)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LatestOutputLocation )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in BSTR path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogAppend)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogAppend )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogAppend)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogAppend )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ VARIANT_BOOL append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogCircular)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogCircular )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogCircular)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogCircular )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ VARIANT_BOOL circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogOverwrite)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogOverwrite )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogOverwrite)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogOverwrite )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ VARIANT_BOOL overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_OutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutputLocation )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Index)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out long *index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Index)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Index )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ long index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Xml)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Xml )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Xml);
         
+        DECLSPEC_XFGVIRT(IDataCollector, SetXml)
         HRESULT ( STDMETHODCALLTYPE *SetXml )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in BSTR Xml,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **Validation);
         
+        DECLSPEC_XFGVIRT(IDataCollector, CreateOutputLocation)
         HRESULT ( STDMETHODCALLTYPE *CreateOutputLocation )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ VARIANT_BOOL Latest,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Location);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_BufferSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferSize )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *size);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_BufferSize)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_BufferSize )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long size);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_BuffersLost)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BuffersLost )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_BuffersLost)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BuffersLost )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_BuffersWritten)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_BuffersWritten )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_BuffersWritten)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BuffersWritten )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_ClockType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClockType )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out ClockType *clock);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_ClockType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClockType )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ ClockType clock);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_EventsLost)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventsLost )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *events);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_EventsLost)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventsLost )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long events);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_ExtendedModes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedModes )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *mode);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_ExtendedModes)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExtendedModes )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long mode);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_FlushTimer)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FlushTimer )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *seconds);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_FlushTimer)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FlushTimer )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long seconds);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_FreeBuffers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeBuffers )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_FreeBuffers)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FreeBuffers )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_Guid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Guid )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out GUID *guid);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_Guid)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Guid )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ GUID guid);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_IsKernelTrace)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsKernelTrace )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *kernel);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_MaximumBuffers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaximumBuffers )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_MaximumBuffers)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaximumBuffers )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_MinimumBuffers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinimumBuffers )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_MinimumBuffers)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MinimumBuffers )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_NumberOfBuffers)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfBuffers )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_NumberOfBuffers)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_NumberOfBuffers )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_PreallocateFile)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PreallocateFile )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *allocate);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_PreallocateFile)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PreallocateFile )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ VARIANT_BOOL allocate);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_ProcessMode)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProcessMode )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *process);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_ProcessMode)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProcessMode )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ VARIANT_BOOL process);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_RealTimeBuffersLost)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RealTimeBuffersLost )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_RealTimeBuffersLost)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RealTimeBuffersLost )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long buffers);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_SessionId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SessionId )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out ULONG64 *id);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_SessionId)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SessionId )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ ULONG64 id);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_SessionName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SessionName )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_SessionName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SessionName )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_SessionThreadId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SessionThreadId )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *tid);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_SessionThreadId)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SessionThreadId )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ unsigned long tid);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_StreamMode)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StreamMode )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__out StreamMode *mode);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, put_StreamMode)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_StreamMode )( 
             __RPC__in ITraceDataCollector * This,
             /* [in] */ StreamMode mode);
         
+        DECLSPEC_XFGVIRT(ITraceDataCollector, get_TraceDataProviders)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TraceDataProviders )( 
             __RPC__in ITraceDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt ITraceDataProviderCollection **providers);
@@ -3640,28 +3923,34 @@ EXTERN_C const IID IID_IConfigurationDataCollector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IConfigurationDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IConfigurationDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3670,6 +3959,7 @@ EXTERN_C const IID IID_IConfigurationDataCollector;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IConfigurationDataCollector * This,
             /* [annotation][in] */ 
@@ -3689,176 +3979,219 @@ EXTERN_C const IID IID_IConfigurationDataCollector;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorSet )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollectorSet **group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_DataCollectorSet)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataCollectorSet )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in_opt IDataCollectorSet *group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorType )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out DataCollectorType *type);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileName )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormat )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out AutoPathFormat *format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormat )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ AutoPathFormat format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormatPattern)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormatPattern )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormatPattern)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormatPattern )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in BSTR pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LatestOutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatestOutputLocation )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LatestOutputLocation)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LatestOutputLocation )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in BSTR path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogAppend)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogAppend )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogAppend)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogAppend )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ VARIANT_BOOL append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogCircular)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogCircular )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogCircular)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogCircular )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ VARIANT_BOOL circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogOverwrite)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogOverwrite )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogOverwrite)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogOverwrite )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ VARIANT_BOOL overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_OutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutputLocation )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Index)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out long *index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Index)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Index )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ long index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Xml)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Xml )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Xml);
         
+        DECLSPEC_XFGVIRT(IDataCollector, SetXml)
         HRESULT ( STDMETHODCALLTYPE *SetXml )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in BSTR Xml,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **Validation);
         
+        DECLSPEC_XFGVIRT(IDataCollector, CreateOutputLocation)
         HRESULT ( STDMETHODCALLTYPE *CreateOutputLocation )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ VARIANT_BOOL Latest,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Location);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_FileMaxCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileMaxCount )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *count);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_FileMaxCount)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileMaxCount )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ unsigned long count);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_FileMaxRecursiveDepth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileMaxRecursiveDepth )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *depth);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_FileMaxRecursiveDepth)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileMaxRecursiveDepth )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ unsigned long depth);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_FileMaxTotalSize)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileMaxTotalSize )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *size);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_FileMaxTotalSize)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileMaxTotalSize )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ unsigned long size);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_Files)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Files )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *Files);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_Files)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Files )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in SAFEARRAY * Files);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_ManagementQueries)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ManagementQueries )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *Queries);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_ManagementQueries)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ManagementQueries )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in SAFEARRAY * Queries);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_QueryNetworkAdapters)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_QueryNetworkAdapters )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *network);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_QueryNetworkAdapters)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_QueryNetworkAdapters )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ VARIANT_BOOL network);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_RegistryKeys)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RegistryKeys )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *query);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_RegistryKeys)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RegistryKeys )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in SAFEARRAY * query);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_RegistryMaxRecursiveDepth)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RegistryMaxRecursiveDepth )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *depth);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_RegistryMaxRecursiveDepth)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RegistryMaxRecursiveDepth )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ unsigned long depth);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, get_SystemStateFile)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SystemStateFile )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *FileName);
         
+        DECLSPEC_XFGVIRT(IConfigurationDataCollector, put_SystemStateFile)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SystemStateFile )( 
             __RPC__in IConfigurationDataCollector * This,
             /* [in] */ __RPC__in BSTR FileName);
@@ -4112,28 +4445,34 @@ EXTERN_C const IID IID_IAlertDataCollector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAlertDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAlertDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IAlertDataCollector * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4142,6 +4481,7 @@ EXTERN_C const IID IID_IAlertDataCollector;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IAlertDataCollector * This,
             /* [annotation][in] */ 
@@ -4161,168 +4501,209 @@ EXTERN_C const IID IID_IAlertDataCollector;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorSet )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollectorSet **group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_DataCollectorSet)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataCollectorSet )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in_opt IDataCollectorSet *group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorType )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out DataCollectorType *type);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileName )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormat )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out AutoPathFormat *format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormat )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ AutoPathFormat format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormatPattern)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormatPattern )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormatPattern)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormatPattern )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LatestOutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatestOutputLocation )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LatestOutputLocation)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LatestOutputLocation )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogAppend)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogAppend )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogAppend)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogAppend )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ VARIANT_BOOL append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogCircular)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogCircular )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogCircular)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogCircular )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ VARIANT_BOOL circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogOverwrite)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogOverwrite )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogOverwrite)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogOverwrite )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ VARIANT_BOOL overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_OutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutputLocation )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Index)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out long *index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Index)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Index )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ long index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Xml)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Xml )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Xml);
         
+        DECLSPEC_XFGVIRT(IDataCollector, SetXml)
         HRESULT ( STDMETHODCALLTYPE *SetXml )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR Xml,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **Validation);
         
+        DECLSPEC_XFGVIRT(IDataCollector, CreateOutputLocation)
         HRESULT ( STDMETHODCALLTYPE *CreateOutputLocation )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ VARIANT_BOOL Latest,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Location);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, get_AlertThresholds)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_AlertThresholds )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *alerts);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, put_AlertThresholds)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_AlertThresholds )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in SAFEARRAY * alerts);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, get_EventLog)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventLog )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *log);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, put_EventLog)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EventLog )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ VARIANT_BOOL log);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, get_SampleInterval)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SampleInterval )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out unsigned long *interval);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, put_SampleInterval)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SampleInterval )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ unsigned long interval);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, get_Task)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Task )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *task);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, put_Task)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Task )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR task);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, get_TaskRunAsSelf)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TaskRunAsSelf )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *RunAsSelf);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, put_TaskRunAsSelf)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TaskRunAsSelf )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ VARIANT_BOOL RunAsSelf);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, get_TaskArguments)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TaskArguments )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *task);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, put_TaskArguments)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TaskArguments )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR task);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, get_TaskUserTextArguments)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TaskUserTextArguments )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *task);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, put_TaskUserTextArguments)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TaskUserTextArguments )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR task);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, get_TriggerDataCollectorSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_TriggerDataCollectorSet )( 
             __RPC__in IAlertDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IAlertDataCollector, put_TriggerDataCollectorSet)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_TriggerDataCollectorSet )( 
             __RPC__in IAlertDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
@@ -4564,28 +4945,34 @@ EXTERN_C const IID IID_IApiTracingDataCollector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IApiTracingDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IApiTracingDataCollector * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4594,6 +4981,7 @@ EXTERN_C const IID IID_IApiTracingDataCollector;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IApiTracingDataCollector * This,
             /* [annotation][in] */ 
@@ -4613,160 +5001,199 @@ EXTERN_C const IID IID_IApiTracingDataCollector;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorSet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorSet )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollectorSet **group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_DataCollectorSet)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataCollectorSet )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in_opt IDataCollectorSet *group);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_DataCollectorType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCollectorType )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__out DataCollectorType *type);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileName )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileName )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormat)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormat )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__out AutoPathFormat *format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormat)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormat )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ AutoPathFormat format);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_FileNameFormatPattern)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FileNameFormatPattern )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_FileNameFormatPattern)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FileNameFormatPattern )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in BSTR pattern);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LatestOutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LatestOutputLocation )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LatestOutputLocation)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LatestOutputLocation )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in BSTR path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogAppend)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogAppend )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogAppend)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogAppend )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ VARIANT_BOOL append);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogCircular)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogCircular )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogCircular)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogCircular )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ VARIANT_BOOL circular);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_LogOverwrite)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogOverwrite )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_LogOverwrite)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogOverwrite )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ VARIANT_BOOL overwrite);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Name)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Name)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_OutputLocation)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutputLocation )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *path);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Index)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Index )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__out long *index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, put_Index)
         /* [restricted][hidden][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Index )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ long index);
         
+        DECLSPEC_XFGVIRT(IDataCollector, get_Xml)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Xml )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Xml);
         
+        DECLSPEC_XFGVIRT(IDataCollector, SetXml)
         HRESULT ( STDMETHODCALLTYPE *SetXml )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in BSTR Xml,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **Validation);
         
+        DECLSPEC_XFGVIRT(IDataCollector, CreateOutputLocation)
         HRESULT ( STDMETHODCALLTYPE *CreateOutputLocation )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ VARIANT_BOOL Latest,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Location);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, get_LogApiNamesOnly)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogApiNamesOnly )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *logapinames);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, put_LogApiNamesOnly)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogApiNamesOnly )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ VARIANT_BOOL logapinames);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, get_LogApisRecursively)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogApisRecursively )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *logrecursively);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, put_LogApisRecursively)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogApisRecursively )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ VARIANT_BOOL logrecursively);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, get_ExePath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExePath )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *exepath);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, put_ExePath)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExePath )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in BSTR exepath);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, get_LogFilePath)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogFilePath )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *logfilepath);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, put_LogFilePath)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogFilePath )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in BSTR logfilepath);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, get_IncludeModules)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncludeModules )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *includemodules);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, put_IncludeModules)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IncludeModules )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in SAFEARRAY * includemodules);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, get_IncludeApis)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncludeApis )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *includeapis);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, put_IncludeApis)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IncludeApis )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in SAFEARRAY * includeapis);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, get_ExcludeApis)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExcludeApis )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *excludeapis);
         
+        DECLSPEC_XFGVIRT(IApiTracingDataCollector, put_ExcludeApis)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ExcludeApis )( 
             __RPC__in IApiTracingDataCollector * This,
             /* [in] */ __RPC__in SAFEARRAY * excludeapis);
@@ -4990,28 +5417,34 @@ EXTERN_C const IID IID_IDataCollectorCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDataCollectorCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDataCollectorCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDataCollectorCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDataCollectorCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDataCollectorCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDataCollectorCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5020,6 +5453,7 @@ EXTERN_C const IID IID_IDataCollectorCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDataCollectorCollection * This,
             /* [annotation][in] */ 
@@ -5039,40 +5473,49 @@ EXTERN_C const IID IID_IDataCollectorCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IDataCollectorCollection * This,
             /* [retval][out] */ __RPC__out long *retVal);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IDataCollectorCollection * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollector **collector);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IDataCollectorCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **retVal);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IDataCollectorCollection * This,
             __RPC__in_opt IDataCollector *collector);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IDataCollectorCollection * This,
             VARIANT collector);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IDataCollectorCollection * This);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, AddRange)
         HRESULT ( STDMETHODCALLTYPE *AddRange )( 
             __RPC__in IDataCollectorCollection * This,
             __RPC__in_opt IDataCollectorCollection *collectors);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, CreateDataCollectorFromXml)
         HRESULT ( STDMETHODCALLTYPE *CreateDataCollectorFromXml )( 
             __RPC__in IDataCollectorCollection * This,
             /* [in] */ __RPC__in BSTR bstrXml,
             /* [out] */ __RPC__deref_out_opt IValueMap **pValidation,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollector **pCollector);
         
+        DECLSPEC_XFGVIRT(IDataCollectorCollection, CreateDataCollector)
         HRESULT ( STDMETHODCALLTYPE *CreateDataCollector )( 
             __RPC__in IDataCollectorCollection * This,
             /* [in] */ DataCollectorType Type,
@@ -5201,28 +5644,34 @@ EXTERN_C const IID IID_IDataCollectorSetCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDataCollectorSetCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDataCollectorSetCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDataCollectorSetCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDataCollectorSetCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDataCollectorSetCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDataCollectorSetCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5231,6 +5680,7 @@ EXTERN_C const IID IID_IDataCollectorSetCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDataCollectorSetCollection * This,
             /* [annotation][in] */ 
@@ -5250,34 +5700,42 @@ EXTERN_C const IID IID_IDataCollectorSetCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSetCollection, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IDataCollectorSetCollection * This,
             /* [retval][out] */ __RPC__out long *retVal);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSetCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IDataCollectorSetCollection * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt IDataCollectorSet **set);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSetCollection, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IDataCollectorSetCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **retVal);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSetCollection, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IDataCollectorSetCollection * This,
             __RPC__in_opt IDataCollectorSet *set);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSetCollection, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IDataCollectorSetCollection * This,
             VARIANT set);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSetCollection, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IDataCollectorSetCollection * This);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSetCollection, AddRange)
         HRESULT ( STDMETHODCALLTYPE *AddRange )( 
             __RPC__in IDataCollectorSetCollection * This,
             __RPC__in_opt IDataCollectorSetCollection *sets);
         
+        DECLSPEC_XFGVIRT(IDataCollectorSetCollection, GetDataCollectorSets)
         HRESULT ( STDMETHODCALLTYPE *GetDataCollectorSets )( 
             __RPC__in IDataCollectorSetCollection * This,
             /* [unique][in] */ __RPC__in_opt BSTR server,
@@ -5437,28 +5895,34 @@ EXTERN_C const IID IID_ITraceDataProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITraceDataProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITraceDataProvider * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITraceDataProvider * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5467,6 +5931,7 @@ EXTERN_C const IID IID_ITraceDataProvider;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITraceDataProvider * This,
             /* [annotation][in] */ 
@@ -5486,80 +5951,99 @@ EXTERN_C const IID IID_ITraceDataProvider;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_DisplayName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisplayName )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *name);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, put_DisplayName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisplayName )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ __RPC__in BSTR name);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_Guid)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Guid )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__out GUID *guid);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, put_Guid)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Guid )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ GUID guid);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_Level)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Level )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **ppLevel);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_KeywordsAny)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeywordsAny )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **ppKeywords);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_KeywordsAll)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeywordsAll )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **ppKeywords);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_Properties)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt IValueMap **ppProperties);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_FilterEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilterEnabled )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *FilterEnabled);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, put_FilterEnabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FilterEnabled )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ VARIANT_BOOL FilterEnabled);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_FilterType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilterType )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__out ULONG *pulType);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, put_FilterType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FilterType )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ ULONG ulType);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, get_FilterData)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FilterData )( 
             __RPC__in ITraceDataProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt SAFEARRAY * *ppData);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, put_FilterData)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FilterData )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ __RPC__in SAFEARRAY * pData);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, Query)
         HRESULT ( STDMETHODCALLTYPE *Query )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ __RPC__in BSTR bstrName,
             /* [unique][in] */ __RPC__in_opt BSTR bstrServer);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, Resolve)
         HRESULT ( STDMETHODCALLTYPE *Resolve )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ __RPC__in_opt IDispatch *pFrom);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, SetSecurity)
         HRESULT ( STDMETHODCALLTYPE *SetSecurity )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ __RPC__in BSTR Sddl);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, GetSecurity)
         HRESULT ( STDMETHODCALLTYPE *GetSecurity )( 
             __RPC__in ITraceDataProvider * This,
             /* [in] */ ULONG SecurityInfo,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *Sddl);
         
+        DECLSPEC_XFGVIRT(ITraceDataProvider, GetRegisteredProcesses)
         HRESULT ( STDMETHODCALLTYPE *GetRegisteredProcesses )( 
             __RPC__in ITraceDataProvider * This,
             /* [out] */ __RPC__deref_out_opt IValueMap **Processes);
@@ -5723,28 +6207,34 @@ EXTERN_C const IID IID_ITraceDataProviderCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITraceDataProviderCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITraceDataProviderCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5753,6 +6243,7 @@ EXTERN_C const IID IID_ITraceDataProviderCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ITraceDataProviderCollection * This,
             /* [annotation][in] */ 
@@ -5772,42 +6263,52 @@ EXTERN_C const IID IID_ITraceDataProviderCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [retval][out] */ __RPC__out long *retVal);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt ITraceDataProvider **ppProvider);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **retVal);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in ITraceDataProviderCollection * This,
             __RPC__in_opt ITraceDataProvider *pProvider);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in ITraceDataProviderCollection * This,
             VARIANT vProvider);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in ITraceDataProviderCollection * This);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, AddRange)
         HRESULT ( STDMETHODCALLTYPE *AddRange )( 
             __RPC__in ITraceDataProviderCollection * This,
             __RPC__in_opt ITraceDataProviderCollection *providers);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, CreateTraceDataProvider)
         HRESULT ( STDMETHODCALLTYPE *CreateTraceDataProvider )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt ITraceDataProvider **Provider);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, GetTraceDataProviders)
         HRESULT ( STDMETHODCALLTYPE *GetTraceDataProviders )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [unique][in] */ __RPC__in_opt BSTR server);
         
+        DECLSPEC_XFGVIRT(ITraceDataProviderCollection, GetTraceDataProvidersByProcess)
         HRESULT ( STDMETHODCALLTYPE *GetTraceDataProvidersByProcess )( 
             __RPC__in ITraceDataProviderCollection * This,
             /* [unique][in] */ __RPC__in_opt BSTR Server,
@@ -5938,28 +6439,34 @@ EXTERN_C const IID IID_ISchedule;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISchedule * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISchedule * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISchedule * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISchedule * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISchedule * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISchedule * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5968,6 +6475,7 @@ EXTERN_C const IID IID_ISchedule;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISchedule * This,
             /* [annotation][in] */ 
@@ -5987,34 +6495,42 @@ EXTERN_C const IID IID_ISchedule;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISchedule, get_StartDate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartDate )( 
             __RPC__in ISchedule * This,
             /* [retval][out] */ __RPC__out VARIANT *start);
         
+        DECLSPEC_XFGVIRT(ISchedule, put_StartDate)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartDate )( 
             __RPC__in ISchedule * This,
             /* [in] */ VARIANT start);
         
+        DECLSPEC_XFGVIRT(ISchedule, get_EndDate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EndDate )( 
             __RPC__in ISchedule * This,
             /* [retval][out] */ __RPC__out VARIANT *end);
         
+        DECLSPEC_XFGVIRT(ISchedule, put_EndDate)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EndDate )( 
             __RPC__in ISchedule * This,
             /* [in] */ VARIANT end);
         
+        DECLSPEC_XFGVIRT(ISchedule, get_StartTime)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartTime )( 
             __RPC__in ISchedule * This,
             /* [retval][out] */ __RPC__out VARIANT *start);
         
+        DECLSPEC_XFGVIRT(ISchedule, put_StartTime)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartTime )( 
             __RPC__in ISchedule * This,
             /* [in] */ VARIANT start);
         
+        DECLSPEC_XFGVIRT(ISchedule, get_Days)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Days )( 
             __RPC__in ISchedule * This,
             /* [retval][out] */ __RPC__out WeekDays *days);
         
+        DECLSPEC_XFGVIRT(ISchedule, put_Days)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Days )( 
             __RPC__in ISchedule * This,
             /* [in] */ WeekDays days);
@@ -6138,28 +6654,34 @@ EXTERN_C const IID IID_IScheduleCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IScheduleCollection * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IScheduleCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IScheduleCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IScheduleCollection * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IScheduleCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IScheduleCollection * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6168,6 +6690,7 @@ EXTERN_C const IID IID_IScheduleCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IScheduleCollection * This,
             /* [annotation][in] */ 
@@ -6187,34 +6710,42 @@ EXTERN_C const IID IID_IScheduleCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IScheduleCollection, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IScheduleCollection * This,
             /* [retval][out] */ __RPC__out long *retVal);
         
+        DECLSPEC_XFGVIRT(IScheduleCollection, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IScheduleCollection * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt ISchedule **ppSchedule);
         
+        DECLSPEC_XFGVIRT(IScheduleCollection, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IScheduleCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ienum);
         
+        DECLSPEC_XFGVIRT(IScheduleCollection, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IScheduleCollection * This,
             __RPC__in_opt ISchedule *pSchedule);
         
+        DECLSPEC_XFGVIRT(IScheduleCollection, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IScheduleCollection * This,
             VARIANT vSchedule);
         
+        DECLSPEC_XFGVIRT(IScheduleCollection, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IScheduleCollection * This);
         
+        DECLSPEC_XFGVIRT(IScheduleCollection, AddRange)
         HRESULT ( STDMETHODCALLTYPE *AddRange )( 
             __RPC__in IScheduleCollection * This,
             __RPC__in_opt IScheduleCollection *pSchedules);
         
+        DECLSPEC_XFGVIRT(IScheduleCollection, CreateSchedule)
         HRESULT ( STDMETHODCALLTYPE *CreateSchedule )( 
             __RPC__in IScheduleCollection * This,
             /* [retval][out] */ __RPC__deref_out_opt ISchedule **Schedule);
@@ -6344,28 +6875,34 @@ EXTERN_C const IID IID_IValueMapItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IValueMapItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IValueMapItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IValueMapItem * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IValueMapItem * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IValueMapItem * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IValueMapItem * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6374,6 +6911,7 @@ EXTERN_C const IID IID_IValueMapItem;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IValueMapItem * This,
             /* [annotation][in] */ 
@@ -6393,42 +6931,52 @@ EXTERN_C const IID IID_IValueMapItem;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IValueMapItem * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IValueMapItem * This,
             /* [in] */ __RPC__in BSTR description);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, get_Enabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IValueMapItem * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *enabled);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, put_Enabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IValueMapItem * This,
             /* [in] */ VARIANT_BOOL enabled);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, get_Key)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Key )( 
             __RPC__in IValueMapItem * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *key);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, put_Key)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Key )( 
             __RPC__in IValueMapItem * This,
             /* [in] */ __RPC__in BSTR key);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IValueMapItem * This,
             /* [retval][out] */ __RPC__out VARIANT *Value);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, put_Value)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in IValueMapItem * This,
             /* [in] */ VARIANT Value);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, get_ValueMapType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ValueMapType )( 
             __RPC__in IValueMapItem * This,
             /* [retval][out] */ __RPC__out ValueMapType *type);
         
+        DECLSPEC_XFGVIRT(IValueMapItem, put_ValueMapType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ValueMapType )( 
             __RPC__in IValueMapItem * This,
             /* [in] */ ValueMapType type);
@@ -6576,28 +7124,34 @@ EXTERN_C const IID IID_IValueMap;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IValueMap * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IValueMap * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IValueMap * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IValueMap * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IValueMap * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IValueMap * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6606,6 +7160,7 @@ EXTERN_C const IID IID_IValueMap;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IValueMap * This,
             /* [annotation][in] */ 
@@ -6625,58 +7180,72 @@ EXTERN_C const IID IID_IValueMap;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IValueMap, get_Count)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IValueMap * This,
             /* [retval][out] */ __RPC__out long *retVal);
         
+        DECLSPEC_XFGVIRT(IValueMap, get_Item)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IValueMap * This,
             /* [in] */ VARIANT index,
             /* [retval][out] */ __RPC__deref_out_opt IValueMapItem **value);
         
+        DECLSPEC_XFGVIRT(IValueMap, get__NewEnum)
         /* [id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IValueMap * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **retVal);
         
+        DECLSPEC_XFGVIRT(IValueMap, get_Description)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IValueMap * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *description);
         
+        DECLSPEC_XFGVIRT(IValueMap, put_Description)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IValueMap * This,
             /* [in] */ __RPC__in BSTR description);
         
+        DECLSPEC_XFGVIRT(IValueMap, get_Value)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Value )( 
             __RPC__in IValueMap * This,
             /* [retval][out] */ __RPC__out VARIANT *Value);
         
+        DECLSPEC_XFGVIRT(IValueMap, put_Value)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Value )( 
             __RPC__in IValueMap * This,
             /* [in] */ VARIANT Value);
         
+        DECLSPEC_XFGVIRT(IValueMap, get_ValueMapType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ValueMapType )( 
             __RPC__in IValueMap * This,
             /* [retval][out] */ __RPC__out ValueMapType *type);
         
+        DECLSPEC_XFGVIRT(IValueMap, put_ValueMapType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ValueMapType )( 
             __RPC__in IValueMap * This,
             /* [in] */ ValueMapType type);
         
+        DECLSPEC_XFGVIRT(IValueMap, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IValueMap * This,
             VARIANT value);
         
+        DECLSPEC_XFGVIRT(IValueMap, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IValueMap * This,
             VARIANT value);
         
+        DECLSPEC_XFGVIRT(IValueMap, Clear)
         HRESULT ( STDMETHODCALLTYPE *Clear )( 
             __RPC__in IValueMap * This);
         
+        DECLSPEC_XFGVIRT(IValueMap, AddRange)
         HRESULT ( STDMETHODCALLTYPE *AddRange )( 
             __RPC__in IValueMap * This,
             __RPC__in_opt IValueMap *map);
         
+        DECLSPEC_XFGVIRT(IValueMap, CreateValueMapItem)
         HRESULT ( STDMETHODCALLTYPE *CreateValueMapItem )( 
             __RPC__in IValueMap * This,
             /* [retval][out] */ __RPC__deref_out_opt IValueMapItem **Item);

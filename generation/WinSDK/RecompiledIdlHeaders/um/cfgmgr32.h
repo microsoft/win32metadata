@@ -1124,7 +1124,12 @@ typedef PHWPROFILEINFO_A  PHWPROFILEINFO;
 #define CM_REMOVE_UI_OK             0x00000000
 #define CM_REMOVE_UI_NOT_OK         0x00000001
 #define CM_REMOVE_NO_RESTART        0x00000002
-#define CM_REMOVE_BITS              0x00000003
+
+#if (WINVER >= _WIN32_WINNT_WIN10)
+#define CM_REMOVE_DISABLE           0x00000004
+#endif // (WINVER >= _WIN32_WINNT_WIN10)
+
+#define CM_REMOVE_BITS              0x00000007
 
 //
 // Backward compatibility--do not use

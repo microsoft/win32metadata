@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -272,6 +280,7 @@ EXTERN_C const IID IID_IVssSnapshotMgmt;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -279,12 +288,15 @@ EXTERN_C const IID IID_IVssSnapshotMgmt;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVssSnapshotMgmt * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVssSnapshotMgmt * This);
         
+        DECLSPEC_XFGVIRT(IVssSnapshotMgmt, GetProviderMgmtInterface)
         HRESULT ( STDMETHODCALLTYPE *GetProviderMgmtInterface )( 
             __RPC__in IVssSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -294,6 +306,7 @@ EXTERN_C const IID IID_IVssSnapshotMgmt;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  IUnknown **ppItf);
         
+        DECLSPEC_XFGVIRT(IVssSnapshotMgmt, QueryVolumesSupportedForSnapshots)
         HRESULT ( STDMETHODCALLTYPE *QueryVolumesSupportedForSnapshots )( 
             __RPC__in IVssSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -303,6 +316,7 @@ EXTERN_C const IID IID_IVssSnapshotMgmt;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssSnapshotMgmt, QuerySnapshotsByVolume)
         HRESULT ( STDMETHODCALLTYPE *QuerySnapshotsByVolume )( 
             __RPC__in IVssSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -383,6 +397,7 @@ EXTERN_C const IID IID_IVssSnapshotMgmt2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -390,12 +405,15 @@ EXTERN_C const IID IID_IVssSnapshotMgmt2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVssSnapshotMgmt2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVssSnapshotMgmt2 * This);
         
+        DECLSPEC_XFGVIRT(IVssSnapshotMgmt2, GetMinDiffAreaSize)
         HRESULT ( STDMETHODCALLTYPE *GetMinDiffAreaSize )( 
             __RPC__in IVssSnapshotMgmt2 * This,
             /* [annotation][out] */ 
@@ -502,6 +520,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -509,12 +528,15 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, AddDiffArea)
         HRESULT ( STDMETHODCALLTYPE *AddDiffArea )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -524,6 +546,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt;
             /* [annotation][in] */ 
             _In_  LONGLONG llMaximumDiffSpace);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, ChangeDiffAreaMaximumSize)
         HRESULT ( STDMETHODCALLTYPE *ChangeDiffAreaMaximumSize )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -533,6 +556,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt;
             /* [annotation][in] */ 
             _In_  LONGLONG llMaximumDiffSpace);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryVolumesSupportedForDiffAreas)
         HRESULT ( STDMETHODCALLTYPE *QueryVolumesSupportedForDiffAreas )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -540,6 +564,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasForVolume)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasForVolume )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -547,6 +572,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasOnVolume)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasOnVolume )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -554,6 +580,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasForSnapshot)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasForSnapshot )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt * This,
             /* [annotation][in] */ 
@@ -669,6 +696,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -676,12 +704,15 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, AddDiffArea)
         HRESULT ( STDMETHODCALLTYPE *AddDiffArea )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -691,6 +722,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][in] */ 
             _In_  LONGLONG llMaximumDiffSpace);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, ChangeDiffAreaMaximumSize)
         HRESULT ( STDMETHODCALLTYPE *ChangeDiffAreaMaximumSize )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -700,6 +732,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][in] */ 
             _In_  LONGLONG llMaximumDiffSpace);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryVolumesSupportedForDiffAreas)
         HRESULT ( STDMETHODCALLTYPE *QueryVolumesSupportedForDiffAreas )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -707,6 +740,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasForVolume)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasForVolume )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -714,6 +748,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasOnVolume)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasOnVolume )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -721,6 +756,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasForSnapshot)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasForSnapshot )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -728,6 +764,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt2, ChangeDiffAreaMaximumSizeEx)
         HRESULT ( STDMETHODCALLTYPE *ChangeDiffAreaMaximumSizeEx )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -739,6 +776,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][in] */ 
             _In_  BOOL bVolatile);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt2, MigrateDiffAreas)
         HRESULT ( STDMETHODCALLTYPE *MigrateDiffAreas )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -748,6 +786,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][in] */ 
             _In_  VSS_PWSZ pwszNewDiffAreaVolumeName);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt2, QueryMigrationStatus)
         HRESULT ( STDMETHODCALLTYPE *QueryMigrationStatus )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -757,6 +796,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt2;
             /* [annotation][out] */ 
             _Out_  IVssAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt2, SetSnapshotPriority)
         HRESULT ( STDMETHODCALLTYPE *SetSnapshotPriority )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt2 * This,
             /* [annotation][in] */ 
@@ -885,6 +925,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -892,12 +933,15 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, AddDiffArea)
         HRESULT ( STDMETHODCALLTYPE *AddDiffArea )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -907,6 +951,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][in] */ 
             _In_  LONGLONG llMaximumDiffSpace);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, ChangeDiffAreaMaximumSize)
         HRESULT ( STDMETHODCALLTYPE *ChangeDiffAreaMaximumSize )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -916,6 +961,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][in] */ 
             _In_  LONGLONG llMaximumDiffSpace);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryVolumesSupportedForDiffAreas)
         HRESULT ( STDMETHODCALLTYPE *QueryVolumesSupportedForDiffAreas )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -923,6 +969,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasForVolume)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasForVolume )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -930,6 +977,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasOnVolume)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasOnVolume )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -937,6 +985,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt, QueryDiffAreasForSnapshot)
         HRESULT ( STDMETHODCALLTYPE *QueryDiffAreasForSnapshot )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -944,6 +993,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][out] */ 
             _Out_  IVssEnumMgmtObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt2, ChangeDiffAreaMaximumSizeEx)
         HRESULT ( STDMETHODCALLTYPE *ChangeDiffAreaMaximumSizeEx )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -955,6 +1005,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][in] */ 
             _In_  BOOL bVolatile);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt2, MigrateDiffAreas)
         HRESULT ( STDMETHODCALLTYPE *MigrateDiffAreas )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -964,6 +1015,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][in] */ 
             _In_  VSS_PWSZ pwszNewDiffAreaVolumeName);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt2, QueryMigrationStatus)
         HRESULT ( STDMETHODCALLTYPE *QueryMigrationStatus )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -973,6 +1025,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][out] */ 
             _Out_  IVssAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt2, SetSnapshotPriority)
         HRESULT ( STDMETHODCALLTYPE *SetSnapshotPriority )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -980,6 +1033,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][in] */ 
             _In_  BYTE priority);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt3, SetVolumeProtectLevel)
         HRESULT ( STDMETHODCALLTYPE *SetVolumeProtectLevel )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -987,6 +1041,7 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][in] */ 
             _In_  VSS_PROTECTION_LEVEL protectionLevel);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt3, GetVolumeProtectLevel)
         HRESULT ( STDMETHODCALLTYPE *GetVolumeProtectLevel )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -994,16 +1049,19 @@ EXTERN_C const IID IID_IVssDifferentialSoftwareSnapshotMgmt3;
             /* [annotation][out] */ 
             _Out_  VSS_VOLUME_PROTECTION_INFO *protectionLevel);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt3, ClearVolumeProtectFault)
         HRESULT ( STDMETHODCALLTYPE *ClearVolumeProtectFault )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
             _In_  VSS_PWSZ pwszVolumeName);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt3, DeleteUnusedDiffAreas)
         HRESULT ( STDMETHODCALLTYPE *DeleteUnusedDiffAreas )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
             _In_  VSS_PWSZ pwszDiffAreaVolumeName);
         
+        DECLSPEC_XFGVIRT(IVssDifferentialSoftwareSnapshotMgmt3, QuerySnapshotDeltaBitmap)
         HRESULT ( STDMETHODCALLTYPE *QuerySnapshotDeltaBitmap )( 
             __RPC__in IVssDifferentialSoftwareSnapshotMgmt3 * This,
             /* [annotation][in] */ 
@@ -1140,6 +1198,7 @@ EXTERN_C const IID IID_IVssEnumMgmtObject;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVssEnumMgmtObject * This,
             /* [annotation][in] */ 
@@ -1147,12 +1206,15 @@ EXTERN_C const IID IID_IVssEnumMgmtObject;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVssEnumMgmtObject * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVssEnumMgmtObject * This);
         
+        DECLSPEC_XFGVIRT(IVssEnumMgmtObject, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IVssEnumMgmtObject * This,
             /* [annotation][in] */ 
@@ -1162,14 +1224,17 @@ EXTERN_C const IID IID_IVssEnumMgmtObject;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IVssEnumMgmtObject, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IVssEnumMgmtObject * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IVssEnumMgmtObject, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IVssEnumMgmtObject * This);
         
+        DECLSPEC_XFGVIRT(IVssEnumMgmtObject, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IVssEnumMgmtObject * This,
             /* [annotation][out][in] */ 

@@ -2256,7 +2256,7 @@ inline HRESULT CheckStringSizeBytes(WCHAR const * psz, size_t cbMax, size_t* pcb
 
 inline void SpClearEvent(SPEVENT * pe)
 {
-    if( pe->elParamType != SPEI_UNDEFINED)
+    if( pe->elParamType != SPET_LPARAM_IS_UNDEFINED)
     {
         if( pe->elParamType == SPET_LPARAM_IS_POINTER ||
             pe->elParamType == SPET_LPARAM_IS_STRING)

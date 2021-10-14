@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -450,18 +458,22 @@ EXTERN_C const IID IID_IXATransLookup;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXATransLookup * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXATransLookup * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXATransLookup * This);
         
+        DECLSPEC_XFGVIRT(IXATransLookup, Lookup)
         HRESULT ( STDMETHODCALLTYPE *Lookup )( 
             __RPC__in IXATransLookup * This,
             /* [out] */ __RPC__deref_out_opt ITransaction **ppTransaction);
@@ -531,18 +543,22 @@ EXTERN_C const IID IID_IXATransLookup2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXATransLookup2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXATransLookup2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXATransLookup2 * This);
         
+        DECLSPEC_XFGVIRT(IXATransLookup2, Lookup)
         HRESULT ( STDMETHODCALLTYPE *Lookup )( 
             __RPC__in IXATransLookup2 * This,
             /* [in] */ __RPC__in XID *pXID,
@@ -611,18 +627,22 @@ EXTERN_C const IID IID_IResourceManagerSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IResourceManagerSink * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IResourceManagerSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IResourceManagerSink * This);
         
+        DECLSPEC_XFGVIRT(IResourceManagerSink, TMDown)
         HRESULT ( STDMETHODCALLTYPE *TMDown )( 
             __RPC__in IResourceManagerSink * This);
         
@@ -706,18 +726,22 @@ EXTERN_C const IID IID_IResourceManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IResourceManager * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IResourceManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IResourceManager * This);
         
+        DECLSPEC_XFGVIRT(IResourceManager, Enlist)
         HRESULT ( STDMETHODCALLTYPE *Enlist )( 
             __RPC__in IResourceManager * This,
             /* [in] */ __RPC__in_opt ITransaction *pTransaction,
@@ -726,6 +750,7 @@ EXTERN_C const IID IID_IResourceManager;
             /* [out] */ __RPC__out LONG *pisoLevel,
             /* [out] */ __RPC__deref_out_opt ITransactionEnlistmentAsync **ppEnlist);
         
+        DECLSPEC_XFGVIRT(IResourceManager, Reenlist)
         HRESULT ( STDMETHODCALLTYPE *Reenlist )( 
             __RPC__in IResourceManager * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbPrepInfo) byte *pPrepInfo,
@@ -733,9 +758,11 @@ EXTERN_C const IID IID_IResourceManager;
             /* [in] */ DWORD lTimeout,
             /* [out] */ __RPC__out XACTSTAT *pXactStat);
         
+        DECLSPEC_XFGVIRT(IResourceManager, ReenlistmentComplete)
         HRESULT ( STDMETHODCALLTYPE *ReenlistmentComplete )( 
             __RPC__in IResourceManager * This);
         
+        DECLSPEC_XFGVIRT(IResourceManager, GetDistributedTransactionManager)
         HRESULT ( STDMETHODCALLTYPE *GetDistributedTransactionManager )( 
             __RPC__in IResourceManager * This,
             /* [in] */ __RPC__in REFIID iid,
@@ -817,23 +844,28 @@ EXTERN_C const IID IID_ILastResourceManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ILastResourceManager * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ILastResourceManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ILastResourceManager * This);
         
+        DECLSPEC_XFGVIRT(ILastResourceManager, TransactionCommitted)
         HRESULT ( STDMETHODCALLTYPE *TransactionCommitted )( 
             __RPC__in ILastResourceManager * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbPrepInfo) byte *pPrepInfo,
             /* [in] */ ULONG cbPrepInfo);
         
+        DECLSPEC_XFGVIRT(ILastResourceManager, RecoveryDone)
         HRESULT ( STDMETHODCALLTYPE *RecoveryDone )( 
             __RPC__in ILastResourceManager * This);
         
@@ -914,18 +946,22 @@ EXTERN_C const IID IID_IResourceManager2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IResourceManager2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IResourceManager2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IResourceManager2 * This);
         
+        DECLSPEC_XFGVIRT(IResourceManager, Enlist)
         HRESULT ( STDMETHODCALLTYPE *Enlist )( 
             __RPC__in IResourceManager2 * This,
             /* [in] */ __RPC__in_opt ITransaction *pTransaction,
@@ -934,6 +970,7 @@ EXTERN_C const IID IID_IResourceManager2;
             /* [out] */ __RPC__out LONG *pisoLevel,
             /* [out] */ __RPC__deref_out_opt ITransactionEnlistmentAsync **ppEnlist);
         
+        DECLSPEC_XFGVIRT(IResourceManager, Reenlist)
         HRESULT ( STDMETHODCALLTYPE *Reenlist )( 
             __RPC__in IResourceManager2 * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbPrepInfo) byte *pPrepInfo,
@@ -941,14 +978,17 @@ EXTERN_C const IID IID_IResourceManager2;
             /* [in] */ DWORD lTimeout,
             /* [out] */ __RPC__out XACTSTAT *pXactStat);
         
+        DECLSPEC_XFGVIRT(IResourceManager, ReenlistmentComplete)
         HRESULT ( STDMETHODCALLTYPE *ReenlistmentComplete )( 
             __RPC__in IResourceManager2 * This);
         
+        DECLSPEC_XFGVIRT(IResourceManager, GetDistributedTransactionManager)
         HRESULT ( STDMETHODCALLTYPE *GetDistributedTransactionManager )( 
             __RPC__in IResourceManager2 * This,
             /* [in] */ __RPC__in REFIID iid,
             /* [iid_is][out] */ __RPC__deref_out_opt void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IResourceManager2, Enlist2)
         HRESULT ( STDMETHODCALLTYPE *Enlist2 )( 
             __RPC__in IResourceManager2 * This,
             /* [in] */ __RPC__in_opt ITransaction *pTransaction,
@@ -958,6 +998,7 @@ EXTERN_C const IID IID_IResourceManager2;
             /* [out] */ __RPC__out XID *pXid,
             /* [out] */ __RPC__deref_out_opt ITransactionEnlistmentAsync **ppEnlist);
         
+        DECLSPEC_XFGVIRT(IResourceManager2, Reenlist2)
         HRESULT ( STDMETHODCALLTYPE *Reenlist2 )( 
             __RPC__in IResourceManager2 * This,
             /* [in] */ __RPC__in XID *pXid,
@@ -1047,18 +1088,22 @@ EXTERN_C const IID IID_IResourceManagerRejoinable;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IResourceManagerRejoinable * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IResourceManagerRejoinable * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IResourceManagerRejoinable * This);
         
+        DECLSPEC_XFGVIRT(IResourceManager, Enlist)
         HRESULT ( STDMETHODCALLTYPE *Enlist )( 
             __RPC__in IResourceManagerRejoinable * This,
             /* [in] */ __RPC__in_opt ITransaction *pTransaction,
@@ -1067,6 +1112,7 @@ EXTERN_C const IID IID_IResourceManagerRejoinable;
             /* [out] */ __RPC__out LONG *pisoLevel,
             /* [out] */ __RPC__deref_out_opt ITransactionEnlistmentAsync **ppEnlist);
         
+        DECLSPEC_XFGVIRT(IResourceManager, Reenlist)
         HRESULT ( STDMETHODCALLTYPE *Reenlist )( 
             __RPC__in IResourceManagerRejoinable * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbPrepInfo) byte *pPrepInfo,
@@ -1074,14 +1120,17 @@ EXTERN_C const IID IID_IResourceManagerRejoinable;
             /* [in] */ DWORD lTimeout,
             /* [out] */ __RPC__out XACTSTAT *pXactStat);
         
+        DECLSPEC_XFGVIRT(IResourceManager, ReenlistmentComplete)
         HRESULT ( STDMETHODCALLTYPE *ReenlistmentComplete )( 
             __RPC__in IResourceManagerRejoinable * This);
         
+        DECLSPEC_XFGVIRT(IResourceManager, GetDistributedTransactionManager)
         HRESULT ( STDMETHODCALLTYPE *GetDistributedTransactionManager )( 
             __RPC__in IResourceManagerRejoinable * This,
             /* [in] */ __RPC__in REFIID iid,
             /* [iid_is][out] */ __RPC__deref_out_opt void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IResourceManager2, Enlist2)
         HRESULT ( STDMETHODCALLTYPE *Enlist2 )( 
             __RPC__in IResourceManagerRejoinable * This,
             /* [in] */ __RPC__in_opt ITransaction *pTransaction,
@@ -1091,12 +1140,14 @@ EXTERN_C const IID IID_IResourceManagerRejoinable;
             /* [out] */ __RPC__out XID *pXid,
             /* [out] */ __RPC__deref_out_opt ITransactionEnlistmentAsync **ppEnlist);
         
+        DECLSPEC_XFGVIRT(IResourceManager2, Reenlist2)
         HRESULT ( STDMETHODCALLTYPE *Reenlist2 )( 
             __RPC__in IResourceManagerRejoinable * This,
             /* [in] */ __RPC__in XID *pXid,
             /* [in] */ DWORD dwTimeout,
             /* [out] */ __RPC__out XACTSTAT *pXactStat);
         
+        DECLSPEC_XFGVIRT(IResourceManagerRejoinable, Rejoin)
         HRESULT ( STDMETHODCALLTYPE *Rejoin )( 
             __RPC__in IResourceManagerRejoinable * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbPrepInfo) byte *pPrepInfo,
@@ -1190,22 +1241,27 @@ EXTERN_C const IID IID_IXAConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXAConfig * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXAConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXAConfig * This);
         
+        DECLSPEC_XFGVIRT(IXAConfig, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IXAConfig * This,
             /* [in] */ GUID clsidHelperDll);
         
+        DECLSPEC_XFGVIRT(IXAConfig, Terminate)
         HRESULT ( STDMETHODCALLTYPE *Terminate )( 
             __RPC__in IXAConfig * This);
         
@@ -1285,22 +1341,27 @@ EXTERN_C const IID IID_IRMHelper;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IRMHelper * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IRMHelper * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IRMHelper * This);
         
+        DECLSPEC_XFGVIRT(IRMHelper, RMCount)
         HRESULT ( STDMETHODCALLTYPE *RMCount )( 
             IRMHelper * This,
             /* [in] */ DWORD dwcTotalNumberOfRMs);
         
+        DECLSPEC_XFGVIRT(IRMHelper, RMInfo)
         HRESULT ( STDMETHODCALLTYPE *RMInfo )( 
             IRMHelper * This,
             /* [in] */ xa_switch_t *pXa_Switch,
@@ -1378,18 +1439,22 @@ EXTERN_C const IID IID_IXAObtainRMInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IXAObtainRMInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IXAObtainRMInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IXAObtainRMInfo * This);
         
+        DECLSPEC_XFGVIRT(IXAObtainRMInfo, ObtainRMInfo)
         HRESULT ( STDMETHODCALLTYPE *ObtainRMInfo )( 
             __RPC__in IXAObtainRMInfo * This,
             /* [in] */ __RPC__in_opt IRMHelper *pIRMHelper);
@@ -1461,18 +1526,22 @@ EXTERN_C const IID IID_IResourceManagerFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IResourceManagerFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IResourceManagerFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IResourceManagerFactory * This);
         
+        DECLSPEC_XFGVIRT(IResourceManagerFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IResourceManagerFactory * This,
             /* [in] */ __RPC__in GUID *pguidRM,
@@ -1548,18 +1617,22 @@ EXTERN_C const IID IID_IResourceManagerFactory2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IResourceManagerFactory2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IResourceManagerFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IResourceManagerFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IResourceManagerFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IResourceManagerFactory2 * This,
             /* [in] */ __RPC__in GUID *pguidRM,
@@ -1567,6 +1640,7 @@ EXTERN_C const IID IID_IResourceManagerFactory2;
             /* [in] */ __RPC__in_opt IResourceManagerSink *pIResMgrSink,
             /* [out] */ __RPC__deref_out_opt IResourceManager **ppResMgr);
         
+        DECLSPEC_XFGVIRT(IResourceManagerFactory2, CreateEx)
         HRESULT ( STDMETHODCALLTYPE *CreateEx )( 
             __RPC__in IResourceManagerFactory2 * This,
             /* [in] */ __RPC__in GUID *pguidRM,
@@ -1646,22 +1720,27 @@ EXTERN_C const IID IID_IPrepareInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPrepareInfo * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPrepareInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPrepareInfo * This);
         
+        DECLSPEC_XFGVIRT(IPrepareInfo, GetPrepareInfoSize)
         HRESULT ( STDMETHODCALLTYPE *GetPrepareInfoSize )( 
             IPrepareInfo * This,
             /* [out] */ ULONG *pcbPrepInfo);
         
+        DECLSPEC_XFGVIRT(IPrepareInfo, GetPrepareInfo)
         HRESULT ( STDMETHODCALLTYPE *GetPrepareInfo )( 
             IPrepareInfo * This,
             /* [out] */ byte *pPrepInfo);
@@ -1737,22 +1816,27 @@ EXTERN_C const IID IID_IPrepareInfo2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPrepareInfo2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPrepareInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPrepareInfo2 * This);
         
+        DECLSPEC_XFGVIRT(IPrepareInfo2, GetPrepareInfoSize)
         HRESULT ( STDMETHODCALLTYPE *GetPrepareInfoSize )( 
             __RPC__in IPrepareInfo2 * This,
             /* [out] */ __RPC__out ULONG *pcbPrepInfo);
         
+        DECLSPEC_XFGVIRT(IPrepareInfo2, GetPrepareInfo)
         HRESULT ( STDMETHODCALLTYPE *GetPrepareInfo )( 
             __RPC__in IPrepareInfo2 * This,
             /* [in] */ ULONG cbPrepareInfo,
@@ -1826,18 +1910,22 @@ EXTERN_C const IID IID_IGetDispenser;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetDispenser * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetDispenser * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetDispenser * This);
         
+        DECLSPEC_XFGVIRT(IGetDispenser, GetDispenser)
         HRESULT ( STDMETHODCALLTYPE *GetDispenser )( 
             __RPC__in IGetDispenser * This,
             /* [in] */ __RPC__in REFIID iid,
@@ -1908,18 +1996,22 @@ EXTERN_C const IID IID_ITransactionVoterBallotAsync2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionVoterBallotAsync2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionVoterBallotAsync2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionVoterBallotAsync2 * This);
         
+        DECLSPEC_XFGVIRT(ITransactionVoterBallotAsync2, VoteRequestDone)
         HRESULT ( STDMETHODCALLTYPE *VoteRequestDone )( 
             __RPC__in ITransactionVoterBallotAsync2 * This,
             /* [in] */ HRESULT hr,
@@ -1988,24 +2080,29 @@ EXTERN_C const IID IID_ITransactionVoterNotifyAsync2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionVoterNotifyAsync2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionVoterNotifyAsync2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionVoterNotifyAsync2 * This);
         
+        DECLSPEC_XFGVIRT(ITransactionOutcomeEvents, Committed)
         HRESULT ( STDMETHODCALLTYPE *Committed )( 
             __RPC__in ITransactionVoterNotifyAsync2 * This,
             /* [in] */ BOOL fRetaining,
             /* [unique][in] */ __RPC__in_opt XACTUOW *pNewUOW,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(ITransactionOutcomeEvents, Aborted)
         HRESULT ( STDMETHODCALLTYPE *Aborted )( 
             __RPC__in ITransactionVoterNotifyAsync2 * This,
             /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
@@ -2013,15 +2110,18 @@ EXTERN_C const IID IID_ITransactionVoterNotifyAsync2;
             /* [unique][in] */ __RPC__in_opt XACTUOW *pNewUOW,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(ITransactionOutcomeEvents, HeuristicDecision)
         HRESULT ( STDMETHODCALLTYPE *HeuristicDecision )( 
             __RPC__in ITransactionVoterNotifyAsync2 * This,
             /* [in] */ DWORD dwDecision,
             /* [unique][in] */ __RPC__in_opt BOID *pboidReason,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(ITransactionOutcomeEvents, Indoubt)
         HRESULT ( STDMETHODCALLTYPE *Indoubt )( 
             __RPC__in ITransactionVoterNotifyAsync2 * This);
         
+        DECLSPEC_XFGVIRT(ITransactionVoterNotifyAsync2, VoteRequest)
         HRESULT ( STDMETHODCALLTYPE *VoteRequest )( 
             __RPC__in ITransactionVoterNotifyAsync2 * This);
         
@@ -2104,18 +2204,22 @@ EXTERN_C const IID IID_ITransactionVoterFactory2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionVoterFactory2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionVoterFactory2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionVoterFactory2 * This);
         
+        DECLSPEC_XFGVIRT(ITransactionVoterFactory2, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in ITransactionVoterFactory2 * This,
             /* [in] */ __RPC__in_opt ITransaction *pTransaction,
@@ -2194,30 +2298,38 @@ EXTERN_C const IID IID_ITransactionPhase0EnlistmentAsync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionPhase0EnlistmentAsync * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionPhase0EnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionPhase0EnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionPhase0EnlistmentAsync, Enable)
         HRESULT ( STDMETHODCALLTYPE *Enable )( 
             __RPC__in ITransactionPhase0EnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionPhase0EnlistmentAsync, WaitForEnlistment)
         HRESULT ( STDMETHODCALLTYPE *WaitForEnlistment )( 
             __RPC__in ITransactionPhase0EnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionPhase0EnlistmentAsync, Phase0Done)
         HRESULT ( STDMETHODCALLTYPE *Phase0Done )( 
             __RPC__in ITransactionPhase0EnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionPhase0EnlistmentAsync, Unenlist)
         HRESULT ( STDMETHODCALLTYPE *Unenlist )( 
             __RPC__in ITransactionPhase0EnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionPhase0EnlistmentAsync, GetTransaction)
         HRESULT ( STDMETHODCALLTYPE *GetTransaction )( 
             __RPC__in ITransactionPhase0EnlistmentAsync * This,
             /* [out] */ __RPC__deref_out_opt ITransaction **ppITransaction);
@@ -2301,22 +2413,27 @@ EXTERN_C const IID IID_ITransactionPhase0NotifyAsync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionPhase0NotifyAsync * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionPhase0NotifyAsync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionPhase0NotifyAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionPhase0NotifyAsync, Phase0Request)
         HRESULT ( STDMETHODCALLTYPE *Phase0Request )( 
             __RPC__in ITransactionPhase0NotifyAsync * This,
             BOOL fAbortingHint);
         
+        DECLSPEC_XFGVIRT(ITransactionPhase0NotifyAsync, EnlistCompleted)
         HRESULT ( STDMETHODCALLTYPE *EnlistCompleted )( 
             __RPC__in ITransactionPhase0NotifyAsync * This,
             /* [in] */ HRESULT status);
@@ -2389,18 +2506,22 @@ EXTERN_C const IID IID_ITransactionPhase0Factory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionPhase0Factory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionPhase0Factory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionPhase0Factory * This);
         
+        DECLSPEC_XFGVIRT(ITransactionPhase0Factory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in ITransactionPhase0Factory * This,
             /* [in] */ __RPC__in_opt ITransactionPhase0NotifyAsync *pPhase0Notify,
@@ -2484,37 +2605,45 @@ EXTERN_C const IID IID_ITransactionTransmitter;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionTransmitter * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionTransmitter * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionTransmitter * This);
         
+        DECLSPEC_XFGVIRT(ITransactionTransmitter, Set)
         HRESULT ( STDMETHODCALLTYPE *Set )( 
             __RPC__in ITransactionTransmitter * This,
             /* [in] */ __RPC__in_opt ITransaction *pTransaction);
         
+        DECLSPEC_XFGVIRT(ITransactionTransmitter, GetPropagationTokenSize)
         HRESULT ( STDMETHODCALLTYPE *GetPropagationTokenSize )( 
             __RPC__in ITransactionTransmitter * This,
             /* [out] */ __RPC__out ULONG *pcbToken);
         
+        DECLSPEC_XFGVIRT(ITransactionTransmitter, MarshalPropagationToken)
         HRESULT ( STDMETHODCALLTYPE *MarshalPropagationToken )( 
             __RPC__in ITransactionTransmitter * This,
             /* [in] */ ULONG cbToken,
             /* [size_is][out] */ __RPC__out_ecount_full(cbToken) byte *rgbToken,
             /* [out] */ __RPC__out ULONG *pcbUsed);
         
+        DECLSPEC_XFGVIRT(ITransactionTransmitter, UnmarshalReturnToken)
         HRESULT ( STDMETHODCALLTYPE *UnmarshalReturnToken )( 
             __RPC__in ITransactionTransmitter * This,
             /* [in] */ ULONG cbReturnToken,
             /* [size_is][in] */ __RPC__in_ecount_full(cbReturnToken) byte *rgbReturnToken);
         
+        DECLSPEC_XFGVIRT(ITransactionTransmitter, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ITransactionTransmitter * This);
         
@@ -2594,18 +2723,22 @@ EXTERN_C const IID IID_ITransactionTransmitterFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionTransmitterFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionTransmitterFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionTransmitterFactory * This);
         
+        DECLSPEC_XFGVIRT(ITransactionTransmitterFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in ITransactionTransmitterFactory * This,
             /* [out] */ __RPC__deref_out_opt ITransactionTransmitter **ppTransmitter);
@@ -2686,34 +2819,41 @@ EXTERN_C const IID IID_ITransactionReceiver;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionReceiver * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionReceiver * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionReceiver * This);
         
+        DECLSPEC_XFGVIRT(ITransactionReceiver, UnmarshalPropagationToken)
         HRESULT ( STDMETHODCALLTYPE *UnmarshalPropagationToken )( 
             __RPC__in ITransactionReceiver * This,
             /* [in] */ ULONG cbToken,
             /* [size_is][in] */ __RPC__in_ecount_full(cbToken) byte *rgbToken,
             /* [out] */ __RPC__deref_out_opt ITransaction **ppTransaction);
         
+        DECLSPEC_XFGVIRT(ITransactionReceiver, GetReturnTokenSize)
         HRESULT ( STDMETHODCALLTYPE *GetReturnTokenSize )( 
             __RPC__in ITransactionReceiver * This,
             /* [out] */ __RPC__out ULONG *pcbReturnToken);
         
+        DECLSPEC_XFGVIRT(ITransactionReceiver, MarshalReturnToken)
         HRESULT ( STDMETHODCALLTYPE *MarshalReturnToken )( 
             __RPC__in ITransactionReceiver * This,
             /* [in] */ ULONG cbReturnToken,
             /* [size_is][out] */ __RPC__out_ecount_full(cbReturnToken) byte *rgbReturnToken,
             /* [out] */ __RPC__out ULONG *pcbUsed);
         
+        DECLSPEC_XFGVIRT(ITransactionReceiver, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ITransactionReceiver * This);
         
@@ -2790,18 +2930,22 @@ EXTERN_C const IID IID_ITransactionReceiverFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionReceiverFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionReceiverFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionReceiverFactory * This);
         
+        DECLSPEC_XFGVIRT(ITransactionReceiverFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in ITransactionReceiverFactory * This,
             /* [out] */ __RPC__deref_out_opt ITransactionReceiver **ppReceiver);
@@ -2888,23 +3032,28 @@ EXTERN_C const IID IID_IDtcLuConfigure;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcLuConfigure * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcLuConfigure * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcLuConfigure * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuConfigure, Add)
         HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IDtcLuConfigure * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbLuPair) byte *pucLuPair,
             /* [in] */ DWORD cbLuPair);
         
+        DECLSPEC_XFGVIRT(IDtcLuConfigure, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IDtcLuConfigure * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbLuPair) byte *pucLuPair,
@@ -2974,15 +3123,18 @@ EXTERN_C const IID IID_IDtcLuRecovery;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcLuRecovery * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcLuRecovery * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcLuRecovery * This);
         
@@ -3049,18 +3201,22 @@ EXTERN_C const IID IID_IDtcLuRecoveryFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcLuRecoveryFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcLuRecoveryFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcLuRecoveryFactory * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IDtcLuRecoveryFactory * This,
             /* [size_is][in] */ __RPC__in_ecount_full(cbLuPair) byte *pucLuPair,
@@ -3256,23 +3412,28 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByDtcTransWork;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, GetLogNameSizes)
         HRESULT ( STDMETHODCALLTYPE *GetLogNameSizes )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [out] */ DWORD *pcbOurLogName,
             /* [out] */ DWORD *pcbRemoteLogName);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, GetOurXln)
         HRESULT ( STDMETHODCALLTYPE *GetOurXln )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [out] */ DTCLUXLN *pXln,
@@ -3280,10 +3441,12 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByDtcTransWork;
             /* [out][in] */ unsigned char *pRemoteLogName,
             /* [out] */ DWORD *pdwProtocol);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, HandleConfirmationFromOurXln)
         HRESULT ( STDMETHODCALLTYPE *HandleConfirmationFromOurXln )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [in] */ DTCLUXLNCONFIRMATION Confirmation);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, HandleTheirXlnResponse)
         HRESULT ( STDMETHODCALLTYPE *HandleTheirXlnResponse )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [in] */ DTCLUXLN Xln,
@@ -3292,39 +3455,48 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByDtcTransWork;
             /* [in] */ DWORD dwProtocol,
             /* [out] */ DTCLUXLNCONFIRMATION *pConfirmation);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, HandleErrorFromOurXln)
         HRESULT ( STDMETHODCALLTYPE *HandleErrorFromOurXln )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [in] */ DTCLUXLNERROR Error);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, CheckForCompareStates)
         HRESULT ( STDMETHODCALLTYPE *CheckForCompareStates )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [out] */ BOOL *fCompareStates);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, GetOurTransIdSize)
         HRESULT ( STDMETHODCALLTYPE *GetOurTransIdSize )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [out][in] */ DWORD *pcbOurTransId);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, GetOurCompareStates)
         HRESULT ( STDMETHODCALLTYPE *GetOurCompareStates )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [out][in] */ unsigned char *pOurTransId,
             /* [out] */ DTCLUCOMPARESTATE *pCompareState);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, HandleTheirCompareStatesResponse)
         HRESULT ( STDMETHODCALLTYPE *HandleTheirCompareStatesResponse )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [in] */ DTCLUCOMPARESTATE CompareState,
             /* [out] */ DTCLUCOMPARESTATESCONFIRMATION *pConfirmation);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, HandleErrorFromOurCompareStates)
         HRESULT ( STDMETHODCALLTYPE *HandleErrorFromOurCompareStates )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [in] */ DTCLUCOMPARESTATESERROR Error);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, ConversationLost)
         HRESULT ( STDMETHODCALLTYPE *ConversationLost )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, GetRecoverySeqNum)
         HRESULT ( STDMETHODCALLTYPE *GetRecoverySeqNum )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [out] */ LONG *plRecoverySeqNum);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcTransWork, ObsoleteRecoverySeqNum)
         HRESULT ( STDMETHODCALLTYPE *ObsoleteRecoverySeqNum )( 
             IDtcLuRecoveryInitiatedByDtcTransWork * This,
             /* [in] */ LONG lNewRecoverySeqNum);
@@ -3429,18 +3601,22 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByDtcStatusWork;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcLuRecoveryInitiatedByDtcStatusWork * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcLuRecoveryInitiatedByDtcStatusWork * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcLuRecoveryInitiatedByDtcStatusWork * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtcStatusWork, HandleCheckLuStatus)
         HRESULT ( STDMETHODCALLTYPE *HandleCheckLuStatus )( 
             __RPC__in IDtcLuRecoveryInitiatedByDtcStatusWork * This,
             /* [in] */ LONG lRecoverySeqNum);
@@ -3510,18 +3686,22 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByDtc;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDtcLuRecoveryInitiatedByDtc * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDtcLuRecoveryInitiatedByDtc * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDtcLuRecoveryInitiatedByDtc * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByDtc, GetWork)
         HRESULT ( STDMETHODCALLTYPE *GetWork )( 
             IDtcLuRecoveryInitiatedByDtc * This,
             /* [out][in] */ DTCINITIATEDRECOVERYWORK *pWork,
@@ -3624,18 +3804,22 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByLuWork;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDtcLuRecoveryInitiatedByLuWork * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDtcLuRecoveryInitiatedByLuWork * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDtcLuRecoveryInitiatedByLuWork * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLuWork, HandleTheirXln)
         HRESULT ( STDMETHODCALLTYPE *HandleTheirXln )( 
             IDtcLuRecoveryInitiatedByLuWork * This,
             /* [in] */ LONG lRecoverySeqNum,
@@ -3647,20 +3831,24 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByLuWork;
             /* [in] */ DWORD dwProtocol,
             /* [out] */ DTCLUXLNRESPONSE *pResponse);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLuWork, GetOurLogNameSize)
         HRESULT ( STDMETHODCALLTYPE *GetOurLogNameSize )( 
             IDtcLuRecoveryInitiatedByLuWork * This,
             /* [out][in] */ DWORD *pcbOurLogName);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLuWork, GetOurXln)
         HRESULT ( STDMETHODCALLTYPE *GetOurXln )( 
             IDtcLuRecoveryInitiatedByLuWork * This,
             /* [out] */ DTCLUXLN *pXln,
             /* [out][in] */ unsigned char *pOurLogName,
             /* [out] */ DWORD *pdwProtocol);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLuWork, HandleConfirmationOfOurXln)
         HRESULT ( STDMETHODCALLTYPE *HandleConfirmationOfOurXln )( 
             IDtcLuRecoveryInitiatedByLuWork * This,
             /* [in] */ DTCLUXLNCONFIRMATION Confirmation);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLuWork, HandleTheirCompareStates)
         HRESULT ( STDMETHODCALLTYPE *HandleTheirCompareStates )( 
             IDtcLuRecoveryInitiatedByLuWork * This,
             /* [out][in] */ unsigned char *pRemoteTransId,
@@ -3669,14 +3857,17 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByLuWork;
             /* [out] */ DTCLUCOMPARESTATESRESPONSE *pResponse,
             /* [out] */ DTCLUCOMPARESTATE *pCompareState);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLuWork, HandleConfirmationOfOurCompareStates)
         HRESULT ( STDMETHODCALLTYPE *HandleConfirmationOfOurCompareStates )( 
             IDtcLuRecoveryInitiatedByLuWork * This,
             /* [in] */ DTCLUCOMPARESTATESCONFIRMATION Confirmation);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLuWork, HandleErrorFromOurCompareStates)
         HRESULT ( STDMETHODCALLTYPE *HandleErrorFromOurCompareStates )( 
             IDtcLuRecoveryInitiatedByLuWork * This,
             /* [in] */ DTCLUCOMPARESTATESERROR Error);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLuWork, ConversationLost)
         HRESULT ( STDMETHODCALLTYPE *ConversationLost )( 
             IDtcLuRecoveryInitiatedByLuWork * This);
         
@@ -3765,18 +3956,22 @@ EXTERN_C const IID IID_IDtcLuRecoveryInitiatedByLu;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcLuRecoveryInitiatedByLu * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcLuRecoveryInitiatedByLu * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcLuRecoveryInitiatedByLu * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRecoveryInitiatedByLu, GetObjectToHandleWorkFromLu)
         HRESULT ( STDMETHODCALLTYPE *GetObjectToHandleWorkFromLu )( 
             __RPC__in IDtcLuRecoveryInitiatedByLu * This,
             /* [out] */ __RPC__deref_out_opt IDtcLuRecoveryInitiatedByLuWork **ppWork);
@@ -3855,34 +4050,43 @@ EXTERN_C const IID IID_IDtcLuRmEnlistment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcLuRmEnlistment * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcLuRmEnlistment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcLuRmEnlistment * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistment, Unplug)
         HRESULT ( STDMETHODCALLTYPE *Unplug )( 
             __RPC__in IDtcLuRmEnlistment * This,
             /* [in] */ BOOL fConversationLost);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistment, BackedOut)
         HRESULT ( STDMETHODCALLTYPE *BackedOut )( 
             __RPC__in IDtcLuRmEnlistment * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistment, BackOut)
         HRESULT ( STDMETHODCALLTYPE *BackOut )( 
             __RPC__in IDtcLuRmEnlistment * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistment, Committed)
         HRESULT ( STDMETHODCALLTYPE *Committed )( 
             __RPC__in IDtcLuRmEnlistment * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistment, Forget)
         HRESULT ( STDMETHODCALLTYPE *Forget )( 
             __RPC__in IDtcLuRmEnlistment * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistment, RequestCommit)
         HRESULT ( STDMETHODCALLTYPE *RequestCommit )( 
             __RPC__in IDtcLuRmEnlistment * This);
         
@@ -3980,42 +4184,54 @@ EXTERN_C const IID IID_IDtcLuRmEnlistmentSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcLuRmEnlistmentSink * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, AckUnplug)
         HRESULT ( STDMETHODCALLTYPE *AckUnplug )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, TmDown)
         HRESULT ( STDMETHODCALLTYPE *TmDown )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, SessionLost)
         HRESULT ( STDMETHODCALLTYPE *SessionLost )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, BackedOut)
         HRESULT ( STDMETHODCALLTYPE *BackedOut )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, BackOut)
         HRESULT ( STDMETHODCALLTYPE *BackOut )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, Committed)
         HRESULT ( STDMETHODCALLTYPE *Committed )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, Forget)
         HRESULT ( STDMETHODCALLTYPE *Forget )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, Prepare)
         HRESULT ( STDMETHODCALLTYPE *Prepare )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentSink, RequestCommit)
         HRESULT ( STDMETHODCALLTYPE *RequestCommit )( 
             __RPC__in IDtcLuRmEnlistmentSink * This);
         
@@ -4113,18 +4329,22 @@ EXTERN_C const IID IID_IDtcLuRmEnlistmentFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDtcLuRmEnlistmentFactory * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDtcLuRmEnlistmentFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDtcLuRmEnlistmentFactory * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuRmEnlistmentFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             IDtcLuRmEnlistmentFactory * This,
             /* [in] */ unsigned char *pucLuPair,
@@ -4211,37 +4431,47 @@ EXTERN_C const IID IID_IDtcLuSubordinateDtc;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcLuSubordinateDtc * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcLuSubordinateDtc * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcLuSubordinateDtc * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtc, Unplug)
         HRESULT ( STDMETHODCALLTYPE *Unplug )( 
             __RPC__in IDtcLuSubordinateDtc * This,
             /* [in] */ BOOL fConversationLost);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtc, BackedOut)
         HRESULT ( STDMETHODCALLTYPE *BackedOut )( 
             __RPC__in IDtcLuSubordinateDtc * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtc, BackOut)
         HRESULT ( STDMETHODCALLTYPE *BackOut )( 
             __RPC__in IDtcLuSubordinateDtc * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtc, Committed)
         HRESULT ( STDMETHODCALLTYPE *Committed )( 
             __RPC__in IDtcLuSubordinateDtc * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtc, Forget)
         HRESULT ( STDMETHODCALLTYPE *Forget )( 
             __RPC__in IDtcLuSubordinateDtc * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtc, Prepare)
         HRESULT ( STDMETHODCALLTYPE *Prepare )( 
             __RPC__in IDtcLuSubordinateDtc * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtc, RequestCommit)
         HRESULT ( STDMETHODCALLTYPE *RequestCommit )( 
             __RPC__in IDtcLuSubordinateDtc * This);
         
@@ -4340,39 +4570,50 @@ EXTERN_C const IID IID_IDtcLuSubordinateDtcSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDtcLuSubordinateDtcSink * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcSink, AckUnplug)
         HRESULT ( STDMETHODCALLTYPE *AckUnplug )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcSink, TmDown)
         HRESULT ( STDMETHODCALLTYPE *TmDown )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcSink, SessionLost)
         HRESULT ( STDMETHODCALLTYPE *SessionLost )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcSink, BackedOut)
         HRESULT ( STDMETHODCALLTYPE *BackedOut )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcSink, BackOut)
         HRESULT ( STDMETHODCALLTYPE *BackOut )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcSink, Committed)
         HRESULT ( STDMETHODCALLTYPE *Committed )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcSink, Forget)
         HRESULT ( STDMETHODCALLTYPE *Forget )( 
             IDtcLuSubordinateDtcSink * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcSink, RequestCommit)
         HRESULT ( STDMETHODCALLTYPE *RequestCommit )( 
             IDtcLuSubordinateDtcSink * This);
         
@@ -4471,18 +4712,22 @@ EXTERN_C const IID IID_IDtcLuSubordinateDtcFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDtcLuSubordinateDtcFactory * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDtcLuSubordinateDtcFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDtcLuSubordinateDtcFactory * This);
         
+        DECLSPEC_XFGVIRT(IDtcLuSubordinateDtcFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             IDtcLuSubordinateDtcFactory * This,
             /* [in] */ unsigned char *pucLuPair,

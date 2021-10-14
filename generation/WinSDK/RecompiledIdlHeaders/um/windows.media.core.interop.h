@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -121,6 +129,7 @@ EXTERN_C const IID IID_IAudioFrameNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioFrameNative * This,
             /* [annotation][in] */ 
@@ -128,25 +137,31 @@ EXTERN_C const IID IID_IAudioFrameNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioFrameNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioFrameNative * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             IAudioFrameNative * This,
             /* [out] */ ULONG *iidCount,
             /* [size_is][size_is][out] */ IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             IAudioFrameNative * This,
             /* [out] */ HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             IAudioFrameNative * This,
             /* [out] */ TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IAudioFrameNative, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             IAudioFrameNative * This,
             /* [annotation][in] */ 
@@ -237,6 +252,7 @@ EXTERN_C const IID IID_IVideoFrameNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVideoFrameNative * This,
             /* [annotation][in] */ 
@@ -244,25 +260,31 @@ EXTERN_C const IID IID_IVideoFrameNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IVideoFrameNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IVideoFrameNative * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             IVideoFrameNative * This,
             /* [out] */ ULONG *iidCount,
             /* [size_is][size_is][out] */ IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             IVideoFrameNative * This,
             /* [out] */ HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             IVideoFrameNative * This,
             /* [out] */ TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IVideoFrameNative, GetData)
         HRESULT ( STDMETHODCALLTYPE *GetData )( 
             IVideoFrameNative * This,
             /* [annotation][in] */ 
@@ -270,6 +292,7 @@ EXTERN_C const IID IID_IVideoFrameNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  LPVOID *ppv);
         
+        DECLSPEC_XFGVIRT(IVideoFrameNative, GetDevice)
         HRESULT ( STDMETHODCALLTYPE *GetDevice )( 
             IVideoFrameNative * This,
             /* [annotation][in] */ 
@@ -361,6 +384,7 @@ EXTERN_C const IID IID_IAudioFrameNativeFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioFrameNativeFactory * This,
             /* [annotation][in] */ 
@@ -368,25 +392,31 @@ EXTERN_C const IID IID_IAudioFrameNativeFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioFrameNativeFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioFrameNativeFactory * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             IAudioFrameNativeFactory * This,
             /* [out] */ ULONG *iidCount,
             /* [size_is][size_is][out] */ IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             IAudioFrameNativeFactory * This,
             /* [out] */ HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             IAudioFrameNativeFactory * This,
             /* [out] */ TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IAudioFrameNativeFactory, CreateFromMFSample)
         HRESULT ( STDMETHODCALLTYPE *CreateFromMFSample )( 
             IAudioFrameNativeFactory * This,
             /* [annotation][in] */ 
@@ -489,6 +519,7 @@ EXTERN_C const IID IID_IVideoFrameNativeFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVideoFrameNativeFactory * This,
             /* [annotation][in] */ 
@@ -496,25 +527,31 @@ EXTERN_C const IID IID_IVideoFrameNativeFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IVideoFrameNativeFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IVideoFrameNativeFactory * This);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetIids)
         HRESULT ( STDMETHODCALLTYPE *GetIids )( 
             IVideoFrameNativeFactory * This,
             /* [out] */ ULONG *iidCount,
             /* [size_is][size_is][out] */ IID **iids);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetRuntimeClassName)
         HRESULT ( STDMETHODCALLTYPE *GetRuntimeClassName )( 
             IVideoFrameNativeFactory * This,
             /* [out] */ HSTRING *className);
         
+        DECLSPEC_XFGVIRT(IInspectable, GetTrustLevel)
         HRESULT ( STDMETHODCALLTYPE *GetTrustLevel )( 
             IVideoFrameNativeFactory * This,
             /* [out] */ TrustLevel *trustLevel);
         
+        DECLSPEC_XFGVIRT(IVideoFrameNativeFactory, CreateFromMFSample)
         HRESULT ( STDMETHODCALLTYPE *CreateFromMFSample )( 
             IVideoFrameNativeFactory * This,
             /* [annotation][in] */ 

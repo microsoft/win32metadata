@@ -1,7 +1,7 @@
 --traverse
 <IncludeRoot>/um/activscp.h
 <IncludeRoot>/um/minidumpapiset.h
-<IncludeRoot>/um/dbghelp.h
+<IncludeRoot>/um/ImageHlp.h
 <IncludeRoot>/um/wct.h
 <IncludeRoot>/um/errhandlingapi.h
 <IncludeRoot>/um/utilapiset.h
@@ -10,5 +10,12 @@
 <IncludeRoot>/um/dbgprop.h
 <IncludeRoot>/um/activprof.h
 <IncludeRoot>/winrt/webapplication.h
+<IncludeRoot>/shared/bugcodes.h
+<IncludeRoot>/um/activaut.h
+<IncludeRoot>/um/activdbg100.h
+<IncludeRoot>/um/jscript9diag.h
+<IncludeRoot>/um/mindumpdef.h
+<IncludeRoot>/um/objsafe.h
+<IncludeRoot>/um/wheadef.h
 --namespace
 Windows.Win32.System.Diagnostics.Debug

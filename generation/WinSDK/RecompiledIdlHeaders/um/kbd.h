@@ -1399,8 +1399,8 @@ typedef struct tagKBD_TYPE_INFO {
 #define X6B _EQ(           LAUNCH_APP1                                                      ) // SpeedRacer
 #define X6C _EQ(           LAUNCH_MAIL                                                      ) // SpeedRacer
 #define X6D _EQ(           LAUNCH_MEDIA_SELECT                                              ) // SpeedRacer
-#define XF1 _NE(_none_,    _none_,    _none_,    HANJA,     HANJA,     HANJA,     HANJA     )
-#define XF2 _NE(_none_,    _none_,    _none_,    HANGEUL,   HANGEUL,   HANGEUL,   HANGEUL   )
+#define XF1 _NE(_none_,    IME_OFF,   _none_,    HANJA,     HANJA,     HANJA,     HANJA     )
+#define XF2 _NE(_none_,    IME_ON,    _none_,    HANGEUL,   HANGEUL,   HANGEUL,   HANGEUL   )
 
         /*
          * The break key is sent to us as E1,LCtrl,NumLock

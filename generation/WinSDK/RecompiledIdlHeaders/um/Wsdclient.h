@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -216,6 +224,7 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDEndpointProxy * This,
             /* [annotation][in] */ 
@@ -223,12 +232,15 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDEndpointProxy * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDEndpointProxy * This);
         
+        DECLSPEC_XFGVIRT(IWSDEndpointProxy, SendOneWayRequest)
         HRESULT ( STDMETHODCALLTYPE *SendOneWayRequest )( 
             IWSDEndpointProxy * This,
             /* [annotation][in] */ 
@@ -236,6 +248,7 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
             /* [annotation][in] */ 
             _In_  const WSD_OPERATION *pOperation);
         
+        DECLSPEC_XFGVIRT(IWSDEndpointProxy, SendTwoWayRequest)
         HRESULT ( STDMETHODCALLTYPE *SendTwoWayRequest )( 
             IWSDEndpointProxy * This,
             /* [annotation][in] */ 
@@ -245,6 +258,7 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
             /* [annotation][optional][in] */ 
             _In_opt_  const WSD_SYNCHRONOUS_RESPONSE_CONTEXT *pResponseContext);
         
+        DECLSPEC_XFGVIRT(IWSDEndpointProxy, SendTwoWayRequestAsync)
         HRESULT ( STDMETHODCALLTYPE *SendTwoWayRequestAsync )( 
             IWSDEndpointProxy * This,
             /* [annotation][in] */ 
@@ -258,21 +272,25 @@ EXTERN_C const IID IID_IWSDEndpointProxy;
             /* [annotation][out] */ 
             _Outptr_  IWSDAsyncResult **pResult);
         
+        DECLSPEC_XFGVIRT(IWSDEndpointProxy, AbortAsyncOperation)
         HRESULT ( STDMETHODCALLTYPE *AbortAsyncOperation )( 
             IWSDEndpointProxy * This,
             /* [annotation][in] */ 
             _In_  IWSDAsyncResult *pAsyncResult);
         
+        DECLSPEC_XFGVIRT(IWSDEndpointProxy, ProcessFault)
         HRESULT ( STDMETHODCALLTYPE *ProcessFault )( 
             IWSDEndpointProxy * This,
             /* [annotation][in] */ 
             _In_  const WSD_SOAP_FAULT *pFault);
         
+        DECLSPEC_XFGVIRT(IWSDEndpointProxy, GetErrorInfo)
         HRESULT ( STDMETHODCALLTYPE *GetErrorInfo )( 
             IWSDEndpointProxy * This,
             /* [annotation][out] */ 
             _Outptr_  LPCWSTR *ppszErrorInfo);
         
+        DECLSPEC_XFGVIRT(IWSDEndpointProxy, GetFaultInfo)
         HRESULT ( STDMETHODCALLTYPE *GetFaultInfo )( 
             IWSDEndpointProxy * This,
             /* [annotation][out] */ 
@@ -361,6 +379,7 @@ EXTERN_C const IID IID_IWSDMetadataExchange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDMetadataExchange * This,
             /* [annotation][in] */ 
@@ -368,12 +387,15 @@ EXTERN_C const IID IID_IWSDMetadataExchange;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDMetadataExchange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDMetadataExchange * This);
         
+        DECLSPEC_XFGVIRT(IWSDMetadataExchange, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             IWSDMetadataExchange * This,
             /* [annotation][out] */ 
@@ -476,6 +498,7 @@ EXTERN_C const IID IID_IWSDServiceProxy;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDServiceProxy * This,
             /* [annotation][in] */ 
@@ -483,22 +506,27 @@ EXTERN_C const IID IID_IWSDServiceProxy;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDServiceProxy * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDServiceProxy * This);
         
+        DECLSPEC_XFGVIRT(IWSDMetadataExchange, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             IWSDServiceProxy * This,
             /* [annotation][out] */ 
             _Outptr_  WSD_METADATA_SECTION_LIST **MetadataOut);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, BeginGetMetadata)
         HRESULT ( STDMETHODCALLTYPE *BeginGetMetadata )( 
             IWSDServiceProxy * This,
             /* [annotation][out] */ 
             _Outptr_  IWSDAsyncResult **ppResult);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, EndGetMetadata)
         HRESULT ( STDMETHODCALLTYPE *EndGetMetadata )( 
             IWSDServiceProxy * This,
             /* [annotation][in] */ 
@@ -506,11 +534,13 @@ EXTERN_C const IID IID_IWSDServiceProxy;
             /* [annotation][out] */ 
             _Outptr_  WSD_METADATA_SECTION_LIST **ppMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, GetServiceMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetServiceMetadata )( 
             IWSDServiceProxy * This,
             /* [annotation][out] */ 
             _Outptr_  WSD_SERVICE_METADATA **ppServiceMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, SubscribeToOperation)
         HRESULT ( STDMETHODCALLTYPE *SubscribeToOperation )( 
             IWSDServiceProxy * This,
             /* [annotation][in] */ 
@@ -522,16 +552,19 @@ EXTERN_C const IID IID_IWSDServiceProxy;
             /* [annotation][out] */ 
             _Outptr_opt_  WSDXML_ELEMENT **ppAny);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, UnsubscribeToOperation)
         HRESULT ( STDMETHODCALLTYPE *UnsubscribeToOperation )( 
             IWSDServiceProxy * This,
             /* [annotation][in] */ 
             _In_  const WSD_OPERATION *pOperation);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, SetEventingStatusCallback)
         HRESULT ( STDMETHODCALLTYPE *SetEventingStatusCallback )( 
             IWSDServiceProxy * This,
             /* [annotation][optional][in] */ 
             _In_opt_  IWSDEventingStatus *pStatus);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, GetEndpointProxy)
         HRESULT ( STDMETHODCALLTYPE *GetEndpointProxy )( 
             IWSDServiceProxy * This,
             /* [annotation][out] */ 
@@ -785,6 +818,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -792,22 +826,27 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDServiceProxyEventing * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDServiceProxyEventing * This);
         
+        DECLSPEC_XFGVIRT(IWSDMetadataExchange, GetMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetMetadata )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][out] */ 
             _Outptr_  WSD_METADATA_SECTION_LIST **MetadataOut);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, BeginGetMetadata)
         HRESULT ( STDMETHODCALLTYPE *BeginGetMetadata )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][out] */ 
             _Outptr_  IWSDAsyncResult **ppResult);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, EndGetMetadata)
         HRESULT ( STDMETHODCALLTYPE *EndGetMetadata )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -815,11 +854,13 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_  WSD_METADATA_SECTION_LIST **ppMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, GetServiceMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetServiceMetadata )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][out] */ 
             _Outptr_  WSD_SERVICE_METADATA **ppServiceMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, SubscribeToOperation)
         HRESULT ( STDMETHODCALLTYPE *SubscribeToOperation )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -831,21 +872,25 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_opt_  WSDXML_ELEMENT **ppAny);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, UnsubscribeToOperation)
         HRESULT ( STDMETHODCALLTYPE *UnsubscribeToOperation )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
             _In_  const WSD_OPERATION *pOperation);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, SetEventingStatusCallback)
         HRESULT ( STDMETHODCALLTYPE *SetEventingStatusCallback )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][optional][in] */ 
             _In_opt_  IWSDEventingStatus *pStatus);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxy, GetEndpointProxy)
         HRESULT ( STDMETHODCALLTYPE *GetEndpointProxy )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][out] */ 
             _Outptr_  IWSDEndpointProxy **ppProxy);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, SubscribeToMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *SubscribeToMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -863,6 +908,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_opt_  WSDXML_ELEMENT **ppAny);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, BeginSubscribeToMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *BeginSubscribeToMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -882,6 +928,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_  IWSDAsyncResult **ppResult);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, EndSubscribeToMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *EndSubscribeToMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -895,6 +942,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_opt_  WSDXML_ELEMENT **ppAny);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, UnsubscribeToMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *UnsubscribeToMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -904,6 +952,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][in] */ 
             _In_  const WSDXML_ELEMENT *pAny);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, BeginUnsubscribeToMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *BeginUnsubscribeToMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -919,6 +968,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_  IWSDAsyncResult **ppResult);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, EndUnsubscribeToMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *EndUnsubscribeToMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -928,6 +978,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][in] */ 
             _In_  IWSDAsyncResult *pResult);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, RenewMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *RenewMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -943,6 +994,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_opt_  WSDXML_ELEMENT **ppAny);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, BeginRenewMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *BeginRenewMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -960,6 +1012,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_  IWSDAsyncResult **ppResult);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, EndRenewMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *EndRenewMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -973,6 +1026,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_opt_  WSDXML_ELEMENT **ppAny);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, GetStatusForMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *GetStatusForMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -986,6 +1040,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_opt_  WSDXML_ELEMENT **ppAny);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, BeginGetStatusForMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *BeginGetStatusForMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -1001,6 +1056,7 @@ EXTERN_C const IID IID_IWSDServiceProxyEventing;
             /* [annotation][out] */ 
             _Outptr_  IWSDAsyncResult **ppResult);
         
+        DECLSPEC_XFGVIRT(IWSDServiceProxyEventing, EndGetStatusForMultipleOperations)
         HRESULT ( STDMETHODCALLTYPE *EndGetStatusForMultipleOperations )( 
             IWSDServiceProxyEventing * This,
             /* [annotation][in] */ 
@@ -1195,6 +1251,7 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDDeviceProxy * This,
             /* [annotation][in] */ 
@@ -1202,12 +1259,15 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDDeviceProxy * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDDeviceProxy * This);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             IWSDDeviceProxy * This,
             /* [annotation][in] */ 
@@ -1221,36 +1281,43 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
             /* [annotation][optional][in] */ 
             _In_opt_  IWSDDeviceProxy *pSponsor);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, BeginGetMetadata)
         HRESULT ( STDMETHODCALLTYPE *BeginGetMetadata )( 
             IWSDDeviceProxy * This,
             /* [annotation][out] */ 
             _Outptr_  IWSDAsyncResult **ppResult);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, EndGetMetadata)
         HRESULT ( STDMETHODCALLTYPE *EndGetMetadata )( 
             IWSDDeviceProxy * This,
             /* [annotation][in] */ 
             _In_  IWSDAsyncResult *pResult);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, GetHostMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetHostMetadata )( 
             IWSDDeviceProxy * This,
             /* [annotation][out] */ 
             _Outptr_  WSD_HOST_METADATA **ppHostMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, GetThisModelMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetThisModelMetadata )( 
             IWSDDeviceProxy * This,
             /* [annotation][out] */ 
             _Outptr_  WSD_THIS_MODEL_METADATA **ppManufacturerMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, GetThisDeviceMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetThisDeviceMetadata )( 
             IWSDDeviceProxy * This,
             /* [annotation][out] */ 
             _Outptr_  WSD_THIS_DEVICE_METADATA **ppThisDeviceMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, GetAllMetadata)
         HRESULT ( STDMETHODCALLTYPE *GetAllMetadata )( 
             IWSDDeviceProxy * This,
             /* [annotation][out] */ 
             _Outptr_  WSD_METADATA_SECTION_LIST **ppMetadata);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, GetServiceProxyById)
         HRESULT ( STDMETHODCALLTYPE *GetServiceProxyById )( 
             IWSDDeviceProxy * This,
             /* [annotation][in] */ 
@@ -1258,6 +1325,7 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
             /* [annotation][out] */ 
             _Outptr_  IWSDServiceProxy **ppServiceProxy);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, GetServiceProxyByType)
         HRESULT ( STDMETHODCALLTYPE *GetServiceProxyByType )( 
             IWSDDeviceProxy * This,
             /* [annotation][in] */ 
@@ -1265,6 +1333,7 @@ EXTERN_C const IID IID_IWSDDeviceProxy;
             /* [annotation][out] */ 
             _Outptr_  IWSDServiceProxy **ppServiceProxy);
         
+        DECLSPEC_XFGVIRT(IWSDDeviceProxy, GetEndpointProxy)
         HRESULT ( STDMETHODCALLTYPE *GetEndpointProxy )( 
             IWSDDeviceProxy * This,
             /* [annotation][out] */ 
@@ -1384,6 +1453,7 @@ EXTERN_C const IID IID_IWSDAsyncResult;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDAsyncResult * This,
             /* [annotation][in] */ 
@@ -1391,12 +1461,15 @@ EXTERN_C const IID IID_IWSDAsyncResult;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDAsyncResult * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDAsyncResult * This);
         
+        DECLSPEC_XFGVIRT(IWSDAsyncResult, SetCallback)
         HRESULT ( STDMETHODCALLTYPE *SetCallback )( 
             IWSDAsyncResult * This,
             /* [annotation][in] */ 
@@ -1404,27 +1477,33 @@ EXTERN_C const IID IID_IWSDAsyncResult;
             /* [annotation][in] */ 
             _In_  IUnknown *pAsyncState);
         
+        DECLSPEC_XFGVIRT(IWSDAsyncResult, SetWaitHandle)
         HRESULT ( STDMETHODCALLTYPE *SetWaitHandle )( 
             IWSDAsyncResult * This,
             /* [annotation][in] */ 
             _In_  HANDLE hWaitHandle);
         
+        DECLSPEC_XFGVIRT(IWSDAsyncResult, HasCompleted)
         HRESULT ( STDMETHODCALLTYPE *HasCompleted )( 
             IWSDAsyncResult * This);
         
+        DECLSPEC_XFGVIRT(IWSDAsyncResult, GetAsyncState)
         HRESULT ( STDMETHODCALLTYPE *GetAsyncState )( 
             IWSDAsyncResult * This,
             /* [annotation][out] */ 
             _Outptr_  IUnknown **ppAsyncState);
         
+        DECLSPEC_XFGVIRT(IWSDAsyncResult, Abort)
         HRESULT ( STDMETHODCALLTYPE *Abort )( 
             IWSDAsyncResult * This);
         
+        DECLSPEC_XFGVIRT(IWSDAsyncResult, GetEvent)
         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
             IWSDAsyncResult * This,
             /* [annotation][out] */ 
             _Out_  WSD_EVENT *pEvent);
         
+        DECLSPEC_XFGVIRT(IWSDAsyncResult, GetEndpointProxy)
         HRESULT ( STDMETHODCALLTYPE *GetEndpointProxy )( 
             IWSDAsyncResult * This,
             /* [annotation][out] */ 
@@ -1515,6 +1594,7 @@ EXTERN_C const IID IID_IWSDAsyncCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDAsyncCallback * This,
             /* [annotation][in] */ 
@@ -1522,12 +1602,15 @@ EXTERN_C const IID IID_IWSDAsyncCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDAsyncCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDAsyncCallback * This);
         
+        DECLSPEC_XFGVIRT(IWSDAsyncCallback, AsyncOperationComplete)
         HRESULT ( STDMETHODCALLTYPE *AsyncOperationComplete )( 
             IWSDAsyncCallback * This,
             /* [annotation][in] */ 
@@ -1610,6 +1693,7 @@ EXTERN_C const IID IID_IWSDEventingStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWSDEventingStatus * This,
             /* [annotation][in] */ 
@@ -1617,17 +1701,21 @@ EXTERN_C const IID IID_IWSDEventingStatus;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWSDEventingStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWSDEventingStatus * This);
         
+        DECLSPEC_XFGVIRT(IWSDEventingStatus, SubscriptionRenewed)
         void ( STDMETHODCALLTYPE *SubscriptionRenewed )( 
             IWSDEventingStatus * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR pszSubscriptionAction);
         
+        DECLSPEC_XFGVIRT(IWSDEventingStatus, SubscriptionRenewalFailed)
         void ( STDMETHODCALLTYPE *SubscriptionRenewalFailed )( 
             IWSDEventingStatus * This,
             /* [annotation][in] */ 
@@ -1635,6 +1723,7 @@ EXTERN_C const IID IID_IWSDEventingStatus;
             /* [annotation][in] */ 
             _In_  HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IWSDEventingStatus, SubscriptionEnded)
         void ( STDMETHODCALLTYPE *SubscriptionEnded )( 
             IWSDEventingStatus * This,
             /* [annotation][in] */ 

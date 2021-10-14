@@ -84,19 +84,19 @@
 #endif
 
 #if !defined(WINPATHCCHAPI)
-#if !defined(STATIC_PATHCCH)  
-#define WINPATHCCHAPI WINBASEAPI 
-#else  
+#if !defined(STATIC_PATHCCH)
+#define WINPATHCCHAPI WINBASEAPI
+#else
 #define WINPATHCCHAPI
-#endif  
+#endif
 #endif
 
 #if !defined(WINSTORAGEAPI)
-#if !defined(_WINSTORAGEAPI_)  
-#define WINSTORAGEAPI DECLSPEC_IMPORT 
-#else  
+#if !defined(_WINSTORAGEAPI_)
+#define WINSTORAGEAPI DECLSPEC_IMPORT
+#else
 #define WINSTORAGEAPI
-#endif  
+#endif
 #endif
 
 #endif // _APISETCCONV_

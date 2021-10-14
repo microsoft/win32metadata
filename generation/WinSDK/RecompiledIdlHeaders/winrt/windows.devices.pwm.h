@@ -96,7 +96,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -698,8 +698,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPwm_CIPwmPin;
  * Introduced to Windows.Devices.DevicesLowLevelContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Pwm.IPwmControllerStatics3 interface starting with version 3.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *   Static Methods exist on the Windows.Devices.Pwm.IPwmControllerStatics2 interface starting with version 2.0 of the Windows.Devices.DevicesLowLevelContract API contract
+ *   Static Methods exist on the Windows.Devices.Pwm.IPwmControllerStatics3 interface starting with version 3.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *   Static Methods exist on the Windows.Devices.Pwm.IPwmControllerStatics interface starting with version 1.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *
  * Class implements the following interfaces:
@@ -1708,8 +1708,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CPwm_CIPwmPin;
  * Introduced to Windows.Devices.DevicesLowLevelContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.Devices.Pwm.IPwmControllerStatics3 interface starting with version 3.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *   Static Methods exist on the Windows.Devices.Pwm.IPwmControllerStatics2 interface starting with version 2.0 of the Windows.Devices.DevicesLowLevelContract API contract
+ *   Static Methods exist on the Windows.Devices.Pwm.IPwmControllerStatics3 interface starting with version 3.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *   Static Methods exist on the Windows.Devices.Pwm.IPwmControllerStatics interface starting with version 1.0 of the Windows.Devices.DevicesLowLevelContract API contract
  *
  * Class implements the following interfaces:

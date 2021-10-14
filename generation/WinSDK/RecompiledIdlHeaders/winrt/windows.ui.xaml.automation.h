@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -501,6 +501,23 @@ namespace ABI {
 #define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics8 ABI::Windows::UI::Xaml::Automation::IAutomationPropertiesStatics8
 
 #endif // ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics8_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Xaml {
+                namespace Automation {
+                    interface IAutomationPropertiesStatics9;
+                } /* Automation */
+            } /* Xaml */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9 ABI::Windows::UI::Xaml::Automation::IAutomationPropertiesStatics9
+
+#endif // ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationProperty_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationProperty_FWD_DEFINED__
@@ -1595,6 +1612,20 @@ namespace ABI {
                 namespace Automation {
                     namespace Peers {
                         typedef enum AccessibilityView : int AccessibilityView;
+                    } /* Peers */
+                } /* Automation */
+            } /* Xaml */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Xaml {
+                namespace Automation {
+                    namespace Peers {
+                        typedef enum AutomationControlType : int AutomationControlType;
                     } /* Peers */
                 } /* Automation */
             } /* Xaml */
@@ -3594,6 +3625,52 @@ EXTERN_C const IID IID___x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationProper
 
 /*
  *
+ * Interface Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Xaml.Automation.AutomationProperties
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Xaml_Automation_IAutomationPropertiesStatics9[] = L"Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9";
+namespace ABI {
+    namespace Windows {
+        namespace UI {
+            namespace Xaml {
+                namespace Automation {
+                    MIDL_INTERFACE("2f20b1d1-87b2-5562-8077-da593edafd2d")
+                    IAutomationPropertiesStatics9 : public IInspectable
+                    {
+                    public:
+                        virtual HRESULT STDMETHODCALLTYPE get_AutomationControlTypeProperty(
+                            ABI::Windows::UI::Xaml::IDependencyProperty** value
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE GetAutomationControlType(
+                            ABI::Windows::UI::Xaml::IUIElement* element,
+                            ABI::Windows::UI::Xaml::Automation::Peers::AutomationControlType* result
+                            ) = 0;
+                        virtual HRESULT STDMETHODCALLTYPE SetAutomationControlType(
+                            ABI::Windows::UI::Xaml::IUIElement* element,
+                            ABI::Windows::UI::Xaml::Automation::Peers::AutomationControlType value
+                            ) = 0;
+                    };
+
+                    extern MIDL_CONST_ID IID& IID_IAutomationPropertiesStatics9 = _uuidof(IAutomationPropertiesStatics9);
+                } /* Automation */
+            } /* Xaml */
+        } /* UI */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9;
+#endif /* !defined(____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Interface Windows.UI.Xaml.Automation.IAutomationProperty
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -5250,8 +5327,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.Xaml.Automation.IAutomationAnnotationFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.Xaml.Automation.IAutomationAnnotationFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationAnnotationStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
@@ -5278,14 +5355,14 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.IAutomationElementIdentifiers ** Default Interface **
@@ -5309,14 +5386,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.IAutomationProperties ** Default Interface **
@@ -5971,6 +6049,12 @@ typedef interface __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesS
 typedef interface __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics8 __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics8;
 
 #endif // ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics8_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_FWD_DEFINED__
+#define ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9 __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9;
+
+#endif // ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationProperty_FWD_DEFINED__
 #define ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationProperty_FWD_DEFINED__
@@ -7303,6 +7387,8 @@ interface __FIVector_1_Windows__CUI__CXaml__CUIElement
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x10000
 
 typedef enum __x_ABI_CWindows_CUI_CXaml_CAutomation_CPeers_CAccessibilityView __x_ABI_CWindows_CUI_CXaml_CAutomation_CPeers_CAccessibilityView;
+
+typedef enum __x_ABI_CWindows_CUI_CXaml_CAutomation_CPeers_CAutomationControlType __x_ABI_CWindows_CUI_CXaml_CAutomation_CPeers_CAutomationControlType;
 
 typedef enum __x_ABI_CWindows_CUI_CXaml_CAutomation_CPeers_CAutomationHeadingLevel __x_ABI_CWindows_CUI_CXaml_CAutomation_CPeers_CAutomationHeadingLevel;
 
@@ -9935,6 +10021,87 @@ interface __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics8
 EXTERN_C const IID IID___x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics8;
 #endif /* !defined(____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics8_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x70000
+
+/*
+ *
+ * Interface Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.UI.Xaml.Automation.AutomationProperties
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_UI_Xaml_Automation_IAutomationPropertiesStatics9[] = L"Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9";
+typedef struct __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_AutomationControlTypeProperty)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This,
+        __x_ABI_CWindows_CUI_CXaml_CIDependencyProperty** value);
+    HRESULT (STDMETHODCALLTYPE* GetAutomationControlType)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This,
+        __x_ABI_CWindows_CUI_CXaml_CIUIElement* element,
+        enum __x_ABI_CWindows_CUI_CXaml_CAutomation_CPeers_CAutomationControlType* result);
+    HRESULT (STDMETHODCALLTYPE* SetAutomationControlType)(__x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9* This,
+        __x_ABI_CWindows_CUI_CXaml_CIUIElement* element,
+        enum __x_ABI_CWindows_CUI_CXaml_CAutomation_CPeers_CAutomationControlType value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9Vtbl;
+
+interface __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9
+{
+    CONST_VTBL struct __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_get_AutomationControlTypeProperty(This, value) \
+    ((This)->lpVtbl->get_AutomationControlTypeProperty(This, value))
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_GetAutomationControlType(This, element, result) \
+    ((This)->lpVtbl->GetAutomationControlType(This, element, result))
+
+#define __x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_SetAutomationControlType(This, element, value) \
+    ((This)->lpVtbl->SetAutomationControlType(This, element, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9;
+#endif /* !defined(____x_ABI_CWindows_CUI_CXaml_CAutomation_CIAutomationPropertiesStatics9_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 
 /*
  *
@@ -12911,8 +13078,8 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass can be activated.
- *   Type can be activated via the Windows.UI.Xaml.Automation.IAutomationAnnotationFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Type can be activated via RoActivateInstance starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Type can be activated via the Windows.UI.Xaml.Automation.IAutomationAnnotationFactory interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationAnnotationStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
@@ -12939,14 +13106,14 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationElementIdentifiersStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.IAutomationElementIdentifiers ** Default Interface **
@@ -12970,14 +13137,15 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics9 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics7 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics8 interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics3 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics4 interface starting with version 2.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics5 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Xaml.Automation.IAutomationPropertiesStatics6 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class implements the following interfaces:
  *    Windows.UI.Xaml.Automation.IAutomationProperties ** Default Interface **

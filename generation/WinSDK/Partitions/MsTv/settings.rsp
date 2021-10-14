@@ -4,6 +4,7 @@ _SetAllocator=_SetAllocator2
 --traverse
 <IncludeRoot>/um/mpeg2bits.h
 <IncludeRoot>/shared/bdamedia.h
+<IncludeRoot>/shared/atsmedia.h
 <IncludeRoot>/um/mpeg2structs.h
 <IncludeRoot>/um/tuner.h
 <IncludeRoot>/um/segment.h
@@ -18,5 +19,7 @@ _SetAllocator=_SetAllocator2
 <IncludeRoot>/um/bdatif.h
 <IncludeRoot>/um/mpeg2psiparser.h
 <IncludeRoot>/um/DvbSiParser.h
+<IncludeRoot>/um/tune.h
+<IncludeRoot>/um/tvratings_enum.h
 --namespace
 Windows.Win32.Graphics.DirectShow

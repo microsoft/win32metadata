@@ -792,7 +792,7 @@ public:
         Polarisation pc;
         HRESULT hr = (*this)->get_SignalPolarisation(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_POLARISATION_NOT_SET;
         }
         return pc;
     }
@@ -904,7 +904,7 @@ public:
         LNB_Source pc;
         HRESULT hr = (*this)->get_DiseqLNBSource(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_LNB_SOURCE_NOT_SET;
         }
         return pc;
     }
@@ -974,7 +974,7 @@ public:
         RollOff pc;
         HRESULT hr = (*this)->get_SignalRollOff(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_ROLL_OFF_NOT_SET;
         }
         return pc;
     }
@@ -988,7 +988,7 @@ public:
         Pilot pc;
         HRESULT hr = (*this)->get_SignalPilot(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_PILOT_NOT_SET;
         }
         return pc;
     }
@@ -1048,7 +1048,7 @@ public:
         FECMethod pc;
         HRESULT hr = (*this)->get_LPInnerFec(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_FEC_METHOD_NOT_SET;
         }
         return pc;
     }
@@ -1062,7 +1062,7 @@ public:
         BinaryConvolutionCodeRate pc;
         HRESULT hr = (*this)->get_LPInnerFecRate(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_BCC_RATE_NOT_SET;
         }
         return pc;
     }
@@ -1076,7 +1076,7 @@ public:
         HierarchyAlpha pc;
         HRESULT hr = (*this)->get_HAlpha(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_HALPHA_NOT_SET;
         }
         return pc;
     }
@@ -1090,7 +1090,7 @@ public:
         GuardInterval pc;
         HRESULT hr = (*this)->get_Guard(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_GUARD_NOT_SET;
         }
         return pc;
     }
@@ -1104,7 +1104,7 @@ public:
         TransmissionMode pc;
         HRESULT hr = (*this)->get_Mode(&pc);
         if (FAILED(hr)) {
-            return -1;
+            return BDA_XMIT_MODE_NOT_SET;
         }
         return pc;
     }

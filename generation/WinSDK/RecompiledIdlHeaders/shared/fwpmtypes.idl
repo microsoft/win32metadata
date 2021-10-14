@@ -761,7 +761,6 @@ typedef struct FWPM_CALLOUT_SUBSCRIPTION0_
 
 // The macro is repeated here, so that MIDL has access.
 #define FWP_ACTION_FLAG_CALLOUT         (0x00004000)
-#define FWP_ACTION_BITMAP_INDEX_SET     (0x00000009)
 
 // Action taken if all the filter conditions are true.
 typedef struct FWPM_ACTION0_
@@ -778,8 +777,6 @@ typedef struct FWPM_ACTION0_
        GUID filterType;
        [case(FWP_ACTION_FLAG_CALLOUT)]
        GUID calloutKey;
-       [case(FWP_ACTION_BITMAP_INDEX_SET)]
-       UINT8 bitmapIndex;
    };
 
 } FWPM_ACTION0;
@@ -831,6 +828,10 @@ cpp_quote("#define FWPM_FILTER_FLAG_SILENT_MODE (0x00000400)")
 // (used for s2s IPsec tunnel policies) 
 // Do not initiate IPsec acquire, if packet matches a IPsec policy from a filter with this flag
 cpp_quote("#define FWPM_FILTER_FLAG_IPSEC_NO_ACQUIRE_INITIATE   (0x00000800)")
+// The flag is reserved
+cpp_quote("#define FWPM_FILTER_FLAG_RESERVED0   (0x00001000)")
+// The flag is reserved
+cpp_quote("#define FWPM_FILTER_FLAG_RESERVED1   (0x00002000)")
 
 
 
@@ -1004,10 +1005,6 @@ typedef struct FWPM_STATISTICS0_
    UINT64 reauthReasonSocketPropertyChanged;
    UINT64 reauthReasonNewInboundMCastBCastPacket;
    UINT64 reauthReasonEDPPolicyChanged;
-   UINT64 reauthReasonPreclassifyLocalAddrLayerChange;
-   UINT64 reauthReasonPreclassifyRemoteAddrLayerChange;
-   UINT64 reauthReasonPreclassifyLocalPortLayerChange;
-   UINT64 reauthReasonPreclassifyRemotePortLayerChange;
    UINT64 reauthReasonProxyHandleChanged;
 } FWPM_STATISTICS0;
 
@@ -1240,6 +1237,9 @@ typedef struct FWPM_NET_EVENT_HEADER3_
 } FWPM_NET_EVENT_HEADER3;
 cpp_quote("#endif //(NTDDI_VERSION >= NTDDI_WINTHRESHOLD)")
 
+// NOTE: If FWPM_NET_EVENT_TYPE is being updated, you MUST update FWPM_NET_EVENT_INTERNAL_TYPE in fwpptypes.idl
+// so that the first part of the _INTERNAL_ struct exactly matches the current FWPM_NET_EVENT_TYPE
+//
 // Types of network events fired by WFP/IPsec.
 typedef [v1_enum] enum FWPM_NET_EVENT_TYPE_
 {

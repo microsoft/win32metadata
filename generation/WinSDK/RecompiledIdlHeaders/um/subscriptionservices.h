@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -202,36 +210,43 @@ EXTERN_C const IID IID_IWMPSubscriptionService;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSubscriptionService * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSubscriptionService * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSubscriptionService * This);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService, allowPlay)
         HRESULT ( STDMETHODCALLTYPE *allowPlay )( 
             IWMPSubscriptionService * This,
             HWND hwnd,
             IWMPMedia *pMedia,
             BOOL *pfAllowPlay);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService, allowCDBurn)
         HRESULT ( STDMETHODCALLTYPE *allowCDBurn )( 
             IWMPSubscriptionService * This,
             HWND hwnd,
             IWMPPlaylist *pPlaylist,
             BOOL *pfAllowBurn);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService, allowPDATransfer)
         HRESULT ( STDMETHODCALLTYPE *allowPDATransfer )( 
             IWMPSubscriptionService * This,
             HWND hwnd,
             IWMPPlaylist *pPlaylist,
             BOOL *pfAllowTransfer);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService, startBackgroundProcessing)
         HRESULT ( STDMETHODCALLTYPE *startBackgroundProcessing )( 
             IWMPSubscriptionService * This,
             HWND hwnd);
@@ -309,18 +324,22 @@ EXTERN_C const IID IID_IWMPSubscriptionServiceCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSubscriptionServiceCallback * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSubscriptionServiceCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSubscriptionServiceCallback * This);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionServiceCallback, onComplete)
         HRESULT ( STDMETHODCALLTYPE *onComplete )( 
             IWMPSubscriptionServiceCallback * This,
             HRESULT hrResult);
@@ -400,52 +419,63 @@ EXTERN_C const IID IID_IWMPSubscriptionService2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPSubscriptionService2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPSubscriptionService2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPSubscriptionService2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService, allowPlay)
         HRESULT ( STDMETHODCALLTYPE *allowPlay )( 
             IWMPSubscriptionService2 * This,
             HWND hwnd,
             IWMPMedia *pMedia,
             BOOL *pfAllowPlay);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService, allowCDBurn)
         HRESULT ( STDMETHODCALLTYPE *allowCDBurn )( 
             IWMPSubscriptionService2 * This,
             HWND hwnd,
             IWMPPlaylist *pPlaylist,
             BOOL *pfAllowBurn);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService, allowPDATransfer)
         HRESULT ( STDMETHODCALLTYPE *allowPDATransfer )( 
             IWMPSubscriptionService2 * This,
             HWND hwnd,
             IWMPPlaylist *pPlaylist,
             BOOL *pfAllowTransfer);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService, startBackgroundProcessing)
         HRESULT ( STDMETHODCALLTYPE *startBackgroundProcessing )( 
             IWMPSubscriptionService2 * This,
             HWND hwnd);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService2, stopBackgroundProcessing)
         HRESULT ( STDMETHODCALLTYPE *stopBackgroundProcessing )( 
             IWMPSubscriptionService2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService2, serviceEvent)
         HRESULT ( STDMETHODCALLTYPE *serviceEvent )( 
             IWMPSubscriptionService2 * This,
             WMPSubscriptionServiceEvent event);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService2, deviceAvailable)
         HRESULT ( STDMETHODCALLTYPE *deviceAvailable )( 
             IWMPSubscriptionService2 * This,
             BSTR bstrDeviceName,
             IWMPSubscriptionServiceCallback *pCB);
         
+        DECLSPEC_XFGVIRT(IWMPSubscriptionService2, prepareForSync)
         HRESULT ( STDMETHODCALLTYPE *prepareForSync )( 
             IWMPSubscriptionService2 * This,
             BSTR bstrFilename,
@@ -589,28 +619,34 @@ EXTERN_C const IID IID_IWMPDownloadItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPDownloadItem * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPDownloadItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPDownloadItem * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPDownloadItem * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPDownloadItem * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPDownloadItem * This,
             /* [in] */ REFIID riid,
@@ -619,6 +655,7 @@ EXTERN_C const IID IID_IWMPDownloadItem;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPDownloadItem * This,
             /* [annotation][in] */ 
@@ -638,32 +675,40 @@ EXTERN_C const IID IID_IWMPDownloadItem;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_sourceURL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_sourceURL )( 
             IWMPDownloadItem * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_size)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_size )( 
             IWMPDownloadItem * This,
             /* [retval][out] */ long *plSize);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_type )( 
             IWMPDownloadItem * This,
             /* [retval][out] */ BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_progress)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_progress )( 
             IWMPDownloadItem * This,
             /* [retval][out] */ long *plProgress);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_downloadState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_downloadState )( 
             IWMPDownloadItem * This,
             /* [retval][out] */ WMPSubscriptionDownloadState *pwmpsdls);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *pause )( 
             IWMPDownloadItem * This);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, resume)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *resume )( 
             IWMPDownloadItem * This);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cancel )( 
             IWMPDownloadItem * This);
         
@@ -766,28 +811,34 @@ EXTERN_C const IID IID_IWMPDownloadItem2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPDownloadItem2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPDownloadItem2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPDownloadItem2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPDownloadItem2 * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPDownloadItem2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPDownloadItem2 * This,
             /* [in] */ REFIID riid,
@@ -796,6 +847,7 @@ EXTERN_C const IID IID_IWMPDownloadItem2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPDownloadItem2 * This,
             /* [annotation][in] */ 
@@ -815,35 +867,44 @@ EXTERN_C const IID IID_IWMPDownloadItem2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_sourceURL)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_sourceURL )( 
             IWMPDownloadItem2 * This,
             /* [retval][out] */ BSTR *pbstrURL);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_size)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_size )( 
             IWMPDownloadItem2 * This,
             /* [retval][out] */ long *plSize);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_type)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_type )( 
             IWMPDownloadItem2 * This,
             /* [retval][out] */ BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_progress)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_progress )( 
             IWMPDownloadItem2 * This,
             /* [retval][out] */ long *plProgress);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, get_downloadState)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_downloadState )( 
             IWMPDownloadItem2 * This,
             /* [retval][out] */ WMPSubscriptionDownloadState *pwmpsdls);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *pause )( 
             IWMPDownloadItem2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, resume)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *resume )( 
             IWMPDownloadItem2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem, cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *cancel )( 
             IWMPDownloadItem2 * This);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadItem2, getItemInfo)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getItemInfo )( 
             IWMPDownloadItem2 * This,
             /* [in] */ BSTR bstrItemName,
@@ -968,28 +1029,34 @@ EXTERN_C const IID IID_IWMPDownloadCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPDownloadCollection * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPDownloadCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPDownloadCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPDownloadCollection * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPDownloadCollection * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPDownloadCollection * This,
             /* [in] */ REFIID riid,
@@ -998,6 +1065,7 @@ EXTERN_C const IID IID_IWMPDownloadCollection;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPDownloadCollection * This,
             /* [annotation][in] */ 
@@ -1017,29 +1085,35 @@ EXTERN_C const IID IID_IWMPDownloadCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadCollection, get_id)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_id )( 
             IWMPDownloadCollection * This,
             /* [retval][out] */ long *plId);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadCollection, get_count)
         /* [helpstring][propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_count )( 
             IWMPDownloadCollection * This,
             /* [retval][out] */ long *plCount);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadCollection, item)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *item )( 
             IWMPDownloadCollection * This,
             /* [in] */ long lItem,
             /* [retval][out] */ IWMPDownloadItem2 **ppDownload);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadCollection, startDownload)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *startDownload )( 
             IWMPDownloadCollection * This,
             /* [in] */ BSTR bstrSourceURL,
             /* [in] */ BSTR bstrType,
             /* [retval][out] */ IWMPDownloadItem2 **ppDownload);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadCollection, removeItem)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *removeItem )( 
             IWMPDownloadCollection * This,
             /* [in] */ long lItem);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadCollection, Clear)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Clear )( 
             IWMPDownloadCollection * This);
         
@@ -1139,28 +1213,34 @@ EXTERN_C const IID IID_IWMPDownloadManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMPDownloadManager * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMPDownloadManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMPDownloadManager * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IWMPDownloadManager * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IWMPDownloadManager * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IWMPDownloadManager * This,
             /* [in] */ REFIID riid,
@@ -1169,6 +1249,7 @@ EXTERN_C const IID IID_IWMPDownloadManager;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWMPDownloadManager * This,
             /* [annotation][in] */ 
@@ -1188,11 +1269,13 @@ EXTERN_C const IID IID_IWMPDownloadManager;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadManager, getDownloadCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *getDownloadCollection )( 
             IWMPDownloadManager * This,
             /* [in] */ long lCollectionId,
             /* [retval][out] */ IWMPDownloadCollection **ppCollection);
         
+        DECLSPEC_XFGVIRT(IWMPDownloadManager, createDownloadCollection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *createDownloadCollection )( 
             IWMPDownloadManager * This,
             /* [retval][out] */ IWMPDownloadCollection **ppCollection);

@@ -17,8 +17,8 @@ Abstract:
 
 #include <winapifamily.h>
 
-#pragma region Desktop Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 
 /*
@@ -98,22 +98,22 @@ typedef INTERNET_PORT * LPINTERNET_PORT;
 // the API succeeded (in this case dwError will be ERROR_SUCCESS)
 //
 
-typedef struct
+typedef struct _WINHTTP_ASYNC_RESULT
 {
     DWORD_PTR dwResult;  // indicates which async API has encountered an error
     DWORD dwError;       // the error code if the API failed
-} WINHTTP_ASYNC_RESULT, *LPWINHTTP_ASYNC_RESULT;
+} WINHTTP_ASYNC_RESULT, *LPWINHTTP_ASYNC_RESULT, *PWINHTTP_ASYNC_RESULT;
 
 
 //
 // HTTP_VERSION_INFO - query or set global HTTP version (1.0 or 1.1)
 //
 
-typedef struct
+typedef struct _HTTP_VERSION_INFO
 {
     DWORD dwMajorVersion;
     DWORD dwMinorVersion;
-} HTTP_VERSION_INFO, *LPHTTP_VERSION_INFO;
+} HTTP_VERSION_INFO, *LPHTTP_VERSION_INFO, *PHTTP_VERSION_INFO;
 
 
 //
@@ -147,7 +147,7 @@ typedef int INTERNET_SCHEME, *LPINTERNET_SCHEME;
 
 #pragma warning( disable : 4121 )   // disable alignment warning
 
-typedef struct
+typedef struct _WINHTTP_URL_COMPONENTS
 {
     DWORD   dwStructSize;       // size of this structure. Used in version check
     LPWSTR  lpszScheme;         // pointer to scheme name
@@ -176,23 +176,23 @@ typedef LPURL_COMPONENTS LPURL_COMPONENTSW;
 // set proxy information on a WinHttpOpen() handle
 //
 
-typedef struct
+typedef struct _WINHTTP_PROXY_INFO
 {
     DWORD  dwAccessType;      // see WINHTTP_ACCESS_* types below
     LPWSTR lpszProxy;         // proxy server list
     LPWSTR lpszProxyBypass;   // proxy bypass list
-} WINHTTP_PROXY_INFO, *LPWINHTTP_PROXY_INFO;
+} WINHTTP_PROXY_INFO, *LPWINHTTP_PROXY_INFO, *PWINHTTP_PROXY_INFO;
 
 typedef WINHTTP_PROXY_INFO WINHTTP_PROXY_INFOW;
 typedef LPWINHTTP_PROXY_INFO LPWINHTTP_PROXY_INFOW;
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
-typedef struct
+typedef struct _WINHTTP_AUTOPROXY_OPTIONS
 {
     DWORD   dwFlags;
     DWORD   dwAutoDetectFlags;
@@ -200,7 +200,7 @@ typedef struct
     LPVOID  lpvReserved;
     DWORD   dwReserved;
     BOOL    fAutoLogonIfChallenged;
-} WINHTTP_AUTOPROXY_OPTIONS;
+} WINHTTP_AUTOPROXY_OPTIONS, *PWINHTTP_AUTOPROXY_OPTIONS;
 
 #define WINHTTP_AUTOPROXY_AUTO_DETECT           0x00000001
 #define WINHTTP_AUTOPROXY_CONFIG_URL            0x00000002
@@ -253,6 +253,7 @@ typedef struct _WINHTTP_PROXY_RESULT_EX
     DWORD dwProxyInterfaceAffinity;
 } WINHTTP_PROXY_RESULT_EX;
 
+
 #define NETWORKING_KEY_BUFSIZE 128
 
 typedef struct _WinHttpProxyNetworkKey
@@ -285,18 +286,20 @@ typedef struct _WINHTTP_PROXY_SETTINGS
     PWINHTTP_PROXY_NETWORKING_KEY pNetworkKeys;
 } WINHTTP_PROXY_SETTINGS, *PWINHTTP_PROXY_SETTINGS;
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
+
+
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 //
 // WINHTTP_CERTIFICATE_INFO lpBuffer - contains the certificate returned from
 // the server
 //
 
-typedef struct
+typedef struct _WINHTTP_CERTIFICATE_INFO
 {
     //
     // ftExpiry - date the certificate expires.
@@ -318,7 +321,7 @@ typedef struct
     LPWSTR lpszSubjectInfo;
 
     //
-    // lpszIssuerInfo - the name of orgainzation, site, and server
+    // lpszIssuerInfo - the name of organization, site, and server
     //   the cert was issues by.
     //
 
@@ -351,7 +354,7 @@ typedef struct
 
     DWORD dwKeySize;
 
-} WINHTTP_CERTIFICATE_INFO;
+} WINHTTP_CERTIFICATE_INFO, *PWINHTTP_CERTIFICATE_INFO;
 
 #ifdef _WS2DEF_
 
@@ -474,6 +477,16 @@ typedef struct _WINHTTP_REQUEST_STATS
     ULONGLONG rgullStats[WinHttpRequestStatMax];
 } WINHTTP_REQUEST_STATS, *PWINHTTP_REQUEST_STATS;
 
+#define WINHTTP_MATCH_CONNECTION_GUID_FLAG_REQUIRE_MARKED_CONNECTION 0x00000001
+
+#define WINHTTP_MATCH_CONNECTION_GUID_FLAGS_MASK WINHTTP_MATCH_CONNECTION_GUID_FLAG_REQUIRE_MARKED_CONNECTION
+
+typedef struct _WINHTTP_MATCH_CONNECTION_GUID
+{
+    GUID ConnectionGuid;
+    ULONGLONG ullFlags;
+} WINHTTP_MATCH_CONNECTION_GUID, *PWINHTTP_MATCH_CONNECTION_GUID;
+
 #pragma warning(push)
 #pragma warning(disable:4201) //nameless unions
 
@@ -492,6 +505,88 @@ typedef struct _WINHTTP_EXTENDED_HEADER
 } WINHTTP_EXTENDED_HEADER, *PWINHTTP_EXTENDED_HEADER;
 
 #pragma warning(pop)
+
+typedef union _WINHTTP_HEADER_NAME
+{
+    PCWSTR pwszName;
+    PCSTR  pszName;
+} WINHTTP_HEADER_NAME, *PWINHTTP_HEADER_NAME;
+
+#define WINHTTP_RESOLVER_CACHE_CONFIG_FLAG_SOFT_LIMIT      0x00000001
+#define WINHTTP_RESOLVER_CACHE_CONFIG_FLAG_BYPASS_CACHE    0x00000002
+#define WINHTTP_RESOLVER_CACHE_CONFIG_FLAG_USE_DNS_TTL     0x00000004
+#define WINHTTP_RESOLVER_CACHE_CONFIG_FLAG_CONN_USE_TTL    0x00000008
+
+typedef enum _WINHTTP_SECURE_DNS_SETTING
+{
+    WinHttpSecureDnsSettingDefault                   = 0,
+    WinHttpSecureDnsSettingForcePlaintext            = 1,
+    WinHttpSecureDnsSettingRequireEncryption         = 2,
+    WinHttpSecureDnsSettingTryEncryptionWithFallback = 3,
+    WinHttpSecureDnsSettingMax                       = 4
+} WINHTTP_SECURE_DNS_SETTING;
+
+
+typedef struct _WINHTTP_RESOLVER_CACHE_CONFIG
+{
+    ULONG ulMaxResolverCacheEntries;
+
+    //
+    // ulMaxCacheEntryAge is the maximum allowed age of a cache entry specified in minutes.
+    //
+
+    ULONG ulMaxCacheEntryAge;
+
+    //
+    // ulMinCacheEntryTtl the minimum TTL of a cache entry specified in seconds.
+    //
+
+    ULONG ulMinCacheEntryTtl;
+
+    WINHTTP_SECURE_DNS_SETTING SecureDnsSetting;
+
+    //
+    // If WINHTTP_RESOLVER_CACHE_CONFIG_FLAG_CONN_USE_TTL is set, then ullCOnnResolutionWaitTime
+    // can be used to control how frequently a re-resolution attempt is made for any connection.
+    // It is specified in 100 nanosecond units, and the default is 600000000 (one minute).
+    //
+
+    ULONGLONG ullConnResolutionWaitTime;
+
+    ULONGLONG ullFlags;
+} WINHTTP_RESOLVER_CACHE_CONFIG, *PWINHTTP_RESOLVER_CACHE_CONFIG;
+
+//
+// Structures for WinHttpQueryConnectionGroup
+//
+
+typedef struct _WINHTTP_CONNECTION_GROUP
+{
+    ULONG cConnections;
+    GUID guidGroup;
+} WINHTTP_CONNECTION_GROUP, *PWINHTTP_CONNECTION_GROUP;
+
+typedef struct _WINHTTP_HOST_CONNECTION_GROUP
+{
+    PCWSTR pwszHost;
+    ULONG cConnectionGroups;
+    PWINHTTP_CONNECTION_GROUP pConnectionGroups;
+} WINHTTP_HOST_CONNECTION_GROUP, *PWINHTTP_HOST_CONNECTION_GROUP;
+
+typedef struct _WINHTTP_QUERY_CONNECTION_GROUP_RESULT
+{
+    ULONG cHosts;
+    PWINHTTP_HOST_CONNECTION_GROUP pHostConnectionGroups;
+} WINHTTP_QUERY_CONNECTION_GROUP_RESULT, *PWINHTTP_QUERY_CONNECTION_GROUP_RESULT;
+
+#define WINHTTP_QUERY_CONNECTION_GROUP_FLAG_INSECURE 0x0000000000000001ull
+
+
+typedef struct _WINHTTP_HTTP2_RECEIVE_WINDOW
+{
+    ULONG ulStreamWindow;
+    ULONG ulStreamWindowUpdateDelta;
+} WINHTTP_HTTP2_RECEIVE_WINDOW, *PWINHTTP_HTTP2_RECEIVE_WINDOW;
 
 //
 // constants for WinHttpTimeFromSystemTime
@@ -601,6 +696,7 @@ typedef struct _WINHTTP_EXTENDED_HEADER
 
 #define WINHTTP_OPTION_KDC_PROXY_SETTINGS               136
 
+#define WINHTTP_OPTION_PROXY_DISABLE_SERVICE_CALLS      137
 
 #define WINHTTP_OPTION_ENCODE_EXTRA                     138
 #define WINHTTP_OPTION_DISABLE_STREAM_QUEUE             139
@@ -634,8 +730,58 @@ typedef struct _WINHTTP_EXTENDED_HEADER
 #define WINHTTP_OPTION_IGNORE_CERT_REVOCATION_OFFLINE   155
 
 #define WINHTTP_OPTION_SOURCE_ADDRESS                   156
+#define WINHTTP_OPTION_HEAP_EXTENSION                   157
 
-#define WINHTTP_LAST_OPTION                             WINHTTP_OPTION_IGNORE_CERT_REVOCATION_OFFLINE
+#define WINHTTP_OPTION_TLS_PROTOCOL_INSECURE_FALLBACK   158
+
+#define WINHTTP_OPTION_STREAM_ERROR_CODE                159
+
+#define WINHTTP_OPTION_REQUIRE_STREAM_END               160
+
+#define WINHTTP_OPTION_ENABLE_HTTP2_PLUS_CLIENT_CERT    161
+
+#define WINHTTP_OPTION_FAILED_CONNECTION_RETRIES        162
+
+#define WINHTTP_OPTION_SET_GLOBAL_CALLBACK              163
+
+#define WINHTTP_OPTION_HTTP2_KEEPALIVE                  164
+
+#define WINHTTP_OPTION_RESOLUTION_HOSTNAME              165
+
+#define WINHTTP_OPTION_SET_TOKEN_BINDING                166
+
+#define WINHTTP_OPTION_TOKEN_BINDING_PUBLIC_KEY         167
+
+#define WINHTTP_OPTION_REFERER_TOKEN_BINDING_HOSTNAME   168
+
+#define WINHTTP_OPTION_HTTP2_PLUS_TRANSFER_ENCODING     169
+
+#define WINHTTP_OPTION_RESOLVER_CACHE_CONFIG            170
+
+#define WINHTTP_OPTION_DISABLE_CERT_CHAIN_BUILDING      171
+
+#define WINHTTP_OPTION_BACKGROUND_CONNECTIONS           172
+
+#define WINHTTP_OPTION_FIRST_AVAILABLE_CONNECTION       173
+
+#define WINHTTP_OPTION_ENABLE_TEST_SIGNING              174
+#define WINHTTP_OPTION_NTSERVICE_FLAG_TEST              175
+#define WINHTTP_OPTION_DISABLE_PROXY_LINK_LOCAL_NAME_RESOLUTION 176
+
+
+#define WINHTTP_OPTION_TCP_PRIORITY_STATUS              177
+
+#define WINHTTP_OPTION_CONNECTION_GUID                  178
+
+#define WINHTTP_OPTION_MATCH_CONNECTION_GUID            179
+
+#define WINHTTP_OPTION_PROXY_CONFIG_INFO                180
+#define WINHTTP_OPTION_AGGREGATE_PROXY_CONFIG           181
+#define WINHTTP_OPTION_SELECTED_PROXY_CONFIG_INFO       182
+
+#define WINHTTP_OPTION_HTTP2_RECEIVE_WINDOW             183
+
+#define WINHTTP_LAST_OPTION                             WINHTTP_OPTION_HTTP2_RECEIVE_WINDOW
 
 #define WINHTTP_OPTION_USERNAME                         0x1000
 #define WINHTTP_OPTION_PASSWORD                         0x1001
@@ -645,6 +791,22 @@ typedef struct _WINHTTP_EXTENDED_HEADER
 
 // manifest value for WINHTTP_OPTION_MAX_CONNS_PER_SERVER and WINHTTP_OPTION_MAX_CONNS_PER_1_0_SERVER
 #define WINHTTP_CONNS_PER_SERVER_UNLIMITED    0xFFFFFFFF
+
+
+#define WINHTTP_CONNECTION_RETRY_CONDITION_408              0x1
+#define WINHTTP_CONNECTION_RETRY_CONDITION_SSL_HANDSHAKE    0x2
+#define WINHTTP_CONNECTION_RETRY_CONDITION_STALE_CONNECTION 0x4
+
+#define WINHTTP_CONNECTION_RETRY_CONDITION_MASK           \
+    (WINHTTP_CONNECTION_RETRY_CONDITION_408 |             \
+     WINHTTP_CONNECTION_RETRY_CONDITION_SSL_HANDSHAKE |   \
+     WINHTTP_CONNECTION_RETRY_CONDITION_STALE_CONNECTION) \
+
+typedef struct _WINHTTP_FAILED_CONNECTION_RETRIES
+{
+    DWORD dwMaxRetries;
+    DWORD dwAllowedRetryConditions;
+} WINHTTP_FAILED_CONNECTION_RETRIES, *PWINHTTP_FAILED_CONNECTION_RETRIES;
 
 //
 // Values for WINHTTP_OPTION_DECOMPRESSION
@@ -662,7 +824,8 @@ typedef struct _WINHTTP_EXTENDED_HEADER
 //
 
 #define WINHTTP_PROTOCOL_FLAG_HTTP2 0x1
-#define WINHTTP_PROTOCOL_MASK (WINHTTP_PROTOCOL_FLAG_HTTP2)
+#define WINHTTP_PROTOCOL_FLAG_HTTP3 0x2
+#define WINHTTP_PROTOCOL_MASK (WINHTTP_PROTOCOL_FLAG_HTTP2 | WINHTTP_PROTOCOL_FLAG_HTTP3)
 
 
 // values for WINHTTP_OPTION_AUTOLOGON_POLICY
@@ -971,6 +1134,8 @@ typedef WINHTTP_STATUS_CALLBACK * LPWINHTTP_STATUS_CALLBACK;
 
 #define WINHTTP_QUERY_MAX                          78
 
+#define WINHTTP_QUERY_EX_ALL_HEADERS               WINHTTP_QUERY_RAW_HEADERS
+
 //
 // WINHTTP_QUERY_CUSTOM - if this special value is supplied as the dwInfoLevel
 // parameter of WinHttpQueryHeaders() then the lpBuffer parameter contains the name
@@ -1011,6 +1176,21 @@ typedef WINHTTP_STATUS_CALLBACK * LPWINHTTP_STATUS_CALLBACK;
 //
 
 #define WINHTTP_QUERY_FLAG_NUMBER64                0x08000000
+
+//
+// HTTP_QUERY_FLAG_TRAILERS - if this bit is set in the dwInfoLevel parameter of
+// WinHttpQueryHeaders(), then the response trailers will be queried, if they exist
+//
+
+#define WINHTTP_QUERY_FLAG_TRAILERS                0x02000000
+
+//
+// WINHTTP_QUERY_FLAG_WIRE_ENCODING - if this bit is set in the dwInfoLevel parameter
+// of WinHttpQueryHeaders(), then the value of the header will be returned
+// with as it gets encoded when sent over the wire.
+//
+
+#define WINHTTP_QUERY_FLAG_WIRE_ENCODING           0x01000000
 
 
 //
@@ -1155,37 +1335,48 @@ typedef WINHTTP_STATUS_CALLBACK * LPWINHTTP_STATUS_CALLBACK;
 
 #define WINHTTP_EXTENDED_HEADER_FLAG_UNICODE 0x00000001
 
+//
+// values for ullFlags for WinHttpReadDataEx
+//
+
+//
+// WINHTTP_READ_DATA_EX_FLAG_FILL_BUFFER - if set, don't complete ReadDataEx
+// until the data buffer has been filled or the response is complete.
+//
+
+#define WINHTTP_READ_DATA_EX_FLAG_FILL_BUFFER 0x0000000000000001ull
+
+
 #define WINHTTP_IGNORE_REQUEST_TOTAL_LENGTH 0
 
 // WinHttpSendRequest prettifiers for optional parameters.
 #define WINHTTP_NO_ADDITIONAL_HEADERS   NULL
 #define WINHTTP_NO_REQUEST_DATA         NULL
 
-
 // WinHttpQueryHeaders prettifiers for optional parameters.
 #define WINHTTP_HEADER_NAME_BY_INDEX           NULL
 #define WINHTTP_NO_OUTPUT_BUFFER               NULL
 #define WINHTTP_NO_HEADER_INDEX                NULL
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
-typedef struct
+typedef struct _WINHTTP_CURRENT_USER_IE_PROXY_CONFIG
 {
     BOOL    fAutoDetect;
     LPWSTR  lpszAutoConfigUrl;
     LPWSTR  lpszProxy;
     LPWSTR  lpszProxyBypass;
-} WINHTTP_CURRENT_USER_IE_PROXY_CONFIG;
+} WINHTTP_CURRENT_USER_IE_PROXY_CONFIG, *PWINHTTP_CURRENT_USER_IE_PROXY_CONFIG;
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 //#if !defined(_WINERROR_)
 
@@ -1285,9 +1476,11 @@ typedef struct
 #define ERROR_WINHTTP_SECURE_FAILURE_PROXY                  (WINHTTP_ERROR_BASE + 188)
 #define ERROR_WINHTTP_RESERVED_189                          (WINHTTP_ERROR_BASE + 189)
 #define ERROR_WINHTTP_HTTP_PROTOCOL_MISMATCH                (WINHTTP_ERROR_BASE + 190)
+#define ERROR_WINHTTP_GLOBAL_CALLBACK_FAILED                (WINHTTP_ERROR_BASE + 191)
+#define ERROR_WINHTTP_FEATURE_DISABLED                      (WINHTTP_ERROR_BASE + 192)
 
 
-#define WINHTTP_ERROR_LAST                                  (WINHTTP_ERROR_BASE + 188)
+#define WINHTTP_ERROR_LAST                                  ERROR_WINHTTP_FEATURE_DISABLED
 
 #define WINHTTP_RESET_STATE                     0x00000001
 #define WINHTTP_RESET_SWPAD_CURRENT_NETWORK     0x00000002
@@ -1352,11 +1545,11 @@ WinHttpCreateUrl
     _Inout_ LPDWORD pdwUrlLength
 );
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 BOOLAPI
 WinHttpCheckPlatform(void);
@@ -1365,11 +1558,11 @@ WinHttpCheckPlatform(void);
 WINHTTPAPI BOOL WINAPI WinHttpGetDefaultProxyConfiguration( IN OUT WINHTTP_PROXY_INFO * pProxyInfo);
 WINHTTPAPI BOOL WINAPI WinHttpSetDefaultProxyConfiguration( IN WINHTTP_PROXY_INFO * pProxyInfo);
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 WINHTTPAPI
 HINTERNET
@@ -1410,6 +1603,20 @@ WinHttpReadData
     _Out_writes_bytes_to_(dwNumberOfBytesToRead, *lpdwNumberOfBytesRead) __out_data_source(NETWORK) LPVOID lpBuffer,
     IN DWORD dwNumberOfBytesToRead,
     OUT LPDWORD lpdwNumberOfBytesRead
+);
+
+WINHTTPAPI
+DWORD
+WINAPI
+WinHttpReadDataEx
+(
+    IN HINTERNET hRequest,
+    _Out_writes_bytes_to_(dwNumberOfBytesToRead, *lpdwNumberOfBytesRead) __out_data_source(NETWORK) LPVOID lpBuffer,
+    IN DWORD dwNumberOfBytesToRead,
+    OUT LPDWORD lpdwNumberOfBytesRead,
+    IN ULONGLONG ullFlags,
+    IN DWORD cbProperty,
+    _In_reads_bytes_opt_(cbProperty) PVOID pvProperty
 );
 
 BOOLAPI
@@ -1476,11 +1683,11 @@ WinHttpSetTimeouts
 );
 
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 WINHTTPAPI
 DWORD
@@ -1494,11 +1701,11 @@ WinHttpIsHostInProxyBypassList
     _Out_ BOOL *pfIsInBypassList
 );
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 //
 // prototypes
@@ -1585,11 +1792,11 @@ BOOLAPI WinHttpQueryAuthSchemes
     OUT LPDWORD     pdwAuthTarget
 );
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 BOOLAPI WinHttpQueryAuthParams(
     IN  HINTERNET   hRequest,        // HINTERNET handle returned by WinHttpOpenRequest
@@ -1597,11 +1804,11 @@ BOOLAPI WinHttpQueryAuthParams(
     OUT LPVOID*     pAuthParams      // Scheme-specific Advanced auth parameters
     );
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 WINHTTPAPI
 BOOL
@@ -1624,11 +1831,47 @@ WinHttpQueryHeaders
     IN OUT LPDWORD   lpdwIndex OPTIONAL
 );
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+WINHTTPAPI
+DWORD
+WINAPI
+WinHttpQueryHeadersEx
+(
+    _In_ HINTERNET hRequest,
+    _In_ DWORD dwInfoLevel,
+    _In_ ULONGLONG ullFlags,
+    _In_ UINT uiCodePage,
+    _Inout_opt_ PDWORD pdwIndex,
+    _In_opt_ PWINHTTP_HEADER_NAME pHeaderName,
+    _Out_writes_bytes_to_opt_(*pdwBufferLength, *pdwBufferLength) PVOID pBuffer,
+    _Inout_ PDWORD pdwBufferLength,
+    _Out_writes_opt_(*pdwHeadersCount) PWINHTTP_EXTENDED_HEADER *ppHeaders,
+    _Out_ PDWORD pdwHeadersCount
+);
+
+WINHTTPAPI
+DWORD
+WINAPI
+WinHttpQueryConnectionGroup
+(
+    _In_ HINTERNET hInternet,
+    _In_opt_ const GUID *pGuidConnection,
+    _In_ ULONGLONG ullFlags,
+    _Inout_ PWINHTTP_QUERY_CONNECTION_GROUP_RESULT *ppResult
+);
+
+WINHTTPAPI
+VOID
+WINAPI
+WinHttpFreeQueryConnectionGroupResult
+(
+    _Inout_ WINHTTP_QUERY_CONNECTION_GROUP_RESULT *pResult
+);
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
+#pragma region Application Family or OneCore Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
 BOOLAPI
 WinHttpDetectAutoProxyConfigUrl
@@ -1772,11 +2015,11 @@ WinHttpSetProxySettingsPerUser(
     _In_ BOOL fProxySettingsPerUser
 );
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
-#pragma region Desktop Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 typedef enum _WINHTTP_WEB_SOCKET_OPERATION
 {
@@ -1906,7 +2149,7 @@ WinHttpWebSocketQueryCloseStatus
 #include <poppack.h>
 
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
 
 #endif // !defined(_WINHTTPX_)

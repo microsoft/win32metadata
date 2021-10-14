@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -224,18 +232,22 @@ EXTERN_C const IID IID_IFtpProviderConstruct;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFtpProviderConstruct * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFtpProviderConstruct * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFtpProviderConstruct * This);
         
+        DECLSPEC_XFGVIRT(IFtpProviderConstruct, Construct)
         HRESULT ( STDMETHODCALLTYPE *Construct )( 
             __RPC__in IFtpProviderConstruct * This,
             /* [in] */ __RPC__in SAFEARRAY * configurationEntries);
@@ -309,18 +321,22 @@ EXTERN_C const IID IID_IFtpAuthenticationProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFtpAuthenticationProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFtpAuthenticationProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFtpAuthenticationProvider * This);
         
+        DECLSPEC_XFGVIRT(IFtpAuthenticationProvider, AuthenticateUser)
         HRESULT ( STDMETHODCALLTYPE *AuthenticateUser )( 
             __RPC__in IFtpAuthenticationProvider * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSessionId,
@@ -401,18 +417,22 @@ EXTERN_C const IID IID_AsyncIFtpAuthenticationProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIFtpAuthenticationProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIFtpAuthenticationProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIFtpAuthenticationProvider * This);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpAuthenticationProvider, Begin_AuthenticateUser)
         HRESULT ( STDMETHODCALLTYPE *Begin_AuthenticateUser )( 
             __RPC__in AsyncIFtpAuthenticationProvider * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSessionId,
@@ -420,6 +440,7 @@ EXTERN_C const IID IID_AsyncIFtpAuthenticationProvider;
             /* [string][in] */ __RPC__in_string LPCWSTR pszUserName,
             /* [string][in] */ __RPC__in_string LPCWSTR pszPassword);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpAuthenticationProvider, Finish_AuthenticateUser)
         HRESULT ( STDMETHODCALLTYPE *Finish_AuthenticateUser )( 
             __RPC__in AsyncIFtpAuthenticationProvider * This,
             /* [string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszCanonicalUserName,
@@ -496,18 +517,22 @@ EXTERN_C const IID IID_IFtpRoleProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFtpRoleProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFtpRoleProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFtpRoleProvider * This);
         
+        DECLSPEC_XFGVIRT(IFtpRoleProvider, IsUserInRole)
         HRESULT ( STDMETHODCALLTYPE *IsUserInRole )( 
             __RPC__in IFtpRoleProvider * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSessionId,
@@ -586,18 +611,22 @@ EXTERN_C const IID IID_AsyncIFtpRoleProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIFtpRoleProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIFtpRoleProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIFtpRoleProvider * This);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpRoleProvider, Begin_IsUserInRole)
         HRESULT ( STDMETHODCALLTYPE *Begin_IsUserInRole )( 
             __RPC__in AsyncIFtpRoleProvider * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSessionId,
@@ -605,6 +634,7 @@ EXTERN_C const IID IID_AsyncIFtpRoleProvider;
             /* [string][in] */ __RPC__in_string LPCWSTR pszUserName,
             /* [string][in] */ __RPC__in_string LPCWSTR pszRole);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpRoleProvider, Finish_IsUserInRole)
         HRESULT ( STDMETHODCALLTYPE *Finish_IsUserInRole )( 
             __RPC__in AsyncIFtpRoleProvider * This,
             /* [retval][out] */ __RPC__out BOOL *pfIsInRole);
@@ -679,18 +709,22 @@ EXTERN_C const IID IID_IFtpHomeDirectoryProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFtpHomeDirectoryProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFtpHomeDirectoryProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFtpHomeDirectoryProvider * This);
         
+        DECLSPEC_XFGVIRT(IFtpHomeDirectoryProvider, GetUserHomeDirectoryData)
         HRESULT ( STDMETHODCALLTYPE *GetUserHomeDirectoryData )( 
             __RPC__in IFtpHomeDirectoryProvider * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSessionId,
@@ -767,24 +801,29 @@ EXTERN_C const IID IID_AsyncIFtpHomeDirectoryProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIFtpHomeDirectoryProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIFtpHomeDirectoryProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIFtpHomeDirectoryProvider * This);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpHomeDirectoryProvider, Begin_GetUserHomeDirectoryData)
         HRESULT ( STDMETHODCALLTYPE *Begin_GetUserHomeDirectoryData )( 
             __RPC__in AsyncIFtpHomeDirectoryProvider * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSessionId,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSiteName,
             /* [string][in] */ __RPC__in_string LPCWSTR pszUserName);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpHomeDirectoryProvider, Finish_GetUserHomeDirectoryData)
         HRESULT ( STDMETHODCALLTYPE *Finish_GetUserHomeDirectoryData )( 
             __RPC__in AsyncIFtpHomeDirectoryProvider * This,
             /* [retval][string][out] */ __RPC__deref_out_opt_string LPWSTR *ppszHomeDirectoryData);
@@ -885,18 +924,22 @@ EXTERN_C const IID IID_IFtpLogProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFtpLogProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFtpLogProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFtpLogProvider * This);
         
+        DECLSPEC_XFGVIRT(IFtpLogProvider, Log)
         HRESULT ( STDMETHODCALLTYPE *Log )( 
             __RPC__in IFtpLogProvider * This,
             /* [in] */ __RPC__in const struct LOGGING_PARAMETERS *pLoggingParameters);
@@ -967,22 +1010,27 @@ EXTERN_C const IID IID_AsyncIFtpLogProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIFtpLogProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIFtpLogProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIFtpLogProvider * This);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpLogProvider, Begin_Log)
         HRESULT ( STDMETHODCALLTYPE *Begin_Log )( 
             __RPC__in AsyncIFtpLogProvider * This,
             /* [in] */ __RPC__in const struct LOGGING_PARAMETERS *pLoggingParameters);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpLogProvider, Finish_Log)
         HRESULT ( STDMETHODCALLTYPE *Finish_Log )( 
             __RPC__in AsyncIFtpLogProvider * This);
         
@@ -1066,18 +1114,22 @@ EXTERN_C const IID IID_IFtpAuthorizationProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFtpAuthorizationProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFtpAuthorizationProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFtpAuthorizationProvider * This);
         
+        DECLSPEC_XFGVIRT(IFtpAuthorizationProvider, GetUserAccessPermission)
         HRESULT ( STDMETHODCALLTYPE *GetUserAccessPermission )( 
             __RPC__in IFtpAuthorizationProvider * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSessionId,
@@ -1156,18 +1208,22 @@ EXTERN_C const IID IID_AsyncIFtpAuthorizationProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIFtpAuthorizationProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIFtpAuthorizationProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIFtpAuthorizationProvider * This);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpAuthorizationProvider, Begin_GetUserAccessPermission)
         HRESULT ( STDMETHODCALLTYPE *Begin_GetUserAccessPermission )( 
             __RPC__in AsyncIFtpAuthorizationProvider * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSessionId,
@@ -1175,6 +1231,7 @@ EXTERN_C const IID IID_AsyncIFtpAuthorizationProvider;
             /* [string][in] */ __RPC__in_string LPCWSTR pszVirtualPath,
             /* [string][in] */ __RPC__in_string LPCWSTR pszUserName);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpAuthorizationProvider, Finish_GetUserAccessPermission)
         HRESULT ( STDMETHODCALLTYPE *Finish_GetUserAccessPermission )( 
             __RPC__in AsyncIFtpAuthorizationProvider * This,
             /* [retval][out] */ __RPC__out FTP_ACCESS *pFtpAccess);
@@ -1280,18 +1337,22 @@ EXTERN_C const IID IID_IFtpPreprocessProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFtpPreprocessProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFtpPreprocessProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFtpPreprocessProvider * This);
         
+        DECLSPEC_XFGVIRT(IFtpPreprocessProvider, HandlePreprocess)
         HRESULT ( STDMETHODCALLTYPE *HandlePreprocess )( 
             __RPC__in IFtpPreprocessProvider * This,
             /* [in] */ __RPC__in const struct PRE_PROCESS_PARAMETERS *pPreProcessParameters,
@@ -1364,22 +1425,27 @@ EXTERN_C const IID IID_AsyncIFtpPreprocessProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIFtpPreprocessProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIFtpPreprocessProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIFtpPreprocessProvider * This);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpPreprocessProvider, Begin_HandlePreprocess)
         HRESULT ( STDMETHODCALLTYPE *Begin_HandlePreprocess )( 
             __RPC__in AsyncIFtpPreprocessProvider * This,
             /* [in] */ __RPC__in const struct PRE_PROCESS_PARAMETERS *pPreProcessParameters);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpPreprocessProvider, Finish_HandlePreprocess)
         HRESULT ( STDMETHODCALLTYPE *Finish_HandlePreprocess )( 
             __RPC__in AsyncIFtpPreprocessProvider * This,
             /* [retval][out] */ __RPC__out FTP_PROCESS_STATUS *pFtpProcessStatus);
@@ -1483,18 +1549,22 @@ EXTERN_C const IID IID_IFtpPostprocessProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFtpPostprocessProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFtpPostprocessProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFtpPostprocessProvider * This);
         
+        DECLSPEC_XFGVIRT(IFtpPostprocessProvider, HandlePostprocess)
         HRESULT ( STDMETHODCALLTYPE *HandlePostprocess )( 
             __RPC__in IFtpPostprocessProvider * This,
             /* [in] */ __RPC__in const struct POST_PROCESS_PARAMETERS *pPostProcessParameters,
@@ -1567,22 +1637,27 @@ EXTERN_C const IID IID_AsyncIFtpPostprocessProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIFtpPostprocessProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIFtpPostprocessProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIFtpPostprocessProvider * This);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpPostprocessProvider, Begin_HandlePostprocess)
         HRESULT ( STDMETHODCALLTYPE *Begin_HandlePostprocess )( 
             __RPC__in AsyncIFtpPostprocessProvider * This,
             /* [in] */ __RPC__in const struct POST_PROCESS_PARAMETERS *pPostProcessParameters);
         
+        DECLSPEC_XFGVIRT(AsyncIFtpPostprocessProvider, Finish_HandlePostprocess)
         HRESULT ( STDMETHODCALLTYPE *Finish_HandlePostprocess )( 
             __RPC__in AsyncIFtpPostprocessProvider * This,
             /* [retval][out] */ __RPC__out FTP_PROCESS_STATUS *pFtpProcessStatus);

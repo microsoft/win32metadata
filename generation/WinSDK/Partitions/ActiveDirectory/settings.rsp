@@ -13,5 +13,6 @@
 <IncludeRoot>/um/NtDsAPI.h
 <IncludeRoot>/um/ObjSel.h
 <IncludeRoot>/um/schedule.h
+<IncludeRoot>/um/ntdsbmsg.h
 --namespace
 Windows.Win32.Networking.ActiveDirectory

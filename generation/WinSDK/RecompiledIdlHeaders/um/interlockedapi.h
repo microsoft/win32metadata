@@ -29,7 +29,6 @@ extern "C" {
 
 #ifndef _NTOS_
 
-
 #endif /* _NTOS_ */
 
 #endif /* NOWINBASEINTERLOCK */
@@ -53,14 +52,12 @@ InitializeSListHead(
     _Out_ PSLIST_HEADER ListHead
     );
 
-
 WINBASEAPI
 PSLIST_ENTRY
 WINAPI
 InterlockedPopEntrySList(
     _Inout_ PSLIST_HEADER ListHead
     );
-
 
 WINBASEAPI
 PSLIST_ENTRY
@@ -69,7 +66,6 @@ InterlockedPushEntrySList(
     _Inout_ PSLIST_HEADER ListHead,
     _Inout_ __drv_aliasesMem PSLIST_ENTRY ListEntry
     );
-
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 
@@ -85,7 +81,6 @@ InterlockedPushListSListEx(
     _In_ ULONG Count
     );
 
-
 #endif // (NTDDI_VERSION >= NTDDI_WIN8)
 
 WINBASEAPI
@@ -95,7 +90,6 @@ InterlockedFlushSList(
     _Inout_ PSLIST_HEADER ListHead
     );
 
-
 WINBASEAPI
 USHORT
 WINAPI
@@ -103,14 +97,11 @@ QueryDepthSList(
     _In_ PSLIST_HEADER ListHead
     );
 
-
 #endif /* SLIST_HEADER_ */
 
 #endif /* _NTOS_ */
 
 #endif /* NOWINBASEINTERLOCK */
-
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion

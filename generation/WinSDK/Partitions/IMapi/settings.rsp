@@ -3,5 +3,8 @@
 <IncludeRoot>/um/imapi2.h
 <IncludeRoot>/um/imapi2fs.h
 <IncludeRoot>/um/imapi.h
+<IncludeRoot>/um/imessage.h
+<IncludeRoot>/um/mailmsgprops.h
+<IncludeRoot>/um/smtpguid.h
 --namespace
 Windows.Win32.Storage.Imapi

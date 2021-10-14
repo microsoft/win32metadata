@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -123,6 +123,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics ABI::Windows::Devices::Haptics::IKnownSimpleHapticsControllerWaveformsStatics
 
 #endif // ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                interface IKnownSimpleHapticsControllerWaveformsStatics2;
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2 ABI::Windows::Devices::Haptics::IKnownSimpleHapticsControllerWaveformsStatics2
+
+#endif // ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
@@ -634,6 +649,69 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsCo
 
 /*
  *
+ * Interface Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Haptics.KnownSimpleHapticsControllerWaveforms
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Haptics_IKnownSimpleHapticsControllerWaveformsStatics2[] = L"Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                MIDL_INTERFACE("a7d24c27-b79d-510a-bf79-ff6d49173e1d")
+                IKnownSimpleHapticsControllerWaveformsStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_BrushContinuous(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_ChiselMarkerContinuous(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_EraserContinuous(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Error(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_GalaxyPenContinuous(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Hover(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_InkContinuous(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_MarkerContinuous(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_PencilContinuous(
+                        UINT16* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Success(
+                        UINT16* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IKnownSimpleHapticsControllerWaveformsStatics2 = _uuidof(IKnownSimpleHapticsControllerWaveformsStatics2);
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Interface Windows.Devices.Haptics.ISimpleHapticsController
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
@@ -837,6 +915,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStati
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -917,6 +996,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 typedef interface __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics;
 
 #endif // ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2 __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2;
+
+#endif // ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
@@ -1893,6 +1978,120 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsCo
 
 /*
  *
+ * Interface Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Haptics.KnownSimpleHapticsControllerWaveforms
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Haptics_IKnownSimpleHapticsControllerWaveformsStatics2[] = L"Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2";
+typedef struct __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_BrushContinuous)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_ChiselMarkerContinuous)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_EraserContinuous)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_Error)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_GalaxyPenContinuous)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_Hover)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_InkContinuous)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_MarkerContinuous)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_PencilContinuous)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+    HRESULT (STDMETHODCALLTYPE* get_Success)(__x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2* This,
+        UINT16* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_BrushContinuous(This, value) \
+    ((This)->lpVtbl->get_BrushContinuous(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_ChiselMarkerContinuous(This, value) \
+    ((This)->lpVtbl->get_ChiselMarkerContinuous(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_EraserContinuous(This, value) \
+    ((This)->lpVtbl->get_EraserContinuous(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_Error(This, value) \
+    ((This)->lpVtbl->get_Error(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_GalaxyPenContinuous(This, value) \
+    ((This)->lpVtbl->get_GalaxyPenContinuous(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_Hover(This, value) \
+    ((This)->lpVtbl->get_Hover(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_InkContinuous(This, value) \
+    ((This)->lpVtbl->get_InkContinuous(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_MarkerContinuous(This, value) \
+    ((This)->lpVtbl->get_MarkerContinuous(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_PencilContinuous(This, value) \
+    ((This)->lpVtbl->get_PencilContinuous(This, value))
+
+#define __x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_get_Success(This, value) \
+    ((This)->lpVtbl->get_Success(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CHaptics_CIKnownSimpleHapticsControllerWaveformsStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+
+/*
+ *
  * Interface Windows.Devices.Haptics.ISimpleHapticsController
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 4.0
@@ -2261,6 +2460,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CHaptics_CIVibrationDeviceStati
  *
  * RuntimeClass contains static methods.
  *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.Devices.Haptics.IKnownSimpleHapticsControllerWaveformsStatics2 interface starting with version 14.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

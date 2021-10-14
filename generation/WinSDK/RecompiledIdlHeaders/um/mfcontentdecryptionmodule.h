@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -85,7 +93,6 @@ extern "C"{
 /* interface __MIDL_itf_mfcontentdecryptionmodule_0000_0000 */
 /* [local] */ 
 
-#if (NTDDI_VERSION >= NTDDI_WIN10_VB) 
 #pragma region Application Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP)
 
@@ -155,6 +162,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSession;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMFContentDecryptionModuleSession * This,
             /* [annotation][in] */ 
@@ -162,22 +170,27 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSession;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMFContentDecryptionModuleSession * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMFContentDecryptionModuleSession * This);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSession, GetSessionId)
         HRESULT ( STDMETHODCALLTYPE *GetSessionId )( 
             __RPC__in IMFContentDecryptionModuleSession * This,
             /* [annotation][out] */ 
             _Out_  LPWSTR *sessionId);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSession, GetExpiration)
         HRESULT ( STDMETHODCALLTYPE *GetExpiration )( 
             __RPC__in IMFContentDecryptionModuleSession * This,
             /* [annotation][out] */ 
             _Out_  double *expiration);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSession, GetKeyStatuses)
         HRESULT ( STDMETHODCALLTYPE *GetKeyStatuses )( 
             __RPC__in IMFContentDecryptionModuleSession * This,
             /* [annotation][size_is][size_is][out] */ 
@@ -185,6 +198,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSession;
             /* [annotation][out] */ 
             _Out_  UINT *numKeyStatuses);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSession, Load)
         HRESULT ( STDMETHODCALLTYPE *Load )( 
             __RPC__in IMFContentDecryptionModuleSession * This,
             /* [annotation][in] */ 
@@ -192,6 +206,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSession;
             /* [annotation][out] */ 
             _Out_  BOOL *loaded);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSession, GenerateRequest)
         HRESULT ( STDMETHODCALLTYPE *GenerateRequest )( 
             __RPC__in IMFContentDecryptionModuleSession * This,
             /* [annotation][in] */ 
@@ -201,6 +216,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSession;
             /* [annotation][in] */ 
             _In_  DWORD initDataSize);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSession, Update)
         HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in IMFContentDecryptionModuleSession * This,
             /* [annotation][size_is][in] */ 
@@ -208,9 +224,11 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSession;
             /* [annotation][in] */ 
             _In_  DWORD responseSize);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSession, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IMFContentDecryptionModuleSession * This);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSession, Remove)
         HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IMFContentDecryptionModuleSession * This);
         
@@ -307,6 +325,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSessionCallbacks;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMFContentDecryptionModuleSessionCallbacks * This,
             /* [annotation][in] */ 
@@ -314,12 +333,15 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSessionCallbacks;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMFContentDecryptionModuleSessionCallbacks * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMFContentDecryptionModuleSessionCallbacks * This);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSessionCallbacks, KeyMessage)
         HRESULT ( STDMETHODCALLTYPE *KeyMessage )( 
             __RPC__in IMFContentDecryptionModuleSessionCallbacks * This,
             /* [annotation][in] */ 
@@ -330,6 +352,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleSessionCallbacks;
             _In_  DWORD messageSize,
             /* [optional][in] */ __RPC__in LPCWSTR destinationURL);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleSessionCallbacks, KeyStatusChanged)
         HRESULT ( STDMETHODCALLTYPE *KeyStatusChanged )( 
             __RPC__in IMFContentDecryptionModuleSessionCallbacks * This);
         
@@ -439,6 +462,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModule;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMFContentDecryptionModule * This,
             /* [annotation][in] */ 
@@ -446,12 +470,15 @@ EXTERN_C const IID IID_IMFContentDecryptionModule;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMFContentDecryptionModule * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMFContentDecryptionModule * This);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModule, SetContentEnabler)
         HRESULT ( STDMETHODCALLTYPE *SetContentEnabler )( 
             __RPC__in IMFContentDecryptionModule * This,
             /* [annotation][in] */ 
@@ -459,16 +486,19 @@ EXTERN_C const IID IID_IMFContentDecryptionModule;
             /* [annotation][in] */ 
             _In_  IMFAsyncResult *result);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModule, GetSuspendNotify)
         HRESULT ( STDMETHODCALLTYPE *GetSuspendNotify )( 
             __RPC__in IMFContentDecryptionModule * This,
             /* [annotation][out] */ 
             _Out_  IMFCdmSuspendNotify **notify);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModule, SetPMPHostApp)
         HRESULT ( STDMETHODCALLTYPE *SetPMPHostApp )( 
             __RPC__in IMFContentDecryptionModule * This,
             /* [annotation][in] */ 
             _In_  IMFPMPHostApp *pmpHostApp);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModule, CreateSession)
         HRESULT ( STDMETHODCALLTYPE *CreateSession )( 
             __RPC__in IMFContentDecryptionModule * This,
             /* [annotation][in] */ 
@@ -478,6 +508,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModule;
             /* [annotation][out] */ 
             _Out_  IMFContentDecryptionModuleSession **session);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModule, SetServerCertificate)
         HRESULT ( STDMETHODCALLTYPE *SetServerCertificate )( 
             __RPC__in IMFContentDecryptionModule * This,
             /* [annotation][size_is][in] */ 
@@ -485,6 +516,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModule;
             /* [annotation][in] */ 
             _In_  DWORD certificateSize);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModule, CreateTrustedInput)
         HRESULT ( STDMETHODCALLTYPE *CreateTrustedInput )( 
             __RPC__in IMFContentDecryptionModule * This,
             /* [annotation][size_is][in] */ 
@@ -494,6 +526,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModule;
             /* [annotation][out] */ 
             _Out_  IMFTrustedInput **trustedInput);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModule, GetProtectionSystemIds)
         HRESULT ( STDMETHODCALLTYPE *GetProtectionSystemIds )( 
             __RPC__in IMFContentDecryptionModule * This,
             /* [annotation][size_is][size_is][out] */ 
@@ -594,6 +627,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleAccess;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMFContentDecryptionModuleAccess * This,
             /* [annotation][in] */ 
@@ -601,12 +635,15 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleAccess;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMFContentDecryptionModuleAccess * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMFContentDecryptionModuleAccess * This);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleAccess, CreateContentDecryptionModule)
         HRESULT ( STDMETHODCALLTYPE *CreateContentDecryptionModule )( 
             __RPC__in IMFContentDecryptionModuleAccess * This,
             /* [annotation][in] */ 
@@ -614,11 +651,13 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleAccess;
             /* [annotation][out] */ 
             _Out_  IMFContentDecryptionModule **contentDecryptionModule);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleAccess, GetConfiguration)
         HRESULT ( STDMETHODCALLTYPE *GetConfiguration )( 
             __RPC__in IMFContentDecryptionModuleAccess * This,
             /* [annotation][out] */ 
             _Out_  IPropertyStore **configuration);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleAccess, GetKeySystem)
         HRESULT ( STDMETHODCALLTYPE *GetKeySystem )( 
             __RPC__in IMFContentDecryptionModuleAccess * This,
             /* [annotation][out] */ 
@@ -717,6 +756,7 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IMFContentDecryptionModuleFactory * This,
             /* [annotation][in] */ 
@@ -724,18 +764,22 @@ EXTERN_C const IID IID_IMFContentDecryptionModuleFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IMFContentDecryptionModuleFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IMFContentDecryptionModuleFactory * This);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleFactory, IsTypeSupported)
         BOOL ( STDMETHODCALLTYPE *IsTypeSupported )( 
             IMFContentDecryptionModuleFactory * This,
             /* [annotation][in] */ 
             _In_  LPCWSTR keySystem,
             /* [optional][in] */ LPCWSTR contentType);
         
+        DECLSPEC_XFGVIRT(IMFContentDecryptionModuleFactory, CreateContentDecryptionModuleAccess)
         HRESULT ( STDMETHODCALLTYPE *CreateContentDecryptionModuleAccess )( 
             IMFContentDecryptionModuleFactory * This,
             /* [annotation][in] */ 
@@ -799,7 +843,6 @@ STDAPI MFCreateEncryptedMediaExtensionsStoreActivate(
     );
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
 #pragma endregion
-#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB) 
 
 
 extern RPC_IF_HANDLE __MIDL_itf_mfcontentdecryptionmodule_0000_0005_v0_0_c_ifspec;

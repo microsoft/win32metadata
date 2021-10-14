@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -237,28 +245,34 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumCERTVIEWCOLUMN * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumCERTVIEWCOLUMN * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [in] */ REFIID riid,
@@ -267,6 +281,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [annotation][in] */ 
@@ -286,42 +301,52 @@ EXTERN_C const IID IID_IEnumCERTVIEWCOLUMN;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [retval][out] */ LONG *pIndex);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [retval][out] */ BSTR *pstrOut);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, GetDisplayName)
         HRESULT ( STDMETHODCALLTYPE *GetDisplayName )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [retval][out] */ BSTR *pstrOut);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, GetType)
         HRESULT ( STDMETHODCALLTYPE *GetType )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [retval][out] */ LONG *pType);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, IsIndexed)
         HRESULT ( STDMETHODCALLTYPE *IsIndexed )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [retval][out] */ LONG *pIndexed);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, GetMaxLength)
         HRESULT ( STDMETHODCALLTYPE *GetMaxLength )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [retval][out] */ LONG *pMaxLength);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [in] */ LONG Flags,
             /* [retval][out] */ VARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [in] */ LONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumCERTVIEWCOLUMN * This);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWCOLUMN, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumCERTVIEWCOLUMN * This,
             /* [retval][out] */ IEnumCERTVIEWCOLUMN **ppenum);
@@ -444,28 +469,34 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumCERTVIEWATTRIBUTE * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumCERTVIEWATTRIBUTE * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [in] */ REFIID riid,
@@ -474,6 +505,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [annotation][in] */ 
@@ -493,25 +525,31 @@ EXTERN_C const IID IID_IEnumCERTVIEWATTRIBUTE;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWATTRIBUTE, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [retval][out] */ LONG *pIndex);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWATTRIBUTE, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [retval][out] */ BSTR *pstrOut);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWATTRIBUTE, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [retval][out] */ BSTR *pstrOut);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWATTRIBUTE, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [in] */ LONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWATTRIBUTE, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumCERTVIEWATTRIBUTE * This);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWATTRIBUTE, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumCERTVIEWATTRIBUTE * This,
             /* [retval][out] */ IEnumCERTVIEWATTRIBUTE **ppenum);
@@ -627,28 +665,34 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumCERTVIEWEXTENSION * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumCERTVIEWEXTENSION * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [in] */ REFIID riid,
@@ -657,6 +701,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [annotation][in] */ 
@@ -676,31 +721,38 @@ EXTERN_C const IID IID_IEnumCERTVIEWEXTENSION;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWEXTENSION, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [retval][out] */ LONG *pIndex);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWEXTENSION, GetName)
         HRESULT ( STDMETHODCALLTYPE *GetName )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [retval][out] */ BSTR *pstrOut);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWEXTENSION, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [retval][out] */ LONG *pFlags);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWEXTENSION, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [in] */ LONG Type,
             /* [in] */ LONG Flags,
             /* [retval][out] */ VARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWEXTENSION, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [in] */ LONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWEXTENSION, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumCERTVIEWEXTENSION * This);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWEXTENSION, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumCERTVIEWEXTENSION * This,
             /* [retval][out] */ IEnumCERTVIEWEXTENSION **ppenum);
@@ -822,28 +874,34 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnumCERTVIEWROW * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnumCERTVIEWROW * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnumCERTVIEWROW * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             IEnumCERTVIEWROW * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             IEnumCERTVIEWROW * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             IEnumCERTVIEWROW * This,
             /* [in] */ REFIID riid,
@@ -852,6 +910,7 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IEnumCERTVIEWROW * This,
             /* [annotation][in] */ 
@@ -871,35 +930,43 @@ EXTERN_C const IID IID_IEnumCERTVIEWROW;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWROW, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             IEnumCERTVIEWROW * This,
             /* [retval][out] */ LONG *pIndex);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWROW, EnumCertViewColumn)
         HRESULT ( STDMETHODCALLTYPE *EnumCertViewColumn )( 
             IEnumCERTVIEWROW * This,
             /* [retval][out] */ IEnumCERTVIEWCOLUMN **ppenum);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWROW, EnumCertViewAttribute)
         HRESULT ( STDMETHODCALLTYPE *EnumCertViewAttribute )( 
             IEnumCERTVIEWROW * This,
             /* [in] */ LONG Flags,
             /* [retval][out] */ IEnumCERTVIEWATTRIBUTE **ppenum);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWROW, EnumCertViewExtension)
         HRESULT ( STDMETHODCALLTYPE *EnumCertViewExtension )( 
             IEnumCERTVIEWROW * This,
             /* [in] */ LONG Flags,
             /* [retval][out] */ IEnumCERTVIEWEXTENSION **ppenum);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWROW, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             IEnumCERTVIEWROW * This,
             /* [in] */ LONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWROW, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnumCERTVIEWROW * This);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWROW, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             IEnumCERTVIEWROW * This,
             /* [retval][out] */ IEnumCERTVIEWROW **ppenum);
         
+        DECLSPEC_XFGVIRT(IEnumCERTVIEWROW, GetMaxIndex)
         HRESULT ( STDMETHODCALLTYPE *GetMaxIndex )( 
             IEnumCERTVIEWROW * This,
             /* [retval][out] */ LONG *pIndex);
@@ -1030,28 +1097,34 @@ EXTERN_C const IID IID_ICertView;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICertView * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICertView * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICertView * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             ICertView * This,
             /* [out] */ UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             ICertView * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             ICertView * This,
             /* [in] */ REFIID riid,
@@ -1060,6 +1133,7 @@ EXTERN_C const IID IID_ICertView;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertView * This,
             /* [annotation][in] */ 
@@ -1079,34 +1153,41 @@ EXTERN_C const IID IID_ICertView;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertView, OpenConnection)
         HRESULT ( STDMETHODCALLTYPE *OpenConnection )( 
             ICertView * This,
             /* [in] */ const BSTR strConfig);
         
+        DECLSPEC_XFGVIRT(ICertView, EnumCertViewColumn)
         HRESULT ( STDMETHODCALLTYPE *EnumCertViewColumn )( 
             ICertView * This,
             /* [in] */ LONG fResultColumn,
             /* [retval][out] */ IEnumCERTVIEWCOLUMN **ppenum);
         
+        DECLSPEC_XFGVIRT(ICertView, GetColumnCount)
         HRESULT ( STDMETHODCALLTYPE *GetColumnCount )( 
             ICertView * This,
             /* [in] */ LONG fResultColumn,
             /* [retval][out] */ LONG *pcColumn);
         
+        DECLSPEC_XFGVIRT(ICertView, GetColumnIndex)
         HRESULT ( STDMETHODCALLTYPE *GetColumnIndex )( 
             ICertView * This,
             /* [in] */ LONG fResultColumn,
             /* [in] */ const BSTR strColumnName,
             /* [retval][out] */ LONG *pColumnIndex);
         
+        DECLSPEC_XFGVIRT(ICertView, SetResultColumnCount)
         HRESULT ( STDMETHODCALLTYPE *SetResultColumnCount )( 
             ICertView * This,
             /* [in] */ LONG cResultColumn);
         
+        DECLSPEC_XFGVIRT(ICertView, SetResultColumn)
         HRESULT ( STDMETHODCALLTYPE *SetResultColumn )( 
             ICertView * This,
             /* [in] */ LONG ColumnIndex);
         
+        DECLSPEC_XFGVIRT(ICertView, SetRestriction)
         HRESULT ( STDMETHODCALLTYPE *SetRestriction )( 
             ICertView * This,
             /* [in] */ LONG ColumnIndex,
@@ -1114,6 +1195,7 @@ EXTERN_C const IID IID_ICertView;
             /* [in] */ LONG SortOrder,
             /* [in] */ const VARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(ICertView, OpenView)
         HRESULT ( STDMETHODCALLTYPE *OpenView )( 
             ICertView * This,
             /* [retval][out] */ IEnumCERTVIEWROW **ppenum);
@@ -1216,28 +1298,34 @@ EXTERN_C const IID IID_ICertView2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICertView2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICertView2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICertView2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICertView2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICertView2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICertView2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1246,6 +1334,7 @@ EXTERN_C const IID IID_ICertView2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICertView2 * This,
             /* [annotation][in] */ 
@@ -1265,34 +1354,41 @@ EXTERN_C const IID IID_ICertView2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICertView, OpenConnection)
         HRESULT ( STDMETHODCALLTYPE *OpenConnection )( 
             __RPC__in ICertView2 * This,
             /* [in] */ __RPC__in const BSTR strConfig);
         
+        DECLSPEC_XFGVIRT(ICertView, EnumCertViewColumn)
         HRESULT ( STDMETHODCALLTYPE *EnumCertViewColumn )( 
             __RPC__in ICertView2 * This,
             /* [in] */ LONG fResultColumn,
             /* [retval][out] */ __RPC__deref_out_opt IEnumCERTVIEWCOLUMN **ppenum);
         
+        DECLSPEC_XFGVIRT(ICertView, GetColumnCount)
         HRESULT ( STDMETHODCALLTYPE *GetColumnCount )( 
             __RPC__in ICertView2 * This,
             /* [in] */ LONG fResultColumn,
             /* [retval][out] */ __RPC__out LONG *pcColumn);
         
+        DECLSPEC_XFGVIRT(ICertView, GetColumnIndex)
         HRESULT ( STDMETHODCALLTYPE *GetColumnIndex )( 
             __RPC__in ICertView2 * This,
             /* [in] */ LONG fResultColumn,
             /* [in] */ __RPC__in const BSTR strColumnName,
             /* [retval][out] */ __RPC__out LONG *pColumnIndex);
         
+        DECLSPEC_XFGVIRT(ICertView, SetResultColumnCount)
         HRESULT ( STDMETHODCALLTYPE *SetResultColumnCount )( 
             __RPC__in ICertView2 * This,
             /* [in] */ LONG cResultColumn);
         
+        DECLSPEC_XFGVIRT(ICertView, SetResultColumn)
         HRESULT ( STDMETHODCALLTYPE *SetResultColumn )( 
             __RPC__in ICertView2 * This,
             /* [in] */ LONG ColumnIndex);
         
+        DECLSPEC_XFGVIRT(ICertView, SetRestriction)
         HRESULT ( STDMETHODCALLTYPE *SetRestriction )( 
             __RPC__in ICertView2 * This,
             /* [in] */ LONG ColumnIndex,
@@ -1300,10 +1396,12 @@ EXTERN_C const IID IID_ICertView2;
             /* [in] */ LONG SortOrder,
             /* [in] */ __RPC__in const VARIANT *pvarValue);
         
+        DECLSPEC_XFGVIRT(ICertView, OpenView)
         HRESULT ( STDMETHODCALLTYPE *OpenView )( 
             __RPC__in ICertView2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumCERTVIEWROW **ppenum);
         
+        DECLSPEC_XFGVIRT(ICertView2, SetTable)
         HRESULT ( STDMETHODCALLTYPE *SetTable )( 
             __RPC__in ICertView2 * This,
             /* [in] */ LONG Table);

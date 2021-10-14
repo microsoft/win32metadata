@@ -28,3 +28,9 @@
 #include <in6addr.h>
 #include <transportsettingcommon.h>
 #include <sporder.h>
+#include <afunix.h>
+#include <svcguid.h>
+#include <wsipx.h>
+#include <wshisotp.h>
+#include <wsnetbs.h>
+#include <wsvns.h>

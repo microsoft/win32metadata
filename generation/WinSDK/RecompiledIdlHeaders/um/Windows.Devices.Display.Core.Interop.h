@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -151,6 +159,7 @@ EXTERN_C const IID IID_IDisplayDeviceInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDisplayDeviceInterop * This,
             /* [annotation][in] */ 
@@ -158,12 +167,15 @@ EXTERN_C const IID IID_IDisplayDeviceInterop;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDisplayDeviceInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDisplayDeviceInterop * This);
         
+        DECLSPEC_XFGVIRT(IDisplayDeviceInterop, CreateSharedHandle)
         HRESULT ( STDMETHODCALLTYPE *CreateSharedHandle )( 
             IDisplayDeviceInterop * This,
             /* [annotation][in] */ 
@@ -177,6 +189,7 @@ EXTERN_C const IID IID_IDisplayDeviceInterop;
             /* [annotation][retval][out] */ 
             _Out_retval_  HANDLE *pHandle);
         
+        DECLSPEC_XFGVIRT(IDisplayDeviceInterop, OpenSharedHandle)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedHandle )( 
             IDisplayDeviceInterop * This,
             /* [annotation][in] */ 
@@ -258,6 +271,7 @@ EXTERN_C const IID IID_IDisplayPathInterop;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDisplayPathInterop * This,
             /* [annotation][in] */ 
@@ -265,17 +279,21 @@ EXTERN_C const IID IID_IDisplayPathInterop;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDisplayPathInterop * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDisplayPathInterop * This);
         
+        DECLSPEC_XFGVIRT(IDisplayPathInterop, CreateSourcePresentationHandle)
         HRESULT ( STDMETHODCALLTYPE *CreateSourcePresentationHandle )( 
             IDisplayPathInterop * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  HANDLE *pValue);
         
+        DECLSPEC_XFGVIRT(IDisplayPathInterop, GetSourceId)
         HRESULT ( STDMETHODCALLTYPE *GetSourceId )( 
             IDisplayPathInterop * This,
             /* [annotation][retval][out] */ 

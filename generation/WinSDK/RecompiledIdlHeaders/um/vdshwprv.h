@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -1037,6 +1045,7 @@ EXTERN_C const IID IID_IEnumVdsObject;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumVdsObject * This,
             /* [annotation][in] */ 
@@ -1044,25 +1053,31 @@ EXTERN_C const IID IID_IEnumVdsObject;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumVdsObject * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumVdsObject * This);
         
+        DECLSPEC_XFGVIRT(IEnumVdsObject, Next)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumVdsObject * This,
             /* [in] */ ULONG celt,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(celt, *pcFetched) IUnknown **ppObjectArray,
             /* [out] */ __RPC__out ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumVdsObject, Skip)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumVdsObject * This,
             /* [in] */ ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumVdsObject, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumVdsObject * This);
         
+        DECLSPEC_XFGVIRT(IEnumVdsObject, Clone)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumVdsObject * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
@@ -1147,6 +1162,7 @@ EXTERN_C const IID IID_IVdsAsync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsAsync * This,
             /* [annotation][in] */ 
@@ -1154,20 +1170,25 @@ EXTERN_C const IID IID_IVdsAsync;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsAsync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsAsync * This);
         
+        DECLSPEC_XFGVIRT(IVdsAsync, Cancel)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IVdsAsync * This);
         
+        DECLSPEC_XFGVIRT(IVdsAsync, Wait)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Wait )( 
             __RPC__in IVdsAsync * This,
             /* [out] */ __RPC__out HRESULT *pHrResult,
             /* [out] */ __RPC__out VDS_ASYNC_OUTPUT *pAsyncOut);
         
+        DECLSPEC_XFGVIRT(IVdsAsync, QueryStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryStatus )( 
             __RPC__in IVdsAsync * This,
             /* [out] */ __RPC__out HRESULT *pHrResult,
@@ -1244,6 +1265,7 @@ EXTERN_C const IID IID_IVdsAdviseSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsAdviseSink * This,
             /* [annotation][in] */ 
@@ -1251,12 +1273,15 @@ EXTERN_C const IID IID_IVdsAdviseSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsAdviseSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsAdviseSink * This);
         
+        DECLSPEC_XFGVIRT(IVdsAdviseSink, OnNotify)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnNotify )( 
             __RPC__in IVdsAdviseSink * This,
             /* [range][in] */ __RPC__in_range(1,100) LONG lNumberOfNotifications,
@@ -1326,6 +1351,7 @@ EXTERN_C const IID IID_IVdsProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsProvider * This,
             /* [annotation][in] */ 
@@ -1333,12 +1359,15 @@ EXTERN_C const IID IID_IVdsProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsProvider * This);
         
+        DECLSPEC_XFGVIRT(IVdsProvider, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsProvider * This,
             /* [out] */ __RPC__out VDS_PROVIDER_PROP *pProviderProp);
@@ -1407,6 +1436,7 @@ EXTERN_C const IID IID_IVdsProviderSupport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsProviderSupport * This,
             /* [annotation][in] */ 
@@ -1414,12 +1444,15 @@ EXTERN_C const IID IID_IVdsProviderSupport;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsProviderSupport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsProviderSupport * This);
         
+        DECLSPEC_XFGVIRT(IVdsProviderSupport, GetVersionSupport)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetVersionSupport )( 
             __RPC__in IVdsProviderSupport * This,
             /* [out] */ __RPC__out ULONG *ulVersionSupport);
@@ -1514,6 +1547,7 @@ EXTERN_C const IID IID_IVdsProviderPrivate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsProviderPrivate * This,
             /* [annotation][in] */ 
@@ -1521,23 +1555,28 @@ EXTERN_C const IID IID_IVdsProviderPrivate;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsProviderPrivate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsProviderPrivate * This);
         
+        DECLSPEC_XFGVIRT(IVdsProviderPrivate, GetObject)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetObject )( 
             __RPC__in IVdsProviderPrivate * This,
             /* [in] */ VDS_OBJECT_ID ObjectId,
             /* [in] */ VDS_OBJECT_TYPE type,
             /* [out] */ __RPC__deref_out_opt IUnknown **ppObjectUnk);
         
+        DECLSPEC_XFGVIRT(IVdsProviderPrivate, OnLoad)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnLoad )( 
             __RPC__in IVdsProviderPrivate * This,
             /* [string][in] */ __RPC__in_string LPWSTR pwszMachineName,
             /* [in] */ __RPC__in_opt IUnknown *pCallbackObject);
         
+        DECLSPEC_XFGVIRT(IVdsProviderPrivate, OnUnload)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *OnUnload )( 
             __RPC__in IVdsProviderPrivate * This,
             /* [in] */ BOOL bForceUnload);
@@ -2337,6 +2376,7 @@ EXTERN_C const IID IID_IVdsHwProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProvider * This,
             /* [annotation][in] */ 
@@ -2344,19 +2384,24 @@ EXTERN_C const IID IID_IVdsHwProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsHwProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsHwProvider * This);
         
+        DECLSPEC_XFGVIRT(IVdsHwProvider, QuerySubSystems)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QuerySubSystems )( 
             __RPC__in IVdsHwProvider * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsHwProvider, Reenumerate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reenumerate )( 
             __RPC__in IVdsHwProvider * This);
         
+        DECLSPEC_XFGVIRT(IVdsHwProvider, Refresh)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IVdsHwProvider * This);
         
@@ -2430,6 +2475,7 @@ EXTERN_C const IID IID_IVdsHwProviderType;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProviderType * This,
             /* [annotation][in] */ 
@@ -2437,12 +2483,15 @@ EXTERN_C const IID IID_IVdsHwProviderType;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsHwProviderType * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsHwProviderType * This);
         
+        DECLSPEC_XFGVIRT(IVdsHwProviderType, GetProviderType)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProviderType )( 
             __RPC__in IVdsHwProviderType * This,
             /* [out] */ __RPC__out VDS_HWPROVIDER_TYPE *pType);
@@ -2511,6 +2560,7 @@ EXTERN_C const IID IID_IVdsHwProviderType2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProviderType2 * This,
             /* [annotation][in] */ 
@@ -2518,12 +2568,15 @@ EXTERN_C const IID IID_IVdsHwProviderType2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsHwProviderType2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsHwProviderType2 * This);
         
+        DECLSPEC_XFGVIRT(IVdsHwProviderType2, GetProviderType2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProviderType2 )( 
             __RPC__in IVdsHwProviderType2 * This,
             /* [out] */ __RPC__out VDS_HWPROVIDER_TYPE *pType);
@@ -2609,6 +2662,7 @@ EXTERN_C const IID IID_IVdsHwProviderStoragePools;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProviderStoragePools * This,
             /* [annotation][in] */ 
@@ -2616,12 +2670,15 @@ EXTERN_C const IID IID_IVdsHwProviderStoragePools;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsHwProviderStoragePools * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsHwProviderStoragePools * This);
         
+        DECLSPEC_XFGVIRT(IVdsHwProviderStoragePools, QueryStoragePools)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryStoragePools )( 
             __RPC__in IVdsHwProviderStoragePools * This,
             /* [in] */ ULONG ulFlags,
@@ -2629,6 +2686,7 @@ EXTERN_C const IID IID_IVdsHwProviderStoragePools;
             /* [unique][in] */ __RPC__in_opt VDS_POOL_ATTRIBUTES *pPoolAttributes,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsHwProviderStoragePools, CreateLunInStoragePool)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateLunInStoragePool )( 
             __RPC__in IVdsHwProviderStoragePools * This,
             /* [in] */ VDS_LUN_TYPE type,
@@ -2638,6 +2696,7 @@ EXTERN_C const IID IID_IVdsHwProviderStoragePools;
             /* [unique][in] */ __RPC__in_opt VDS_HINTS2 *pHints2,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsHwProviderStoragePools, QueryMaxLunCreateSizeInStoragePool)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryMaxLunCreateSizeInStoragePool )( 
             __RPC__in IVdsHwProviderStoragePools * This,
             /* [in] */ VDS_LUN_TYPE type,
@@ -2763,6 +2822,7 @@ EXTERN_C const IID IID_IVdsSubSystem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystem * This,
             /* [annotation][in] */ 
@@ -2770,41 +2830,51 @@ EXTERN_C const IID IID_IVdsSubSystem;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsSubSystem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsSubSystem * This);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsSubSystem * This,
             /* [out] */ __RPC__out VDS_SUB_SYSTEM_PROP *pSubSystemProp);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, GetProvider)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProvider )( 
             __RPC__in IVdsSubSystem * This,
             /* [out] */ __RPC__deref_out_opt IVdsProvider **ppProvider);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, QueryControllers)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryControllers )( 
             __RPC__in IVdsSubSystem * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, QueryLuns)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryLuns )( 
             __RPC__in IVdsSubSystem * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, QueryDrives)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryDrives )( 
             __RPC__in IVdsSubSystem * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, GetDrive)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDrive )( 
             __RPC__in IVdsSubSystem * This,
             /* [in] */ SHORT sBusNumber,
             /* [in] */ SHORT sSlotNumber,
             /* [out] */ __RPC__deref_out_opt IVdsDrive **ppDrive);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, Reenumerate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reenumerate )( 
             __RPC__in IVdsSubSystem * This);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, SetControllerStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetControllerStatus )( 
             __RPC__in IVdsSubSystem * This,
             /* [size_is][in] */ __RPC__in_ecount_full(lNumberOfOnlineControllers) VDS_OBJECT_ID *pOnlineControllerIdArray,
@@ -2812,6 +2882,7 @@ EXTERN_C const IID IID_IVdsSubSystem;
             /* [size_is][in] */ __RPC__in_ecount_full(lNumberOfOfflineControllers) VDS_OBJECT_ID *pOfflineControllerIdArray,
             /* [in] */ LONG lNumberOfOfflineControllers);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, CreateLun)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateLun )( 
             __RPC__in IVdsSubSystem * This,
             /* [in] */ VDS_LUN_TYPE type,
@@ -2822,15 +2893,18 @@ EXTERN_C const IID IID_IVdsSubSystem;
             /* [unique][in] */ __RPC__in_opt VDS_HINTS *pHints,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, ReplaceDrive)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReplaceDrive )( 
             __RPC__in IVdsSubSystem * This,
             /* [in] */ VDS_OBJECT_ID DriveToBeReplaced,
             /* [in] */ VDS_OBJECT_ID ReplacementDrive);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, SetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetStatus )( 
             __RPC__in IVdsSubSystem * This,
             /* [in] */ VDS_SUB_SYSTEM_STATUS status);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem, QueryMaxLunCreateSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryMaxLunCreateSize )( 
             __RPC__in IVdsSubSystem * This,
             /* [in] */ VDS_LUN_TYPE type,
@@ -2958,6 +3032,7 @@ EXTERN_C const IID IID_IVdsSubSystem2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystem2 * This,
             /* [annotation][in] */ 
@@ -2965,16 +3040,20 @@ EXTERN_C const IID IID_IVdsSubSystem2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsSubSystem2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsSubSystem2 * This);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem2, GetProperties2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties2 )( 
             __RPC__in IVdsSubSystem2 * This,
             /* [out] */ __RPC__out VDS_SUB_SYSTEM_PROP2 *pSubSystemProp2);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem2, GetDrive2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDrive2 )( 
             __RPC__in IVdsSubSystem2 * This,
             /* [in] */ SHORT sBusNumber,
@@ -2982,6 +3061,7 @@ EXTERN_C const IID IID_IVdsSubSystem2;
             /* [in] */ ULONG ulEnclosureNumber,
             /* [out] */ __RPC__deref_out_opt IVdsDrive **ppDrive);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem2, CreateLun2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateLun2 )( 
             __RPC__in IVdsSubSystem2 * This,
             /* [in] */ VDS_LUN_TYPE type,
@@ -2992,6 +3072,7 @@ EXTERN_C const IID IID_IVdsSubSystem2;
             /* [unique][in] */ __RPC__in_opt VDS_HINTS2 *pHints2,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystem2, QueryMaxLunCreateSize2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryMaxLunCreateSize2 )( 
             __RPC__in IVdsSubSystem2 * This,
             /* [in] */ VDS_LUN_TYPE type,
@@ -3073,6 +3154,7 @@ EXTERN_C const IID IID_IVdsSubSystemNaming;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystemNaming * This,
             /* [annotation][in] */ 
@@ -3080,12 +3162,15 @@ EXTERN_C const IID IID_IVdsSubSystemNaming;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsSubSystemNaming * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsSubSystemNaming * This);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystemNaming, SetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *SetFriendlyName )( 
             __RPC__in IVdsSubSystemNaming * This,
             /* [string][in] */ __RPC__in_string LPWSTR pwszFriendlyName);
@@ -3165,6 +3250,7 @@ EXTERN_C const IID IID_IVdsSubSystemIscsi;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystemIscsi * This,
             /* [annotation][in] */ 
@@ -3172,26 +3258,32 @@ EXTERN_C const IID IID_IVdsSubSystemIscsi;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsSubSystemIscsi * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsSubSystemIscsi * This);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystemIscsi, QueryTargets)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryTargets )( 
             __RPC__in IVdsSubSystemIscsi * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystemIscsi, QueryPortals)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryPortals )( 
             __RPC__in IVdsSubSystemIscsi * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystemIscsi, CreateTarget)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateTarget )( 
             __RPC__in IVdsSubSystemIscsi * This,
             /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszIscsiName,
             /* [string][in] */ __RPC__in_string LPWSTR pwszFriendlyName,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystemIscsi, SetIpsecGroupPresharedKey)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetIpsecGroupPresharedKey )( 
             __RPC__in IVdsSubSystemIscsi * This,
             /* [unique][in] */ __RPC__in_opt VDS_ISCSI_IPSEC_KEY *pIpsecKey);
@@ -3269,6 +3361,7 @@ EXTERN_C const IID IID_IVdsSubSystemInterconnect;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsSubSystemInterconnect * This,
             /* [annotation][in] */ 
@@ -3276,12 +3369,15 @@ EXTERN_C const IID IID_IVdsSubSystemInterconnect;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsSubSystemInterconnect * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsSubSystemInterconnect * This);
         
+        DECLSPEC_XFGVIRT(IVdsSubSystemInterconnect, GetSupportedInterconnects)
         HRESULT ( STDMETHODCALLTYPE *GetSupportedInterconnects )( 
             __RPC__in IVdsSubSystemInterconnect * This,
             /* [out] */ __RPC__out ULONG *pulSupportedInterconnectsFlag);
@@ -3361,6 +3457,7 @@ EXTERN_C const IID IID_IVdsControllerPort;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsControllerPort * This,
             /* [annotation][in] */ 
@@ -3368,27 +3465,34 @@ EXTERN_C const IID IID_IVdsControllerPort;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsControllerPort * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsControllerPort * This);
         
+        DECLSPEC_XFGVIRT(IVdsControllerPort, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsControllerPort * This,
             /* [out] */ __RPC__out VDS_PORT_PROP *pPortProp);
         
+        DECLSPEC_XFGVIRT(IVdsControllerPort, GetController)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetController )( 
             __RPC__in IVdsControllerPort * This,
             /* [out] */ __RPC__deref_out_opt IVdsController **ppController);
         
+        DECLSPEC_XFGVIRT(IVdsControllerPort, QueryAssociatedLuns)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAssociatedLuns )( 
             __RPC__in IVdsControllerPort * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsControllerPort, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IVdsControllerPort * This);
         
+        DECLSPEC_XFGVIRT(IVdsControllerPort, SetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetStatus )( 
             __RPC__in IVdsControllerPort * This,
             /* [in] */ VDS_PORT_STATUS status);
@@ -3488,6 +3592,7 @@ EXTERN_C const IID IID_IVdsController;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsController * This,
             /* [annotation][in] */ 
@@ -3495,38 +3600,48 @@ EXTERN_C const IID IID_IVdsController;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsController * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsController * This);
         
+        DECLSPEC_XFGVIRT(IVdsController, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsController * This,
             /* [out] */ __RPC__out VDS_CONTROLLER_PROP *pControllerProp);
         
+        DECLSPEC_XFGVIRT(IVdsController, GetSubSystem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSubSystem )( 
             __RPC__in IVdsController * This,
             /* [out] */ __RPC__deref_out_opt IVdsSubSystem **ppSubSystem);
         
+        DECLSPEC_XFGVIRT(IVdsController, GetPortProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPortProperties )( 
             __RPC__in IVdsController * This,
             /* [in] */ SHORT sPortNumber,
             /* [out] */ __RPC__out VDS_PORT_PROP *pPortProp);
         
+        DECLSPEC_XFGVIRT(IVdsController, FlushCache)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *FlushCache )( 
             __RPC__in IVdsController * This);
         
+        DECLSPEC_XFGVIRT(IVdsController, InvalidateCache)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *InvalidateCache )( 
             __RPC__in IVdsController * This);
         
+        DECLSPEC_XFGVIRT(IVdsController, Reset)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IVdsController * This);
         
+        DECLSPEC_XFGVIRT(IVdsController, QueryAssociatedLuns)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAssociatedLuns )( 
             __RPC__in IVdsController * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsController, SetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetStatus )( 
             __RPC__in IVdsController * This,
             /* [in] */ VDS_CONTROLLER_STATUS status);
@@ -3616,6 +3731,7 @@ EXTERN_C const IID IID_IVdsControllerControllerPort;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsControllerControllerPort * This,
             /* [annotation][in] */ 
@@ -3623,12 +3739,15 @@ EXTERN_C const IID IID_IVdsControllerControllerPort;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsControllerControllerPort * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsControllerControllerPort * This);
         
+        DECLSPEC_XFGVIRT(IVdsControllerControllerPort, QueryControllerPorts)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryControllerPorts )( 
             __RPC__in IVdsControllerControllerPort * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
@@ -3713,6 +3832,7 @@ EXTERN_C const IID IID_IVdsDrive;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDrive * This,
             /* [annotation][in] */ 
@@ -3720,33 +3840,41 @@ EXTERN_C const IID IID_IVdsDrive;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsDrive * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsDrive * This);
         
+        DECLSPEC_XFGVIRT(IVdsDrive, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsDrive * This,
             /* [out] */ __RPC__out VDS_DRIVE_PROP *pDriveProp);
         
+        DECLSPEC_XFGVIRT(IVdsDrive, GetSubSystem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSubSystem )( 
             __RPC__in IVdsDrive * This,
             /* [out] */ __RPC__deref_out_opt IVdsSubSystem **ppSubSystem);
         
+        DECLSPEC_XFGVIRT(IVdsDrive, QueryExtents)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryExtents )( 
             __RPC__in IVdsDrive * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfExtents) VDS_DRIVE_EXTENT **ppExtentArray,
             /* [out] */ __RPC__out LONG *plNumberOfExtents);
         
+        DECLSPEC_XFGVIRT(IVdsDrive, SetFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             __RPC__in IVdsDrive * This,
             /* [in] */ ULONG ulFlags);
         
+        DECLSPEC_XFGVIRT(IVdsDrive, ClearFlags)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ClearFlags )( 
             __RPC__in IVdsDrive * This,
             /* [in] */ ULONG ulFlags);
         
+        DECLSPEC_XFGVIRT(IVdsDrive, SetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetStatus )( 
             __RPC__in IVdsDrive * This,
             /* [in] */ VDS_DRIVE_STATUS status);
@@ -3830,6 +3958,7 @@ EXTERN_C const IID IID_IVdsDrive2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsDrive2 * This,
             /* [annotation][in] */ 
@@ -3837,12 +3966,15 @@ EXTERN_C const IID IID_IVdsDrive2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsDrive2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsDrive2 * This);
         
+        DECLSPEC_XFGVIRT(IVdsDrive2, GetProperties2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties2 )( 
             __RPC__in IVdsDrive2 * This,
             /* [out] */ __RPC__out VDS_DRIVE_PROP2 *pDriveProp2);
@@ -3969,6 +4101,7 @@ EXTERN_C const IID IID_IVdsLun;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLun * This,
             /* [annotation][in] */ 
@@ -3976,28 +4109,35 @@ EXTERN_C const IID IID_IVdsLun;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsLun * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsLun * This);
         
+        DECLSPEC_XFGVIRT(IVdsLun, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsLun * This,
             /* [out] */ __RPC__out VDS_LUN_PROP *pLunProp);
         
+        DECLSPEC_XFGVIRT(IVdsLun, GetSubSystem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSubSystem )( 
             __RPC__in IVdsLun * This,
             /* [out] */ __RPC__deref_out_opt IVdsSubSystem **ppSubSystem);
         
+        DECLSPEC_XFGVIRT(IVdsLun, GetIdentificationData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetIdentificationData )( 
             __RPC__in IVdsLun * This,
             /* [out] */ __RPC__out VDS_LUN_INFORMATION *pLunInfo);
         
+        DECLSPEC_XFGVIRT(IVdsLun, QueryActiveControllers)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryActiveControllers )( 
             __RPC__in IVdsLun * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsLun, Extend)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Extend )( 
             __RPC__in IVdsLun * This,
             /* [in] */ ULONGLONG ullNumberOfBytesToAdd,
@@ -4005,36 +4145,44 @@ EXTERN_C const IID IID_IVdsLun;
             /* [in] */ LONG lNumberOfDrives,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsLun, Shrink)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Shrink )( 
             __RPC__in IVdsLun * This,
             /* [in] */ ULONGLONG ullNumberOfBytesToRemove,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsLun, QueryPlexes)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryPlexes )( 
             __RPC__in IVdsLun * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsLun, AddPlex)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddPlex )( 
             __RPC__in IVdsLun * This,
             /* [in] */ VDS_OBJECT_ID lunId,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsLun, RemovePlex)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemovePlex )( 
             __RPC__in IVdsLun * This,
             /* [in] */ VDS_OBJECT_ID plexId,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsLun, Recover)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Recover )( 
             __RPC__in IVdsLun * This,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsLun, SetMask)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetMask )( 
             __RPC__in IVdsLun * This,
             /* [string][in] */ __RPC__in_string LPWSTR pwszUnmaskingList);
         
+        DECLSPEC_XFGVIRT(IVdsLun, Delete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IVdsLun * This);
         
+        DECLSPEC_XFGVIRT(IVdsLun, AssociateControllers)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AssociateControllers )( 
             __RPC__in IVdsLun * This,
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(lNumberOfActiveControllers) VDS_OBJECT_ID *pActiveControllerIdArray,
@@ -4042,18 +4190,22 @@ EXTERN_C const IID IID_IVdsLun;
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(lNumberOfInactiveControllers) VDS_OBJECT_ID *pInactiveControllerIdArray,
             /* [in] */ LONG lNumberOfInactiveControllers);
         
+        DECLSPEC_XFGVIRT(IVdsLun, QueryHints)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryHints )( 
             __RPC__in IVdsLun * This,
             /* [out] */ __RPC__out VDS_HINTS *pHints);
         
+        DECLSPEC_XFGVIRT(IVdsLun, ApplyHints)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ApplyHints )( 
             __RPC__in IVdsLun * This,
             /* [in] */ __RPC__in VDS_HINTS *pHints);
         
+        DECLSPEC_XFGVIRT(IVdsLun, SetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetStatus )( 
             __RPC__in IVdsLun * This,
             /* [in] */ VDS_LUN_STATUS status);
         
+        DECLSPEC_XFGVIRT(IVdsLun, QueryMaxLunExtendSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryMaxLunExtendSize )( 
             __RPC__in IVdsLun * This,
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(lNumberOfDrives) VDS_OBJECT_ID *pDriveIdArray,
@@ -4175,6 +4327,7 @@ EXTERN_C const IID IID_IVdsLun2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLun2 * This,
             /* [annotation][in] */ 
@@ -4182,16 +4335,20 @@ EXTERN_C const IID IID_IVdsLun2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsLun2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsLun2 * This);
         
+        DECLSPEC_XFGVIRT(IVdsLun2, QueryHints2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryHints2 )( 
             __RPC__in IVdsLun2 * This,
             /* [out] */ __RPC__out VDS_HINTS2 *pHints2);
         
+        DECLSPEC_XFGVIRT(IVdsLun2, ApplyHints2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ApplyHints2 )( 
             __RPC__in IVdsLun2 * This,
             /* [in] */ __RPC__in VDS_HINTS2 *pHints2);
@@ -4263,6 +4420,7 @@ EXTERN_C const IID IID_IVdsLunNaming;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunNaming * This,
             /* [annotation][in] */ 
@@ -4270,12 +4428,15 @@ EXTERN_C const IID IID_IVdsLunNaming;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsLunNaming * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsLunNaming * This);
         
+        DECLSPEC_XFGVIRT(IVdsLunNaming, SetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *SetFriendlyName )( 
             __RPC__in IVdsLunNaming * This,
             /* [string][in] */ __RPC__in_string LPWSTR pwszFriendlyName);
@@ -4344,6 +4505,7 @@ EXTERN_C const IID IID_IVdsLunNumber;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunNumber * This,
             /* [annotation][in] */ 
@@ -4351,12 +4513,15 @@ EXTERN_C const IID IID_IVdsLunNumber;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsLunNumber * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsLunNumber * This);
         
+        DECLSPEC_XFGVIRT(IVdsLunNumber, GetLunNumber)
         HRESULT ( STDMETHODCALLTYPE *GetLunNumber )( 
             __RPC__in IVdsLunNumber * This,
             /* [out] */ __RPC__out ULONG *pulLunNumber);
@@ -4431,6 +4596,7 @@ EXTERN_C const IID IID_IVdsLunControllerPorts;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunControllerPorts * This,
             /* [annotation][in] */ 
@@ -4438,12 +4604,15 @@ EXTERN_C const IID IID_IVdsLunControllerPorts;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsLunControllerPorts * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsLunControllerPorts * This);
         
+        DECLSPEC_XFGVIRT(IVdsLunControllerPorts, AssociateControllerPorts)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AssociateControllerPorts )( 
             __RPC__in IVdsLunControllerPorts * This,
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(lNumberOfActiveControllerPorts) VDS_OBJECT_ID *pActiveControllerPortIdArray,
@@ -4451,6 +4620,7 @@ EXTERN_C const IID IID_IVdsLunControllerPorts;
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(lNumberOfInactiveControllerPorts) VDS_OBJECT_ID *pInactiveControllerPortIdArray,
             /* [in] */ LONG lNumberOfInactiveControllerPorts);
         
+        DECLSPEC_XFGVIRT(IVdsLunControllerPorts, QueryActiveControllerPorts)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryActiveControllerPorts )( 
             __RPC__in IVdsLunControllerPorts * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
@@ -4536,6 +4706,7 @@ EXTERN_C const IID IID_IVdsLunMpio;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunMpio * This,
             /* [annotation][in] */ 
@@ -4543,29 +4714,35 @@ EXTERN_C const IID IID_IVdsLunMpio;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsLunMpio * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsLunMpio * This);
         
+        DECLSPEC_XFGVIRT(IVdsLunMpio, GetPathInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetPathInfo )( 
             __RPC__in IVdsLunMpio * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfPaths) VDS_PATH_INFO **ppPaths,
             /* [out] */ __RPC__out LONG *plNumberOfPaths);
         
+        DECLSPEC_XFGVIRT(IVdsLunMpio, GetLoadBalancePolicy)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLoadBalancePolicy )( 
             __RPC__in IVdsLunMpio * This,
             /* [out] */ __RPC__out VDS_LOADBALANCE_POLICY_ENUM *pPolicy,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfPaths) VDS_PATH_POLICY **ppPaths,
             /* [out] */ __RPC__out LONG *plNumberOfPaths);
         
+        DECLSPEC_XFGVIRT(IVdsLunMpio, SetLoadBalancePolicy)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetLoadBalancePolicy )( 
             __RPC__in IVdsLunMpio * This,
             /* [in] */ VDS_LOADBALANCE_POLICY_ENUM policy,
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(lNumberOfPaths) VDS_PATH_POLICY *pPaths,
             /* [in] */ LONG lNumberOfPaths);
         
+        DECLSPEC_XFGVIRT(IVdsLunMpio, GetSupportedLbPolicies)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSupportedLbPolicies )( 
             __RPC__in IVdsLunMpio * This,
             /* [out] */ __RPC__out ULONG *pulLbFlags);
@@ -4647,6 +4824,7 @@ EXTERN_C const IID IID_IVdsLunIscsi;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunIscsi * This,
             /* [annotation][in] */ 
@@ -4654,17 +4832,21 @@ EXTERN_C const IID IID_IVdsLunIscsi;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsLunIscsi * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsLunIscsi * This);
         
+        DECLSPEC_XFGVIRT(IVdsLunIscsi, AssociateTargets)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AssociateTargets )( 
             __RPC__in IVdsLunIscsi * This,
             /* [size_is][unique][in] */ __RPC__in_ecount_full_opt(lNumberOfTargets) VDS_OBJECT_ID *pTargetIdArray,
             /* [in] */ LONG lNumberOfTargets);
         
+        DECLSPEC_XFGVIRT(IVdsLunIscsi, QueryAssociatedTargets)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAssociatedTargets )( 
             __RPC__in IVdsLunIscsi * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
@@ -4749,6 +4931,7 @@ EXTERN_C const IID IID_IVdsLunPlex;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsLunPlex * This,
             /* [annotation][in] */ 
@@ -4756,29 +4939,36 @@ EXTERN_C const IID IID_IVdsLunPlex;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsLunPlex * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsLunPlex * This);
         
+        DECLSPEC_XFGVIRT(IVdsLunPlex, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsLunPlex * This,
             /* [out] */ __RPC__out VDS_LUN_PLEX_PROP *pPlexProp);
         
+        DECLSPEC_XFGVIRT(IVdsLunPlex, GetLun)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetLun )( 
             __RPC__in IVdsLunPlex * This,
             /* [out] */ __RPC__deref_out_opt IVdsLun **ppLun);
         
+        DECLSPEC_XFGVIRT(IVdsLunPlex, QueryExtents)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryExtents )( 
             __RPC__in IVdsLunPlex * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfExtents) VDS_DRIVE_EXTENT **ppExtentArray,
             /* [out] */ __RPC__out LONG *plNumberOfExtents);
         
+        DECLSPEC_XFGVIRT(IVdsLunPlex, QueryHints)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryHints )( 
             __RPC__in IVdsLunPlex * This,
             /* [out] */ __RPC__out VDS_HINTS *pHints);
         
+        DECLSPEC_XFGVIRT(IVdsLunPlex, ApplyHints)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ApplyHints )( 
             __RPC__in IVdsLunPlex * This,
             /* [in] */ __RPC__in VDS_HINTS *pHints);
@@ -4881,6 +5071,7 @@ EXTERN_C const IID IID_IVdsIscsiPortal;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiPortal * This,
             /* [annotation][in] */ 
@@ -4888,38 +5079,47 @@ EXTERN_C const IID IID_IVdsIscsiPortal;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsIscsiPortal * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsIscsiPortal * This);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortal, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsIscsiPortal * This,
             /* [out] */ __RPC__out VDS_ISCSI_PORTAL_PROP *pPortalProp);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortal, GetSubSystem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSubSystem )( 
             __RPC__in IVdsIscsiPortal * This,
             /* [out] */ __RPC__deref_out_opt IVdsSubSystem **ppSubSystem);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortal, QueryAssociatedPortalGroups)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAssociatedPortalGroups )( 
             __RPC__in IVdsIscsiPortal * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortal, SetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetStatus )( 
             __RPC__in IVdsIscsiPortal * This,
             /* [in] */ VDS_ISCSI_PORTAL_STATUS status);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortal, SetIpsecTunnelAddress)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetIpsecTunnelAddress )( 
             __RPC__in IVdsIscsiPortal * This,
             /* [in] */ __RPC__in VDS_IPADDRESS *pTunnelAddress,
             /* [in] */ __RPC__in VDS_IPADDRESS *pDestinationAddress);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortal, GetIpsecSecurity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetIpsecSecurity )( 
             __RPC__in IVdsIscsiPortal * This,
             /* [in] */ __RPC__in VDS_IPADDRESS *pInitiatorPortalAddress,
             /* [out] */ __RPC__out ULONGLONG *pullSecurityFlags);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortal, SetIpsecSecurity)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetIpsecSecurity )( 
             __RPC__in IVdsIscsiPortal * This,
             /* [in] */ __RPC__in VDS_IPADDRESS *pInitiatorPortalAddress,
@@ -5038,6 +5238,7 @@ EXTERN_C const IID IID_IVdsIscsiTarget;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [annotation][in] */ 
@@ -5045,50 +5246,62 @@ EXTERN_C const IID IID_IVdsIscsiTarget;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsIscsiTarget * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsIscsiTarget * This);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [out] */ __RPC__out VDS_ISCSI_TARGET_PROP *pTargetProp);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, GetSubSystem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSubSystem )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [out] */ __RPC__deref_out_opt IVdsSubSystem **ppSubSystem);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, QueryPortalGroups)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryPortalGroups )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, QueryAssociatedLuns)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAssociatedLuns )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, CreatePortalGroup)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreatePortalGroup )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, Delete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, SetFriendlyName)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetFriendlyName )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [string][in] */ __RPC__in_string LPWSTR pwszFriendlyName);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, SetSharedSecret)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetSharedSecret )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [unique][in] */ __RPC__in_opt VDS_ISCSI_SHARED_SECRET *pTargetSharedSecret,
             /* [string][unique][in] */ __RPC__in_opt_string LPWSTR pwszInitiatorName);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, RememberInitiatorSharedSecret)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RememberInitiatorSharedSecret )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [string][in] */ __RPC__in_string LPWSTR pwszInitiatorName,
             /* [unique][in] */ __RPC__in_opt VDS_ISCSI_SHARED_SECRET *pInitiatorSharedSecret);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiTarget, GetConnectedInitiators)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetConnectedInitiators )( 
             __RPC__in IVdsIscsiTarget * This,
             /* [size_is][size_is][string][out] */ __RPC__deref_out_ecount_full_opt_string(*plNumberOfInitiators) LPWSTR **pppwszInitiatorList,
@@ -5202,6 +5415,7 @@ EXTERN_C const IID IID_IVdsIscsiPortalGroup;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsIscsiPortalGroup * This,
             /* [annotation][in] */ 
@@ -5209,34 +5423,42 @@ EXTERN_C const IID IID_IVdsIscsiPortalGroup;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsIscsiPortalGroup * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsIscsiPortalGroup * This);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortalGroup, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsIscsiPortalGroup * This,
             /* [out] */ __RPC__out VDS_ISCSI_PORTALGROUP_PROP *pPortalGroupProp);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortalGroup, GetTarget)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTarget )( 
             __RPC__in IVdsIscsiPortalGroup * This,
             /* [out] */ __RPC__deref_out_opt IVdsIscsiTarget **ppTarget);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortalGroup, QueryAssociatedPortals)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAssociatedPortals )( 
             __RPC__in IVdsIscsiPortalGroup * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortalGroup, AddPortal)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AddPortal )( 
             __RPC__in IVdsIscsiPortalGroup * This,
             /* [in] */ VDS_OBJECT_ID portalId,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortalGroup, RemovePortal)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RemovePortal )( 
             __RPC__in IVdsIscsiPortalGroup * This,
             /* [in] */ VDS_OBJECT_ID portalId,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
         
+        DECLSPEC_XFGVIRT(IVdsIscsiPortalGroup, Delete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IVdsIscsiPortalGroup * This,
             /* [out] */ __RPC__deref_out_opt IVdsAsync **ppAsync);
@@ -5336,6 +5558,7 @@ EXTERN_C const IID IID_IVdsStoragePool;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsStoragePool * This,
             /* [annotation][in] */ 
@@ -5343,33 +5566,41 @@ EXTERN_C const IID IID_IVdsStoragePool;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsStoragePool * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsStoragePool * This);
         
+        DECLSPEC_XFGVIRT(IVdsStoragePool, GetProvider)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProvider )( 
             __RPC__in IVdsStoragePool * This,
             /* [out] */ __RPC__deref_out_opt IVdsProvider **ppProvider);
         
+        DECLSPEC_XFGVIRT(IVdsStoragePool, GetProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in IVdsStoragePool * This,
             /* [out] */ __RPC__out VDS_STORAGE_POOL_PROP *pStoragePoolProp);
         
+        DECLSPEC_XFGVIRT(IVdsStoragePool, GetAttributes)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAttributes )( 
             __RPC__in IVdsStoragePool * This,
             /* [out] */ __RPC__out VDS_POOL_ATTRIBUTES *pStoragePoolAttributes);
         
+        DECLSPEC_XFGVIRT(IVdsStoragePool, QueryDriveExtents)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryDriveExtents )( 
             __RPC__in IVdsStoragePool * This,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*plNumberOfExtents) VDS_STORAGE_POOL_DRIVE_EXTENT **ppExtentArray,
             /* [out] */ __RPC__out LONG *plNumberOfExtents);
         
+        DECLSPEC_XFGVIRT(IVdsStoragePool, QueryAllocatedLuns)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAllocatedLuns )( 
             __RPC__in IVdsStoragePool * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
         
+        DECLSPEC_XFGVIRT(IVdsStoragePool, QueryAllocatedStoragePools)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryAllocatedStoragePools )( 
             __RPC__in IVdsStoragePool * This,
             /* [out] */ __RPC__deref_out_opt IEnumVdsObject **ppEnum);
@@ -5460,6 +5691,7 @@ EXTERN_C const IID IID_IVdsMaintenance;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsMaintenance * This,
             /* [annotation][in] */ 
@@ -5467,20 +5699,25 @@ EXTERN_C const IID IID_IVdsMaintenance;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsMaintenance * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsMaintenance * This);
         
+        DECLSPEC_XFGVIRT(IVdsMaintenance, StartMaintenance)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *StartMaintenance )( 
             __RPC__in IVdsMaintenance * This,
             /* [in] */ VDS_MAINTENANCE_OPERATION operation);
         
+        DECLSPEC_XFGVIRT(IVdsMaintenance, StopMaintenance)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *StopMaintenance )( 
             __RPC__in IVdsMaintenance * This,
             /* [in] */ VDS_MAINTENANCE_OPERATION operation);
         
+        DECLSPEC_XFGVIRT(IVdsMaintenance, PulseMaintenance)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *PulseMaintenance )( 
             __RPC__in IVdsMaintenance * This,
             /* [in] */ VDS_MAINTENANCE_OPERATION operation,
@@ -5576,6 +5813,7 @@ EXTERN_C const IID IID_IVdsHwProviderPrivate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProviderPrivate * This,
             /* [annotation][in] */ 
@@ -5583,12 +5821,15 @@ EXTERN_C const IID IID_IVdsHwProviderPrivate;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsHwProviderPrivate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsHwProviderPrivate * This);
         
+        DECLSPEC_XFGVIRT(IVdsHwProviderPrivate, QueryIfCreatedLun)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *QueryIfCreatedLun )( 
             __RPC__in IVdsHwProviderPrivate * This,
             /* [string][in] */ __RPC__in_string LPWSTR pwszDevicePath,
@@ -5660,6 +5901,7 @@ EXTERN_C const IID IID_IVdsHwProviderPrivateMpio;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsHwProviderPrivateMpio * This,
             /* [annotation][in] */ 
@@ -5667,12 +5909,15 @@ EXTERN_C const IID IID_IVdsHwProviderPrivateMpio;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsHwProviderPrivateMpio * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsHwProviderPrivateMpio * This);
         
+        DECLSPEC_XFGVIRT(IVdsHwProviderPrivateMpio, SetAllPathStatusesFromHbaPort)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetAllPathStatusesFromHbaPort )( 
             __RPC__in IVdsHwProviderPrivateMpio * This,
             /* [in] */ VDS_HBAPORT_PROP hbaPortProp,
@@ -5765,6 +6010,7 @@ EXTERN_C const IID IID_IVdsAdmin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IVdsAdmin * This,
             /* [annotation][in] */ 
@@ -5772,12 +6018,15 @@ EXTERN_C const IID IID_IVdsAdmin;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IVdsAdmin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IVdsAdmin * This);
         
+        DECLSPEC_XFGVIRT(IVdsAdmin, RegisterProvider)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RegisterProvider )( 
             __RPC__in IVdsAdmin * This,
             /* [in] */ VDS_OBJECT_ID providerId,
@@ -5788,6 +6037,7 @@ EXTERN_C const IID IID_IVdsAdmin;
             /* [string][max_is][in] */ __RPC__in_ecount_full_string(( 16 + 1 ) ) LPWSTR pwszVersion,
             /* [in] */ GUID guidVersionId);
         
+        DECLSPEC_XFGVIRT(IVdsAdmin, UnregisterProvider)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *UnregisterProvider )( 
             __RPC__in IVdsAdmin * This,
             /* [in] */ VDS_OBJECT_ID providerId);

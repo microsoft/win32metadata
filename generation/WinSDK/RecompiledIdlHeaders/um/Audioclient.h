@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -100,6 +108,27 @@ typedef interface IAudioClockAdjustment IAudioClockAdjustment;
 typedef interface ISimpleAudioVolume ISimpleAudioVolume;
 
 #endif 	/* __ISimpleAudioVolume_FWD_DEFINED__ */
+
+
+#ifndef __IAudioClientDuckingControl_FWD_DEFINED__
+#define __IAudioClientDuckingControl_FWD_DEFINED__
+typedef interface IAudioClientDuckingControl IAudioClientDuckingControl;
+
+#endif 	/* __IAudioClientDuckingControl_FWD_DEFINED__ */
+
+
+#ifndef __IAudioEffectsChangedNotificationClient_FWD_DEFINED__
+#define __IAudioEffectsChangedNotificationClient_FWD_DEFINED__
+typedef interface IAudioEffectsChangedNotificationClient IAudioEffectsChangedNotificationClient;
+
+#endif 	/* __IAudioEffectsChangedNotificationClient_FWD_DEFINED__ */
+
+
+#ifndef __IAudioEffectsManager_FWD_DEFINED__
+#define __IAudioEffectsManager_FWD_DEFINED__
+typedef interface IAudioEffectsManager IAudioEffectsManager;
+
+#endif 	/* __IAudioEffectsManager_FWD_DEFINED__ */
 
 
 #ifndef __IAudioStreamVolume_FWD_DEFINED__
@@ -273,6 +302,7 @@ EXTERN_C const IID IID_IAudioClient;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioClient * This,
             /* [annotation][in] */ 
@@ -280,12 +310,15 @@ EXTERN_C const IID IID_IAudioClient;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioClient * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioClient * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IAudioClient * This,
             /* [annotation][in] */ 
@@ -301,21 +334,25 @@ EXTERN_C const IID IID_IAudioClient;
             /* [annotation][in] */ 
             _In_opt_  LPCGUID AudioSessionGuid);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetBufferSize)
         HRESULT ( STDMETHODCALLTYPE *GetBufferSize )( 
             IAudioClient * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pNumBufferFrames);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetStreamLatency)
         HRESULT ( STDMETHODCALLTYPE *GetStreamLatency )( 
             IAudioClient * This,
             /* [annotation][out] */ 
             _Out_  REFERENCE_TIME *phnsLatency);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetCurrentPadding)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPadding )( 
             IAudioClient * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pNumPaddingFrames);
         
+        DECLSPEC_XFGVIRT(IAudioClient, IsFormatSupported)
         HRESULT ( STDMETHODCALLTYPE *IsFormatSupported )( 
             IAudioClient * This,
             /* [annotation][in] */ 
@@ -325,11 +362,13 @@ EXTERN_C const IID IID_IAudioClient;
             /* [unique][annotation][out] */ 
             _Out_opt_  WAVEFORMATEX **ppClosestMatch);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetMixFormat)
         HRESULT ( STDMETHODCALLTYPE *GetMixFormat )( 
             IAudioClient * This,
             /* [annotation][out] */ 
             _Out_  WAVEFORMATEX **ppDeviceFormat);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetDevicePeriod)
         HRESULT ( STDMETHODCALLTYPE *GetDevicePeriod )( 
             IAudioClient * This,
             /* [annotation][out] */ 
@@ -337,20 +376,25 @@ EXTERN_C const IID IID_IAudioClient;
             /* [annotation][out] */ 
             _Out_opt_  REFERENCE_TIME *phnsMinimumDevicePeriod);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             IAudioClient * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             IAudioClient * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IAudioClient * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, SetEventHandle)
         HRESULT ( STDMETHODCALLTYPE *SetEventHandle )( 
             IAudioClient * This,
             /* [annotation][in] */ 
             _In_  HANDLE eventHandle);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetService)
         HRESULT ( STDMETHODCALLTYPE *GetService )( 
             IAudioClient * This,
             /* [annotation][in] */ 
@@ -472,6 +516,7 @@ EXTERN_C const IID IID_IAudioClient2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioClient2 * This,
             /* [annotation][in] */ 
@@ -479,12 +524,15 @@ EXTERN_C const IID IID_IAudioClient2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioClient2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioClient2 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IAudioClient2 * This,
             /* [annotation][in] */ 
@@ -500,21 +548,25 @@ EXTERN_C const IID IID_IAudioClient2;
             /* [annotation][in] */ 
             _In_opt_  LPCGUID AudioSessionGuid);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetBufferSize)
         HRESULT ( STDMETHODCALLTYPE *GetBufferSize )( 
             IAudioClient2 * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pNumBufferFrames);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetStreamLatency)
         HRESULT ( STDMETHODCALLTYPE *GetStreamLatency )( 
             IAudioClient2 * This,
             /* [annotation][out] */ 
             _Out_  REFERENCE_TIME *phnsLatency);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetCurrentPadding)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPadding )( 
             IAudioClient2 * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pNumPaddingFrames);
         
+        DECLSPEC_XFGVIRT(IAudioClient, IsFormatSupported)
         HRESULT ( STDMETHODCALLTYPE *IsFormatSupported )( 
             IAudioClient2 * This,
             /* [annotation][in] */ 
@@ -524,11 +576,13 @@ EXTERN_C const IID IID_IAudioClient2;
             /* [unique][annotation][out] */ 
             _Out_opt_  WAVEFORMATEX **ppClosestMatch);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetMixFormat)
         HRESULT ( STDMETHODCALLTYPE *GetMixFormat )( 
             IAudioClient2 * This,
             /* [annotation][out] */ 
             _Out_  WAVEFORMATEX **ppDeviceFormat);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetDevicePeriod)
         HRESULT ( STDMETHODCALLTYPE *GetDevicePeriod )( 
             IAudioClient2 * This,
             /* [annotation][out] */ 
@@ -536,20 +590,25 @@ EXTERN_C const IID IID_IAudioClient2;
             /* [annotation][out] */ 
             _Out_opt_  REFERENCE_TIME *phnsMinimumDevicePeriod);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             IAudioClient2 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             IAudioClient2 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IAudioClient2 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, SetEventHandle)
         HRESULT ( STDMETHODCALLTYPE *SetEventHandle )( 
             IAudioClient2 * This,
             /* [annotation][in] */ 
             _In_  HANDLE eventHandle);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetService)
         HRESULT ( STDMETHODCALLTYPE *GetService )( 
             IAudioClient2 * This,
             /* [annotation][in] */ 
@@ -557,6 +616,7 @@ EXTERN_C const IID IID_IAudioClient2;
             /* [annotation][iid_is][out] */ 
             _Out_  void **ppv);
         
+        DECLSPEC_XFGVIRT(IAudioClient2, IsOffloadCapable)
         HRESULT ( STDMETHODCALLTYPE *IsOffloadCapable )( 
             IAudioClient2 * This,
             /* [annotation][in] */ 
@@ -564,11 +624,13 @@ EXTERN_C const IID IID_IAudioClient2;
             /* [annotation][out] */ 
             _Out_  BOOL *pbOffloadCapable);
         
+        DECLSPEC_XFGVIRT(IAudioClient2, SetClientProperties)
         HRESULT ( STDMETHODCALLTYPE *SetClientProperties )( 
             IAudioClient2 * This,
             /* [annotation][in] */ 
             _In_  const AudioClientProperties *pProperties);
         
+        DECLSPEC_XFGVIRT(IAudioClient2, GetBufferSizeLimits)
         HRESULT ( STDMETHODCALLTYPE *GetBufferSizeLimits )( 
             IAudioClient2 * This,
             /* [annotation][in] */ 
@@ -745,6 +807,7 @@ EXTERN_C const IID IID_IAudioClient3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
@@ -752,12 +815,15 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioClient3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioClient3 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
@@ -773,21 +839,25 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [annotation][in] */ 
             _In_opt_  LPCGUID AudioSessionGuid);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetBufferSize)
         HRESULT ( STDMETHODCALLTYPE *GetBufferSize )( 
             IAudioClient3 * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pNumBufferFrames);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetStreamLatency)
         HRESULT ( STDMETHODCALLTYPE *GetStreamLatency )( 
             IAudioClient3 * This,
             /* [annotation][out] */ 
             _Out_  REFERENCE_TIME *phnsLatency);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetCurrentPadding)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentPadding )( 
             IAudioClient3 * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pNumPaddingFrames);
         
+        DECLSPEC_XFGVIRT(IAudioClient, IsFormatSupported)
         HRESULT ( STDMETHODCALLTYPE *IsFormatSupported )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
@@ -797,11 +867,13 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [unique][annotation][out] */ 
             _Out_opt_  WAVEFORMATEX **ppClosestMatch);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetMixFormat)
         HRESULT ( STDMETHODCALLTYPE *GetMixFormat )( 
             IAudioClient3 * This,
             /* [annotation][out] */ 
             _Out_  WAVEFORMATEX **ppDeviceFormat);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetDevicePeriod)
         HRESULT ( STDMETHODCALLTYPE *GetDevicePeriod )( 
             IAudioClient3 * This,
             /* [annotation][out] */ 
@@ -809,20 +881,25 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [annotation][out] */ 
             _Out_opt_  REFERENCE_TIME *phnsMinimumDevicePeriod);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Start)
         HRESULT ( STDMETHODCALLTYPE *Start )( 
             IAudioClient3 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Stop)
         HRESULT ( STDMETHODCALLTYPE *Stop )( 
             IAudioClient3 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IAudioClient3 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClient, SetEventHandle)
         HRESULT ( STDMETHODCALLTYPE *SetEventHandle )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
             _In_  HANDLE eventHandle);
         
+        DECLSPEC_XFGVIRT(IAudioClient, GetService)
         HRESULT ( STDMETHODCALLTYPE *GetService )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
@@ -830,6 +907,7 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [annotation][iid_is][out] */ 
             _Out_  void **ppv);
         
+        DECLSPEC_XFGVIRT(IAudioClient2, IsOffloadCapable)
         HRESULT ( STDMETHODCALLTYPE *IsOffloadCapable )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
@@ -837,11 +915,13 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [annotation][out] */ 
             _Out_  BOOL *pbOffloadCapable);
         
+        DECLSPEC_XFGVIRT(IAudioClient2, SetClientProperties)
         HRESULT ( STDMETHODCALLTYPE *SetClientProperties )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
             _In_  const AudioClientProperties *pProperties);
         
+        DECLSPEC_XFGVIRT(IAudioClient2, GetBufferSizeLimits)
         HRESULT ( STDMETHODCALLTYPE *GetBufferSizeLimits )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
@@ -853,6 +933,7 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [annotation][out] */ 
             _Out_  REFERENCE_TIME *phnsMaxBufferDuration);
         
+        DECLSPEC_XFGVIRT(IAudioClient3, GetSharedModeEnginePeriod)
         HRESULT ( STDMETHODCALLTYPE *GetSharedModeEnginePeriod )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
@@ -866,6 +947,7 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [annotation][out] */ 
             _Out_  UINT32 *pMaxPeriodInFrames);
         
+        DECLSPEC_XFGVIRT(IAudioClient3, GetCurrentSharedModeEnginePeriod)
         HRESULT ( STDMETHODCALLTYPE *GetCurrentSharedModeEnginePeriod )( 
             IAudioClient3 * This,
             /* [unique][annotation][out] */ 
@@ -873,6 +955,7 @@ EXTERN_C const IID IID_IAudioClient3;
             /* [annotation][out] */ 
             _Out_  UINT32 *pCurrentPeriodInFrames);
         
+        DECLSPEC_XFGVIRT(IAudioClient3, InitializeSharedAudioStream)
         HRESULT ( STDMETHODCALLTYPE *InitializeSharedAudioStream )( 
             IAudioClient3 * This,
             /* [annotation][in] */ 
@@ -1010,6 +1093,7 @@ EXTERN_C const IID IID_IAudioRenderClient;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioRenderClient * This,
             /* [annotation][in] */ 
@@ -1017,12 +1101,15 @@ EXTERN_C const IID IID_IAudioRenderClient;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioRenderClient * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioRenderClient * This);
         
+        DECLSPEC_XFGVIRT(IAudioRenderClient, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             IAudioRenderClient * This,
             /* [annotation][in] */ 
@@ -1030,6 +1117,7 @@ EXTERN_C const IID IID_IAudioRenderClient;
             /* [annotation][out] */ 
             _Outptr_result_buffer_(_Inexpressible_("NumFramesRequested * pFormat->nBlockAlign"))  BYTE **ppData);
         
+        DECLSPEC_XFGVIRT(IAudioRenderClient, ReleaseBuffer)
         HRESULT ( STDMETHODCALLTYPE *ReleaseBuffer )( 
             IAudioRenderClient * This,
             /* [annotation][in] */ 
@@ -1121,6 +1209,7 @@ EXTERN_C const IID IID_IAudioCaptureClient;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioCaptureClient * This,
             /* [annotation][in] */ 
@@ -1128,12 +1217,15 @@ EXTERN_C const IID IID_IAudioCaptureClient;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioCaptureClient * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioCaptureClient * This);
         
+        DECLSPEC_XFGVIRT(IAudioCaptureClient, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             IAudioCaptureClient * This,
             /* [annotation][out] */ 
@@ -1147,11 +1239,13 @@ EXTERN_C const IID IID_IAudioCaptureClient;
             /* [annotation][unique][out] */ 
             _Out_opt_  UINT64 *pu64QPCPosition);
         
+        DECLSPEC_XFGVIRT(IAudioCaptureClient, ReleaseBuffer)
         HRESULT ( STDMETHODCALLTYPE *ReleaseBuffer )( 
             IAudioCaptureClient * This,
             /* [annotation][in] */ 
             _In_  UINT32 NumFramesRead);
         
+        DECLSPEC_XFGVIRT(IAudioCaptureClient, GetNextPacketSize)
         HRESULT ( STDMETHODCALLTYPE *GetNextPacketSize )( 
             IAudioCaptureClient * This,
             /* [annotation][out] */ 
@@ -1247,6 +1341,7 @@ EXTERN_C const IID IID_IAudioClock;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioClock * This,
             /* [annotation][in] */ 
@@ -1254,17 +1349,21 @@ EXTERN_C const IID IID_IAudioClock;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioClock * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioClock * This);
         
+        DECLSPEC_XFGVIRT(IAudioClock, GetFrequency)
         HRESULT ( STDMETHODCALLTYPE *GetFrequency )( 
             IAudioClock * This,
             /* [annotation][out] */ 
             _Out_  UINT64 *pu64Frequency);
         
+        DECLSPEC_XFGVIRT(IAudioClock, GetPosition)
         HRESULT ( STDMETHODCALLTYPE *GetPosition )( 
             IAudioClock * This,
             /* [annotation][out] */ 
@@ -1272,6 +1371,7 @@ EXTERN_C const IID IID_IAudioClock;
             /* [annotation][unique][out] */ 
             _Out_opt_  UINT64 *pu64QPCPosition);
         
+        DECLSPEC_XFGVIRT(IAudioClock, GetCharacteristics)
         HRESULT ( STDMETHODCALLTYPE *GetCharacteristics )( 
             IAudioClock * This,
             /* [annotation][out] */ 
@@ -1359,6 +1459,7 @@ EXTERN_C const IID IID_IAudioClock2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioClock2 * This,
             /* [annotation][in] */ 
@@ -1366,12 +1467,15 @@ EXTERN_C const IID IID_IAudioClock2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioClock2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioClock2 * This);
         
+        DECLSPEC_XFGVIRT(IAudioClock2, GetDevicePosition)
         HRESULT ( STDMETHODCALLTYPE *GetDevicePosition )( 
             IAudioClock2 * This,
             /* [annotation][out] */ 
@@ -1453,6 +1557,7 @@ EXTERN_C const IID IID_IAudioClockAdjustment;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioClockAdjustment * This,
             /* [annotation][in] */ 
@@ -1460,12 +1565,15 @@ EXTERN_C const IID IID_IAudioClockAdjustment;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioClockAdjustment * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioClockAdjustment * This);
         
+        DECLSPEC_XFGVIRT(IAudioClockAdjustment, SetSampleRate)
         HRESULT ( STDMETHODCALLTYPE *SetSampleRate )( 
             IAudioClockAdjustment * This,
             /* [annotation][in] */ 
@@ -1559,6 +1667,7 @@ EXTERN_C const IID IID_ISimpleAudioVolume;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISimpleAudioVolume * This,
             /* [annotation][in] */ 
@@ -1566,29 +1675,35 @@ EXTERN_C const IID IID_ISimpleAudioVolume;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISimpleAudioVolume * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISimpleAudioVolume * This);
         
+        DECLSPEC_XFGVIRT(ISimpleAudioVolume, SetMasterVolume)
         HRESULT ( STDMETHODCALLTYPE *SetMasterVolume )( 
             ISimpleAudioVolume * This,
             /* [annotation][in] */ 
             _In_  float fLevel,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(ISimpleAudioVolume, GetMasterVolume)
         HRESULT ( STDMETHODCALLTYPE *GetMasterVolume )( 
             ISimpleAudioVolume * This,
             /* [annotation][out] */ 
             _Out_  float *pfLevel);
         
+        DECLSPEC_XFGVIRT(ISimpleAudioVolume, SetMute)
         HRESULT ( STDMETHODCALLTYPE *SetMute )( 
             ISimpleAudioVolume * This,
             /* [annotation][in] */ 
             _In_  const BOOL bMute,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(ISimpleAudioVolume, GetMute)
         HRESULT ( STDMETHODCALLTYPE *GetMute )( 
             ISimpleAudioVolume * This,
             /* [annotation][out] */ 
@@ -1643,11 +1758,351 @@ EXTERN_C const IID IID_ISimpleAudioVolume;
 /* interface __MIDL_itf_audioclient_0000_0009 */
 /* [local] */ 
 
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+typedef /* [v1_enum] */ 
+enum AUDIO_DUCKING_OPTIONS
+    {
+        AUDIO_DUCKING_OPTIONS_DEFAULT	= 0,
+        AUDIO_DUCKING_OPTIONS_DO_NOT_DUCK_OTHER_STREAMS	= 0x1
+    } 	AUDIO_DUCKING_OPTIONS;
+
+DEFINE_ENUM_FLAG_OPERATORS(AUDIO_DUCKING_OPTIONS);
 
 
 extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0009_v0_0_c_ifspec;
 extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0009_v0_0_s_ifspec;
+
+#ifndef __IAudioClientDuckingControl_INTERFACE_DEFINED__
+#define __IAudioClientDuckingControl_INTERFACE_DEFINED__
+
+/* interface IAudioClientDuckingControl */
+/* [local][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IAudioClientDuckingControl;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("C789D381-A28C-4168-B28F-D3A837924DC3")
+    IAudioClientDuckingControl : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE SetDuckingOptionsForCurrentStream( 
+            /* [annotation][in] */ 
+            _In_  AUDIO_DUCKING_OPTIONS options) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IAudioClientDuckingControlVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IAudioClientDuckingControl * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IAudioClientDuckingControl * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IAudioClientDuckingControl * This);
+        
+        DECLSPEC_XFGVIRT(IAudioClientDuckingControl, SetDuckingOptionsForCurrentStream)
+        HRESULT ( STDMETHODCALLTYPE *SetDuckingOptionsForCurrentStream )( 
+            IAudioClientDuckingControl * This,
+            /* [annotation][in] */ 
+            _In_  AUDIO_DUCKING_OPTIONS options);
+        
+        END_INTERFACE
+    } IAudioClientDuckingControlVtbl;
+
+    interface IAudioClientDuckingControl
+    {
+        CONST_VTBL struct IAudioClientDuckingControlVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IAudioClientDuckingControl_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IAudioClientDuckingControl_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IAudioClientDuckingControl_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IAudioClientDuckingControl_SetDuckingOptionsForCurrentStream(This,options)	\
+    ( (This)->lpVtbl -> SetDuckingOptionsForCurrentStream(This,options) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IAudioClientDuckingControl_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_audioclient_0000_0010 */
+/* [local] */ 
+
+typedef /* [v1_enum] */ 
+enum AUDIO_EFFECT_STATE
+    {
+        AUDIO_EFFECT_STATE_OFF	= 0,
+        AUDIO_EFFECT_STATE_ON	= ( AUDIO_EFFECT_STATE_OFF + 1 ) 
+    } 	AUDIO_EFFECT_STATE;
+
+typedef struct AUDIO_EFFECT
+    {
+    GUID id;
+    BOOL canSetState;
+    AUDIO_EFFECT_STATE state;
+    } 	AUDIO_EFFECT;
+
+
+
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0010_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0010_v0_0_s_ifspec;
+
+#ifndef __IAudioEffectsChangedNotificationClient_INTERFACE_DEFINED__
+#define __IAudioEffectsChangedNotificationClient_INTERFACE_DEFINED__
+
+/* interface IAudioEffectsChangedNotificationClient */
+/* [local][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IAudioEffectsChangedNotificationClient;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("A5DED44F-3C5D-4B2B-BD1E-5DC1EE20BBF6")
+    IAudioEffectsChangedNotificationClient : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE OnAudioEffectsChanged( void) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IAudioEffectsChangedNotificationClientVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IAudioEffectsChangedNotificationClient * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IAudioEffectsChangedNotificationClient * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IAudioEffectsChangedNotificationClient * This);
+        
+        DECLSPEC_XFGVIRT(IAudioEffectsChangedNotificationClient, OnAudioEffectsChanged)
+        HRESULT ( STDMETHODCALLTYPE *OnAudioEffectsChanged )( 
+            IAudioEffectsChangedNotificationClient * This);
+        
+        END_INTERFACE
+    } IAudioEffectsChangedNotificationClientVtbl;
+
+    interface IAudioEffectsChangedNotificationClient
+    {
+        CONST_VTBL struct IAudioEffectsChangedNotificationClientVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IAudioEffectsChangedNotificationClient_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IAudioEffectsChangedNotificationClient_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IAudioEffectsChangedNotificationClient_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IAudioEffectsChangedNotificationClient_OnAudioEffectsChanged(This)	\
+    ( (This)->lpVtbl -> OnAudioEffectsChanged(This) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IAudioEffectsChangedNotificationClient_INTERFACE_DEFINED__ */
+
+
+#ifndef __IAudioEffectsManager_INTERFACE_DEFINED__
+#define __IAudioEffectsManager_INTERFACE_DEFINED__
+
+/* interface IAudioEffectsManager */
+/* [local][unique][uuid][object] */ 
+
+
+EXTERN_C const IID IID_IAudioEffectsManager;
+
+#if defined(__cplusplus) && !defined(CINTERFACE)
+    
+    MIDL_INTERFACE("4460B3AE-4B44-4527-8676-7548A8ACD260")
+    IAudioEffectsManager : public IUnknown
+    {
+    public:
+        virtual HRESULT STDMETHODCALLTYPE RegisterAudioEffectsChangedNotificationCallback( 
+            /* [annotation][in] */ 
+            _In_  IAudioEffectsChangedNotificationClient *client) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE UnregisterAudioEffectsChangedNotificationCallback( 
+            /* [annotation][in] */ 
+            _In_  IAudioEffectsChangedNotificationClient *client) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE GetAudioEffects( 
+            /* [annotation][size_is][size_is][out] */ 
+            _Outptr_result_buffer_maybenull_(*numEffects)  AUDIO_EFFECT **effects,
+            /* [out] */ UINT32 *numEffects) = 0;
+        
+        virtual HRESULT STDMETHODCALLTYPE SetAudioEffectState( 
+            /* [annotation][in] */ 
+            _In_  GUID effectId,
+            /* [annotation][in] */ 
+            _In_  AUDIO_EFFECT_STATE state) = 0;
+        
+    };
+    
+    
+#else 	/* C style interface */
+
+    typedef struct IAudioEffectsManagerVtbl
+    {
+        BEGIN_INTERFACE
+        
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
+        HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
+            IAudioEffectsManager * This,
+            /* [annotation][in] */ 
+            _In_  REFIID riid,
+            /* [annotation][iid_is][out] */ 
+            _COM_Outptr_  void **ppvObject);
+        
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
+        ULONG ( STDMETHODCALLTYPE *AddRef )( 
+            IAudioEffectsManager * This);
+        
+        DECLSPEC_XFGVIRT(IUnknown, Release)
+        ULONG ( STDMETHODCALLTYPE *Release )( 
+            IAudioEffectsManager * This);
+        
+        DECLSPEC_XFGVIRT(IAudioEffectsManager, RegisterAudioEffectsChangedNotificationCallback)
+        HRESULT ( STDMETHODCALLTYPE *RegisterAudioEffectsChangedNotificationCallback )( 
+            IAudioEffectsManager * This,
+            /* [annotation][in] */ 
+            _In_  IAudioEffectsChangedNotificationClient *client);
+        
+        DECLSPEC_XFGVIRT(IAudioEffectsManager, UnregisterAudioEffectsChangedNotificationCallback)
+        HRESULT ( STDMETHODCALLTYPE *UnregisterAudioEffectsChangedNotificationCallback )( 
+            IAudioEffectsManager * This,
+            /* [annotation][in] */ 
+            _In_  IAudioEffectsChangedNotificationClient *client);
+        
+        DECLSPEC_XFGVIRT(IAudioEffectsManager, GetAudioEffects)
+        HRESULT ( STDMETHODCALLTYPE *GetAudioEffects )( 
+            IAudioEffectsManager * This,
+            /* [annotation][size_is][size_is][out] */ 
+            _Outptr_result_buffer_maybenull_(*numEffects)  AUDIO_EFFECT **effects,
+            /* [out] */ UINT32 *numEffects);
+        
+        DECLSPEC_XFGVIRT(IAudioEffectsManager, SetAudioEffectState)
+        HRESULT ( STDMETHODCALLTYPE *SetAudioEffectState )( 
+            IAudioEffectsManager * This,
+            /* [annotation][in] */ 
+            _In_  GUID effectId,
+            /* [annotation][in] */ 
+            _In_  AUDIO_EFFECT_STATE state);
+        
+        END_INTERFACE
+    } IAudioEffectsManagerVtbl;
+
+    interface IAudioEffectsManager
+    {
+        CONST_VTBL struct IAudioEffectsManagerVtbl *lpVtbl;
+    };
+
+    
+
+#ifdef COBJMACROS
+
+
+#define IAudioEffectsManager_QueryInterface(This,riid,ppvObject)	\
+    ( (This)->lpVtbl -> QueryInterface(This,riid,ppvObject) ) 
+
+#define IAudioEffectsManager_AddRef(This)	\
+    ( (This)->lpVtbl -> AddRef(This) ) 
+
+#define IAudioEffectsManager_Release(This)	\
+    ( (This)->lpVtbl -> Release(This) ) 
+
+
+#define IAudioEffectsManager_RegisterAudioEffectsChangedNotificationCallback(This,client)	\
+    ( (This)->lpVtbl -> RegisterAudioEffectsChangedNotificationCallback(This,client) ) 
+
+#define IAudioEffectsManager_UnregisterAudioEffectsChangedNotificationCallback(This,client)	\
+    ( (This)->lpVtbl -> UnregisterAudioEffectsChangedNotificationCallback(This,client) ) 
+
+#define IAudioEffectsManager_GetAudioEffects(This,effects,numEffects)	\
+    ( (This)->lpVtbl -> GetAudioEffects(This,effects,numEffects) ) 
+
+#define IAudioEffectsManager_SetAudioEffectState(This,effectId,state)	\
+    ( (This)->lpVtbl -> SetAudioEffectState(This,effectId,state) ) 
+
+#endif /* COBJMACROS */
+
+
+#endif 	/* C style interface */
+
+
+
+
+#endif 	/* __IAudioEffectsManager_INTERFACE_DEFINED__ */
+
+
+/* interface __MIDL_itf_audioclient_0000_0012 */
+/* [local] */ 
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
+
+
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0012_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0012_v0_0_s_ifspec;
 
 #ifndef __IAudioStreamVolume_INTERFACE_DEFINED__
 #define __IAudioStreamVolume_INTERFACE_DEFINED__
@@ -1701,6 +2156,7 @@ EXTERN_C const IID IID_IAudioStreamVolume;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IAudioStreamVolume * This,
             /* [annotation][in] */ 
@@ -1708,17 +2164,21 @@ EXTERN_C const IID IID_IAudioStreamVolume;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IAudioStreamVolume * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IAudioStreamVolume * This);
         
+        DECLSPEC_XFGVIRT(IAudioStreamVolume, GetChannelCount)
         HRESULT ( STDMETHODCALLTYPE *GetChannelCount )( 
             IAudioStreamVolume * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pdwCount);
         
+        DECLSPEC_XFGVIRT(IAudioStreamVolume, SetChannelVolume)
         HRESULT ( STDMETHODCALLTYPE *SetChannelVolume )( 
             IAudioStreamVolume * This,
             /* [annotation][in] */ 
@@ -1726,6 +2186,7 @@ EXTERN_C const IID IID_IAudioStreamVolume;
             /* [annotation][in] */ 
             _In_  const float fLevel);
         
+        DECLSPEC_XFGVIRT(IAudioStreamVolume, GetChannelVolume)
         HRESULT ( STDMETHODCALLTYPE *GetChannelVolume )( 
             IAudioStreamVolume * This,
             /* [annotation][in] */ 
@@ -1733,6 +2194,7 @@ EXTERN_C const IID IID_IAudioStreamVolume;
             /* [annotation][out] */ 
             _Out_  float *pfLevel);
         
+        DECLSPEC_XFGVIRT(IAudioStreamVolume, SetAllVolumes)
         HRESULT ( STDMETHODCALLTYPE *SetAllVolumes )( 
             IAudioStreamVolume * This,
             /* [annotation][in] */ 
@@ -1740,6 +2202,7 @@ EXTERN_C const IID IID_IAudioStreamVolume;
             /* [annotation][size_is][in] */ 
             _In_reads_(dwCount)  const float *pfVolumes);
         
+        DECLSPEC_XFGVIRT(IAudioStreamVolume, GetAllVolumes)
         HRESULT ( STDMETHODCALLTYPE *GetAllVolumes )( 
             IAudioStreamVolume * This,
             /* [annotation][in] */ 
@@ -1796,7 +2259,7 @@ EXTERN_C const IID IID_IAudioStreamVolume;
 #endif 	/* __IAudioStreamVolume_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_audioclient_0000_0010 */
+/* interface __MIDL_itf_audioclient_0000_0013 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */
@@ -1849,8 +2312,8 @@ typedef struct AMBISONICS_PARAMS
 
 
 
-extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0010_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0010_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0013_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0013_v0_0_s_ifspec;
 
 #ifndef __IAudioAmbisonicsControl_INTERFACE_DEFINED__
 #define __IAudioAmbisonicsControl_INTERFACE_DEFINED__
@@ -1900,6 +2363,7 @@ EXTERN_C const IID IID_IAudioAmbisonicsControl;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IAudioAmbisonicsControl * This,
             /* [annotation][in] */ 
@@ -1907,12 +2371,15 @@ EXTERN_C const IID IID_IAudioAmbisonicsControl;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IAudioAmbisonicsControl * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IAudioAmbisonicsControl * This);
         
+        DECLSPEC_XFGVIRT(IAudioAmbisonicsControl, SetData)
         HRESULT ( STDMETHODCALLTYPE *SetData )( 
             __RPC__in IAudioAmbisonicsControl * This,
             /* [annotation][size_is][in] */ 
@@ -1920,16 +2387,19 @@ EXTERN_C const IID IID_IAudioAmbisonicsControl;
             /* [annotation][in] */ 
             _In_  UINT32 cbAmbisonicsParams);
         
+        DECLSPEC_XFGVIRT(IAudioAmbisonicsControl, SetHeadTracking)
         HRESULT ( STDMETHODCALLTYPE *SetHeadTracking )( 
             __RPC__in IAudioAmbisonicsControl * This,
             /* [annotation][in] */ 
             _In_  BOOL bEnableHeadTracking);
         
+        DECLSPEC_XFGVIRT(IAudioAmbisonicsControl, GetHeadTracking)
         HRESULT ( STDMETHODCALLTYPE *GetHeadTracking )( 
             __RPC__in IAudioAmbisonicsControl * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbEnableHeadTracking);
         
+        DECLSPEC_XFGVIRT(IAudioAmbisonicsControl, SetRotation)
         HRESULT ( STDMETHODCALLTYPE *SetRotation )( 
             __RPC__in IAudioAmbisonicsControl * This,
             /* [annotation][in] */ 
@@ -1987,7 +2457,7 @@ EXTERN_C const IID IID_IAudioAmbisonicsControl;
 #endif 	/* __IAudioAmbisonicsControl_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_audioclient_0000_0011 */
+/* interface __MIDL_itf_audioclient_0000_0014 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP) */
@@ -1996,8 +2466,8 @@ EXTERN_C const IID IID_IAudioAmbisonicsControl;
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
 
-extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0011_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0011_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0014_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0014_v0_0_s_ifspec;
 
 #ifndef __IChannelAudioVolume_INTERFACE_DEFINED__
 #define __IChannelAudioVolume_INTERFACE_DEFINED__
@@ -2053,6 +2523,7 @@ EXTERN_C const IID IID_IChannelAudioVolume;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IChannelAudioVolume * This,
             /* [annotation][in] */ 
@@ -2060,17 +2531,21 @@ EXTERN_C const IID IID_IChannelAudioVolume;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IChannelAudioVolume * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IChannelAudioVolume * This);
         
+        DECLSPEC_XFGVIRT(IChannelAudioVolume, GetChannelCount)
         HRESULT ( STDMETHODCALLTYPE *GetChannelCount )( 
             IChannelAudioVolume * This,
             /* [annotation][out] */ 
             _Out_  UINT32 *pdwCount);
         
+        DECLSPEC_XFGVIRT(IChannelAudioVolume, SetChannelVolume)
         HRESULT ( STDMETHODCALLTYPE *SetChannelVolume )( 
             IChannelAudioVolume * This,
             /* [annotation][in] */ 
@@ -2079,6 +2554,7 @@ EXTERN_C const IID IID_IChannelAudioVolume;
             _In_  const float fLevel,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IChannelAudioVolume, GetChannelVolume)
         HRESULT ( STDMETHODCALLTYPE *GetChannelVolume )( 
             IChannelAudioVolume * This,
             /* [annotation][in] */ 
@@ -2086,6 +2562,7 @@ EXTERN_C const IID IID_IChannelAudioVolume;
             /* [annotation][out] */ 
             _Out_  float *pfLevel);
         
+        DECLSPEC_XFGVIRT(IChannelAudioVolume, SetAllVolumes)
         HRESULT ( STDMETHODCALLTYPE *SetAllVolumes )( 
             IChannelAudioVolume * This,
             /* [annotation][in] */ 
@@ -2094,6 +2571,7 @@ EXTERN_C const IID IID_IChannelAudioVolume;
             _In_reads_(dwCount)  const float *pfVolumes,
             /* [unique][in] */ LPCGUID EventContext);
         
+        DECLSPEC_XFGVIRT(IChannelAudioVolume, GetAllVolumes)
         HRESULT ( STDMETHODCALLTYPE *GetAllVolumes )( 
             IChannelAudioVolume * This,
             /* [annotation][in] */ 
@@ -2150,7 +2628,7 @@ EXTERN_C const IID IID_IChannelAudioVolume;
 #endif 	/* __IChannelAudioVolume_INTERFACE_DEFINED__ */
 
 
-/* interface __MIDL_itf_audioclient_0000_0012 */
+/* interface __MIDL_itf_audioclient_0000_0015 */
 /* [local] */ 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
@@ -2195,6 +2673,8 @@ EXTERN_C const IID IID_IChannelAudioVolume;
 #define AUDCLNT_E_ENGINE_FORMAT_LOCKED         AUDCLNT_ERR(0x029)
 #define AUDCLNT_E_HEADTRACKING_ENABLED         AUDCLNT_ERR(0x030)
 #define AUDCLNT_E_HEADTRACKING_UNSUPPORTED     AUDCLNT_ERR(0x040)
+#define AUDCLNT_E_EFFECT_NOT_AVAILABLE         AUDCLNT_ERR(0x041)
+#define AUDCLNT_E_EFFECT_STATE_READ_ONLY       AUDCLNT_ERR(0x042)
 #define AUDCLNT_S_BUFFER_EMPTY                 AUDCLNT_SUCCESS(0x001)
 #define AUDCLNT_S_THREAD_ALREADY_REGISTERED    AUDCLNT_SUCCESS(0x002)
 #define AUDCLNT_S_POSITION_STALLED             AUDCLNT_SUCCESS(0x003)
@@ -2202,8 +2682,8 @@ EXTERN_C const IID IID_IChannelAudioVolume;
 #pragma endregion
 
 
-extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0012_v0_0_c_ifspec;
-extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0012_v0_0_s_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0015_v0_0_c_ifspec;
+extern RPC_IF_HANDLE __MIDL_itf_audioclient_0000_0015_v0_0_s_ifspec;
 
 /* Additional Prototypes for ALL interfaces */
 

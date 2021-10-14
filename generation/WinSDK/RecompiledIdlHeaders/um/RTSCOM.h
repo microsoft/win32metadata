@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -397,94 +405,116 @@ EXTERN_C const IID IID_IRealTimeStylus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRealTimeStylus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRealTimeStylus * This);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, get_Enabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IRealTimeStylus * This,
             /* [retval][out] */ __RPC__out BOOL *pfEnable);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, put_Enabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ BOOL fEnable);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, get_HWND)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HWND )( 
             __RPC__in IRealTimeStylus * This,
             /* [retval][out] */ __RPC__out HANDLE_PTR *phwnd);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, put_HWND)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HWND )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ HANDLE_PTR hwnd);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, get_WindowInputRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WindowInputRectangle )( 
             __RPC__in IRealTimeStylus * This,
             /* [retval][out] */ __RPC__out RECT *prcWndInputRect);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, put_WindowInputRectangle)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WindowInputRectangle )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ __RPC__in const RECT *prcWndInputRect);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, AddStylusSyncPlugin)
         HRESULT ( STDMETHODCALLTYPE *AddStylusSyncPlugin )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ ULONG iIndex,
             /* [in] */ __RPC__in_opt IStylusSyncPlugin *piPlugin);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, RemoveStylusSyncPlugin)
         HRESULT ( STDMETHODCALLTYPE *RemoveStylusSyncPlugin )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ ULONG iIndex,
             /* [out][in] */ __RPC__deref_inout_opt IStylusSyncPlugin **ppiPlugin);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, RemoveAllStylusSyncPlugins)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllStylusSyncPlugins )( 
             __RPC__in IRealTimeStylus * This);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetStylusSyncPlugin)
         HRESULT ( STDMETHODCALLTYPE *GetStylusSyncPlugin )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ ULONG iIndex,
             /* [out] */ __RPC__deref_out_opt IStylusSyncPlugin **ppiPlugin);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetStylusSyncPluginCount)
         HRESULT ( STDMETHODCALLTYPE *GetStylusSyncPluginCount )( 
             __RPC__in IRealTimeStylus * This,
             /* [out] */ __RPC__out ULONG *pcPlugins);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, AddStylusAsyncPlugin)
         HRESULT ( STDMETHODCALLTYPE *AddStylusAsyncPlugin )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ ULONG iIndex,
             /* [in] */ __RPC__in_opt IStylusAsyncPlugin *piPlugin);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, RemoveStylusAsyncPlugin)
         HRESULT ( STDMETHODCALLTYPE *RemoveStylusAsyncPlugin )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ ULONG iIndex,
             /* [out][in] */ __RPC__deref_inout_opt IStylusAsyncPlugin **ppiPlugin);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, RemoveAllStylusAsyncPlugins)
         HRESULT ( STDMETHODCALLTYPE *RemoveAllStylusAsyncPlugins )( 
             __RPC__in IRealTimeStylus * This);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetStylusAsyncPlugin)
         HRESULT ( STDMETHODCALLTYPE *GetStylusAsyncPlugin )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ ULONG iIndex,
             /* [out] */ __RPC__deref_out_opt IStylusAsyncPlugin **ppiPlugin);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetStylusAsyncPluginCount)
         HRESULT ( STDMETHODCALLTYPE *GetStylusAsyncPluginCount )( 
             __RPC__in IRealTimeStylus * This,
             /* [out] */ __RPC__out ULONG *pcPlugins);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, get_ChildRealTimeStylusPlugin)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ChildRealTimeStylusPlugin )( 
             __RPC__in IRealTimeStylus * This,
             /* [retval][out] */ __RPC__deref_out_opt IRealTimeStylus **ppiRTS);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, putref_ChildRealTimeStylusPlugin)
         /* [propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_ChildRealTimeStylusPlugin )( 
             __RPC__in IRealTimeStylus * This,
             /* [unique][in] */ __RPC__in_opt IRealTimeStylus *piRTS);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, AddCustomStylusDataToQueue)
         HRESULT ( STDMETHODCALLTYPE *AddCustomStylusDataToQueue )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ StylusQueue sq,
@@ -492,55 +522,67 @@ EXTERN_C const IID IID_IRealTimeStylus;
             /* [range][in] */ __RPC__in_range(0,0x7fff) ULONG cbData,
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cbData) BYTE *pbData);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, ClearStylusQueues)
         HRESULT ( STDMETHODCALLTYPE *ClearStylusQueues )( 
             __RPC__in IRealTimeStylus * This);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, SetAllTabletsMode)
         HRESULT ( STDMETHODCALLTYPE *SetAllTabletsMode )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ BOOL fUseMouseForInput);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, SetSingleTabletMode)
         HRESULT ( STDMETHODCALLTYPE *SetSingleTabletMode )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ __RPC__in_opt IInkTablet *piTablet);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetTablet)
         HRESULT ( STDMETHODCALLTYPE *GetTablet )( 
             __RPC__in IRealTimeStylus * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkTablet **ppiSingleTablet);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetTabletContextIdFromTablet)
         HRESULT ( STDMETHODCALLTYPE *GetTabletContextIdFromTablet )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ __RPC__in_opt IInkTablet *piTablet,
             /* [retval][out] */ __RPC__out TABLET_CONTEXT_ID *ptcid);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetTabletFromTabletContextId)
         HRESULT ( STDMETHODCALLTYPE *GetTabletFromTabletContextId )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ TABLET_CONTEXT_ID tcid,
             /* [retval][out] */ __RPC__deref_out_opt IInkTablet **ppiTablet);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetAllTabletContextIds)
         HRESULT ( STDMETHODCALLTYPE *GetAllTabletContextIds )( 
             __RPC__in IRealTimeStylus * This,
             /* [out][in] */ __RPC__inout ULONG *pcTcidCount,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcTcidCount) TABLET_CONTEXT_ID **ppTcids);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetStyluses)
         HRESULT ( STDMETHODCALLTYPE *GetStyluses )( 
             __RPC__in IRealTimeStylus * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkCursors **ppiInkCursors);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetStylusForId)
         HRESULT ( STDMETHODCALLTYPE *GetStylusForId )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ STYLUS_ID sid,
             /* [retval][out] */ __RPC__deref_out_opt IInkCursor **ppiInkCursor);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, SetDesiredPacketDescription)
         HRESULT ( STDMETHODCALLTYPE *SetDesiredPacketDescription )( 
             __RPC__in IRealTimeStylus * This,
             /* [range][in] */ __RPC__in_range(0,32) ULONG cProperties,
             /* [size_is][in] */ __RPC__in_ecount_full(cProperties) const GUID *pPropertyGuids);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetDesiredPacketDescription)
         HRESULT ( STDMETHODCALLTYPE *GetDesiredPacketDescription )( 
             __RPC__in IRealTimeStylus * This,
             /* [out][in] */ __RPC__inout ULONG *pcProperties,
             /* [size_is][size_is][out] */ __RPC__deref_out_ecount_full_opt(*pcProperties) GUID **ppPropertyGuids);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus, GetPacketDescriptionData)
         HRESULT ( STDMETHODCALLTYPE *GetPacketDescriptionData )( 
             __RPC__in IRealTimeStylus * This,
             /* [in] */ TABLET_CONTEXT_ID tcid,
@@ -706,22 +748,27 @@ EXTERN_C const IID IID_IRealTimeStylus2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRealTimeStylus2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRealTimeStylus2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRealTimeStylus2 * This);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus2, get_FlicksEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_FlicksEnabled )( 
             __RPC__in IRealTimeStylus2 * This,
             /* [retval][out] */ __RPC__out BOOL *pfEnable);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus2, put_FlicksEnabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_FlicksEnabled )( 
             __RPC__in IRealTimeStylus2 * This,
             /* [in] */ BOOL fEnable);
@@ -796,22 +843,27 @@ EXTERN_C const IID IID_IRealTimeStylus3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRealTimeStylus3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRealTimeStylus3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRealTimeStylus3 * This);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus3, get_MultiTouchEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MultiTouchEnabled )( 
             __RPC__in IRealTimeStylus3 * This,
             /* [retval][out] */ __RPC__out BOOL *pfEnable);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylus3, put_MultiTouchEnabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MultiTouchEnabled )( 
             __RPC__in IRealTimeStylus3 * This,
             /* [in] */ BOOL fEnable);
@@ -886,22 +938,27 @@ EXTERN_C const IID IID_IRealTimeStylusSynchronization;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRealTimeStylusSynchronization * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRealTimeStylusSynchronization * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRealTimeStylusSynchronization * This);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylusSynchronization, AcquireLock)
         HRESULT ( STDMETHODCALLTYPE *AcquireLock )( 
             __RPC__in IRealTimeStylusSynchronization * This,
             /* [in] */ RealTimeStylusLockType lock);
         
+        DECLSPEC_XFGVIRT(IRealTimeStylusSynchronization, ReleaseLock)
         HRESULT ( STDMETHODCALLTYPE *ReleaseLock )( 
             __RPC__in IRealTimeStylusSynchronization * This,
             /* [in] */ RealTimeStylusLockType lock);
@@ -1007,18 +1064,22 @@ EXTERN_C const IID IID_IStrokeBuilder;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStrokeBuilder * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStrokeBuilder * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStrokeBuilder * This);
         
+        DECLSPEC_XFGVIRT(IStrokeBuilder, CreateStroke)
         HRESULT ( STDMETHODCALLTYPE *CreateStroke )( 
             __RPC__in IStrokeBuilder * This,
             /* [range][in] */ __RPC__in_range(0,0xfffff) ULONG cPktBuffLength,
@@ -1029,6 +1090,7 @@ EXTERN_C const IID IID_IStrokeBuilder;
             /* [in] */ FLOAT fInkToDeviceScaleY,
             /* [out][in] */ __RPC__deref_inout_opt IInkStrokeDisp **ppIInkStroke);
         
+        DECLSPEC_XFGVIRT(IStrokeBuilder, BeginStroke)
         HRESULT ( STDMETHODCALLTYPE *BeginStroke )( 
             __RPC__in IStrokeBuilder * This,
             /* [in] */ TABLET_CONTEXT_ID tcid,
@@ -1040,6 +1102,7 @@ EXTERN_C const IID IID_IStrokeBuilder;
             /* [in] */ FLOAT fInkToDeviceScaleY,
             /* [unique][out][in] */ __RPC__deref_opt_inout_opt IInkStrokeDisp **ppIInkStroke);
         
+        DECLSPEC_XFGVIRT(IStrokeBuilder, AppendPackets)
         HRESULT ( STDMETHODCALLTYPE *AppendPackets )( 
             __RPC__in IStrokeBuilder * This,
             /* [in] */ TABLET_CONTEXT_ID tcid,
@@ -1047,6 +1110,7 @@ EXTERN_C const IID IID_IStrokeBuilder;
             /* [range][in] */ __RPC__in_range(0,0x7fff) ULONG cPktBuffLength,
             /* [size_is][in] */ __RPC__in_ecount_full(cPktBuffLength) const LONG *pPackets);
         
+        DECLSPEC_XFGVIRT(IStrokeBuilder, EndStroke)
         HRESULT ( STDMETHODCALLTYPE *EndStroke )( 
             __RPC__in IStrokeBuilder * This,
             /* [in] */ TABLET_CONTEXT_ID tcid,
@@ -1054,10 +1118,12 @@ EXTERN_C const IID IID_IStrokeBuilder;
             /* [out][in] */ __RPC__deref_inout_opt IInkStrokeDisp **ppIInkStroke,
             /* [out][in] */ __RPC__inout RECT *pDirtyRect);
         
+        DECLSPEC_XFGVIRT(IStrokeBuilder, get_Ink)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Ink )( 
             __RPC__in IStrokeBuilder * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDisp **ppiInkObj);
         
+        DECLSPEC_XFGVIRT(IStrokeBuilder, putref_Ink)
         /* [propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_Ink )( 
             __RPC__in IStrokeBuilder * This,
             /* [in] */ __RPC__in_opt IInkDisp *piInkObj);
@@ -1236,42 +1302,50 @@ EXTERN_C const IID IID_IStylusPlugin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStylusPlugin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStylusPlugin * This);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, RealTimeStylusEnabled)
         HRESULT ( STDMETHODCALLTYPE *RealTimeStylusEnabled )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [range][in] */ __RPC__in_range(0,8) ULONG cTcidCount,
             /* [size_is][in] */ __RPC__in_ecount_full(cTcidCount) const TABLET_CONTEXT_ID *pTcids);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, RealTimeStylusDisabled)
         HRESULT ( STDMETHODCALLTYPE *RealTimeStylusDisabled )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [range][in] */ __RPC__in_range(0,8) ULONG cTcidCount,
             /* [size_is][in] */ __RPC__in_ecount_full(cTcidCount) const TABLET_CONTEXT_ID *pTcids);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusInRange)
         HRESULT ( STDMETHODCALLTYPE *StylusInRange )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ TABLET_CONTEXT_ID tcid,
             /* [in] */ STYLUS_ID sid);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusOutOfRange)
         HRESULT ( STDMETHODCALLTYPE *StylusOutOfRange )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ TABLET_CONTEXT_ID tcid,
             /* [in] */ STYLUS_ID sid);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusDown)
         HRESULT ( STDMETHODCALLTYPE *StylusDown )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1280,6 +1354,7 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [size_is][in] */ __RPC__in_ecount_full(cPropCountPerPkt) LONG *pPacket,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkt);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusUp)
         HRESULT ( STDMETHODCALLTYPE *StylusUp )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1288,6 +1363,7 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [size_is][in] */ __RPC__in_ecount_full(cPropCountPerPkt) LONG *pPacket,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkt);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusButtonDown)
         HRESULT ( STDMETHODCALLTYPE *StylusButtonDown )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1295,6 +1371,7 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [in] */ __RPC__in const GUID *pGuidStylusButton,
             /* [out][in] */ __RPC__inout POINT *pStylusPos);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusButtonUp)
         HRESULT ( STDMETHODCALLTYPE *StylusButtonUp )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1302,6 +1379,7 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [in] */ __RPC__in const GUID *pGuidStylusButton,
             /* [out][in] */ __RPC__inout POINT *pStylusPos);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, InAirPackets)
         HRESULT ( STDMETHODCALLTYPE *InAirPackets )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1312,6 +1390,7 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [out][in] */ __RPC__inout ULONG *pcInOutPkts,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkts);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, Packets)
         HRESULT ( STDMETHODCALLTYPE *Packets )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1322,6 +1401,7 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [out][in] */ __RPC__inout ULONG *pcInOutPkts,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkts);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, CustomStylusDataAdded)
         HRESULT ( STDMETHODCALLTYPE *CustomStylusDataAdded )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1329,6 +1409,7 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [range][in] */ __RPC__in_range(0,0x7fff) ULONG cbData,
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cbData) const BYTE *pbData);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, SystemEvent)
         HRESULT ( STDMETHODCALLTYPE *SystemEvent )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1337,16 +1418,19 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [in] */ SYSTEM_EVENT event,
             /* [in] */ SYSTEM_EVENT_DATA eventdata);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, TabletAdded)
         HRESULT ( STDMETHODCALLTYPE *TabletAdded )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ __RPC__in_opt IInkTablet *piTablet);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, TabletRemoved)
         HRESULT ( STDMETHODCALLTYPE *TabletRemoved )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ LONG iTabletIndex);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, Error)
         HRESULT ( STDMETHODCALLTYPE *Error )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1355,10 +1439,12 @@ EXTERN_C const IID IID_IStylusPlugin;
             /* [in] */ HRESULT hrErrorCode,
             /* [out][in] */ __RPC__inout LONG_PTR *lptrKey);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, UpdateMapping)
         HRESULT ( STDMETHODCALLTYPE *UpdateMapping )( 
             __RPC__in IStylusPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, DataInterest)
         HRESULT ( STDMETHODCALLTYPE *DataInterest )( 
             __RPC__in IStylusPlugin * This,
             /* [retval][out] */ __RPC__out RealTimeStylusDataInterest *pDataInterest);
@@ -1472,42 +1558,50 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStylusSyncPlugin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStylusSyncPlugin * This);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, RealTimeStylusEnabled)
         HRESULT ( STDMETHODCALLTYPE *RealTimeStylusEnabled )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [range][in] */ __RPC__in_range(0,8) ULONG cTcidCount,
             /* [size_is][in] */ __RPC__in_ecount_full(cTcidCount) const TABLET_CONTEXT_ID *pTcids);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, RealTimeStylusDisabled)
         HRESULT ( STDMETHODCALLTYPE *RealTimeStylusDisabled )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [range][in] */ __RPC__in_range(0,8) ULONG cTcidCount,
             /* [size_is][in] */ __RPC__in_ecount_full(cTcidCount) const TABLET_CONTEXT_ID *pTcids);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusInRange)
         HRESULT ( STDMETHODCALLTYPE *StylusInRange )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ TABLET_CONTEXT_ID tcid,
             /* [in] */ STYLUS_ID sid);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusOutOfRange)
         HRESULT ( STDMETHODCALLTYPE *StylusOutOfRange )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ TABLET_CONTEXT_ID tcid,
             /* [in] */ STYLUS_ID sid);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusDown)
         HRESULT ( STDMETHODCALLTYPE *StylusDown )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1516,6 +1610,7 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [size_is][in] */ __RPC__in_ecount_full(cPropCountPerPkt) LONG *pPacket,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkt);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusUp)
         HRESULT ( STDMETHODCALLTYPE *StylusUp )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1524,6 +1619,7 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [size_is][in] */ __RPC__in_ecount_full(cPropCountPerPkt) LONG *pPacket,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkt);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusButtonDown)
         HRESULT ( STDMETHODCALLTYPE *StylusButtonDown )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1531,6 +1627,7 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [in] */ __RPC__in const GUID *pGuidStylusButton,
             /* [out][in] */ __RPC__inout POINT *pStylusPos);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusButtonUp)
         HRESULT ( STDMETHODCALLTYPE *StylusButtonUp )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1538,6 +1635,7 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [in] */ __RPC__in const GUID *pGuidStylusButton,
             /* [out][in] */ __RPC__inout POINT *pStylusPos);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, InAirPackets)
         HRESULT ( STDMETHODCALLTYPE *InAirPackets )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1548,6 +1646,7 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [out][in] */ __RPC__inout ULONG *pcInOutPkts,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkts);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, Packets)
         HRESULT ( STDMETHODCALLTYPE *Packets )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1558,6 +1657,7 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [out][in] */ __RPC__inout ULONG *pcInOutPkts,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkts);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, CustomStylusDataAdded)
         HRESULT ( STDMETHODCALLTYPE *CustomStylusDataAdded )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1565,6 +1665,7 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [range][in] */ __RPC__in_range(0,0x7fff) ULONG cbData,
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cbData) const BYTE *pbData);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, SystemEvent)
         HRESULT ( STDMETHODCALLTYPE *SystemEvent )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1573,16 +1674,19 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [in] */ SYSTEM_EVENT event,
             /* [in] */ SYSTEM_EVENT_DATA eventdata);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, TabletAdded)
         HRESULT ( STDMETHODCALLTYPE *TabletAdded )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ __RPC__in_opt IInkTablet *piTablet);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, TabletRemoved)
         HRESULT ( STDMETHODCALLTYPE *TabletRemoved )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ LONG iTabletIndex);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, Error)
         HRESULT ( STDMETHODCALLTYPE *Error )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1591,10 +1695,12 @@ EXTERN_C const IID IID_IStylusSyncPlugin;
             /* [in] */ HRESULT hrErrorCode,
             /* [out][in] */ __RPC__inout LONG_PTR *lptrKey);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, UpdateMapping)
         HRESULT ( STDMETHODCALLTYPE *UpdateMapping )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, DataInterest)
         HRESULT ( STDMETHODCALLTYPE *DataInterest )( 
             __RPC__in IStylusSyncPlugin * This,
             /* [retval][out] */ __RPC__out RealTimeStylusDataInterest *pDataInterest);
@@ -1709,42 +1815,50 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStylusAsyncPlugin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStylusAsyncPlugin * This);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, RealTimeStylusEnabled)
         HRESULT ( STDMETHODCALLTYPE *RealTimeStylusEnabled )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [range][in] */ __RPC__in_range(0,8) ULONG cTcidCount,
             /* [size_is][in] */ __RPC__in_ecount_full(cTcidCount) const TABLET_CONTEXT_ID *pTcids);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, RealTimeStylusDisabled)
         HRESULT ( STDMETHODCALLTYPE *RealTimeStylusDisabled )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [range][in] */ __RPC__in_range(0,8) ULONG cTcidCount,
             /* [size_is][in] */ __RPC__in_ecount_full(cTcidCount) const TABLET_CONTEXT_ID *pTcids);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusInRange)
         HRESULT ( STDMETHODCALLTYPE *StylusInRange )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ TABLET_CONTEXT_ID tcid,
             /* [in] */ STYLUS_ID sid);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusOutOfRange)
         HRESULT ( STDMETHODCALLTYPE *StylusOutOfRange )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ TABLET_CONTEXT_ID tcid,
             /* [in] */ STYLUS_ID sid);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusDown)
         HRESULT ( STDMETHODCALLTYPE *StylusDown )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1753,6 +1867,7 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [size_is][in] */ __RPC__in_ecount_full(cPropCountPerPkt) LONG *pPacket,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkt);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusUp)
         HRESULT ( STDMETHODCALLTYPE *StylusUp )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1761,6 +1876,7 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [size_is][in] */ __RPC__in_ecount_full(cPropCountPerPkt) LONG *pPacket,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkt);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusButtonDown)
         HRESULT ( STDMETHODCALLTYPE *StylusButtonDown )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1768,6 +1884,7 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [in] */ __RPC__in const GUID *pGuidStylusButton,
             /* [out][in] */ __RPC__inout POINT *pStylusPos);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, StylusButtonUp)
         HRESULT ( STDMETHODCALLTYPE *StylusButtonUp )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1775,6 +1892,7 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [in] */ __RPC__in const GUID *pGuidStylusButton,
             /* [out][in] */ __RPC__inout POINT *pStylusPos);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, InAirPackets)
         HRESULT ( STDMETHODCALLTYPE *InAirPackets )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1785,6 +1903,7 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [out][in] */ __RPC__inout ULONG *pcInOutPkts,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkts);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, Packets)
         HRESULT ( STDMETHODCALLTYPE *Packets )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1795,6 +1914,7 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [out][in] */ __RPC__inout ULONG *pcInOutPkts,
             /* [out][in] */ __RPC__deref_inout_opt LONG **ppInOutPkts);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, CustomStylusDataAdded)
         HRESULT ( STDMETHODCALLTYPE *CustomStylusDataAdded )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1802,6 +1922,7 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [range][in] */ __RPC__in_range(0,0x7fff) ULONG cbData,
             /* [unique][size_is][in] */ __RPC__in_ecount_full_opt(cbData) const BYTE *pbData);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, SystemEvent)
         HRESULT ( STDMETHODCALLTYPE *SystemEvent )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1810,16 +1931,19 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [in] */ SYSTEM_EVENT event,
             /* [in] */ SYSTEM_EVENT_DATA eventdata);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, TabletAdded)
         HRESULT ( STDMETHODCALLTYPE *TabletAdded )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ __RPC__in_opt IInkTablet *piTablet);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, TabletRemoved)
         HRESULT ( STDMETHODCALLTYPE *TabletRemoved )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
             /* [in] */ LONG iTabletIndex);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, Error)
         HRESULT ( STDMETHODCALLTYPE *Error )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc,
@@ -1828,10 +1952,12 @@ EXTERN_C const IID IID_IStylusAsyncPlugin;
             /* [in] */ HRESULT hrErrorCode,
             /* [out][in] */ __RPC__inout LONG_PTR *lptrKey);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, UpdateMapping)
         HRESULT ( STDMETHODCALLTYPE *UpdateMapping )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [in] */ __RPC__in_opt IRealTimeStylus *piRtsSrc);
         
+        DECLSPEC_XFGVIRT(IStylusPlugin, DataInterest)
         HRESULT ( STDMETHODCALLTYPE *DataInterest )( 
             __RPC__in IStylusAsyncPlugin * This,
             /* [retval][out] */ __RPC__out RealTimeStylusDataInterest *pDataInterest);
@@ -1990,73 +2116,91 @@ EXTERN_C const IID IID_IDynamicRenderer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDynamicRenderer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDynamicRenderer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDynamicRenderer * This);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, get_Enabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IDynamicRenderer * This,
             /* [retval][out] */ __RPC__out BOOL *bEnabled);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, put_Enabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IDynamicRenderer * This,
             /* [in] */ BOOL bEnabled);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, get_HWND)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HWND )( 
             __RPC__in IDynamicRenderer * This,
             /* [retval][out] */ __RPC__out HANDLE_PTR *hwnd);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, put_HWND)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HWND )( 
             __RPC__in IDynamicRenderer * This,
             /* [in] */ HANDLE_PTR hwnd);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, get_ClipRectangle)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClipRectangle )( 
             __RPC__in IDynamicRenderer * This,
             /* [retval][out] */ __RPC__out RECT *prcClipRect);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, put_ClipRectangle)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClipRectangle )( 
             __RPC__in IDynamicRenderer * This,
             /* [in] */ __RPC__in const RECT *prcClipRect);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, get_ClipRegion)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClipRegion )( 
             __RPC__in IDynamicRenderer * This,
             /* [retval][out] */ __RPC__out HANDLE_PTR *phClipRgn);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, put_ClipRegion)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClipRegion )( 
             __RPC__in IDynamicRenderer * This,
             /* [in] */ HANDLE_PTR hClipRgn);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, get_DrawingAttributes)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DrawingAttributes )( 
             __RPC__in IDynamicRenderer * This,
             /* [retval][out] */ __RPC__deref_out_opt IInkDrawingAttributes **ppiDA);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, putref_DrawingAttributes)
         /* [propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_DrawingAttributes )( 
             __RPC__in IDynamicRenderer * This,
             /* [in] */ __RPC__in_opt IInkDrawingAttributes *piDA);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, get_DataCacheEnabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DataCacheEnabled )( 
             __RPC__in IDynamicRenderer * This,
             /* [retval][out] */ __RPC__out BOOL *pfCacheData);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, put_DataCacheEnabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DataCacheEnabled )( 
             __RPC__in IDynamicRenderer * This,
             /* [in] */ BOOL fCacheData);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, ReleaseCachedData)
         HRESULT ( STDMETHODCALLTYPE *ReleaseCachedData )( 
             __RPC__in IDynamicRenderer * This,
             ULONG strokeId);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, Refresh)
         HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IDynamicRenderer * This);
         
+        DECLSPEC_XFGVIRT(IDynamicRenderer, Draw)
         HRESULT ( STDMETHODCALLTYPE *Draw )( 
             __RPC__in IDynamicRenderer * This,
             /* [in] */ HANDLE_PTR hDC);
@@ -2182,39 +2326,48 @@ EXTERN_C const IID IID_IGestureRecognizer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGestureRecognizer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGestureRecognizer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGestureRecognizer * This);
         
+        DECLSPEC_XFGVIRT(IGestureRecognizer, get_Enabled)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in IGestureRecognizer * This,
             /* [retval][out] */ __RPC__out BOOL *pfEnabled);
         
+        DECLSPEC_XFGVIRT(IGestureRecognizer, put_Enabled)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_Enabled )( 
             __RPC__in IGestureRecognizer * This,
             /* [in] */ BOOL fEnabled);
         
+        DECLSPEC_XFGVIRT(IGestureRecognizer, get_MaxStrokeCount)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MaxStrokeCount )( 
             __RPC__in IGestureRecognizer * This,
             /* [retval][out] */ __RPC__out long *pcStrokes);
         
+        DECLSPEC_XFGVIRT(IGestureRecognizer, put_MaxStrokeCount)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MaxStrokeCount )( 
             __RPC__in IGestureRecognizer * This,
             /* [in] */ long cStrokes);
         
+        DECLSPEC_XFGVIRT(IGestureRecognizer, EnableGestures)
         HRESULT ( STDMETHODCALLTYPE *EnableGestures )( 
             __RPC__in IGestureRecognizer * This,
             /* [range][in] */ __RPC__in_range(0,64) ULONG cGestures,
             /* [size_is][in] */ __RPC__in_ecount_full(cGestures) const int *pGestures);
         
+        DECLSPEC_XFGVIRT(IGestureRecognizer, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IGestureRecognizer * This);
         

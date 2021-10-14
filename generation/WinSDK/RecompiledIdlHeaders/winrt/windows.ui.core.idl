@@ -12,6 +12,7 @@ import "windowscontracts.idl";
 import "Windows.Foundation.idl";
 import "Windows.System.idl";
 import "Windows.UI.idl";
+import "Windows.UI.Composition.idl";
 import "Windows.UI.Input.idl";
 import "Windows.UI.Input.Inking.idl";
 import "Windows.UI.Input.Inking.Core.idl";
@@ -34,6 +35,8 @@ namespace Windows
     {
         interface IAsyncAction;
 
+        interface IClosable;
+
         typedef struct Point Point;
 
         typedef struct Rect Rect;
@@ -52,6 +55,18 @@ namespace Windows
         typedef enum VirtualKey VirtualKey;
 
         typedef enum VirtualKeyModifiers VirtualKeyModifiers;
+    }
+}
+namespace Windows
+{
+    namespace UI
+    {
+        namespace Composition
+        {
+            interface IVisualElement;
+
+            runtimeclass Visual;
+        }
     }
 }
 namespace Windows
@@ -132,6 +147,8 @@ namespace Windows
 
             typedef enum CoreDispatcherPriority CoreDispatcherPriority;
 
+            typedef enum CoreIndependentInputFilters CoreIndependentInputFilters;
+
             typedef enum CoreInputDeviceTypes CoreInputDeviceTypes;
 
             typedef enum CoreProcessEventsOption CoreProcessEventsOption;
@@ -181,6 +198,10 @@ namespace Windows
             interface ICoreDispatcher2;
 
             interface ICoreDispatcherWithTaskPriority;
+
+            interface ICoreIndependentInputSourceController;
+
+            interface ICoreIndependentInputSourceControllerStatics;
 
             interface ICoreInputSourceBase;
 
@@ -273,6 +294,8 @@ namespace Windows
             runtimeclass CoreDispatcher;
 
             runtimeclass CoreIndependentInputSource;
+
+            runtimeclass CoreIndependentInputSourceController;
 
             runtimeclass CoreWindow;
 
@@ -440,6 +463,18 @@ namespace Windows
                 Low    = -1,
                 Normal = 0,
                 High   = 1
+            };
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [flags]
+            enum CoreIndependentInputFilters
+            {
+                None          = 0x0,
+                MouseButton   = 0x1,
+                MouseWheel    = 0x2,
+                MouseHover    = 0x4,
+                PenWithBarrel = 0x8,
+                PenInverted   = 0x10
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -671,6 +706,29 @@ namespace Windows
                 [overload("ShouldYield")] HRESULT ShouldYield([out] [retval] boolean* value);
                 [overload("ShouldYield")] HRESULT ShouldYieldToPriority([in] Windows.UI.Core.CoreDispatcherPriority priority, [out] [retval] boolean* value);
                 HRESULT StopProcessEvents();
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.UI.Core.CoreIndependentInputSourceController)]
+            [uuid(0963261C-84FE-578A-83CA-6425309CCDE4)]
+            interface ICoreIndependentInputSourceController : IInspectable
+            {
+                [propget] HRESULT IsTransparentForUncontrolledInput([out] [retval] boolean* value);
+                [propput] HRESULT IsTransparentForUncontrolledInput([in] boolean value);
+                [propget] HRESULT IsPalmRejectionEnabled([out] [retval] boolean* value);
+                [propput] HRESULT IsPalmRejectionEnabled([in] boolean value);
+                [propget] HRESULT Source([out] [retval] Windows.UI.Core.CoreIndependentInputSource** value);
+                [overload("SetControlledInput")] HRESULT SetControlledInput([in] Windows.UI.Core.CoreInputDeviceTypes inputTypes);
+                [overload("SetControlledInput")] HRESULT SetControlledInputWithFilters([in] Windows.UI.Core.CoreInputDeviceTypes inputTypes, [in] Windows.UI.Core.CoreIndependentInputFilters required, [in] Windows.UI.Core.CoreIndependentInputFilters excluded);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.UI.Core.CoreIndependentInputSourceController)]
+            [uuid(3EDC4E20-9A8A-5691-8586-FCA4CB57526D)]
+            interface ICoreIndependentInputSourceControllerStatics : IInspectable
+            {
+                HRESULT CreateForVisual([in] Windows.UI.Composition.Visual* visual, [out] [retval] Windows.UI.Core.CoreIndependentInputSourceController** result);
+                HRESULT CreateForIVisualElement([in] Windows.UI.Composition.IVisualElement* visualElement, [out] [retval] Windows.UI.Core.CoreIndependentInputSourceController** result);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -1190,6 +1248,17 @@ namespace Windows
                 [default] interface Windows.UI.Core.ICoreInputSourceBase;
                 interface Windows.UI.Core.ICorePointerInputSource;
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.UI.Core.ICorePointerInputSource2;
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.UI.Core.ICorePointerRedirector;
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.UI.Core.ICoreIndependentInputSourceControllerStatics, Windows.Foundation.UniversalApiContract, 13.0)]
+            [threading(both)]
+            runtimeclass CoreIndependentInputSourceController
+            {
+                [default] interface Windows.UI.Core.ICoreIndependentInputSourceController;
+                interface Windows.Foundation.IClosable;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]

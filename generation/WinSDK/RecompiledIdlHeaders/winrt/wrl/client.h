@@ -41,12 +41,12 @@
 // Warning 4624 is generated if the object has private destructor and the object cannot be created on the stack
 // ComPtr does not require the object to be created on the stack thus disabling the warning
 
-// Legacy artifact: This enabled sealed / final optimizations for classes in release builds, and blocking 
-// of access to AddRef/Release through ComPtr in checked builds. This guard has been removed, so prefer the C++ 
+// Legacy artifact: This enabled sealed / final optimizations for classes in release builds, and blocking
+// of access to AddRef/Release through ComPtr in checked builds. This guard has been removed, so prefer the C++
 // keywords intead.
 #if defined(_DEBUG) || defined(DBG)
-#define WrlFinal 
-#define WrlSealed 
+#define WrlFinal
+#define WrlSealed
 #else
 #define WrlFinal final
 #define WrlSealed sealed
@@ -369,7 +369,7 @@ public:
     {
         return ptr_;
     }
-    
+
 #if (defined(_DEBUG) || defined(DBG)) && defined(__REMOVE_IUNKNOWN_METHODS__)
     typename Details::RemoveIUnknown<InterfaceType>::ReturnType* operator->() const throw()
     {
@@ -420,7 +420,7 @@ public:
         if (ptr_ != nullptr)
         {
             auto ref = ptr_->Release();
-            DBG_UNREFERENCED_LOCAL_VARIABLE(ref);
+            (void)ref;
             // Attaching to the same object only works if duplicate references are being coalesced. Otherwise
             // re-attaching will cause the pointer to be released and may cause a crash on a subsequent dereference.
             __WRL_ASSERT__(ref != 0 || ptr_ != other);
@@ -434,8 +434,8 @@ public:
         return InternalRelease();
     }
 
-    // Previously, unsafe behavior could be triggered when 'this' is ComPtr<IInspectable> or ComPtr<IUnknown> and CopyTo is used to copy to another type U. 
-    // The user will use operator& to convert the destination into a ComPtrRef, which can then implicit cast to IInspectable** and IUnknown**. 
+    // Previously, unsafe behavior could be triggered when 'this' is ComPtr<IInspectable> or ComPtr<IUnknown> and CopyTo is used to copy to another type U.
+    // The user will use operator& to convert the destination into a ComPtrRef, which can then implicit cast to IInspectable** and IUnknown**.
     // If this overload of CopyTo is not present, it will implicitly cast to IInspectable or IUnknown and match CopyTo(InterfaceType**) instead.
     // A valid polymoprhic downcast requires run-time type checking via QueryInterface, so CopyTo(InterfaceType**) will break type safety.
     // This overload matches ComPtrRef before the implicit cast takes place, preventing the unsafe downcast.
@@ -760,7 +760,7 @@ public:
         ComPtr::operator=(static_cast<ComPtr&&>(other));
         return *this;
     }
-    
+
     void operator->() = delete;
 };
 
@@ -771,7 +771,7 @@ template<typename T>
 HRESULT AsAgile(_In_opt_ T* p, _Inout_ Microsoft::WRL::AgileRef* pAgile) throw()
 {
     static_assert(!Details::IsSame<IAgileReference, T>::value, "Cannot get IAgileReference object to IAgileReference.");
-    
+
     HRESULT hr = S_OK;
     if (p)
     {
@@ -781,7 +781,7 @@ HRESULT AsAgile(_In_opt_ T* p, _Inout_ Microsoft::WRL::AgileRef* pAgile) throw()
     {
         *pAgile = nullptr;
     }
-    
+
     return hr;
 }
 

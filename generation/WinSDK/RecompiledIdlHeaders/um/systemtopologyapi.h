@@ -32,7 +32,6 @@ GetNumaHighestNodeNumber(
     _Out_ PULONG HighestNodeNumber
     );
 
-
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 #pragma endregion
 
@@ -49,8 +48,22 @@ GetNumaNodeProcessorMaskEx(
     _Out_ PGROUP_AFFINITY ProcessorMask
     );
 
-
 #endif // (_WIN32_WINNT >=0x0601)
+
+#if (_WIN32_WINNT >= _WIN32_WINNT_WIN10_FE)
+
+_Success_(return != false)
+WINBASEAPI
+BOOL
+WINAPI
+GetNumaNodeProcessorMask2(
+    _In_ USHORT NodeNumber,
+    _Out_writes_to_opt_(ProcessorMaskCount, *RequiredMaskCount) PGROUP_AFFINITY ProcessorMasks,
+    _In_ USHORT ProcessorMaskCount,
+    _Out_ PUSHORT RequiredMaskCount
+    );
+
+#endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN10_FE)
 
 #if _WIN32_WINNT >= 0x0601
 
@@ -61,7 +74,6 @@ GetNumaProximityNodeEx(
     _In_ ULONG ProximityId,
     _Out_ PUSHORT NodeNumber
     );
-
 
 #endif // (_WIN32_WINNT >=0x0601)
 

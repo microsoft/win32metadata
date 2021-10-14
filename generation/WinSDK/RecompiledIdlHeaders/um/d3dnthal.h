@@ -53,7 +53,7 @@
  * from the driver using GetDriverInfo.
  */
 
-typedef struct _D3DNTHALDeviceDesc_V1 
+typedef struct _D3DNTHALDeviceDesc_V1
 {
     DWORD               dwSize;                     // Size of D3DNTHALDEVICEDESC_V1 structure
     DWORD               dwFlags;                    // Indicates which fields have valid data
@@ -81,7 +81,7 @@ typedef struct _D3DNTHALDeviceDesc_V1
  * queried from the driver using GetDriverInfo.
  */
 
-typedef struct _D3DNTHALDeviceDesc_V2 
+typedef struct _D3DNTHALDeviceDesc_V2
 {
     DWORD               dwSize;                     // Size of D3DNTDEVICEDESC structure
     DWORD               dwFlags;                    // Indicates which fields have valid data
@@ -116,7 +116,7 @@ typedef struct _D3DNTHALDeviceDesc_V2
  * queried from the driver using GetDriverInfo.
  */
 
-typedef struct _D3DNTDeviceDesc_V3 
+typedef struct _D3DNTDeviceDesc_V3
 {
     DWORD               dwSize;                     // Size of D3DNTDEVICEDESC structure
     DWORD               dwFlags;                    // Indicates which fields have valid data
@@ -164,7 +164,7 @@ typedef struct _D3DNTDeviceDesc_V3
  * The HAL driver will be asked to allocate dwNumVertices + dwNumClipVertices
  * in the case described above.
  */
-typedef struct _D3DNTHAL_GLOBALDRIVERDATA 
+typedef struct _D3DNTHAL_GLOBALDRIVERDATA
 {
     DWORD                   dwSize;                 // Size of this structure
     D3DNTHALDEVICEDESC_V1   hwCaps;                 // Capabilities of the hardware
@@ -182,7 +182,7 @@ typedef D3DNTHAL_GLOBALDRIVERDATA *LPD3DNTHAL_GLOBALDRIVERDATA;
  * Extended caps introduced with DX5 and queried with
  * GetDriverInfo (GUID_D3DExtendedCaps).
  */
-typedef struct _D3DNTHAL_D3DDX6EXTENDEDCAPS 
+typedef struct _D3DNTHAL_D3DDX6EXTENDEDCAPS
 {
     DWORD       dwSize;                             // Size of this structure
 
@@ -213,7 +213,7 @@ typedef struct _D3DNTHAL_D3DDX6EXTENDEDCAPS
  * Extended caps introduced with DX5 and queried with
  * GetDriverInfo (GUID_D3DExtendedCaps).
  */
-typedef struct _D3DNTHAL_D3DEXTENDEDCAPS 
+typedef struct _D3DNTHAL_D3DEXTENDEDCAPS
 {
     DWORD       dwSize;                         // Size of this structure
     DWORD       dwMinTextureWidth, dwMaxTextureWidth;
@@ -270,7 +270,7 @@ typedef D3DNTHAL_D3DDX6EXTENDEDCAPS *LPD3DNTHAL_D3DDX6EXTENDEDCAPS;
 
 typedef ULONG_PTR D3DINTHAL_BUFFERHANDLE, *LPD3DINTHAL_BUFFERHANDLE;
 
-typedef struct _D3DNTHAL_CONTEXTCREATEDATA 
+typedef struct _D3DNTHAL_CONTEXTCREATEDATA
 {
     union
     {
@@ -293,21 +293,21 @@ typedef struct _D3DNTHAL_CONTEXTCREATEDATA
 } D3DNTHAL_CONTEXTCREATEDATA;
 typedef D3DNTHAL_CONTEXTCREATEDATA *LPD3DNTHAL_CONTEXTCREATEDATA;
 
-typedef struct _D3DNTHAL_CONTEXTDESTROYDATA 
+typedef struct _D3DNTHAL_CONTEXTDESTROYDATA
 {
     ULONG_PTR   dwhContext; // in:  Context handle
     HRESULT     ddrval;     // out: Return value
 } D3DNTHAL_CONTEXTDESTROYDATA;
 typedef D3DNTHAL_CONTEXTDESTROYDATA *LPD3DNTHAL_CONTEXTDESTROYDATA;
 
-typedef struct _D3DNTHAL_CONTEXTDESTROYALLDATA 
+typedef struct _D3DNTHAL_CONTEXTDESTROYALLDATA
 {
     DWORD       dwPID;      // in:  Process id to destroy contexts for
     HRESULT     ddrval;     // out: Return value
 } D3DNTHAL_CONTEXTDESTROYALLDATA;
 typedef D3DNTHAL_CONTEXTDESTROYALLDATA *LPD3DNTHAL_CONTEXTDESTROYALLDATA;
 
-typedef struct _D3DNTHAL_SCENECAPTUREDATA 
+typedef struct _D3DNTHAL_SCENECAPTUREDATA
 {
     ULONG_PTR   dwhContext; // in:  Context handle
     DWORD       dwFlag;     // in:  Indicates beginning or end
@@ -315,7 +315,7 @@ typedef struct _D3DNTHAL_SCENECAPTUREDATA
 } D3DNTHAL_SCENECAPTUREDATA;
 typedef D3DNTHAL_SCENECAPTUREDATA *LPD3DNTHAL_SCENECAPTUREDATA;
 
-typedef struct _D3DNTHAL_TEXTURECREATEDATA 
+typedef struct _D3DNTHAL_TEXTURECREATEDATA
 {
     ULONG_PTR   dwhContext; // in:  Context handle
     HANDLE      hDDS;       // in:  Handle to surface object
@@ -324,7 +324,7 @@ typedef struct _D3DNTHAL_TEXTURECREATEDATA
 } D3DNTHAL_TEXTURECREATEDATA;
 typedef D3DNTHAL_TEXTURECREATEDATA *LPD3DNTHAL_TEXTURECREATEDATA;
 
-typedef struct _D3DNTHAL_TEXTUREDESTROYDATA 
+typedef struct _D3DNTHAL_TEXTUREDESTROYDATA
 {
     ULONG_PTR   dwhContext; // in:  Context handle
     ULONG_PTR   dwHandle;   // in:  Handle to texture
@@ -332,7 +332,7 @@ typedef struct _D3DNTHAL_TEXTUREDESTROYDATA
 } D3DNTHAL_TEXTUREDESTROYDATA;
 typedef D3DNTHAL_TEXTUREDESTROYDATA *LPD3DNTHAL_TEXTUREDESTROYDATA;
 
-typedef struct _D3DNTHAL_TEXTURESWAPDATA 
+typedef struct _D3DNTHAL_TEXTURESWAPDATA
 {
     ULONG_PTR   dwhContext; // in:  Context handle
     ULONG_PTR   dwHandle1;  // in:  Handle to texture 1
@@ -341,7 +341,7 @@ typedef struct _D3DNTHAL_TEXTURESWAPDATA
 } D3DNTHAL_TEXTURESWAPDATA;
 typedef D3DNTHAL_TEXTURESWAPDATA *LPD3DNTHAL_TEXTURESWAPDATA;
 
-typedef struct _D3DNTHAL_TEXTUREGETSURFDATA 
+typedef struct _D3DNTHAL_TEXTUREGETSURFDATA
 {
     ULONG_PTR   dwhContext; // in:  Context handle
     HANDLE      hDDS;       // out: Handle to surface object
@@ -393,7 +393,7 @@ typedef DWORD   (APIENTRY *LPD3DNTHAL_TEXTUREDESTROYCB)(LPD3DNTHAL_TEXTUREDESTRO
 typedef DWORD   (APIENTRY *LPD3DNTHAL_TEXTURESWAPCB)(LPD3DNTHAL_TEXTURESWAPDATA);
 typedef DWORD   (APIENTRY *LPD3DNTHAL_TEXTUREGETSURFCB)(LPD3DNTHAL_TEXTUREGETSURFDATA);
 
-typedef struct _D3DNTHAL_CALLBACKS 
+typedef struct _D3DNTHAL_CALLBACKS
 {
     DWORD                           dwSize;
 
@@ -449,7 +449,7 @@ typedef D3DNTHAL_CALLBACKS *LPD3DNTHAL_CALLBACKS;
 
 #define D3DNTHAL_SIZE_V1 sizeof(D3DNTHAL_CALLBACKS)
 
-typedef struct _D3DNTHAL_SETRENDERTARGETDATA 
+typedef struct _D3DNTHAL_SETRENDERTARGETDATA
 {
     ULONG_PTR           dwhContext;     // in:  Context handle
     PDD_SURFACE_LOCAL   lpDDS;          // in:  new render target
@@ -639,7 +639,7 @@ typedef struct _D3DNTHAL_DP2POINTS
 // DrawPrimitives2 line primitives
 //
 
-typedef struct _D3DNTHAL_DP2STARTVERTEX 
+typedef struct _D3DNTHAL_DP2STARTVERTEX
 {
     WORD    wVStart;
 } D3DNTHAL_DP2STARTVERTEX, *LPD3DNTHAL_DP2STARTVERTEX;
@@ -708,7 +708,7 @@ typedef struct _D3DNTHAL_DP2INDEXEDTRIANGLEFAN
     WORD    wV[3];
 } D3DNTHAL_DP2INDEXEDTRIANGLEFAN;
 
-typedef struct _D3DNTHAL_DP2TRIANGLEFAN_IMM 
+typedef struct _D3DNTHAL_DP2TRIANGLEFAN_IMM
 {
     DWORD   dwEdgeFlags;
 } D3DNTHAL_DP2TRIANGLEFAN_IMM, *LPD3DNTHAL_DP2TRIANGLEFAN_IMM;
@@ -736,7 +736,7 @@ typedef struct _D3DNTHAL_DP2TEXTURESTAGESTATE
 } D3DNTHAL_DP2TEXTURESTAGESTATE;
 typedef D3DNTHAL_DP2TEXTURESTAGESTATE  *LPD3DNTHAL_DP2TEXTURESTAGESTATE;
 
-typedef struct _D3DNTHAL_DP2VIEWPORTINFO 
+typedef struct _D3DNTHAL_DP2VIEWPORTINFO
 {
     DWORD   dwX;
     DWORD   dwY;
@@ -745,7 +745,7 @@ typedef struct _D3DNTHAL_DP2VIEWPORTINFO
 } D3DNTHAL_DP2VIEWPORTINFO;
 typedef D3DNTHAL_DP2VIEWPORTINFO  *LPD3DNTHAL_DP2VIEWPORTINFO;
 
-typedef struct _D3DNTHAL_DP2WINFO 
+typedef struct _D3DNTHAL_DP2WINFO
 {
     D3DVALUE    dvWNear;
     D3DVALUE    dvWFar;
@@ -1078,7 +1078,7 @@ typedef struct __NT_D3DLINEPATTERN {
 } _NT_D3DLINEPATTERN;
 
 #ifndef D3DPMISCCAPS_LINEPATTERNREP
-#define D3DPMISCCAPS_LINEPATTERNREP     0x00000004L  
+#define D3DPMISCCAPS_LINEPATTERNREP     0x00000004L
 #endif
 
 // These are old filter caps that have been retired.
@@ -1125,7 +1125,7 @@ typedef struct __NT_D3DLINEPATTERN {
 // When set it means that driver has to cull rects against current viewport.
 // The bit is set only for pure devices
 //
-#define D3DNTCLEAR_COMPUTERECTS   0x00000008l  
+#define D3DNTCLEAR_COMPUTERECTS   0x00000008l
 
 
 typedef struct _D3DNTHAL_DP2MULTIPLYTRANSFORM
@@ -1370,11 +1370,11 @@ typedef D3DNTHAL_DP2SETCONVOLUTIONKERNELMONO *LPD3DNTHAL_DP2SETCONVOLUTIONKERNEL
 
 typedef struct _D3DNTHAL_DP2COMPOSERECTS
 {
-    DWORD               SrcSurfaceHandle; 
+    DWORD               SrcSurfaceHandle;
     DWORD               DstSurfaceHandle;
-    DWORD               SrcRectDescsVBHandle;   
+    DWORD               SrcRectDescsVBHandle;
     UINT                NumRects;
-    DWORD               DstRectDescsVBHandle;   
+    DWORD               DstRectDescsVBHandle;
     D3DCOMPOSERECTSOP   Operation;
     INT                 XOffset;
     INT                 YOffset;
@@ -1420,14 +1420,14 @@ typedef struct _D3DNTHAL_DP2SURFACEBLT
 typedef D3DNTHAL_DP2SURFACEBLT  *LPD3DNTHAL_DP2SURFACEBLT;
 
 typedef D3DNTHAL_DP2SETVERTEXSHADERCONST D3DNTHAL_DP2SETVERTEXSHADERCONSTB;
-typedef D3DNTHAL_DP2SETVERTEXSHADERCONSTB  *LPD3DNTHAL_DP2SETVERTEXSHADERCONSTB; 
+typedef D3DNTHAL_DP2SETVERTEXSHADERCONSTB  *LPD3DNTHAL_DP2SETVERTEXSHADERCONSTB;
 typedef D3DNTHAL_DP2SETVERTEXSHADERCONST D3DNTHAL_DP2SETVERTEXSHADERCONSTI;
-typedef D3DNTHAL_DP2SETVERTEXSHADERCONSTI  *LPD3DNTHAL_DP2SETVERTEXSHADERCONSTI; 
+typedef D3DNTHAL_DP2SETVERTEXSHADERCONSTI  *LPD3DNTHAL_DP2SETVERTEXSHADERCONSTI;
 
 typedef D3DNTHAL_DP2SETPIXELSHADERCONST D3DNTHAL_DP2SETPIXELSHADERCONSTB;
-typedef D3DNTHAL_DP2SETPIXELSHADERCONSTB  *LPD3DNTHAL_DP2SETPIXELSHADERCONSTB; 
+typedef D3DNTHAL_DP2SETPIXELSHADERCONSTB  *LPD3DNTHAL_DP2SETPIXELSHADERCONSTB;
 typedef D3DNTHAL_DP2SETPIXELSHADERCONST D3DNTHAL_DP2SETPIXELSHADERCONSTI;
-typedef D3DNTHAL_DP2SETPIXELSHADERCONSTI  *LPD3DNTHAL_DP2SETPIXELSHADERCONSTI; 
+typedef D3DNTHAL_DP2SETPIXELSHADERCONSTI  *LPD3DNTHAL_DP2SETPIXELSHADERCONSTI;
 
 typedef struct _D3DNTHAL_DP2CREATEQUERY
 {
@@ -1527,10 +1527,10 @@ typedef D3DNTHAL_DP2RESPONSEQUERY  *LPD3DNTHAL_DP2RESPONSEQUERY;
 
 #ifdef __cplusplus
 // This gets regtype, and also maps D3DSPR_CONSTn to D3DSPR_CONST (for easier parsing)
-inline 
-D3DSHADER_PARAM_REGISTER_TYPE 
+inline
+D3DSHADER_PARAM_REGISTER_TYPE
 _NT_D3DSI_GETREGTYPE_RESOLVING_CONSTANTS(
-    DWORD   token) 
+    DWORD   token)
 {
     D3DSHADER_PARAM_REGISTER_TYPE RegType = _NT_D3DSI_GETREGTYPE(token);
     switch (RegType)
@@ -1544,8 +1544,8 @@ _NT_D3DSI_GETREGTYPE_RESOLVING_CONSTANTS(
     }
 }
 
-// The inline function below retrieves register number for an opcode, 
-// taking into account that: if the type is a 
+// The inline function below retrieves register number for an opcode,
+// taking into account that: if the type is a
 // D3DSPR_CONSTn, the register number needs to be remapped.
 //
 //           D3DSPR_CONST  is for c0-c2047
@@ -1556,10 +1556,10 @@ _NT_D3DSI_GETREGTYPE_RESOLVING_CONSTANTS(
 // For example if the instruction token specifies type D3DSPR_CONST4, reg# 3,
 // the register number retrieved is 6147.
 // For other register types, the register number is just returned unchanged.
-inline 
-UINT 
+inline
+UINT
 _NT_D3DSI_GETREGNUM_RESOLVING_CONSTANTS(
-    DWORD   token) 
+    DWORD   token)
 {
     D3DSHADER_PARAM_REGISTER_TYPE RegType = _NT_D3DSI_GETREGTYPE(token);
     UINT RegNum = _NT_D3DSI_GETREGNUM(token);
@@ -1811,13 +1811,13 @@ typedef struct _DDNT_DXVERSION
 } DDNT_DXVERSION;
 
 // Informs driver that runtime will send a notification after last outstanding AGP
-// lock has been released. 
+// lock has been released.
 typedef struct _DDNT_DEFERRED_AGP_AWARE_DATA
 {
     DDNT_GETDRIVERINFO2DATA gdi2;           // [in/out] GetDriverInfo2 data
 } DDNT_DEFERRED_AGP_AWARE_DATA;
 
-// Notification that the last AGP lock has been released. Driver can free all deferred AGP 
+// Notification that the last AGP lock has been released. Driver can free all deferred AGP
 // allocations for this process.
 typedef struct _DDNT_FREE_DEFERRED_AGP_DATA
 {
@@ -1925,7 +1925,7 @@ typedef struct _DDNT_GETDDIVERSIONDATA
 // New FVF flags that are not API visible but accessed by the driver
 // Note, that D3DFVF_RESERVED2 includes this flag and should not be used for validation
 
-#define _NT_D3DFVF_FOG                      0x00002000L // There is a separate fog value in the FVF vertex 
+#define _NT_D3DFVF_FOG                      0x00002000L // There is a separate fog value in the FVF vertex
 
 // Flags that drivers need to expose for DX8 but were removed from the DX9 headers
 #if(DIRECT3D_VERSION >= 0x0900)
@@ -2280,7 +2280,7 @@ typedef enum _D3DVSD_TOKENTYPE
     D3DVSD_TOKEN_END            = 7,    // end-of-array (requires all DWORD bits to be 1)
     D3DVSD_FORCE_DWORD          = 0x7fffffff,// force 32-bit size enum
 } D3DVSD_TOKENTYPE;
-#endif __COMMONHALDEFINES
+#endif // __COMMONHALDEFINES
 
 #define D3DVSD_TOKENTYPESHIFT       29
 #define D3DVSD_TOKENTYPEMASK        (7 << D3DVSD_TOKENTYPESHIFT)

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -36,6 +36,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -347,33 +355,40 @@ EXTERN_C const IID IID_IMSAdminBaseW;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSAdminBaseW * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSAdminBaseW * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, AddKey)
         HRESULT ( STDMETHODCALLTYPE *AddKey )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteKey)
         HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteChildKeys)
         HRESULT ( STDMETHODCALLTYPE *DeleteChildKeys )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumKeys)
         HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -381,6 +396,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [size_is][out] */ __RPC__out_ecount_full(256) LPWSTR pszMDName,
             /* [in] */ DWORD dwMDEnumObjectIndex);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CopyKey)
         HRESULT ( STDMETHODCALLTYPE *CopyKey )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDSourceHandle,
@@ -390,18 +406,21 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [in] */ BOOL bMDOverwriteFlag,
             /* [in] */ BOOL bMDCopyFlag);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, RenameKey)
         HRESULT ( STDMETHODCALLTYPE *RenameKey )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDNewName);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SetData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetData )( 
             IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ LPCWSTR pszMDPath,
             /* [in] */ PMETADATA_RECORD pmdrMDData);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetData )( 
             IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -409,6 +428,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [out][in] */ PMETADATA_RECORD pmdrMDData,
             /* [out] */ DWORD *pdwMDRequiredDataLen);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteData)
         HRESULT ( STDMETHODCALLTYPE *DeleteData )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -416,6 +436,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [in] */ DWORD dwMDIdentifier,
             /* [in] */ DWORD dwMDDataType);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *EnumData )( 
             IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -424,6 +445,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [in] */ DWORD dwMDEnumDataIndex,
             /* [out] */ DWORD *pdwMDRequiredDataLen);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetAllData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetAllData )( 
             IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -437,6 +459,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [size_is][out] */ unsigned char *pbMDBuffer,
             /* [out] */ DWORD *pdwMDRequiredBufferSize);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteAllData)
         HRESULT ( STDMETHODCALLTYPE *DeleteAllData )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -444,6 +467,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [in] */ DWORD dwMDUserType,
             /* [in] */ DWORD dwMDDataType);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CopyData)
         HRESULT ( STDMETHODCALLTYPE *CopyData )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDSourceHandle,
@@ -455,6 +479,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [in] */ DWORD dwMDDataType,
             /* [in] */ BOOL bMDCopyFlag);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetDataPaths)
         HRESULT ( STDMETHODCALLTYPE *GetDataPaths )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -465,6 +490,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [size_is][out] */ __RPC__out_ecount_full(dwMDBufferSize) WCHAR *pszBuffer,
             /* [out] */ __RPC__out DWORD *pdwMDRequiredBufferSize);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, OpenKey)
         HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -473,34 +499,41 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [in] */ DWORD dwMDTimeOut,
             /* [out] */ __RPC__out PMETADATA_HANDLE phMDNewHandle);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CloseKey)
         HRESULT ( STDMETHODCALLTYPE *CloseKey )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, ChangePermissions)
         HRESULT ( STDMETHODCALLTYPE *ChangePermissions )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [in] */ DWORD dwMDTimeOut,
             /* [in] */ DWORD dwMDAccessRequested);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SaveData)
         HRESULT ( STDMETHODCALLTYPE *SaveData )( 
             __RPC__in IMSAdminBaseW * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetHandleInfo)
         HRESULT ( STDMETHODCALLTYPE *GetHandleInfo )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [out] */ __RPC__out PMETADATA_HANDLE_INFO pmdhiInfo);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetSystemChangeNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSystemChangeNumber )( 
             __RPC__in IMSAdminBaseW * This,
             /* [out] */ __RPC__out DWORD *pdwSystemChangeNumber);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetDataSetNumber)
         HRESULT ( STDMETHODCALLTYPE *GetDataSetNumber )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath,
             /* [out] */ __RPC__out DWORD *pdwMDDataSetNumber);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SetLastChangeTime)
         HRESULT ( STDMETHODCALLTYPE *SetLastChangeTime )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -508,6 +541,7 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [in] */ __RPC__in PFILETIME pftMDLastChangeTime,
             /* [in] */ BOOL bLocalTime);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetLastChangeTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastChangeTime )( 
             __RPC__in IMSAdminBaseW * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -515,24 +549,29 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [out] */ __RPC__out PFILETIME pftMDLastChangeTime,
             /* [in] */ BOOL bLocalTime);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, KeyExchangePhase1)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *KeyExchangePhase1 )( 
             IMSAdminBaseW * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, KeyExchangePhase2)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *KeyExchangePhase2 )( 
             IMSAdminBaseW * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, Backup)
         HRESULT ( STDMETHODCALLTYPE *Backup )( 
             __RPC__in IMSAdminBaseW * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, Restore)
         HRESULT ( STDMETHODCALLTYPE *Restore )( 
             __RPC__in IMSAdminBaseW * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumBackups)
         HRESULT ( STDMETHODCALLTYPE *EnumBackups )( 
             __RPC__in IMSAdminBaseW * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(256) LPWSTR pszMDBackupLocation,
@@ -540,15 +579,18 @@ EXTERN_C const IID IID_IMSAdminBaseW;
             /* [out] */ __RPC__out PFILETIME pftMDBackupTime,
             /* [in] */ DWORD dwMDEnumIndex);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteBackup)
         HRESULT ( STDMETHODCALLTYPE *DeleteBackup )( 
             __RPC__in IMSAdminBaseW * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, UnmarshalInterface)
         HRESULT ( STDMETHODCALLTYPE *UnmarshalInterface )( 
             __RPC__in IMSAdminBaseW * This,
             /* [out] */ __RPC__deref_out_opt IMSAdminBaseW **piadmbwInterface);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetServerGuid)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *GetServerGuid )( 
             IMSAdminBaseW * This);
         
@@ -851,33 +893,40 @@ EXTERN_C const IID IID_IMSAdminBase2W;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSAdminBase2W * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSAdminBase2W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, AddKey)
         HRESULT ( STDMETHODCALLTYPE *AddKey )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteKey)
         HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteChildKeys)
         HRESULT ( STDMETHODCALLTYPE *DeleteChildKeys )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumKeys)
         HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -885,6 +934,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [size_is][out] */ __RPC__out_ecount_full(256) LPWSTR pszMDName,
             /* [in] */ DWORD dwMDEnumObjectIndex);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CopyKey)
         HRESULT ( STDMETHODCALLTYPE *CopyKey )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDSourceHandle,
@@ -894,18 +944,21 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ BOOL bMDOverwriteFlag,
             /* [in] */ BOOL bMDCopyFlag);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, RenameKey)
         HRESULT ( STDMETHODCALLTYPE *RenameKey )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDNewName);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SetData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetData )( 
             IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ LPCWSTR pszMDPath,
             /* [in] */ PMETADATA_RECORD pmdrMDData);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetData )( 
             IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -913,6 +966,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [out][in] */ PMETADATA_RECORD pmdrMDData,
             /* [out] */ DWORD *pdwMDRequiredDataLen);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteData)
         HRESULT ( STDMETHODCALLTYPE *DeleteData )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -920,6 +974,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ DWORD dwMDIdentifier,
             /* [in] */ DWORD dwMDDataType);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *EnumData )( 
             IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -928,6 +983,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ DWORD dwMDEnumDataIndex,
             /* [out] */ DWORD *pdwMDRequiredDataLen);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetAllData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetAllData )( 
             IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -941,6 +997,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [size_is][out] */ unsigned char *pbMDBuffer,
             /* [out] */ DWORD *pdwMDRequiredBufferSize);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteAllData)
         HRESULT ( STDMETHODCALLTYPE *DeleteAllData )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -948,6 +1005,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ DWORD dwMDUserType,
             /* [in] */ DWORD dwMDDataType);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CopyData)
         HRESULT ( STDMETHODCALLTYPE *CopyData )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDSourceHandle,
@@ -959,6 +1017,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ DWORD dwMDDataType,
             /* [in] */ BOOL bMDCopyFlag);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetDataPaths)
         HRESULT ( STDMETHODCALLTYPE *GetDataPaths )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -969,6 +1028,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [size_is][out] */ __RPC__out_ecount_full(dwMDBufferSize) WCHAR *pszBuffer,
             /* [out] */ __RPC__out DWORD *pdwMDRequiredBufferSize);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, OpenKey)
         HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -977,34 +1037,41 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ DWORD dwMDTimeOut,
             /* [out] */ __RPC__out PMETADATA_HANDLE phMDNewHandle);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CloseKey)
         HRESULT ( STDMETHODCALLTYPE *CloseKey )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, ChangePermissions)
         HRESULT ( STDMETHODCALLTYPE *ChangePermissions )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [in] */ DWORD dwMDTimeOut,
             /* [in] */ DWORD dwMDAccessRequested);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SaveData)
         HRESULT ( STDMETHODCALLTYPE *SaveData )( 
             __RPC__in IMSAdminBase2W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetHandleInfo)
         HRESULT ( STDMETHODCALLTYPE *GetHandleInfo )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [out] */ __RPC__out PMETADATA_HANDLE_INFO pmdhiInfo);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetSystemChangeNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSystemChangeNumber )( 
             __RPC__in IMSAdminBase2W * This,
             /* [out] */ __RPC__out DWORD *pdwSystemChangeNumber);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetDataSetNumber)
         HRESULT ( STDMETHODCALLTYPE *GetDataSetNumber )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath,
             /* [out] */ __RPC__out DWORD *pdwMDDataSetNumber);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SetLastChangeTime)
         HRESULT ( STDMETHODCALLTYPE *SetLastChangeTime )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1012,6 +1079,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ __RPC__in PFILETIME pftMDLastChangeTime,
             /* [in] */ BOOL bLocalTime);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetLastChangeTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastChangeTime )( 
             __RPC__in IMSAdminBase2W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1019,24 +1087,29 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [out] */ __RPC__out PFILETIME pftMDLastChangeTime,
             /* [in] */ BOOL bLocalTime);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, KeyExchangePhase1)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *KeyExchangePhase1 )( 
             IMSAdminBase2W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, KeyExchangePhase2)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *KeyExchangePhase2 )( 
             IMSAdminBase2W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, Backup)
         HRESULT ( STDMETHODCALLTYPE *Backup )( 
             __RPC__in IMSAdminBase2W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, Restore)
         HRESULT ( STDMETHODCALLTYPE *Restore )( 
             __RPC__in IMSAdminBase2W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumBackups)
         HRESULT ( STDMETHODCALLTYPE *EnumBackups )( 
             __RPC__in IMSAdminBase2W * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(256) LPWSTR pszMDBackupLocation,
@@ -1044,18 +1117,22 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [out] */ __RPC__out PFILETIME pftMDBackupTime,
             /* [in] */ DWORD dwMDEnumIndex);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteBackup)
         HRESULT ( STDMETHODCALLTYPE *DeleteBackup )( 
             __RPC__in IMSAdminBase2W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, UnmarshalInterface)
         HRESULT ( STDMETHODCALLTYPE *UnmarshalInterface )( 
             __RPC__in IMSAdminBase2W * This,
             /* [out] */ __RPC__deref_out_opt IMSAdminBaseW **piadmbwInterface);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetServerGuid)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *GetServerGuid )( 
             IMSAdminBase2W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, BackupWithPasswd)
         HRESULT ( STDMETHODCALLTYPE *BackupWithPasswd )( 
             __RPC__in IMSAdminBase2W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
@@ -1063,6 +1140,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ DWORD dwMDFlags,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszPasswd);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, RestoreWithPasswd)
         HRESULT ( STDMETHODCALLTYPE *RestoreWithPasswd )( 
             __RPC__in IMSAdminBase2W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
@@ -1070,6 +1148,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ DWORD dwMDFlags,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszPasswd);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, Export)
         HRESULT ( STDMETHODCALLTYPE *Export )( 
             __RPC__in IMSAdminBase2W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszPasswd,
@@ -1077,6 +1156,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszSourcePath,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, Import)
         HRESULT ( STDMETHODCALLTYPE *Import )( 
             __RPC__in IMSAdminBase2W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszPasswd,
@@ -1085,6 +1165,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszDestPath,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, RestoreHistory)
         HRESULT ( STDMETHODCALLTYPE *RestoreHistory )( 
             __RPC__in IMSAdminBase2W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDHistoryLocation,
@@ -1092,6 +1173,7 @@ EXTERN_C const IID IID_IMSAdminBase2W;
             /* [in] */ DWORD dwMDMinorVersion,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, EnumHistory)
         HRESULT ( STDMETHODCALLTYPE *EnumHistory )( 
             __RPC__in IMSAdminBase2W * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(256) LPWSTR pszMDHistoryLocation,
@@ -1277,33 +1359,40 @@ EXTERN_C const IID IID_IMSAdminBase3W;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSAdminBase3W * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSAdminBase3W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, AddKey)
         HRESULT ( STDMETHODCALLTYPE *AddKey )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteKey)
         HRESULT ( STDMETHODCALLTYPE *DeleteKey )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteChildKeys)
         HRESULT ( STDMETHODCALLTYPE *DeleteChildKeys )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumKeys)
         HRESULT ( STDMETHODCALLTYPE *EnumKeys )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1311,6 +1400,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [size_is][out] */ __RPC__out_ecount_full(256) LPWSTR pszMDName,
             /* [in] */ DWORD dwMDEnumObjectIndex);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CopyKey)
         HRESULT ( STDMETHODCALLTYPE *CopyKey )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDSourceHandle,
@@ -1320,18 +1410,21 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ BOOL bMDOverwriteFlag,
             /* [in] */ BOOL bMDCopyFlag);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, RenameKey)
         HRESULT ( STDMETHODCALLTYPE *RenameKey )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDNewName);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SetData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *SetData )( 
             IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ LPCWSTR pszMDPath,
             /* [in] */ PMETADATA_RECORD pmdrMDData);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetData )( 
             IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1339,6 +1432,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [out][in] */ PMETADATA_RECORD pmdrMDData,
             /* [out] */ DWORD *pdwMDRequiredDataLen);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteData)
         HRESULT ( STDMETHODCALLTYPE *DeleteData )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1346,6 +1440,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ DWORD dwMDIdentifier,
             /* [in] */ DWORD dwMDDataType);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *EnumData )( 
             IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1354,6 +1449,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ DWORD dwMDEnumDataIndex,
             /* [out] */ DWORD *pdwMDRequiredDataLen);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetAllData)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetAllData )( 
             IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1367,6 +1463,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [size_is][out] */ unsigned char *pbMDBuffer,
             /* [out] */ DWORD *pdwMDRequiredBufferSize);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteAllData)
         HRESULT ( STDMETHODCALLTYPE *DeleteAllData )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1374,6 +1471,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ DWORD dwMDUserType,
             /* [in] */ DWORD dwMDDataType);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CopyData)
         HRESULT ( STDMETHODCALLTYPE *CopyData )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDSourceHandle,
@@ -1385,6 +1483,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ DWORD dwMDDataType,
             /* [in] */ BOOL bMDCopyFlag);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetDataPaths)
         HRESULT ( STDMETHODCALLTYPE *GetDataPaths )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1395,6 +1494,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [size_is][out] */ __RPC__out_ecount_full(dwMDBufferSize) WCHAR *pszBuffer,
             /* [out] */ __RPC__out DWORD *pdwMDRequiredBufferSize);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, OpenKey)
         HRESULT ( STDMETHODCALLTYPE *OpenKey )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1403,34 +1503,41 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ DWORD dwMDTimeOut,
             /* [out] */ __RPC__out PMETADATA_HANDLE phMDNewHandle);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, CloseKey)
         HRESULT ( STDMETHODCALLTYPE *CloseKey )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, ChangePermissions)
         HRESULT ( STDMETHODCALLTYPE *ChangePermissions )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [in] */ DWORD dwMDTimeOut,
             /* [in] */ DWORD dwMDAccessRequested);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SaveData)
         HRESULT ( STDMETHODCALLTYPE *SaveData )( 
             __RPC__in IMSAdminBase3W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetHandleInfo)
         HRESULT ( STDMETHODCALLTYPE *GetHandleInfo )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [out] */ __RPC__out PMETADATA_HANDLE_INFO pmdhiInfo);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetSystemChangeNumber)
         HRESULT ( STDMETHODCALLTYPE *GetSystemChangeNumber )( 
             __RPC__in IMSAdminBase3W * This,
             /* [out] */ __RPC__out DWORD *pdwSystemChangeNumber);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetDataSetNumber)
         HRESULT ( STDMETHODCALLTYPE *GetDataSetNumber )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDPath,
             /* [out] */ __RPC__out DWORD *pdwMDDataSetNumber);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, SetLastChangeTime)
         HRESULT ( STDMETHODCALLTYPE *SetLastChangeTime )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1438,6 +1545,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ __RPC__in PFILETIME pftMDLastChangeTime,
             /* [in] */ BOOL bLocalTime);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetLastChangeTime)
         HRESULT ( STDMETHODCALLTYPE *GetLastChangeTime )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1445,24 +1553,29 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [out] */ __RPC__out PFILETIME pftMDLastChangeTime,
             /* [in] */ BOOL bLocalTime);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, KeyExchangePhase1)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *KeyExchangePhase1 )( 
             IMSAdminBase3W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, KeyExchangePhase2)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *KeyExchangePhase2 )( 
             IMSAdminBase3W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, Backup)
         HRESULT ( STDMETHODCALLTYPE *Backup )( 
             __RPC__in IMSAdminBase3W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, Restore)
         HRESULT ( STDMETHODCALLTYPE *Restore )( 
             __RPC__in IMSAdminBase3W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, EnumBackups)
         HRESULT ( STDMETHODCALLTYPE *EnumBackups )( 
             __RPC__in IMSAdminBase3W * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(256) LPWSTR pszMDBackupLocation,
@@ -1470,18 +1583,22 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [out] */ __RPC__out PFILETIME pftMDBackupTime,
             /* [in] */ DWORD dwMDEnumIndex);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, DeleteBackup)
         HRESULT ( STDMETHODCALLTYPE *DeleteBackup )( 
             __RPC__in IMSAdminBase3W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
             /* [in] */ DWORD dwMDVersion);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, UnmarshalInterface)
         HRESULT ( STDMETHODCALLTYPE *UnmarshalInterface )( 
             __RPC__in IMSAdminBase3W * This,
             /* [out] */ __RPC__deref_out_opt IMSAdminBaseW **piadmbwInterface);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseW, GetServerGuid)
         /* [restricted][local] */ HRESULT ( STDMETHODCALLTYPE *GetServerGuid )( 
             IMSAdminBase3W * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, BackupWithPasswd)
         HRESULT ( STDMETHODCALLTYPE *BackupWithPasswd )( 
             __RPC__in IMSAdminBase3W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
@@ -1489,6 +1606,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ DWORD dwMDFlags,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszPasswd);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, RestoreWithPasswd)
         HRESULT ( STDMETHODCALLTYPE *RestoreWithPasswd )( 
             __RPC__in IMSAdminBase3W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDBackupLocation,
@@ -1496,6 +1614,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ DWORD dwMDFlags,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszPasswd);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, Export)
         HRESULT ( STDMETHODCALLTYPE *Export )( 
             __RPC__in IMSAdminBase3W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszPasswd,
@@ -1503,6 +1622,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszSourcePath,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, Import)
         HRESULT ( STDMETHODCALLTYPE *Import )( 
             __RPC__in IMSAdminBase3W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszPasswd,
@@ -1511,6 +1631,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszDestPath,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, RestoreHistory)
         HRESULT ( STDMETHODCALLTYPE *RestoreHistory )( 
             __RPC__in IMSAdminBase3W * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszMDHistoryLocation,
@@ -1518,6 +1639,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [in] */ DWORD dwMDMinorVersion,
             /* [in] */ DWORD dwMDFlags);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase2W, EnumHistory)
         HRESULT ( STDMETHODCALLTYPE *EnumHistory )( 
             __RPC__in IMSAdminBase3W * This,
             /* [size_is][out][in] */ __RPC__inout_ecount_full(256) LPWSTR pszMDHistoryLocation,
@@ -1526,6 +1648,7 @@ EXTERN_C const IID IID_IMSAdminBase3W;
             /* [out] */ __RPC__out PFILETIME pftMDHistoryTime,
             /* [in] */ DWORD dwMDEnumIndex);
         
+        DECLSPEC_XFGVIRT(IMSAdminBase3W, GetChildPaths)
         HRESULT ( STDMETHODCALLTYPE *GetChildPaths )( 
             __RPC__in IMSAdminBase3W * This,
             /* [in] */ METADATA_HANDLE hMDHandle,
@@ -1715,18 +1838,22 @@ EXTERN_C const IID IID_IMSImpExpHelpW;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSImpExpHelpW * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSImpExpHelpW * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSImpExpHelpW * This);
         
+        DECLSPEC_XFGVIRT(IMSImpExpHelpW, EnumeratePathsInFile)
         HRESULT ( STDMETHODCALLTYPE *EnumeratePathsInFile )( 
             __RPC__in IMSImpExpHelpW * This,
             /* [string][in][unique] */ __RPC__in_opt_string LPCWSTR pszFileName,
@@ -1802,23 +1929,28 @@ EXTERN_C const IID IID_IMSAdminBaseSinkW;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMSAdminBaseSinkW * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMSAdminBaseSinkW * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMSAdminBaseSinkW * This);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseSinkW, SinkNotify)
         HRESULT ( STDMETHODCALLTYPE *SinkNotify )( 
             __RPC__in IMSAdminBaseSinkW * This,
             /* [in] */ DWORD dwMDNumElements,
             /* [size_is][in] */ __RPC__in_ecount_full(dwMDNumElements) MD_CHANGE_OBJECT_W pcoChangeList[  ]);
         
+        DECLSPEC_XFGVIRT(IMSAdminBaseSinkW, ShutdownNotify)
         HRESULT ( STDMETHODCALLTYPE *ShutdownNotify )( 
             __RPC__in IMSAdminBaseSinkW * This);
         
@@ -1896,29 +2028,36 @@ EXTERN_C const IID IID_AsyncIMSAdminBaseSinkW;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in AsyncIMSAdminBaseSinkW * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in AsyncIMSAdminBaseSinkW * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in AsyncIMSAdminBaseSinkW * This);
         
+        DECLSPEC_XFGVIRT(AsyncIMSAdminBaseSinkW, Begin_SinkNotify)
         HRESULT ( STDMETHODCALLTYPE *Begin_SinkNotify )( 
             __RPC__in AsyncIMSAdminBaseSinkW * This,
             /* [in] */ DWORD dwMDNumElements,
             /* [size_is][in] */ __RPC__in_xcount_full(dwMDNumElements) MD_CHANGE_OBJECT_W pcoChangeList[  ]);
         
+        DECLSPEC_XFGVIRT(AsyncIMSAdminBaseSinkW, Finish_SinkNotify)
         HRESULT ( STDMETHODCALLTYPE *Finish_SinkNotify )( 
             __RPC__in AsyncIMSAdminBaseSinkW * This);
         
+        DECLSPEC_XFGVIRT(AsyncIMSAdminBaseSinkW, Begin_ShutdownNotify)
         HRESULT ( STDMETHODCALLTYPE *Begin_ShutdownNotify )( 
             __RPC__in AsyncIMSAdminBaseSinkW * This);
         
+        DECLSPEC_XFGVIRT(AsyncIMSAdminBaseSinkW, Finish_ShutdownNotify)
         HRESULT ( STDMETHODCALLTYPE *Finish_ShutdownNotify )( 
             __RPC__in AsyncIMSAdminBaseSinkW * This);
         

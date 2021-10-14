@@ -1,6 +1,6 @@
 /********************************************************************************
 *                                                                               *
-* powerbase.h -- ApiSet Contract for api-ms-win-power-base-l1-1-0               *  
+* powerbase.h -- ApiSet Contract for api-ms-win-power-base-l1-1-0               *
 *                                                                               *
 * Copyright (c) Microsoft Corporation. All rights reserved.                     *
 *                                                                               *
@@ -54,7 +54,6 @@ CallNtPowerInformation(
     _In_ ULONG OutputBufferLength
     );
 
-
 #ifdef _OVERRIDE_NTSTATUS_
 #undef NTSTATUS
 #endif
@@ -65,17 +64,17 @@ GetPwrCapabilities(
     _Out_ PSYSTEM_POWER_CAPABILITIES lpspc
     );
 
-
 #if (NTDDI_VERSION >= NTDDI_WIN8)
+
 POWER_PLATFORM_ROLE
 WINAPI
 PowerDeterminePlatformRoleEx(
     _In_ ULONG Version
     );
-
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
+
 DWORD
 WINAPI
 PowerRegisterSuspendResumeNotification(
@@ -83,16 +82,15 @@ PowerRegisterSuspendResumeNotification(
     _In_ HANDLE Recipient,
     _Out_ PHPOWERNOTIFY RegistrationHandle
     );
-
 #endif
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
+
 DWORD
 WINAPI
 PowerUnregisterSuspendResumeNotification(
     _Inout_ HPOWERNOTIFY RegistrationHandle
     );
-
 #endif
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)

@@ -435,25 +435,6 @@ DECLARE_INTERFACE(ID3D11FunctionParameterReflection)
     STDMETHOD(GetDesc)(THIS_ _Out_ D3D11_PARAMETER_DESC * pDesc) PURE;
 };
 
-// {CAC701EE-80FC-4122-8242-10B39C8CEC34}
-interface DECLSPEC_UUID("CAC701EE-80FC-4122-8242-10B39C8CEC34") ID3D11Module;
-DEFINE_GUID(IID_ID3D11Module, 
-0xcac701ee, 0x80fc, 0x4122, 0x82, 0x42, 0x10, 0xb3, 0x9c, 0x8c, 0xec, 0x34);
-
-#undef INTERFACE
-#define INTERFACE ID3D11Module
-
-DECLARE_INTERFACE_(ID3D11Module, IUnknown)
-{
-    STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
-    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
-    STDMETHOD_(ULONG, Release)(THIS) PURE;
-
-    // Create an instance of a module for resource re-binding.
-    STDMETHOD(CreateInstance)(THIS_ _In_opt_ LPCSTR pNamespace,
-                                    _COM_Outptr_ interface ID3D11ModuleInstance ** ppModuleInstance) PURE;
-};
-
 
 // {469E07F7-045A-48D5-AA12-68A478CDF75D}
 interface DECLSPEC_UUID("469E07F7-045A-48D5-AA12-68A478CDF75D") ID3D11ModuleInstance;
@@ -486,6 +467,25 @@ DECLARE_INTERFACE_(ID3D11ModuleInstance, IUnknown)
 
     STDMETHOD(BindResourceAsUnorderedAccessView)(THIS_ _In_ UINT uSrcSrvSlot, _In_ UINT uDstUavSlot, _In_ UINT uCount) PURE;
     STDMETHOD(BindResourceAsUnorderedAccessViewByName)(THIS_ _In_ LPCSTR pSrvName, _In_ UINT uDstUavSlot, _In_ UINT uCount) PURE;
+};
+
+// {CAC701EE-80FC-4122-8242-10B39C8CEC34}
+interface DECLSPEC_UUID("CAC701EE-80FC-4122-8242-10B39C8CEC34") ID3D11Module;
+DEFINE_GUID(IID_ID3D11Module, 
+0xcac701ee, 0x80fc, 0x4122, 0x82, 0x42, 0x10, 0xb3, 0x9c, 0x8c, 0xec, 0x34);
+
+#undef INTERFACE
+#define INTERFACE ID3D11Module
+
+DECLARE_INTERFACE_(ID3D11Module, IUnknown)
+{
+    STDMETHOD(QueryInterface)(THIS_ _In_ REFIID iid, _Out_ LPVOID * ppv) PURE;
+    STDMETHOD_(ULONG, AddRef)(THIS) PURE;
+    STDMETHOD_(ULONG, Release)(THIS) PURE;
+
+    // Create an instance of a module for resource re-binding.
+    STDMETHOD(CreateInstance)(THIS_ _In_opt_ LPCSTR pNamespace,
+                                    _COM_Outptr_ interface ID3D11ModuleInstance ** ppModuleInstance) PURE;
 };
 
 

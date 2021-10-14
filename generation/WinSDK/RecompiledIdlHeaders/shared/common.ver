@@ -34,11 +34,11 @@
     constant VER_LEGALCOPYRIGHT_STR_WITH_YEARS below
 *****************************************************************/
 #ifndef VER_LEGALCOPYRIGHT_YEARS
-#define VER_LEGALCOPYRIGHT_YEARS    "2019"
+#define VER_LEGALCOPYRIGHT_YEARS    "2021"
 #endif
 
 #ifndef VER_LEGALCOPYRIGHT_STR_WITH_YEARS
-#define VER_LEGALCOPYRIGHT_STR_WITH_YEARS L"\251 2019 Microsoft Corporation. All rights reserved."
+#define VER_LEGALCOPYRIGHT_STR_WITH_YEARS L"\251 2021 Microsoft Corporation. All rights reserved."
 #endif
 
 #ifndef VER_LEGALCOPYRIGHT_STR

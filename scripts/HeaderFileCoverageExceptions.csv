@@ -1,0 +1,333 @@
+File,Skipping,Reason
+/shared/apiset.h,true,API set macros
+/shared/apisetcconv.h,true,API set macros
+/shared/basetsd.h,true,typedefs and inlined code we don't need
+/shared/clfslsn.h,true,duplicate types we don't need
+/shared/concurrencysal.h,true,SAL annotations
+/shared/d3dkmdt.h,true,Ignoring kernel stuff
+/shared/d3dkmthk.h,true,Ignoring kernel stuff
+/shared/d3dukmdt.h,true,Ignoring kernel stuff
+/shared/devioctl.h,true,Copy of winioctl.h
+/shared/dontuse.h,true,Used for deprecation
+/shared/dpfilter.h,true,Ignoring kernel stuff
+/shared/driverspecs.h,true,SAL annotations
+/shared/drivinit.h,true,Moved to wingdi.h
+/shared/ehstorbandmgmt.h,true,Ignoring kernel stuff
+/shared/ehstorioctl.h,true,Ignoring kernel stuff
+/shared/fwpvi.h,true,Seems to be a bunch of redefines
+/shared/gpio.h,true,Ignoring kernel stuff
+/shared/hbaapi.h,true,Ignoring kernel stuff
+/shared/hwn.h,true,Ignoring kernel stuff
+/shared/initguid.h,true,Only for C guids
+/shared/intsafe.h,true,Int helpers
+/shared/ipv6prefast.h,true,SAL annotations
+/shared/kernelspecs.h,true,Ignoring kernel stuff
+/shared/ksarm.h,true,Ignoring kernel stuff
+/shared/ksarm64.h,true,Ignoring kernel stuff
+/shared/ksguid.h,true,Ignoring kernel stuff
+/shared/kxarm.h,true,Ignoring kernel stuff
+/shared/kxarm64.h,true,Ignoring kernel stuff
+/shared/kxarm64unw.h,true,Ignoring kernel stuff
+/shared/kxarmunw.h,true,Ignoring kernel stuff
+/shared/lamp.h,false,Need lamp partition
+/shared/math3dhelper.h,true,Math stuff that doesn't scrape
+/shared/mprapidef.h,true,Max constants we don't need
+/shared/nfcdtadev.h,false,Need NFC partition
+/shared/nfcradiodev.h,false,Need NFC partition
+/shared/nfcsedev.h,false,Need NFC partition
+/shared/nfpdev.h,false,Need NFP partition
+/shared/no_sal2.h,true,SAL annotations
+/shared/ntdd1394.h,false,Need 1394 partition
+/shared/ntddbeep.h,false,Need beep partition or put somewhere else
+/shared/ntddcdrm.h,false,Need cdrom partition
+/shared/ntddcdvd.h,false,Need dvd partition
+/shared/ntddchgr.h,false,Need medium changer partition
+/shared/ntdddisk.h,true,Duplicated ioctl constants
+/shared/ntddmmc.h,true,Ignoring kernel stuff
+/shared/ntddmodm.h,false,Need modem partition
+/shared/ntddpar.h,false,Need parallel partition
+/shared/ntddscm.h,true,Duplicated ioctl constants
+/shared/ntddser.h,true,Duplicated ioctl constants
+/shared/ntddtape.h,false,Need tape partition
+/shared/ntddtdi.h,false,Need Transport driver interface partition
+/shared/ntdskreg.h,true,Pre-vista stuff
+/shared/ntverp.h,true,Build version stuff
+/shared/nvme.h,false,Need NVMe partition
+/shared/packoff.h,true,Pack stuff
+/shared/packon.h,true,Pack stuff
+/shared/poppack.h,true,Pack stuff
+/shared/pshpack1.h,true,Pack stuff
+/shared/pshpack2.h,true,Pack stuff
+/shared/pshpack4.h,true,Pack stuff
+/shared/pshpack8.h,true,Pack stuff
+/shared/pshpck16.h,true,Pack stuff
+/shared/reshub.h,false,Need Resource Hub partition
+/shared/rpcnterr.h,false,Move RPC_ into a manual enum
+/shared/rpcsal.h,true,SAL annotations
+/shared/sal.h,true,SAL annotations
+/shared/scsi.h,false,Need SCSI partition
+/shared/scsiscan.h,false,Need SCSI partition
+/shared/sdv_driverspecs.h,true,SAL annotations
+/shared/spb.h,false,Need Simple Peripheral Bus partition
+/shared/specstrings_strict.h,true,SAL annotations
+/shared/specstrings_undef.h,true,SAL annotations
+/shared/specstrings.h,true,SAL annotations
+/shared/srb.h,false,Need SCSI partition
+/shared/suppress.h,true,C warning suppressions
+/shared/tbt3ioctls.h,false,Need Thunderbolt 3 partition
+/shared/tdi.h,false,Need TDI partition
+/shared/traceloggingactivity.h,true,Templates we can't use
+/shared/traceloggingprovider.h,true,Templates we can't use
+/shared/unexposeenums2managed.h,true,Defines we can't use
+/shared/usb100.h,true,No real content
+/shared/usb200.h,true,No real content
+/shared/usbdi.h,true,Obsolete
+/shared/vhf.h,false,Need VHF partition
+/shared/warning.h,true,Warnings we don't need
+/shared/winapifamily.h,true,WinAPI stuff we don't need
+/shared/winpackagefamily.h,true,WinAPI stuff we don't need
+/shared/netcx/shared/1.0/net/checksum.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/checksumtypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/databuffer.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/databuffertypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/extension.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/fragment.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/gso.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/gsotypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/ieee8021q.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/ieee8021qtypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/logicaladdress.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/logicaladdresstypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/mdl.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/mdltypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/packet.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/packethash.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/packethashtypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/returncontext.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/returncontexttypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/ring.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/ringcollection.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/rsc.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/rsctypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/virtualaddress.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/virtualaddresstypes.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/wifi/exemptionaction.h,true,Inlined code we can't scrape
+/shared/netcx/shared/1.0/net/wifi/exemptionactiontypes.h,true,Inlined code we can't scrape
+/um/_dbdao.h,true,Class definitions we can't scrape
+/um/activeds.h,true,Only includes
+/um/adc.h,false,Need ADC partition
+/um/adsdb.h,false,Need ADS partition
+/um/adserr.h,false,Need ADS partition
+/um/adsnms.h,false,Need ADS partition
+/um/adssts.h,false,Need ADS partition
+/um/alg.h,false,Need ALG ?
+/um/axextendenums.h,true,Says for managed code
+/um/baseaudioprocessingobject.h,true,Class we can't scrape
+/um/bdaiface_enums.h,true,Duplicate info
+/um/cdosys.h,false,Need CODSys
+/um/cdosyserr.h,false,Need CODSys
+/um/cdosysstr.h,false,Need CODSys
+/um/chptrarr.h,true,Class we can't scrape
+/um/chstrarr.h,true,Class we can't scrape
+/um/chstring.h,true,Class we can't scrape
+/um/cimfs.h,false,Need CimFS
+/um/coguid.h,true,Duplicate guid info
+/um/comlite.h,true,Rename macros only
+/um/commapi.h,true,Duped in winbase.h
+/um/correngine.h,false,Need correlation
+/um/cper.h,false,Need Windows Hardware Error Architecture (WHEA)
+/um/cperguid.h,false,Need Windows Hardware Error Architecture (WHEA)
+/um/d2d1effecthelpers.h,true,Inline code we can't scrape
+/um/d2d1helper.h,true,Inline code we can't scrape
+/um/d3d.h,false,Need D3D
+/um/d3dhal.h,true,Ignoring kernel stuff
+/um/d3dhalex.h,true,Ignoring kernel stuff
+/um/ddkmapi.h,true,Ignoring kernel stuff
+/um/devicecategories.h,true,DEVICEDISPLAY_CATEGORY_* -- no documentation for them
+/um/directxcollision.h,true,Inlined code
+/um/directxcolors.h,true,vector constants we can't use
+/um/directxmath.h,true,Inlined code
+/um/directxpackedvector.h,true,Inlined code
+/um/dmksctrl.h,true,Ignoring kernel stuff
+/um/dmo.h,true,Nothing to scrape
+/um/dpx.h,false,Need DPX section
+/um/dpx1.h,false,Need DPX section
+/um/dshow.h,true,Includes only
+/um/dx95type.h,true,Ignoring kernel stuff
+/um/dxdiag.h,true,Not intended to be used in user code
+/um/dxgiddi.h,true,Ignoring kernel stuff
+/um/dxtmpl.h,true,Inlines and templates
+/um/easencryptprov.h,false,Need EAS
+/um/easregprov.h,false,Need EAS
+/um/encdec_enums.h,true,Uknown enums
+/um/filterpipelineutil.h,true,Inlined code
+/um/fltwinerror.h,true,Duplicate constants
+/um/frquery.h,true,Inline code
+/um/functiondiscoveryproviderhelper.h,true,Inlined code
+/um/fwcommon.h,true,Inlined code
+/um/gdiplus.h,true,Can't use C++ classes
+/um/gdiplusbase.h,true,Can't use C++ classes
+/um/gdiplusbitmap.h,true,Can't use C++ classes
+/um/gdiplusbrush.h,true,Can't use C++ classes
+/um/gdipluscachedbitmap.h,true,Can't use C++ classes
+/um/gdipluscolor.h,true,Can't use C++ classes
+/um/gdipluscolormatrix.h,true,Can't use C++ classes
+/um/gdipluseffects.h,true,Can't use C++ classes
+/um/gdiplusenums.h,true,Can't use C++ classes
+/um/gdiplusflat.h,true,Can't use C++ classes
+/um/gdiplusfont.h,true,Can't use C++ classes
+/um/gdiplusfontcollection.h,true,Can't use C++ classes
+/um/gdiplusfontfamily.h,true,Can't use C++ classes
+/um/gdiplusgpstubs.h,true,Can't use C++ classes
+/um/gdiplusgraphics.h,true,Can't use C++ classes
+/um/gdiplusheaders.h,true,Can't use C++ classes
+/um/gdiplusimageattributes.h,true,Can't use C++ classes
+/um/gdiplusimagecodec.h,true,Can't use C++ classes
+/um/gdiplusimaging.h,true,Can't use C++ classes
+/um/gdiplusinit.h,true,Can't use C++ classes
+/um/gdipluslinecaps.h,true,Can't use C++ classes
+/um/gdiplusmatrix.h,true,Can't use C++ classes
+/um/gdiplusmem.h,true,Can't use C++ classes
+/um/gdiplusmetafile.h,true,Can't use C++ classes
+/um/gdiplusmetaheader.h,true,Can't use C++ classes
+/um/gdipluspath.h,true,Can't use C++ classes
+/um/gdipluspen.h,true,Can't use C++ classes
+/um/gdipluspixelformats.h,true,Can't use C++ classes
+/um/gdiplusregion.h,true,Can't use C++ classes
+/um/gdiplusstringformat.h,true,Can't use C++ classes
+/um/gdiplustypes.h,true,Can't use C++ classes
+/um/genlex.h,true,Can't use C++ classes
+/um/hlguids.h,true,Duplicate guid constants
+/um/hliface.h,true,Nothing useful
+/um/httpcach.h,true,Can't use C++ classes
+/um/httpcompression.h,false,Need Web Server Core
+/um/hxhelppaneproxy.h,false,Need Help Pane
+/um/idlmulti.h,true,Preprocessor stuff
+/um/inputeventflags.h,true,WinPhone - deprecated
+/um/instance.h,true,Can't use C++ classes
+/um/knownfolderpathscom.h,true,Undocumented--nothings seems to use these interfaces
+/um/ksopmapi.h,true,Ignoring kernel stuff
+/um/lmon.h,true,Undocumented and unused
+/um/mdcommsg.h,true,Macros we can't use
+/um/methodco.h,true,Can't use C++ classes
+/um/microsoft.diagnostics.appanalysis.h,true,Seems to be WinRT stuff
+/um/mimedisp.h,true,DISP ids--can't find anything that uses them
+/um/mimeinfo.h,true,Undocumented--can't find uses of it
+/um/minappmodel.h,true,Undocumented constants--can't find uses of it
+/um/minidrv.h,true,Macros we can't use
+/um/msado15_backcompat.h,true,Empty of anything
+/um/msado15.h,true,Empty of anything
+/um/msdelta.h,false,TODO: Where to put this
+/um/mspcoll.h,true,Can't use C++ classes
+/um/mspenum.h,true,Can't use C++ classes
+/um/msplog.h,true,Can't use C++ classes
+/um/mspst.h,true,Can't use C++ classes
+/um/mspterm.h,true,Can't use C++ classes
+/um/mspthrd.h,true,Can't use C++ classes
+/um/msptrmac.h,true,Can't use C++ classes
+/um/msptrmar.h,true,Can't use C++ classes
+/um/msptrmvc.h,true,Can't use C++ classes
+/um/msputils.h,true,Can't use C++ classes
+/um/msremote.h,true,Undocumented
+/um/msstkppg.h,true,Udocumented and unused
+/um/msterr.h,true,Empty
+/um/msxml2.h,true,Using 6.x
+/um/msxml2did.h,true,Using 6.x
+/um/mtsadmin.h,true,Using mtx instead
+/um/mtsevents.h,true,Using mtx instead
+/um/mtsgrp.h,true,Using mtx instead
+/um/multimon.h,true,Duplicated in other headers
+/um/nspapip.h,true,Duplicated in other headers
+/um/nt_vdd.h,true,Ignoring kernel stuff
+/um/ntddpsch.h,true,Ignoring kernel stuff
+/um/ntsdexts.h,true,Superceded by wdbhexts.h
+/um/objerror.h,true,Empty
+/um/objpath.h,true,Can't use C++ classes
+/um/oemupgex.h,true,Obsolete for XP and later
+/um/ole2ver.h,true,Empty
+/um/opathlex.h,true,Undocumented can't find uses
+/um/parser.h,true,Can't use C++ classes
+/um/pdrvver.h,true,Printer driver resource constants
+/um/pix_win.h,true,Can't use C++ classes
+/um/pix.h,true,Can't use C++ classes
+/um/polarity.h,true,Empty
+/um/portabledeviceconnectimports.h,true,Empty
+/um/provexce.h,true,Can't use C++ classes
+/um/provider.h,true,Can't use C++ classes
+/um/refptrco.h,true,Can't use C++ classes
+/um/ringtonedeviceservice.h,Undocumented can't find uses
+/um/sapi51.h,true,Superceded by sapi53.h
+/um/sapiddk51.h,Superceded by sapiddk.h
+/um/sberrors.h,true,What is Session Broker
+/um/scclient.h,true,Can't use C++ classes
+/um/schemadef.h,true,Undocumented can't find uses
+/um/scrptids.h,true,Undocumented--could be IE
+/um/scserver.h,true,Can't use C++ classes
+/um/sipbase.h,true,Empty
+/um/softintrin.h,true,Machine intrinsincs we can't scrape
+/um/spcollec.h,true,Can't use C++ classes
+/um/spddkhlp.h,true,Can't use C++ classes
+/um/speventq.h,true,Can't use C++ classes
+/um/sphelper.h,true,Can't use C++ classes
+/um/spuihelp.h,true,Can't use C++ classes
+/um/sql_1.h,true,Can't use C++ classes
+/um/stllock.h,true,Can't use C++ classes
+/um/thrdbase.h,true,Can't use C++ classes
+/um/tpwaitablehandle.h,false,CLSID_SignalableNotifier - not documented--do we want this?
+/um/txctx.h,true,Empty
+/um/uiautomation.h,true,Empty
+/um/uiribbonpropertyhelpers.h,true,Can't use C++ classes
+/um/utillib.h,true,Empty
+/um/uusbfn.h,true,Empty
+/um/vddsvc.h,true,Ignoring kernel stuff
+/um/vsanimation.h,true,Undocumented can't find uses
+/um/vsbackup.h,true,Can't use C++ classes
+/um/vsstyle.h,false,VisualStyle -- can't find what uses this
+/um/wdscpmsg.h,false,Can't find what uses these errors
+/um/wia_xp.h,true,Using wia_lh.h instead
+/um/wia.h,true,Using wia_lh.h instead
+/um/wiamindr_xp.h,true,Using wiamindr_lh.h instead
+/um/widemath.h,true,Exclusing math functions
+/um/windows.h,true,Only has includes
+/um/windowsnumerics.h,Exclusing math functions
+/um/windowsnumerics.impl.h,true,Can't use C++ classes
+/um/winmeta.h,true,Used by templates we can't use
+/um/winphoneinput.h,true,WinPhone - deprecated
+/um/winres.h,true,Duplicated constants
+/um/winresrc.h,true,Only includes
+/um/wkspbkax.h,true,Undocumented no sampels found
+/um/wmdm.h,true,No content
+/um/wmsdk.h,true,Includes only
+/um/wownt16.h,true,WOW stuff
+/um/wownt32.h,true,WOW stuff
+/um/wpframework.h,true,Can't use C++ classes
+/um/wsdemolicensing.h,true,Undocumented can't find samples
+/um/wspiapi.h,true,Helpers for protocol independent API functions
+/um/xapobase.h,true,Can't use C++ classes
+/um/xmldomdid.h,true,For XmlDom.idl which we don't use
+/um/xmldsodid.h,true,For XmlDom.idl which we don't use
+/um/zmouse.h,true,Duplicate constants
+/um/qcc/platform.h,true,No usable content
+/um/qcc/windows/mapping.h,true,No usable content
+/um/qcc/windows/platform_types.h,true,No usable content
+/um/dbdao.h,true,Can't use C++ classes
+/um/daogetrw.h,true,Can't use C++ classes
+/um/dbdaoerr.h,true,Can't use C++ classes
+/um/dbdaoid.h,true,Can't use C++ classes
+/um/dbdaoint.h,true,Can't use C++ classes
+/um/dbnetlib.h,true,Can't use C++ classes
+/um/wbemglue.h,true,Can't use C++ classes
+/um/wbemtime.h,true,Can't use C++ classes
+/um/ipxconst.h,true,Can't compile because of missing type for stm.h
+/um/ipxrip.h,true,Can't compile because of missing type for stm.h
+/um/ipxrtdef.h,true,Can't compile because of missing type for stm.h
+/um/ipxsap.h,true,Can't compile because of missing type for stm.h
+/um/ipxtfflt.h,true,Can't compile because of missing type for stm.h
+/um/stm.h,true,Can't compile because of missing type for stm.h
+/um/sapiddk51.h,true,Duplicated by sapiddk53.h
+/um/wiamdef.h,true,Won't scan
+/um/windowsnumerics.h,true,WinRT stuff
+/um/wiautil.h,true,C++ classes
+/um/DbgHelp.h,true,Subset of ImageHlp.h
+/um/httpserv.h,true,C++ classes
+/um/httpcompression.h,true,For IIS but can't find a lib for it

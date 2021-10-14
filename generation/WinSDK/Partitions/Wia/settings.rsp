@@ -1,6 +1,15 @@
 --traverse
-<IncludeRoot>/um/wia_xp.h
+<IncludeRoot>/um/wia_lh.h
 <IncludeRoot>/um/wiadef.h
 <IncludeRoot>/um/WiaVideo.h
+<IncludeRoot>/um/wiadevd.h
+<IncludeRoot>/um/wiaintfc.h
+<IncludeRoot>/um/wiamdef--.h
+<IncludeRoot>/um/wiamicro.h
+<IncludeRoot>/um/wiamindr_lh.h
+<IncludeRoot>/um/wiamindr.h
+<IncludeRoot>/um/wiatwcmp.h
+<IncludeRoot>/um/wiautil.h
+<IncludeRoot>/um/wiawsdsc.h
 --namespace
 Windows.Win32.Devices.ImageAcquisition

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -266,18 +274,22 @@ EXTERN_C const IID IID_IWiaMiniDrv;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaMiniDrv * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaMiniDrv * This);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvInitializeWia)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvInitializeWia )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0000,
@@ -290,6 +302,7 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [out] */ __RPC__deref_out_opt IUnknown **__MIDL__IWiaMiniDrv0007,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0008);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvAcquireItemData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvAcquireItemData )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0009,
@@ -297,12 +310,14 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [out][in] */ __RPC__inout PMINIDRV_TRANSFER_CONTEXT __MIDL__IWiaMiniDrv0011,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0012);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvInitItemProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvInitItemProperties )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0013,
             /* [in] */ LONG __MIDL__IWiaMiniDrv0014,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0015);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvValidateItemProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvValidateItemProperties )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0016,
@@ -311,6 +326,7 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [in] */ __RPC__in const PROPSPEC *__MIDL__IWiaMiniDrv0019,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0020);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvWriteItemProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvWriteItemProperties )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0021,
@@ -318,6 +334,7 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [in] */ __RPC__in PMINIDRV_TRANSFER_CONTEXT __MIDL__IWiaMiniDrv0023,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0024);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvReadItemProperties)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvReadItemProperties )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0025,
@@ -326,24 +343,28 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [in] */ __RPC__in const PROPSPEC *__MIDL__IWiaMiniDrv0028,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0029);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvLockWiaDevice)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvLockWiaDevice )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0030,
             /* [in] */ LONG __MIDL__IWiaMiniDrv0031,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0032);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvUnLockWiaDevice)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvUnLockWiaDevice )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0033,
             /* [in] */ LONG __MIDL__IWiaMiniDrv0034,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0035);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvAnalyzeItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvAnalyzeItem )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0036,
             /* [in] */ LONG __MIDL__IWiaMiniDrv0037,
             /* [in] */ __RPC__in LONG *__MIDL__IWiaMiniDrv0038);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvGetDeviceErrorStr)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvGetDeviceErrorStr )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ LONG __MIDL__IWiaMiniDrv0039,
@@ -351,6 +372,7 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [string][out] */ __RPC__deref_out_opt_string LPOLESTR *__MIDL__IWiaMiniDrv0041,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0042);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvDeviceCommand)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvDeviceCommand )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0043,
@@ -359,6 +381,7 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [out] */ __RPC__deref_out_opt IWiaDrvItem **__MIDL__IWiaMiniDrv0046,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0047);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvGetCapabilities)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvGetCapabilities )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0048,
@@ -367,18 +390,21 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [out] */ __RPC__deref_out_opt WIA_DEV_CAP_DRV **__MIDL__IWiaMiniDrv0051,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0052);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvDeleteItem)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvDeleteItem )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0053,
             /* [in] */ LONG __MIDL__IWiaMiniDrv0054,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0055);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvFreeDrvItemContext)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvFreeDrvItemContext )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ LONG __MIDL__IWiaMiniDrv0056,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0057,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0058);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvGetWiaFormatInfo)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvGetWiaFormatInfo )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0059,
@@ -387,12 +413,14 @@ EXTERN_C const IID IID_IWiaMiniDrv;
             /* [out] */ __RPC__deref_out_opt WIA_FORMAT_INFO **__MIDL__IWiaMiniDrv0062,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaMiniDrv0063);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvNotifyPnpEvent)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvNotifyPnpEvent )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in const GUID *pEventGUID,
             /* [in] */ __RPC__in BSTR bstrDeviceID,
             /* [in] */ ULONG ulReserved);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrv, drvUnInitializeWia)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *drvUnInitializeWia )( 
             __RPC__in IWiaMiniDrv * This,
             /* [in] */ __RPC__in BYTE *__MIDL__IWiaMiniDrv0064);
@@ -515,18 +543,22 @@ EXTERN_C const IID IID_IWiaMiniDrvCallBack;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaMiniDrvCallBack * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaMiniDrvCallBack * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaMiniDrvCallBack * This);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrvCallBack, MiniDrvCallback)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MiniDrvCallback )( 
             __RPC__in IWiaMiniDrvCallBack * This,
             /* [in] */ LONG lReason,
@@ -609,18 +641,22 @@ EXTERN_C const IID IID_IWiaMiniDrvTransferCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaMiniDrvTransferCallback * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaMiniDrvTransferCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaMiniDrvTransferCallback * This);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrvTransferCallback, GetNextStream)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetNextStream )( 
             __RPC__in IWiaMiniDrvTransferCallback * This,
             /* [in] */ LONG lFlags,
@@ -629,6 +665,7 @@ EXTERN_C const IID IID_IWiaMiniDrvTransferCallback;
             /* [annotation][out] */ 
             _Outptr_result_maybenull_ _At_(*ppIStream, _When_(return == S_OK, _Post_notnull_))  IStream **ppIStream);
         
+        DECLSPEC_XFGVIRT(IWiaMiniDrvTransferCallback, SendMessage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SendMessage )( 
             __RPC__in IWiaMiniDrvTransferCallback * This,
             /* [in] */ LONG lFlags,
@@ -740,69 +777,85 @@ EXTERN_C const IID IID_IWiaDrvItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWiaDrvItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWiaDrvItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWiaDrvItem * This);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, GetItemFlags)
         HRESULT ( STDMETHODCALLTYPE *GetItemFlags )( 
             __RPC__in IWiaDrvItem * This,
             /* [out] */ __RPC__out LONG *__MIDL__IWiaDrvItem0000);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, GetDeviceSpecContext)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceSpecContext )( 
             __RPC__in IWiaDrvItem * This,
             /* [out] */ __RPC__deref_out_opt BYTE **__MIDL__IWiaDrvItem0001);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, GetFullItemName)
         HRESULT ( STDMETHODCALLTYPE *GetFullItemName )( 
             __RPC__in IWiaDrvItem * This,
             /* [out] */ __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0002);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, GetItemName)
         HRESULT ( STDMETHODCALLTYPE *GetItemName )( 
             __RPC__in IWiaDrvItem * This,
             /* [out] */ __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0003);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, AddItemToFolder)
         HRESULT ( STDMETHODCALLTYPE *AddItemToFolder )( 
             __RPC__in IWiaDrvItem * This,
             /* [in] */ __RPC__in_opt IWiaDrvItem *__MIDL__IWiaDrvItem0004);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, UnlinkItemTree)
         HRESULT ( STDMETHODCALLTYPE *UnlinkItemTree )( 
             __RPC__in IWiaDrvItem * This,
             /* [in] */ LONG __MIDL__IWiaDrvItem0005);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, RemoveItemFromFolder)
         HRESULT ( STDMETHODCALLTYPE *RemoveItemFromFolder )( 
             __RPC__in IWiaDrvItem * This,
             /* [in] */ LONG __MIDL__IWiaDrvItem0006);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, FindItemByName)
         HRESULT ( STDMETHODCALLTYPE *FindItemByName )( 
             __RPC__in IWiaDrvItem * This,
             /* [in] */ LONG __MIDL__IWiaDrvItem0007,
             /* [in] */ __RPC__in BSTR __MIDL__IWiaDrvItem0008,
             /* [out] */ __RPC__deref_out_opt IWiaDrvItem **__MIDL__IWiaDrvItem0009);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, FindChildItemByName)
         HRESULT ( STDMETHODCALLTYPE *FindChildItemByName )( 
             __RPC__in IWiaDrvItem * This,
             /* [in] */ __RPC__in BSTR __MIDL__IWiaDrvItem0010,
             /* [out] */ __RPC__deref_out_opt IWiaDrvItem **__MIDL__IWiaDrvItem0011);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, GetParentItem)
         HRESULT ( STDMETHODCALLTYPE *GetParentItem )( 
             __RPC__in IWiaDrvItem * This,
             /* [out] */ __RPC__deref_out_opt IWiaDrvItem **__MIDL__IWiaDrvItem0012);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, GetFirstChildItem)
         HRESULT ( STDMETHODCALLTYPE *GetFirstChildItem )( 
             __RPC__in IWiaDrvItem * This,
             /* [out] */ __RPC__deref_out_opt IWiaDrvItem **__MIDL__IWiaDrvItem0013);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, GetNextSiblingItem)
         HRESULT ( STDMETHODCALLTYPE *GetNextSiblingItem )( 
             __RPC__in IWiaDrvItem * This,
             /* [out] */ __RPC__deref_out_opt IWiaDrvItem **__MIDL__IWiaDrvItem0014);
         
+        DECLSPEC_XFGVIRT(IWiaDrvItem, DumpItemData)
         HRESULT ( STDMETHODCALLTYPE *DumpItemData )( 
             __RPC__in IWiaDrvItem * This,
             /* [out] */ __RPC__deref_out_opt BSTR *__MIDL__IWiaDrvItem0015);

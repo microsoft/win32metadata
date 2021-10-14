@@ -463,7 +463,7 @@ typedef struct IPSEC_TUNNEL_ENDPOINTS2_
    [size_is(numAddresses)] IPSEC_TUNNEL_ENDPOINT0* remoteAddresses;
    
 } IPSEC_TUNNEL_ENDPOINTS2;
-cpp_quote("#endif (NTDDI_VERSION >= NTDDI_WIN8)")
+cpp_quote("#endif // (NTDDI_VERSION >= NTDDI_WIN8)")
 
 
 cpp_quote("#if (NTDDI_VERSION >= NTDDI_WIN7)")

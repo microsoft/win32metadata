@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -126,6 +126,36 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                interface IActivationSignalDetectionConfiguration2;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2 ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetectionConfiguration2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                interface IActivationSignalDetectionConfigurationCreationResult;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetectionConfigurationCreationResult
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector_FWD_DEFINED__
 namespace ABI {
@@ -141,6 +171,21 @@ namespace ABI {
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                interface IActivationSignalDetector2;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2 ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetector2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager_FWD_DEFINED__
 namespace ABI {
@@ -155,6 +200,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager ABI::Windows::ApplicationModel::ConversationalAgent::IConversationalAgentDetectorManager
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                interface IConversationalAgentDetectorManager2;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2 ABI::Windows::ApplicationModel::ConversationalAgent::IConversationalAgentDetectorManager2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManagerStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManagerStatics_FWD_DEFINED__
@@ -185,6 +245,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession ABI::Windows::ApplicationModel::ConversationalAgent::IConversationalAgentSession
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                interface IConversationalAgentSession2;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2 ABI::Windows::ApplicationModel::ConversationalAgent::IConversationalAgentSession2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSessionInterruptedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSessionInterruptedEventArgs_FWD_DEFINED__
@@ -230,6 +305,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal ABI::Windows::ApplicationModel::ConversationalAgent::IConversationalAgentSignal
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                interface IConversationalAgentSignal2;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2 ABI::Windows::ApplicationModel::ConversationalAgent::IConversationalAgentSignal2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignalDetectedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignalDetectedEventArgs_FWD_DEFINED__
@@ -290,6 +380,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo ABI::Windows::ApplicationModel::ConversationalAgent::IDetectionConfigurationAvailabilityInfo
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                interface IDetectionConfigurationAvailabilityInfo2;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2 ABI::Windows::ApplicationModel::ConversationalAgent::IDetectionConfigurationAvailabilityInfo2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C++)
 
@@ -557,6 +662,390 @@ typedef IAsyncOperationCompletedHandler<ABI::Windows::ApplicationModel::Conversa
 #endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfiguration_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                class ActivationSignalDetectionConfigurationCreationResult;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("edd52757-74d4-5837-941f-c37c5d4b4f53"))
+IAsyncOperation<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationCreationResult*> : IAsyncOperation_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationCreationResult*, ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetectionConfigurationCreationResult*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationCreationResult*> __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_t;
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("67d722c6-e9e6-56ef-bd63-96fc1a6d0292"))
+IAsyncOperationCompletedHandler<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationCreationResult*> : IAsyncOperationCompletedHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationCreationResult*, ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetectionConfigurationCreationResult*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationCreationResult*> __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                typedef enum ActivationSignalDetectionConfigurationRemovalResult : int ActivationSignalDetectionConfigurationRemovalResult;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("312794cb-0e43-5cbf-a148-58a9d7a65c14"))
+IAsyncOperation<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationRemovalResult> : IAsyncOperation_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationRemovalResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationRemovalResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationRemovalResult> __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_t;
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("df53d38d-347f-587d-b115-be893a8d7c49"))
+IAsyncOperationCompletedHandler<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationRemovalResult> : IAsyncOperationCompletedHandler_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationRemovalResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationRemovalResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationRemovalResult> __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                typedef enum ActivationSignalDetectionConfigurationSetModelDataResult : int ActivationSignalDetectionConfigurationSetModelDataResult;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("3738e73c-e4cd-55ad-b760-07af8b4a29d3"))
+IAsyncOperation<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationSetModelDataResult> : IAsyncOperation_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationSetModelDataResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationSetModelDataResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationSetModelDataResult> __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_t;
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("c3982503-9ae9-582e-9874-33ea36649a3c"))
+IAsyncOperationCompletedHandler<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationSetModelDataResult> : IAsyncOperationCompletedHandler_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationSetModelDataResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationSetModelDataResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationSetModelDataResult> __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                typedef enum ActivationSignalDetectionConfigurationStateChangeResult : int ActivationSignalDetectionConfigurationStateChangeResult;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("be03cc1f-0a8a-5878-a84e-af4646df3cc5"))
+IAsyncOperation<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationStateChangeResult> : IAsyncOperation_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationStateChangeResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationStateChangeResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationStateChangeResult> __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_t;
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("4aa91bfb-908e-52ba-a23d-06f464b5b54a"))
+IAsyncOperationCompletedHandler<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationStateChangeResult> : IAsyncOperationCompletedHandler_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationStateChangeResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationStateChangeResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<enum ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationStateChangeResult> __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                class ActivationSignalDetector;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_USE
+#define DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("3566eb2e-4f9c-5261-998d-90296eff00c5"))
+IAsyncOperation<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetector*> : IAsyncOperation_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetector*, ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetector*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetector>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetector*> __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_t;
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("550e15d0-52f2-5369-bed9-646c9589140b"))
+IAsyncOperationCompletedHandler<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetector*> : IAsyncOperationCompletedHandler_impl<ABI::Windows::Foundation::Internal::AggregateType<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetector*, ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetector*>>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetector>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetector*> __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                typedef enum ConversationalAgentActivationResult : int ConversationalAgentActivationResult;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_USE
+#define DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("d177b8f3-d984-5c78-a57f-f096e291b374"))
+IAsyncOperation<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationResult> : IAsyncOperation_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.ApplicationModel.ConversationalAgent.ConversationalAgentActivationResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationResult> __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_t;
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult ABI::Windows::Foundation::__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_USE
+#define DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("41948ce0-5d83-5e12-a8ba-114c4a3a62e3"))
+IAsyncOperationCompletedHandler<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationResult> : IAsyncOperationCompletedHandler_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationResult>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.ApplicationModel.ConversationalAgent.ConversationalAgentActivationResult>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationResult> __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_t;
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 namespace ABI {
     namespace Windows {
@@ -1135,16 +1624,6 @@ typedef IAsyncOperationCompletedHandler<__FIVectorView_1_Windows__CApplicationMo
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 
-namespace ABI {
-    namespace Windows {
-        namespace ApplicationModel {
-            namespace ConversationalAgent {
-                class ActivationSignalDetector;
-            } /* ConversationalAgent */
-        } /* ApplicationModel */
-    } /* Windows */
-} /* ABI */
-
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 
 #ifndef DEF___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_USE
@@ -1279,6 +1758,226 @@ typedef IAsyncOperationCompletedHandler<__FIVectorView_1_Windows__CApplicationMo
 #endif /* DEF___FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                typedef enum ConversationalAgentVoiceActivationPrerequisiteKind : int ConversationalAgentVoiceActivationPrerequisiteKind;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#define DEF___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("89b54546-b694-5277-866b-7f2fc740c640"))
+IIterator<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind> : IIterator_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterator`1<Windows.ApplicationModel.ConversationalAgent.ConversationalAgentVoiceActivationPrerequisiteKind>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterator<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind> __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t;
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind ABI::Windows::Foundation::Collections::__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#define DEF___FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("4e9bb4c0-65ab-5049-9336-918b6d359071"))
+IIterable<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind> : IIterable_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterable`1<Windows.ApplicationModel.ConversationalAgent.ConversationalAgentVoiceActivationPrerequisiteKind>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterable<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind> __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t;
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind ABI::Windows::Foundation::Collections::__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#define DEF___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("82216c11-1e7a-592c-9a3d-15d63e6fdd19"))
+IVectorView<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind> : IVectorView_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IVectorView`1<Windows.ApplicationModel.ConversationalAgent.ConversationalAgentVoiceActivationPrerequisiteKind>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IVectorView<enum ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentVoiceActivationPrerequisiteKind> __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t;
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind ABI::Windows::Foundation::Collections::__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#define DEF___FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("c192099d-c28a-550a-8c2b-e31c8fabcb4b"))
+IAsyncOperation<__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind*> : IAsyncOperation_impl<__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.Foundation.Collections.IVectorView`1<Windows.ApplicationModel.ConversationalAgent.ConversationalAgentVoiceActivationPrerequisiteKind>>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind*> __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t;
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind ABI::Windows::Foundation::__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#define DEF___FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("80bbbe11-f1c5-5a42-b20b-005a57f88011"))
+IAsyncOperationCompletedHandler<__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind*> : IAsyncOperationCompletedHandler_impl<__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.Foundation.Collections.IVectorView`1<Windows.ApplicationModel.ConversationalAgent.ConversationalAgentVoiceActivationPrerequisiteKind>>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind*> __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t;
+#define __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+
+#ifndef DEF___FIVector_1_HSTRING_USE
+#define DEF___FIVector_1_HSTRING_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("98b9acc1-4b56-532e-ac73-03d5291cca90"))
+IVector<HSTRING> : IVector_impl<HSTRING>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IVector`1<String>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IVector<HSTRING> __FIVector_1_HSTRING_t;
+#define __FIVector_1_HSTRING ABI::Windows::Foundation::Collections::__FIVector_1_HSTRING_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIVector_1_HSTRING_USE */
+
+
+
+#ifndef DEF___FIAsyncOperation_1___FIVector_1_HSTRING_USE
+#define DEF___FIAsyncOperation_1___FIVector_1_HSTRING_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("92b02cd3-aa6e-573d-bc03-8d2309cba3eb"))
+IAsyncOperation<__FIVector_1_HSTRING*> : IAsyncOperation_impl<__FIVector_1_HSTRING*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.IAsyncOperation`1<Windows.Foundation.Collections.IVector`1<String>>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperation<__FIVector_1_HSTRING*> __FIAsyncOperation_1___FIVector_1_HSTRING_t;
+#define __FIAsyncOperation_1___FIVector_1_HSTRING ABI::Windows::Foundation::__FIAsyncOperation_1___FIVector_1_HSTRING_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperation_1___FIVector_1_HSTRING_USE */
+
+
+
+#ifndef DEF___FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_USE
+#define DEF___FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation {
+template <>
+struct __declspec(uuid("fae4b396-97c8-5cc3-bf88-ea3098edf6b2"))
+IAsyncOperationCompletedHandler<__FIVector_1_HSTRING*> : IAsyncOperationCompletedHandler_impl<__FIVector_1_HSTRING*>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.AsyncOperationCompletedHandler`1<Windows.Foundation.Collections.IVector`1<String>>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IAsyncOperationCompletedHandler<__FIVector_1_HSTRING*> __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_t;
+#define __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING ABI::Windows::Foundation::__FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_t
+/* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_USE */
+
 
 namespace ABI {
     namespace Windows {
@@ -1556,6 +2255,70 @@ typedef IIterable<enum ABI::Windows::ApplicationModel::ConversationalAgent::Acti
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                typedef enum SignalDetectorResourceKind : int SignalDetectorResourceKind;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE
+#define DEF___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("a27176ec-ab9a-5a55-8e50-ad4dab5b5d68"))
+IIterator<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind> : IIterator_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterator`1<Windows.ApplicationModel.ConversationalAgent.SignalDetectorResourceKind>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterator<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind> __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_t;
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind ABI::Windows::Foundation::Collections::__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE
+#define DEF___FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("263e7b6e-5338-5871-9fdb-a27d9bc02e92"))
+IIterable<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind> : IIterable_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IIterable`1<Windows.ApplicationModel.ConversationalAgent.SignalDetectorResourceKind>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IIterable<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind> __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_t;
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind ABI::Windows::Foundation::Collections::__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 
 #ifndef DEF___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionTrainingDataFormat_USE
@@ -1609,6 +2372,33 @@ typedef IVectorView<enum ABI::Windows::ApplicationModel::ConversationalAgent::Ac
 #endif /* DEF___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorPowerState_USE */
 
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#ifndef DEF___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE
+#define DEF___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE
+#if !defined(RO_NO_TEMPLATE_NAME)
+namespace ABI { namespace Windows { namespace Foundation { namespace Collections {
+template <>
+struct __declspec(uuid("a847ac9b-a9ae-55c5-811d-920122e361d6"))
+IVectorView<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind> : IVectorView_impl<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind>
+{
+    static const wchar_t* z_get_rc_name_impl()
+    {
+        return L"Windows.Foundation.Collections.IVectorView`1<Windows.ApplicationModel.ConversationalAgent.SignalDetectorResourceKind>";
+    }
+};
+// Define a typedef for the parameterized interface specialization's mangled name.
+// This allows code which uses the mangled name for the parameterized interface to access the
+// correct parameterized interface specialization.
+typedef IVectorView<enum ABI::Windows::ApplicationModel::ConversationalAgent::SignalDetectorResourceKind> __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_t;
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind ABI::Windows::Foundation::Collections::__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_t
+/* Collections */ } /* Foundation */ } /* Windows */ } /* ABI */ }
+
+#endif // !defined(RO_NO_TEMPLATE_NAME)
+#endif /* DEF___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_USE */
+
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 namespace ABI {
     namespace Windows {
@@ -1829,7 +2619,27 @@ namespace ABI {
     namespace Windows {
         namespace ApplicationModel {
             namespace ConversationalAgent {
+                typedef enum ActivationSignalDetectionConfigurationCreationStatus : int ActivationSignalDetectionConfigurationCreationStatus;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
                 typedef enum ActivationSignalDetectorKind : int ActivationSignalDetectorKind;
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                typedef enum ConversationalAgentActivationKind : int ConversationalAgentActivationKind;
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
@@ -1894,6 +2704,113 @@ namespace ABI {
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                enum ActivationSignalDetectionConfigurationCreationStatus : int
+                {
+                    ActivationSignalDetectionConfigurationCreationStatus_Success = 0,
+                    ActivationSignalDetectionConfigurationCreationStatus_SignalIdNotAvailable = 1,
+                    ActivationSignalDetectionConfigurationCreationStatus_ModelIdNotSupported = 2,
+                    ActivationSignalDetectionConfigurationCreationStatus_InvalidSignalId = 3,
+                    ActivationSignalDetectionConfigurationCreationStatus_InvalidModelId = 4,
+                    ActivationSignalDetectionConfigurationCreationStatus_InvalidDisplayName = 5,
+                    ActivationSignalDetectionConfigurationCreationStatus_ConfigurationAlreadyExists = 6,
+                    ActivationSignalDetectionConfigurationCreationStatus_CreationNotSupported = 7,
+                };
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationRemovalResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                enum ActivationSignalDetectionConfigurationRemovalResult : int
+                {
+                    ActivationSignalDetectionConfigurationRemovalResult_Success = 0,
+                    ActivationSignalDetectionConfigurationRemovalResult_NotFound = 1,
+                    ActivationSignalDetectionConfigurationRemovalResult_CurrentlyEnabled = 2,
+                    ActivationSignalDetectionConfigurationRemovalResult_RemovalNotSupported = 3,
+                };
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationSetModelDataResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                enum ActivationSignalDetectionConfigurationSetModelDataResult : int
+                {
+                    ActivationSignalDetectionConfigurationSetModelDataResult_Success = 0,
+                    ActivationSignalDetectionConfigurationSetModelDataResult_EmptyModelData = 1,
+                    ActivationSignalDetectionConfigurationSetModelDataResult_UnsupportedFormat = 2,
+                    ActivationSignalDetectionConfigurationSetModelDataResult_ConfigurationCurrentlyEnabled = 3,
+                    ActivationSignalDetectionConfigurationSetModelDataResult_InvalidData = 4,
+                    ActivationSignalDetectionConfigurationSetModelDataResult_SetModelDataNotSupported = 5,
+                    ActivationSignalDetectionConfigurationSetModelDataResult_ConfigurationNotFound = 6,
+                    ActivationSignalDetectionConfigurationSetModelDataResult_UnknownError = 7,
+                };
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationStateChangeResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                enum ActivationSignalDetectionConfigurationStateChangeResult : int
+                {
+                    ActivationSignalDetectionConfigurationStateChangeResult_Success = 0,
+                    ActivationSignalDetectionConfigurationStateChangeResult_NoModelData = 1,
+                    ActivationSignalDetectionConfigurationStateChangeResult_ConfigurationNotFound = 2,
+                };
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -1977,6 +2894,54 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ConversationalAgentActivationKind
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                enum ConversationalAgentActivationKind : int
+                {
+                    ConversationalAgentActivationKind_VoiceActivationPreview = 0,
+                    ConversationalAgentActivationKind_Foreground = 1,
+                };
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ConversationalAgentActivationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                enum ConversationalAgentActivationResult : int
+                {
+                    ConversationalAgentActivationResult_Success = 0,
+                    ConversationalAgentActivationResult_AgentInactive = 1,
+                    ConversationalAgentActivationResult_ScreenNotAvailable = 2,
+                    ConversationalAgentActivationResult_AgentInterrupted = 3,
+                };
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Struct Windows.ApplicationModel.ConversationalAgent.ConversationalAgentSessionUpdateResponse
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 8.0
@@ -2052,6 +3017,33 @@ namespace ABI {
 
 /*
  *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ConversationalAgentVoiceActivationPrerequisiteKind
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                enum ConversationalAgentVoiceActivationPrerequisiteKind : int
+                {
+                    ConversationalAgentVoiceActivationPrerequisiteKind_MicrophonePermission = 0,
+                    ConversationalAgentVoiceActivationPrerequisiteKind_KnownAgents = 1,
+                    ConversationalAgentVoiceActivationPrerequisiteKind_AgentAllowed = 2,
+                    ConversationalAgentVoiceActivationPrerequisiteKind_AppCapability = 3,
+                    ConversationalAgentVoiceActivationPrerequisiteKind_BackgroundTaskRegistration = 4,
+                    ConversationalAgentVoiceActivationPrerequisiteKind_PolicyPermission = 5,
+                };
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Struct Windows.ApplicationModel.ConversationalAgent.DetectionConfigurationAvailabilityChangeKind
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -2096,12 +3088,53 @@ namespace ABI {
                     DetectionConfigurationTrainingStatus_VoiceTooSlow = 5,
                     DetectionConfigurationTrainingStatus_VoiceQualityProblem = 6,
                     DetectionConfigurationTrainingStatus_TrainingSystemInternalError = 7,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+                    DetectionConfigurationTrainingStatus_TrainingTimedOut = 8,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+                    DetectionConfigurationTrainingStatus_ConfigurationNotFound = 9,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
                 };
             } /* ConversationalAgent */
         } /* ApplicationModel */
     } /* Windows */
 } /* ABI */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.SignalDetectorResourceKind
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                enum SignalDetectorResourceKind : int
+                {
+                    SignalDetectorResourceKind_ParallelModelSupport = 0,
+                    SignalDetectorResourceKind_ParallelModelSupportForAgent = 1,
+                    SignalDetectorResourceKind_ParallelSignalSupport = 2,
+                    SignalDetectorResourceKind_ParallelSignalSupportForAgent = 3,
+                    SignalDetectorResourceKind_DisplayOffSupport = 4,
+                    SignalDetectorResourceKind_PluggedInPower = 5,
+                    SignalDetectorResourceKind_Detector = 6,
+                    SignalDetectorResourceKind_SupportedSleepState = 7,
+                    SignalDetectorResourceKind_SupportedBatterySaverState = 8,
+                    SignalDetectorResourceKind_ScreenAvailability = 9,
+                    SignalDetectorResourceKind_InputHardware = 10,
+                    SignalDetectorResourceKind_AcousticEchoCancellation = 11,
+                    SignalDetectorResourceKind_ModelIdSupport = 12,
+                    SignalDetectorResourceKind_DataChannel = 13,
+                };
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -2215,6 +3248,99 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_C
 
 /*
  *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfiguration2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfiguration
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IActivationSignalDetectionConfiguration2[] = L"Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfiguration2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                MIDL_INTERFACE("71d9b022-562c-57ce-a78b-8b4ff0145bab")
+                IActivationSignalDetectionConfiguration2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE SetModelDataWithResult(
+                        HSTRING dataType,
+                        ABI::Windows::Storage::Streams::IInputStream* data,
+                        ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationSetModelDataResult* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetModelDataWithResultAsync(
+                        HSTRING dataType,
+                        ABI::Windows::Storage::Streams::IInputStream* data,
+                        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetEnabledWithResultAsync(
+                        boolean value,
+                        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetEnabledWithResult(
+                        boolean value,
+                        ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationStateChangeResult* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_TrainingStepCompletionMaxAllowedTime(
+                        UINT32* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IActivationSignalDetectionConfiguration2 = _uuidof(IActivationSignalDetectionConfiguration2);
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfigurationCreationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationResult
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IActivationSignalDetectionConfigurationCreationResult[] = L"Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfigurationCreationResult";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                MIDL_INTERFACE("4c89bc1b-8d12-5e48-a71c-7f6bc1cd66e0")
+                IActivationSignalDetectionConfigurationCreationResult : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_Status(
+                        ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationCreationStatus* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_Configuration(
+                        ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetectionConfiguration** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IActivationSignalDetectionConfigurationCreationResult = _uuidof(IActivationSignalDetectionConfigurationCreationResult);
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -2310,6 +3436,72 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_C
 
 /*
  *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetector
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IActivationSignalDetector2[] = L"Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                MIDL_INTERFACE("c7e2490a-baa5-59d2-85d1-ba42f7cf78c9")
+                IActivationSignalDetector2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetAvailableModelIdsForSignalIdAsync(
+                        HSTRING signalId,
+                        __FIAsyncOperation_1___FIVector_1_HSTRING** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetAvailableModelIdsForSignalId(
+                        HSTRING signalId,
+                        __FIVector_1_HSTRING** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE CreateConfigurationWithResultAsync(
+                        HSTRING signalId,
+                        HSTRING modelId,
+                        HSTRING displayName,
+                        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE CreateConfigurationWithResult(
+                        HSTRING signalId,
+                        HSTRING modelId,
+                        HSTRING displayName,
+                        ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetectionConfigurationCreationResult** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RemoveConfigurationWithResultAsync(
+                        HSTRING signalId,
+                        HSTRING modelId,
+                        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RemoveConfigurationWithResult(
+                        HSTRING signalId,
+                        HSTRING modelId,
+                        ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectionConfigurationRemovalResult* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_DetectorId(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IActivationSignalDetector2 = _uuidof(IActivationSignalDetector2);
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -2354,6 +3546,47 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ConversationalAgentDetectorManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IConversationalAgentDetectorManager2[] = L"Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                MIDL_INTERFACE("84610f31-d7f3-52fe-9311-c9eb4e3eb30a")
+                IConversationalAgentDetectorManager2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE GetActivationSignalDetectorFromId(
+                        HSTRING detectorId,
+                        ABI::Windows::ApplicationModel::ConversationalAgent::IActivationSignalDetector** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetActivationSignalDetectorFromIdAsync(
+                        HSTRING detectorId,
+                        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector** operation
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IConversationalAgentDetectorManager2 = _uuidof(IConversationalAgentDetectorManager2);
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -2539,6 +3772,60 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_C
 
 /*
  *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSession2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ConversationalAgentSession
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IConversationalAgentSession2[] = L"Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSession2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                MIDL_INTERFACE("a7a9fbf9-ac78-57ff-9596-acc7a1c9a607")
+                IConversationalAgentSession2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE RequestActivationAsync(
+                        ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationKind activationKind,
+                        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE RequestActivation(
+                        ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationKind activationKind,
+                        ABI::Windows::ApplicationModel::ConversationalAgent::ConversationalAgentActivationResult* result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetSupportLockScreenActivationAsync(
+                        boolean lockScreenActivationSupported,
+                        ABI::Windows::Foundation::IAsyncAction** operation
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE SetSupportLockScreenActivation(
+                        boolean lockScreenActivationSupported
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetMissingPrerequisites(
+                        __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind** result
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE GetMissingPrerequisitesAsync(
+                        __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind** operation
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IConversationalAgentSession2 = _uuidof(IConversationalAgentSession2);
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSessionInterruptedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 8.0
@@ -2677,6 +3964,45 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSignal2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ConversationalAgentSignal
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IConversationalAgentSignal2[] = L"Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSignal2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                MIDL_INTERFACE("d0cc7ba9-9a7b-5c34-880e-b6146c904ecb")
+                IConversationalAgentSignal2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_DetectorId(
+                        HSTRING* value
+                        ) = 0;
+                    virtual HRESULT STDMETHODCALLTYPE get_DetectorKind(
+                        ABI::Windows::ApplicationModel::ConversationalAgent::ActivationSignalDetectorKind* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IConversationalAgentSignal2 = _uuidof(IConversationalAgentSignal2);
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -2830,12 +4156,50 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_C
 
 /*
  *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IDetectionConfigurationAvailabilityInfo2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.DetectionConfigurationAvailabilityInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IDetectionConfigurationAvailabilityInfo2[] = L"Windows.ApplicationModel.ConversationalAgent.IDetectionConfigurationAvailabilityInfo2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace ConversationalAgent {
+                MIDL_INTERFACE("30e06433-38b3-5c4b-84c3-62b6e685b2ff")
+                IDetectionConfigurationAvailabilityInfo2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_UnavailableSystemResources(
+                        __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IDetectionConfigurationAvailabilityInfo2 = _uuidof(IDetectionConfigurationAvailabilityInfo2);
+            } /* ConversationalAgent */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfiguration
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfiguration ** Default Interface **
+ *    Windows.Foundation.IClosable
+ *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfiguration2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2849,12 +4213,32 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfigurationCreationResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_ConversationalAgent_ActivationSignalDetectionConfigurationCreationResult_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_ConversationalAgent_ActivationSignalDetectionConfigurationCreationResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_ConversationalAgent_ActivationSignalDetectionConfigurationCreationResult[] = L"Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetector
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -2877,6 +4261,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2901,6 +4286,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSession ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSession2
  *    Windows.Foundation.IClosable
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -2942,6 +4328,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSignal ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSignal2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -3018,6 +4405,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IDetectionConfigurationAvailabilityInfo ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IDetectionConfigurationAvailabilityInfo2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -3037,17 +4425,41 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActi
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2 __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector_FWD_DEFINED__
 
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2 __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_FWD_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2 __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManagerStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManagerStatics_FWD_DEFINED__
@@ -3060,6 +4472,12 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConv
 typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2 __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSessionInterruptedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSessionInterruptedEventArgs_FWD_DEFINED__
@@ -3078,6 +4496,12 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConv
 typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2 __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignalDetectedEventArgs_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignalDetectedEventArgs_FWD_DEFINED__
@@ -3102,6 +4526,12 @@ typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDete
 typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2 __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -3715,6 +5145,764 @@ interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConv
 
 #endif // ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfiguration_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* This,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationRemovalResult __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationRemovalResult;
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationRemovalResult* result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* This,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationSetModelDataResult __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationSetModelDataResult;
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationSetModelDataResult* result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* This,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationStateChangeResult __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationStateChangeResult;
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationStateChangeResult* result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* This,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+#if !defined(____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector;
+
+typedef struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorVtbl;
+
+interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* This,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationResult __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationResult;
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult;
+
+typedef struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationResult* result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResultVtbl;
+
+interface __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult
+{
+    CONST_VTBL struct __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult;
+
+typedef struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* This,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResultVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 typedef interface __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentSession __FIAsyncOperationCompletedHandler_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentSession;
 
@@ -5495,6 +7683,608 @@ interface __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplic
 #endif // ____FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 
+typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentVoiceActivationPrerequisiteKind __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentVoiceActivationPrerequisiteKind;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__)
+#define ____FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+
+typedef interface __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+typedef struct __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Current)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentVoiceActivationPrerequisiteKind* result);
+    HRESULT (STDMETHODCALLTYPE* get_HasCurrent)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* MoveNext)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        UINT32 itemsLength,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentVoiceActivationPrerequisiteKind* items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl;
+
+interface __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind
+{
+    CONST_VTBL struct __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_get_Current(This, result) \
+    ((This)->lpVtbl->get_Current(This, result))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_get_HasCurrent(This, result) \
+    ((This)->lpVtbl->get_HasCurrent(This, result))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_MoveNext(This, result) \
+    ((This)->lpVtbl->MoveNext(This, result))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetMany(This, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__)
+#define ____FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+
+typedef interface __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+typedef struct __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* First)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind** result);
+
+    END_INTERFACE
+} __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl;
+
+interface __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind
+{
+    CONST_VTBL struct __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_First(This, result) \
+    ((This)->lpVtbl->First(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__)
+#define ____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+
+typedef interface __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+typedef struct __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        UINT32 index,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentVoiceActivationPrerequisiteKind* result);
+    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentVoiceActivationPrerequisiteKind value,
+        UINT32* index,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        UINT32 startIndex,
+        UINT32 itemsLength,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentVoiceActivationPrerequisiteKind* items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl;
+
+interface __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind
+{
+    CONST_VTBL struct __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetAt(This, index, result) \
+    ((This)->lpVtbl->GetAt(This, index, result))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_get_Size(This, result) \
+    ((This)->lpVtbl->get_Size(This, result))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_IndexOf(This, value, index, result) \
+    ((This)->lpVtbl->IndexOf(This, value, index, result))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetMany(This, startIndex, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+typedef interface __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+typedef struct __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl;
+
+interface __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind
+{
+    CONST_VTBL struct __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind;
+
+typedef struct __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* This,
+        __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKindVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if !defined(____FIVector_1_HSTRING_INTERFACE_DEFINED__)
+#define ____FIVector_1_HSTRING_INTERFACE_DEFINED__
+
+typedef interface __FIVector_1_HSTRING __FIVector_1_HSTRING;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIVector_1_HSTRING;
+
+typedef struct __FIVector_1_HSTRINGVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVector_1_HSTRING* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVector_1_HSTRING* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIVector_1_HSTRING* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVector_1_HSTRING* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVector_1_HSTRING* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVector_1_HSTRING* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVector_1_HSTRING* This,
+        UINT32 index,
+        HSTRING* result);
+    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVector_1_HSTRING* This,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* GetView)(__FIVector_1_HSTRING* This,
+        __FIVectorView_1_HSTRING** result);
+    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVector_1_HSTRING* This,
+        HSTRING value,
+        UINT32* index,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* SetAt)(__FIVector_1_HSTRING* This,
+        UINT32 index,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* InsertAt)(__FIVector_1_HSTRING* This,
+        UINT32 index,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* RemoveAt)(__FIVector_1_HSTRING* This,
+        UINT32 index);
+    HRESULT (STDMETHODCALLTYPE* Append)(__FIVector_1_HSTRING* This,
+        HSTRING value);
+    HRESULT (STDMETHODCALLTYPE* RemoveAtEnd)(__FIVector_1_HSTRING* This);
+    HRESULT (STDMETHODCALLTYPE* Clear)(__FIVector_1_HSTRING* This);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVector_1_HSTRING* This,
+        UINT32 startIndex,
+        UINT32 itemsLength,
+        HSTRING* items,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* ReplaceAll)(__FIVector_1_HSTRING* This,
+        UINT32 itemsLength,
+        HSTRING* items);
+
+    END_INTERFACE
+} __FIVector_1_HSTRINGVtbl;
+
+interface __FIVector_1_HSTRING
+{
+    CONST_VTBL struct __FIVector_1_HSTRINGVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIVector_1_HSTRING_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIVector_1_HSTRING_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIVector_1_HSTRING_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIVector_1_HSTRING_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIVector_1_HSTRING_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIVector_1_HSTRING_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIVector_1_HSTRING_GetAt(This, index, result) \
+    ((This)->lpVtbl->GetAt(This, index, result))
+
+#define __FIVector_1_HSTRING_get_Size(This, result) \
+    ((This)->lpVtbl->get_Size(This, result))
+
+#define __FIVector_1_HSTRING_GetView(This, result) \
+    ((This)->lpVtbl->GetView(This, result))
+
+#define __FIVector_1_HSTRING_IndexOf(This, value, index, result) \
+    ((This)->lpVtbl->IndexOf(This, value, index, result))
+
+#define __FIVector_1_HSTRING_SetAt(This, index, value) \
+    ((This)->lpVtbl->SetAt(This, index, value))
+
+#define __FIVector_1_HSTRING_InsertAt(This, index, value) \
+    ((This)->lpVtbl->InsertAt(This, index, value))
+
+#define __FIVector_1_HSTRING_RemoveAt(This, index) \
+    ((This)->lpVtbl->RemoveAt(This, index))
+
+#define __FIVector_1_HSTRING_Append(This, value) \
+    ((This)->lpVtbl->Append(This, value))
+
+#define __FIVector_1_HSTRING_RemoveAtEnd(This) \
+    ((This)->lpVtbl->RemoveAtEnd(This))
+
+#define __FIVector_1_HSTRING_Clear(This) \
+    ((This)->lpVtbl->Clear(This))
+
+#define __FIVector_1_HSTRING_GetMany(This, startIndex, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
+
+#define __FIVector_1_HSTRING_ReplaceAll(This, itemsLength, items) \
+    ((This)->lpVtbl->ReplaceAll(This, itemsLength, items))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIVector_1_HSTRING_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING;
+
+#if !defined(____FIAsyncOperation_1___FIVector_1_HSTRING_INTERFACE_DEFINED__)
+#define ____FIAsyncOperation_1___FIVector_1_HSTRING_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperation_1___FIVector_1_HSTRING __FIAsyncOperation_1___FIVector_1_HSTRING;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperation_1___FIVector_1_HSTRING;
+
+typedef struct __FIAsyncOperation_1___FIVector_1_HSTRINGVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperation_1___FIVector_1_HSTRING* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperation_1___FIVector_1_HSTRING* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperation_1___FIVector_1_HSTRING* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIAsyncOperation_1___FIVector_1_HSTRING* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIAsyncOperation_1___FIVector_1_HSTRING* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIAsyncOperation_1___FIVector_1_HSTRING* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* put_Completed)(__FIAsyncOperation_1___FIVector_1_HSTRING* This,
+        __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING* handler);
+    HRESULT (STDMETHODCALLTYPE* get_Completed)(__FIAsyncOperation_1___FIVector_1_HSTRING* This,
+        __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING** result);
+    HRESULT (STDMETHODCALLTYPE* GetResults)(__FIAsyncOperation_1___FIVector_1_HSTRING* This,
+        __FIVector_1_HSTRING** result);
+
+    END_INTERFACE
+} __FIAsyncOperation_1___FIVector_1_HSTRINGVtbl;
+
+interface __FIAsyncOperation_1___FIVector_1_HSTRING
+{
+    CONST_VTBL struct __FIAsyncOperation_1___FIVector_1_HSTRINGVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_put_Completed(This, handler) \
+    ((This)->lpVtbl->put_Completed(This, handler))
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_get_Completed(This, result) \
+    ((This)->lpVtbl->get_Completed(This, result))
+
+#define __FIAsyncOperation_1___FIVector_1_HSTRING_GetResults(This, result) \
+    ((This)->lpVtbl->GetResults(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperation_1___FIVector_1_HSTRING_INTERFACE_DEFINED__
+
+#if !defined(____FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_INTERFACE_DEFINED__)
+#define ____FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_INTERFACE_DEFINED__
+
+typedef interface __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING;
+
+typedef struct __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRINGVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING* This);
+    HRESULT (STDMETHODCALLTYPE* Invoke)(__FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING* This,
+        __FIAsyncOperation_1___FIVector_1_HSTRING* asyncInfo,
+        AsyncStatus asyncStatus);
+
+    END_INTERFACE
+} __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRINGVtbl;
+
+interface __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING
+{
+    CONST_VTBL struct __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRINGVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_Invoke(This, asyncInfo, asyncStatus) \
+    ((This)->lpVtbl->Invoke(This, asyncInfo, asyncStatus))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIAsyncOperationCompletedHandler_1___FIVector_1_HSTRING_INTERFACE_DEFINED__
+
 #ifndef ____x_ABI_CWindows_CMedia_CAudio_CIAudioDeviceInputNode_FWD_DEFINED__
 #define ____x_ABI_CWindows_CMedia_CAudio_CIAudioDeviceInputNode_FWD_DEFINED__
 typedef interface __x_ABI_CWindows_CMedia_CAudio_CIAudioDeviceInputNode __x_ABI_CWindows_CMedia_CAudio_CIAudioDeviceInputNode;
@@ -6051,6 +8841,153 @@ interface __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CActi
 #endif // ____FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorPowerState_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 
+typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CSignalDetectorResourceKind __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CSignalDetectorResourceKind;
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__)
+#define ____FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__
+
+typedef interface __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind;
+
+typedef struct __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Current)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CSignalDetectorResourceKind* result);
+    HRESULT (STDMETHODCALLTYPE* get_HasCurrent)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* MoveNext)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        UINT32 itemsLength,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CSignalDetectorResourceKind* items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl;
+
+interface __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind
+{
+    CONST_VTBL struct __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_get_Current(This, result) \
+    ((This)->lpVtbl->get_Current(This, result))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_get_HasCurrent(This, result) \
+    ((This)->lpVtbl->get_HasCurrent(This, result))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_MoveNext(This, result) \
+    ((This)->lpVtbl->MoveNext(This, result))
+
+#define __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetMany(This, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__)
+#define ____FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__
+
+typedef interface __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind;
+
+typedef struct __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* First)(__FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        __FIIterator_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind** result);
+
+    END_INTERFACE
+} __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl;
+
+interface __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind
+{
+    CONST_VTBL struct __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_First(This, result) \
+    ((This)->lpVtbl->First(This, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIIterable_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 #if !defined(____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionTrainingDataFormat_INTERFACE_DEFINED__)
 #define ____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionTrainingDataFormat_INTERFACE_DEFINED__
@@ -6220,6 +9157,91 @@ interface __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CAc
 
 #endif // ____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectorPowerState_INTERFACE_DEFINED__
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__)
+#define ____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__
+
+typedef interface __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind;
+
+//  Declare the parameterized interface IID.
+EXTERN_C const IID IID___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind;
+
+typedef struct __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAt)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        UINT32 index,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CSignalDetectorResourceKind* result);
+    HRESULT (STDMETHODCALLTYPE* get_Size)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        UINT32* result);
+    HRESULT (STDMETHODCALLTYPE* IndexOf)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CSignalDetectorResourceKind value,
+        UINT32* index,
+        boolean* result);
+    HRESULT (STDMETHODCALLTYPE* GetMany)(__FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind* This,
+        UINT32 startIndex,
+        UINT32 itemsLength,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CSignalDetectorResourceKind* items,
+        UINT32* result);
+
+    END_INTERFACE
+} __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl;
+
+interface __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind
+{
+    CONST_VTBL struct __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKindVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetAt(This, index, result) \
+    ((This)->lpVtbl->GetAt(This, index, result))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_get_Size(This, result) \
+    ((This)->lpVtbl->get_Size(This, result))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_IndexOf(This, value, index, result) \
+    ((This)->lpVtbl->IndexOf(This, value, index, result))
+
+#define __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_GetMany(This, startIndex, itemsLength, items, result) \
+    ((This)->lpVtbl->GetMany(This, startIndex, itemsLength, items, result))
+
+#endif /* COBJMACROS */
+
+#endif // ____FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind_INTERFACE_DEFINED__
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 #if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
@@ -6445,13 +9467,92 @@ typedef interface __x_ABI_CWindows_CMedia_CAudio_CIAudioGraph __x_ABI_CWindows_C
 
 #endif // ____x_ABI_CWindows_CMedia_CAudio_CIAudioGraph_FWD_DEFINED__
 
+typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationCreationStatus __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationCreationStatus;
+
 typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectorKind __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectorKind;
+
+typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationKind __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationKind;
 
 typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentState __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentState;
 
 typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentSystemStateChangeType __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentSystemStateChangeType;
 
 typedef enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CDetectionConfigurationAvailabilityChangeKind __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CDetectionConfigurationAvailabilityChangeKind;
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationStatus
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationCreationStatus
+{
+    ActivationSignalDetectionConfigurationCreationStatus_Success = 0,
+    ActivationSignalDetectionConfigurationCreationStatus_SignalIdNotAvailable = 1,
+    ActivationSignalDetectionConfigurationCreationStatus_ModelIdNotSupported = 2,
+    ActivationSignalDetectionConfigurationCreationStatus_InvalidSignalId = 3,
+    ActivationSignalDetectionConfigurationCreationStatus_InvalidModelId = 4,
+    ActivationSignalDetectionConfigurationCreationStatus_InvalidDisplayName = 5,
+    ActivationSignalDetectionConfigurationCreationStatus_ConfigurationAlreadyExists = 6,
+    ActivationSignalDetectionConfigurationCreationStatus_CreationNotSupported = 7,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationRemovalResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationRemovalResult
+{
+    ActivationSignalDetectionConfigurationRemovalResult_Success = 0,
+    ActivationSignalDetectionConfigurationRemovalResult_NotFound = 1,
+    ActivationSignalDetectionConfigurationRemovalResult_CurrentlyEnabled = 2,
+    ActivationSignalDetectionConfigurationRemovalResult_RemovalNotSupported = 3,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationSetModelDataResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationSetModelDataResult
+{
+    ActivationSignalDetectionConfigurationSetModelDataResult_Success = 0,
+    ActivationSignalDetectionConfigurationSetModelDataResult_EmptyModelData = 1,
+    ActivationSignalDetectionConfigurationSetModelDataResult_UnsupportedFormat = 2,
+    ActivationSignalDetectionConfigurationSetModelDataResult_ConfigurationCurrentlyEnabled = 3,
+    ActivationSignalDetectionConfigurationSetModelDataResult_InvalidData = 4,
+    ActivationSignalDetectionConfigurationSetModelDataResult_SetModelDataNotSupported = 5,
+    ActivationSignalDetectionConfigurationSetModelDataResult_ConfigurationNotFound = 6,
+    ActivationSignalDetectionConfigurationSetModelDataResult_UnknownError = 7,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationStateChangeResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationStateChangeResult
+{
+    ActivationSignalDetectionConfigurationStateChangeResult_Success = 0,
+    ActivationSignalDetectionConfigurationStateChangeResult_NoModelData = 1,
+    ActivationSignalDetectionConfigurationStateChangeResult_ConfigurationNotFound = 2,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -6511,6 +9612,38 @@ enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDe
 
 /*
  *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ConversationalAgentActivationKind
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationKind
+{
+    ConversationalAgentActivationKind_VoiceActivationPreview = 0,
+    ConversationalAgentActivationKind_Foreground = 1,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ConversationalAgentActivationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationResult
+{
+    ConversationalAgentActivationResult_Success = 0,
+    ConversationalAgentActivationResult_AgentInactive = 1,
+    ConversationalAgentActivationResult_ScreenNotAvailable = 2,
+    ConversationalAgentActivationResult_AgentInterrupted = 3,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Struct Windows.ApplicationModel.ConversationalAgent.ConversationalAgentSessionUpdateResponse
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 8.0
@@ -6562,6 +9695,25 @@ enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgen
 
 /*
  *
+ * Struct Windows.ApplicationModel.ConversationalAgent.ConversationalAgentVoiceActivationPrerequisiteKind
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentVoiceActivationPrerequisiteKind
+{
+    ConversationalAgentVoiceActivationPrerequisiteKind_MicrophonePermission = 0,
+    ConversationalAgentVoiceActivationPrerequisiteKind_KnownAgents = 1,
+    ConversationalAgentVoiceActivationPrerequisiteKind_AgentAllowed = 2,
+    ConversationalAgentVoiceActivationPrerequisiteKind_AppCapability = 3,
+    ConversationalAgentVoiceActivationPrerequisiteKind_BackgroundTaskRegistration = 4,
+    ConversationalAgentVoiceActivationPrerequisiteKind_PolicyPermission = 5,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Struct Windows.ApplicationModel.ConversationalAgent.DetectionConfigurationAvailabilityChangeKind
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -6594,8 +9746,41 @@ enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CDetectionConfigura
     DetectionConfigurationTrainingStatus_VoiceTooSlow = 5,
     DetectionConfigurationTrainingStatus_VoiceQualityProblem = 6,
     DetectionConfigurationTrainingStatus_TrainingSystemInternalError = 7,
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+    DetectionConfigurationTrainingStatus_TrainingTimedOut = 8,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+    DetectionConfigurationTrainingStatus_ConfigurationNotFound = 9,
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 };
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Struct Windows.ApplicationModel.ConversationalAgent.SignalDetectorResourceKind
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CSignalDetectorResourceKind
+{
+    SignalDetectorResourceKind_ParallelModelSupport = 0,
+    SignalDetectorResourceKind_ParallelModelSupportForAgent = 1,
+    SignalDetectorResourceKind_ParallelSignalSupport = 2,
+    SignalDetectorResourceKind_ParallelSignalSupportForAgent = 3,
+    SignalDetectorResourceKind_DisplayOffSupport = 4,
+    SignalDetectorResourceKind_PluggedInPower = 5,
+    SignalDetectorResourceKind_Detector = 6,
+    SignalDetectorResourceKind_SupportedSleepState = 7,
+    SignalDetectorResourceKind_SupportedBatterySaverState = 8,
+    SignalDetectorResourceKind_ScreenAvailability = 9,
+    SignalDetectorResourceKind_InputHardware = 10,
+    SignalDetectorResourceKind_AcousticEchoCancellation = 11,
+    SignalDetectorResourceKind_ModelIdSupport = 12,
+    SignalDetectorResourceKind_DataChannel = 13,
+};
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -6790,6 +9975,175 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_C
 
 /*
  *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfiguration2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfiguration
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IActivationSignalDetectionConfiguration2[] = L"Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfiguration2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* SetModelDataWithResult)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        HSTRING dataType,
+        __x_ABI_CWindows_CStorage_CStreams_CIInputStream* data,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationSetModelDataResult* result);
+    HRESULT (STDMETHODCALLTYPE* SetModelDataWithResultAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        HSTRING dataType,
+        __x_ABI_CWindows_CStorage_CStreams_CIInputStream* data,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationSetModelDataResult** operation);
+    HRESULT (STDMETHODCALLTYPE* SetEnabledWithResultAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        boolean value,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationStateChangeResult** operation);
+    HRESULT (STDMETHODCALLTYPE* SetEnabledWithResult)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        boolean value,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationStateChangeResult* result);
+    HRESULT (STDMETHODCALLTYPE* get_TrainingStepCompletionMaxAllowedTime)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2* This,
+        UINT32* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_SetModelDataWithResult(This, dataType, data, result) \
+    ((This)->lpVtbl->SetModelDataWithResult(This, dataType, data, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_SetModelDataWithResultAsync(This, dataType, data, operation) \
+    ((This)->lpVtbl->SetModelDataWithResultAsync(This, dataType, data, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_SetEnabledWithResultAsync(This, value, operation) \
+    ((This)->lpVtbl->SetEnabledWithResultAsync(This, value, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_SetEnabledWithResult(This, value, result) \
+    ((This)->lpVtbl->SetEnabledWithResult(This, value, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_get_TrainingStepCompletionMaxAllowedTime(This, value) \
+    ((This)->lpVtbl->get_TrainingStepCompletionMaxAllowedTime(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfigurationCreationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationResult
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IActivationSignalDetectionConfigurationCreationResult[] = L"Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfigurationCreationResult";
+typedef struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResultVtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_Status)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationCreationStatus* value);
+    HRESULT (STDMETHODCALLTYPE* get_Configuration)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult* This,
+        __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfiguration** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResultVtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResultVtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_get_Status(This, value) \
+    ((This)->lpVtbl->get_Status(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_get_Configuration(This, value) \
+    ((This)->lpVtbl->get_Configuration(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -6948,6 +10302,117 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_C
 
 /*
  *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetector
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IActivationSignalDetector2[] = L"Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetAvailableModelIdsForSignalIdAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        HSTRING signalId,
+        __FIAsyncOperation_1___FIVector_1_HSTRING** operation);
+    HRESULT (STDMETHODCALLTYPE* GetAvailableModelIdsForSignalId)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        HSTRING signalId,
+        __FIVector_1_HSTRING** result);
+    HRESULT (STDMETHODCALLTYPE* CreateConfigurationWithResultAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        HSTRING signalId,
+        HSTRING modelId,
+        HSTRING displayName,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationCreationResult** operation);
+    HRESULT (STDMETHODCALLTYPE* CreateConfigurationWithResult)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        HSTRING signalId,
+        HSTRING modelId,
+        HSTRING displayName,
+        __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetectionConfigurationCreationResult** result);
+    HRESULT (STDMETHODCALLTYPE* RemoveConfigurationWithResultAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        HSTRING signalId,
+        HSTRING modelId,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetectionConfigurationRemovalResult** operation);
+    HRESULT (STDMETHODCALLTYPE* RemoveConfigurationWithResult)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        HSTRING signalId,
+        HSTRING modelId,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectionConfigurationRemovalResult* result);
+    HRESULT (STDMETHODCALLTYPE* get_DetectorId)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_GetAvailableModelIdsForSignalIdAsync(This, signalId, operation) \
+    ((This)->lpVtbl->GetAvailableModelIdsForSignalIdAsync(This, signalId, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_GetAvailableModelIdsForSignalId(This, signalId, result) \
+    ((This)->lpVtbl->GetAvailableModelIdsForSignalId(This, signalId, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_CreateConfigurationWithResultAsync(This, signalId, modelId, displayName, operation) \
+    ((This)->lpVtbl->CreateConfigurationWithResultAsync(This, signalId, modelId, displayName, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_CreateConfigurationWithResult(This, signalId, modelId, displayName, result) \
+    ((This)->lpVtbl->CreateConfigurationWithResult(This, signalId, modelId, displayName, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_RemoveConfigurationWithResultAsync(This, signalId, modelId, operation) \
+    ((This)->lpVtbl->RemoveConfigurationWithResultAsync(This, signalId, modelId, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_RemoveConfigurationWithResult(This, signalId, modelId, result) \
+    ((This)->lpVtbl->RemoveConfigurationWithResult(This, signalId, modelId, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_get_DetectorId(This, value) \
+    ((This)->lpVtbl->get_DetectorId(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
@@ -7031,6 +10496,82 @@ interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversation
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ConversationalAgentDetectorManager
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IConversationalAgentDetectorManager2[] = L"Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* GetActivationSignalDetectorFromId)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2* This,
+        HSTRING detectorId,
+        __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIActivationSignalDetector** result);
+    HRESULT (STDMETHODCALLTYPE* GetActivationSignalDetectorFromIdAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2* This,
+        HSTRING detectorId,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CActivationSignalDetector** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_GetActivationSignalDetectorFromId(This, detectorId, result) \
+    ((This)->lpVtbl->GetActivationSignalDetectorFromId(This, detectorId, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_GetActivationSignalDetectorFromIdAsync(This, detectorId, operation) \
+    ((This)->lpVtbl->GetActivationSignalDetectorFromIdAsync(This, detectorId, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentDetectorManager2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -7348,6 +10889,103 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_C
 
 /*
  *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSession2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ConversationalAgentSession
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IConversationalAgentSession2[] = L"Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSession2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* RequestActivationAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationKind activationKind,
+        __FIAsyncOperation_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentActivationResult** operation);
+    HRESULT (STDMETHODCALLTYPE* RequestActivation)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationKind activationKind,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CConversationalAgentActivationResult* result);
+    HRESULT (STDMETHODCALLTYPE* SetSupportLockScreenActivationAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        boolean lockScreenActivationSupported,
+        __x_ABI_CWindows_CFoundation_CIAsyncAction** operation);
+    HRESULT (STDMETHODCALLTYPE* SetSupportLockScreenActivation)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        boolean lockScreenActivationSupported);
+    HRESULT (STDMETHODCALLTYPE* GetMissingPrerequisites)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind** result);
+    HRESULT (STDMETHODCALLTYPE* GetMissingPrerequisitesAsync)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2* This,
+        __FIAsyncOperation_1___FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CConversationalAgentVoiceActivationPrerequisiteKind** operation);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_RequestActivationAsync(This, activationKind, operation) \
+    ((This)->lpVtbl->RequestActivationAsync(This, activationKind, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_RequestActivation(This, activationKind, result) \
+    ((This)->lpVtbl->RequestActivation(This, activationKind, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_SetSupportLockScreenActivationAsync(This, lockScreenActivationSupported, operation) \
+    ((This)->lpVtbl->SetSupportLockScreenActivationAsync(This, lockScreenActivationSupported, operation))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_SetSupportLockScreenActivation(This, lockScreenActivationSupported) \
+    ((This)->lpVtbl->SetSupportLockScreenActivation(This, lockScreenActivationSupported))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_GetMissingPrerequisites(This, result) \
+    ((This)->lpVtbl->GetMissingPrerequisites(This, result))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_GetMissingPrerequisitesAsync(This, operation) \
+    ((This)->lpVtbl->GetMissingPrerequisitesAsync(This, operation))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSession2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSessionInterruptedEventArgs
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 8.0
@@ -7607,6 +11245,80 @@ interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversation
 EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal;
 #endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
+
+/*
+ *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSignal2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.ConversationalAgentSignal
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IConversationalAgentSignal2[] = L"Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSignal2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_DetectorId)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2* This,
+        HSTRING* value);
+    HRESULT (STDMETHODCALLTYPE* get_DetectorKind)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2* This,
+        enum __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CActivationSignalDetectorKind* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_get_DetectorId(This, value) \
+    ((This)->lpVtbl->get_DetectorId(This, value))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_get_DetectorKind(This, value) \
+    ((This)->lpVtbl->get_DetectorKind(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIConversationalAgentSignal2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
 
 /*
  *
@@ -7896,12 +11608,83 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_C
 
 /*
  *
+ * Interface Windows.ApplicationModel.ConversationalAgent.IDetectionConfigurationAvailabilityInfo2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.ConversationalAgent.DetectionConfigurationAvailabilityInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_ConversationalAgent_IDetectionConfigurationAvailabilityInfo2[] = L"Windows.ApplicationModel.ConversationalAgent.IDetectionConfigurationAvailabilityInfo2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_UnavailableSystemResources)(__x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2* This,
+        __FIVectorView_1_Windows__CApplicationModel__CConversationalAgent__CSignalDetectorResourceKind** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_get_UnavailableSystemResources(This, value) \
+    ((This)->lpVtbl->get_UnavailableSystemResources(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CConversationalAgent_CIDetectionConfigurationAvailabilityInfo2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfiguration
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfiguration ** Default Interface **
+ *    Windows.Foundation.IClosable
+ *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfiguration2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -7915,12 +11698,32 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 
 /*
  *
+ * Class Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationResult
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Class implements the following interfaces:
+ *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetectionConfigurationCreationResult ** Default Interface **
+ *
+ * Class Marshaling Behavior:  Agile - Class is agile
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#ifndef RUNTIMECLASS_Windows_ApplicationModel_ConversationalAgent_ActivationSignalDetectionConfigurationCreationResult_DEFINED
+#define RUNTIMECLASS_Windows_ApplicationModel_ConversationalAgent_ActivationSignalDetectionConfigurationCreationResult_DEFINED
+extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_ApplicationModel_ConversationalAgent_ActivationSignalDetectionConfigurationCreationResult[] = L"Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetectionConfigurationCreationResult";
+#endif
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Class Windows.ApplicationModel.ConversationalAgent.ActivationSignalDetector
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 10.0
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IActivationSignalDetector2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -7943,6 +11746,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentDetectorManager2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -7967,6 +11771,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSession ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSession2
  *    Windows.Foundation.IClosable
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -8008,6 +11813,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSignal ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IConversationalAgentSignal2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *
@@ -8084,6 +11890,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.ConversationalAgent.IDetectionConfigurationAvailabilityInfo ** Default Interface **
+ *    Windows.ApplicationModel.ConversationalAgent.IDetectionConfigurationAvailabilityInfo2
  *
  * Class Marshaling Behavior:  Agile - Class is agile
  *

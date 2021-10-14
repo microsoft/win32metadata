@@ -44,7 +44,6 @@ AccessCheck(
     _Out_ LPBOOL AccessStatus
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -61,7 +60,6 @@ AccessCheckAndAuditAlarmW(
     _Out_ LPBOOL AccessStatus,
     _Out_ LPBOOL pfGenerateOnClose
     );
-
 
 #ifdef UNICODE
 #define AccessCheckAndAuditAlarm  AccessCheckAndAuditAlarmW
@@ -84,7 +82,6 @@ AccessCheckByType(
     _Out_ LPBOOL AccessStatus
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -101,7 +98,6 @@ AccessCheckByTypeResultList(
     _Out_writes_(ObjectTypeListLength) LPDWORD GrantedAccessList,
     _Out_writes_(ObjectTypeListLength) LPDWORD AccessStatusList
     );
-
 
 WINADVAPI
 BOOL
@@ -124,7 +120,6 @@ AccessCheckByTypeAndAuditAlarmW(
     _Out_ LPBOOL AccessStatus,
     _Out_ LPBOOL pfGenerateOnClose
     );
-
 
 #ifdef UNICODE
 #define AccessCheckByTypeAndAuditAlarm  AccessCheckByTypeAndAuditAlarmW
@@ -151,7 +146,6 @@ AccessCheckByTypeResultListAndAuditAlarmW(
     _Out_writes_(ObjectTypeListLength) LPDWORD AccessStatusList,
     _Out_ LPBOOL pfGenerateOnClose
     );
-
 
 #ifdef UNICODE
 #define AccessCheckByTypeResultListAndAuditAlarm  AccessCheckByTypeResultListAndAuditAlarmW
@@ -180,7 +174,6 @@ AccessCheckByTypeResultListAndAuditAlarmByHandleW(
     _Out_ LPBOOL pfGenerateOnClose
     );
 
-
 #ifdef UNICODE
 #define AccessCheckByTypeResultListAndAuditAlarmByHandle  AccessCheckByTypeResultListAndAuditAlarmByHandleW
 #endif
@@ -201,7 +194,6 @@ AddAccessAllowedAce(
     _In_ PSID pSid
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -212,7 +204,6 @@ AddAccessAllowedAceEx(
     _In_ DWORD AccessMask,
     _In_ PSID pSid
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -233,7 +224,6 @@ AddAccessAllowedObjectAce(
     _In_ PSID pSid
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -243,7 +233,6 @@ AddAccessDeniedAce(
     _In_ DWORD AccessMask,
     _In_ PSID pSid
     );
-
 
 WINADVAPI
 BOOL
@@ -255,7 +244,6 @@ AddAccessDeniedAceEx(
     _In_ DWORD AccessMask,
     _In_ PSID pSid
     );
-
 
 WINADVAPI
 BOOL
@@ -269,7 +257,6 @@ AddAccessDeniedObjectAce(
     _In_opt_ GUID* InheritedObjectTypeGuid,
     _In_ PSID pSid
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -287,7 +274,6 @@ AddAce(
     _In_reads_bytes_(nAceListLength) LPVOID pAceList,
     _In_ DWORD nAceListLength
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -307,7 +293,6 @@ AddAuditAccessAce(
     _In_ BOOL bAuditFailure
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -320,7 +305,6 @@ AddAuditAccessAceEx(
     _In_ BOOL bAuditSuccess,
     _In_ BOOL bAuditFailure
     );
-
 
 WINADVAPI
 BOOL
@@ -336,7 +320,6 @@ AddAuditAccessObjectAce(
     _In_ BOOL bAuditSuccess,
     _In_ BOOL bAuditFailure
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -356,7 +339,6 @@ AddMandatoryAce(
     _In_ DWORD MandatoryPolicy,
     _In_ PSID pLabelSid
     );
-
 
 #endif /* _WIN32_WINNT >=  0x0600 */
 
@@ -381,7 +363,6 @@ AddResourceAttributeAce(
     _Out_ PDWORD pReturnLength
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -392,7 +373,6 @@ AddScopedPolicyIDAce(
     _In_ DWORD AccessMask,
     _In_ PSID pSid
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -414,7 +394,6 @@ AdjustTokenGroups(
     _Out_opt_ PDWORD ReturnLength
     );
 
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
@@ -432,7 +411,6 @@ AdjustTokenPrivileges(
     _Out_writes_bytes_to_opt_(BufferLength,*ReturnLength) PTOKEN_PRIVILEGES PreviousState,
     _Out_opt_ PDWORD ReturnLength
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -457,14 +435,12 @@ AllocateAndInitializeSid(
     _Outptr_ PSID* pSid
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
 AllocateLocallyUniqueId(
     _Out_ PLUID Luid
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -480,7 +456,6 @@ AreAllAccessesGranted(
     _In_ DWORD DesiredAccess
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -488,7 +463,6 @@ AreAnyAccessesGranted(
     _In_ DWORD GrantedAccess,
     _In_ DWORD DesiredAccess
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -504,7 +478,6 @@ CheckTokenMembership(
     _In_ PSID SidToCheck,
     _Out_ PBOOL IsMember
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -523,7 +496,6 @@ CheckTokenCapability(
     _Out_ PBOOL HasCapability
     );
 
-
 WINADVAPI
 BOOL
 APIENTRY
@@ -533,7 +505,6 @@ GetAppContainerAce(
     _Outptr_ PVOID* AppContainerAce,
     _Out_opt_ DWORD* AppContainerAceIndex
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -550,7 +521,6 @@ CheckTokenMembershipEx(
     _In_ DWORD Flags,
     _Out_ PBOOL IsMember
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -572,7 +542,6 @@ ConvertToAutoInheritPrivateObjectSecurity(
     _In_ PGENERIC_MAPPING GenericMapping
     );
 
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
@@ -587,7 +556,6 @@ CopySid(
     _Out_writes_bytes_(nDestinationSidLength) PSID pDestinationSid,
     _In_ PSID pSourceSid
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -607,7 +575,6 @@ CreatePrivateObjectSecurity(
     _In_ PGENERIC_MAPPING GenericMapping
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -621,7 +588,6 @@ CreatePrivateObjectSecurityEx(
     _In_opt_ HANDLE Token,
     _In_ PGENERIC_MAPPING GenericMapping
     );
-
 
 WINADVAPI
 BOOL
@@ -638,7 +604,6 @@ CreatePrivateObjectSecurityWithMultipleInheritance(
     _In_ PGENERIC_MAPPING GenericMapping
     );
 
-
 WINADVAPI
 BOOL
 APIENTRY
@@ -653,7 +618,6 @@ CreateRestrictedToken(
     _In_reads_opt_(RestrictedSidCount) PSID_AND_ATTRIBUTES SidsToRestrict,
     _Outptr_ PHANDLE NewTokenHandle
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -674,7 +638,6 @@ CreateWellKnownSid(
     _Inout_ DWORD* cbSid
     );
 
-
 WINADVAPI
 _Success_(return != FALSE)
 BOOL
@@ -685,7 +648,6 @@ EqualDomainSid(
     _Out_ BOOL* pfEqual
     );
 
-
 #endif //(_WIN32_WINNT >= 0x0501)
 
 WINADVAPI
@@ -695,7 +657,6 @@ DeleteAce(
     _Inout_ PACL pAcl,
     _In_ DWORD dwAceIndex
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -709,7 +670,6 @@ WINAPI
 DestroyPrivateObjectSecurity(
     _Pre_valid_ _Post_invalid_ PSECURITY_DESCRIPTOR* ObjectDescriptor
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -726,7 +686,6 @@ DuplicateToken(
     _Outptr_ PHANDLE DuplicateTokenHandle
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -738,7 +697,6 @@ DuplicateTokenEx(
     _In_ TOKEN_TYPE TokenType,
     _Outptr_ PHANDLE phNewToken
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -754,7 +712,6 @@ EqualPrefixSid(
     _In_ PSID pSid2
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -763,7 +720,6 @@ EqualSid(
     _In_ PSID pSid2
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -771,7 +727,6 @@ FindFirstFreeAce(
     _In_ PACL pAcl,
     _Outptr_ LPVOID* pAce
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -786,7 +741,6 @@ FreeSid(
     _In_ PSID pSid
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -795,7 +749,6 @@ GetAce(
     _In_ DWORD dwAceIndex,
     _Outptr_ LPVOID* pAce
     );
-
 
 WINADVAPI
 BOOL
@@ -806,7 +759,6 @@ GetAclInformation(
     _In_ DWORD nAclInformationLength,
     _In_ ACL_INFORMATION_CLASS dwAclInformationClass
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -824,7 +776,6 @@ GetFileSecurityW(
     _In_ DWORD nLength,
     _Out_ LPDWORD lpnLengthNeeded
     );
-
 
 #ifdef UNICODE
 #define GetFileSecurity  GetFileSecurityW
@@ -847,7 +798,6 @@ GetKernelObjectSecurity(
     _Out_ LPDWORD lpnLengthNeeded
     );
 
-
 WINADVAPI
 _Post_satisfies_(return >= 8 && return <= SECURITY_MAX_SID_SIZE)
 _Success_(1)
@@ -856,7 +806,6 @@ WINAPI
 GetLengthSid(
     _In_ _Post_readable_byte_size_(return) PSID pSid
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -876,7 +825,6 @@ GetPrivateObjectSecurity(
     _Out_ PDWORD ReturnLength
     );
 
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
@@ -892,7 +840,6 @@ GetSecurityDescriptorControl(
     _Out_ LPDWORD lpdwRevision
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -903,7 +850,6 @@ GetSecurityDescriptorDacl(
     _Out_ LPBOOL lpbDaclDefaulted
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -913,14 +859,12 @@ GetSecurityDescriptorGroup(
     _Out_ LPBOOL lpbGroupDefaulted
     );
 
-
 WINADVAPI
 DWORD
 WINAPI
 GetSecurityDescriptorLength(
     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
     );
-
 
 WINADVAPI
 BOOL
@@ -931,7 +875,6 @@ GetSecurityDescriptorOwner(
     _Out_ LPBOOL lpbOwnerDefaulted
     );
 
-
 WINADVAPI
 DWORD
 WINAPI
@@ -939,7 +882,6 @@ GetSecurityDescriptorRMControl(
     _In_ PSECURITY_DESCRIPTOR SecurityDescriptor,
     _Out_ PUCHAR RMControl
     );
-
 
 WINADVAPI
 BOOL
@@ -951,7 +893,6 @@ GetSecurityDescriptorSacl(
     _Out_ LPBOOL lpbSaclDefaulted
     );
 
-
 WINADVAPI
 PSID_IDENTIFIER_AUTHORITY
 WINAPI
@@ -959,14 +900,12 @@ GetSidIdentifierAuthority(
     _In_ PSID pSid
     );
 
-
 WINADVAPI
 DWORD
 WINAPI
 GetSidLengthRequired(
     _In_ UCHAR nSubAuthorityCount
     );
-
 
 WINADVAPI
 PDWORD
@@ -976,14 +915,12 @@ GetSidSubAuthority(
     _In_ DWORD nSubAuthority
     );
 
-
 WINADVAPI
 PUCHAR
 WINAPI
 GetSidSubAuthorityCount(
     _In_ PSID pSid
     );
-
 
 WINADVAPI
 BOOL
@@ -996,7 +933,6 @@ GetTokenInformation(
     _Out_ PDWORD ReturnLength
     );
 
-
 #if (_WIN32_WINNT >= 0x0501)
 
 WINADVAPI
@@ -1008,7 +944,6 @@ GetWindowsAccountDomainSid(
     _Out_writes_bytes_to_opt_(*cbDomainSid,*cbDomainSid) PSID pDomainSid,
     _Inout_ DWORD* cbDomainSid
     );
-
 
 #endif //(_WIN32_WINNT >= 0x0501)
 
@@ -1025,7 +960,6 @@ ImpersonateAnonymousToken(
     _In_ HANDLE ThreadHandle
     );
 
-
 _Must_inspect_result_
 WINADVAPI
 BOOL
@@ -1034,7 +968,6 @@ ImpersonateLoggedOnUser(
     _In_ HANDLE hToken
     );
 
-
 _Must_inspect_result_
 WINADVAPI
 BOOL
@@ -1042,7 +975,6 @@ WINAPI
 ImpersonateSelf(
     _In_ SECURITY_IMPERSONATION_LEVEL ImpersonationLevel
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -1059,7 +991,6 @@ InitializeAcl(
     _In_ DWORD dwAclRevision
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1067,7 +998,6 @@ InitializeSecurityDescriptor(
     _Out_ PSECURITY_DESCRIPTOR pSecurityDescriptor,
     _In_ DWORD dwRevision
     );
-
 
 WINADVAPI
 BOOL
@@ -1077,7 +1007,6 @@ InitializeSid(
     _In_ PSID_IDENTIFIER_AUTHORITY pIdentifierAuthority,
     _In_ BYTE nSubAuthorityCount
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -1092,7 +1021,6 @@ IsTokenRestricted(
     _In_ HANDLE TokenHandle
     );
 
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
@@ -1106,7 +1034,6 @@ IsValidAcl(
     _In_ PACL pAcl
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1114,14 +1041,12 @@ IsValidSecurityDescriptor(
     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
 IsValidSid(
     _In_ PSID pSid
     );
-
 
 #if (_WIN32_WINNT >= 0x0501)
 
@@ -1132,7 +1057,6 @@ IsWellKnownSid(
     _In_ PSID pSid,
     _In_ WELL_KNOWN_SID_TYPE WellKnownSidType
     );
-
 
 #endif // (_WIN32_WINNT >= 0x0501)
 
@@ -1154,7 +1078,6 @@ MakeAbsoluteSD(
     _Inout_ LPDWORD lpdwPrimaryGroupSize
     );
 
-
 WINADVAPI
 _Success_(return != FALSE)
 BOOL
@@ -1164,7 +1087,6 @@ MakeSelfRelativeSD(
     _Out_writes_bytes_to_opt_(*lpdwBufferLength,*lpdwBufferLength) PSECURITY_DESCRIPTOR pSelfRelativeSecurityDescriptor,
     _Inout_ LPDWORD lpdwBufferLength
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -1180,7 +1102,6 @@ MapGenericMask(
     _In_ PGENERIC_MAPPING GenericMapping
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1189,7 +1110,6 @@ ObjectCloseAuditAlarmW(
     _In_ LPVOID HandleId,
     _In_ BOOL GenerateOnClose
     );
-
 
 #ifdef UNICODE
 #define ObjectCloseAuditAlarm  ObjectCloseAuditAlarmW
@@ -1203,7 +1123,6 @@ ObjectDeleteAuditAlarmW(
     _In_ LPVOID HandleId,
     _In_ BOOL GenerateOnClose
     );
-
 
 #ifdef UNICODE
 #define ObjectDeleteAuditAlarm  ObjectDeleteAuditAlarmW
@@ -1227,7 +1146,6 @@ ObjectOpenAuditAlarmW(
     _Out_ LPBOOL GenerateOnClose
     );
 
-
 #ifdef UNICODE
 #define ObjectOpenAuditAlarm  ObjectOpenAuditAlarmW
 #endif
@@ -1244,7 +1162,6 @@ ObjectPrivilegeAuditAlarmW(
     _In_ BOOL AccessGranted
     );
 
-
 #ifdef UNICODE
 #define ObjectPrivilegeAuditAlarm  ObjectPrivilegeAuditAlarmW
 #endif
@@ -1258,7 +1175,6 @@ PrivilegeCheck(
     _Out_ LPBOOL pfResult
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1269,7 +1185,6 @@ PrivilegedServiceAuditAlarmW(
     _In_ PPRIVILEGE_SET Privileges,
     _In_ BOOL AccessGranted
     );
-
 
 #ifdef UNICODE
 #define PrivilegedServiceAuditAlarm  PrivilegedServiceAuditAlarmW
@@ -1285,7 +1200,6 @@ QuerySecurityAccessMask(
     _Out_ LPDWORD DesiredAccess
     );
 
-
 #endif // (_WIN32_WINNT >= 0x0600)
 
 WINADVAPI
@@ -1294,7 +1208,6 @@ WINAPI
 RevertToSelf(
     VOID
     );
-
 
 WINADVAPI
 BOOL
@@ -1306,7 +1219,6 @@ SetAclInformation(
     _In_ ACL_INFORMATION_CLASS dwAclInformationClass
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1315,7 +1227,6 @@ SetFileSecurityW(
     _In_ SECURITY_INFORMATION SecurityInformation,
     _In_ PSECURITY_DESCRIPTOR pSecurityDescriptor
     );
-
 #ifdef UNICODE
 #define SetFileSecurity  SetFileSecurityW
 #endif
@@ -1335,7 +1246,6 @@ SetKernelObjectSecurity(
     _In_ PSECURITY_DESCRIPTOR SecurityDescriptor
     );
 
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
@@ -1353,7 +1263,6 @@ SetPrivateObjectSecurity(
     _In_opt_ HANDLE Token
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1366,7 +1275,6 @@ SetPrivateObjectSecurityEx(
     _In_opt_ HANDLE Token
     );
 
-
 #if (_WIN32_WINNT >= 0x0600)
 
 WINADVAPI
@@ -1376,7 +1284,6 @@ SetSecurityAccessMask(
     _In_ SECURITY_INFORMATION SecurityInformation,
     _Out_ LPDWORD DesiredAccess
     );
-
 
 #endif // (_WIN32_WINNT >= 0x0600)
 
@@ -1395,7 +1302,6 @@ SetSecurityDescriptorControl(
     _In_ SECURITY_DESCRIPTOR_CONTROL ControlBitsToSet
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1406,7 +1312,6 @@ SetSecurityDescriptorDacl(
     _In_ BOOL bDaclDefaulted
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1415,7 +1320,6 @@ SetSecurityDescriptorGroup(
     _In_opt_ PSID pGroup,
     _In_ BOOL bGroupDefaulted
     );
-
 
 WINADVAPI
 BOOL
@@ -1426,7 +1330,6 @@ SetSecurityDescriptorOwner(
     _In_ BOOL bOwnerDefaulted
     );
 
-
 WINADVAPI
 DWORD
 WINAPI
@@ -1434,7 +1337,6 @@ SetSecurityDescriptorRMControl(
     _Inout_ PSECURITY_DESCRIPTOR SecurityDescriptor,
     _In_opt_ PUCHAR RMControl
     );
-
 
 WINADVAPI
 BOOL
@@ -1446,7 +1348,6 @@ SetSecurityDescriptorSacl(
     _In_ BOOL bSaclDefaulted
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1456,7 +1357,6 @@ SetTokenInformation(
     _In_reads_bytes_(TokenInformationLength) LPVOID TokenInformation,
     _In_ DWORD TokenInformationLength
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -1476,7 +1376,6 @@ SetCachedSigningLevel(
     _In_opt_ HANDLE TargetFile
     );
 
-
 WINADVAPI
 BOOL
 WINAPI
@@ -1488,7 +1387,6 @@ GetCachedSigningLevel(
     _Inout_opt_ PULONG ThumbprintSize,
     _Out_opt_ PULONG ThumbprintAlgorithm
     );
-
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM)
 #pragma endregion
@@ -1506,7 +1404,6 @@ CveEventWrite(
     _In_ PCWSTR CveId,
     _In_opt_ PCWSTR AdditionalDetails
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
@@ -1528,12 +1425,11 @@ DeriveCapabilitySidsFromName(
     _Out_ DWORD* CapabilitySidCount
     );
 
-
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 
 #endif // (_WIN32_WINNT >= _WIN32_WINNT_WIN10)
- 
+
 #ifdef __cplusplus
 }
 #endif

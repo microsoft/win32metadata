@@ -497,7 +497,11 @@ typedef ULONG WINBIO_REJECT_DETAIL, *PWINBIO_REJECT_DETAIL;
 //
 #define WINBIO_FACE_SPOOF_DETECTED          ((WINBIO_REJECT_DETAIL)4)
 #define WINBIO_FACE_AMBIGUOUS_TARGET        ((WINBIO_REJECT_DETAIL)5)
+// WINBIO_FACE_EYES_OCCLUDED is deprecated. Use WINBIO_FACE_OCCLUDED instead
 #define WINBIO_FACE_EYES_OCCLUDED           ((WINBIO_REJECT_DETAIL)6)
+// WINBIO_FACE_OCCLUDED indicates that the user's eyes, mouth or nose are occluded.
+// This is create to replace WINBIO_FACE_EYES_OCCLUDED
+#define WINBIO_FACE_OCCLUDED                ((WINBIO_REJECT_DETAIL)6)
 
 // Camera orientation doesn't match mandatory value in EXTENDED_SENSOR_INFO
 #define WINBIO_FACE_WRONG_ORIENTATION       ((WINBIO_REJECT_DETAIL)7)
@@ -1230,7 +1234,7 @@ typedef ULONG64 WINBIO_PROTECTION_TICKET, *PWINBIO_PROTECTION_TICKET;
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN9)
 
-#define WINBIO_OPAQUE_ENGINE_DATA_ITEM_COUNT    ((ULONG)77)  // Number of ULONG slots in the array
+#define WINBIO_OPAQUE_ENGINE_DATA_ITEM_COUNT    ((ULONG)78)  // Number of ULONG slots in the array
 
 #if (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
 
@@ -2133,6 +2137,37 @@ typedef struct _WINBIO_FP_BU_STATE {
 } WINBIO_FP_BU_STATE, *PWINBIO_FP_BU_STATE;
 
 #endif // (NTDDI_VERSION >= NTDDI_WIN10_19H1)
+
+#if (NTDDI_VERSION >= NTDDI_WIN10_VB)
+
+///////////////////////////////////////////////////////////////////////////////
+//
+// WINBIO_PROPERTY_FP_IS_IMPROVING
+//
+// Description:
+//      Returns information on whether a FP sensor is currently
+//      set to improve recognition through extra enrollment templates.
+//      Duplicate enrollment records are permitted while this is set.
+//
+// Access:
+//      Read-only
+//
+// Inputs:
+//      SessionHandle - must be valid
+//      UnitId - must be valid
+//      Identity - must be NULL
+//      SubFactor - must be WINBIO_SUBTYPE_NO_INFORMATION
+//
+// Outputs:
+//      PropertyBuffer - points to BOOL buffer containing the improvement status
+//      PropertyBufferSize - points to a SIZE_T variable containing sizeof(BOOL)
+//
+#define WINBIO_PROPERTY_FP_IS_IMPROVING             ((WINBIO_PROPERTY_ID)9)
+
+#define WINBIO_OPERATION_IMPROVE_BEGIN              ((WINBIO_OPERATION_TYPE)35)
+#define WINBIO_OPERATION_IMPROVE_END                ((WINBIO_OPERATION_TYPE)36)
+
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_VB)
 
 ///////////////////////////////////////////////////////////////////////////
 //

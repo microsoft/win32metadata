@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_MEDIA_MEDIACONTROLCONTRACT_VERSION)
@@ -1107,6 +1107,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics ABI::Windows::Media::Audio::ISpatialAudioFormatSubtypeStatics
 
 #endif // ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Audio {
+                interface ISpatialAudioFormatSubtypeStatics2;
+            } /* Audio */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2 ABI::Windows::Media::Audio::ISpatialAudioFormatSubtypeStatics2
+
+#endif // ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C++)
 
@@ -6404,6 +6419,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtyp
 
 /*
  *
+ * Interface Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Audio.SpatialAudioFormatSubtype
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#if !defined(____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Audio_ISpatialAudioFormatSubtypeStatics2[] = L"Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics2";
+namespace ABI {
+    namespace Windows {
+        namespace Media {
+            namespace Audio {
+                MIDL_INTERFACE("4565e6cb-d95b-5621-b6af-0e8849c57c80")
+                ISpatialAudioFormatSubtypeStatics2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_DTSXForHomeTheater(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_ISpatialAudioFormatSubtypeStatics2 = _uuidof(ISpatialAudioFormatSubtypeStatics2);
+            } /* Audio */
+        } /* Media */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Class Windows.Media.Audio.AudioDeviceInputNode
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -7286,6 +7337,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics2 interface starting with version 12.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
@@ -7685,6 +7737,12 @@ typedef interface __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatConfigurati
 typedef interface __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics;
 
 #endif // ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2 __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2;
+
+#endif // ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_FWD_DEFINED__
 
 // Parameterized interface forward declarations (C)
 
@@ -16200,6 +16258,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtyp
 
 /*
  *
+ * Interface Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 12.0
+ *
+ * Interface is a part of the implementation of type Windows.Media.Audio.SpatialAudioFormatSubtype
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+#if !defined(____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Media_Audio_ISpatialAudioFormatSubtypeStatics2[] = L"Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics2";
+typedef struct __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_DTSXForHomeTheater)(__x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2Vtbl;
+
+interface __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_get_DTSXForHomeTheater(This, value) \
+    ((This)->lpVtbl->get_DTSXForHomeTheater(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2;
+#endif /* !defined(____x_ABI_CWindows_CMedia_CAudio_CISpatialAudioFormatSubtypeStatics2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xc0000
+
+/*
+ *
  * Class Windows.Media.Audio.AudioDeviceInputNode
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
@@ -17082,6 +17209,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 7.0
  *
  * RuntimeClass contains static methods.
+ *   Static Methods exist on the Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics2 interface starting with version 12.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.Media.Audio.ISpatialAudioFormatSubtypeStatics interface starting with version 7.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment

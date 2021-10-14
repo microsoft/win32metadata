@@ -6,5 +6,5 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <spatialinteractionmanagerinterop.h>
-#include <holographicspaceinterop.h>
+//#include <perceptiondevice.h> -- won't scan - Error (Line 64, Column 29 in D:/repos/win32metadata/generation/WinSDK/RecompiledIdlHeaders/um/perceptiondevice.h): Unsupported return type for abstract method: 'CX_TypeClass_LValueReference'. Generated bindings may be incomplete.
+#include <perceptiondevicecore.h>

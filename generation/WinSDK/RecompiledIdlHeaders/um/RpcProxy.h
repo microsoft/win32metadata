@@ -448,36 +448,36 @@ void STDMETHODCALLTYPE
 CStdAsyncStubBuffer2_Disconnect(
     IRpcStubBuffer *pthis);
 
-DECLSPEC_CHPE_GUEST void ObjectStublessClient3(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient4(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient5(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient6(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient7(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient8(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient9(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient10(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient11(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient12(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient13(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient14(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient15(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient16(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient17(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient18(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient19(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient20(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient21(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient22(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient23(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient24(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient25(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient26(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient27(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient28(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient29(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient30(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient31(void);
-DECLSPEC_CHPE_GUEST void ObjectStublessClient32(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient3(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient4(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient5(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient6(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient7(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient8(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient9(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient10(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient11(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient12(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient13(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient14(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient15(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient16(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient17(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient18(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient19(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient20(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient21(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient22(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient23(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient24(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient25(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient26(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient27(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient28(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient29(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient30(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient31(void);
+DECLSPEC_CHPE_GUEST void STDMETHODCALLTYPE ObjectStublessClient32(void);
 
 DECLSPEC_CHPE_GUEST
 void STDMETHODCALLTYPE
@@ -892,6 +892,7 @@ _Check_return_ HRESULT STDAPICALLTYPE DLLGETCLASSOBJECT_ENTRY ( \
         }
 
 #define CSTDSTUBBUFFERRELEASE(pFactory)   \
+DECLSPEC_XFGVIRT(IUnknown, Release) \
 ULONG STDMETHODCALLTYPE CStdStubBuffer_Release(IRpcStubBuffer *This) \
     {   \
     return NdrCStdStubBuffer_Release(This,(IPSFactoryBuffer *)pFactory);   \
@@ -899,6 +900,7 @@ ULONG STDMETHODCALLTYPE CStdStubBuffer_Release(IRpcStubBuffer *This) \
 
 #ifdef PROXY_DELEGATION
 #define CSTDSTUBBUFFER2RELEASE(pFactory)   \
+DECLSPEC_XFGVIRT(IUnknown, Release) \
 ULONG STDMETHODCALLTYPE CStdStubBuffer2_Release(IRpcStubBuffer *This) \
     {   \
     return NdrCStdStubBuffer2_Release(This,(IPSFactoryBuffer *)pFactory);   \

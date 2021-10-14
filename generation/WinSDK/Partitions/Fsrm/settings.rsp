@@ -6,5 +6,6 @@
 <IncludeRoot>/um/fsrmpipeline.h
 <IncludeRoot>/um/fsrmreports.h
 <IncludeRoot>/um/fsrmscreen.h
+<IncludeRoot>/um/fsrmerr.h
 --namespace
 Windows.Win32.Storage.FileServerResourceManager

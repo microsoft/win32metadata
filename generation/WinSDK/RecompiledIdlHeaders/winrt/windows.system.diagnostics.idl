@@ -51,6 +51,8 @@ namespace Windows
     {
         runtimeclass AppDiagnosticInfo;
 
+        typedef enum ProcessorArchitecture ProcessorArchitecture;
+
         runtimeclass User;
     }
 }
@@ -97,6 +99,8 @@ namespace Windows
             interface ISystemDiagnosticInfo;
 
             interface ISystemDiagnosticInfoStatics;
+
+            interface ISystemDiagnosticInfoStatics2;
 
             interface ISystemMemoryUsage;
 
@@ -171,7 +175,9 @@ namespace Windows
                 VerifyingTrust      = 2,
                 Detecting           = 3,
                 Resolving           = 4,
-                VerifyingResolution = 5
+                VerifyingResolution = 5,
+                [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+                Executing           = 6
             };
 
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
@@ -349,6 +355,15 @@ namespace Windows
                 HRESULT GetForCurrentSystem([out] [retval] Windows.System.Diagnostics.SystemDiagnosticInfo** value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 11.0)]
+            [exclusiveto(Windows.System.Diagnostics.SystemDiagnosticInfo)]
+            [uuid(79DED189-6AF9-4DA9-A422-15F73255B3EB)]
+            interface ISystemDiagnosticInfoStatics2 : IInspectable
+            {
+                HRESULT IsArchitectureSupported([in] Windows.System.ProcessorArchitecture type, [out] [retval] boolean* result);
+                [propget] HRESULT PreferredArchitecture([out] [retval] Windows.System.ProcessorArchitecture* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             [exclusiveto(Windows.System.Diagnostics.SystemMemoryUsage)]
             [uuid(17FFC595-1702-49CF-AA27-2F0A32591404)]
@@ -463,6 +478,7 @@ namespace Windows
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
             [marshaling_behavior(agile)]
             [static(Windows.System.Diagnostics.ISystemDiagnosticInfoStatics, Windows.Foundation.UniversalApiContract, 4.0)]
+            [static(Windows.System.Diagnostics.ISystemDiagnosticInfoStatics2, Windows.Foundation.UniversalApiContract, 11.0)]
             [threading(both)]
             runtimeclass SystemDiagnosticInfo
             {

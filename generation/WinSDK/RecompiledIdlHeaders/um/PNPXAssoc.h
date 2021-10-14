@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -131,26 +139,32 @@ EXTERN_C const IID IID_IPNPXAssociation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPNPXAssociation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPNPXAssociation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPNPXAssociation * This);
         
+        DECLSPEC_XFGVIRT(IPNPXAssociation, Associate)
         HRESULT ( STDMETHODCALLTYPE *Associate )( 
             __RPC__in IPNPXAssociation * This,
             /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubcategory);
         
+        DECLSPEC_XFGVIRT(IPNPXAssociation, Unassociate)
         HRESULT ( STDMETHODCALLTYPE *Unassociate )( 
             __RPC__in IPNPXAssociation * This,
             /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubcategory);
         
+        DECLSPEC_XFGVIRT(IPNPXAssociation, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IPNPXAssociation * This,
             /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubcategory);
@@ -234,28 +248,34 @@ EXTERN_C const IID IID_IPNPXDeviceAssociation;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPNPXDeviceAssociation * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPNPXDeviceAssociation * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPNPXDeviceAssociation * This);
         
+        DECLSPEC_XFGVIRT(IPNPXDeviceAssociation, Associate)
         HRESULT ( STDMETHODCALLTYPE *Associate )( 
             __RPC__in IPNPXDeviceAssociation * This,
             /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubCategory,
             /* [in] */ __RPC__in_opt IFunctionDiscoveryNotification *pIFunctionDiscoveryNotification);
         
+        DECLSPEC_XFGVIRT(IPNPXDeviceAssociation, Unassociate)
         HRESULT ( STDMETHODCALLTYPE *Unassociate )( 
             __RPC__in IPNPXDeviceAssociation * This,
             /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubCategory,
             /* [in] */ __RPC__in_opt IFunctionDiscoveryNotification *pIFunctionDiscoveryNotification);
         
+        DECLSPEC_XFGVIRT(IPNPXDeviceAssociation, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IPNPXDeviceAssociation * This,
             /* [unique][string][in] */ __RPC__in_opt_string const WCHAR *pszSubcategory,

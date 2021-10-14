@@ -496,7 +496,7 @@ enum ConditionType
 
 struct UiaCondition
 {
-    ConditionType ConditionType;
+    enum ConditionType ConditionType;
 };
 
 #ifndef __uiautomationclient_h__
@@ -510,23 +510,23 @@ enum PropertyConditionFlags
 
 struct UiaPropertyCondition
 {
-    ConditionType ConditionType;
+    enum ConditionType ConditionType;
     PROPERTYID PropertyId;
     VARIANT Value;
-    PropertyConditionFlags Flags;
+    enum PropertyConditionFlags Flags;
 };
 
 struct UiaAndOrCondition
 {
-    ConditionType ConditionType;
-    UiaCondition ** ppConditions; // ptr to array-of-ptrs to conditions
+    enum ConditionType ConditionType;
+    struct UiaCondition ** ppConditions; // ptr to array-of-ptrs to conditions
     int cConditions;
 };
 
 struct UiaNotCondition
 {
-    ConditionType ConditionType;
-    UiaCondition * pCondition;
+    enum ConditionType ConditionType;
+    struct UiaCondition * pCondition;
 };
 
 
@@ -546,14 +546,14 @@ enum AutomationElementMode
 
 struct UiaCacheRequest
 {
-    UiaCondition *  pViewCondition;
-    TreeScope       Scope;
+    struct UiaCondition *  pViewCondition;
+    enum TreeScope  Scope;
 
     PROPERTYID *    pProperties;
     int             cProperties;
     PATTERNID *     pPatterns;
     int             cPatterns;
-    AutomationElementMode automationElementMode;
+    enum AutomationElementMode automationElementMode;
 };
 
 HRESULT WINAPI UiaHUiaNodeFromVariant(VARIANT * pvar, HUIANODE *phnode);
@@ -602,7 +602,7 @@ struct UiaFindParams
     int MaxDepth;
     BOOL FindFirst;
     BOOL ExcludeRoot;
-    UiaCondition * pFindCondition;
+    struct UiaCondition * pFindCondition;
 };
 
 BOOL WINAPI UiaNodeRelease(HUIANODE hnode);
@@ -611,12 +611,12 @@ HRESULT WINAPI UiaGetPropertyValue(HUIANODE hnode, PROPERTYID propertyId, VARIAN
 HRESULT WINAPI UiaGetPatternProvider(HUIANODE hnode, PATTERNID patternId, HUIAPATTERNOBJECT * phobj);
 HRESULT WINAPI UiaGetRuntimeId(HUIANODE hnode, SAFEARRAY ** pruntimeId);
 HRESULT WINAPI UiaSetFocus(HUIANODE hnode);
-HRESULT WINAPI UiaNavigate(HUIANODE hnode, NavigateDirection direction, UiaCondition * pCondition, UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
-HRESULT WINAPI UiaGetUpdatedCache(HUIANODE hnode, UiaCacheRequest * pRequest, NormalizeState normalizeState, UiaCondition * pNormalizeCondition, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
-HRESULT WINAPI UiaFind(HUIANODE hnode, UiaFindParams * pParams, UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, SAFEARRAY ** ppOffsets, SAFEARRAY ** ppTreeStructures);
+HRESULT WINAPI UiaNavigate(HUIANODE hnode, enum NavigateDirection direction, struct UiaCondition * pCondition, struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
+HRESULT WINAPI UiaGetUpdatedCache(HUIANODE hnode, struct UiaCacheRequest * pRequest, enum NormalizeState normalizeState, struct UiaCondition * pNormalizeCondition, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
+HRESULT WINAPI UiaFind(HUIANODE hnode, struct UiaFindParams * pParams, struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, SAFEARRAY ** ppOffsets, SAFEARRAY ** ppTreeStructures);
 
-HRESULT WINAPI UiaNodeFromPoint(double x, double y, UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
-HRESULT WINAPI UiaNodeFromFocus(UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
+HRESULT WINAPI UiaNodeFromPoint(double x, double y, struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
+HRESULT WINAPI UiaNodeFromFocus(struct UiaCacheRequest * pRequest, SAFEARRAY ** ppRequestedData, BSTR * ppTreeStructure);
 HRESULT WINAPI UiaNodeFromHandle(HWND hwnd, HUIANODE * phnode);
 HRESULT WINAPI UiaNodeFromProvider(IRawElementProviderSimple * pProvider, HUIANODE * phnode);
 HRESULT WINAPI UiaGetRootNode(HUIANODE * phnode);
@@ -650,7 +650,7 @@ enum ProviderType
     ProviderType_NonClientArea,
 };
 
-typedef SAFEARRAY * WINAPI UiaProviderCallback(HWND hwnd, ProviderType providerType);
+typedef SAFEARRAY * WINAPI UiaProviderCallback(HWND hwnd, enum ProviderType providerType);
 
 void WINAPI UiaRegisterProviderCallback(UiaProviderCallback * pCallback);
 
@@ -674,7 +674,7 @@ enum AutomationIdentifierType
     AutomationIdentifierType_Style,
 };
 
-int WINAPI UiaLookupId(AutomationIdentifierType type, const GUID* pGuid);
+int WINAPI UiaLookupId(enum AutomationIdentifierType type, const GUID* pGuid);
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
@@ -718,13 +718,13 @@ enum AsyncContentLoadedState
 
 struct UiaEventArgs
 {
-    EventArgsType Type;
+    enum EventArgsType Type;
     int EventId;
 };
 
 struct UiaPropertyChangedEventArgs
 {
-    EventArgsType Type;
+    enum EventArgsType Type;
     int EventId;
     PROPERTYID PropertyId;
     VARIANT OldValue;
@@ -733,39 +733,39 @@ struct UiaPropertyChangedEventArgs
 
 struct UiaStructureChangedEventArgs
 {
-    EventArgsType Type;
+    enum EventArgsType Type;
     int EventId;
-    StructureChangeType StructureChangeType;
+    enum StructureChangeType StructureChangeType;
     int * pRuntimeId;
     int cRuntimeIdLen;
 };
 
 struct UiaTextEditTextChangedEventArgs
 {
-    EventArgsType Type;
+    enum EventArgsType Type;
     int EventId;
-    TextEditChangeType TextEditChangeType;
+    enum TextEditChangeType TextEditChangeType;
     SAFEARRAY * pTextChange;
 };
 
 struct UiaChangesEventArgs {
-    EventArgsType Type;
+    enum EventArgsType Type;
     int EventId;
     int EventIdCount;
-    UiaChangeInfo * pUiaChanges;
+    struct UiaChangeInfo * pUiaChanges;
 };
 
 struct UiaAsyncContentLoadedEventArgs
 {
-    EventArgsType Type;
+    enum EventArgsType Type;
     int EventId;
-    AsyncContentLoadedState AsyncContentLoadedState;
+    enum AsyncContentLoadedState AsyncContentLoadedState;
     double PercentComplete;
 };
 
 struct UiaWindowClosedEventArgs
 {
-    EventArgsType Type;
+    enum EventArgsType Type;
     int EventId;
     int * pRuntimeId;
     int cRuntimeIdLen;
@@ -777,14 +777,14 @@ struct UiaWindowClosedEventArgs
 BOOL WINAPI UiaClientsAreListening();
 HRESULT WINAPI UiaRaiseAutomationPropertyChangedEvent(IRawElementProviderSimple * pProvider, PROPERTYID id, VARIANT oldValue, VARIANT newValue);
 HRESULT WINAPI UiaRaiseAutomationEvent(IRawElementProviderSimple * pProvider, EVENTID id);
-HRESULT WINAPI UiaRaiseStructureChangedEvent(IRawElementProviderSimple * pProvider, StructureChangeType structureChangeType, int * pRuntimeId, int cRuntimeIdLen);
-HRESULT WINAPI UiaRaiseAsyncContentLoadedEvent(IRawElementProviderSimple * pProvider, AsyncContentLoadedState asyncContentLoadedState, double percentComplete);
-HRESULT WINAPI UiaRaiseTextEditTextChangedEvent(IRawElementProviderSimple * pProvider, TextEditChangeType textEditChangeType, SAFEARRAY *pChangedData);
+HRESULT WINAPI UiaRaiseStructureChangedEvent(IRawElementProviderSimple * pProvider, enum StructureChangeType structureChangeType, int * pRuntimeId, int cRuntimeIdLen);
+HRESULT WINAPI UiaRaiseAsyncContentLoadedEvent(IRawElementProviderSimple * pProvider, enum AsyncContentLoadedState asyncContentLoadedState, double percentComplete);
+HRESULT WINAPI UiaRaiseTextEditTextChangedEvent(IRawElementProviderSimple * pProvider, enum TextEditChangeType textEditChangeType, SAFEARRAY *pChangedData);
 HRESULT WINAPI UiaRaiseChangesEvent(IRawElementProviderSimple * pProvider, int eventIdCount, struct UiaChangeInfo * pUiaChanges);
 HRESULT WINAPI UiaRaiseNotificationEvent(
     _In_ IRawElementProviderSimple* provider,
-    NotificationKind notificationKind,
-    NotificationProcessing notificationProcessing,
+    enum NotificationKind notificationKind,
+    enum NotificationProcessing notificationProcessing,
     _In_opt_ BSTR displayString,
     _In_ BSTR activityId);
 HRESULT WINAPI UiaRaiseActiveTextPositionChangedEvent(
@@ -800,8 +800,8 @@ HRESULT WINAPI UiaRaiseActiveTextPositionChangedEvent(
 //
 // Client Event APIs
 //
-typedef void WINAPI UiaEventCallback(UiaEventArgs * pArgs, SAFEARRAY * pRequestedData, BSTR pTreeStructure);
-HRESULT WINAPI UiaAddEvent(HUIANODE hnode, EVENTID eventId, UiaEventCallback * pCallback, TreeScope scope, PROPERTYID * pProperties, int cProperties, UiaCacheRequest * pRequest, HUIAEVENT * phEvent);
+typedef void WINAPI UiaEventCallback(struct UiaEventArgs * pArgs, SAFEARRAY * pRequestedData, BSTR pTreeStructure);
+HRESULT WINAPI UiaAddEvent(HUIANODE hnode, EVENTID eventId, UiaEventCallback * pCallback, enum TreeScope scope, PROPERTYID * pProperties, int cProperties, struct UiaCacheRequest * pRequest, HUIAEVENT * phEvent);
 HRESULT WINAPI UiaRemoveEvent(HUIAEVENT hEvent);
 HRESULT WINAPI UiaEventAddWindow(HUIAEVENT hEvent, HWND hwnd);
 HRESULT WINAPI UiaEventRemoveWindow(HUIAEVENT hEvent, HWND hwnd);
@@ -813,7 +813,7 @@ HRESULT WINAPI UiaEventRemoveWindow(HUIAEVENT hEvent, HWND hwnd);
 //
 // --------------------------------------------------------------------------
 
-HRESULT WINAPI DockPattern_SetDockPosition(HUIAPATTERNOBJECT hobj, DockPosition dockPosition);
+HRESULT WINAPI DockPattern_SetDockPosition(HUIAPATTERNOBJECT hobj, enum DockPosition dockPosition);
 HRESULT WINAPI ExpandCollapsePattern_Collapse(HUIAPATTERNOBJECT hobj);
 HRESULT WINAPI ExpandCollapsePattern_Expand(HUIAPATTERNOBJECT hobj);
 HRESULT WINAPI GridPattern_GetItem(HUIAPATTERNOBJECT hobj, int row, int column, HUIANODE * pResult);
@@ -822,7 +822,7 @@ HRESULT WINAPI MultipleViewPattern_GetViewName(HUIAPATTERNOBJECT hobj, int viewI
 HRESULT WINAPI MultipleViewPattern_SetCurrentView(HUIAPATTERNOBJECT hobj, int viewId);
 HRESULT WINAPI RangeValuePattern_SetValue(HUIAPATTERNOBJECT hobj, double val);
 HRESULT WINAPI ScrollItemPattern_ScrollIntoView(HUIAPATTERNOBJECT hobj);
-HRESULT WINAPI ScrollPattern_Scroll(HUIAPATTERNOBJECT hobj, ScrollAmount horizontalAmount, ScrollAmount verticalAmount);
+HRESULT WINAPI ScrollPattern_Scroll(HUIAPATTERNOBJECT hobj, enum ScrollAmount horizontalAmount, enum ScrollAmount verticalAmount);
 HRESULT WINAPI ScrollPattern_SetScrollPercent(HUIAPATTERNOBJECT hobj, double horizontalPercent, double verticalPercent);
 HRESULT WINAPI SelectionItemPattern_AddToSelection(HUIAPATTERNOBJECT hobj);
 HRESULT WINAPI SelectionItemPattern_RemoveFromSelection(HUIAPATTERNOBJECT hobj);
@@ -833,28 +833,28 @@ HRESULT WINAPI TransformPattern_Resize(HUIAPATTERNOBJECT hobj, double width, dou
 HRESULT WINAPI TransformPattern_Rotate(HUIAPATTERNOBJECT hobj, double degrees);
 HRESULT WINAPI ValuePattern_SetValue(HUIAPATTERNOBJECT hobj, LPCWSTR pVal);
 HRESULT WINAPI WindowPattern_Close(HUIAPATTERNOBJECT hobj);
-HRESULT WINAPI WindowPattern_SetWindowVisualState(HUIAPATTERNOBJECT hobj, WindowVisualState state);
+HRESULT WINAPI WindowPattern_SetWindowVisualState(HUIAPATTERNOBJECT hobj, enum WindowVisualState state);
 HRESULT WINAPI WindowPattern_WaitForInputIdle(HUIAPATTERNOBJECT hobj, int milliseconds, BOOL * pResult);
 
 HRESULT WINAPI TextPattern_GetSelection(HUIAPATTERNOBJECT hobj, SAFEARRAY** pRetVal);
 HRESULT WINAPI TextPattern_GetVisibleRanges(HUIAPATTERNOBJECT hobj, SAFEARRAY** pRetVal);
 HRESULT WINAPI TextPattern_RangeFromChild(HUIAPATTERNOBJECT hobj, HUIANODE hnodeChild, HUIATEXTRANGE* pRetVal);
-HRESULT WINAPI TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, UiaPoint point, HUIATEXTRANGE* pRetVal);
+HRESULT WINAPI TextPattern_RangeFromPoint(HUIAPATTERNOBJECT hobj, struct UiaPoint point, HUIATEXTRANGE* pRetVal);
 HRESULT WINAPI TextPattern_get_DocumentRange(HUIAPATTERNOBJECT hobj, HUIATEXTRANGE* pRetVal);
-HRESULT WINAPI TextPattern_get_SupportedTextSelection(HUIAPATTERNOBJECT hobj, SupportedTextSelection* pRetVal);
+HRESULT WINAPI TextPattern_get_SupportedTextSelection(HUIAPATTERNOBJECT hobj, enum SupportedTextSelection* pRetVal);
 HRESULT WINAPI TextRange_Clone(HUIATEXTRANGE hobj, HUIATEXTRANGE* pRetVal);
 HRESULT WINAPI TextRange_Compare(HUIATEXTRANGE hobj, HUIATEXTRANGE range, BOOL* pRetVal);
-HRESULT WINAPI TextRange_CompareEndpoints(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, TextPatternRangeEndpoint targetEndpoint, int* pRetVal);
-HRESULT WINAPI TextRange_ExpandToEnclosingUnit(HUIATEXTRANGE hobj, TextUnit unit);
+HRESULT WINAPI TextRange_CompareEndpoints(HUIATEXTRANGE hobj, enum TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, enum TextPatternRangeEndpoint targetEndpoint, int* pRetVal);
+HRESULT WINAPI TextRange_ExpandToEnclosingUnit(HUIATEXTRANGE hobj, enum TextUnit unit);
 HRESULT WINAPI TextRange_GetAttributeValue(HUIATEXTRANGE hobj, TEXTATTRIBUTEID attributeId, VARIANT * pRetVal);
 HRESULT WINAPI TextRange_FindAttribute(HUIATEXTRANGE hobj, TEXTATTRIBUTEID attributeId, VARIANT val, BOOL backward, HUIATEXTRANGE * pRetVal);
 HRESULT WINAPI TextRange_FindText(HUIATEXTRANGE hobj, BSTR text, BOOL backward, BOOL ignoreCase, HUIATEXTRANGE* pRetVal);
 HRESULT WINAPI TextRange_GetBoundingRectangles(HUIATEXTRANGE hobj, SAFEARRAY** pRetVal);
 HRESULT WINAPI TextRange_GetEnclosingElement(HUIATEXTRANGE hobj, HUIANODE* pRetVal);
 HRESULT WINAPI TextRange_GetText(HUIATEXTRANGE hobj, int maxLength, BSTR* pRetVal);
-HRESULT WINAPI TextRange_Move(HUIATEXTRANGE hobj, TextUnit unit, int count, int* pRetVal);
-HRESULT WINAPI TextRange_MoveEndpointByUnit(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, TextUnit unit, int count, int* pRetVal);
-HRESULT WINAPI TextRange_MoveEndpointByRange(HUIATEXTRANGE hobj, TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, TextPatternRangeEndpoint targetEndpoint);
+HRESULT WINAPI TextRange_Move(HUIATEXTRANGE hobj, enum TextUnit unit, int count, int* pRetVal);
+HRESULT WINAPI TextRange_MoveEndpointByUnit(HUIATEXTRANGE hobj, enum TextPatternRangeEndpoint endpoint, enum TextUnit unit, int count, int* pRetVal);
+HRESULT WINAPI TextRange_MoveEndpointByRange(HUIATEXTRANGE hobj, enum TextPatternRangeEndpoint endpoint, HUIATEXTRANGE targetRange, enum TextPatternRangeEndpoint targetEndpoint);
 HRESULT WINAPI TextRange_Select(HUIATEXTRANGE hobj);
 HRESULT WINAPI TextRange_AddToSelection(HUIATEXTRANGE hobj);
 HRESULT WINAPI TextRange_RemoveFromSelection(HUIATEXTRANGE hobj);
@@ -866,10 +866,10 @@ HRESULT WINAPI LegacyIAccessiblePattern_Select(HUIAPATTERNOBJECT hobj, long flag
 HRESULT WINAPI LegacyIAccessiblePattern_DoDefaultAction(HUIAPATTERNOBJECT hobj);
 HRESULT WINAPI LegacyIAccessiblePattern_SetValue(HUIAPATTERNOBJECT hobj, LPCWSTR szValue);
 HRESULT WINAPI LegacyIAccessiblePattern_GetIAccessible(HUIAPATTERNOBJECT hobj, IAccessible ** pAccessible);
-HRESULT WINAPI SynchronizedInputPattern_StartListening(HUIAPATTERNOBJECT hobj, SynchronizedInputType inputType);
+HRESULT WINAPI SynchronizedInputPattern_StartListening(HUIAPATTERNOBJECT hobj, enum SynchronizedInputType inputType);
 HRESULT WINAPI SynchronizedInputPattern_Cancel(HUIAPATTERNOBJECT hobj);
 HRESULT WINAPI VirtualizedItemPattern_Realize(HUIAPATTERNOBJECT hobj);
-HRESULT WINAPI CustomNavigationPattern_Navigate(HUIAPATTERNOBJECT hobj, NavigateDirection direction, HUIANODE * pResult);
+HRESULT WINAPI CustomNavigationPattern_Navigate(HUIAPATTERNOBJECT hobj, enum NavigateDirection direction, HUIANODE * pResult);
 
 BOOL WINAPI UiaPatternRelease(HUIAPATTERNOBJECT hobj);
 BOOL WINAPI UiaTextRangeRelease(HUIATEXTRANGE hobj);

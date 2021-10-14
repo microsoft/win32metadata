@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -478,6 +486,7 @@ EXTERN_C const IID IID_IOPMVideoOutput;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IOPMVideoOutput * This,
             /* [annotation][in] */ 
@@ -485,12 +494,15 @@ EXTERN_C const IID IID_IOPMVideoOutput;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IOPMVideoOutput * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IOPMVideoOutput * This);
         
+        DECLSPEC_XFGVIRT(IOPMVideoOutput, StartInitialization)
         HRESULT ( STDMETHODCALLTYPE *StartInitialization )( 
             IOPMVideoOutput * This,
             /* [annotation][out] */ 
@@ -500,11 +512,13 @@ EXTERN_C const IID IID_IOPMVideoOutput;
             /* [annotation][out] */ 
             _Out_  ULONG *pulCertificateLength);
         
+        DECLSPEC_XFGVIRT(IOPMVideoOutput, FinishInitialization)
         HRESULT ( STDMETHODCALLTYPE *FinishInitialization )( 
             IOPMVideoOutput * This,
             /* [annotation][in] */ 
             _In_  const OPM_ENCRYPTED_INITIALIZATION_PARAMETERS *pParameters);
         
+        DECLSPEC_XFGVIRT(IOPMVideoOutput, GetInformation)
         HRESULT ( STDMETHODCALLTYPE *GetInformation )( 
             IOPMVideoOutput * This,
             /* [annotation][in] */ 
@@ -512,6 +526,7 @@ EXTERN_C const IID IID_IOPMVideoOutput;
             /* [annotation][out] */ 
             _Out_  OPM_REQUESTED_INFORMATION *pRequestedInformation);
         
+        DECLSPEC_XFGVIRT(IOPMVideoOutput, COPPCompatibleGetInformation)
         HRESULT ( STDMETHODCALLTYPE *COPPCompatibleGetInformation )( 
             IOPMVideoOutput * This,
             /* [annotation][in] */ 
@@ -519,6 +534,7 @@ EXTERN_C const IID IID_IOPMVideoOutput;
             /* [annotation][out] */ 
             _Out_  OPM_REQUESTED_INFORMATION *pRequestedInformation);
         
+        DECLSPEC_XFGVIRT(IOPMVideoOutput, Configure)
         HRESULT ( STDMETHODCALLTYPE *Configure )( 
             IOPMVideoOutput * This,
             /* [annotation][in] */ 

@@ -69,6 +69,9 @@
 #define SECPKG_ATTR_CONNECTION_INFO_EX   0x6e   // returns SecPkgContext_ConnectionInfoEx
 #define SECPKG_ATTR_KEYING_MATERIAL_TOKEN_BINDING 0x6f // returns SecPkgContext_KeyingMaterial specific to Token Binding
 #define SECPKG_ATTR_KEYING_MATERIAL_INPROC        0x70 // returns SecPkgContext_KeyingMaterial_Inproc
+#define SECPKG_ATTR_CERT_CHECK_RESULT        0x71 // returns SecPkgContext_CertificateValidationResult, use during and after SSPI handshake loop
+#define SECPKG_ATTR_CERT_CHECK_RESULT_INPROC 0x72 // returns SecPkgContext_CertificateValidationResult, use only after SSPI handshake loop
+#define SECPKG_ATTR_SESSION_TICKET_KEYS      0x73 // sets    SecPkgCred_SessionTicketKeys
 
 //
 // typedefs
@@ -110,6 +113,24 @@ typedef struct _SecPkgCred_ClientCertPolicy
     LPWSTR  pwszSslCtlStoreName;
     LPWSTR  pwszSslCtlIdentifier;
 } SecPkgCred_ClientCertPolicy, *PSecPkgCred_ClientCertPolicy;
+
+// Session ticket protection version definitions.
+#define SESSION_TICKET_INFO_V0 0
+#define SESSION_TICKET_INFO_VERSION SESSION_TICKET_INFO_V0
+
+typedef struct _SecPkgCred_SessionTicketKey
+{
+    DWORD   TicketInfoVersion;      // Set to SESSION_TICKET_INFO_VERSION for the current session ticket protection method.
+    BYTE    KeyId[16];              // Uniquely identifies each session ticket key issued by a TLS server.
+    BYTE    KeyingMaterial[64];     // Must be generated using a cryptographic RNG.
+    BYTE    KeyingMaterialSize;     // Size in bytes of the keying material in the KeyingMaterial array. Must be between 32 and 64.
+} SecPkgCred_SessionTicketKey, *PSecPkgCred_SessionTicketKey;
+
+typedef struct _SecPkgCred_SessionTicketKeys
+{
+    DWORD                           cSessionTicketKeys; // Up to 16 keys.
+    PSecPkgCred_SessionTicketKey    pSessionTicketKeys;
+} SecPkgCred_SessionTicketKeys, *PSecPkgCred_SessionTicketKeys;
 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_GAMES) */

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -158,18 +166,22 @@ EXTERN_C const IID IID_IDataConvert;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDataConvert * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDataConvert * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDataConvert * This);
         
+        DECLSPEC_XFGVIRT(IDataConvert, DataConvert)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *DataConvert )( 
             IDataConvert * This,
             /* [in] */ DBTYPE wSrcType,
@@ -189,11 +201,13 @@ EXTERN_C const IID IID_IDataConvert;
             /* [in] */ BYTE bScale,
             /* [in] */ DBDATACONVERT dwFlags);
         
+        DECLSPEC_XFGVIRT(IDataConvert, CanConvert)
         HRESULT ( STDMETHODCALLTYPE *CanConvert )( 
             __RPC__in IDataConvert * This,
             /* [in] */ DBTYPE wSrcType,
             /* [in] */ DBTYPE wDstType);
         
+        DECLSPEC_XFGVIRT(IDataConvert, GetConversionSize)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetConversionSize )( 
             IDataConvert * This,
             /* [in] */ DBTYPE wSrcType,
@@ -294,24 +308,29 @@ EXTERN_C const IID IID_IDCInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDCInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDCInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDCInfo * This);
         
+        DECLSPEC_XFGVIRT(IDCInfo, GetInfo)
         HRESULT ( STDMETHODCALLTYPE *GetInfo )( 
             __RPC__in IDCInfo * This,
             /* [in] */ ULONG cInfo,
             /* [size_is][in] */ __RPC__in_ecount_full(cInfo) DCINFOTYPE rgeInfoType[  ],
             /* [size_is][out] */ __RPC__out_ecount_full(cInfo) DCINFO **prgInfo);
         
+        DECLSPEC_XFGVIRT(IDCInfo, SetInfo)
         HRESULT ( STDMETHODCALLTYPE *SetInfo )( 
             __RPC__in IDCInfo * This,
             /* [in] */ ULONG cInfo,

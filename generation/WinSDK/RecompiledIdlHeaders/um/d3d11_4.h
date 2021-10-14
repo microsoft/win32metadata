@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -144,6 +152,7 @@ EXTERN_C const IID IID_ID3D11Device4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11Device4 * This,
             /* [annotation][in] */ 
@@ -151,12 +160,15 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D11Device4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D11Device4 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateBuffer)
         HRESULT ( STDMETHODCALLTYPE *CreateBuffer )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -166,6 +178,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Buffer **ppBuffer);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateTexture1D)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture1D )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -175,6 +188,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture1D **ppTexture1D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateTexture2D)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture2D )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -184,6 +198,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture2D **ppTexture2D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateTexture3D)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture3D )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -193,6 +208,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture3D **ppTexture3D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateShaderResourceView)
         HRESULT ( STDMETHODCALLTYPE *CreateShaderResourceView )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -202,6 +218,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11ShaderResourceView **ppSRView);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateUnorderedAccessView)
         HRESULT ( STDMETHODCALLTYPE *CreateUnorderedAccessView )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -211,6 +228,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11UnorderedAccessView **ppUAView);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateRenderTargetView)
         HRESULT ( STDMETHODCALLTYPE *CreateRenderTargetView )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -220,6 +238,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RenderTargetView **ppRTView);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateDepthStencilView)
         HRESULT ( STDMETHODCALLTYPE *CreateDepthStencilView )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -229,6 +248,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DepthStencilView **ppDepthStencilView);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateInputLayout)
         HRESULT ( STDMETHODCALLTYPE *CreateInputLayout )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -242,6 +262,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11InputLayout **ppInputLayout);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateVertexShader)
         HRESULT ( STDMETHODCALLTYPE *CreateVertexShader )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -253,6 +274,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11VertexShader **ppVertexShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateGeometryShader)
         HRESULT ( STDMETHODCALLTYPE *CreateGeometryShader )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -264,6 +286,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11GeometryShader **ppGeometryShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateGeometryShaderWithStreamOutput)
         HRESULT ( STDMETHODCALLTYPE *CreateGeometryShaderWithStreamOutput )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -285,6 +308,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11GeometryShader **ppGeometryShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreatePixelShader)
         HRESULT ( STDMETHODCALLTYPE *CreatePixelShader )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -296,6 +320,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11PixelShader **ppPixelShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateHullShader)
         HRESULT ( STDMETHODCALLTYPE *CreateHullShader )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -307,6 +332,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11HullShader **ppHullShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateDomainShader)
         HRESULT ( STDMETHODCALLTYPE *CreateDomainShader )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -318,6 +344,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DomainShader **ppDomainShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateComputeShader)
         HRESULT ( STDMETHODCALLTYPE *CreateComputeShader )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -329,11 +356,13 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11ComputeShader **ppComputeShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateClassLinkage)
         HRESULT ( STDMETHODCALLTYPE *CreateClassLinkage )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
             _COM_Outptr_  ID3D11ClassLinkage **ppLinkage);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateBlendState)
         HRESULT ( STDMETHODCALLTYPE *CreateBlendState )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -341,6 +370,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11BlendState **ppBlendState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateDepthStencilState)
         HRESULT ( STDMETHODCALLTYPE *CreateDepthStencilState )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -348,6 +378,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DepthStencilState **ppDepthStencilState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateRasterizerState)
         HRESULT ( STDMETHODCALLTYPE *CreateRasterizerState )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -355,6 +386,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RasterizerState **ppRasterizerState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateSamplerState)
         HRESULT ( STDMETHODCALLTYPE *CreateSamplerState )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -362,6 +394,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11SamplerState **ppSamplerState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateQuery)
         HRESULT ( STDMETHODCALLTYPE *CreateQuery )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -369,6 +402,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Query **ppQuery);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreatePredicate)
         HRESULT ( STDMETHODCALLTYPE *CreatePredicate )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -376,6 +410,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Predicate **ppPredicate);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateCounter)
         HRESULT ( STDMETHODCALLTYPE *CreateCounter )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -383,12 +418,14 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Counter **ppCounter);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateDeferredContext)
         HRESULT ( STDMETHODCALLTYPE *CreateDeferredContext )( 
             ID3D11Device4 * This,
             UINT ContextFlags,
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DeviceContext **ppDeferredContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, OpenSharedResource)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedResource )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -398,6 +435,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  void **ppResource);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckFormatSupport)
         HRESULT ( STDMETHODCALLTYPE *CheckFormatSupport )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -405,6 +443,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _Out_  UINT *pFormatSupport);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckMultisampleQualityLevels)
         HRESULT ( STDMETHODCALLTYPE *CheckMultisampleQualityLevels )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -414,11 +453,13 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _Out_  UINT *pNumQualityLevels);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckCounterInfo)
         void ( STDMETHODCALLTYPE *CheckCounterInfo )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
             _Out_  D3D11_COUNTER_INFO *pCounterInfo);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckCounter)
         HRESULT ( STDMETHODCALLTYPE *CheckCounter )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -440,6 +481,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _Inout_opt_  UINT *pDescriptionLength);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckFeatureSupport)
         HRESULT ( STDMETHODCALLTYPE *CheckFeatureSupport )( 
             ID3D11Device4 * This,
             D3D11_FEATURE Feature,
@@ -447,6 +489,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             _Out_writes_bytes_(FeatureSupportDataSize)  void *pFeatureSupportData,
             UINT FeatureSupportDataSize);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -456,6 +499,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _Out_writes_bytes_opt_(*pDataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -465,6 +509,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _In_reads_bytes_opt_(DataSize)  const void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -472,38 +517,47 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetFeatureLevel)
         D3D_FEATURE_LEVEL ( STDMETHODCALLTYPE *GetFeatureLevel )( 
             ID3D11Device4 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetCreationFlags)
         UINT ( STDMETHODCALLTYPE *GetCreationFlags )( 
             ID3D11Device4 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetDeviceRemovedReason)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceRemovedReason )( 
             ID3D11Device4 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetImmediateContext)
         void ( STDMETHODCALLTYPE *GetImmediateContext )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11DeviceContext **ppImmediateContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, SetExceptionMode)
         HRESULT ( STDMETHODCALLTYPE *SetExceptionMode )( 
             ID3D11Device4 * This,
             UINT RaiseFlags);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetExceptionMode)
         UINT ( STDMETHODCALLTYPE *GetExceptionMode )( 
             ID3D11Device4 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, GetImmediateContext1)
         void ( STDMETHODCALLTYPE *GetImmediateContext1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11DeviceContext1 **ppImmediateContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, CreateDeferredContext1)
         HRESULT ( STDMETHODCALLTYPE *CreateDeferredContext1 )( 
             ID3D11Device4 * This,
             UINT ContextFlags,
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DeviceContext1 **ppDeferredContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, CreateBlendState1)
         HRESULT ( STDMETHODCALLTYPE *CreateBlendState1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -511,6 +565,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11BlendState1 **ppBlendState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, CreateRasterizerState1)
         HRESULT ( STDMETHODCALLTYPE *CreateRasterizerState1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -518,6 +573,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RasterizerState1 **ppRasterizerState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, CreateDeviceContextState)
         HRESULT ( STDMETHODCALLTYPE *CreateDeviceContextState )( 
             ID3D11Device4 * This,
             UINT Flags,
@@ -531,6 +587,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _Out_opt_  ID3DDeviceContextState **ppContextState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, OpenSharedResource1)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedResource1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -540,6 +597,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_  void **ppResource);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, OpenSharedResourceByName)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedResourceByName )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -551,17 +609,20 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_  void **ppResource);
         
+        DECLSPEC_XFGVIRT(ID3D11Device2, GetImmediateContext2)
         void ( STDMETHODCALLTYPE *GetImmediateContext2 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11DeviceContext2 **ppImmediateContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device2, CreateDeferredContext2)
         HRESULT ( STDMETHODCALLTYPE *CreateDeferredContext2 )( 
             ID3D11Device4 * This,
             UINT ContextFlags,
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DeviceContext2 **ppDeferredContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device2, GetResourceTiling)
         void ( STDMETHODCALLTYPE *GetResourceTiling )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -579,6 +640,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _Out_writes_(*pNumSubresourceTilings)  D3D11_SUBRESOURCE_TILING *pSubresourceTilingsForNonPackedMips);
         
+        DECLSPEC_XFGVIRT(ID3D11Device2, CheckMultisampleQualityLevels1)
         HRESULT ( STDMETHODCALLTYPE *CheckMultisampleQualityLevels1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -590,6 +652,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _Out_  UINT *pNumQualityLevels);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateTexture2D1)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture2D1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -599,6 +662,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture2D1 **ppTexture2D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateTexture3D1)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture3D1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -608,6 +672,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture3D1 **ppTexture3D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateRasterizerState2)
         HRESULT ( STDMETHODCALLTYPE *CreateRasterizerState2 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -615,6 +680,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RasterizerState2 **ppRasterizerState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateShaderResourceView1)
         HRESULT ( STDMETHODCALLTYPE *CreateShaderResourceView1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -624,6 +690,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11ShaderResourceView1 **ppSRView1);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateUnorderedAccessView1)
         HRESULT ( STDMETHODCALLTYPE *CreateUnorderedAccessView1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -633,6 +700,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11UnorderedAccessView1 **ppUAView1);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateRenderTargetView1)
         HRESULT ( STDMETHODCALLTYPE *CreateRenderTargetView1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -642,6 +710,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RenderTargetView1 **ppRTView1);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateQuery1)
         HRESULT ( STDMETHODCALLTYPE *CreateQuery1 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -649,17 +718,20 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Query1 **ppQuery1);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, GetImmediateContext3)
         void ( STDMETHODCALLTYPE *GetImmediateContext3 )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11DeviceContext3 **ppImmediateContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateDeferredContext3)
         HRESULT ( STDMETHODCALLTYPE *CreateDeferredContext3 )( 
             ID3D11Device4 * This,
             UINT ContextFlags,
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DeviceContext3 **ppDeferredContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, WriteToSubresource)
         void ( STDMETHODCALLTYPE *WriteToSubresource )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -675,6 +747,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _In_  UINT SrcDepthPitch);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, ReadFromSubresource)
         void ( STDMETHODCALLTYPE *ReadFromSubresource )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -690,6 +763,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _In_opt_  const D3D11_BOX *pSrcBox);
         
+        DECLSPEC_XFGVIRT(ID3D11Device4, RegisterDeviceRemovedEvent)
         HRESULT ( STDMETHODCALLTYPE *RegisterDeviceRemovedEvent )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -697,6 +771,7 @@ EXTERN_C const IID IID_ID3D11Device4;
             /* [annotation] */ 
             _Out_  DWORD *pdwCookie);
         
+        DECLSPEC_XFGVIRT(ID3D11Device4, UnregisterDeviceRemoved)
         void ( STDMETHODCALLTYPE *UnregisterDeviceRemoved )( 
             ID3D11Device4 * This,
             /* [annotation] */ 
@@ -974,6 +1049,7 @@ EXTERN_C const IID IID_ID3D11Device5;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11Device5 * This,
             /* [annotation][in] */ 
@@ -981,12 +1057,15 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D11Device5 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D11Device5 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateBuffer)
         HRESULT ( STDMETHODCALLTYPE *CreateBuffer )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -996,6 +1075,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Buffer **ppBuffer);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateTexture1D)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture1D )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1005,6 +1085,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture1D **ppTexture1D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateTexture2D)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture2D )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1014,6 +1095,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture2D **ppTexture2D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateTexture3D)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture3D )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1023,6 +1105,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture3D **ppTexture3D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateShaderResourceView)
         HRESULT ( STDMETHODCALLTYPE *CreateShaderResourceView )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1032,6 +1115,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11ShaderResourceView **ppSRView);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateUnorderedAccessView)
         HRESULT ( STDMETHODCALLTYPE *CreateUnorderedAccessView )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1041,6 +1125,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11UnorderedAccessView **ppUAView);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateRenderTargetView)
         HRESULT ( STDMETHODCALLTYPE *CreateRenderTargetView )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1050,6 +1135,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RenderTargetView **ppRTView);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateDepthStencilView)
         HRESULT ( STDMETHODCALLTYPE *CreateDepthStencilView )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1059,6 +1145,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DepthStencilView **ppDepthStencilView);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateInputLayout)
         HRESULT ( STDMETHODCALLTYPE *CreateInputLayout )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1072,6 +1159,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11InputLayout **ppInputLayout);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateVertexShader)
         HRESULT ( STDMETHODCALLTYPE *CreateVertexShader )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1083,6 +1171,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11VertexShader **ppVertexShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateGeometryShader)
         HRESULT ( STDMETHODCALLTYPE *CreateGeometryShader )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1094,6 +1183,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11GeometryShader **ppGeometryShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateGeometryShaderWithStreamOutput)
         HRESULT ( STDMETHODCALLTYPE *CreateGeometryShaderWithStreamOutput )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1115,6 +1205,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11GeometryShader **ppGeometryShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreatePixelShader)
         HRESULT ( STDMETHODCALLTYPE *CreatePixelShader )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1126,6 +1217,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11PixelShader **ppPixelShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateHullShader)
         HRESULT ( STDMETHODCALLTYPE *CreateHullShader )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1137,6 +1229,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11HullShader **ppHullShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateDomainShader)
         HRESULT ( STDMETHODCALLTYPE *CreateDomainShader )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1148,6 +1241,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DomainShader **ppDomainShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateComputeShader)
         HRESULT ( STDMETHODCALLTYPE *CreateComputeShader )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1159,11 +1253,13 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11ComputeShader **ppComputeShader);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateClassLinkage)
         HRESULT ( STDMETHODCALLTYPE *CreateClassLinkage )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
             _COM_Outptr_  ID3D11ClassLinkage **ppLinkage);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateBlendState)
         HRESULT ( STDMETHODCALLTYPE *CreateBlendState )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1171,6 +1267,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11BlendState **ppBlendState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateDepthStencilState)
         HRESULT ( STDMETHODCALLTYPE *CreateDepthStencilState )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1178,6 +1275,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DepthStencilState **ppDepthStencilState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateRasterizerState)
         HRESULT ( STDMETHODCALLTYPE *CreateRasterizerState )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1185,6 +1283,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RasterizerState **ppRasterizerState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateSamplerState)
         HRESULT ( STDMETHODCALLTYPE *CreateSamplerState )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1192,6 +1291,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11SamplerState **ppSamplerState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateQuery)
         HRESULT ( STDMETHODCALLTYPE *CreateQuery )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1199,6 +1299,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Query **ppQuery);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreatePredicate)
         HRESULT ( STDMETHODCALLTYPE *CreatePredicate )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1206,6 +1307,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Predicate **ppPredicate);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateCounter)
         HRESULT ( STDMETHODCALLTYPE *CreateCounter )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1213,12 +1315,14 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Counter **ppCounter);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CreateDeferredContext)
         HRESULT ( STDMETHODCALLTYPE *CreateDeferredContext )( 
             ID3D11Device5 * This,
             UINT ContextFlags,
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DeviceContext **ppDeferredContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, OpenSharedResource)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedResource )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1228,6 +1332,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  void **ppResource);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckFormatSupport)
         HRESULT ( STDMETHODCALLTYPE *CheckFormatSupport )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1235,6 +1340,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _Out_  UINT *pFormatSupport);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckMultisampleQualityLevels)
         HRESULT ( STDMETHODCALLTYPE *CheckMultisampleQualityLevels )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1244,11 +1350,13 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _Out_  UINT *pNumQualityLevels);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckCounterInfo)
         void ( STDMETHODCALLTYPE *CheckCounterInfo )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
             _Out_  D3D11_COUNTER_INFO *pCounterInfo);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckCounter)
         HRESULT ( STDMETHODCALLTYPE *CheckCounter )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1270,6 +1378,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _Inout_opt_  UINT *pDescriptionLength);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, CheckFeatureSupport)
         HRESULT ( STDMETHODCALLTYPE *CheckFeatureSupport )( 
             ID3D11Device5 * This,
             D3D11_FEATURE Feature,
@@ -1277,6 +1386,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             _Out_writes_bytes_(FeatureSupportDataSize)  void *pFeatureSupportData,
             UINT FeatureSupportDataSize);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1286,6 +1396,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _Out_writes_bytes_opt_(*pDataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1295,6 +1406,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _In_reads_bytes_opt_(DataSize)  const void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1302,38 +1414,47 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetFeatureLevel)
         D3D_FEATURE_LEVEL ( STDMETHODCALLTYPE *GetFeatureLevel )( 
             ID3D11Device5 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetCreationFlags)
         UINT ( STDMETHODCALLTYPE *GetCreationFlags )( 
             ID3D11Device5 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetDeviceRemovedReason)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceRemovedReason )( 
             ID3D11Device5 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetImmediateContext)
         void ( STDMETHODCALLTYPE *GetImmediateContext )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11DeviceContext **ppImmediateContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, SetExceptionMode)
         HRESULT ( STDMETHODCALLTYPE *SetExceptionMode )( 
             ID3D11Device5 * This,
             UINT RaiseFlags);
         
+        DECLSPEC_XFGVIRT(ID3D11Device, GetExceptionMode)
         UINT ( STDMETHODCALLTYPE *GetExceptionMode )( 
             ID3D11Device5 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, GetImmediateContext1)
         void ( STDMETHODCALLTYPE *GetImmediateContext1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11DeviceContext1 **ppImmediateContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, CreateDeferredContext1)
         HRESULT ( STDMETHODCALLTYPE *CreateDeferredContext1 )( 
             ID3D11Device5 * This,
             UINT ContextFlags,
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DeviceContext1 **ppDeferredContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, CreateBlendState1)
         HRESULT ( STDMETHODCALLTYPE *CreateBlendState1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1341,6 +1462,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11BlendState1 **ppBlendState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, CreateRasterizerState1)
         HRESULT ( STDMETHODCALLTYPE *CreateRasterizerState1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1348,6 +1470,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RasterizerState1 **ppRasterizerState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, CreateDeviceContextState)
         HRESULT ( STDMETHODCALLTYPE *CreateDeviceContextState )( 
             ID3D11Device5 * This,
             UINT Flags,
@@ -1361,6 +1484,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _Out_opt_  ID3DDeviceContextState **ppContextState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, OpenSharedResource1)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedResource1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1370,6 +1494,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_  void **ppResource);
         
+        DECLSPEC_XFGVIRT(ID3D11Device1, OpenSharedResourceByName)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedResourceByName )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1381,17 +1506,20 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_  void **ppResource);
         
+        DECLSPEC_XFGVIRT(ID3D11Device2, GetImmediateContext2)
         void ( STDMETHODCALLTYPE *GetImmediateContext2 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11DeviceContext2 **ppImmediateContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device2, CreateDeferredContext2)
         HRESULT ( STDMETHODCALLTYPE *CreateDeferredContext2 )( 
             ID3D11Device5 * This,
             UINT ContextFlags,
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DeviceContext2 **ppDeferredContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device2, GetResourceTiling)
         void ( STDMETHODCALLTYPE *GetResourceTiling )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1409,6 +1537,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _Out_writes_(*pNumSubresourceTilings)  D3D11_SUBRESOURCE_TILING *pSubresourceTilingsForNonPackedMips);
         
+        DECLSPEC_XFGVIRT(ID3D11Device2, CheckMultisampleQualityLevels1)
         HRESULT ( STDMETHODCALLTYPE *CheckMultisampleQualityLevels1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1420,6 +1549,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _Out_  UINT *pNumQualityLevels);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateTexture2D1)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture2D1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1429,6 +1559,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture2D1 **ppTexture2D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateTexture3D1)
         HRESULT ( STDMETHODCALLTYPE *CreateTexture3D1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1438,6 +1569,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Texture3D1 **ppTexture3D);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateRasterizerState2)
         HRESULT ( STDMETHODCALLTYPE *CreateRasterizerState2 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1445,6 +1577,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RasterizerState2 **ppRasterizerState);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateShaderResourceView1)
         HRESULT ( STDMETHODCALLTYPE *CreateShaderResourceView1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1454,6 +1587,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11ShaderResourceView1 **ppSRView1);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateUnorderedAccessView1)
         HRESULT ( STDMETHODCALLTYPE *CreateUnorderedAccessView1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1463,6 +1597,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11UnorderedAccessView1 **ppUAView1);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateRenderTargetView1)
         HRESULT ( STDMETHODCALLTYPE *CreateRenderTargetView1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1472,6 +1607,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11RenderTargetView1 **ppRTView1);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateQuery1)
         HRESULT ( STDMETHODCALLTYPE *CreateQuery1 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1479,17 +1615,20 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11Query1 **ppQuery1);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, GetImmediateContext3)
         void ( STDMETHODCALLTYPE *GetImmediateContext3 )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11DeviceContext3 **ppImmediateContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, CreateDeferredContext3)
         HRESULT ( STDMETHODCALLTYPE *CreateDeferredContext3 )( 
             ID3D11Device5 * This,
             UINT ContextFlags,
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11DeviceContext3 **ppDeferredContext);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, WriteToSubresource)
         void ( STDMETHODCALLTYPE *WriteToSubresource )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1505,6 +1644,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _In_  UINT SrcDepthPitch);
         
+        DECLSPEC_XFGVIRT(ID3D11Device3, ReadFromSubresource)
         void ( STDMETHODCALLTYPE *ReadFromSubresource )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1520,6 +1660,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _In_opt_  const D3D11_BOX *pSrcBox);
         
+        DECLSPEC_XFGVIRT(ID3D11Device4, RegisterDeviceRemovedEvent)
         HRESULT ( STDMETHODCALLTYPE *RegisterDeviceRemovedEvent )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1527,11 +1668,13 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _Out_  DWORD *pdwCookie);
         
+        DECLSPEC_XFGVIRT(ID3D11Device4, UnregisterDeviceRemoved)
         void ( STDMETHODCALLTYPE *UnregisterDeviceRemoved )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
             _In_  DWORD dwCookie);
         
+        DECLSPEC_XFGVIRT(ID3D11Device5, OpenSharedFence)
         HRESULT ( STDMETHODCALLTYPE *OpenSharedFence )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1541,6 +1684,7 @@ EXTERN_C const IID IID_ID3D11Device5;
             /* [annotation] */ 
             _COM_Outptr_opt_  void **ppFence);
         
+        DECLSPEC_XFGVIRT(ID3D11Device5, CreateFence)
         HRESULT ( STDMETHODCALLTYPE *CreateFence )( 
             ID3D11Device5 * This,
             /* [annotation] */ 
@@ -1823,6 +1967,7 @@ EXTERN_C const IID IID_ID3D11Multithread;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11Multithread * This,
             /* [annotation][in] */ 
@@ -1830,23 +1975,29 @@ EXTERN_C const IID IID_ID3D11Multithread;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D11Multithread * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D11Multithread * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Multithread, Enter)
         void ( STDMETHODCALLTYPE *Enter )( 
             ID3D11Multithread * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Multithread, Leave)
         void ( STDMETHODCALLTYPE *Leave )( 
             ID3D11Multithread * This);
         
+        DECLSPEC_XFGVIRT(ID3D11Multithread, SetMultithreadProtected)
         BOOL ( STDMETHODCALLTYPE *SetMultithreadProtected )( 
             ID3D11Multithread * This,
             /* [annotation] */ 
             _In_  BOOL bMTProtect);
         
+        DECLSPEC_XFGVIRT(ID3D11Multithread, GetMultithreadProtected)
         BOOL ( STDMETHODCALLTYPE *GetMultithreadProtected )( 
             ID3D11Multithread * This);
         
@@ -1964,6 +2115,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11VideoContext2 * This,
             /* [annotation][in] */ 
@@ -1971,17 +2123,21 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D11VideoContext2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D11VideoContext2 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11DeviceChild, GetDevice)
         void ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11Device **ppDevice);
         
+        DECLSPEC_XFGVIRT(ID3D11DeviceChild, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -1991,6 +2147,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11DeviceChild, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2000,6 +2157,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11DeviceChild, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2007,6 +2165,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, GetDecoderBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetDecoderBuffer )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2017,6 +2176,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Outptr_result_bytebuffer_(*pBufferSize)  void **ppBuffer);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, ReleaseDecoderBuffer)
         HRESULT ( STDMETHODCALLTYPE *ReleaseDecoderBuffer )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2024,6 +2184,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  D3D11_VIDEO_DECODER_BUFFER_TYPE Type);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, DecoderBeginFrame)
         HRESULT ( STDMETHODCALLTYPE *DecoderBeginFrame )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2034,11 +2195,13 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_reads_bytes_opt_(ContentKeySize)  const void *pContentKey);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, DecoderEndFrame)
         HRESULT ( STDMETHODCALLTYPE *DecoderEndFrame )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
             _In_  ID3D11VideoDecoder *pDecoder);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, SubmitDecoderBuffers)
         HRESULT ( STDMETHODCALLTYPE *SubmitDecoderBuffers )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2048,6 +2211,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_reads_(NumBuffers)  const D3D11_VIDEO_DECODER_BUFFER_DESC *pBufferDesc);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, DecoderExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *DecoderExtension )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2055,6 +2219,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_DECODER_EXTENSION *pExtensionData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputTargetRect)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputTargetRect )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2064,6 +2229,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_opt_  const RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputBackgroundColor)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputBackgroundColor )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2073,6 +2239,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputColorSpace)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputColorSpace )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2080,6 +2247,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_PROCESSOR_COLOR_SPACE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputAlphaFillMode)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputAlphaFillMode )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2089,6 +2257,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  UINT StreamIndex);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputConstriction)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputConstriction )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2098,6 +2267,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  SIZE Size);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputStereoMode)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputStereoMode )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2105,6 +2275,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  BOOL Enable);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *VideoProcessorSetOutputExtension )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2116,6 +2287,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputTargetRect)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputTargetRect )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2125,6 +2297,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputBackgroundColor)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputBackgroundColor )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2134,6 +2307,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputColorSpace)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputColorSpace )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2141,6 +2315,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_PROCESSOR_COLOR_SPACE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputAlphaFillMode)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputAlphaFillMode )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2150,6 +2325,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  UINT *pStreamIndex);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputConstriction)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputConstriction )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2159,6 +2335,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  SIZE *pSize);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputStereoMode)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputStereoMode )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2166,6 +2343,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *VideoProcessorGetOutputExtension )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2177,6 +2355,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamFrameFormat)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamFrameFormat )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2186,6 +2365,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  D3D11_VIDEO_FRAME_FORMAT FrameFormat);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamColorSpace)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamColorSpace )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2195,6 +2375,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_PROCESSOR_COLOR_SPACE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamOutputRate)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamOutputRate )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2208,6 +2389,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_opt_  const DXGI_RATIONAL *pCustomRate);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamSourceRect)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamSourceRect )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2219,6 +2401,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_opt_  const RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamDestRect)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamDestRect )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2230,6 +2413,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_opt_  const RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamAlpha)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamAlpha )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2241,6 +2425,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  FLOAT Alpha);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamPalette)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamPalette )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2252,6 +2437,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_reads_opt_(Count)  const UINT *pEntries);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamPixelAspectRatio)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamPixelAspectRatio )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2265,6 +2451,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_opt_  const DXGI_RATIONAL *pDestinationAspectRatio);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamLumaKey)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamLumaKey )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2278,6 +2465,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  FLOAT Upper);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamStereoFormat)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamStereoFormat )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2297,6 +2485,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  int MonoOffset);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamAutoProcessingMode)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamAutoProcessingMode )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2306,6 +2495,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  BOOL Enable);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamFilter)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamFilter )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2319,6 +2509,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  int Level);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *VideoProcessorSetStreamExtension )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2332,6 +2523,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamFrameFormat)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamFrameFormat )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2341,6 +2533,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_FRAME_FORMAT *pFrameFormat);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamColorSpace)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamColorSpace )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2350,6 +2543,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_PROCESSOR_COLOR_SPACE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamOutputRate)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamOutputRate )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2363,6 +2557,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  DXGI_RATIONAL *pCustomRate);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamSourceRect)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamSourceRect )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2374,6 +2569,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamDestRect)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamDestRect )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2385,6 +2581,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamAlpha)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamAlpha )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2396,6 +2593,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  FLOAT *pAlpha);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamPalette)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamPalette )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2407,6 +2605,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_writes_(Count)  UINT *pEntries);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamPixelAspectRatio)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamPixelAspectRatio )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2420,6 +2619,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  DXGI_RATIONAL *pDestinationAspectRatio);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamLumaKey)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamLumaKey )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2433,6 +2633,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  FLOAT *pUpper);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamStereoFormat)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamStereoFormat )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2452,6 +2653,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  int *MonoOffset);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamAutoProcessingMode)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamAutoProcessingMode )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2461,6 +2663,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamFilter)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamFilter )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2474,6 +2677,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  int *pLevel);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *VideoProcessorGetStreamExtension )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2487,6 +2691,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorBlt)
         HRESULT ( STDMETHODCALLTYPE *VideoProcessorBlt )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2500,6 +2705,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_reads_(StreamCount)  const D3D11_VIDEO_PROCESSOR_STREAM *pStreams);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, NegotiateCryptoSessionKeyExchange)
         HRESULT ( STDMETHODCALLTYPE *NegotiateCryptoSessionKeyExchange )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2509,6 +2715,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Inout_updates_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, EncryptionBlt)
         void ( STDMETHODCALLTYPE *EncryptionBlt )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2522,6 +2729,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Inout_opt_bytecount_(IVSize)  void *pIV);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, DecryptionBlt)
         void ( STDMETHODCALLTYPE *DecryptionBlt )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2541,6 +2749,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Inout_opt_bytecount_(IVSize)  void *pIV);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, StartSessionKeyRefresh)
         void ( STDMETHODCALLTYPE *StartSessionKeyRefresh )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2550,11 +2759,13 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_writes_bytes_(RandomNumberSize)  void *pRandomNumber);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, FinishSessionKeyRefresh)
         void ( STDMETHODCALLTYPE *FinishSessionKeyRefresh )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
             _In_  ID3D11CryptoSession *pCryptoSession);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, GetEncryptionBltKey)
         HRESULT ( STDMETHODCALLTYPE *GetEncryptionBltKey )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2564,6 +2775,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_writes_bytes_(KeySize)  void *pReadbackKey);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, NegotiateAuthenticatedChannelKeyExchange)
         HRESULT ( STDMETHODCALLTYPE *NegotiateAuthenticatedChannelKeyExchange )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2573,6 +2785,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Inout_updates_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, QueryAuthenticatedChannel)
         HRESULT ( STDMETHODCALLTYPE *QueryAuthenticatedChannel )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2586,6 +2799,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_writes_bytes_(OutputSize)  void *pOutput);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, ConfigureAuthenticatedChannel)
         HRESULT ( STDMETHODCALLTYPE *ConfigureAuthenticatedChannel )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2597,6 +2811,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  D3D11_AUTHENTICATED_CONFIGURE_OUTPUT *pOutput);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamRotation)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamRotation )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2608,6 +2823,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  D3D11_VIDEO_PROCESSOR_ROTATION Rotation);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamRotation)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamRotation )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2619,6 +2835,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_PROCESSOR_ROTATION *pRotation);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, SubmitDecoderBuffers1)
         HRESULT ( STDMETHODCALLTYPE *SubmitDecoderBuffers1 )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2628,6 +2845,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_reads_(NumBuffers)  const D3D11_VIDEO_DECODER_BUFFER_DESC1 *pBufferDesc);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, GetDataForNewHardwareKey)
         HRESULT ( STDMETHODCALLTYPE *GetDataForNewHardwareKey )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2639,6 +2857,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  UINT64 *pPrivateOutputData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, CheckCryptoSessionStatus)
         HRESULT ( STDMETHODCALLTYPE *CheckCryptoSessionStatus )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2646,6 +2865,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  D3D11_CRYPTO_SESSION_STATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, DecoderEnableDownsampling)
         HRESULT ( STDMETHODCALLTYPE *DecoderEnableDownsampling )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2657,6 +2877,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  UINT ReferenceFrameCount);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, DecoderUpdateDownsampling)
         HRESULT ( STDMETHODCALLTYPE *DecoderUpdateDownsampling )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2664,6 +2885,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_SAMPLE_DESC *pOutputDesc);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorSetOutputColorSpace1)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputColorSpace1 )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2671,6 +2893,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  DXGI_COLOR_SPACE_TYPE ColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorSetOutputShaderUsage)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputShaderUsage )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2678,6 +2901,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  BOOL ShaderUsage);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetOutputColorSpace1)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputColorSpace1 )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2685,6 +2909,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  DXGI_COLOR_SPACE_TYPE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetOutputShaderUsage)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputShaderUsage )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2692,6 +2917,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  BOOL *pShaderUsage);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorSetStreamColorSpace1)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamColorSpace1 )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2701,6 +2927,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  DXGI_COLOR_SPACE_TYPE ColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorSetStreamMirror)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamMirror )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2714,6 +2941,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_  BOOL FlipVertical);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetStreamColorSpace1)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamColorSpace1 )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2723,6 +2951,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  DXGI_COLOR_SPACE_TYPE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetStreamMirror)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamMirror )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2736,6 +2965,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  BOOL *pFlipVertical);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetBehaviorHints)
         HRESULT ( STDMETHODCALLTYPE *VideoProcessorGetBehaviorHints )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2753,6 +2983,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_  UINT *pBehaviorHints);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext2, VideoProcessorSetOutputHDRMetaData)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputHDRMetaData )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2764,6 +2995,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pHDRMetaData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext2, VideoProcessorGetOutputHDRMetaData)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputHDRMetaData )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2775,6 +3007,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _Out_writes_bytes_opt_(Size)  void *pMetaData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext2, VideoProcessorSetStreamHDRMetaData)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamHDRMetaData )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -2788,6 +3021,7 @@ EXTERN_C const IID IID_ID3D11VideoContext2;
             /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pHDRMetaData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext2, VideoProcessorGetStreamHDRMetaData)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamHDRMetaData )( 
             ID3D11VideoContext2 * This,
             /* [annotation] */ 
@@ -3173,6 +3407,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11VideoDevice2 * This,
             /* [annotation][in] */ 
@@ -3180,12 +3415,15 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D11VideoDevice2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D11VideoDevice2 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CreateVideoDecoder)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoder )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3195,6 +3433,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _COM_Outptr_  ID3D11VideoDecoder **ppDecoder);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CreateVideoProcessor)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessor )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3204,6 +3443,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _COM_Outptr_  ID3D11VideoProcessor **ppVideoProcessor);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CreateAuthenticatedChannel)
         HRESULT ( STDMETHODCALLTYPE *CreateAuthenticatedChannel )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3211,6 +3451,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _COM_Outptr_  ID3D11AuthenticatedChannel **ppAuthenticatedChannel);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CreateCryptoSession)
         HRESULT ( STDMETHODCALLTYPE *CreateCryptoSession )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3222,6 +3463,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _COM_Outptr_  ID3D11CryptoSession **ppCryptoSession);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CreateVideoDecoderOutputView)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoDecoderOutputView )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3231,6 +3473,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11VideoDecoderOutputView **ppVDOVView);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CreateVideoProcessorInputView)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessorInputView )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3242,6 +3485,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11VideoProcessorInputView **ppVPIView);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CreateVideoProcessorOutputView)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessorOutputView )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3253,6 +3497,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _COM_Outptr_opt_  ID3D11VideoProcessorOutputView **ppVPOView);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CreateVideoProcessorEnumerator)
         HRESULT ( STDMETHODCALLTYPE *CreateVideoProcessorEnumerator )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3260,9 +3505,11 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _COM_Outptr_  ID3D11VideoProcessorEnumerator **ppEnum);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, GetVideoDecoderProfileCount)
         UINT ( STDMETHODCALLTYPE *GetVideoDecoderProfileCount )( 
             ID3D11VideoDevice2 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, GetVideoDecoderProfile)
         HRESULT ( STDMETHODCALLTYPE *GetVideoDecoderProfile )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3270,6 +3517,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  GUID *pDecoderProfile);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CheckVideoDecoderFormat)
         HRESULT ( STDMETHODCALLTYPE *CheckVideoDecoderFormat )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3279,6 +3527,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  BOOL *pSupported);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, GetVideoDecoderConfigCount)
         HRESULT ( STDMETHODCALLTYPE *GetVideoDecoderConfigCount )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3286,6 +3535,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  UINT *pCount);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, GetVideoDecoderConfig)
         HRESULT ( STDMETHODCALLTYPE *GetVideoDecoderConfig )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3295,6 +3545,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_DECODER_CONFIG *pConfig);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, GetContentProtectionCaps)
         HRESULT ( STDMETHODCALLTYPE *GetContentProtectionCaps )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3304,6 +3555,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_CONTENT_PROTECTION_CAPS *pCaps);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, CheckCryptoKeyExchange)
         HRESULT ( STDMETHODCALLTYPE *CheckCryptoKeyExchange )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3315,6 +3567,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  GUID *pKeyExchangeType);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3324,6 +3577,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _In_reads_bytes_opt_(DataSize)  const void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3331,6 +3585,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice1, GetCryptoSessionPrivateDataSize)
         HRESULT ( STDMETHODCALLTYPE *GetCryptoSessionPrivateDataSize )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3344,6 +3599,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  UINT *pPrivateOutputSize);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice1, GetVideoDecoderCaps)
         HRESULT ( STDMETHODCALLTYPE *GetVideoDecoderCaps )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3361,6 +3617,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  UINT *pDecoderCaps);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice1, CheckVideoDecoderDownsampling)
         HRESULT ( STDMETHODCALLTYPE *CheckVideoDecoderDownsampling )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3378,6 +3635,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  BOOL *pRealTimeHint);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice1, RecommendVideoDecoderDownsampleParameters)
         HRESULT ( STDMETHODCALLTYPE *RecommendVideoDecoderDownsampleParameters )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3391,6 +3649,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_SAMPLE_DESC *pRecommendedOutputDesc);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice2, CheckFeatureSupport)
         HRESULT ( STDMETHODCALLTYPE *CheckFeatureSupport )( 
             ID3D11VideoDevice2 * This,
             D3D11_FEATURE_VIDEO Feature,
@@ -3398,6 +3657,7 @@ EXTERN_C const IID IID_ID3D11VideoDevice2;
             _Out_writes_bytes_(FeatureSupportDataSize)  void *pFeatureSupportData,
             UINT FeatureSupportDataSize);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoDevice2, NegotiateCryptoSessionKeyExchangeMT)
         HRESULT ( STDMETHODCALLTYPE *NegotiateCryptoSessionKeyExchangeMT )( 
             ID3D11VideoDevice2 * This,
             /* [annotation] */ 
@@ -3584,6 +3844,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ID3D11VideoContext3 * This,
             /* [annotation][in] */ 
@@ -3591,17 +3852,21 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ID3D11VideoContext3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ID3D11VideoContext3 * This);
         
+        DECLSPEC_XFGVIRT(ID3D11DeviceChild, GetDevice)
         void ( STDMETHODCALLTYPE *GetDevice )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
             _Outptr_  ID3D11Device **ppDevice);
         
+        DECLSPEC_XFGVIRT(ID3D11DeviceChild, GetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *GetPrivateData )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3611,6 +3876,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_bytes_opt_( *pDataSize )  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11DeviceChild, SetPrivateData)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateData )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3620,6 +3886,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_bytes_opt_( DataSize )  const void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11DeviceChild, SetPrivateDataInterface)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateDataInterface )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3627,6 +3894,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_opt_  const IUnknown *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, GetDecoderBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetDecoderBuffer )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3637,6 +3905,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Outptr_result_bytebuffer_(*pBufferSize)  void **ppBuffer);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, ReleaseDecoderBuffer)
         HRESULT ( STDMETHODCALLTYPE *ReleaseDecoderBuffer )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3644,6 +3913,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  D3D11_VIDEO_DECODER_BUFFER_TYPE Type);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, DecoderBeginFrame)
         HRESULT ( STDMETHODCALLTYPE *DecoderBeginFrame )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3654,11 +3924,13 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_bytes_opt_(ContentKeySize)  const void *pContentKey);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, DecoderEndFrame)
         HRESULT ( STDMETHODCALLTYPE *DecoderEndFrame )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
             _In_  ID3D11VideoDecoder *pDecoder);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, SubmitDecoderBuffers)
         HRESULT ( STDMETHODCALLTYPE *SubmitDecoderBuffers )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3668,6 +3940,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_(NumBuffers)  const D3D11_VIDEO_DECODER_BUFFER_DESC *pBufferDesc);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, DecoderExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *DecoderExtension )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3675,6 +3948,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_DECODER_EXTENSION *pExtensionData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputTargetRect)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputTargetRect )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3684,6 +3958,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_opt_  const RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputBackgroundColor)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputBackgroundColor )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3693,6 +3968,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputColorSpace)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputColorSpace )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3700,6 +3976,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_PROCESSOR_COLOR_SPACE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputAlphaFillMode)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputAlphaFillMode )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3709,6 +3986,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  UINT StreamIndex);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputConstriction)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputConstriction )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3718,6 +3996,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  SIZE Size);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputStereoMode)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputStereoMode )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3725,6 +4004,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  BOOL Enable);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetOutputExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *VideoProcessorSetOutputExtension )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3736,6 +4016,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputTargetRect)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputTargetRect )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3745,6 +4026,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputBackgroundColor)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputBackgroundColor )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3754,6 +4036,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_COLOR *pColor);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputColorSpace)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputColorSpace )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3761,6 +4044,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_PROCESSOR_COLOR_SPACE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputAlphaFillMode)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputAlphaFillMode )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3770,6 +4054,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  UINT *pStreamIndex);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputConstriction)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputConstriction )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3779,6 +4064,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  SIZE *pSize);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputStereoMode)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputStereoMode )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3786,6 +4072,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetOutputExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *VideoProcessorGetOutputExtension )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3797,6 +4084,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamFrameFormat)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamFrameFormat )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3806,6 +4094,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  D3D11_VIDEO_FRAME_FORMAT FrameFormat);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamColorSpace)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamColorSpace )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3815,6 +4104,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_PROCESSOR_COLOR_SPACE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamOutputRate)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamOutputRate )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3828,6 +4118,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_opt_  const DXGI_RATIONAL *pCustomRate);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamSourceRect)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamSourceRect )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3839,6 +4130,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_opt_  const RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamDestRect)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamDestRect )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3850,6 +4142,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_opt_  const RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamAlpha)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamAlpha )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3861,6 +4154,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  FLOAT Alpha);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamPalette)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamPalette )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3872,6 +4166,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_opt_(Count)  const UINT *pEntries);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamPixelAspectRatio)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamPixelAspectRatio )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3885,6 +4180,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_opt_  const DXGI_RATIONAL *pDestinationAspectRatio);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamLumaKey)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamLumaKey )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3898,6 +4194,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  FLOAT Upper);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamStereoFormat)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamStereoFormat )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3917,6 +4214,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  int MonoOffset);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamAutoProcessingMode)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamAutoProcessingMode )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3926,6 +4224,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  BOOL Enable);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamFilter)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamFilter )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3939,6 +4238,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  int Level);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *VideoProcessorSetStreamExtension )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3952,6 +4252,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamFrameFormat)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamFrameFormat )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3961,6 +4262,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_FRAME_FORMAT *pFrameFormat);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamColorSpace)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamColorSpace )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3970,6 +4272,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_PROCESSOR_COLOR_SPACE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamOutputRate)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamOutputRate )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3983,6 +4286,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  DXGI_RATIONAL *pCustomRate);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamSourceRect)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamSourceRect )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -3994,6 +4298,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamDestRect)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamDestRect )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4005,6 +4310,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  RECT *pRect);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamAlpha)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamAlpha )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4016,6 +4322,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  FLOAT *pAlpha);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamPalette)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamPalette )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4027,6 +4334,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_(Count)  UINT *pEntries);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamPixelAspectRatio)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamPixelAspectRatio )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4040,6 +4348,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  DXGI_RATIONAL *pDestinationAspectRatio);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamLumaKey)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamLumaKey )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4053,6 +4362,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  FLOAT *pUpper);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamStereoFormat)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamStereoFormat )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4072,6 +4382,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  int *MonoOffset);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamAutoProcessingMode)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamAutoProcessingMode )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4081,6 +4392,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  BOOL *pEnabled);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamFilter)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamFilter )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4094,6 +4406,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  int *pLevel);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamExtension)
         APP_DEPRECATED_HRESULT ( STDMETHODCALLTYPE *VideoProcessorGetStreamExtension )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4107,6 +4420,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorBlt)
         HRESULT ( STDMETHODCALLTYPE *VideoProcessorBlt )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4120,6 +4434,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_(StreamCount)  const D3D11_VIDEO_PROCESSOR_STREAM *pStreams);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, NegotiateCryptoSessionKeyExchange)
         HRESULT ( STDMETHODCALLTYPE *NegotiateCryptoSessionKeyExchange )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4129,6 +4444,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Inout_updates_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, EncryptionBlt)
         void ( STDMETHODCALLTYPE *EncryptionBlt )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4142,6 +4458,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Inout_opt_bytecount_(IVSize)  void *pIV);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, DecryptionBlt)
         void ( STDMETHODCALLTYPE *DecryptionBlt )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4161,6 +4478,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Inout_opt_bytecount_(IVSize)  void *pIV);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, StartSessionKeyRefresh)
         void ( STDMETHODCALLTYPE *StartSessionKeyRefresh )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4170,11 +4488,13 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_bytes_(RandomNumberSize)  void *pRandomNumber);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, FinishSessionKeyRefresh)
         void ( STDMETHODCALLTYPE *FinishSessionKeyRefresh )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
             _In_  ID3D11CryptoSession *pCryptoSession);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, GetEncryptionBltKey)
         HRESULT ( STDMETHODCALLTYPE *GetEncryptionBltKey )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4184,6 +4504,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_bytes_(KeySize)  void *pReadbackKey);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, NegotiateAuthenticatedChannelKeyExchange)
         HRESULT ( STDMETHODCALLTYPE *NegotiateAuthenticatedChannelKeyExchange )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4193,6 +4514,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Inout_updates_bytes_(DataSize)  void *pData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, QueryAuthenticatedChannel)
         HRESULT ( STDMETHODCALLTYPE *QueryAuthenticatedChannel )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4206,6 +4528,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_bytes_(OutputSize)  void *pOutput);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, ConfigureAuthenticatedChannel)
         HRESULT ( STDMETHODCALLTYPE *ConfigureAuthenticatedChannel )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4217,6 +4540,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  D3D11_AUTHENTICATED_CONFIGURE_OUTPUT *pOutput);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorSetStreamRotation)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamRotation )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4228,6 +4552,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  D3D11_VIDEO_PROCESSOR_ROTATION Rotation);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext, VideoProcessorGetStreamRotation)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamRotation )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4239,6 +4564,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  D3D11_VIDEO_PROCESSOR_ROTATION *pRotation);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, SubmitDecoderBuffers1)
         HRESULT ( STDMETHODCALLTYPE *SubmitDecoderBuffers1 )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4248,6 +4574,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_(NumBuffers)  const D3D11_VIDEO_DECODER_BUFFER_DESC1 *pBufferDesc);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, GetDataForNewHardwareKey)
         HRESULT ( STDMETHODCALLTYPE *GetDataForNewHardwareKey )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4259,6 +4586,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  UINT64 *pPrivateOutputData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, CheckCryptoSessionStatus)
         HRESULT ( STDMETHODCALLTYPE *CheckCryptoSessionStatus )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4266,6 +4594,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  D3D11_CRYPTO_SESSION_STATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, DecoderEnableDownsampling)
         HRESULT ( STDMETHODCALLTYPE *DecoderEnableDownsampling )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4277,6 +4606,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  UINT ReferenceFrameCount);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, DecoderUpdateDownsampling)
         HRESULT ( STDMETHODCALLTYPE *DecoderUpdateDownsampling )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4284,6 +4614,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  const D3D11_VIDEO_SAMPLE_DESC *pOutputDesc);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorSetOutputColorSpace1)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputColorSpace1 )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4291,6 +4622,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  DXGI_COLOR_SPACE_TYPE ColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorSetOutputShaderUsage)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputShaderUsage )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4298,6 +4630,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  BOOL ShaderUsage);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetOutputColorSpace1)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputColorSpace1 )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4305,6 +4638,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  DXGI_COLOR_SPACE_TYPE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetOutputShaderUsage)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputShaderUsage )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4312,6 +4646,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  BOOL *pShaderUsage);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorSetStreamColorSpace1)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamColorSpace1 )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4321,6 +4656,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  DXGI_COLOR_SPACE_TYPE ColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorSetStreamMirror)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamMirror )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4334,6 +4670,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_  BOOL FlipVertical);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetStreamColorSpace1)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamColorSpace1 )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4343,6 +4680,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  DXGI_COLOR_SPACE_TYPE *pColorSpace);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetStreamMirror)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamMirror )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4356,6 +4694,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  BOOL *pFlipVertical);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext1, VideoProcessorGetBehaviorHints)
         HRESULT ( STDMETHODCALLTYPE *VideoProcessorGetBehaviorHints )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4373,6 +4712,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_  UINT *pBehaviorHints);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext2, VideoProcessorSetOutputHDRMetaData)
         void ( STDMETHODCALLTYPE *VideoProcessorSetOutputHDRMetaData )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4384,6 +4724,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pHDRMetaData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext2, VideoProcessorGetOutputHDRMetaData)
         void ( STDMETHODCALLTYPE *VideoProcessorGetOutputHDRMetaData )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4395,6 +4736,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_bytes_opt_(Size)  void *pMetaData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext2, VideoProcessorSetStreamHDRMetaData)
         void ( STDMETHODCALLTYPE *VideoProcessorSetStreamHDRMetaData )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4408,6 +4750,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_bytes_opt_(Size)  const void *pHDRMetaData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext2, VideoProcessorGetStreamHDRMetaData)
         void ( STDMETHODCALLTYPE *VideoProcessorGetStreamHDRMetaData )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4421,6 +4764,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _Out_writes_bytes_opt_(Size)  void *pMetaData);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext3, DecoderBeginFrame1)
         HRESULT ( STDMETHODCALLTYPE *DecoderBeginFrame1 )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 
@@ -4437,6 +4781,7 @@ EXTERN_C const IID IID_ID3D11VideoContext3;
             /* [annotation] */ 
             _In_reads_opt_(NumComponentHistograms)  ID3D11Buffer *const *ppHistogramBuffers);
         
+        DECLSPEC_XFGVIRT(ID3D11VideoContext3, SubmitDecoderBuffers2)
         HRESULT ( STDMETHODCALLTYPE *SubmitDecoderBuffers2 )( 
             ID3D11VideoContext3 * This,
             /* [annotation] */ 

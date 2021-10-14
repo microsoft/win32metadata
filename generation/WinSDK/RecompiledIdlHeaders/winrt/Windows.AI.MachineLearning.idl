@@ -107,9 +107,13 @@ namespace Windows
 
             typedef enum LearningModelFeatureKind LearningModelFeatureKind;
 
+            typedef enum LearningModelPixelRange LearningModelPixelRange;
+
             typedef enum TensorKind TensorKind;
 
             interface IImageFeatureDescriptor;
+
+            interface IImageFeatureDescriptor2;
 
             interface IImageFeatureValue;
 
@@ -144,6 +148,8 @@ namespace Windows
             interface ILearningModelSessionOptions;
 
             interface ILearningModelSessionOptions2;
+
+            interface ILearningModelSessionOptions3;
 
             interface ILearningModelStatics;
 
@@ -314,7 +320,7 @@ namespace Windows
     {
         namespace MachineLearning
         {
-            [contractversion(3.0)]
+            [contractversion(5.0)]
             apicontract MachineLearningContract
             {
             }
@@ -336,6 +342,14 @@ namespace Windows
                 Sequence = 1,
                 Map      = 2,
                 Image    = 3
+            };
+
+            [contract(Windows.AI.MachineLearning.MachineLearningContract, 5.0)]
+            enum LearningModelPixelRange
+            {
+                ZeroTo255     = 0,
+                ZeroToOne     = 1,
+                MinusOneToOne = 2
             };
 
             [contract(Windows.AI.MachineLearning.MachineLearningContract, 1.0)]
@@ -368,6 +382,14 @@ namespace Windows
                 [propget] HRESULT BitmapAlphaMode([out] [retval] Windows.Graphics.Imaging.BitmapAlphaMode* value);
                 [propget] HRESULT Width([out] [retval] UINT32* value);
                 [propget] HRESULT Height([out] [retval] UINT32* value);
+            }
+
+            [contract(Windows.AI.MachineLearning.MachineLearningContract, 5.0)]
+            [exclusiveto(Windows.AI.MachineLearning.ImageFeatureDescriptor)]
+            [uuid(2B27CCA7-D533-5862-BB98-1611B155B0E1)]
+            interface IImageFeatureDescriptor2 : IInspectable
+            {
+                [propget] HRESULT PixelRange([out] [retval] Windows.AI.MachineLearning.LearningModelPixelRange* value);
             }
 
             [contract(Windows.AI.MachineLearning.MachineLearningContract, 1.0)]
@@ -525,6 +547,14 @@ namespace Windows
             {
                 [propget] HRESULT CloseModelOnSessionCreation([out] [retval] boolean* value);
                 [propput] HRESULT CloseModelOnSessionCreation([in] boolean value);
+            }
+
+            [contract(Windows.AI.MachineLearning.MachineLearningContract, 4.0)]
+            [exclusiveto(Windows.AI.MachineLearning.LearningModelSessionOptions)]
+            [uuid(58E15CEE-D8C2-56FC-92E8-76D751081086)]
+            interface ILearningModelSessionOptions3 : IInspectable
+            {
+                HRESULT OverrideNamedDimension([in] HSTRING name, [in] UINT32 dimension);
             }
 
             [contract(Windows.AI.MachineLearning.MachineLearningContract, 1.0)]
@@ -946,6 +976,7 @@ namespace Windows
             runtimeclass ImageFeatureDescriptor
             {
                 [default] interface Windows.AI.MachineLearning.IImageFeatureDescriptor;
+                [contract(Windows.AI.MachineLearning.MachineLearningContract, 5.0)] interface Windows.AI.MachineLearning.IImageFeatureDescriptor2;
                 interface Windows.AI.MachineLearning.ILearningModelFeatureDescriptor;
             }
 
@@ -1016,6 +1047,7 @@ namespace Windows
             {
                 [default] interface Windows.AI.MachineLearning.ILearningModelSessionOptions;
                 [contract(Windows.AI.MachineLearning.MachineLearningContract, 3.0)] interface Windows.AI.MachineLearning.ILearningModelSessionOptions2;
+                [contract(Windows.AI.MachineLearning.MachineLearningContract, 4.0)] interface Windows.AI.MachineLearning.ILearningModelSessionOptions3;
             }
 
             [contract(Windows.AI.MachineLearning.MachineLearningContract, 1.0)]

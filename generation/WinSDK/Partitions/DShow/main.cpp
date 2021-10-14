@@ -72,3 +72,14 @@
 #include <austream.h>
 #include <ddstream.h>
 #include <mmstream.h>
+#include <activecf.h>
+#include <dxva.h>
+#include <dxva2api.h>
+#include <dxva2swdev.h>
+#include <evntrace.h>
+#include <dxva2trace.h>
+#include <mediaerr.h>
+#include <mpeg2error.h>
+#include <pbdaerrors.h>
+#include <playlist.h>
+#include <xprtdefs.h>

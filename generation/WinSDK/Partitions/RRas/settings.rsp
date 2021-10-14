@@ -5,5 +5,6 @@
 <IncludeRoot>/um/RassHost.h
 <IncludeRoot>/um/Mgm.h
 <IncludeRoot>/um/RtmV2.h
+<IncludeRoot>/um/raserror.h
 --namespace
 Windows.Win32.NetworkManagement.Rras

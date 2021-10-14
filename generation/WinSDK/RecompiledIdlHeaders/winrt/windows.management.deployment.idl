@@ -17,15 +17,21 @@ namespace Windows
 {
     namespace ApplicationModel
     {
+        runtimeclass AppInstallerInfo;
+
         runtimeclass Package;
 
         typedef enum PackageContentGroupState PackageContentGroupState;
+
+        typedef struct PackageVersion PackageVersion;
     }
 }
 namespace Windows
 {
     namespace Foundation
     {
+        typedef struct DateTime DateTime;
+
         interface IAsyncAction;
 
         apicontract UniversalApiContract;
@@ -39,6 +45,8 @@ namespace Windows
     {
         namespace Deployment
         {
+            apicontract SharedPackageContainerContract;
+
             typedef enum AddPackageByAppInstallerOptions AddPackageByAppInstallerOptions;
 
             typedef enum DeploymentOptions DeploymentOptions;
@@ -57,17 +65,43 @@ namespace Windows
 
             typedef enum RemovalOptions RemovalOptions;
 
+            typedef enum SharedPackageContainerCreationCollisionOptions SharedPackageContainerCreationCollisionOptions;
+
+            typedef enum SharedPackageContainerOperationStatus SharedPackageContainerOperationStatus;
+
             typedef enum StubPackageOption StubPackageOption;
 
             typedef struct DeploymentProgress DeploymentProgress;
 
             interface IAddPackageOptions;
 
+            interface IAppInstallerManager;
+
+            interface IAppInstallerManagerStatics;
+
+            interface IAutoUpdateSettingsOptions;
+
+            interface IAutoUpdateSettingsOptionsStatics;
+
+            interface ICreateSharedPackageContainerOptions;
+
+            interface ICreateSharedPackageContainerResult;
+
+            interface IDeleteSharedPackageContainerOptions;
+
+            interface IDeleteSharedPackageContainerResult;
+
             interface IDeploymentResult;
 
             interface IDeploymentResult2;
 
+            interface IFindSharedPackageContainerOptions;
+
+            interface IPackageAllUserProvisioningOptions;
+
             interface IPackageManager;
+
+            interface IPackageManager10;
 
             interface IPackageManager2;
 
@@ -95,11 +129,41 @@ namespace Windows
 
             interface IRegisterPackageOptions;
 
+            interface ISharedPackageContainer;
+
+            interface ISharedPackageContainerManager;
+
+            interface ISharedPackageContainerManagerStatics;
+
+            interface ISharedPackageContainerMember;
+
+            interface ISharedPackageContainerMemberFactory;
+
             interface IStagePackageOptions;
+
+            interface IUpdateSharedPackageContainerOptions;
+
+            interface IUpdateSharedPackageContainerResult;
 
             runtimeclass AddPackageOptions;
 
+            runtimeclass AppInstallerManager;
+
+            runtimeclass AutoUpdateSettingsOptions;
+
+            runtimeclass CreateSharedPackageContainerOptions;
+
+            runtimeclass CreateSharedPackageContainerResult;
+
+            runtimeclass DeleteSharedPackageContainerOptions;
+
+            runtimeclass DeleteSharedPackageContainerResult;
+
             runtimeclass DeploymentResult;
+
+            runtimeclass FindSharedPackageContainerOptions;
+
+            runtimeclass PackageAllUserProvisioningOptions;
 
             runtimeclass PackageManager;
 
@@ -111,7 +175,17 @@ namespace Windows
 
             runtimeclass RegisterPackageOptions;
 
+            runtimeclass SharedPackageContainer;
+
+            runtimeclass SharedPackageContainerManager;
+
+            runtimeclass SharedPackageContainerMember;
+
             runtimeclass StagePackageOptions;
+
+            runtimeclass UpdateSharedPackageContainerOptions;
+
+            runtimeclass UpdateSharedPackageContainerResult;
         }
     }
 }
@@ -129,11 +203,27 @@ namespace Windows
 
                 interface Windows.Foundation.Collections.IIterable<Windows.Management.Deployment.PackageVolume*>;
 
+                interface Windows.Foundation.Collections.IIterable<Windows.Management.Deployment.SharedPackageContainer*>;
+
+                interface Windows.Foundation.Collections.IIterable<Windows.Management.Deployment.SharedPackageContainerMember*>;
+
                 interface Windows.Foundation.Collections.IIterator<Windows.Management.Deployment.PackageUserInformation*>;
 
                 interface Windows.Foundation.Collections.IIterator<Windows.Management.Deployment.PackageVolume*>;
 
+                interface Windows.Foundation.Collections.IIterator<Windows.Management.Deployment.SharedPackageContainer*>;
+
+                interface Windows.Foundation.Collections.IIterator<Windows.Management.Deployment.SharedPackageContainerMember*>;
+
                 interface Windows.Foundation.Collections.IVectorView<Windows.Management.Deployment.PackageVolume*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Management.Deployment.SharedPackageContainer*>;
+
+                interface Windows.Foundation.Collections.IVectorView<Windows.Management.Deployment.SharedPackageContainerMember*>;
+
+                interface Windows.Foundation.Collections.IVector<Windows.Management.Deployment.SharedPackageContainer*>;
+
+                interface Windows.Foundation.Collections.IVector<Windows.Management.Deployment.SharedPackageContainerMember*>;
 
                 interface Windows.Foundation.IAsyncOperationWithProgress<Windows.Management.Deployment.DeploymentResult*, Windows.Management.Deployment.DeploymentProgress>;
 
@@ -152,6 +242,11 @@ namespace Windows
     {
         namespace Deployment
         {
+            [contractversion(1.0)]
+            apicontract SharedPackageContainerContract
+            {
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 5.0)]
             [flags]
             enum AddPackageByAppInstallerOptions
@@ -258,6 +353,25 @@ namespace Windows
                 RemoveForAllUsers               = 0x80000
             };
 
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            enum SharedPackageContainerCreationCollisionOptions
+            {
+                FailIfExists      = 0,
+                MergeWithExisting = 1,
+                ReplaceExisting   = 2
+            };
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            enum SharedPackageContainerOperationStatus
+            {
+                Success                               = 0,
+                BlockedByPolicy                       = 1,
+                AlreadyExists                         = 2,
+                PackageFamilyExistsInAnotherContainer = 3,
+                NotFound                              = 4,
+                UnknownFailure                        = 5
+            };
+
             [contract(Windows.Foundation.UniversalApiContract, 10.0)]
             enum StubPackageOption
             {
@@ -311,6 +425,104 @@ namespace Windows
                 [propput] HRESULT DeferRegistrationWhenPackagesAreInUse([in] boolean value);
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Management.Deployment.AppInstallerManager)]
+            [uuid(E7EE21C3-2103-53EE-9B18-68AFEAB0033D)]
+            interface IAppInstallerManager : IInspectable
+            {
+                HRESULT SetAutoUpdateSettings([in] HSTRING packageFamilyName, [in] Windows.Management.Deployment.AutoUpdateSettingsOptions* appInstallerInfo);
+                HRESULT ClearAutoUpdateSettings([in] HSTRING packageFamilyName);
+                HRESULT PauseAutoUpdatesUntil([in] HSTRING packageFamilyName, [in] Windows.Foundation.DateTime dateTime);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Management.Deployment.AppInstallerManager)]
+            [uuid(C95A6ED5-FC59-5336-9B2E-2B07C5E61434)]
+            interface IAppInstallerManagerStatics : IInspectable
+            {
+                HRESULT GetDefault([out] [retval] Windows.Management.Deployment.AppInstallerManager** result);
+                HRESULT GetForSystem([out] [retval] Windows.Management.Deployment.AppInstallerManager** result);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Management.Deployment.AutoUpdateSettingsOptions)]
+            [uuid(67491D87-35E1-512A-8968-1AE88D1BE6D3)]
+            interface IAutoUpdateSettingsOptions : IInspectable
+            {
+                [propget] HRESULT Version([out] [retval] Windows.ApplicationModel.PackageVersion* value);
+                [propput] HRESULT Version([in] Windows.ApplicationModel.PackageVersion value);
+                [propget] HRESULT AppInstallerUri([out] [retval] Windows.Foundation.Uri** value);
+                [propput] HRESULT AppInstallerUri([in] Windows.Foundation.Uri* value);
+                [propget] HRESULT OnLaunch([out] [retval] boolean* value);
+                [propput] HRESULT OnLaunch([in] boolean value);
+                [propget] HRESULT HoursBetweenUpdateChecks([out] [retval] UINT32* value);
+                [propput] HRESULT HoursBetweenUpdateChecks([in] UINT32 value);
+                [propget] HRESULT ShowPrompt([out] [retval] boolean* value);
+                [propput] HRESULT ShowPrompt([in] boolean value);
+                [propget] HRESULT UpdateBlocksActivation([out] [retval] boolean* value);
+                [propput] HRESULT UpdateBlocksActivation([in] boolean value);
+                [propget] HRESULT AutomaticBackgroundTask([out] [retval] boolean* value);
+                [propput] HRESULT AutomaticBackgroundTask([in] boolean value);
+                [propget] HRESULT ForceUpdateFromAnyVersion([out] [retval] boolean* value);
+                [propput] HRESULT ForceUpdateFromAnyVersion([in] boolean value);
+                [propget] HRESULT IsAutoRepairEnabled([out] [retval] boolean* value);
+                [propput] HRESULT IsAutoRepairEnabled([in] boolean value);
+                [propget] HRESULT UpdateUris([out] [retval] Windows.Foundation.Collections.IVector<Windows.Foundation.Uri*>** value);
+                [propget] HRESULT RepairUris([out] [retval] Windows.Foundation.Collections.IVector<Windows.Foundation.Uri*>** value);
+                [propget] HRESULT DependencyPackageUris([out] [retval] Windows.Foundation.Collections.IVector<Windows.Foundation.Uri*>** value);
+                [propget] HRESULT OptionalPackageUris([out] [retval] Windows.Foundation.Collections.IVector<Windows.Foundation.Uri*>** value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Management.Deployment.AutoUpdateSettingsOptions)]
+            [uuid(887B337D-0C05-54D0-BD49-3BB7A2C084CB)]
+            interface IAutoUpdateSettingsOptionsStatics : IInspectable
+            {
+                HRESULT CreateFromAppInstallerInfo([in] Windows.ApplicationModel.AppInstallerInfo* appInstallerInfo, [out] [retval] Windows.Management.Deployment.AutoUpdateSettingsOptions** result);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.CreateSharedPackageContainerOptions)]
+            [uuid(C2AB6ECE-F664-5C8E-A4B3-2A33276D3DDE)]
+            interface ICreateSharedPackageContainerOptions : IInspectable
+            {
+                [propget] HRESULT Members([out] [retval] Windows.Foundation.Collections.IVector<Windows.Management.Deployment.SharedPackageContainerMember*>** value);
+                [propget] HRESULT ForceAppShutdown([out] [retval] boolean* value);
+                [propput] HRESULT ForceAppShutdown([in] boolean value);
+                [propget] HRESULT CreateCollisionOption([out] [retval] Windows.Management.Deployment.SharedPackageContainerCreationCollisionOptions* value);
+                [propput] HRESULT CreateCollisionOption([in] Windows.Management.Deployment.SharedPackageContainerCreationCollisionOptions value);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.CreateSharedPackageContainerResult)]
+            [uuid(CE8810BF-151C-5707-B936-497E564AFC7A)]
+            interface ICreateSharedPackageContainerResult : IInspectable
+            {
+                [propget] HRESULT Container([out] [retval] Windows.Management.Deployment.SharedPackageContainer** value);
+                [propget] HRESULT Status([out] [retval] Windows.Management.Deployment.SharedPackageContainerOperationStatus* value);
+                [propget] HRESULT ExtendedError([out] [retval] HRESULT* value);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.DeleteSharedPackageContainerOptions)]
+            [uuid(9D81865F-986E-5138-8B5D-384D8E66ED6C)]
+            interface IDeleteSharedPackageContainerOptions : IInspectable
+            {
+                [propget] HRESULT ForceAppShutdown([out] [retval] boolean* value);
+                [propput] HRESULT ForceAppShutdown([in] boolean value);
+                [propget] HRESULT AllUsers([out] [retval] boolean* value);
+                [propput] HRESULT AllUsers([in] boolean value);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.DeleteSharedPackageContainerResult)]
+            [uuid(35398884-5736-517B-85BC-E598C81AB284)]
+            interface IDeleteSharedPackageContainerResult : IInspectable
+            {
+                [propget] HRESULT Status([out] [retval] Windows.Management.Deployment.SharedPackageContainerOperationStatus* value);
+                [propget] HRESULT ExtendedError([out] [retval] HRESULT* value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [exclusiveto(Windows.Management.Deployment.DeploymentResult)]
             [uuid(2563B9AE-B77D-4C1F-8A7B-20E6AD515EF3)]
@@ -327,6 +539,26 @@ namespace Windows
             interface IDeploymentResult2 : IInspectable
             {
                 [propget] HRESULT IsRegistered([out] [retval] boolean* value);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.FindSharedPackageContainerOptions)]
+            [uuid(B40FC8FE-8384-54CC-817D-AE09D3B6A606)]
+            interface IFindSharedPackageContainerOptions : IInspectable
+            {
+                [propget] HRESULT Name([out] [retval] HSTRING* value);
+                [propput] HRESULT Name([in] HSTRING value);
+                [propget] HRESULT PackageFamilyName([out] [retval] HSTRING* value);
+                [propput] HRESULT PackageFamilyName([in] HSTRING value);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Management.Deployment.PackageAllUserProvisioningOptions)]
+            [uuid(DA35AA22-1DE0-5D3E-99FF-D24F3118BF5E)]
+            interface IPackageAllUserProvisioningOptions : IInspectable
+            {
+                [propget] HRESULT OptionalPackageFamilyNames([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** value);
+                [propget] HRESULT ProjectionOrderPackageFamilyNames([out] [retval] Windows.Foundation.Collections.IVector<HSTRING>** value);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -350,6 +582,14 @@ namespace Windows
                 [overload("FindPackages")] HRESULT FindPackagesByPackageFamilyName([in] HSTRING packageFamilyName, [out] [retval] Windows.Foundation.Collections.IIterable<Windows.ApplicationModel.Package*>** packageCollection);
                 [overload("FindPackagesForUser")] HRESULT FindPackagesByUserSecurityIdPackageFamilyName([in] HSTRING userSecurityId, [in] HSTRING packageFamilyName, [out] [retval] Windows.Foundation.Collections.IIterable<Windows.ApplicationModel.Package*>** packageCollection);
                 [overload("FindPackageForUser")] HRESULT FindPackageByUserSecurityIdPackageFullName([in] HSTRING userSecurityId, [in] HSTRING packageFullName, [out] [retval] Windows.ApplicationModel.Package** packageInformation);
+            }
+
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [exclusiveto(Windows.Management.Deployment.PackageManager)]
+            [uuid(A7D7D07E-2E66-4093-AED5-E093ED87B3BB)]
+            interface IPackageManager10 : IInspectable
+            {
+                [overload("ProvisionPackageForAllUsersAsync")] HRESULT ProvisionPackageForAllUsersWithOptionsAsync([in] HSTRING mainPackageFamilyName, [in] Windows.Management.Deployment.PackageAllUserProvisioningOptions* options, [out] [retval] Windows.Foundation.IAsyncOperationWithProgress<Windows.Management.Deployment.DeploymentResult*, Windows.Management.Deployment.DeploymentProgress>** operation);
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -537,6 +777,56 @@ namespace Windows
                 [propput] HRESULT DeferRegistrationWhenPackagesAreInUse([in] boolean value);
             }
 
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.SharedPackageContainer)]
+            [uuid(177F1AA9-151E-5EF7-B1D9-2FBA0B4B0D17)]
+            interface ISharedPackageContainer : IInspectable
+            {
+                [propget] HRESULT Name([out] [retval] HSTRING* value);
+                [propget] HRESULT Id([out] [retval] HSTRING* value);
+                HRESULT GetMembers([out] [retval] Windows.Foundation.Collections.IVector<Windows.Management.Deployment.SharedPackageContainerMember*>** result);
+                HRESULT RemovePackageFamily([in] HSTRING packageFamilyName, [in] Windows.Management.Deployment.UpdateSharedPackageContainerOptions* options, [out] [retval] Windows.Management.Deployment.UpdateSharedPackageContainerResult** result);
+                HRESULT ResetData([out] [retval] Windows.Management.Deployment.UpdateSharedPackageContainerResult** result);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.SharedPackageContainerManager)]
+            [uuid(BE353068-1EF7-5AC8-AB3F-0B9F612F0274)]
+            interface ISharedPackageContainerManager : IInspectable
+            {
+                HRESULT CreateContainer([in] HSTRING name, [in] Windows.Management.Deployment.CreateSharedPackageContainerOptions* options, [out] [retval] Windows.Management.Deployment.CreateSharedPackageContainerResult** result);
+                HRESULT DeleteContainer([in] HSTRING id, [in] Windows.Management.Deployment.DeleteSharedPackageContainerOptions* options, [out] [retval] Windows.Management.Deployment.DeleteSharedPackageContainerResult** result);
+                HRESULT GetContainer([in] HSTRING id, [out] [retval] Windows.Management.Deployment.SharedPackageContainer** result);
+                [overload("FindContainers")] HRESULT FindContainers([out] [retval] Windows.Foundation.Collections.IVector<Windows.Management.Deployment.SharedPackageContainer*>** result);
+                [overload("FindContainers")] HRESULT FindContainersWithOptions([in] Windows.Management.Deployment.FindSharedPackageContainerOptions* options, [out] [retval] Windows.Foundation.Collections.IVector<Windows.Management.Deployment.SharedPackageContainer*>** result);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.SharedPackageContainerManager)]
+            [uuid(2EF56348-838A-5F55-A89E-1198A2C627E6)]
+            interface ISharedPackageContainerManagerStatics : IInspectable
+            {
+                HRESULT GetDefault([out] [retval] Windows.Management.Deployment.SharedPackageContainerManager** result);
+                HRESULT GetForUser([in] HSTRING userSid, [out] [retval] Windows.Management.Deployment.SharedPackageContainerManager** result);
+                HRESULT GetForProvisioning([out] [retval] Windows.Management.Deployment.SharedPackageContainerManager** result);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.SharedPackageContainerMember)]
+            [uuid(FE0D0438-43C9-5426-B89C-F79BF85DDFF4)]
+            interface ISharedPackageContainerMember : IInspectable
+            {
+                [propget] HRESULT PackageFamilyName([out] [retval] HSTRING* value);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.SharedPackageContainerMember)]
+            [uuid(49B0CEEB-498F-5A62-B738-B3CA0D436704)]
+            interface ISharedPackageContainerMemberFactory : IInspectable
+            {
+                HRESULT CreateInstance([in] HSTRING packageFamilyName, [out] [retval] Windows.Management.Deployment.SharedPackageContainerMember** value);
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 10.0)]
             [exclusiveto(Windows.Management.Deployment.StagePackageOptions)]
             [uuid(0B110C9C-B95D-4C56-BD36-6D656800D06B)]
@@ -566,6 +856,26 @@ namespace Windows
                 [propput] HRESULT AllowUnsigned([in] boolean value);
             }
 
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.UpdateSharedPackageContainerOptions)]
+            [uuid(80672E83-7194-59F9-B5B9-DAA5375F130A)]
+            interface IUpdateSharedPackageContainerOptions : IInspectable
+            {
+                [propget] HRESULT ForceAppShutdown([out] [retval] boolean* value);
+                [propput] HRESULT ForceAppShutdown([in] boolean value);
+                [propget] HRESULT RequirePackagesPresent([out] [retval] boolean* value);
+                [propput] HRESULT RequirePackagesPresent([in] boolean value);
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [exclusiveto(Windows.Management.Deployment.UpdateSharedPackageContainerResult)]
+            [uuid(AA407DF7-C72D-5458-AEA3-4645B6A8EE99)]
+            interface IUpdateSharedPackageContainerResult : IInspectable
+            {
+                [propget] HRESULT Status([out] [retval] Windows.Management.Deployment.SharedPackageContainerOperationStatus* value);
+                [propget] HRESULT ExtendedError([out] [retval] HRESULT* value);
+            }
+
             [activatable(Windows.Foundation.UniversalApiContract, 10.0)]
             [contract(Windows.Foundation.UniversalApiContract, 10.0)]
             [marshaling_behavior(agile)]
@@ -574,12 +884,81 @@ namespace Windows
                 [default] interface Windows.Management.Deployment.IAddPackageOptions;
             }
 
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Management.Deployment.IAppInstallerManagerStatics, Windows.Foundation.UniversalApiContract, 13.0)]
+            [threading(both)]
+            runtimeclass AppInstallerManager
+            {
+                [default] interface Windows.Management.Deployment.IAppInstallerManager;
+            }
+
+            [activatable(Windows.Foundation.UniversalApiContract, 13.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Management.Deployment.IAutoUpdateSettingsOptionsStatics, Windows.Foundation.UniversalApiContract, 13.0)]
+            [threading(both)]
+            runtimeclass AutoUpdateSettingsOptions
+            {
+                [default] interface Windows.Management.Deployment.IAutoUpdateSettingsOptions;
+            }
+
+            [activatable(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass CreateSharedPackageContainerOptions
+            {
+                [default] interface Windows.Management.Deployment.ICreateSharedPackageContainerOptions;
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass CreateSharedPackageContainerResult
+            {
+                [default] interface Windows.Management.Deployment.ICreateSharedPackageContainerResult;
+            }
+
+            [activatable(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass DeleteSharedPackageContainerOptions
+            {
+                [default] interface Windows.Management.Deployment.IDeleteSharedPackageContainerOptions;
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass DeleteSharedPackageContainerResult
+            {
+                [default] interface Windows.Management.Deployment.IDeleteSharedPackageContainerResult;
+            }
+
             [contract(Windows.Foundation.UniversalApiContract, 1.0)]
             [marshaling_behavior(agile)]
             runtimeclass DeploymentResult
             {
                 [default] interface Windows.Management.Deployment.IDeploymentResult;
                 [contract(Windows.Foundation.UniversalApiContract, 4.0)] interface Windows.Management.Deployment.IDeploymentResult2;
+            }
+
+            [activatable(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass FindSharedPackageContainerOptions
+            {
+                [default] interface Windows.Management.Deployment.IFindSharedPackageContainerOptions;
+            }
+
+            [activatable(Windows.Foundation.UniversalApiContract, 13.0)]
+            [contract(Windows.Foundation.UniversalApiContract, 13.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass PackageAllUserProvisioningOptions
+            {
+                [default] interface Windows.Management.Deployment.IPackageAllUserProvisioningOptions;
             }
 
             [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
@@ -597,6 +976,7 @@ namespace Windows
                 [contract(Windows.Foundation.UniversalApiContract, 6.0)] interface Windows.Management.Deployment.IPackageManager7;
                 [contract(Windows.Foundation.UniversalApiContract, 7.0)] interface Windows.Management.Deployment.IPackageManager8;
                 [contract(Windows.Foundation.UniversalApiContract, 10.0)] interface Windows.Management.Deployment.IPackageManager9;
+                [contract(Windows.Foundation.UniversalApiContract, 13.0)] interface Windows.Management.Deployment.IPackageManager10;
             }
 
             [contract(Windows.Foundation.UniversalApiContract, 4.0)]
@@ -631,12 +1011,53 @@ namespace Windows
                 [default] interface Windows.Management.Deployment.IRegisterPackageOptions;
             }
 
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass SharedPackageContainer
+            {
+                [default] interface Windows.Management.Deployment.ISharedPackageContainer;
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [static(Windows.Management.Deployment.ISharedPackageContainerManagerStatics, Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [threading(both)]
+            runtimeclass SharedPackageContainerManager
+            {
+                [default] interface Windows.Management.Deployment.ISharedPackageContainerManager;
+            }
+
+            [activatable(Windows.Management.Deployment.ISharedPackageContainerMemberFactory, Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass SharedPackageContainerMember
+            {
+                [default] interface Windows.Management.Deployment.ISharedPackageContainerMember;
+            }
+
             [activatable(Windows.Foundation.UniversalApiContract, 10.0)]
             [contract(Windows.Foundation.UniversalApiContract, 10.0)]
             [marshaling_behavior(agile)]
             runtimeclass StagePackageOptions
             {
                 [default] interface Windows.Management.Deployment.IStagePackageOptions;
+            }
+
+            [activatable(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            [threading(both)]
+            runtimeclass UpdateSharedPackageContainerOptions
+            {
+                [default] interface Windows.Management.Deployment.IUpdateSharedPackageContainerOptions;
+            }
+
+            [contract(Windows.Management.Deployment.SharedPackageContainerContract, 1.0)]
+            [marshaling_behavior(agile)]
+            runtimeclass UpdateSharedPackageContainerResult
+            {
+                [default] interface Windows.Management.Deployment.IUpdateSharedPackageContainerResult;
             }
         }
     }

@@ -33,7 +33,6 @@ extern "C" {
 #pragma region Desktop Family or OneCore Family or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
-
 #if _MSC_VER >= 1200
 #pragma warning(push)
 #pragma warning(disable:4820) /* padding added after data member */
@@ -62,8 +61,6 @@ extern "C" {
 #if (PSAPI_VERSION > 1)
 #define EnumProcessModules          K32EnumProcessModules
 #define EnumProcessModulesEx        K32EnumProcessModulesEx
-#define QueryWorkingSet             K32QueryWorkingSet
-#define QueryWorkingSetEx           K32QueryWorkingSetEx
 #define InitializeProcessForWsWatch K32InitializeProcessForWsWatch
 #define GetWsChanges                K32GetWsChanges
 #define GetWsChangesEx              K32GetWsChangesEx
@@ -126,6 +123,8 @@ extern "C" {
 #define GetModuleBaseNameW          K32GetModuleBaseNameW
 #define GetModuleFileNameExA        K32GetModuleFileNameExA
 #define GetModuleFileNameExW        K32GetModuleFileNameExW
+#define QueryWorkingSet             K32QueryWorkingSet
+#define QueryWorkingSetEx           K32QueryWorkingSetEx
 
 #endif
 
@@ -136,7 +135,6 @@ EnumProcesses(
     _In_ DWORD cb,
     _Out_ LPDWORD lpcbNeeded
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -153,7 +151,6 @@ EnumProcessModules(
     _Out_ LPDWORD lpcbNeeded
     );
 
-
 BOOL
 WINAPI
 EnumProcessModulesEx(
@@ -163,7 +160,6 @@ EnumProcessModulesEx(
     _Out_ LPDWORD lpcbNeeded,
     _In_ DWORD dwFilterFlag
     );
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion
@@ -194,7 +190,6 @@ GetModuleBaseNameW(
 #else
 #define GetModuleBaseName  GetModuleBaseNameA
 #endif // !UNICODE
-
 
 _Success_(return != 0)
 _Ret_range_(1, nSize)
@@ -260,6 +255,121 @@ EmptyWorkingSet(
 
 #pragma region Desktop Family or OneCore Family or Games Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
+
+BOOL
+WINAPI
+InitializeProcessForWsWatch(
+    _In_ HANDLE hProcess
+    );
+
+typedef struct _PSAPI_WS_WATCH_INFORMATION {
+    LPVOID FaultingPc;
+    LPVOID FaultingVa;
+} PSAPI_WS_WATCH_INFORMATION, *PPSAPI_WS_WATCH_INFORMATION;
+
+typedef struct _PSAPI_WS_WATCH_INFORMATION_EX {
+    PSAPI_WS_WATCH_INFORMATION BasicInfo;
+    ULONG_PTR FaultingThreadId;
+    ULONG_PTR Flags;    // Reserved
+} PSAPI_WS_WATCH_INFORMATION_EX, *PPSAPI_WS_WATCH_INFORMATION_EX;
+
+BOOL
+WINAPI
+GetWsChanges(
+    _In_ HANDLE hProcess,
+    _Out_writes_bytes_(cb) PPSAPI_WS_WATCH_INFORMATION lpWatchInfo,
+    _In_ DWORD cb
+    );
+
+BOOL
+WINAPI
+GetWsChangesEx(
+    _In_ HANDLE hProcess,
+    _Out_writes_bytes_to_(*cb, *cb) PPSAPI_WS_WATCH_INFORMATION_EX lpWatchInfoEx,
+    _Inout_ PDWORD cb
+    );
+
+DWORD
+WINAPI
+GetMappedFileNameW (
+    _In_ HANDLE hProcess,
+    _In_ LPVOID lpv,
+    _Out_writes_(nSize) LPWSTR lpFilename,
+    _In_ DWORD nSize
+    );
+
+DWORD
+WINAPI
+GetMappedFileNameA (
+    _In_ HANDLE hProcess,
+    _In_ LPVOID lpv,
+    _Out_writes_(nSize) LPSTR lpFilename,
+    _In_ DWORD nSize
+    );
+
+#ifdef UNICODE
+#define GetMappedFileName  GetMappedFileNameW
+#else
+#define GetMappedFileName  GetMappedFileNameA
+#endif // !UNICODE
+
+BOOL
+WINAPI
+EnumDeviceDrivers (
+    _Out_writes_bytes_(cb) LPVOID *lpImageBase,
+    _In_ DWORD cb,
+    _Out_ LPDWORD lpcbNeeded
+    );
+
+DWORD
+WINAPI
+GetDeviceDriverBaseNameA (
+    _In_ LPVOID ImageBase,
+    _Out_writes_(nSize) LPSTR lpFilename,
+    _In_ DWORD nSize
+    );
+
+DWORD
+WINAPI
+GetDeviceDriverBaseNameW (
+    _In_ LPVOID ImageBase,
+    _Out_writes_(nSize) LPWSTR lpBaseName,
+    _In_ DWORD nSize
+    );
+
+#ifdef UNICODE
+#define GetDeviceDriverBaseName  GetDeviceDriverBaseNameW
+#else
+#define GetDeviceDriverBaseName  GetDeviceDriverBaseNameA
+#endif // !UNICODE
+
+DWORD
+WINAPI
+GetDeviceDriverFileNameA (
+    _In_ LPVOID ImageBase,
+    _Out_writes_(nSize) LPSTR lpFilename,
+    _In_ DWORD nSize
+    );
+
+DWORD
+WINAPI
+GetDeviceDriverFileNameW (
+    _In_ LPVOID ImageBase,
+    _Out_writes_(nSize) LPWSTR lpFilename,
+    _In_ DWORD nSize
+    );
+
+#ifdef UNICODE
+#define GetDeviceDriverFileName  GetDeviceDriverFileNameW
+#else
+#define GetDeviceDriverFileName  GetDeviceDriverFileNameA
+#endif // !UNICODE
+
+#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
+#pragma endregion
+
+#pragma region Application Family or OneCore Family or Games Family
+#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 //
 // Working set information structures. All non-specified bits are reserved.
@@ -350,123 +460,6 @@ QueryWorkingSetEx(
     _Out_writes_bytes_(cb) PVOID pv,
     _In_ DWORD cb
     );
-
-BOOL
-WINAPI
-InitializeProcessForWsWatch(
-    _In_ HANDLE hProcess
-    );
-
-typedef struct _PSAPI_WS_WATCH_INFORMATION {
-    LPVOID FaultingPc;
-    LPVOID FaultingVa;
-} PSAPI_WS_WATCH_INFORMATION, *PPSAPI_WS_WATCH_INFORMATION;
-
-typedef struct _PSAPI_WS_WATCH_INFORMATION_EX {
-    PSAPI_WS_WATCH_INFORMATION BasicInfo;
-    ULONG_PTR FaultingThreadId;
-    ULONG_PTR Flags;    // Reserved
-} PSAPI_WS_WATCH_INFORMATION_EX, *PPSAPI_WS_WATCH_INFORMATION_EX;
-
-BOOL
-WINAPI
-GetWsChanges(
-    _In_ HANDLE hProcess,
-    _Out_writes_bytes_(cb) PPSAPI_WS_WATCH_INFORMATION lpWatchInfo,
-    _In_ DWORD cb
-    );
-
-BOOL
-WINAPI
-GetWsChangesEx(
-    _In_ HANDLE hProcess,
-    _Out_writes_bytes_to_(*cb, *cb) PPSAPI_WS_WATCH_INFORMATION_EX lpWatchInfoEx,
-    _Inout_ PDWORD cb
-    );
-
-DWORD
-WINAPI
-GetMappedFileNameW (
-    _In_ HANDLE hProcess,
-    _In_ LPVOID lpv,
-    _Out_writes_(nSize) LPWSTR lpFilename,
-    _In_ DWORD nSize
-    );
-
-DWORD
-WINAPI
-GetMappedFileNameA (
-    _In_ HANDLE hProcess,
-    _In_ LPVOID lpv,
-    _Out_writes_(nSize) LPSTR lpFilename,
-    _In_ DWORD nSize
-    );
-
-#ifdef UNICODE
-#define GetMappedFileName  GetMappedFileNameW
-#else
-#define GetMappedFileName  GetMappedFileNameA
-#endif // !UNICODE
-
-BOOL
-WINAPI
-EnumDeviceDrivers (
-    _Out_writes_bytes_(cb) LPVOID *lpImageBase,
-    _In_ DWORD cb,
-    _Out_ LPDWORD lpcbNeeded
-    );
-
-
-DWORD
-WINAPI
-GetDeviceDriverBaseNameA (
-    _In_ LPVOID ImageBase,
-    _Out_writes_(nSize) LPSTR lpFilename,
-    _In_ DWORD nSize
-    );
-
-DWORD
-WINAPI
-GetDeviceDriverBaseNameW (
-    _In_ LPVOID ImageBase,
-    _Out_writes_(nSize) LPWSTR lpBaseName,
-    _In_ DWORD nSize
-    );
-
-#ifdef UNICODE
-#define GetDeviceDriverBaseName  GetDeviceDriverBaseNameW
-#else
-#define GetDeviceDriverBaseName  GetDeviceDriverBaseNameA
-#endif // !UNICODE
-
-
-DWORD
-WINAPI
-GetDeviceDriverFileNameA (
-    _In_ LPVOID ImageBase,
-    _Out_writes_(nSize) LPSTR lpFilename,
-    _In_ DWORD nSize
-    );
-
-DWORD
-WINAPI
-GetDeviceDriverFileNameW (
-    _In_ LPVOID ImageBase,
-    _Out_writes_(nSize) LPWSTR lpFilename,
-    _In_ DWORD nSize
-    );
-
-#ifdef UNICODE
-#define GetDeviceDriverFileName  GetDeviceDriverFileNameW
-#else
-#define GetDeviceDriverFileName  GetDeviceDriverFileNameA
-#endif // !UNICODE
-
-#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
-#pragma endregion
-
-#pragma region Application Family or OneCore Family or Games Family
-#if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
 // Structure for GetProcessMemoryInfo()
 
@@ -612,7 +605,6 @@ GetProcessImageFileNameW (
 #if _MSC_VER >= 1200
 #pragma warning(pop)
 #endif
-
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES) */
 #pragma endregion

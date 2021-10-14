@@ -6,5 +6,4 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <wpcevent.h>
-#include <wpcapi.h>
+#include <wpc.h>

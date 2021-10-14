@@ -43,7 +43,7 @@ typedef HANDLE HTHEME;          // handle to a section of theme data for class
 //  HWND hwnd - The handle to the Target window that will receive feedback
 //                                                                                                 
 //---------------------------------------------------------------------------
-BOOL WINAPI 
+THEMEAPI_(BOOL) 
 BeginPanningFeedback(
 _In_ HWND hwnd); 
 //---------------------------------------------------------------------------
@@ -74,7 +74,7 @@ _In_ HWND hwnd);
 //        the second call would be with the parameter as 20 pixels as opposed to 10
 //   Eg : UpdatePanningFeedback(hwnd, 10, 10, TRUE)
 // 
-BOOL WINAPI
+THEMEAPI_(BOOL)
 UpdatePanningFeedback(
 	_In_ HWND hwnd,
 	_In_ LONG lTotalOverpanOffsetX, 
@@ -97,7 +97,7 @@ UpdatePanningFeedback(
 //                      Either ways the method will try to restore the moved window.
 //                      The latter case exists for compatibility with legacy apps. 
 //
-BOOL WINAPI
+THEMEAPI_(BOOL)
 EndPanningFeedback(
 	_In_ HWND hwnd, 
 	_In_ BOOL fAnimateBack);

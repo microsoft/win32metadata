@@ -88,7 +88,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x10000
+#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_STARTUPTASKCONTRACT_VERSION)
@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -133,6 +133,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension ABI::Windows::ApplicationModel::AppExtensions::IAppExtension
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace AppExtensions {
+                interface IAppExtension2;
+            } /* AppExtensions */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2 ABI::Windows::ApplicationModel::AppExtensions::IAppExtension2
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtensionCatalog_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtensionCatalog_FWD_DEFINED__
@@ -884,6 +899,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppEx
 
 /*
  *
+ * Interface Windows.ApplicationModel.AppExtensions.IAppExtension2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.AppExtensions.AppExtension
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_AppExtensions_IAppExtension2[] = L"Windows.ApplicationModel.AppExtensions.IAppExtension2";
+namespace ABI {
+    namespace Windows {
+        namespace ApplicationModel {
+            namespace AppExtensions {
+                MIDL_INTERFACE("ab3b15f0-14f9-4b9f-9419-a349a242ef38")
+                IAppExtension2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_AppUserModelId(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IAppExtension2 = _uuidof(IAppExtension2);
+            } /* AppExtensions */
+        } /* ApplicationModel */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.ApplicationModel.AppExtensions.IAppExtensionCatalog
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
@@ -1203,6 +1254,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppEx
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.AppExtensions.IAppExtension ** Default Interface **
+ *    Windows.ApplicationModel.AppExtensions.IAppExtension2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1348,6 +1400,12 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
 typedef interface __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension;
 
 #endif // ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2 __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2;
+
+#endif // ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtensionCatalog_FWD_DEFINED__
 #define ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtensionCatalog_FWD_DEFINED__
@@ -2501,6 +2559,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppEx
 
 /*
  *
+ * Interface Windows.ApplicationModel.AppExtensions.IAppExtension2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 13.0
+ *
+ * Interface is a part of the implementation of type Windows.ApplicationModel.AppExtensions.AppExtension
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+#if !defined(____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_ApplicationModel_AppExtensions_IAppExtension2[] = L"Windows.ApplicationModel.AppExtensions.IAppExtension2";
+typedef struct __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_AppUserModelId)(__x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2Vtbl;
+
+interface __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_get_AppUserModelId(This, value) \
+    ((This)->lpVtbl->get_AppUserModelId(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2;
+#endif /* !defined(____x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppExtension2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xd0000
+
+/*
+ *
  * Interface Windows.ApplicationModel.AppExtensions.IAppExtensionCatalog
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 3.0
@@ -3087,6 +3214,7 @@ EXTERN_C const IID IID___x_ABI_CWindows_CApplicationModel_CAppExtensions_CIAppEx
  *
  * Class implements the following interfaces:
  *    Windows.ApplicationModel.AppExtensions.IAppExtension ** Default Interface **
+ *    Windows.ApplicationModel.AppExtensions.IAppExtension2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

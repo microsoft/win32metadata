@@ -207,7 +207,8 @@
       MarkerFileName="$(ScrapedHeadersMarker)"
       Win32MetadataScraperAssetsDir="$(Win32MetadataScraperAssetsDir)"
       ExcludeFromCrossarch="$(ExcludeFromCrossarch)"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
+      PartitionFilter="$(PartitionFilter)"/>
 
   </Target>
 

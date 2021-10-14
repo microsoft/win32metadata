@@ -2,5 +2,7 @@
 <IncludeRoot>/shared/winbio_types.h
 <IncludeRoot>/um/WinBio.h
 <IncludeRoot>/um/winbio_adapter.h
+<IncludeRoot>/shared/winbio_err.h
+<IncludeRoot>/shared/winbio_ioctl.h
 --namespace
 Windows.Win32.Devices.BiometricFramework

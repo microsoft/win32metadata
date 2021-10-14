@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -160,6 +168,7 @@ EXTERN_C const IID IID_ItsPubPlugin2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][in] */ 
@@ -167,12 +176,15 @@ EXTERN_C const IID IID_ItsPubPlugin2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ItsPubPlugin2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ItsPubPlugin2 * This);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin, GetResourceList)
         HRESULT ( STDMETHODCALLTYPE *GetResourceList )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][in] */ 
@@ -182,6 +194,7 @@ EXTERN_C const IID IID_ItsPubPlugin2;
             /* [annotation][out] */ 
             _Out_  pluginResource **resourceList);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin, GetResource)
         HRESULT ( STDMETHODCALLTYPE *GetResource )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][in] */ 
@@ -190,21 +203,25 @@ EXTERN_C const IID IID_ItsPubPlugin2;
             /* [annotation][out] */ 
             _Out_  pluginResource *resource);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin, GetCacheLastUpdateTime)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetCacheLastUpdateTime )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][out] */ 
             _Out_  unsigned long long *lastUpdateTime);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin, get_pluginName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_pluginName )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin, get_pluginVersion)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_pluginVersion )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pVal);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin, ResolveResource)
         HRESULT ( STDMETHODCALLTYPE *ResolveResource )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][out] */ 
@@ -218,6 +235,7 @@ EXTERN_C const IID IID_ItsPubPlugin2;
             /* [annotation][string][in] */ 
             _In_  wchar_t *alias);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin2, GetResource2List)
         HRESULT ( STDMETHODCALLTYPE *GetResource2List )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][in] */ 
@@ -227,6 +245,7 @@ EXTERN_C const IID IID_ItsPubPlugin2;
             /* [annotation][out] */ 
             _Out_  pluginResource2 **resourceList);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin2, GetResource2)
         HRESULT ( STDMETHODCALLTYPE *GetResource2 )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][in] */ 
@@ -235,6 +254,7 @@ EXTERN_C const IID IID_ItsPubPlugin2;
             /* [annotation][out] */ 
             _Out_  pluginResource2 *resource);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin2, ResolvePersonalDesktop)
         HRESULT ( STDMETHODCALLTYPE *ResolvePersonalDesktop )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][string][in] */ 
@@ -248,6 +268,7 @@ EXTERN_C const IID IID_ItsPubPlugin2;
             /* [annotation][string][out] */ 
             _Out_  wchar_t endPointName[ 256 ]);
         
+        DECLSPEC_XFGVIRT(ItsPubPlugin2, DeletePersonalDesktopAssignment)
         HRESULT ( STDMETHODCALLTYPE *DeletePersonalDesktopAssignment )( 
             __RPC__in ItsPubPlugin2 * This,
             /* [annotation][string][in] */ 

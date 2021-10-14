@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -259,6 +267,7 @@ EXTERN_C const IID IID_IEnumNetConnection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumNetConnection * This,
             /* [annotation][in] */ 
@@ -266,12 +275,15 @@ EXTERN_C const IID IID_IEnumNetConnection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumNetConnection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumNetConnection * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetConnection, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumNetConnection * This,
             /* [annotation][in] */ 
@@ -281,14 +293,17 @@ EXTERN_C const IID IID_IEnumNetConnection;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumNetConnection, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumNetConnection * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumNetConnection, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumNetConnection * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetConnection, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumNetConnection * This,
             /* [annotation][out] */ 
@@ -474,6 +489,7 @@ EXTERN_C const IID IID_INetConnection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetConnection * This,
             /* [annotation][in] */ 
@@ -481,21 +497,27 @@ EXTERN_C const IID IID_INetConnection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetConnection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetConnection * This);
         
+        DECLSPEC_XFGVIRT(INetConnection, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in INetConnection * This);
         
+        DECLSPEC_XFGVIRT(INetConnection, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in INetConnection * This);
         
+        DECLSPEC_XFGVIRT(INetConnection, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in INetConnection * This);
         
+        DECLSPEC_XFGVIRT(INetConnection, Duplicate)
         HRESULT ( STDMETHODCALLTYPE *Duplicate )( 
             __RPC__in INetConnection * This,
             /* [annotation][string][in] */ 
@@ -503,15 +525,18 @@ EXTERN_C const IID IID_INetConnection;
             /* [annotation][out] */ 
             _Out_  INetConnection **ppCon);
         
+        DECLSPEC_XFGVIRT(INetConnection, GetProperties)
         HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in INetConnection * This,
             /* [annotation][out] */ 
             _Out_  NETCON_PROPERTIES **ppProps);
         
+        DECLSPEC_XFGVIRT(INetConnection, GetUiObjectClassId)
         HRESULT ( STDMETHODCALLTYPE *GetUiObjectClassId )( 
             __RPC__in INetConnection * This,
             /* [ref][out] */ __RPC__out CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(INetConnection, Rename)
         HRESULT ( STDMETHODCALLTYPE *Rename )( 
             __RPC__in INetConnection * This,
             /* [annotation][string][in] */ 
@@ -623,6 +648,7 @@ EXTERN_C const IID IID_INetConnectionManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetConnectionManager * This,
             /* [annotation][in] */ 
@@ -630,12 +656,15 @@ EXTERN_C const IID IID_INetConnectionManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetConnectionManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetConnectionManager * This);
         
+        DECLSPEC_XFGVIRT(INetConnectionManager, EnumConnections)
         HRESULT ( STDMETHODCALLTYPE *EnumConnections )( 
             __RPC__in INetConnectionManager * This,
             /* [annotation][in] */ 
@@ -728,6 +757,7 @@ EXTERN_C const IID IID_INetConnectionConnectUi;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetConnectionConnectUi * This,
             /* [annotation][in] */ 
@@ -735,17 +765,21 @@ EXTERN_C const IID IID_INetConnectionConnectUi;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetConnectionConnectUi * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetConnectionConnectUi * This);
         
+        DECLSPEC_XFGVIRT(INetConnectionConnectUi, SetConnection)
         HRESULT ( STDMETHODCALLTYPE *SetConnection )( 
             __RPC__in INetConnectionConnectUi * This,
             /* [annotation][in] */ 
             _In_  INetConnection *pCon);
         
+        DECLSPEC_XFGVIRT(INetConnectionConnectUi, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in INetConnectionConnectUi * This,
             /* [annotation][in] */ 
@@ -753,6 +787,7 @@ EXTERN_C const IID IID_INetConnectionConnectUi;
             /* [annotation][in] */ 
             _In_  DWORD dwFlags);
         
+        DECLSPEC_XFGVIRT(INetConnectionConnectUi, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in INetConnectionConnectUi * This,
             /* [annotation][in] */ 
@@ -845,6 +880,7 @@ EXTERN_C const IID IID_IEnumNetSharingPortMapping;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumNetSharingPortMapping * This,
             /* [annotation][in] */ 
@@ -852,12 +888,15 @@ EXTERN_C const IID IID_IEnumNetSharingPortMapping;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumNetSharingPortMapping * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumNetSharingPortMapping * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPortMapping, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumNetSharingPortMapping * This,
             /* [annotation][in] */ 
@@ -867,14 +906,17 @@ EXTERN_C const IID IID_IEnumNetSharingPortMapping;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPortMapping, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumNetSharingPortMapping * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPortMapping, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumNetSharingPortMapping * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPortMapping, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumNetSharingPortMapping * This,
             /* [annotation][out] */ 
@@ -982,6 +1024,7 @@ EXTERN_C const IID IID_INetSharingPortMappingProps;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][in] */ 
@@ -989,17 +1032,21 @@ EXTERN_C const IID IID_INetSharingPortMappingProps;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetSharingPortMappingProps * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetSharingPortMappingProps * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][in] */ 
@@ -1009,6 +1056,7 @@ EXTERN_C const IID IID_INetSharingPortMappingProps;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][in] */ 
@@ -1021,6 +1069,7 @@ EXTERN_C const IID IID_INetSharingPortMappingProps;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetSharingPortMappingProps * This,
             /* [annotation][in] */ 
@@ -1040,41 +1089,49 @@ EXTERN_C const IID IID_INetSharingPortMappingProps;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingProps, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingProps, get_IPProtocol)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IPProtocol )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  UCHAR *pucIPProt);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingProps, get_ExternalPort)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExternalPort )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *pusPort);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingProps, get_InternalPort)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternalPort )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *pusPort);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingProps, get_Options)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Options )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  long *pdwOptions);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingProps, get_TargetName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetName )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrTargetName);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingProps, get_TargetIPAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TargetIPAddress )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrTargetIPAddress);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingProps, get_Enabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Enabled )( 
             __RPC__in INetSharingPortMappingProps * This,
             /* [annotation][retval][out] */ 
@@ -1185,6 +1242,7 @@ EXTERN_C const IID IID_INetSharingPortMapping;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetSharingPortMapping * This,
             /* [annotation][in] */ 
@@ -1192,17 +1250,21 @@ EXTERN_C const IID IID_INetSharingPortMapping;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetSharingPortMapping * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetSharingPortMapping * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetSharingPortMapping * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetSharingPortMapping * This,
             /* [annotation][in] */ 
@@ -1212,6 +1274,7 @@ EXTERN_C const IID IID_INetSharingPortMapping;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetSharingPortMapping * This,
             /* [annotation][in] */ 
@@ -1224,6 +1287,7 @@ EXTERN_C const IID IID_INetSharingPortMapping;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetSharingPortMapping * This,
             /* [annotation][in] */ 
@@ -1243,17 +1307,21 @@ EXTERN_C const IID IID_INetSharingPortMapping;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMapping, Disable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Disable )( 
             __RPC__in INetSharingPortMapping * This);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMapping, Enable)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Enable )( 
             __RPC__in INetSharingPortMapping * This);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMapping, get_Properties)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Properties )( 
             __RPC__in INetSharingPortMapping * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  INetSharingPortMappingProps **ppNSPMP);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMapping, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in INetSharingPortMapping * This);
         
@@ -1358,6 +1426,7 @@ EXTERN_C const IID IID_IEnumNetSharingEveryConnection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumNetSharingEveryConnection * This,
             /* [annotation][in] */ 
@@ -1365,12 +1434,15 @@ EXTERN_C const IID IID_IEnumNetSharingEveryConnection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumNetSharingEveryConnection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumNetSharingEveryConnection * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingEveryConnection, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumNetSharingEveryConnection * This,
             /* [annotation][in] */ 
@@ -1380,14 +1452,17 @@ EXTERN_C const IID IID_IEnumNetSharingEveryConnection;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingEveryConnection, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumNetSharingEveryConnection * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingEveryConnection, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumNetSharingEveryConnection * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingEveryConnection, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumNetSharingEveryConnection * This,
             /* [annotation][out] */ 
@@ -1481,6 +1556,7 @@ EXTERN_C const IID IID_IEnumNetSharingPublicConnection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumNetSharingPublicConnection * This,
             /* [annotation][in] */ 
@@ -1488,12 +1564,15 @@ EXTERN_C const IID IID_IEnumNetSharingPublicConnection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumNetSharingPublicConnection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumNetSharingPublicConnection * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPublicConnection, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumNetSharingPublicConnection * This,
             /* [annotation][in] */ 
@@ -1503,14 +1582,17 @@ EXTERN_C const IID IID_IEnumNetSharingPublicConnection;
             /* [annotation][out] */ 
             _Out_  ULONG *pceltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPublicConnection, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumNetSharingPublicConnection * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPublicConnection, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumNetSharingPublicConnection * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPublicConnection, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumNetSharingPublicConnection * This,
             /* [annotation][out] */ 
@@ -1604,6 +1686,7 @@ EXTERN_C const IID IID_IEnumNetSharingPrivateConnection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumNetSharingPrivateConnection * This,
             /* [annotation][in] */ 
@@ -1611,12 +1694,15 @@ EXTERN_C const IID IID_IEnumNetSharingPrivateConnection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumNetSharingPrivateConnection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumNetSharingPrivateConnection * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPrivateConnection, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumNetSharingPrivateConnection * This,
             /* [annotation][in] */ 
@@ -1626,14 +1712,17 @@ EXTERN_C const IID IID_IEnumNetSharingPrivateConnection;
             /* [annotation][out] */ 
             _Out_  ULONG *pCeltFetched);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPrivateConnection, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumNetSharingPrivateConnection * This,
             /* [annotation][in] */ 
             _In_  ULONG celt);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPrivateConnection, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumNetSharingPrivateConnection * This);
         
+        DECLSPEC_XFGVIRT(IEnumNetSharingPrivateConnection, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumNetSharingPrivateConnection * This,
             /* [annotation][out] */ 
@@ -1717,6 +1806,7 @@ EXTERN_C const IID IID_INetSharingPortMappingCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetSharingPortMappingCollection * This,
             /* [annotation][in] */ 
@@ -1724,17 +1814,21 @@ EXTERN_C const IID IID_INetSharingPortMappingCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetSharingPortMappingCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetSharingPortMappingCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetSharingPortMappingCollection * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetSharingPortMappingCollection * This,
             /* [annotation][in] */ 
@@ -1744,6 +1838,7 @@ EXTERN_C const IID IID_INetSharingPortMappingCollection;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetSharingPortMappingCollection * This,
             /* [annotation][in] */ 
@@ -1756,6 +1851,7 @@ EXTERN_C const IID IID_INetSharingPortMappingCollection;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetSharingPortMappingCollection * This,
             /* [annotation][in] */ 
@@ -1775,11 +1871,13 @@ EXTERN_C const IID IID_INetSharingPortMappingCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingCollection, get__NewEnum)
         /* [helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in INetSharingPortMappingCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IUnknown **pVal);
         
+        DECLSPEC_XFGVIRT(INetSharingPortMappingCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in INetSharingPortMappingCollection * This,
             /* [annotation][retval][out] */ 
@@ -1895,6 +1993,7 @@ EXTERN_C const IID IID_INetConnectionProps;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][in] */ 
@@ -1902,17 +2001,21 @@ EXTERN_C const IID IID_INetConnectionProps;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetConnectionProps * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetConnectionProps * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][in] */ 
@@ -1922,6 +2025,7 @@ EXTERN_C const IID IID_INetConnectionProps;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][in] */ 
@@ -1934,6 +2038,7 @@ EXTERN_C const IID IID_INetConnectionProps;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetConnectionProps * This,
             /* [annotation][in] */ 
@@ -1953,31 +2058,37 @@ EXTERN_C const IID IID_INetConnectionProps;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetConnectionProps, get_Guid)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Guid )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrGuid);
         
+        DECLSPEC_XFGVIRT(INetConnectionProps, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(INetConnectionProps, get_DeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceName )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrDeviceName);
         
+        DECLSPEC_XFGVIRT(INetConnectionProps, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  NETCON_STATUS *pStatus);
         
+        DECLSPEC_XFGVIRT(INetConnectionProps, get_MediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  NETCON_MEDIATYPE *pMediaType);
         
+        DECLSPEC_XFGVIRT(INetConnectionProps, get_Characteristics)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Characteristics )( 
             __RPC__in INetConnectionProps * This,
             /* [annotation][retval][out] */ 
@@ -2145,6 +2256,7 @@ EXTERN_C const IID IID_INetSharingConfiguration;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][in] */ 
@@ -2152,17 +2264,21 @@ EXTERN_C const IID IID_INetSharingConfiguration;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetSharingConfiguration * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetSharingConfiguration * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][in] */ 
@@ -2172,6 +2288,7 @@ EXTERN_C const IID IID_INetSharingConfiguration;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][in] */ 
@@ -2184,6 +2301,7 @@ EXTERN_C const IID IID_INetSharingConfiguration;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetSharingConfiguration * This,
             /* [annotation][in] */ 
@@ -2203,35 +2321,43 @@ EXTERN_C const IID IID_INetSharingConfiguration;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, get_SharingEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SharingEnabled )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, get_SharingConnectionType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SharingConnectionType )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  SHARINGCONNECTIONTYPE *pType);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, DisableSharing)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisableSharing )( 
             __RPC__in INetSharingConfiguration * This);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, EnableSharing)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableSharing )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][in] */ 
             _In_  SHARINGCONNECTIONTYPE Type);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, get_InternetFirewallEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InternetFirewallEnabled )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pbEnabled);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, DisableInternetFirewall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisableInternetFirewall )( 
             __RPC__in INetSharingConfiguration * This);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, EnableInternetFirewall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableInternetFirewall )( 
             __RPC__in INetSharingConfiguration * This);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, get_EnumPortMappings)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumPortMappings )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][in] */ 
@@ -2239,6 +2365,7 @@ EXTERN_C const IID IID_INetSharingConfiguration;
             /* [annotation][retval][out] */ 
             _Out_retval_  INetSharingPortMappingCollection **ppColl);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, AddPortMapping)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddPortMapping )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][in] */ 
@@ -2258,6 +2385,7 @@ EXTERN_C const IID IID_INetSharingConfiguration;
             /* [annotation][retval][out] */ 
             _Out_retval_  INetSharingPortMapping **ppMapping);
         
+        DECLSPEC_XFGVIRT(INetSharingConfiguration, RemovePortMapping)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemovePortMapping )( 
             __RPC__in INetSharingConfiguration * This,
             /* [annotation][in] */ 
@@ -2372,6 +2500,7 @@ EXTERN_C const IID IID_INetSharingEveryConnectionCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetSharingEveryConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2379,17 +2508,21 @@ EXTERN_C const IID IID_INetSharingEveryConnectionCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetSharingEveryConnectionCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetSharingEveryConnectionCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetSharingEveryConnectionCollection * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetSharingEveryConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2399,6 +2532,7 @@ EXTERN_C const IID IID_INetSharingEveryConnectionCollection;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetSharingEveryConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2411,6 +2545,7 @@ EXTERN_C const IID IID_INetSharingEveryConnectionCollection;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetSharingEveryConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2430,11 +2565,13 @@ EXTERN_C const IID IID_INetSharingEveryConnectionCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetSharingEveryConnectionCollection, get__NewEnum)
         /* [helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in INetSharingEveryConnectionCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IUnknown **pVal);
         
+        DECLSPEC_XFGVIRT(INetSharingEveryConnectionCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in INetSharingEveryConnectionCollection * This,
             /* [annotation][retval][out] */ 
@@ -2525,6 +2662,7 @@ EXTERN_C const IID IID_INetSharingPublicConnectionCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetSharingPublicConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2532,17 +2670,21 @@ EXTERN_C const IID IID_INetSharingPublicConnectionCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetSharingPublicConnectionCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetSharingPublicConnectionCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetSharingPublicConnectionCollection * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetSharingPublicConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2552,6 +2694,7 @@ EXTERN_C const IID IID_INetSharingPublicConnectionCollection;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetSharingPublicConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2564,6 +2707,7 @@ EXTERN_C const IID IID_INetSharingPublicConnectionCollection;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetSharingPublicConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2583,11 +2727,13 @@ EXTERN_C const IID IID_INetSharingPublicConnectionCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetSharingPublicConnectionCollection, get__NewEnum)
         /* [helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in INetSharingPublicConnectionCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IUnknown **pVal);
         
+        DECLSPEC_XFGVIRT(INetSharingPublicConnectionCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in INetSharingPublicConnectionCollection * This,
             /* [annotation][retval][out] */ 
@@ -2678,6 +2824,7 @@ EXTERN_C const IID IID_INetSharingPrivateConnectionCollection;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetSharingPrivateConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2685,17 +2832,21 @@ EXTERN_C const IID IID_INetSharingPrivateConnectionCollection;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetSharingPrivateConnectionCollection * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetSharingPrivateConnectionCollection * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetSharingPrivateConnectionCollection * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetSharingPrivateConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2705,6 +2856,7 @@ EXTERN_C const IID IID_INetSharingPrivateConnectionCollection;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetSharingPrivateConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2717,6 +2869,7 @@ EXTERN_C const IID IID_INetSharingPrivateConnectionCollection;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetSharingPrivateConnectionCollection * This,
             /* [annotation][in] */ 
@@ -2736,11 +2889,13 @@ EXTERN_C const IID IID_INetSharingPrivateConnectionCollection;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetSharingPrivateConnectionCollection, get__NewEnum)
         /* [helpstring][restricted][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in INetSharingPrivateConnectionCollection * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IUnknown **pVal);
         
+        DECLSPEC_XFGVIRT(INetSharingPrivateConnectionCollection, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in INetSharingPrivateConnectionCollection * This,
             /* [annotation][retval][out] */ 
@@ -2855,6 +3010,7 @@ EXTERN_C const IID IID_INetSharingManager;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][in] */ 
@@ -2862,17 +3018,21 @@ EXTERN_C const IID IID_INetSharingManager;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetSharingManager * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetSharingManager * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][in] */ 
@@ -2882,6 +3042,7 @@ EXTERN_C const IID IID_INetSharingManager;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][in] */ 
@@ -2894,6 +3055,7 @@ EXTERN_C const IID IID_INetSharingManager;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             INetSharingManager * This,
             /* [annotation][in] */ 
@@ -2913,11 +3075,13 @@ EXTERN_C const IID IID_INetSharingManager;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(INetSharingManager, get_SharingInstalled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SharingInstalled )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT_BOOL *pbInstalled);
         
+        DECLSPEC_XFGVIRT(INetSharingManager, get_EnumPublicConnections)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumPublicConnections )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][in] */ 
@@ -2925,6 +3089,7 @@ EXTERN_C const IID IID_INetSharingManager;
             /* [annotation][retval][out] */ 
             _Out_retval_  INetSharingPublicConnectionCollection **ppColl);
         
+        DECLSPEC_XFGVIRT(INetSharingManager, get_EnumPrivateConnections)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumPrivateConnections )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][in] */ 
@@ -2932,6 +3097,7 @@ EXTERN_C const IID IID_INetSharingManager;
             /* [annotation][retval][out] */ 
             _Out_retval_  INetSharingPrivateConnectionCollection **ppColl);
         
+        DECLSPEC_XFGVIRT(INetSharingManager, get_INetSharingConfigurationForINetConnection)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_INetSharingConfigurationForINetConnection )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][in] */ 
@@ -2939,11 +3105,13 @@ EXTERN_C const IID IID_INetSharingManager;
             /* [annotation][retval][out] */ 
             _Out_retval_  INetSharingConfiguration **ppNetSharingConfiguration);
         
+        DECLSPEC_XFGVIRT(INetSharingManager, get_EnumEveryConnection)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnumEveryConnection )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  INetSharingEveryConnectionCollection **ppColl);
         
+        DECLSPEC_XFGVIRT(INetSharingManager, get_NetConnectionProps)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NetConnectionProps )( 
             __RPC__in INetSharingManager * This,
             /* [annotation][in] */ 

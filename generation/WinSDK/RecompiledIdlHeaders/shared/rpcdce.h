@@ -150,6 +150,7 @@ typedef struct _RPC_IF_ID
 #define RPC_C_USE_INTRANET_PORT         0x2
 #define RPC_C_DONT_FAIL                 0x4
 #define RPC_C_RPCHTTP_USE_LOAD_BALANCE  0x8
+#define RPC_C_TRY_ENFORCE_MAX_CALLS     0x10
 
 #if (NTDDI_VERSION < NTDDI_VISTA)
 // RPC_POLICY EndpointFlags specific to the Falcon/RPC transport (deprecated for Vista)
@@ -391,6 +392,16 @@ RpcSsGetContextBinding (
 
 #pragma region Application Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
+
+/* client/server */
+RPCRTAPI
+_Must_inspect_result_
+RPC_STATUS
+RPC_ENTRY
+RpcBindingInqMaxCalls (
+    _In_ RPC_BINDING_HANDLE Binding,
+    _Out_ unsigned int * MaxCalls
+    );
 
 /* client/server */
 RPCRTAPI

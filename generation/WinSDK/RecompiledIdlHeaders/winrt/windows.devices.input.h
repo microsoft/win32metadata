@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #endif // defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
@@ -104,6 +104,7 @@
 #include "EventToken.h"
 #include "windowscontracts.h"
 #include "Windows.Foundation.h"
+#include "Windows.Devices.Haptics.h"
 // Importing Collections header
 #include <windows.foundation.collections.h>
 
@@ -228,6 +229,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CDevices_CInput_CIPenDevice ABI::Windows::Devices::Input::IPenDevice
 
 #endif // ____x_ABI_CWindows_CDevices_CInput_CIPenDevice_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Input {
+                interface IPenDevice2;
+            } /* Input */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CInput_CIPenDevice2 ABI::Windows::Devices::Input::IPenDevice2
+
+#endif // ____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CInput_CIPenDeviceStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CInput_CIPenDeviceStatics_FWD_DEFINED__
@@ -914,6 +930,31 @@ typedef ITypedEventHandler<ABI::Windows::Devices::Input::PenDockListener*, ABI::
 
 namespace ABI {
     namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                class SimpleHapticsController;
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+#ifndef ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Haptics {
+                interface ISimpleHapticsController;
+            } /* Haptics */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController ABI::Windows::Devices::Haptics::ISimpleHapticsController
+
+#endif // ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
+
+namespace ABI {
+    namespace Windows {
         namespace Foundation {
             typedef struct Rect Rect;
         } /* Foundation */
@@ -1357,6 +1398,42 @@ namespace ABI {
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CInput_CIPenDevice;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CInput_CIPenDevice_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
+
+/*
+ *
+ * Interface Windows.Devices.Input.IPenDevice2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Input.PenDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Input_IPenDevice2[] = L"Windows.Devices.Input.IPenDevice2";
+namespace ABI {
+    namespace Windows {
+        namespace Devices {
+            namespace Input {
+                MIDL_INTERFACE("0207d327-7fb8-5566-8c34-f8342037b7f9")
+                IPenDevice2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_SimpleHapticsController(
+                        ABI::Windows::Devices::Haptics::ISimpleHapticsController** value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IPenDevice2 = _uuidof(IPenDevice2);
+            } /* Input */
+        } /* Devices */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CInput_CIPenDevice2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 
 /*
  *
@@ -1939,6 +2016,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Input.IPenDevice ** Default Interface **
+ *    Windows.Devices.Input.IPenDevice2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2165,6 +2243,12 @@ typedef interface __x_ABI_CWindows_CDevices_CInput_CIPenButtonListenerStatics __
 typedef interface __x_ABI_CWindows_CDevices_CInput_CIPenDevice __x_ABI_CWindows_CDevices_CInput_CIPenDevice;
 
 #endif // ____x_ABI_CWindows_CDevices_CInput_CIPenDevice_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CInput_CIPenDevice2 __x_ABI_CWindows_CDevices_CInput_CIPenDevice2;
+
+#endif // ____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CDevices_CInput_CIPenDeviceStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CDevices_CInput_CIPenDeviceStatics_FWD_DEFINED__
@@ -3108,6 +3192,12 @@ interface __FITypedEventHandler_2_Windows__CDevices__CInput__CPenDockListener_Wi
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xa0000
 
+#ifndef ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
+#define ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController __x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController;
+
+#endif // ____x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController_FWD_DEFINED__
+
 typedef struct __x_ABI_CWindows_CFoundation_CRect __x_ABI_CWindows_CFoundation_CRect;
 
 typedef enum __x_ABI_CWindows_CDevices_CInput_CPointerDeviceType __x_ABI_CWindows_CDevices_CInput_CPointerDeviceType;
@@ -3787,6 +3877,75 @@ interface __x_ABI_CWindows_CDevices_CInput_CIPenDevice
 EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CInput_CIPenDevice;
 #endif /* !defined(____x_ABI_CWindows_CDevices_CInput_CIPenDevice_INTERFACE_DEFINED__) */
 #endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0x80000
+
+/*
+ *
+ * Interface Windows.Devices.Input.IPenDevice2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 14.0
+ *
+ * Interface is a part of the implementation of type Windows.Devices.Input.PenDevice
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
+#if !defined(____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_Devices_Input_IPenDevice2[] = L"Windows.Devices.Input.IPenDevice2";
+typedef struct __x_ABI_CWindows_CDevices_CInput_CIPenDevice2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CDevices_CInput_CIPenDevice2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CDevices_CInput_CIPenDevice2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CDevices_CInput_CIPenDevice2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CDevices_CInput_CIPenDevice2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CDevices_CInput_CIPenDevice2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CDevices_CInput_CIPenDevice2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_SimpleHapticsController)(__x_ABI_CWindows_CDevices_CInput_CIPenDevice2* This,
+        __x_ABI_CWindows_CDevices_CHaptics_CISimpleHapticsController** value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CDevices_CInput_CIPenDevice2Vtbl;
+
+interface __x_ABI_CWindows_CDevices_CInput_CIPenDevice2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CDevices_CInput_CIPenDevice2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CDevices_CInput_CIPenDevice2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CDevices_CInput_CIPenDevice2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CDevices_CInput_CIPenDevice2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CDevices_CInput_CIPenDevice2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CDevices_CInput_CIPenDevice2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CDevices_CInput_CIPenDevice2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CDevices_CInput_CIPenDevice2_get_SimpleHapticsController(This, value) \
+    ((This)->lpVtbl->get_SimpleHapticsController(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CDevices_CInput_CIPenDevice2;
+#endif /* !defined(____x_ABI_CWindows_CDevices_CInput_CIPenDevice2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xe0000
 
 /*
  *
@@ -4781,6 +4940,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.Devices.Input.IPenDevice ** Default Interface **
+ *    Windows.Devices.Input.IPenDevice2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

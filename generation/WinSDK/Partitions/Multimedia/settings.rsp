@@ -17,5 +17,11 @@ AVIPALCHANGE
 <IncludeRoot>/um/mmddk.h
 <IncludeRoot>/um/mmiscapi.h
 <IncludeRoot>/um/timeapi.h
+<IncludeRoot>/um/asferr.h
+<IncludeRoot>/um/mciavi.h
+<IncludeRoot>/um/msacmdlg.h
+<IncludeRoot>/um/msacmdrv.h
+<IncludeRoot>/um/nserror.h
+<IncludeRoot>/um/vfwext.h
 --namespace
 Windows.Win32.Media.Multimedia

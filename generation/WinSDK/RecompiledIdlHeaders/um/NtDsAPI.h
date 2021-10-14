@@ -676,7 +676,7 @@ typedef struct
 #define NTDSCONN_OPT_USER_OWNED_SCHEDULE    (1 << 5)
 
 // This is the default rodc connection - 1 per rodc for FRS's uses
-#define NTDSCONN_OPT_RODC_TOPOLOGY            (1 << 6)          
+#define NTDSCONN_OPT_RODC_TOPOLOGY            (1 << 6)
 
 // Connection reasons
 //
@@ -3262,7 +3262,7 @@ DsInheritSecurityIdentityA(
 #ifdef __cplusplus
 }
 #endif
-#endif !MIDL_PASS
+#endif // !MIDL_PASS
 
 
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_PKG_WINMGMT) */

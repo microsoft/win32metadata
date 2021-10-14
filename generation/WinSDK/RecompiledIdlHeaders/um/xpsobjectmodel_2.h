@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -116,6 +124,7 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsOMPackageWriter3D * This,
             /* [annotation][in] */ 
@@ -123,12 +132,15 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IXpsOMPackageWriter3D * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IXpsOMPackageWriter3D * This);
         
+        DECLSPEC_XFGVIRT(IXpsOMPackageWriter, StartNewDocument)
         HRESULT ( STDMETHODCALLTYPE *StartNewDocument )( 
             IXpsOMPackageWriter3D * This,
             /* [annotation][in] */ 
@@ -142,6 +154,7 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
             /* [annotation][in] */ 
             _In_  IXpsOMPartUriCollection *restrictedFonts);
         
+        DECLSPEC_XFGVIRT(IXpsOMPackageWriter, AddPage)
         HRESULT ( STDMETHODCALLTYPE *AddPage )( 
             IXpsOMPackageWriter3D * This,
             /* [annotation][in] */ 
@@ -157,19 +170,23 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
             /* [annotation][in] */ 
             _In_  IXpsOMImageResource *pageThumbnail);
         
+        DECLSPEC_XFGVIRT(IXpsOMPackageWriter, AddResource)
         HRESULT ( STDMETHODCALLTYPE *AddResource )( 
             IXpsOMPackageWriter3D * This,
             /* [annotation][in] */ 
             _In_  IXpsOMResource *resource);
         
+        DECLSPEC_XFGVIRT(IXpsOMPackageWriter, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             IXpsOMPackageWriter3D * This);
         
+        DECLSPEC_XFGVIRT(IXpsOMPackageWriter, IsClosed)
         HRESULT ( STDMETHODCALLTYPE *IsClosed )( 
             IXpsOMPackageWriter3D * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *isClosed);
         
+        DECLSPEC_XFGVIRT(IXpsOMPackageWriter3D, AddModelTexture)
         HRESULT ( STDMETHODCALLTYPE *AddModelTexture )( 
             IXpsOMPackageWriter3D * This,
             /* [annotation][in] */ 
@@ -177,6 +194,7 @@ EXTERN_C const IID IID_IXpsOMPackageWriter3D;
             /* [annotation][in] */ 
             _In_  IStream *textureData);
         
+        DECLSPEC_XFGVIRT(IXpsOMPackageWriter3D, SetModelPrintTicket)
         HRESULT ( STDMETHODCALLTYPE *SetModelPrintTicket )( 
             IXpsOMPackageWriter3D * This,
             /* [annotation][in] */ 
@@ -280,6 +298,7 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IXpsDocumentPackageTarget3D * This,
             /* [annotation][in] */ 
@@ -287,12 +306,15 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IXpsDocumentPackageTarget3D * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IXpsDocumentPackageTarget3D * This);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentPackageTarget3D, GetXpsOMPackageWriter3D)
         HRESULT ( STDMETHODCALLTYPE *GetXpsOMPackageWriter3D )( 
             IXpsDocumentPackageTarget3D * This,
             /* [annotation][in] */ 
@@ -306,6 +328,7 @@ EXTERN_C const IID IID_IXpsDocumentPackageTarget3D;
             /* [annotation][retval][out] */ 
             _Out_retval_  IXpsOMPackageWriter3D **packageWriter);
         
+        DECLSPEC_XFGVIRT(IXpsDocumentPackageTarget3D, GetXpsOMFactory)
         HRESULT ( STDMETHODCALLTYPE *GetXpsOMFactory )( 
             IXpsDocumentPackageTarget3D * This,
             /* [annotation][retval][out] */ 

@@ -6,6 +6,7 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#include <lm.h>
 #include <lmaccess.h>
 #include <lmjoin.h>
 #include <atacct.h>
@@ -23,3 +24,14 @@
 #include <lmwksta.h>
 #include <lmerr.h>
 #include <lmcons.h>
+#include <netevent.h>
+#include <nettypes.h>
+#include <lmrepl.h>
+#include <lmsname.h>
+#include <lmuseflg.h>
+#include <netcfgn.h>
+#include <netcfgx.h>
+#include <netprov.h>
+//#include <routprot.h> -- won't compile because it includes stm.h which is missing a type
+#include <rtinfo.h>
+#include <rtutils.h>

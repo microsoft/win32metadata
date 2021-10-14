@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -162,6 +170,7 @@ EXTERN_C const IID IID_ISurfaceImageSourceNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISurfaceImageSourceNative * This,
             /* [annotation][in] */ 
@@ -169,17 +178,21 @@ EXTERN_C const IID IID_ISurfaceImageSourceNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISurfaceImageSourceNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISurfaceImageSourceNative * This);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNative, SetDevice)
         HRESULT ( STDMETHODCALLTYPE *SetDevice )( 
             ISurfaceImageSourceNative * This,
             /* [annotation][in] */ 
             _In_  IDXGIDevice *device);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNative, BeginDraw)
         HRESULT ( STDMETHODCALLTYPE *BeginDraw )( 
             ISurfaceImageSourceNative * This,
             /* [annotation][in] */ 
@@ -189,6 +202,7 @@ EXTERN_C const IID IID_ISurfaceImageSourceNative;
             /* [annotation][out] */ 
             _Out_  POINT *offset);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNative, EndDraw)
         HRESULT ( STDMETHODCALLTYPE *EndDraw )( 
             ISurfaceImageSourceNative * This);
         
@@ -261,6 +275,7 @@ EXTERN_C const IID IID_IVirtualSurfaceUpdatesCallbackNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVirtualSurfaceUpdatesCallbackNative * This,
             /* [annotation][in] */ 
@@ -268,12 +283,15 @@ EXTERN_C const IID IID_IVirtualSurfaceUpdatesCallbackNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IVirtualSurfaceUpdatesCallbackNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IVirtualSurfaceUpdatesCallbackNative * This);
         
+        DECLSPEC_XFGVIRT(IVirtualSurfaceUpdatesCallbackNative, UpdatesNeeded)
         HRESULT ( STDMETHODCALLTYPE *UpdatesNeeded )( 
             IVirtualSurfaceUpdatesCallbackNative * This);
         
@@ -366,6 +384,7 @@ EXTERN_C const IID IID_IVirtualSurfaceImageSourceNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][in] */ 
@@ -373,17 +392,21 @@ EXTERN_C const IID IID_IVirtualSurfaceImageSourceNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IVirtualSurfaceImageSourceNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IVirtualSurfaceImageSourceNative * This);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNative, SetDevice)
         HRESULT ( STDMETHODCALLTYPE *SetDevice )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][in] */ 
             _In_  IDXGIDevice *device);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNative, BeginDraw)
         HRESULT ( STDMETHODCALLTYPE *BeginDraw )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][in] */ 
@@ -393,19 +416,23 @@ EXTERN_C const IID IID_IVirtualSurfaceImageSourceNative;
             /* [annotation][out] */ 
             _Out_  POINT *offset);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNative, EndDraw)
         HRESULT ( STDMETHODCALLTYPE *EndDraw )( 
             IVirtualSurfaceImageSourceNative * This);
         
+        DECLSPEC_XFGVIRT(IVirtualSurfaceImageSourceNative, Invalidate)
         HRESULT ( STDMETHODCALLTYPE *Invalidate )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][in] */ 
             _In_  RECT updateRect);
         
+        DECLSPEC_XFGVIRT(IVirtualSurfaceImageSourceNative, GetUpdateRectCount)
         HRESULT ( STDMETHODCALLTYPE *GetUpdateRectCount )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][out] */ 
             _Out_  DWORD *count);
         
+        DECLSPEC_XFGVIRT(IVirtualSurfaceImageSourceNative, GetUpdateRects)
         HRESULT ( STDMETHODCALLTYPE *GetUpdateRects )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][size_is][out] */ 
@@ -413,16 +440,19 @@ EXTERN_C const IID IID_IVirtualSurfaceImageSourceNative;
             /* [annotation][in] */ 
             _In_  DWORD count);
         
+        DECLSPEC_XFGVIRT(IVirtualSurfaceImageSourceNative, GetVisibleBounds)
         HRESULT ( STDMETHODCALLTYPE *GetVisibleBounds )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][out] */ 
             _Out_  RECT *bounds);
         
+        DECLSPEC_XFGVIRT(IVirtualSurfaceImageSourceNative, RegisterForUpdatesNeeded)
         HRESULT ( STDMETHODCALLTYPE *RegisterForUpdatesNeeded )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][in] */ 
             _In_opt_  IVirtualSurfaceUpdatesCallbackNative *callback);
         
+        DECLSPEC_XFGVIRT(IVirtualSurfaceImageSourceNative, Resize)
         HRESULT ( STDMETHODCALLTYPE *Resize )( 
             IVirtualSurfaceImageSourceNative * This,
             /* [annotation][in] */ 
@@ -520,6 +550,7 @@ EXTERN_C const IID IID_ISwapChainBackgroundPanelNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISwapChainBackgroundPanelNative * This,
             /* [annotation][in] */ 
@@ -527,12 +558,15 @@ EXTERN_C const IID IID_ISwapChainBackgroundPanelNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISwapChainBackgroundPanelNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISwapChainBackgroundPanelNative * This);
         
+        DECLSPEC_XFGVIRT(ISwapChainBackgroundPanelNative, SetSwapChain)
         HRESULT ( STDMETHODCALLTYPE *SetSwapChain )( 
             ISwapChainBackgroundPanelNative * This,
             /* [annotation][in] */ 
@@ -614,6 +648,7 @@ EXTERN_C const IID IID_ISurfaceImageSourceManagerNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISurfaceImageSourceManagerNative * This,
             /* [annotation][in] */ 
@@ -621,12 +656,15 @@ EXTERN_C const IID IID_ISurfaceImageSourceManagerNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISurfaceImageSourceManagerNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISurfaceImageSourceManagerNative * This);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceManagerNative, FlushAllSurfacesWithDevice)
         HRESULT ( STDMETHODCALLTYPE *FlushAllSurfacesWithDevice )( 
             ISurfaceImageSourceManagerNative * This,
             /* [annotation][in] */ 
@@ -713,6 +751,7 @@ EXTERN_C const IID IID_ISurfaceImageSourceNativeWithD2D;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISurfaceImageSourceNativeWithD2D * This,
             /* [annotation][in] */ 
@@ -720,17 +759,21 @@ EXTERN_C const IID IID_ISurfaceImageSourceNativeWithD2D;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISurfaceImageSourceNativeWithD2D * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISurfaceImageSourceNativeWithD2D * This);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNativeWithD2D, SetDevice)
         HRESULT ( STDMETHODCALLTYPE *SetDevice )( 
             ISurfaceImageSourceNativeWithD2D * This,
             /* [annotation][in] */ 
             _In_  IUnknown *device);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNativeWithD2D, BeginDraw)
         HRESULT ( STDMETHODCALLTYPE *BeginDraw )( 
             ISurfaceImageSourceNativeWithD2D * This,
             /* [annotation][in] */ 
@@ -742,12 +785,15 @@ EXTERN_C const IID IID_ISurfaceImageSourceNativeWithD2D;
             /* [annotation][out] */ 
             _Out_  POINT *offset);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNativeWithD2D, EndDraw)
         HRESULT ( STDMETHODCALLTYPE *EndDraw )( 
             ISurfaceImageSourceNativeWithD2D * This);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNativeWithD2D, SuspendDraw)
         HRESULT ( STDMETHODCALLTYPE *SuspendDraw )( 
             ISurfaceImageSourceNativeWithD2D * This);
         
+        DECLSPEC_XFGVIRT(ISurfaceImageSourceNativeWithD2D, ResumeDraw)
         HRESULT ( STDMETHODCALLTYPE *ResumeDraw )( 
             ISurfaceImageSourceNativeWithD2D * This);
         
@@ -828,6 +874,7 @@ EXTERN_C const IID IID_ISwapChainPanelNative;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISwapChainPanelNative * This,
             /* [annotation][in] */ 
@@ -835,12 +882,15 @@ EXTERN_C const IID IID_ISwapChainPanelNative;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISwapChainPanelNative * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISwapChainPanelNative * This);
         
+        DECLSPEC_XFGVIRT(ISwapChainPanelNative, SetSwapChain)
         HRESULT ( STDMETHODCALLTYPE *SetSwapChain )( 
             ISwapChainPanelNative * This,
             /* [annotation][in] */ 
@@ -921,6 +971,7 @@ EXTERN_C const IID IID_ISwapChainPanelNative2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ISwapChainPanelNative2 * This,
             /* [annotation][in] */ 
@@ -928,17 +979,21 @@ EXTERN_C const IID IID_ISwapChainPanelNative2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ISwapChainPanelNative2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ISwapChainPanelNative2 * This);
         
+        DECLSPEC_XFGVIRT(ISwapChainPanelNative, SetSwapChain)
         HRESULT ( STDMETHODCALLTYPE *SetSwapChain )( 
             ISwapChainPanelNative2 * This,
             /* [annotation][in] */ 
             _In_  IDXGISwapChain *swapChain);
         
+        DECLSPEC_XFGVIRT(ISwapChainPanelNative2, SetSwapChainHandle)
         HRESULT ( STDMETHODCALLTYPE *SetSwapChainHandle )( 
             ISwapChainPanelNative2 * This,
             /* [annotation][in] */ 

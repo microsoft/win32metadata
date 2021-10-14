@@ -25,6 +25,8 @@ namespace Windows
     {
         typedef struct Color Color;
 
+        typedef struct WindowId WindowId;
+
         interface IColorHelper;
 
         interface IColorHelperStatics;
@@ -58,7 +60,13 @@ namespace Windows
         {
             interface Windows.Foundation.Collections.IIterable<Windows.UI.Color>;
 
+            interface Windows.Foundation.Collections.IIterable<Windows.UI.WindowId>;
+
             interface Windows.Foundation.Collections.IIterator<Windows.UI.Color>;
+
+            interface Windows.Foundation.Collections.IIterator<Windows.UI.WindowId>;
+
+            interface Windows.Foundation.Collections.IVectorView<Windows.UI.WindowId>;
 
             interface Windows.Foundation.IReference<Windows.UI.Color>;
         }
@@ -77,6 +85,12 @@ namespace Windows
             BYTE R;
             BYTE G;
             BYTE B;
+        };
+
+        [contract(Windows.Foundation.UniversalApiContract, 12.0)]
+        struct WindowId
+        {
+            UINT64 Value;
         };
 
         [contract(Windows.Foundation.UniversalApiContract, 1.0)]

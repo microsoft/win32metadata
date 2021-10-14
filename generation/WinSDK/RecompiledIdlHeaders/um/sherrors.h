@@ -123,6 +123,10 @@
 #define COPYENGINE_E_RMS_REQUIRES_EDP_CONSENT_FOR_REMOVABLE_DRIVE  _HRESULT_TYPEDEF_(0x8027004BL) // The file can be copied as personal if the user consents to override the EDP block
 #define COPYENGINE_E_RMS_BLOCKED_BY_EDP_FOR_REMOVABLE_DRIVE        _HRESULT_TYPEDEF_(0x8027004CL) // The file can only be copied as work protected per EDP policy
 
+#define COPYENGINE_E_WARNED_BY_DLP_POLICY                          _HRESULT_TYPEDEF_(0x8027004DL) // The file is warned against being copied per DLP policy
+#define COPYENGINE_E_BLOCKED_BY_DLP_POLICY                         _HRESULT_TYPEDEF_(0x8027004EL) // The file cannot be copied per DLP policy
+#define COPYENGINE_E_SILENT_FAIL_BY_DLP_POLICY                     _HRESULT_TYPEDEF_(0x8027004FL) // The file cannot be copied per DLP policy, and the caller is requested to silently fail
+
 //  error codes without a more specific group use FACILITY_SHELL and 0x01 in the second lowest byte.
 #define NETCACHE_E_NEGATIVE_CACHE           _HRESULT_TYPEDEF_(0x80270100L) // The item requested is in the negative net parsing cache
 #define EXECUTE_E_LAUNCH_APPLICATION        _HRESULT_TYPEDEF_(0x80270101L) // for returned by command delegates to indicate that they did no work 

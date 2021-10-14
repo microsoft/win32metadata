@@ -65,4 +65,4 @@
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */
 #pragma endregion
 
-#endif _STGPROP_H_
+#endif // _STGPROP_H_

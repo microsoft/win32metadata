@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -331,47 +339,57 @@ EXTERN_C const IID IID_ISyncProviderRegistration;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISyncProviderRegistration * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISyncProviderRegistration * This);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, CreateSyncProviderConfigUIRegistrationInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateSyncProviderConfigUIRegistrationInstance )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in const SyncProviderConfigUIConfiguration *pConfigUIConfig,
             /* [retval][out] */ __RPC__deref_out_opt ISyncProviderConfigUIInfo **ppConfigUIInfo);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, UnregisterSyncProviderConfigUI)
         HRESULT ( STDMETHODCALLTYPE *UnregisterSyncProviderConfigUI )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, EnumerateSyncProviderConfigUIs)
         HRESULT ( STDMETHODCALLTYPE *EnumerateSyncProviderConfigUIs )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [unique][in] */ __RPC__in_opt LPCGUID pguidContentType,
             /* [in] */ DWORD dwSupportedArchitecture,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSyncProviderConfigUIInfos **ppEnumSyncProviderConfigUIInfos);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, CreateSyncProviderRegistrationInstance)
         HRESULT ( STDMETHODCALLTYPE *CreateSyncProviderRegistrationInstance )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in const SyncProviderConfiguration *pProviderConfiguration,
             /* [retval][out] */ __RPC__deref_out_opt ISyncProviderInfo **ppProviderInfo);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, UnregisterSyncProvider)
         HRESULT ( STDMETHODCALLTYPE *UnregisterSyncProvider )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, GetSyncProviderConfigUIInfoforProvider)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProviderConfigUIInfoforProvider )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidProviderInstanceId,
             /* [retval][out] */ __RPC__deref_out_opt ISyncProviderConfigUIInfo **ppProviderConfigUIInfo);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, EnumerateSyncProviders)
         HRESULT ( STDMETHODCALLTYPE *EnumerateSyncProviders )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [unique][in] */ __RPC__in_opt LPCGUID pguidContentType,
@@ -381,47 +399,56 @@ EXTERN_C const IID IID_ISyncProviderRegistration;
             /* [in] */ DWORD dwSupportedArchitecture,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSyncProviderInfos **ppEnumSyncProviderInfos);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, GetSyncProviderInfo)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProviderInfo )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId,
             /* [retval][out] */ __RPC__deref_out_opt ISyncProviderInfo **ppProviderInfo);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, GetSyncProviderFromInstanceId)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProviderFromInstanceId )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId,
             /* [in] */ DWORD dwClsContext,
             /* [retval][out] */ __RPC__deref_out_opt IRegisteredSyncProvider **ppSyncProvider);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, GetSyncProviderConfigUIInfo)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProviderConfigUIInfo )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId,
             /* [retval][out] */ __RPC__deref_out_opt ISyncProviderConfigUIInfo **ppConfigUIInfo);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, GetSyncProviderConfigUIFromInstanceId)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProviderConfigUIFromInstanceId )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId,
             /* [in] */ DWORD dwClsContext,
             /* [retval][out] */ __RPC__deref_out_opt ISyncProviderConfigUI **ppConfigUI);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, GetSyncProviderState)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProviderState )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId,
             /* [retval][out] */ __RPC__out DWORD *pdwStateFlags);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, SetSyncProviderState)
         HRESULT ( STDMETHODCALLTYPE *SetSyncProviderState )( 
             __RPC__in ISyncProviderRegistration * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId,
             /* [in] */ DWORD dwStateFlagsMask,
             /* [in] */ DWORD dwStateFlags);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, RegisterForEvent)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RegisterForEvent )( 
             ISyncProviderRegistration * This,
             /* [retval][out] */ HANDLE *phEvent);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, RevokeEvent)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *RevokeEvent )( 
             ISyncProviderRegistration * This,
             /* [in] */ HANDLE hEvent);
         
+        DECLSPEC_XFGVIRT(ISyncProviderRegistration, GetChange)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetChange )( 
             ISyncProviderRegistration * This,
             /* [in] */ HANDLE hEvent,
@@ -546,31 +573,38 @@ EXTERN_C const IID IID_IEnumSyncProviderConfigUIInfos;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSyncProviderConfigUIInfos * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumSyncProviderConfigUIInfos * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumSyncProviderConfigUIInfos * This);
         
+        DECLSPEC_XFGVIRT(IEnumSyncProviderConfigUIInfos, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSyncProviderConfigUIInfos * This,
             /* [range][in] */ __RPC__in_range(0,1) ULONG cFactories,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(cFactories, *pcFetched) ISyncProviderConfigUIInfo **ppSyncProviderConfigUIInfo,
             /* [out] */ __RPC__out ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSyncProviderConfigUIInfos, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSyncProviderConfigUIInfos * This,
             /* [in] */ ULONG cFactories);
         
+        DECLSPEC_XFGVIRT(IEnumSyncProviderConfigUIInfos, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumSyncProviderConfigUIInfos * This);
         
+        DECLSPEC_XFGVIRT(IEnumSyncProviderConfigUIInfos, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSyncProviderConfigUIInfos * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSyncProviderConfigUIInfos **ppEnum);
@@ -658,31 +692,38 @@ EXTERN_C const IID IID_IEnumSyncProviderInfos;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumSyncProviderInfos * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumSyncProviderInfos * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumSyncProviderInfos * This);
         
+        DECLSPEC_XFGVIRT(IEnumSyncProviderInfos, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumSyncProviderInfos * This,
             /* [range][in] */ __RPC__in_range(0,1) ULONG cInstances,
             /* [length_is][size_is][out] */ __RPC__out_ecount_part(cInstances, *pcFetched) ISyncProviderInfo **ppSyncProviderInfo,
             /* [out] */ __RPC__out ULONG *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumSyncProviderInfos, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumSyncProviderInfos * This,
             /* [in] */ ULONG cInstances);
         
+        DECLSPEC_XFGVIRT(IEnumSyncProviderInfos, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumSyncProviderInfos * This);
         
+        DECLSPEC_XFGVIRT(IEnumSyncProviderInfos, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumSyncProviderInfos * This,
             /* [retval][out] */ __RPC__deref_out_opt IEnumSyncProviderInfos **ppEnum);
@@ -761,40 +802,49 @@ EXTERN_C const IID IID_ISyncProviderInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncProviderInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISyncProviderInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISyncProviderInfo * This);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ISyncProviderInfo * This,
             /* [out] */ __RPC__out DWORD *cProps);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in ISyncProviderInfo * This,
             /* [in] */ DWORD iProp,
             /* [out] */ __RPC__out PROPERTYKEY *pkey);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ISyncProviderInfo * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
             /* [out] */ __RPC__out PROPVARIANT *pv);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in ISyncProviderInfo * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
             /* [in] */ __RPC__in REFPROPVARIANT propvar);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ISyncProviderInfo * This);
         
+        DECLSPEC_XFGVIRT(ISyncProviderInfo, GetSyncProvider)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProvider )( 
             __RPC__in ISyncProviderInfo * This,
             /* [in] */ DWORD dwClsContext,
@@ -881,40 +931,49 @@ EXTERN_C const IID IID_ISyncProviderConfigUIInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncProviderConfigUIInfo * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISyncProviderConfigUIInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISyncProviderConfigUIInfo * This);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, GetCount)
         HRESULT ( STDMETHODCALLTYPE *GetCount )( 
             __RPC__in ISyncProviderConfigUIInfo * This,
             /* [out] */ __RPC__out DWORD *cProps);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, GetAt)
         HRESULT ( STDMETHODCALLTYPE *GetAt )( 
             __RPC__in ISyncProviderConfigUIInfo * This,
             /* [in] */ DWORD iProp,
             /* [out] */ __RPC__out PROPERTYKEY *pkey);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, GetValue)
         HRESULT ( STDMETHODCALLTYPE *GetValue )( 
             __RPC__in ISyncProviderConfigUIInfo * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
             /* [out] */ __RPC__out PROPVARIANT *pv);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, SetValue)
         HRESULT ( STDMETHODCALLTYPE *SetValue )( 
             __RPC__in ISyncProviderConfigUIInfo * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
             /* [in] */ __RPC__in REFPROPVARIANT propvar);
         
+        DECLSPEC_XFGVIRT(IPropertyStore, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in ISyncProviderConfigUIInfo * This);
         
+        DECLSPEC_XFGVIRT(ISyncProviderConfigUIInfo, GetSyncProviderConfigUI)
         HRESULT ( STDMETHODCALLTYPE *GetSyncProviderConfigUI )( 
             __RPC__in ISyncProviderConfigUIInfo * This,
             /* [in] */ DWORD dwClsContext,
@@ -1015,34 +1074,41 @@ EXTERN_C const IID IID_ISyncProviderConfigUI;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncProviderConfigUI * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISyncProviderConfigUI * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISyncProviderConfigUI * This);
         
+        DECLSPEC_XFGVIRT(ISyncProviderConfigUI, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in ISyncProviderConfigUI * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId,
             /* [in] */ __RPC__in LPCGUID pguidContentType,
             /* [in] */ __RPC__in_opt IPropertyStore *pConfigurationProperties);
         
+        DECLSPEC_XFGVIRT(ISyncProviderConfigUI, GetRegisteredProperties)
         HRESULT ( STDMETHODCALLTYPE *GetRegisteredProperties )( 
             __RPC__in ISyncProviderConfigUI * This,
             /* [retval][out] */ __RPC__deref_out_opt IPropertyStore **ppConfigUIProperties);
         
+        DECLSPEC_XFGVIRT(ISyncProviderConfigUI, CreateAndRegisterNewSyncProvider)
         HRESULT ( STDMETHODCALLTYPE *CreateAndRegisterNewSyncProvider )( 
             __RPC__in ISyncProviderConfigUI * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
             /* [unique][in] */ __RPC__in_opt IUnknown *pUnkContext,
             /* [retval][out] */ __RPC__deref_out_opt ISyncProviderInfo **ppProviderInfo);
         
+        DECLSPEC_XFGVIRT(ISyncProviderConfigUI, ModifySyncProvider)
         HRESULT ( STDMETHODCALLTYPE *ModifySyncProvider )( 
             __RPC__in ISyncProviderConfigUI * This,
             /* [unique][in] */ __RPC__in_opt HWND hwndParent,
@@ -1129,28 +1195,34 @@ EXTERN_C const IID IID_IRegisteredSyncProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRegisteredSyncProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRegisteredSyncProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRegisteredSyncProvider * This);
         
+        DECLSPEC_XFGVIRT(IRegisteredSyncProvider, Init)
         HRESULT ( STDMETHODCALLTYPE *Init )( 
             __RPC__in IRegisteredSyncProvider * This,
             /* [in] */ __RPC__in LPCGUID pguidInstanceId,
             /* [in] */ __RPC__in LPCGUID pguidContentType,
             /* [in] */ __RPC__in_opt IPropertyStore *pContextPropertyStore);
         
+        DECLSPEC_XFGVIRT(IRegisteredSyncProvider, GetInstanceId)
         HRESULT ( STDMETHODCALLTYPE *GetInstanceId )( 
             __RPC__in IRegisteredSyncProvider * This,
             /* [retval][out] */ __RPC__out GUID *pguidInstanceId);
         
+        DECLSPEC_XFGVIRT(IRegisteredSyncProvider, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IRegisteredSyncProvider * This);
         
@@ -1247,22 +1319,27 @@ EXTERN_C const IID IID_ISyncRegistrationChange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISyncRegistrationChange * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISyncRegistrationChange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISyncRegistrationChange * This);
         
+        DECLSPEC_XFGVIRT(ISyncRegistrationChange, GetEvent)
         HRESULT ( STDMETHODCALLTYPE *GetEvent )( 
             __RPC__in ISyncRegistrationChange * This,
             /* [retval][out] */ __RPC__out SYNC_REGISTRATION_EVENT *psreEvent);
         
+        DECLSPEC_XFGVIRT(ISyncRegistrationChange, GetInstanceId)
         HRESULT ( STDMETHODCALLTYPE *GetInstanceId )( 
             __RPC__in ISyncRegistrationChange * This,
             /* [retval][out] */ __RPC__out LPGUID pguidInstanceId);

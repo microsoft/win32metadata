@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -146,6 +154,7 @@ EXTERN_C const IID IID_IEnumPortableDeviceConnectors;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IEnumPortableDeviceConnectors * This,
             /* [annotation][in] */ 
@@ -153,12 +162,15 @@ EXTERN_C const IID IID_IEnumPortableDeviceConnectors;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IEnumPortableDeviceConnectors * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IEnumPortableDeviceConnectors * This);
         
+        DECLSPEC_XFGVIRT(IEnumPortableDeviceConnectors, Next)
         HRESULT ( STDMETHODCALLTYPE *Next )( 
             __RPC__in IEnumPortableDeviceConnectors * This,
             /* [annotation][in] */ 
@@ -168,14 +180,17 @@ EXTERN_C const IID IID_IEnumPortableDeviceConnectors;
             /* [annotation][unique][out][in] */ 
             _Inout_  UINT32 *pcFetched);
         
+        DECLSPEC_XFGVIRT(IEnumPortableDeviceConnectors, Skip)
         HRESULT ( STDMETHODCALLTYPE *Skip )( 
             __RPC__in IEnumPortableDeviceConnectors * This,
             /* [annotation][in] */ 
             _In_  UINT32 cConnectors);
         
+        DECLSPEC_XFGVIRT(IEnumPortableDeviceConnectors, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in IEnumPortableDeviceConnectors * This);
         
+        DECLSPEC_XFGVIRT(IEnumPortableDeviceConnectors, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IEnumPortableDeviceConnectors * This,
             /* [annotation][out] */ 
@@ -287,6 +302,7 @@ EXTERN_C const IID IID_IPortableDeviceConnector;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPortableDeviceConnector * This,
             /* [annotation][in] */ 
@@ -294,27 +310,33 @@ EXTERN_C const IID IID_IPortableDeviceConnector;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPortableDeviceConnector * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPortableDeviceConnector * This);
         
+        DECLSPEC_XFGVIRT(IPortableDeviceConnector, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IPortableDeviceConnector * This,
             /* [annotation][in] */ 
             _In_  IConnectionRequestCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IPortableDeviceConnector, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IPortableDeviceConnector * This,
             /* [annotation][in] */ 
             _In_  IConnectionRequestCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IPortableDeviceConnector, Cancel)
         HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IPortableDeviceConnector * This,
             /* [annotation][in] */ 
             _In_  IConnectionRequestCallback *pCallback);
         
+        DECLSPEC_XFGVIRT(IPortableDeviceConnector, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IPortableDeviceConnector * This,
             /* [annotation][in] */ 
@@ -326,6 +348,7 @@ EXTERN_C const IID IID_IPortableDeviceConnector;
             /* [annotation][out] */ 
             _Out_  UINT32 *pcbData);
         
+        DECLSPEC_XFGVIRT(IPortableDeviceConnector, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IPortableDeviceConnector * This,
             /* [annotation][in] */ 
@@ -337,6 +360,7 @@ EXTERN_C const IID IID_IPortableDeviceConnector;
             /* [annotation][in] */ 
             _In_  UINT32 cbData);
         
+        DECLSPEC_XFGVIRT(IPortableDeviceConnector, GetPnPID)
         HRESULT ( STDMETHODCALLTYPE *GetPnPID )( 
             __RPC__in IPortableDeviceConnector * This,
             /* [annotation][out] */ 
@@ -422,6 +446,7 @@ EXTERN_C const IID IID_IConnectionRequestCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IConnectionRequestCallback * This,
             /* [annotation][in] */ 
@@ -429,12 +454,15 @@ EXTERN_C const IID IID_IConnectionRequestCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IConnectionRequestCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IConnectionRequestCallback * This);
         
+        DECLSPEC_XFGVIRT(IConnectionRequestCallback, OnComplete)
         HRESULT ( STDMETHODCALLTYPE *OnComplete )( 
             __RPC__in IConnectionRequestCallback * This,
             /* [annotation][in] */ 

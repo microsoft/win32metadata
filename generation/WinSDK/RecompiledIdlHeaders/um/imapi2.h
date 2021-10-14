@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -939,6 +947,7 @@ EXTERN_C const IID IID_IDiscMaster2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscMaster2 * This,
             /* [annotation][in] */ 
@@ -946,17 +955,21 @@ EXTERN_C const IID IID_IDiscMaster2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscMaster2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscMaster2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscMaster2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscMaster2 * This,
             /* [annotation][in] */ 
@@ -966,6 +979,7 @@ EXTERN_C const IID IID_IDiscMaster2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscMaster2 * This,
             /* [annotation][in] */ 
@@ -978,6 +992,7 @@ EXTERN_C const IID IID_IDiscMaster2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscMaster2 * This,
             /* [annotation][in] */ 
@@ -997,20 +1012,24 @@ EXTERN_C const IID IID_IDiscMaster2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDiscMaster2, get__NewEnum)
         /* [helpstring][restricted][hidden][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IDiscMaster2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IEnumVARIANT **ppunk);
         
+        DECLSPEC_XFGVIRT(IDiscMaster2, get_Item)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IDiscMaster2 * This,
             /* [annotation][in] */ 
             _In_  LONG index,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscMaster2, get_Count)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IDiscMaster2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscMaster2, get_IsSupportedEnvironment)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsSupportedEnvironment )( 
             __RPC__in IDiscMaster2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
@@ -1120,6 +1139,7 @@ EXTERN_C const IID IID_DDiscMaster2Events;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DDiscMaster2Events * This,
             /* [annotation][in] */ 
@@ -1127,17 +1147,21 @@ EXTERN_C const IID IID_DDiscMaster2Events;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DDiscMaster2Events * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DDiscMaster2Events * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DDiscMaster2Events * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DDiscMaster2Events * This,
             /* [annotation][in] */ 
@@ -1147,6 +1171,7 @@ EXTERN_C const IID IID_DDiscMaster2Events;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DDiscMaster2Events * This,
             /* [annotation][in] */ 
@@ -1159,6 +1184,7 @@ EXTERN_C const IID IID_DDiscMaster2Events;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DDiscMaster2Events * This,
             /* [annotation][in] */ 
@@ -1178,6 +1204,7 @@ EXTERN_C const IID IID_DDiscMaster2Events;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(DDiscMaster2Events, NotifyDeviceAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifyDeviceAdded )( 
             __RPC__in DDiscMaster2Events * This,
             /* [annotation][in] */ 
@@ -1185,6 +1212,7 @@ EXTERN_C const IID IID_DDiscMaster2Events;
             /* [annotation][in] */ 
             _In_  BSTR uniqueId);
         
+        DECLSPEC_XFGVIRT(DDiscMaster2Events, NotifyDeviceRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *NotifyDeviceRemoved )( 
             __RPC__in DDiscMaster2Events * This,
             /* [annotation][in] */ 
@@ -1414,6 +1442,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [annotation][in] */ 
@@ -1421,12 +1450,15 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscRecorder2Ex * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscRecorder2Ex * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, SendCommandNoData)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SendCommandNoData )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [size_is][ref][in] */ __RPC__in_ecount_full(CdbSize) BYTE *Cdb,
@@ -1435,6 +1467,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [annotation][in] */ 
             _In_  ULONG Timeout);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, SendCommandSendDataToDevice)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SendCommandSendDataToDevice )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [size_is][ref][in] */ __RPC__in_ecount_full(CdbSize) BYTE *Cdb,
@@ -1446,6 +1479,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [annotation][in] */ 
             _In_  ULONG_IMAPI2_NONZERO BufferSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, SendCommandGetDataFromDevice)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SendCommandGetDataFromDevice )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [size_is][ref][in] */ __RPC__in_ecount_full(CdbSize) BYTE *Cdb,
@@ -1458,6 +1492,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             _In_  ULONG_IMAPI2_NONZERO BufferSize,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_NOT_NEGATIVE *BufferFetched);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, ReadDvdStructure)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *ReadDvdStructure )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [range][in] */ __RPC__in_range(0,0xff) ULONG format,
@@ -1468,6 +1503,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*count) BYTE **data,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_DVD_STRUCTURE *count);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, SendDvdStructure)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SendDvdStructure )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [range][in] */ __RPC__in_range(0,0xff) ULONG format,
@@ -1475,21 +1511,25 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [annotation][in] */ 
             _In_  ULONG_IMAPI2_DVD_STRUCTURE count);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetAdapterDescriptor)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetAdapterDescriptor )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*byteSize) BYTE **data,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_ADAPTER_DESCRIPTOR *byteSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetDeviceDescriptor)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDeviceDescriptor )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*byteSize) BYTE **data,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_DEVICE_DESCRIPTOR *byteSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetDiscInformation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetDiscInformation )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*byteSize) BYTE **discInformation,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_DISC_INFORMATION *byteSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetTrackInformation)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetTrackInformation )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [annotation][in] */ 
@@ -1499,6 +1539,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*byteSize) BYTE **trackInformation,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_TRACK_INFORMATION *byteSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetFeaturePage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetFeaturePage )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [annotation][in] */ 
@@ -1508,6 +1549,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*byteSize) BYTE **featureData,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_FEATURE_PAGE *byteSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetModePage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetModePage )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [annotation][in] */ 
@@ -1517,6 +1559,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*byteSize) BYTE **modePageData,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_MODE_PAGE *byteSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, SetModePage)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *SetModePage )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [annotation][in] */ 
@@ -1525,6 +1568,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [annotation][in] */ 
             _In_  ULONG_IMAPI2_MODE_PAGE byteSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetSupportedFeaturePages)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSupportedFeaturePages )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [annotation][in] */ 
@@ -1532,6 +1576,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*byteSize) IMAPI_FEATURE_PAGE_TYPE **featureData,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_ALL_FEATURE_PAGES *byteSize);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetSupportedProfiles)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSupportedProfiles )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [annotation][in] */ 
@@ -1539,6 +1584,7 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*validProfiles) IMAPI_PROFILE_TYPE **profileTypes,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_ALL_PROFILES *validProfiles);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetSupportedModePages)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetSupportedModePages )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [annotation][in] */ 
@@ -1546,14 +1592,17 @@ EXTERN_C const IID IID_IDiscRecorder2Ex;
             /* [size_is][size_is][ref][out] */ __RPC__deref_out_ecount_full_opt(*validPages) IMAPI_MODE_PAGE_TYPE **modePageTypes,
             /* [ref][out] */ __RPC__out ULONG_IMAPI2_ALL_MODE_PAGES *validPages);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetByteAlignmentMask)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetByteAlignmentMask )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [retval][ref][out] */ __RPC__out ULONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetMaximumNonPageAlignedTransferSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetMaximumNonPageAlignedTransferSize )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [retval][ref][out] */ __RPC__out ULONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2Ex, GetMaximumPageAlignedTransferSize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetMaximumPageAlignedTransferSize )( 
             __RPC__in IDiscRecorder2Ex * This,
             /* [retval][ref][out] */ __RPC__out ULONG *value);
@@ -1761,6 +1810,7 @@ EXTERN_C const IID IID_IDiscRecorder2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscRecorder2 * This,
             /* [annotation][in] */ 
@@ -1768,17 +1818,21 @@ EXTERN_C const IID IID_IDiscRecorder2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscRecorder2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscRecorder2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscRecorder2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscRecorder2 * This,
             /* [annotation][in] */ 
@@ -1788,6 +1842,7 @@ EXTERN_C const IID IID_IDiscRecorder2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscRecorder2 * This,
             /* [annotation][in] */ 
@@ -1800,6 +1855,7 @@ EXTERN_C const IID IID_IDiscRecorder2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscRecorder2 * This,
             /* [annotation][in] */ 
@@ -1819,12 +1875,15 @@ EXTERN_C const IID IID_IDiscRecorder2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, EjectMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EjectMedia )( 
             __RPC__in IDiscRecorder2 * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, CloseTray)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CloseTray )( 
             __RPC__in IDiscRecorder2 * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, AcquireExclusiveAccess)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AcquireExclusiveAccess )( 
             __RPC__in IDiscRecorder2 * This,
             /* [annotation][in] */ 
@@ -1832,72 +1891,90 @@ EXTERN_C const IID IID_IDiscRecorder2;
             /* [annotation][in] */ 
             _In_  BSTR __MIDL__IDiscRecorder20000);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, ReleaseExclusiveAccess)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReleaseExclusiveAccess )( 
             __RPC__in IDiscRecorder2 * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, DisableMcn)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *DisableMcn )( 
             __RPC__in IDiscRecorder2 * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, EnableMcn)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EnableMcn )( 
             __RPC__in IDiscRecorder2 * This);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, InitializeDiscRecorder)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *InitializeDiscRecorder )( 
             __RPC__in IDiscRecorder2 * This,
             /* [annotation][in] */ 
             _In_  BSTR recorderUniqueId);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_ActiveDiscRecorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActiveDiscRecorder )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_VendorId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VendorId )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_ProductId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductId )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_ProductRevision)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProductRevision )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_VolumeName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VolumeName )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_VolumePathNames)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_VolumePathNames )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_DeviceCanLoadMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceCanLoadMedia )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_LegacyDeviceNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LegacyDeviceNumber )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *legacyDeviceNumber);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_SupportedFeaturePages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedFeaturePages )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_CurrentFeaturePages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentFeaturePages )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_SupportedProfiles)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedProfiles )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_CurrentProfiles)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentProfiles )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_SupportedModePages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedModePages )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscRecorder2, get_ExclusiveAccessOwner)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExclusiveAccessOwner )( 
             __RPC__in IDiscRecorder2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
@@ -2100,6 +2177,7 @@ EXTERN_C const IID IID_IWriteEngine2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
@@ -2107,17 +2185,21 @@ EXTERN_C const IID IID_IWriteEngine2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWriteEngine2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWriteEngine2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
@@ -2127,6 +2209,7 @@ EXTERN_C const IID IID_IWriteEngine2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
@@ -2139,6 +2222,7 @@ EXTERN_C const IID IID_IWriteEngine2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWriteEngine2 * This,
             /* [annotation][in] */ 
@@ -2158,6 +2242,7 @@ EXTERN_C const IID IID_IWriteEngine2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, WriteSection)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WriteSection )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
@@ -2167,54 +2252,66 @@ EXTERN_C const IID IID_IWriteEngine2;
             /* [annotation][in] */ 
             _In_  LONG numberOfBlocks);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, CancelWrite)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CancelWrite )( 
             __RPC__in IWriteEngine2 * This);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, put_Recorder)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Recorder )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2Ex *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, get_Recorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recorder )( 
             __RPC__in IWriteEngine2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2Ex **value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, put_UseStreamingWrite12)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseStreamingWrite12 )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, get_UseStreamingWrite12)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseStreamingWrite12 )( 
             __RPC__in IWriteEngine2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, put_StartingSectorsPerSecond)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartingSectorsPerSecond )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
             _In_  LONG value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, get_StartingSectorsPerSecond)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartingSectorsPerSecond )( 
             __RPC__in IWriteEngine2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, put_EndingSectorsPerSecond)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_EndingSectorsPerSecond )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
             _In_  LONG value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, get_EndingSectorsPerSecond)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EndingSectorsPerSecond )( 
             __RPC__in IWriteEngine2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, put_BytesPerSector)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BytesPerSector )( 
             __RPC__in IWriteEngine2 * This,
             /* [annotation][in] */ 
             _In_  LONG value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, get_BytesPerSector)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BytesPerSector )( 
             __RPC__in IWriteEngine2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2, get_WriteInProgress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteInProgress )( 
             __RPC__in IWriteEngine2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
@@ -2367,6 +2464,7 @@ EXTERN_C const IID IID_IWriteEngine2EventArgs;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [annotation][in] */ 
@@ -2374,17 +2472,21 @@ EXTERN_C const IID IID_IWriteEngine2EventArgs;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWriteEngine2EventArgs * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWriteEngine2EventArgs * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [annotation][in] */ 
@@ -2394,6 +2496,7 @@ EXTERN_C const IID IID_IWriteEngine2EventArgs;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [annotation][in] */ 
@@ -2406,6 +2509,7 @@ EXTERN_C const IID IID_IWriteEngine2EventArgs;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWriteEngine2EventArgs * This,
             /* [annotation][in] */ 
@@ -2425,30 +2529,37 @@ EXTERN_C const IID IID_IWriteEngine2EventArgs;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_StartLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartLba )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_SectorCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SectorCount )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_LastReadLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastReadLba )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_LastWrittenLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastWrittenLba )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_TotalSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalSystemBuffer )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_UsedSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedSystemBuffer )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_FreeSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSystemBuffer )( 
             __RPC__in IWriteEngine2EventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
@@ -2560,6 +2671,7 @@ EXTERN_C const IID IID_DWriteEngine2Events;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DWriteEngine2Events * This,
             /* [annotation][in] */ 
@@ -2567,17 +2679,21 @@ EXTERN_C const IID IID_DWriteEngine2Events;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DWriteEngine2Events * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DWriteEngine2Events * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DWriteEngine2Events * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DWriteEngine2Events * This,
             /* [annotation][in] */ 
@@ -2587,6 +2703,7 @@ EXTERN_C const IID IID_DWriteEngine2Events;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DWriteEngine2Events * This,
             /* [annotation][in] */ 
@@ -2599,6 +2716,7 @@ EXTERN_C const IID IID_DWriteEngine2Events;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DWriteEngine2Events * This,
             /* [annotation][in] */ 
@@ -2618,6 +2736,7 @@ EXTERN_C const IID IID_DWriteEngine2Events;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(DWriteEngine2Events, Update)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in DWriteEngine2Events * This,
             /* [annotation][in] */ 
@@ -2731,6 +2850,7 @@ EXTERN_C const IID IID_IDiscFormat2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscFormat2 * This,
             /* [annotation][in] */ 
@@ -2738,17 +2858,21 @@ EXTERN_C const IID IID_IDiscFormat2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscFormat2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscFormat2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscFormat2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscFormat2 * This,
             /* [annotation][in] */ 
@@ -2758,6 +2882,7 @@ EXTERN_C const IID IID_IDiscFormat2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscFormat2 * This,
             /* [annotation][in] */ 
@@ -2770,6 +2895,7 @@ EXTERN_C const IID IID_IDiscFormat2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscFormat2 * This,
             /* [annotation][in] */ 
@@ -2789,26 +2915,31 @@ EXTERN_C const IID IID_IDiscFormat2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsRecorderSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsRecorderSupported )( 
             __RPC__in IDiscFormat2 * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsCurrentMediaSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsCurrentMediaSupported )( 
             __RPC__in IDiscFormat2 * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaPhysicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaPhysicallyBlank )( 
             __RPC__in IDiscFormat2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaHeuristicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaHeuristicallyBlank )( 
             __RPC__in IDiscFormat2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_SupportedMediaTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedMediaTypes )( 
             __RPC__in IDiscFormat2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
@@ -2938,6 +3069,7 @@ EXTERN_C const IID IID_IDiscFormat2Erase;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][in] */ 
@@ -2945,17 +3077,21 @@ EXTERN_C const IID IID_IDiscFormat2Erase;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscFormat2Erase * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscFormat2Erase * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][in] */ 
@@ -2965,6 +3101,7 @@ EXTERN_C const IID IID_IDiscFormat2Erase;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][in] */ 
@@ -2977,6 +3114,7 @@ EXTERN_C const IID IID_IDiscFormat2Erase;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscFormat2Erase * This,
             /* [annotation][in] */ 
@@ -2996,61 +3134,74 @@ EXTERN_C const IID IID_IDiscFormat2Erase;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsRecorderSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsRecorderSupported )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsCurrentMediaSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsCurrentMediaSupported )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaPhysicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaPhysicallyBlank )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaHeuristicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaHeuristicallyBlank )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_SupportedMediaTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedMediaTypes )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Erase, put_Recorder)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Recorder )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Erase, get_Recorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recorder )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2 **value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Erase, put_FullErase)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FullErase )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Erase, get_FullErase)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FullErase )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Erase, get_CurrentPhysicalMediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPhysicalMediaType )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_MEDIA_PHYSICAL_TYPE *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Erase, put_ClientName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClientName )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [annotation][in] */ 
             _In_  BSTR value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Erase, get_ClientName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClientName )( 
             __RPC__in IDiscFormat2Erase * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Erase, EraseMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *EraseMedia )( 
             __RPC__in IDiscFormat2Erase * This);
         
@@ -3182,6 +3333,7 @@ EXTERN_C const IID IID_DDiscFormat2EraseEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DDiscFormat2EraseEvents * This,
             /* [annotation][in] */ 
@@ -3189,17 +3341,21 @@ EXTERN_C const IID IID_DDiscFormat2EraseEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DDiscFormat2EraseEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DDiscFormat2EraseEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DDiscFormat2EraseEvents * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DDiscFormat2EraseEvents * This,
             /* [annotation][in] */ 
@@ -3209,6 +3365,7 @@ EXTERN_C const IID IID_DDiscFormat2EraseEvents;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DDiscFormat2EraseEvents * This,
             /* [annotation][in] */ 
@@ -3221,6 +3378,7 @@ EXTERN_C const IID IID_DDiscFormat2EraseEvents;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DDiscFormat2EraseEvents * This,
             /* [annotation][in] */ 
@@ -3240,6 +3398,7 @@ EXTERN_C const IID IID_DDiscFormat2EraseEvents;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(DDiscFormat2EraseEvents, Update)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in DDiscFormat2EraseEvents * This,
             /* [annotation][in] */ 
@@ -3462,6 +3621,7 @@ EXTERN_C const IID IID_IDiscFormat2Data;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
@@ -3469,17 +3629,21 @@ EXTERN_C const IID IID_IDiscFormat2Data;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscFormat2Data * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscFormat2Data * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
@@ -3489,6 +3653,7 @@ EXTERN_C const IID IID_IDiscFormat2Data;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
@@ -3501,6 +3666,7 @@ EXTERN_C const IID IID_IDiscFormat2Data;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscFormat2Data * This,
             /* [annotation][in] */ 
@@ -3520,161 +3686,198 @@ EXTERN_C const IID IID_IDiscFormat2Data;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsRecorderSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsRecorderSupported )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsCurrentMediaSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsCurrentMediaSupported )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaPhysicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaPhysicallyBlank )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaHeuristicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaHeuristicallyBlank )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_SupportedMediaTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedMediaTypes )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, put_Recorder)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Recorder )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_Recorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recorder )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2 **value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, put_BufferUnderrunFreeDisabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BufferUnderrunFreeDisabled )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_BufferUnderrunFreeDisabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferUnderrunFreeDisabled )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, put_PostgapAlreadyInImage)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PostgapAlreadyInImage )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_PostgapAlreadyInImage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PostgapAlreadyInImage )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_CurrentMediaStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentMediaStatus )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_FORMAT2_DATA_MEDIA_STATE *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_WriteProtectStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteProtectStatus )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_MEDIA_WRITE_PROTECT_STATE *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_TotalSectorsOnMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalSectorsOnMedia )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_FreeSectorsOnMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSectorsOnMedia )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_NextWritableAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NextWritableAddress )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_StartAddressOfPreviousSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartAddressOfPreviousSession )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_LastWrittenAddressOfPreviousSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastWrittenAddressOfPreviousSession )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, put_ForceMediaToBeClosed)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ForceMediaToBeClosed )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_ForceMediaToBeClosed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ForceMediaToBeClosed )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, put_DisableConsumerDvdCompatibilityMode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisableConsumerDvdCompatibilityMode )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_DisableConsumerDvdCompatibilityMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisableConsumerDvdCompatibilityMode )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_CurrentPhysicalMediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPhysicalMediaType )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_MEDIA_PHYSICAL_TYPE *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, put_ClientName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClientName )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  BSTR value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_ClientName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClientName )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_RequestedWriteSpeed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestedWriteSpeed )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_RequestedRotationTypeIsPureCAV)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestedRotationTypeIsPureCAV )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_CurrentWriteSpeed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentWriteSpeed )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_CurrentRotationTypeIsPureCAV)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentRotationTypeIsPureCAV )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_SupportedWriteSpeeds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedWriteSpeeds )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *supportedSpeeds);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_SupportedWriteSpeedDescriptors)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedWriteSpeedDescriptors )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *supportedSpeedDescriptors);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, put_ForceOverwrite)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ForceOverwrite )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_ForceOverwrite)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ForceOverwrite )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, get_MultisessionInterfaces)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MultisessionInterfaces )( 
             __RPC__in IDiscFormat2Data * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, Write)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
             _In_  IStream *data);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, CancelWrite)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CancelWrite )( 
             __RPC__in IDiscFormat2Data * This);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2Data, SetWriteSpeed)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWriteSpeed )( 
             __RPC__in IDiscFormat2Data * This,
             /* [annotation][in] */ 
@@ -3880,6 +4083,7 @@ EXTERN_C const IID IID_DDiscFormat2DataEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DDiscFormat2DataEvents * This,
             /* [annotation][in] */ 
@@ -3887,17 +4091,21 @@ EXTERN_C const IID IID_DDiscFormat2DataEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DDiscFormat2DataEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DDiscFormat2DataEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DDiscFormat2DataEvents * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DDiscFormat2DataEvents * This,
             /* [annotation][in] */ 
@@ -3907,6 +4115,7 @@ EXTERN_C const IID IID_DDiscFormat2DataEvents;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DDiscFormat2DataEvents * This,
             /* [annotation][in] */ 
@@ -3919,6 +4128,7 @@ EXTERN_C const IID IID_DDiscFormat2DataEvents;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DDiscFormat2DataEvents * This,
             /* [annotation][in] */ 
@@ -3938,6 +4148,7 @@ EXTERN_C const IID IID_DDiscFormat2DataEvents;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(DDiscFormat2DataEvents, Update)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in DDiscFormat2DataEvents * This,
             /* [annotation][in] */ 
@@ -4043,6 +4254,7 @@ EXTERN_C const IID IID_IDiscFormat2DataEventArgs;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [annotation][in] */ 
@@ -4050,17 +4262,21 @@ EXTERN_C const IID IID_IDiscFormat2DataEventArgs;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscFormat2DataEventArgs * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscFormat2DataEventArgs * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [annotation][in] */ 
@@ -4070,6 +4286,7 @@ EXTERN_C const IID IID_IDiscFormat2DataEventArgs;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [annotation][in] */ 
@@ -4082,6 +4299,7 @@ EXTERN_C const IID IID_IDiscFormat2DataEventArgs;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscFormat2DataEventArgs * This,
             /* [annotation][in] */ 
@@ -4101,46 +4319,57 @@ EXTERN_C const IID IID_IDiscFormat2DataEventArgs;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_StartLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartLba )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_SectorCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SectorCount )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_LastReadLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastReadLba )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_LastWrittenLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastWrittenLba )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_TotalSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalSystemBuffer )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_UsedSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedSystemBuffer )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_FreeSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSystemBuffer )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2DataEventArgs, get_ElapsedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ElapsedTime )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2DataEventArgs, get_RemainingTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemainingTime )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2DataEventArgs, get_TotalTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalTime )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2DataEventArgs, get_CurrentAction)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAction )( 
             __RPC__in IDiscFormat2DataEventArgs * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_FORMAT2_DATA_WRITE_ACTION *value);
@@ -4359,6 +4588,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnce;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
@@ -4366,17 +4596,21 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnce;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscFormat2TrackAtOnce * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscFormat2TrackAtOnce * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
@@ -4386,6 +4620,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnce;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
@@ -4398,6 +4633,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnce;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
@@ -4417,44 +4653,54 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnce;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsRecorderSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsRecorderSupported )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsCurrentMediaSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsCurrentMediaSupported )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaPhysicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaPhysicallyBlank )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaHeuristicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaHeuristicallyBlank )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_SupportedMediaTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedMediaTypes )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, PrepareMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PrepareMedia )( 
             __RPC__in IDiscFormat2TrackAtOnce * This);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, AddAudioTrack)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddAudioTrack )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
             _In_  IStream *data);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, CancelAddTrack)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CancelAddTrack )( 
             __RPC__in IDiscFormat2TrackAtOnce * This);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, ReleaseMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReleaseMedia )( 
             __RPC__in IDiscFormat2TrackAtOnce * This);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, SetWriteSpeed)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWriteSpeed )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
@@ -4462,86 +4708,106 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnce;
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL RotationTypeIsPureCAV);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, put_Recorder)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Recorder )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_Recorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recorder )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2 **value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, put_BufferUnderrunFreeDisabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BufferUnderrunFreeDisabled )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_BufferUnderrunFreeDisabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferUnderrunFreeDisabled )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_NumberOfExistingTracks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfExistingTracks )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_TotalSectorsOnMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalSectorsOnMedia )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_FreeSectorsOnMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSectorsOnMedia )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_UsedSectorsOnMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedSectorsOnMedia )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, put_DoNotFinalizeMedia)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DoNotFinalizeMedia )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_DoNotFinalizeMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DoNotFinalizeMedia )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_ExpectedTableOfContents)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExpectedTableOfContents )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_CurrentPhysicalMediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPhysicalMediaType )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_MEDIA_PHYSICAL_TYPE *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, put_ClientName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClientName )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [annotation][in] */ 
             _In_  BSTR value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_ClientName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClientName )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_RequestedWriteSpeed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestedWriteSpeed )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_RequestedRotationTypeIsPureCAV)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestedRotationTypeIsPureCAV )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_CurrentWriteSpeed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentWriteSpeed )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_CurrentRotationTypeIsPureCAV)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentRotationTypeIsPureCAV )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_SupportedWriteSpeeds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedWriteSpeeds )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *supportedSpeeds);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnce, get_SupportedWriteSpeedDescriptors)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedWriteSpeedDescriptors )( 
             __RPC__in IDiscFormat2TrackAtOnce * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *supportedSpeedDescriptors);
@@ -4723,6 +4989,7 @@ EXTERN_C const IID IID_DDiscFormat2TrackAtOnceEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DDiscFormat2TrackAtOnceEvents * This,
             /* [annotation][in] */ 
@@ -4730,17 +4997,21 @@ EXTERN_C const IID IID_DDiscFormat2TrackAtOnceEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DDiscFormat2TrackAtOnceEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DDiscFormat2TrackAtOnceEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DDiscFormat2TrackAtOnceEvents * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DDiscFormat2TrackAtOnceEvents * This,
             /* [annotation][in] */ 
@@ -4750,6 +5021,7 @@ EXTERN_C const IID IID_DDiscFormat2TrackAtOnceEvents;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DDiscFormat2TrackAtOnceEvents * This,
             /* [annotation][in] */ 
@@ -4762,6 +5034,7 @@ EXTERN_C const IID IID_DDiscFormat2TrackAtOnceEvents;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DDiscFormat2TrackAtOnceEvents * This,
             /* [annotation][in] */ 
@@ -4781,6 +5054,7 @@ EXTERN_C const IID IID_DDiscFormat2TrackAtOnceEvents;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(DDiscFormat2TrackAtOnceEvents, Update)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in DDiscFormat2TrackAtOnceEvents * This,
             /* [annotation][in] */ 
@@ -4887,6 +5161,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnceEventArgs;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [annotation][in] */ 
@@ -4894,17 +5169,21 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnceEventArgs;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [annotation][in] */ 
@@ -4914,6 +5193,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnceEventArgs;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [annotation][in] */ 
@@ -4926,6 +5206,7 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnceEventArgs;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscFormat2TrackAtOnceEventArgs * This,
             /* [annotation][in] */ 
@@ -4945,46 +5226,57 @@ EXTERN_C const IID IID_IDiscFormat2TrackAtOnceEventArgs;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_StartLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartLba )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_SectorCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SectorCount )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_LastReadLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastReadLba )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_LastWrittenLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastWrittenLba )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_TotalSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalSystemBuffer )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_UsedSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedSystemBuffer )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_FreeSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSystemBuffer )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnceEventArgs, get_CurrentTrackNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentTrackNumber )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnceEventArgs, get_CurrentAction)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAction )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_FORMAT2_TAO_WRITE_ACTION *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnceEventArgs, get_ElapsedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ElapsedTime )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2TrackAtOnceEventArgs, get_RemainingTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemainingTime )( 
             __RPC__in IDiscFormat2TrackAtOnceEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
@@ -5202,6 +5494,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
@@ -5209,17 +5502,21 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscFormat2RawCD * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscFormat2RawCD * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
@@ -5229,6 +5526,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
@@ -5241,6 +5539,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
@@ -5260,38 +5559,46 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsRecorderSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsRecorderSupported )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, IsCurrentMediaSupported)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *IsCurrentMediaSupported )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *recorder,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaPhysicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaPhysicallyBlank )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_MediaHeuristicallyBlank)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaHeuristicallyBlank )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2, get_SupportedMediaTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedMediaTypes )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, PrepareMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *PrepareMedia )( 
             __RPC__in IDiscFormat2RawCD * This);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, WriteMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WriteMedia )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
             _In_  IStream *data);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, WriteMedia2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *WriteMedia2 )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
@@ -5299,12 +5606,15 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
             /* [annotation][in] */ 
             _In_  LONG streamLeadInSectors);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, CancelWrite)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CancelWrite )( 
             __RPC__in IDiscFormat2RawCD * This);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, ReleaseMedia)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReleaseMedia )( 
             __RPC__in IDiscFormat2RawCD * This);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, SetWriteSpeed)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetWriteSpeed )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
@@ -5312,78 +5622,96 @@ EXTERN_C const IID IID_IDiscFormat2RawCD;
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL RotationTypeIsPureCAV);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, put_Recorder)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Recorder )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
             _In_  IDiscRecorder2 *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_Recorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recorder )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2 **value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, put_BufferUnderrunFreeDisabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BufferUnderrunFreeDisabled )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_BufferUnderrunFreeDisabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BufferUnderrunFreeDisabled )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_StartOfNextSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartOfNextSession )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_LastPossibleStartOfLeadout)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastPossibleStartOfLeadout )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_CurrentPhysicalMediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPhysicalMediaType )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_MEDIA_PHYSICAL_TYPE *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_SupportedSectorTypes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedSectorTypes )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, put_RequestedSectorType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestedSectorType )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
             _In_  IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_RequestedSectorType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestedSectorType )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, put_ClientName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClientName )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [annotation][in] */ 
             _In_  BSTR value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_ClientName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClientName )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_RequestedWriteSpeed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestedWriteSpeed )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_RequestedRotationTypeIsPureCAV)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestedRotationTypeIsPureCAV )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_CurrentWriteSpeed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentWriteSpeed )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_CurrentRotationTypeIsPureCAV)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentRotationTypeIsPureCAV )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_SupportedWriteSpeeds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedWriteSpeeds )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *supportedSpeeds);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCD, get_SupportedWriteSpeedDescriptors)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SupportedWriteSpeedDescriptors )( 
             __RPC__in IDiscFormat2RawCD * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *supportedSpeedDescriptors);
@@ -5562,6 +5890,7 @@ EXTERN_C const IID IID_DDiscFormat2RawCDEvents;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in DDiscFormat2RawCDEvents * This,
             /* [annotation][in] */ 
@@ -5569,17 +5898,21 @@ EXTERN_C const IID IID_DDiscFormat2RawCDEvents;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in DDiscFormat2RawCDEvents * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in DDiscFormat2RawCDEvents * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in DDiscFormat2RawCDEvents * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in DDiscFormat2RawCDEvents * This,
             /* [annotation][in] */ 
@@ -5589,6 +5922,7 @@ EXTERN_C const IID IID_DDiscFormat2RawCDEvents;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in DDiscFormat2RawCDEvents * This,
             /* [annotation][in] */ 
@@ -5601,6 +5935,7 @@ EXTERN_C const IID IID_DDiscFormat2RawCDEvents;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             DDiscFormat2RawCDEvents * This,
             /* [annotation][in] */ 
@@ -5620,6 +5955,7 @@ EXTERN_C const IID IID_DDiscFormat2RawCDEvents;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(DDiscFormat2RawCDEvents, Update)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Update )( 
             __RPC__in DDiscFormat2RawCDEvents * This,
             /* [annotation][in] */ 
@@ -5723,6 +6059,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCDEventArgs;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [annotation][in] */ 
@@ -5730,17 +6067,21 @@ EXTERN_C const IID IID_IDiscFormat2RawCDEventArgs;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [annotation][in] */ 
@@ -5750,6 +6091,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCDEventArgs;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [annotation][in] */ 
@@ -5762,6 +6104,7 @@ EXTERN_C const IID IID_IDiscFormat2RawCDEventArgs;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IDiscFormat2RawCDEventArgs * This,
             /* [annotation][in] */ 
@@ -5781,42 +6124,52 @@ EXTERN_C const IID IID_IDiscFormat2RawCDEventArgs;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_StartLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartLba )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_SectorCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SectorCount )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_LastReadLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastReadLba )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_LastWrittenLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastWrittenLba )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_TotalSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalSystemBuffer )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_UsedSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedSystemBuffer )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IWriteEngine2EventArgs, get_FreeSystemBuffer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSystemBuffer )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCDEventArgs, get_CurrentAction)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAction )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_FORMAT2_RAW_CD_WRITE_ACTION *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCDEventArgs, get_ElapsedTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ElapsedTime )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IDiscFormat2RawCDEventArgs, get_RemainingTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RemainingTime )( 
             __RPC__in IDiscFormat2RawCDEventArgs * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
@@ -5930,6 +6283,7 @@ EXTERN_C const IID IID_IBurnVerification;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBurnVerification * This,
             /* [annotation][in] */ 
@@ -5937,17 +6291,21 @@ EXTERN_C const IID IID_IBurnVerification;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBurnVerification * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBurnVerification * This);
         
+        DECLSPEC_XFGVIRT(IBurnVerification, put_BurnVerificationLevel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BurnVerificationLevel )( 
             __RPC__in IBurnVerification * This,
             /* [annotation][in] */ 
             _In_  IMAPI_BURN_VERIFICATION_LEVEL value);
         
+        DECLSPEC_XFGVIRT(IBurnVerification, get_BurnVerificationLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BurnVerificationLevel )( 
             __RPC__in IBurnVerification * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_BURN_VERIFICATION_LEVEL *value);
@@ -6037,6 +6395,7 @@ EXTERN_C const IID IID_IWriteSpeedDescriptor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWriteSpeedDescriptor * This,
             /* [annotation][in] */ 
@@ -6044,17 +6403,21 @@ EXTERN_C const IID IID_IWriteSpeedDescriptor;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWriteSpeedDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWriteSpeedDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IWriteSpeedDescriptor * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IWriteSpeedDescriptor * This,
             /* [annotation][in] */ 
@@ -6064,6 +6427,7 @@ EXTERN_C const IID IID_IWriteSpeedDescriptor;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IWriteSpeedDescriptor * This,
             /* [annotation][in] */ 
@@ -6076,6 +6440,7 @@ EXTERN_C const IID IID_IWriteSpeedDescriptor;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IWriteSpeedDescriptor * This,
             /* [annotation][in] */ 
@@ -6095,14 +6460,17 @@ EXTERN_C const IID IID_IWriteSpeedDescriptor;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IWriteSpeedDescriptor, get_MediaType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaType )( 
             __RPC__in IWriteSpeedDescriptor * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_MEDIA_PHYSICAL_TYPE *value);
         
+        DECLSPEC_XFGVIRT(IWriteSpeedDescriptor, get_RotationTypeIsPureCAV)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RotationTypeIsPureCAV )( 
             __RPC__in IWriteSpeedDescriptor * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IWriteSpeedDescriptor, get_WriteSpeed)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteSpeed )( 
             __RPC__in IWriteSpeedDescriptor * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
@@ -6211,6 +6579,7 @@ EXTERN_C const IID IID_IMultisession;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMultisession * This,
             /* [annotation][in] */ 
@@ -6218,17 +6587,21 @@ EXTERN_C const IID IID_IMultisession;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMultisession * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMultisession * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMultisession * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMultisession * This,
             /* [annotation][in] */ 
@@ -6238,6 +6611,7 @@ EXTERN_C const IID IID_IMultisession;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMultisession * This,
             /* [annotation][in] */ 
@@ -6250,6 +6624,7 @@ EXTERN_C const IID IID_IMultisession;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMultisession * This,
             /* [annotation][in] */ 
@@ -6269,19 +6644,23 @@ EXTERN_C const IID IID_IMultisession;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_IsSupportedOnCurrentMediaState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsSupportedOnCurrentMediaState )( 
             __RPC__in IMultisession * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisession, put_InUse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InUse )( 
             __RPC__in IMultisession * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_InUse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InUse )( 
             __RPC__in IMultisession * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_ImportRecorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImportRecorder )( 
             __RPC__in IMultisession * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2 **value);
@@ -6398,6 +6777,7 @@ EXTERN_C const IID IID_IMultisessionSequential;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMultisessionSequential * This,
             /* [annotation][in] */ 
@@ -6405,17 +6785,21 @@ EXTERN_C const IID IID_IMultisessionSequential;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMultisessionSequential * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMultisessionSequential * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMultisessionSequential * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMultisessionSequential * This,
             /* [annotation][in] */ 
@@ -6425,6 +6809,7 @@ EXTERN_C const IID IID_IMultisessionSequential;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMultisessionSequential * This,
             /* [annotation][in] */ 
@@ -6437,6 +6822,7 @@ EXTERN_C const IID IID_IMultisessionSequential;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMultisessionSequential * This,
             /* [annotation][in] */ 
@@ -6456,39 +6842,48 @@ EXTERN_C const IID IID_IMultisessionSequential;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_IsSupportedOnCurrentMediaState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsSupportedOnCurrentMediaState )( 
             __RPC__in IMultisessionSequential * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisession, put_InUse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InUse )( 
             __RPC__in IMultisessionSequential * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_InUse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InUse )( 
             __RPC__in IMultisessionSequential * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_ImportRecorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImportRecorder )( 
             __RPC__in IMultisessionSequential * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2 **value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_IsFirstDataSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsFirstDataSession )( 
             __RPC__in IMultisessionSequential * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_StartAddressOfPreviousSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartAddressOfPreviousSession )( 
             __RPC__in IMultisessionSequential * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_LastWrittenAddressOfPreviousSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastWrittenAddressOfPreviousSession )( 
             __RPC__in IMultisessionSequential * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_NextWritableAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NextWritableAddress )( 
             __RPC__in IMultisessionSequential * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_FreeSectorsOnMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSectorsOnMedia )( 
             __RPC__in IMultisessionSequential * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
@@ -6595,6 +6990,7 @@ EXTERN_C const IID IID_IMultisessionSequential2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [annotation][in] */ 
@@ -6602,17 +6998,21 @@ EXTERN_C const IID IID_IMultisessionSequential2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMultisessionSequential2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMultisessionSequential2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [annotation][in] */ 
@@ -6622,6 +7022,7 @@ EXTERN_C const IID IID_IMultisessionSequential2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [annotation][in] */ 
@@ -6634,6 +7035,7 @@ EXTERN_C const IID IID_IMultisessionSequential2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMultisessionSequential2 * This,
             /* [annotation][in] */ 
@@ -6653,43 +7055,53 @@ EXTERN_C const IID IID_IMultisessionSequential2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_IsSupportedOnCurrentMediaState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsSupportedOnCurrentMediaState )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisession, put_InUse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InUse )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_InUse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InUse )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_ImportRecorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImportRecorder )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2 **value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_IsFirstDataSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsFirstDataSession )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_StartAddressOfPreviousSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartAddressOfPreviousSession )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_LastWrittenAddressOfPreviousSession)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastWrittenAddressOfPreviousSession )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_NextWritableAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NextWritableAddress )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential, get_FreeSectorsOnMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FreeSectorsOnMedia )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionSequential2, get_WriteUnitSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteUnitSize )( 
             __RPC__in IMultisessionSequential2 * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
@@ -6816,6 +7228,7 @@ EXTERN_C const IID IID_IMultisessionRandomWrite;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [annotation][in] */ 
@@ -6823,17 +7236,21 @@ EXTERN_C const IID IID_IMultisessionRandomWrite;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IMultisessionRandomWrite * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IMultisessionRandomWrite * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [annotation][in] */ 
@@ -6843,6 +7260,7 @@ EXTERN_C const IID IID_IMultisessionRandomWrite;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [annotation][in] */ 
@@ -6855,6 +7273,7 @@ EXTERN_C const IID IID_IMultisessionRandomWrite;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IMultisessionRandomWrite * This,
             /* [annotation][in] */ 
@@ -6874,31 +7293,38 @@ EXTERN_C const IID IID_IMultisessionRandomWrite;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_IsSupportedOnCurrentMediaState)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IsSupportedOnCurrentMediaState )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisession, put_InUse)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InUse )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_InUse)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InUse )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IMultisession, get_ImportRecorder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImportRecorder )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt IDiscRecorder2 **value);
         
+        DECLSPEC_XFGVIRT(IMultisessionRandomWrite, get_WriteUnitSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteUnitSize )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionRandomWrite, get_LastWrittenAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastWrittenAddress )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IMultisessionRandomWrite, get_TotalSectorsOnMedia)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TotalSectorsOnMedia )( 
             __RPC__in IMultisessionRandomWrite * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
@@ -7016,6 +7442,7 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][in] */ 
@@ -7023,12 +7450,15 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStreamPseudoRandomBased * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStreamPseudoRandomBased * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IStreamPseudoRandomBased * This,
             /* [annotation] */ 
@@ -7038,6 +7468,7 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             IStreamPseudoRandomBased * This,
             /* [annotation] */ 
@@ -7047,6 +7478,7 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IStreamPseudoRandomBased * This,
             /* [annotation][in] */ 
@@ -7056,11 +7488,13 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][in] */ 
             _In_  ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             IStreamPseudoRandomBased * This,
             /* [annotation][unique][in] */ 
@@ -7072,14 +7506,17 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][in] */ 
             _In_  DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             __RPC__in IStreamPseudoRandomBased * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][in] */ 
@@ -7089,6 +7526,7 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation][in] */ 
             _In_  DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][in] */ 
@@ -7098,6 +7536,7 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation][in] */ 
             _In_  DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][out] */ 
@@ -7105,21 +7544,25 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation][in] */ 
             _In_  DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][out] */ 
             _Out_  IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(IStreamPseudoRandomBased, put_Seed)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *put_Seed )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][in] */ 
             _In_  ULONG value);
         
+        DECLSPEC_XFGVIRT(IStreamPseudoRandomBased, get_Seed)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_Seed )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][out] */ 
             _Out_  ULONG *value);
         
+        DECLSPEC_XFGVIRT(IStreamPseudoRandomBased, put_ExtendedSeed)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *put_ExtendedSeed )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][size_is][in] */ 
@@ -7127,6 +7570,7 @@ EXTERN_C const IID IID_IStreamPseudoRandomBased;
             /* [annotation][in] */ 
             _In_  ULONG eCount);
         
+        DECLSPEC_XFGVIRT(IStreamPseudoRandomBased, get_ExtendedSeed)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedSeed )( 
             __RPC__in IStreamPseudoRandomBased * This,
             /* [annotation][size_is][size_is][out] */ 
@@ -7261,6 +7705,7 @@ EXTERN_C const IID IID_IStreamConcatenate;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][in] */ 
@@ -7268,12 +7713,15 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStreamConcatenate * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStreamConcatenate * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IStreamConcatenate * This,
             /* [annotation] */ 
@@ -7283,6 +7731,7 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             IStreamConcatenate * This,
             /* [annotation] */ 
@@ -7292,6 +7741,7 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IStreamConcatenate * This,
             /* [annotation][in] */ 
@@ -7301,11 +7751,13 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][in] */ 
             _In_  ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             IStreamConcatenate * This,
             /* [annotation][unique][in] */ 
@@ -7317,14 +7769,17 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][in] */ 
             _In_  DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             __RPC__in IStreamConcatenate * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][in] */ 
@@ -7334,6 +7789,7 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation][in] */ 
             _In_  DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][in] */ 
@@ -7343,6 +7799,7 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation][in] */ 
             _In_  DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][out] */ 
@@ -7350,11 +7807,13 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation][in] */ 
             _In_  DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][out] */ 
             _Out_  IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(IStreamConcatenate, Initialize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][in] */ 
@@ -7362,6 +7821,7 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation][in] */ 
             _In_  IStream *stream2);
         
+        DECLSPEC_XFGVIRT(IStreamConcatenate, Initialize2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Initialize2 )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][size_is][in] */ 
@@ -7369,11 +7829,13 @@ EXTERN_C const IID IID_IStreamConcatenate;
             /* [annotation][in] */ 
             _In_  ULONG streamCount);
         
+        DECLSPEC_XFGVIRT(IStreamConcatenate, Append)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Append )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][in] */ 
             _In_  IStream *stream);
         
+        DECLSPEC_XFGVIRT(IStreamConcatenate, Append2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Append2 )( 
             __RPC__in IStreamConcatenate * This,
             /* [annotation][size_is][in] */ 
@@ -7493,6 +7955,7 @@ EXTERN_C const IID IID_IStreamInterleave;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IStreamInterleave * This,
             /* [annotation][in] */ 
@@ -7500,12 +7963,15 @@ EXTERN_C const IID IID_IStreamInterleave;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IStreamInterleave * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IStreamInterleave * This);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Read)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Read )( 
             IStreamInterleave * This,
             /* [annotation] */ 
@@ -7515,6 +7981,7 @@ EXTERN_C const IID IID_IStreamInterleave;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbRead);
         
+        DECLSPEC_XFGVIRT(ISequentialStream, Write)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Write )( 
             IStreamInterleave * This,
             /* [annotation] */ 
@@ -7524,6 +7991,7 @@ EXTERN_C const IID IID_IStreamInterleave;
             /* [annotation] */ 
             _Out_opt_  ULONG *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Seek)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Seek )( 
             IStreamInterleave * This,
             /* [annotation][in] */ 
@@ -7533,11 +8001,13 @@ EXTERN_C const IID IID_IStreamInterleave;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *plibNewPosition);
         
+        DECLSPEC_XFGVIRT(IStream, SetSize)
         HRESULT ( STDMETHODCALLTYPE *SetSize )( 
             __RPC__in IStreamInterleave * This,
             /* [annotation][in] */ 
             _In_  ULARGE_INTEGER libNewSize);
         
+        DECLSPEC_XFGVIRT(IStream, CopyTo)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *CopyTo )( 
             IStreamInterleave * This,
             /* [annotation][unique][in] */ 
@@ -7549,14 +8019,17 @@ EXTERN_C const IID IID_IStreamInterleave;
             /* [annotation] */ 
             _Out_opt_  ULARGE_INTEGER *pcbWritten);
         
+        DECLSPEC_XFGVIRT(IStream, Commit)
         HRESULT ( STDMETHODCALLTYPE *Commit )( 
             __RPC__in IStreamInterleave * This,
             /* [annotation][in] */ 
             _In_  DWORD grfCommitFlags);
         
+        DECLSPEC_XFGVIRT(IStream, Revert)
         HRESULT ( STDMETHODCALLTYPE *Revert )( 
             __RPC__in IStreamInterleave * This);
         
+        DECLSPEC_XFGVIRT(IStream, LockRegion)
         HRESULT ( STDMETHODCALLTYPE *LockRegion )( 
             __RPC__in IStreamInterleave * This,
             /* [annotation][in] */ 
@@ -7566,6 +8039,7 @@ EXTERN_C const IID IID_IStreamInterleave;
             /* [annotation][in] */ 
             _In_  DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, UnlockRegion)
         HRESULT ( STDMETHODCALLTYPE *UnlockRegion )( 
             __RPC__in IStreamInterleave * This,
             /* [annotation][in] */ 
@@ -7575,6 +8049,7 @@ EXTERN_C const IID IID_IStreamInterleave;
             /* [annotation][in] */ 
             _In_  DWORD dwLockType);
         
+        DECLSPEC_XFGVIRT(IStream, Stat)
         HRESULT ( STDMETHODCALLTYPE *Stat )( 
             __RPC__in IStreamInterleave * This,
             /* [annotation][out] */ 
@@ -7582,11 +8057,13 @@ EXTERN_C const IID IID_IStreamInterleave;
             /* [annotation][in] */ 
             _In_  DWORD grfStatFlag);
         
+        DECLSPEC_XFGVIRT(IStream, Clone)
         HRESULT ( STDMETHODCALLTYPE *Clone )( 
             __RPC__in IStreamInterleave * This,
             /* [annotation][out] */ 
             _Out_  IStream **ppstm);
         
+        DECLSPEC_XFGVIRT(IStreamInterleave, Initialize)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IStreamInterleave * This,
             /* [annotation][size_is][in] */ 
@@ -7784,6 +8261,7 @@ EXTERN_C const IID IID_IRawCDImageCreator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
@@ -7791,17 +8269,21 @@ EXTERN_C const IID IID_IRawCDImageCreator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRawCDImageCreator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRawCDImageCreator * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
@@ -7811,6 +8293,7 @@ EXTERN_C const IID IID_IRawCDImageCreator;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
@@ -7823,6 +8306,7 @@ EXTERN_C const IID IID_IRawCDImageCreator;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRawCDImageCreator * This,
             /* [annotation][in] */ 
@@ -7842,11 +8326,13 @@ EXTERN_C const IID IID_IRawCDImageCreator;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, CreateResultImage)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CreateResultImage )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  IStream **resultStream);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, AddTrack)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddTrack )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
@@ -7856,78 +8342,95 @@ EXTERN_C const IID IID_IRawCDImageCreator;
             /* [annotation][retval][out] */ 
             _Out_retval_  LONG *trackIndex);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, AddSpecialPregap)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddSpecialPregap )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
             _In_  IStream *data);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, AddSubcodeRWGenerator)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddSubcodeRWGenerator )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
             _In_  IStream *subcode);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, put_ResultingImageType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ResultingImageType )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
             _In_  IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_ResultingImageType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ResultingImageType )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_FORMAT2_RAW_CD_DATA_SECTOR_TYPE *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_StartOfLeadout)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartOfLeadout )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, put_StartOfLeadoutLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartOfLeadoutLimit )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
             _In_  LONG value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_StartOfLeadoutLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartOfLeadoutLimit )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, put_DisableGaplessAudio)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DisableGaplessAudio )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_DisableGaplessAudio)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DisableGaplessAudio )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, put_MediaCatalogNumber)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_MediaCatalogNumber )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
             _In_  BSTR value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_MediaCatalogNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MediaCatalogNumber )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, put_StartingTrackNumber)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StartingTrackNumber )( 
             __RPC__in IRawCDImageCreator * This,
             /* [range][in] */ __RPC__in_range(1,99) LONG value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_StartingTrackNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartingTrackNumber )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_TrackInfo)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrackInfo )( 
             __RPC__in IRawCDImageCreator * This,
             /* [annotation][in] */ 
             _In_  LONG trackIndex,
             /* [retval][ref][out] */ __RPC__deref_out_opt IRawCDImageTrackInfo **value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_NumberOfExistingTracks)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_NumberOfExistingTracks )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_LastUsedUserSectorInImage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LastUsedUserSectorInImage )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageCreator, get_ExpectedTableOfContents)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExpectedTableOfContents )( 
             __RPC__in IRawCDImageCreator * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
@@ -8117,6 +8620,7 @@ EXTERN_C const IID IID_IRawCDImageTrackInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [annotation][in] */ 
@@ -8124,17 +8628,21 @@ EXTERN_C const IID IID_IRawCDImageTrackInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IRawCDImageTrackInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IRawCDImageTrackInfo * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [annotation][in] */ 
@@ -8144,6 +8652,7 @@ EXTERN_C const IID IID_IRawCDImageTrackInfo;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [annotation][in] */ 
@@ -8156,6 +8665,7 @@ EXTERN_C const IID IID_IRawCDImageTrackInfo;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IRawCDImageTrackInfo * This,
             /* [annotation][in] */ 
@@ -8175,57 +8685,70 @@ EXTERN_C const IID IID_IRawCDImageTrackInfo;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, get_StartingLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartingLba )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, get_SectorCount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SectorCount )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, get_TrackNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrackNumber )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, get_SectorType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SectorType )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_CD_SECTOR_TYPE *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, get_ISRC)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ISRC )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt BSTR *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, put_ISRC)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ISRC )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [annotation][in] */ 
             _In_  BSTR value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, get_DigitalAudioCopySetting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DigitalAudioCopySetting )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [retval][ref][out] */ __RPC__out IMAPI_CD_TRACK_DIGITAL_COPY_SETTING *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, put_DigitalAudioCopySetting)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DigitalAudioCopySetting )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [annotation][in] */ 
             _In_  IMAPI_CD_TRACK_DIGITAL_COPY_SETTING value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, get_AudioHasPreemphasis)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AudioHasPreemphasis )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [retval][ref][out] */ __RPC__out VARIANT_BOOL *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, put_AudioHasPreemphasis)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AudioHasPreemphasis )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [annotation][in] */ 
             _In_  VARIANT_BOOL value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, get_TrackIndexes)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TrackIndexes )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, AddTrackIndex)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddTrackIndex )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [range][in] */ __RPC__in_range(0,0x7fffffff) LONG lbaOffset);
         
+        DECLSPEC_XFGVIRT(IRawCDImageTrackInfo, ClearTrackIndex)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ClearTrackIndex )( 
             __RPC__in IRawCDImageTrackInfo * This,
             /* [range][in] */ __RPC__in_range(0,0x7fffffff) LONG lbaOffset);
@@ -8356,6 +8879,7 @@ EXTERN_C const IID IID_IBlockRange;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBlockRange * This,
             /* [annotation][in] */ 
@@ -8363,17 +8887,21 @@ EXTERN_C const IID IID_IBlockRange;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBlockRange * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBlockRange * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IBlockRange * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IBlockRange * This,
             /* [annotation][in] */ 
@@ -8383,6 +8911,7 @@ EXTERN_C const IID IID_IBlockRange;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IBlockRange * This,
             /* [annotation][in] */ 
@@ -8395,6 +8924,7 @@ EXTERN_C const IID IID_IBlockRange;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IBlockRange * This,
             /* [annotation][in] */ 
@@ -8414,10 +8944,12 @@ EXTERN_C const IID IID_IBlockRange;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IBlockRange, get_StartLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StartLba )( 
             __RPC__in IBlockRange * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
         
+        DECLSPEC_XFGVIRT(IBlockRange, get_EndLba)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EndLba )( 
             __RPC__in IBlockRange * This,
             /* [retval][ref][out] */ __RPC__out LONG *value);
@@ -8511,6 +9043,7 @@ EXTERN_C const IID IID_IBlockRangeList;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IBlockRangeList * This,
             /* [annotation][in] */ 
@@ -8518,17 +9051,21 @@ EXTERN_C const IID IID_IBlockRangeList;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IBlockRangeList * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IBlockRangeList * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IBlockRangeList * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IBlockRangeList * This,
             /* [annotation][in] */ 
@@ -8538,6 +9075,7 @@ EXTERN_C const IID IID_IBlockRangeList;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IBlockRangeList * This,
             /* [annotation][in] */ 
@@ -8550,6 +9088,7 @@ EXTERN_C const IID IID_IBlockRangeList;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IBlockRangeList * This,
             /* [annotation][in] */ 
@@ -8569,6 +9108,7 @@ EXTERN_C const IID IID_IBlockRangeList;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IBlockRangeList, get_BlockRanges)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BlockRanges )( 
             __RPC__in IBlockRangeList * This,
             /* [retval][ref][out] */ __RPC__deref_out_opt SAFEARRAY * *value);

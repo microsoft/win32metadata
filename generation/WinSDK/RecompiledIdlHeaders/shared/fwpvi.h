@@ -492,8 +492,6 @@
 #define FwpmFilterUnsubscribeChanges FwpmFilterUnsubscribeChanges0
 #define FwpmFilterSubscriptionsGet FwpmFilterSubscriptionsGet0
 #define FwpmGetAppIdFromFileName FwpmGetAppIdFromFileName0
-#define FwpmBitmapIndexGet FwpmBitmapIndexGet0
-#define FwpmBitmapIndexFree FwpmBitmapIndexFree0
 
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS3)
 #define FwpmIPsecTunnelAdd FwpmIPsecTunnelAdd3
@@ -602,7 +600,7 @@
 #if (NTDDI_VERSION >= NTDDI_WIN10_RS5) //NTDDI_WIN10_RS5 
 #define FWPM_NET_EVENT_CALLBACK FWPM_NET_EVENT_CALLBACK4
 #define FwpmNetEventSubscribe FwpmNetEventSubscribe4
-#elif (NTDDI_VERSION >= NTDDI_NTDDI_WIN10_RS4) 
+#elif (NTDDI_VERSION >= NTDDI_WIN10_RS4) 
 #define FWPM_NET_EVENT_CALLBACK FWPM_NET_EVENT_CALLBACK3
 #define FwpmNetEventSubscribe FwpmNetEventSubscribe3
 #elif (NTDDI_VERSION >= NTDDI_WINTHRESHOLD)
@@ -625,7 +623,11 @@
 #define FwpmSystemPortsUnsubscribe FwpmSystemPortsUnsubscribe0
 #endif
 
-
+#if (NTDDI_VERSION >= NTDDI_WIN10_CO)
+#define FWPM_DYNAMIC_KEYWORD_CALLBACK FWPM_DYNAMIC_KEYWORD_CALLBACK0
+#define FwpmDynamicKeywordSubscribe FwpmDynamicKeywordSubscribe0
+#define FwpmDynamicKeywordUnsubscribe FwpmDynamicUnsubscribe0
+#endif // (NTDDI_VERSION >= NTDDI_WIN10_CO)
 
 #if (NTDDI_VERSION >= NTDDI_WIN8)
 #define IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK IPSEC_KEY_MANAGER_KEY_DICTATION_CHECK0

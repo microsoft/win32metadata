@@ -68,3 +68,5 @@
 
 #include <reason.h>
 
+#include <fherrors.h>
+#include <fhstatus.h>

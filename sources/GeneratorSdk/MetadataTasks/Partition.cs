@@ -160,6 +160,16 @@ namespace MetadataTasks
             }
         }
 
+        public override string ToString()
+        {
+            return this.Name;
+        }
+
+        public override int GetHashCode()
+        {
+            return this.Name.GetHashCode(StringComparison.OrdinalIgnoreCase);
+        }
+
         public bool IsUpToDate(string markerFile)
         {
             return TaskUtils.IsUpToDate(this.AllFiles, markerFile);

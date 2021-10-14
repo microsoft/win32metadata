@@ -9,7 +9,7 @@
 
   <!-- These are here to support CommonUtils.ps1, which parses the .props file that nuget restore generates based on these. -->
   <ItemGroup>
-    <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.19041.5" GeneratePathProperty="true"/>
-    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.19041.5" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP" Version="10.0.22000.194" GeneratePathProperty="true"/>
+    <PackageReference Include="Microsoft.Windows.SDK.CPP.x64" Version="10.0.22000.194" GeneratePathProperty="true"/>
   </ItemGroup>
 </Project>

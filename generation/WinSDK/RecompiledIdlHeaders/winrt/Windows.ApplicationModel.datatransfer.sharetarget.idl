@@ -137,6 +137,7 @@ namespace Windows
                 [activatable(Windows.Foundation.UniversalApiContract, 1.0)]
                 [contract(Windows.Foundation.UniversalApiContract, 1.0)]
                 [marshaling_behavior(standard)]
+                [threading(both)]
                 runtimeclass QuickLink
                 {
                     [default] interface Windows.ApplicationModel.DataTransfer.ShareTarget.IQuickLink;

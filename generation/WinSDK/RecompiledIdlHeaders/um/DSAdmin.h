@@ -139,7 +139,7 @@ DECLARE_INTERFACE_(IDsAdminNewObjPrimarySite, IUnknown)
 
   // *** IDsAdminNewObjPrimarySite methods ***
   STDMETHOD(CreateNew)(THIS_ /*IN*/ LPCWSTR pszName) PURE;
-  STDMETHOD(Commit)(THIS_ ) PURE;
+  STDMETHOD(Commit)(THIS ) PURE;
 };
 
 
@@ -268,7 +268,7 @@ DECLARE_INTERFACE_(IDsAdminNotifyHandler, IUnknown)
 
   STDMETHOD(Notify)(THIS_ /*IN*/ ULONG nItem, /*IN*/ ULONG uFlags) PURE; 
 
-  STDMETHOD(End)(THIS_) PURE; 
+  STDMETHOD(End)(THIS) PURE; 
 };
 
 

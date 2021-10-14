@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -1269,28 +1277,34 @@ EXTERN_C const IID IID_IFaxJobStatus;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxJobStatus * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxJobStatus * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxJobStatus * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxJobStatus * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxJobStatus * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxJobStatus * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1299,6 +1313,7 @@ EXTERN_C const IID IID_IFaxJobStatus;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxJobStatus * This,
             /* [annotation][in] */ 
@@ -1318,70 +1333,87 @@ EXTERN_C const IID IID_IFaxJobStatus;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out FAX_JOB_STATUS_ENUM *pStatus);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_Pages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pages )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out long *plPages);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_Size)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_CurrentPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPage )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out long *plCurrentPage);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_DeviceId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceId )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out long *plDeviceId);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_ExtendedStatusCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedStatusCode )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out FAX_JOB_EXTENDED_STATUS_ENUM *pExtendedStatusCode);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_ExtendedStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedStatus )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtendedStatus);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_AvailableOperations)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvailableOperations )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out FAX_JOB_OPERATIONS_ENUM *pAvailableOperations);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_JobType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_JobType )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out FAX_JOB_TYPE_ENUM *pJobType);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_ScheduledTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScheduledTime )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out DATE *pdateScheduledTime);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_TransmissionStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStart )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_TransmissionEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionEnd )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_CallerId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallerId )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCallerId);
         
+        DECLSPEC_XFGVIRT(IFaxJobStatus, get_RoutingInformation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoutingInformation )( 
             __RPC__in IFaxJobStatus * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRoutingInformation);
@@ -1619,28 +1651,34 @@ EXTERN_C const IID IID_IFaxServer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxServer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxServer * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxServer * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxServer * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1649,6 +1687,7 @@ EXTERN_C const IID IID_IFaxServer;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxServer * This,
             /* [annotation][in] */ 
@@ -1668,87 +1707,108 @@ EXTERN_C const IID IID_IFaxServer;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxServer, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in BSTR bstrServerName);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_ServerName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerName )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrServerName);
         
+        DECLSPEC_XFGVIRT(IFaxServer, GetDeviceProviders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDeviceProviders )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxDeviceProviders **ppFaxDeviceProviders);
         
+        DECLSPEC_XFGVIRT(IFaxServer, GetDevices)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDevices )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxDevices **ppFaxDevices);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_InboundRouting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InboundRouting )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxInboundRouting **ppFaxInboundRouting);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_Folders)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Folders )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxFolders **pFaxFolders);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_LoggingOptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LoggingOptions )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxLoggingOptions **ppFaxLoggingOptions);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_MajorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorVersion )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__out long *plMajorVersion);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_MinorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorVersion )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__out long *plMinorVersion);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_MajorBuild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorBuild )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__out long *plMajorBuild);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_MinorBuild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorBuild )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__out long *plMinorBuild);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_Debug)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Debug )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDebug);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_Activity)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Activity )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxActivity **ppFaxActivity);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_OutboundRouting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutboundRouting )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutboundRouting **ppFaxOutboundRouting);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_ReceiptOptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptOptions )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxReceiptOptions **ppFaxReceiptOptions);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_Security)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Security )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSecurity **ppFaxSecurity);
         
+        DECLSPEC_XFGVIRT(IFaxServer, Disconnect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IFaxServer * This);
         
+        DECLSPEC_XFGVIRT(IFaxServer, GetExtensionProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetExtensionProperty )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in BSTR bstrGUID,
             /* [retval][out] */ __RPC__out VARIANT *pvProperty);
         
+        DECLSPEC_XFGVIRT(IFaxServer, SetExtensionProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetExtensionProperty )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in BSTR bstrGUID,
             /* [in] */ VARIANT vProperty);
         
+        DECLSPEC_XFGVIRT(IFaxServer, ListenToServerEvents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenToServerEvents )( 
             __RPC__in IFaxServer * This,
             /* [in] */ FAX_SERVER_EVENTS_TYPE_ENUM EventTypes);
         
+        DECLSPEC_XFGVIRT(IFaxServer, RegisterDeviceProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterDeviceProvider )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in BSTR bstrGUID,
@@ -1757,10 +1817,12 @@ EXTERN_C const IID IID_IFaxServer;
             /* [in] */ __RPC__in BSTR TspName,
             /* [in] */ long lFSPIVersion);
         
+        DECLSPEC_XFGVIRT(IFaxServer, UnregisterDeviceProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterDeviceProvider )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in BSTR bstrUniqueName);
         
+        DECLSPEC_XFGVIRT(IFaxServer, RegisterInboundRoutingExtension)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterInboundRoutingExtension )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in BSTR bstrExtensionName,
@@ -1768,14 +1830,17 @@ EXTERN_C const IID IID_IFaxServer;
             /* [in] */ __RPC__in BSTR bstrImageName,
             /* [in] */ VARIANT vMethods);
         
+        DECLSPEC_XFGVIRT(IFaxServer, UnregisterInboundRoutingExtension)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterInboundRoutingExtension )( 
             __RPC__in IFaxServer * This,
             /* [in] */ __RPC__in BSTR bstrExtensionUniqueName);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_RegisteredEvents)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RegisteredEvents )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__out FAX_SERVER_EVENTS_TYPE_ENUM *pEventTypes);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_APIVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_APIVersion )( 
             __RPC__in IFaxServer * This,
             /* [retval][out] */ __RPC__out FAX_SERVER_APIVERSION_ENUM *pAPIVersion);
@@ -1939,28 +2004,34 @@ EXTERN_C const IID IID_IFaxDeviceProviders;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxDeviceProviders * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxDeviceProviders * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxDeviceProviders * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxDeviceProviders * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxDeviceProviders * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxDeviceProviders * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1969,6 +2040,7 @@ EXTERN_C const IID IID_IFaxDeviceProviders;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxDeviceProviders * This,
             /* [annotation][in] */ 
@@ -1988,15 +2060,18 @@ EXTERN_C const IID IID_IFaxDeviceProviders;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProviders, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxDeviceProviders * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProviders, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxDeviceProviders * This,
             /* [in] */ VARIANT vIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxDeviceProvider **pFaxDeviceProvider);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProviders, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxDeviceProviders * This,
             /* [retval][out] */ __RPC__out long *plCount);
@@ -2095,28 +2170,34 @@ EXTERN_C const IID IID_IFaxDevices;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxDevices * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxDevices * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxDevices * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxDevices * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxDevices * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxDevices * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2125,6 +2206,7 @@ EXTERN_C const IID IID_IFaxDevices;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxDevices * This,
             /* [annotation][in] */ 
@@ -2144,19 +2226,23 @@ EXTERN_C const IID IID_IFaxDevices;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxDevices, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxDevices * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxDevices, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxDevices * This,
             /* [in] */ VARIANT vIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxDevice **pFaxDevice);
         
+        DECLSPEC_XFGVIRT(IFaxDevices, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxDevices * This,
             /* [retval][out] */ __RPC__out long *plCount);
         
+        DECLSPEC_XFGVIRT(IFaxDevices, get_ItemById)
         /* [propget][helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *get_ItemById )( 
             __RPC__in IFaxDevices * This,
             /* [in] */ long lId,
@@ -2251,28 +2337,34 @@ EXTERN_C const IID IID_IFaxInboundRouting;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxInboundRouting * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxInboundRouting * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxInboundRouting * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxInboundRouting * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxInboundRouting * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxInboundRouting * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2281,6 +2373,7 @@ EXTERN_C const IID IID_IFaxInboundRouting;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxInboundRouting * This,
             /* [annotation][in] */ 
@@ -2300,10 +2393,12 @@ EXTERN_C const IID IID_IFaxInboundRouting;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRouting, GetExtensions)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetExtensions )( 
             __RPC__in IFaxInboundRouting * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxInboundRoutingExtensions **pFaxInboundRoutingExtensions);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRouting, GetMethods)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMethods )( 
             __RPC__in IFaxInboundRouting * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxInboundRoutingMethods **pFaxInboundRoutingMethods);
@@ -2397,28 +2492,34 @@ EXTERN_C const IID IID_IFaxFolders;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxFolders * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxFolders * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxFolders * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxFolders * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxFolders * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxFolders * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2427,6 +2528,7 @@ EXTERN_C const IID IID_IFaxFolders;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxFolders * This,
             /* [annotation][in] */ 
@@ -2446,18 +2548,22 @@ EXTERN_C const IID IID_IFaxFolders;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxFolders, get_OutgoingQueue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutgoingQueue )( 
             __RPC__in IFaxFolders * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutgoingQueue **pFaxOutgoingQueue);
         
+        DECLSPEC_XFGVIRT(IFaxFolders, get_IncomingQueue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncomingQueue )( 
             __RPC__in IFaxFolders * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxIncomingQueue **pFaxIncomingQueue);
         
+        DECLSPEC_XFGVIRT(IFaxFolders, get_IncomingArchive)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncomingArchive )( 
             __RPC__in IFaxFolders * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxIncomingArchive **pFaxIncomingArchive);
         
+        DECLSPEC_XFGVIRT(IFaxFolders, get_OutgoingArchive)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutgoingArchive )( 
             __RPC__in IFaxFolders * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutgoingArchive **pFaxOutgoingArchive);
@@ -2551,28 +2657,34 @@ EXTERN_C const IID IID_IFaxLoggingOptions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxLoggingOptions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxLoggingOptions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxLoggingOptions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxLoggingOptions * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxLoggingOptions * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxLoggingOptions * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2581,6 +2693,7 @@ EXTERN_C const IID IID_IFaxLoggingOptions;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxLoggingOptions * This,
             /* [annotation][in] */ 
@@ -2600,10 +2713,12 @@ EXTERN_C const IID IID_IFaxLoggingOptions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxLoggingOptions, get_EventLogging)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_EventLogging )( 
             __RPC__in IFaxLoggingOptions * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxEventLogging **pFaxEventLogging);
         
+        DECLSPEC_XFGVIRT(IFaxLoggingOptions, get_ActivityLogging)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ActivityLogging )( 
             __RPC__in IFaxLoggingOptions * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxActivityLogging **pFaxActivityLogging);
@@ -2699,28 +2814,34 @@ EXTERN_C const IID IID_IFaxActivity;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxActivity * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxActivity * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxActivity * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxActivity * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxActivity * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxActivity * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2729,6 +2850,7 @@ EXTERN_C const IID IID_IFaxActivity;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxActivity * This,
             /* [annotation][in] */ 
@@ -2748,22 +2870,27 @@ EXTERN_C const IID IID_IFaxActivity;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxActivity, get_IncomingMessages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncomingMessages )( 
             __RPC__in IFaxActivity * This,
             /* [retval][out] */ __RPC__out long *plIncomingMessages);
         
+        DECLSPEC_XFGVIRT(IFaxActivity, get_RoutingMessages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoutingMessages )( 
             __RPC__in IFaxActivity * This,
             /* [retval][out] */ __RPC__out long *plRoutingMessages);
         
+        DECLSPEC_XFGVIRT(IFaxActivity, get_OutgoingMessages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutgoingMessages )( 
             __RPC__in IFaxActivity * This,
             /* [retval][out] */ __RPC__out long *plOutgoingMessages);
         
+        DECLSPEC_XFGVIRT(IFaxActivity, get_QueuedMessages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_QueuedMessages )( 
             __RPC__in IFaxActivity * This,
             /* [retval][out] */ __RPC__out long *plQueuedMessages);
         
+        DECLSPEC_XFGVIRT(IFaxActivity, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxActivity * This);
         
@@ -2859,28 +2986,34 @@ EXTERN_C const IID IID_IFaxOutboundRouting;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutboundRouting * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutboundRouting * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutboundRouting * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutboundRouting * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutboundRouting * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutboundRouting * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2889,6 +3022,7 @@ EXTERN_C const IID IID_IFaxOutboundRouting;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutboundRouting * This,
             /* [annotation][in] */ 
@@ -2908,10 +3042,12 @@ EXTERN_C const IID IID_IFaxOutboundRouting;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRouting, GetGroups)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetGroups )( 
             __RPC__in IFaxOutboundRouting * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutboundRoutingGroups **pFaxOutboundRoutingGroups);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRouting, GetRules)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetRules )( 
             __RPC__in IFaxOutboundRouting * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutboundRoutingRules **pFaxOutboundRoutingRules);
@@ -3061,28 +3197,34 @@ EXTERN_C const IID IID_IFaxReceiptOptions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxReceiptOptions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxReceiptOptions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3091,6 +3233,7 @@ EXTERN_C const IID IID_IFaxReceiptOptions;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxReceiptOptions * This,
             /* [annotation][in] */ 
@@ -3110,72 +3253,90 @@ EXTERN_C const IID IID_IFaxReceiptOptions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, get_AuthenticationType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AuthenticationType )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [retval][out] */ __RPC__out FAX_SMTP_AUTHENTICATION_TYPE_ENUM *pType);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, put_AuthenticationType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AuthenticationType )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ FAX_SMTP_AUTHENTICATION_TYPE_ENUM Type);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, get_SMTPServer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SMTPServer )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSMTPServer);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, put_SMTPServer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SMTPServer )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ __RPC__in BSTR bstrSMTPServer);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, get_SMTPPort)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SMTPPort )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [retval][out] */ __RPC__out long *plSMTPPort);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, put_SMTPPort)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SMTPPort )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ long lSMTPPort);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, get_SMTPSender)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SMTPSender )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSMTPSender);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, put_SMTPSender)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SMTPSender )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ __RPC__in BSTR bstrSMTPSender);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, get_SMTPUser)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SMTPUser )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSMTPUser);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, put_SMTPUser)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SMTPUser )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ __RPC__in BSTR bstrSMTPUser);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, get_AllowedReceipts)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowedReceipts )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [retval][out] */ __RPC__out FAX_RECEIPT_TYPE_ENUM *pAllowedReceipts);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, put_AllowedReceipts)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowedReceipts )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ FAX_RECEIPT_TYPE_ENUM AllowedReceipts);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, get_SMTPPassword)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SMTPPassword )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSMTPPassword);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, put_SMTPPassword)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SMTPPassword )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ __RPC__in BSTR bstrSMTPPassword);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxReceiptOptions * This);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxReceiptOptions * This);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, get_UseForInboundRouting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseForInboundRouting )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseForInboundRouting);
         
+        DECLSPEC_XFGVIRT(IFaxReceiptOptions, put_UseForInboundRouting)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseForInboundRouting )( 
             __RPC__in IFaxReceiptOptions * This,
             /* [in] */ VARIANT_BOOL bUseForInboundRouting);
@@ -3340,28 +3501,34 @@ EXTERN_C const IID IID_IFaxSecurity;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxSecurity * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxSecurity * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxSecurity * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxSecurity * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxSecurity * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxSecurity * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3370,6 +3537,7 @@ EXTERN_C const IID IID_IFaxSecurity;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxSecurity * This,
             /* [annotation][in] */ 
@@ -3389,28 +3557,35 @@ EXTERN_C const IID IID_IFaxSecurity;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity, get_Descriptor)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Descriptor )( 
             __RPC__in IFaxSecurity * This,
             /* [retval][out] */ __RPC__out VARIANT *pvDescriptor);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity, put_Descriptor)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Descriptor )( 
             __RPC__in IFaxSecurity * This,
             /* [in] */ VARIANT vDescriptor);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity, get_GrantedRights)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GrantedRights )( 
             __RPC__in IFaxSecurity * This,
             /* [retval][out] */ __RPC__out FAX_ACCESS_RIGHTS_ENUM *pGrantedRights);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxSecurity * This);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxSecurity * This);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity, get_InformationType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InformationType )( 
             __RPC__in IFaxSecurity * This,
             /* [retval][out] */ __RPC__out long *plInformationType);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity, put_InformationType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InformationType )( 
             __RPC__in IFaxSecurity * This,
             /* [in] */ long lInformationType);
@@ -3635,28 +3810,34 @@ EXTERN_C const IID IID_IFaxDocument;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxDocument * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxDocument * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxDocument * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -3665,6 +3846,7 @@ EXTERN_C const IID IID_IFaxDocument;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxDocument * This,
             /* [annotation][in] */ 
@@ -3684,140 +3866,174 @@ EXTERN_C const IID IID_IFaxDocument;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Body)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Body )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBody);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_Body)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Body )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in BSTR bstrBody);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Sender)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Sender )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSender **ppFaxSender);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Recipients)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recipients )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipients **ppFaxRecipients);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_CoverPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CoverPage )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCoverPage);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_CoverPage)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CoverPage )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in BSTR bstrCoverPage);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Subject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subject )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_Subject)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Subject )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in BSTR bstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Note)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Note )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNote);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_Note)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Note )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in BSTR bstrNote);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_ScheduleTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScheduleTime )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__out DATE *pdateScheduleTime);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_ScheduleTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScheduleTime )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ DATE dateScheduleTime);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_ReceiptAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptAddress )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReceiptAddress);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_ReceiptAddress)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReceiptAddress )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in BSTR bstrReceiptAddress);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_DocumentName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentName )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_DocumentName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DocumentName )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in BSTR bstrDocumentName);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_CallHandle)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallHandle )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__out long *plCallHandle);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_CallHandle)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CallHandle )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ long lCallHandle);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_CoverPageType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CoverPageType )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__out FAX_COVERPAGE_TYPE_ENUM *pCoverPageType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_CoverPageType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CoverPageType )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ FAX_COVERPAGE_TYPE_ENUM CoverPageType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_ScheduleType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScheduleType )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__out FAX_SCHEDULE_TYPE_ENUM *pScheduleType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_ScheduleType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScheduleType )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ FAX_SCHEDULE_TYPE_ENUM ScheduleType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_ReceiptType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptType )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__out FAX_RECEIPT_TYPE_ENUM *pReceiptType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_ReceiptType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReceiptType )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ FAX_RECEIPT_TYPE_ENUM ReceiptType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_GroupBroadcastReceipts)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GroupBroadcastReceipts )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseGrouping);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_GroupBroadcastReceipts)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_GroupBroadcastReceipts )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ VARIANT_BOOL bUseGrouping);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Priority)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__out FAX_PRIORITY_TYPE_ENUM *pPriority);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_Priority)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ FAX_PRIORITY_TYPE_ENUM Priority);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_TapiConnection)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TapiConnection )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppTapiConnection);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, putref_TapiConnection)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_TapiConnection )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in_opt IDispatch *pTapiConnection);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, Submit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in BSTR bstrFaxServerName,
             /* [retval][out] */ __RPC__out VARIANT *pvFaxOutgoingJobIDs);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, ConnectedSubmit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ConnectedSubmit )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ __RPC__in_opt IFaxServer *pFaxServer,
             /* [retval][out] */ __RPC__out VARIANT *pvFaxOutgoingJobIDs);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_AttachFaxToReceipt)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AttachFaxToReceipt )( 
             __RPC__in IFaxDocument * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbAttachFax);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_AttachFaxToReceipt)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AttachFaxToReceipt )( 
             __RPC__in IFaxDocument * This,
             /* [in] */ VARIANT_BOOL bAttachFax);
@@ -4095,28 +4311,34 @@ EXTERN_C const IID IID_IFaxSender;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxSender * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxSender * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxSender * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxSender * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4125,6 +4347,7 @@ EXTERN_C const IID IID_IFaxSender;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxSender * This,
             /* [annotation][in] */ 
@@ -4144,137 +4367,171 @@ EXTERN_C const IID IID_IFaxSender;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_BillingCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_BillingCode )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBillingCode);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_BillingCode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_BillingCode )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrBillingCode);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_City)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_City )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCity);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_City)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_City )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrCity);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_Company)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Company )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCompany);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_Company)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Company )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrCompany);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_Country)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Country )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCountry);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_Country)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Country )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrCountry);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_Department)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Department )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDepartment);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_Department)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Department )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrDepartment);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_Email)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Email )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrEmail);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_Email)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Email )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrEmail);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_FaxNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FaxNumber )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFaxNumber);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_FaxNumber)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FaxNumber )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrFaxNumber);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_HomePhone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HomePhone )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrHomePhone);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_HomePhone)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HomePhone )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrHomePhone);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_TSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TSID )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_OfficePhone)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OfficePhone )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrOfficePhone);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_OfficePhone)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OfficePhone )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrOfficePhone);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_OfficeLocation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OfficeLocation )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrOfficeLocation);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_OfficeLocation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OfficeLocation )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrOfficeLocation);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_State)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_State )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrState);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_State)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_State )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrState);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_StreetAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_StreetAddress )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrStreetAddress);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_StreetAddress)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_StreetAddress )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrStreetAddress);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_Title)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Title )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTitle);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_Title)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Title )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrTitle);
         
+        DECLSPEC_XFGVIRT(IFaxSender, get_ZipCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ZipCode )( 
             __RPC__in IFaxSender * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrZipCode);
         
+        DECLSPEC_XFGVIRT(IFaxSender, put_ZipCode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ZipCode )( 
             __RPC__in IFaxSender * This,
             /* [in] */ __RPC__in BSTR bstrZipCode);
         
+        DECLSPEC_XFGVIRT(IFaxSender, LoadDefaultSender)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *LoadDefaultSender )( 
             __RPC__in IFaxSender * This);
         
+        DECLSPEC_XFGVIRT(IFaxSender, SaveDefaultSender)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SaveDefaultSender )( 
             __RPC__in IFaxSender * This);
         
@@ -4463,28 +4720,34 @@ EXTERN_C const IID IID_IFaxRecipient;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxRecipient * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxRecipient * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxRecipient * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxRecipient * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxRecipient * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxRecipient * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4493,6 +4756,7 @@ EXTERN_C const IID IID_IFaxRecipient;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxRecipient * This,
             /* [annotation][in] */ 
@@ -4512,18 +4776,22 @@ EXTERN_C const IID IID_IFaxRecipient;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxRecipient, get_FaxNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FaxNumber )( 
             __RPC__in IFaxRecipient * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFaxNumber);
         
+        DECLSPEC_XFGVIRT(IFaxRecipient, put_FaxNumber)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_FaxNumber )( 
             __RPC__in IFaxRecipient * This,
             /* [in] */ __RPC__in BSTR bstrFaxNumber);
         
+        DECLSPEC_XFGVIRT(IFaxRecipient, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFaxRecipient * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IFaxRecipient, put_Name)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Name )( 
             __RPC__in IFaxRecipient * This,
             /* [in] */ __RPC__in BSTR bstrName);
@@ -4629,28 +4897,34 @@ EXTERN_C const IID IID_IFaxRecipients;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxRecipients * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxRecipients * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxRecipients * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxRecipients * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxRecipients * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxRecipients * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4659,6 +4933,7 @@ EXTERN_C const IID IID_IFaxRecipients;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxRecipients * This,
             /* [annotation][in] */ 
@@ -4678,25 +4953,30 @@ EXTERN_C const IID IID_IFaxRecipients;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxRecipients, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxRecipients * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxRecipients, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxRecipients * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipient **ppFaxRecipient);
         
+        DECLSPEC_XFGVIRT(IFaxRecipients, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxRecipients * This,
             /* [retval][out] */ __RPC__out long *plCount);
         
+        DECLSPEC_XFGVIRT(IFaxRecipients, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFaxRecipients * This,
             /* [in] */ __RPC__in BSTR bstrFaxNumber,
             /* [defaultvalue][in] */ __RPC__in BSTR bstrRecipientName,
             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipient **ppFaxRecipient);
         
+        DECLSPEC_XFGVIRT(IFaxRecipients, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFaxRecipients * This,
             /* [in] */ long lIndex);
@@ -4841,28 +5121,34 @@ EXTERN_C const IID IID_IFaxIncomingArchive;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxIncomingArchive * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxIncomingArchive * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -4871,6 +5157,7 @@ EXTERN_C const IID IID_IFaxIncomingArchive;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxIncomingArchive * This,
             /* [annotation][in] */ 
@@ -4890,73 +5177,91 @@ EXTERN_C const IID IID_IFaxIncomingArchive;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, get_UseArchive)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseArchive )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseArchive);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, put_UseArchive)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseArchive )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ VARIANT_BOOL bUseArchive);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, get_ArchiveFolder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ArchiveFolder )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrArchiveFolder);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, put_ArchiveFolder)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ArchiveFolder )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ __RPC__in BSTR bstrArchiveFolder);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, get_SizeQuotaWarning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeQuotaWarning )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSizeQuotaWarning);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, put_SizeQuotaWarning)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SizeQuotaWarning )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ VARIANT_BOOL bSizeQuotaWarning);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, get_HighQuotaWaterMark)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HighQuotaWaterMark )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [retval][out] */ __RPC__out long *plHighQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, put_HighQuotaWaterMark)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HighQuotaWaterMark )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ long lHighQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, get_LowQuotaWaterMark)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LowQuotaWaterMark )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [retval][out] */ __RPC__out long *plLowQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, put_LowQuotaWaterMark)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LowQuotaWaterMark )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ long lLowQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, get_AgeLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AgeLimit )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [retval][out] */ __RPC__out long *plAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, put_AgeLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AgeLimit )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ long lAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, get_SizeLow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeLow )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [retval][out] */ __RPC__out long *plSizeLow);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, get_SizeHigh)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeHigh )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [retval][out] */ __RPC__out long *plSizeHigh);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxIncomingArchive * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxIncomingArchive * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, GetMessages)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMessages )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [defaultvalue][in] */ long lPrefetchSize,
             /* [retval][out] */ __RPC__deref_out_opt IFaxIncomingMessageIterator **pFaxIncomingMessageIterator);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingArchive, GetMessage)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMessage )( 
             __RPC__in IFaxIncomingArchive * This,
             /* [in] */ __RPC__in BSTR bstrMessageId,
@@ -5104,28 +5409,34 @@ EXTERN_C const IID IID_IFaxIncomingQueue;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxIncomingQueue * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxIncomingQueue * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxIncomingQueue * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxIncomingQueue * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxIncomingQueue * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxIncomingQueue * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5134,6 +5445,7 @@ EXTERN_C const IID IID_IFaxIncomingQueue;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxIncomingQueue * This,
             /* [annotation][in] */ 
@@ -5153,24 +5465,30 @@ EXTERN_C const IID IID_IFaxIncomingQueue;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingQueue, get_Blocked)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Blocked )( 
             __RPC__in IFaxIncomingQueue * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbBlocked);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingQueue, put_Blocked)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Blocked )( 
             __RPC__in IFaxIncomingQueue * This,
             /* [in] */ VARIANT_BOOL bBlocked);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingQueue, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxIncomingQueue * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingQueue, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxIncomingQueue * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingQueue, GetJobs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetJobs )( 
             __RPC__in IFaxIncomingQueue * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxIncomingJobs **pFaxIncomingJobs);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingQueue, GetJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetJob )( 
             __RPC__in IFaxIncomingQueue * This,
             /* [in] */ __RPC__in BSTR bstrJobId,
@@ -5319,28 +5637,34 @@ EXTERN_C const IID IID_IFaxOutgoingArchive;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutgoingArchive * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutgoingArchive * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5349,6 +5673,7 @@ EXTERN_C const IID IID_IFaxOutgoingArchive;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutgoingArchive * This,
             /* [annotation][in] */ 
@@ -5368,73 +5693,91 @@ EXTERN_C const IID IID_IFaxOutgoingArchive;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, get_UseArchive)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseArchive )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseArchive);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, put_UseArchive)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseArchive )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ VARIANT_BOOL bUseArchive);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, get_ArchiveFolder)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ArchiveFolder )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrArchiveFolder);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, put_ArchiveFolder)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ArchiveFolder )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ __RPC__in BSTR bstrArchiveFolder);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, get_SizeQuotaWarning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeQuotaWarning )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSizeQuotaWarning);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, put_SizeQuotaWarning)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SizeQuotaWarning )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ VARIANT_BOOL bSizeQuotaWarning);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, get_HighQuotaWaterMark)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HighQuotaWaterMark )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [retval][out] */ __RPC__out long *plHighQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, put_HighQuotaWaterMark)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HighQuotaWaterMark )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ long lHighQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, get_LowQuotaWaterMark)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LowQuotaWaterMark )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [retval][out] */ __RPC__out long *plLowQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, put_LowQuotaWaterMark)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LowQuotaWaterMark )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ long lLowQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, get_AgeLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AgeLimit )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [retval][out] */ __RPC__out long *plAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, put_AgeLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AgeLimit )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ long lAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, get_SizeLow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeLow )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [retval][out] */ __RPC__out long *plSizeLow);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, get_SizeHigh)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeHigh )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [retval][out] */ __RPC__out long *plSizeHigh);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxOutgoingArchive * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxOutgoingArchive * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, GetMessages)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMessages )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [defaultvalue][in] */ long lPrefetchSize,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutgoingMessageIterator **pFaxOutgoingMessageIterator);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingArchive, GetMessage)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMessage )( 
             __RPC__in IFaxOutgoingArchive * This,
             /* [in] */ __RPC__in BSTR bstrMessageId,
@@ -5636,28 +5979,34 @@ EXTERN_C const IID IID_IFaxOutgoingQueue;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutgoingQueue * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutgoingQueue * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5666,6 +6015,7 @@ EXTERN_C const IID IID_IFaxOutgoingQueue;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutgoingQueue * This,
             /* [annotation][in] */ 
@@ -5685,96 +6035,120 @@ EXTERN_C const IID IID_IFaxOutgoingQueue;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_Blocked)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Blocked )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbBlocked);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_Blocked)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Blocked )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ VARIANT_BOOL bBlocked);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_Paused)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Paused )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbPaused);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_Paused)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Paused )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ VARIANT_BOOL bPaused);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_AllowPersonalCoverPages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowPersonalCoverPages )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbAllowPersonalCoverPages);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_AllowPersonalCoverPages)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowPersonalCoverPages )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ VARIANT_BOOL bAllowPersonalCoverPages);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_UseDeviceTSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseDeviceTSID )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseDeviceTSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_UseDeviceTSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseDeviceTSID )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ VARIANT_BOOL bUseDeviceTSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_Retries)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Retries )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ long lRetries);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_RetryDelay)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetryDelay )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out long *plRetryDelay);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_RetryDelay)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RetryDelay )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ long lRetryDelay);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_DiscountRateStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiscountRateStart )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out DATE *pdateDiscountRateStart);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_DiscountRateStart)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DiscountRateStart )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ DATE dateDiscountRateStart);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_DiscountRateEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiscountRateEnd )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out DATE *pdateDiscountRateEnd);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_DiscountRateEnd)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DiscountRateEnd )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ DATE dateDiscountRateEnd);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_AgeLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AgeLimit )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out long *plAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_AgeLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AgeLimit )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ long lAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, get_Branding)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Branding )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbBranding);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, put_Branding)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Branding )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ VARIANT_BOOL bBranding);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxOutgoingQueue * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxOutgoingQueue * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, GetJobs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetJobs )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutgoingJobs **pFaxOutgoingJobs);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingQueue, GetJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetJob )( 
             __RPC__in IFaxOutgoingQueue * This,
             /* [in] */ __RPC__in BSTR bstrJobId,
@@ -5939,28 +6313,34 @@ EXTERN_C const IID IID_IFaxIncomingMessageIterator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxIncomingMessageIterator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxIncomingMessageIterator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxIncomingMessageIterator * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxIncomingMessageIterator * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxIncomingMessageIterator * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxIncomingMessageIterator * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -5969,6 +6349,7 @@ EXTERN_C const IID IID_IFaxIncomingMessageIterator;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxIncomingMessageIterator * This,
             /* [annotation][in] */ 
@@ -5988,25 +6369,31 @@ EXTERN_C const IID IID_IFaxIncomingMessageIterator;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessageIterator, get_Message)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Message )( 
             __RPC__in IFaxIncomingMessageIterator * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxIncomingMessage **pFaxIncomingMessage);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessageIterator, get_PrefetchSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrefetchSize )( 
             __RPC__in IFaxIncomingMessageIterator * This,
             /* [retval][out] */ __RPC__out long *plPrefetchSize);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessageIterator, put_PrefetchSize)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PrefetchSize )( 
             __RPC__in IFaxIncomingMessageIterator * This,
             /* [in] */ long lPrefetchSize);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessageIterator, get_AtEOF)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AtEOF )( 
             __RPC__in IFaxIncomingMessageIterator * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEOF);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessageIterator, MoveFirst)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MoveFirst )( 
             __RPC__in IFaxIncomingMessageIterator * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessageIterator, MoveNext)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MoveNext )( 
             __RPC__in IFaxIncomingMessageIterator * This);
         
@@ -6137,28 +6524,34 @@ EXTERN_C const IID IID_IFaxIncomingMessage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxIncomingMessage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxIncomingMessage * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6167,6 +6560,7 @@ EXTERN_C const IID IID_IFaxIncomingMessage;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxIncomingMessage * This,
             /* [annotation][in] */ 
@@ -6186,54 +6580,67 @@ EXTERN_C const IID IID_IFaxIncomingMessage;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_Pages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pages )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__out long *plPages);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_Size)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_DeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceName )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_TransmissionStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStart )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_TransmissionEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionEnd )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_CallerId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallerId )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCallerId);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_RoutingInformation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoutingInformation )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRoutingInformation);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, CopyTiff)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTiff )( 
             __RPC__in IFaxIncomingMessage * This,
             /* [in] */ __RPC__in BSTR bstrTiffPath);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IFaxIncomingMessage * This);
         
@@ -6357,28 +6764,34 @@ EXTERN_C const IID IID_IFaxOutgoingJobs;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutgoingJobs * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutgoingJobs * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutgoingJobs * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutgoingJobs * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutgoingJobs * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutgoingJobs * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6387,6 +6800,7 @@ EXTERN_C const IID IID_IFaxOutgoingJobs;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutgoingJobs * This,
             /* [annotation][in] */ 
@@ -6406,15 +6820,18 @@ EXTERN_C const IID IID_IFaxOutgoingJobs;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJobs, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxOutgoingJobs * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJobs, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxOutgoingJobs * This,
             /* [in] */ VARIANT vIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutgoingJob **pFaxOutgoingJob);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJobs, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxOutgoingJobs * This,
             /* [retval][out] */ __RPC__out long *plCount);
@@ -6587,28 +7004,34 @@ EXTERN_C const IID IID_IFaxOutgoingJob;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutgoingJob * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutgoingJob * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6617,6 +7040,7 @@ EXTERN_C const IID IID_IFaxOutgoingJob;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutgoingJob * This,
             /* [annotation][in] */ 
@@ -6636,122 +7060,153 @@ EXTERN_C const IID IID_IFaxOutgoingJob;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Subject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subject )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_DocumentName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentName )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Pages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pages )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out long *plPages);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Size)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_SubmissionId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionId )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubmissionId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_OriginalScheduledTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OriginalScheduledTime )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out DATE *pdateOriginalScheduledTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_SubmissionTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionTime )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out DATE *pdateSubmissionTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_ReceiptType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptType )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out FAX_RECEIPT_TYPE_ENUM *pReceiptType);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Priority)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out FAX_PRIORITY_TYPE_ENUM *pPriority);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Sender)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Sender )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSender **ppFaxSender);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Recipient)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recipient )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipient **ppFaxRecipient);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_CurrentPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPage )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out long *plCurrentPage);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_DeviceId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceId )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out long *plDeviceId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out FAX_JOB_STATUS_ENUM *pStatus);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_ExtendedStatusCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedStatusCode )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out FAX_JOB_EXTENDED_STATUS_ENUM *pExtendedStatusCode);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_ExtendedStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedStatus )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtendedStatus);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_AvailableOperations)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvailableOperations )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out FAX_JOB_OPERATIONS_ENUM *pAvailableOperations);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_ScheduledTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScheduledTime )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out DATE *pdateScheduledTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_TransmissionStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStart )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_TransmissionEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionEnd )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_GroupBroadcastReceipts)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GroupBroadcastReceipts )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbGroupBroadcastReceipts);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in IFaxOutgoingJob * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Resume)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in IFaxOutgoingJob * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Restart)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Restart )( 
             __RPC__in IFaxOutgoingJob * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, CopyTiff)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTiff )( 
             __RPC__in IFaxOutgoingJob * This,
             /* [in] */ __RPC__in BSTR bstrTiffPath);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxOutgoingJob * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IFaxOutgoingJob * This);
         
@@ -6935,28 +7390,34 @@ EXTERN_C const IID IID_IFaxOutgoingMessageIterator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutgoingMessageIterator * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutgoingMessageIterator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutgoingMessageIterator * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutgoingMessageIterator * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutgoingMessageIterator * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutgoingMessageIterator * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -6965,6 +7426,7 @@ EXTERN_C const IID IID_IFaxOutgoingMessageIterator;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutgoingMessageIterator * This,
             /* [annotation][in] */ 
@@ -6984,25 +7446,31 @@ EXTERN_C const IID IID_IFaxOutgoingMessageIterator;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessageIterator, get_Message)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Message )( 
             __RPC__in IFaxOutgoingMessageIterator * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutgoingMessage **pFaxOutgoingMessage);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessageIterator, get_AtEOF)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AtEOF )( 
             __RPC__in IFaxOutgoingMessageIterator * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbEOF);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessageIterator, get_PrefetchSize)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrefetchSize )( 
             __RPC__in IFaxOutgoingMessageIterator * This,
             /* [retval][out] */ __RPC__out long *plPrefetchSize);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessageIterator, put_PrefetchSize)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_PrefetchSize )( 
             __RPC__in IFaxOutgoingMessageIterator * This,
             /* [in] */ long lPrefetchSize);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessageIterator, MoveFirst)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MoveFirst )( 
             __RPC__in IFaxOutgoingMessageIterator * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessageIterator, MoveNext)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *MoveNext )( 
             __RPC__in IFaxOutgoingMessageIterator * This);
         
@@ -7151,28 +7619,34 @@ EXTERN_C const IID IID_IFaxOutgoingMessage;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutgoingMessage * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutgoingMessage * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7181,6 +7655,7 @@ EXTERN_C const IID IID_IFaxOutgoingMessage;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutgoingMessage * This,
             /* [annotation][in] */ 
@@ -7200,78 +7675,97 @@ EXTERN_C const IID IID_IFaxOutgoingMessage;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_SubmissionId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionId )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubmissionId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Subject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subject )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_DocumentName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentName )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Pages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pages )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__out long *plPages);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Size)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_OriginalScheduledTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OriginalScheduledTime )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__out DATE *pdateOriginalScheduledTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_SubmissionTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionTime )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__out DATE *pdateSubmissionTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Priority)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__out FAX_PRIORITY_TYPE_ENUM *pPriority);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Sender)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Sender )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSender **ppFaxSender);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Recipient)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recipient )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipient **ppFaxRecipient);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_DeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceName )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_TransmissionStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStart )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_TransmissionEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionEnd )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, CopyTiff)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTiff )( 
             __RPC__in IFaxOutgoingMessage * This,
             /* [in] */ __RPC__in BSTR bstrTiffPath);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IFaxOutgoingMessage * This);
         
@@ -7413,28 +7907,34 @@ EXTERN_C const IID IID_IFaxIncomingJobs;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxIncomingJobs * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxIncomingJobs * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxIncomingJobs * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxIncomingJobs * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxIncomingJobs * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxIncomingJobs * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7443,6 +7943,7 @@ EXTERN_C const IID IID_IFaxIncomingJobs;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxIncomingJobs * This,
             /* [annotation][in] */ 
@@ -7462,15 +7963,18 @@ EXTERN_C const IID IID_IFaxIncomingJobs;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJobs, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxIncomingJobs * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJobs, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxIncomingJobs * This,
             /* [in] */ VARIANT vIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxIncomingJob **pFaxIncomingJob);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJobs, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxIncomingJobs * This,
             /* [retval][out] */ __RPC__out long *plCount);
@@ -7610,28 +8114,34 @@ EXTERN_C const IID IID_IFaxIncomingJob;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxIncomingJob * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxIncomingJob * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxIncomingJob * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxIncomingJob * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxIncomingJob * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxIncomingJob * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7640,6 +8150,7 @@ EXTERN_C const IID IID_IFaxIncomingJob;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxIncomingJob * This,
             /* [annotation][in] */ 
@@ -7659,76 +8170,95 @@ EXTERN_C const IID IID_IFaxIncomingJob;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_Size)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_CurrentPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPage )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out long *plCurrentPage);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_DeviceId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceId )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out long *plDeviceId);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out FAX_JOB_STATUS_ENUM *pStatus);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_ExtendedStatusCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedStatusCode )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out FAX_JOB_EXTENDED_STATUS_ENUM *pExtendedStatusCode);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_ExtendedStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedStatus )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtendedStatus);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_AvailableOperations)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvailableOperations )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out FAX_JOB_OPERATIONS_ENUM *pAvailableOperations);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_TransmissionStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStart )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_TransmissionEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionEnd )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_CallerId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallerId )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCallerId);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_RoutingInformation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoutingInformation )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRoutingInformation);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, get_JobType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_JobType )( 
             __RPC__in IFaxIncomingJob * This,
             /* [retval][out] */ __RPC__out FAX_JOB_TYPE_ENUM *pJobType);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, Cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IFaxIncomingJob * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxIncomingJob * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingJob, CopyTiff)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTiff )( 
             __RPC__in IFaxIncomingJob * This,
             /* [in] */ __RPC__in BSTR bstrTiffPath);
@@ -7909,28 +8439,34 @@ EXTERN_C const IID IID_IFaxDeviceProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxDeviceProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxDeviceProvider * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -7939,6 +8475,7 @@ EXTERN_C const IID IID_IFaxDeviceProvider;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxDeviceProvider * This,
             /* [annotation][in] */ 
@@ -7958,50 +8495,62 @@ EXTERN_C const IID IID_IFaxDeviceProvider;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFriendlyName);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_ImageName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImageName )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrImageName);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUniqueName);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_TapiProviderName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TapiProviderName )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTapiProviderName);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_MajorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorVersion )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__out long *plMajorVersion);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_MinorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorVersion )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__out long *plMinorVersion);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_MajorBuild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorBuild )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__out long *plMajorBuild);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_MinorBuild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorBuild )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__out long *plMinorBuild);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_Debug)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Debug )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDebug);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__out FAX_PROVIDER_STATUS_ENUM *pStatus);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_InitErrorCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InitErrorCode )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__out long *plInitErrorCode);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceProvider, get_DeviceIds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceIds )( 
             __RPC__in IFaxDeviceProvider * This,
             /* [retval][out] */ __RPC__out VARIANT *pvDeviceIds);
@@ -8199,28 +8748,34 @@ EXTERN_C const IID IID_IFaxDevice;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxDevice * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxDevice * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxDevice * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8229,6 +8784,7 @@ EXTERN_C const IID IID_IFaxDevice;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxDevice * This,
             /* [annotation][in] */ 
@@ -8248,107 +8804,133 @@ EXTERN_C const IID IID_IFaxDevice;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out long *plId);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_DeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceName )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_ProviderUniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderUniqueName )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProviderUniqueName);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_PoweredOff)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_PoweredOff )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbPoweredOff);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_ReceivingNow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceivingNow )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbReceivingNow);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_SendingNow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SendingNow )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSendingNow);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_UsedRoutingMethods)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UsedRoutingMethods )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out VARIANT *pvUsedRoutingMethods);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_Description)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Description )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDescription);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, put_Description)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Description )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ __RPC__in BSTR bstrDescription);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_SendEnabled)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SendEnabled )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSendEnabled);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, put_SendEnabled)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SendEnabled )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ VARIANT_BOOL bSendEnabled);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_ReceiveMode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiveMode )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out FAX_DEVICE_RECEIVE_MODE_ENUM *pReceiveMode);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, put_ReceiveMode)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReceiveMode )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ FAX_DEVICE_RECEIVE_MODE_ENUM ReceiveMode);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_RingsBeforeAnswer)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RingsBeforeAnswer )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out long *plRingsBeforeAnswer);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, put_RingsBeforeAnswer)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RingsBeforeAnswer )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ long lRingsBeforeAnswer);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, put_CSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CSID )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ __RPC__in BSTR bstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, put_TSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_TSID )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ __RPC__in BSTR bstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxDevice * This);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxDevice * This);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, GetExtensionProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetExtensionProperty )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ __RPC__in BSTR bstrGUID,
             /* [retval][out] */ __RPC__out VARIANT *pvProperty);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, SetExtensionProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetExtensionProperty )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ __RPC__in BSTR bstrGUID,
             /* [in] */ VARIANT vProperty);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, UseRoutingMethod)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UseRoutingMethod )( 
             __RPC__in IFaxDevice * This,
             /* [in] */ __RPC__in BSTR bstrMethodGUID,
             /* [in] */ VARIANT_BOOL bUse);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, get_RingingNow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RingingNow )( 
             __RPC__in IFaxDevice * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRingingNow);
         
+        DECLSPEC_XFGVIRT(IFaxDevice, AnswerCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AnswerCall )( 
             __RPC__in IFaxDevice * This);
         
@@ -8523,28 +9105,34 @@ EXTERN_C const IID IID_IFaxActivityLogging;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxActivityLogging * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxActivityLogging * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxActivityLogging * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxActivityLogging * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxActivityLogging * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxActivityLogging * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8553,6 +9141,7 @@ EXTERN_C const IID IID_IFaxActivityLogging;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxActivityLogging * This,
             /* [annotation][in] */ 
@@ -8572,33 +9161,41 @@ EXTERN_C const IID IID_IFaxActivityLogging;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxActivityLogging, get_LogIncoming)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogIncoming )( 
             __RPC__in IFaxActivityLogging * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbLogIncoming);
         
+        DECLSPEC_XFGVIRT(IFaxActivityLogging, put_LogIncoming)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogIncoming )( 
             __RPC__in IFaxActivityLogging * This,
             /* [in] */ VARIANT_BOOL bLogIncoming);
         
+        DECLSPEC_XFGVIRT(IFaxActivityLogging, get_LogOutgoing)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LogOutgoing )( 
             __RPC__in IFaxActivityLogging * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbLogOutgoing);
         
+        DECLSPEC_XFGVIRT(IFaxActivityLogging, put_LogOutgoing)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LogOutgoing )( 
             __RPC__in IFaxActivityLogging * This,
             /* [in] */ VARIANT_BOOL bLogOutgoing);
         
+        DECLSPEC_XFGVIRT(IFaxActivityLogging, get_DatabasePath)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DatabasePath )( 
             __RPC__in IFaxActivityLogging * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDatabasePath);
         
+        DECLSPEC_XFGVIRT(IFaxActivityLogging, put_DatabasePath)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DatabasePath )( 
             __RPC__in IFaxActivityLogging * This,
             /* [in] */ __RPC__in BSTR bstrDatabasePath);
         
+        DECLSPEC_XFGVIRT(IFaxActivityLogging, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxActivityLogging * This);
         
+        DECLSPEC_XFGVIRT(IFaxActivityLogging, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxActivityLogging * This);
         
@@ -8734,28 +9331,34 @@ EXTERN_C const IID IID_IFaxEventLogging;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxEventLogging * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxEventLogging * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxEventLogging * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxEventLogging * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxEventLogging * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxEventLogging * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8764,6 +9367,7 @@ EXTERN_C const IID IID_IFaxEventLogging;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxEventLogging * This,
             /* [annotation][in] */ 
@@ -8783,41 +9387,51 @@ EXTERN_C const IID IID_IFaxEventLogging;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, get_InitEventsLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InitEventsLevel )( 
             __RPC__in IFaxEventLogging * This,
             /* [retval][out] */ __RPC__out FAX_LOG_LEVEL_ENUM *pInitEventLevel);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, put_InitEventsLevel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InitEventsLevel )( 
             __RPC__in IFaxEventLogging * This,
             /* [in] */ FAX_LOG_LEVEL_ENUM InitEventLevel);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, get_InboundEventsLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InboundEventsLevel )( 
             __RPC__in IFaxEventLogging * This,
             /* [retval][out] */ __RPC__out FAX_LOG_LEVEL_ENUM *pInboundEventLevel);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, put_InboundEventsLevel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InboundEventsLevel )( 
             __RPC__in IFaxEventLogging * This,
             /* [in] */ FAX_LOG_LEVEL_ENUM InboundEventLevel);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, get_OutboundEventsLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutboundEventsLevel )( 
             __RPC__in IFaxEventLogging * This,
             /* [retval][out] */ __RPC__out FAX_LOG_LEVEL_ENUM *pOutboundEventLevel);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, put_OutboundEventsLevel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OutboundEventsLevel )( 
             __RPC__in IFaxEventLogging * This,
             /* [in] */ FAX_LOG_LEVEL_ENUM OutboundEventLevel);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, get_GeneralEventsLevel)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GeneralEventsLevel )( 
             __RPC__in IFaxEventLogging * This,
             /* [retval][out] */ __RPC__out FAX_LOG_LEVEL_ENUM *pGeneralEventLevel);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, put_GeneralEventsLevel)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_GeneralEventsLevel )( 
             __RPC__in IFaxEventLogging * This,
             /* [in] */ FAX_LOG_LEVEL_ENUM GeneralEventLevel);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxEventLogging * This);
         
+        DECLSPEC_XFGVIRT(IFaxEventLogging, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxEventLogging * This);
         
@@ -8939,28 +9553,34 @@ EXTERN_C const IID IID_IFaxOutboundRoutingGroups;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutboundRoutingGroups * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutboundRoutingGroups * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -8969,6 +9589,7 @@ EXTERN_C const IID IID_IFaxOutboundRoutingGroups;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutboundRoutingGroups * This,
             /* [annotation][in] */ 
@@ -8988,24 +9609,29 @@ EXTERN_C const IID IID_IFaxOutboundRoutingGroups;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingGroups, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingGroups, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [in] */ VARIANT vIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutboundRoutingGroup **pFaxOutboundRoutingGroup);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingGroups, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [retval][out] */ __RPC__out long *plCount);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingGroups, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [in] */ __RPC__in BSTR bstrName,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutboundRoutingGroup **pFaxOutboundRoutingGroup);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingGroups, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFaxOutboundRoutingGroups * This,
             /* [in] */ VARIANT vIndex);
@@ -9114,28 +9740,34 @@ EXTERN_C const IID IID_IFaxOutboundRoutingGroup;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutboundRoutingGroup * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutboundRoutingGroup * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutboundRoutingGroup * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutboundRoutingGroup * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutboundRoutingGroup * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutboundRoutingGroup * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9144,6 +9776,7 @@ EXTERN_C const IID IID_IFaxOutboundRoutingGroup;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutboundRoutingGroup * This,
             /* [annotation][in] */ 
@@ -9163,14 +9796,17 @@ EXTERN_C const IID IID_IFaxOutboundRoutingGroup;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingGroup, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFaxOutboundRoutingGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingGroup, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IFaxOutboundRoutingGroup * This,
             /* [retval][out] */ __RPC__out FAX_GROUP_STATUS_ENUM *pStatus);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingGroup, get_DeviceIds)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceIds )( 
             __RPC__in IFaxOutboundRoutingGroup * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxDeviceIds **pFaxDeviceIds);
@@ -9275,28 +9911,34 @@ EXTERN_C const IID IID_IFaxDeviceIds;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxDeviceIds * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxDeviceIds * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxDeviceIds * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxDeviceIds * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxDeviceIds * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxDeviceIds * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9305,6 +9947,7 @@ EXTERN_C const IID IID_IFaxDeviceIds;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxDeviceIds * This,
             /* [annotation][in] */ 
@@ -9324,27 +9967,33 @@ EXTERN_C const IID IID_IFaxDeviceIds;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceIds, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxDeviceIds * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceIds, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxDeviceIds * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ __RPC__out long *plDeviceId);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceIds, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxDeviceIds * This,
             /* [retval][out] */ __RPC__out long *plCount);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceIds, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFaxDeviceIds * This,
             /* [in] */ long lDeviceId);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceIds, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFaxDeviceIds * This,
             /* [in] */ long lIndex);
         
+        DECLSPEC_XFGVIRT(IFaxDeviceIds, SetOrder)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetOrder )( 
             __RPC__in IFaxDeviceIds * This,
             /* [in] */ long lDeviceId,
@@ -9469,28 +10118,34 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRules;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutboundRoutingRules * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutboundRoutingRules * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9499,6 +10154,7 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRules;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutboundRoutingRules * This,
             /* [annotation][in] */ 
@@ -9518,34 +10174,41 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRules;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRules, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRules, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [in] */ long lIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutboundRoutingRule **pFaxOutboundRoutingRule);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRules, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [retval][out] */ __RPC__out long *plCount);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRules, ItemByCountryAndArea)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ItemByCountryAndArea )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [in] */ long lCountryCode,
             /* [in] */ long lAreaCode,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutboundRoutingRule **pFaxOutboundRoutingRule);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRules, RemoveByCountryAndArea)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveByCountryAndArea )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [in] */ long lCountryCode,
             /* [in] */ long lAreaCode);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRules, Remove)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Remove )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [in] */ long lIndex);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRules, Add)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Add )( 
             __RPC__in IFaxOutboundRoutingRules * This,
             /* [in] */ long lCountryCode,
@@ -9688,28 +10351,34 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRule;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutboundRoutingRule * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutboundRoutingRule * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9718,6 +10387,7 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRule;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutboundRoutingRule * This,
             /* [annotation][in] */ 
@@ -9737,45 +10407,56 @@ EXTERN_C const IID IID_IFaxOutboundRoutingRule;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, get_CountryCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CountryCode )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [retval][out] */ __RPC__out long *plCountryCode);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, get_AreaCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AreaCode )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [retval][out] */ __RPC__out long *plAreaCode);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [retval][out] */ __RPC__out FAX_RULE_STATUS_ENUM *pStatus);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, get_UseDevice)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseDevice )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseDevice);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, put_UseDevice)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseDevice )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [in] */ VARIANT_BOOL bUseDevice);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, get_DeviceId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceId )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [retval][out] */ __RPC__out long *plDeviceId);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, put_DeviceId)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeviceId )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [in] */ long DeviceId);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, get_GroupName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GroupName )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGroupName);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, put_GroupName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_GroupName )( 
             __RPC__in IFaxOutboundRoutingRule * This,
             /* [in] */ __RPC__in BSTR bstrGroupName);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxOutboundRoutingRule * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutboundRoutingRule, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxOutboundRoutingRule * This);
         
@@ -9893,28 +10574,34 @@ EXTERN_C const IID IID_IFaxInboundRoutingExtensions;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxInboundRoutingExtensions * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxInboundRoutingExtensions * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxInboundRoutingExtensions * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxInboundRoutingExtensions * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxInboundRoutingExtensions * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxInboundRoutingExtensions * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -9923,6 +10610,7 @@ EXTERN_C const IID IID_IFaxInboundRoutingExtensions;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxInboundRoutingExtensions * This,
             /* [annotation][in] */ 
@@ -9942,15 +10630,18 @@ EXTERN_C const IID IID_IFaxInboundRoutingExtensions;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtensions, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxInboundRoutingExtensions * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtensions, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxInboundRoutingExtensions * This,
             /* [in] */ VARIANT vIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxInboundRoutingExtension **pFaxInboundRoutingExtension);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtensions, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxInboundRoutingExtensions * This,
             /* [retval][out] */ __RPC__out long *plCount);
@@ -10068,28 +10759,34 @@ EXTERN_C const IID IID_IFaxInboundRoutingExtension;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxInboundRoutingExtension * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxInboundRoutingExtension * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10098,6 +10795,7 @@ EXTERN_C const IID IID_IFaxInboundRoutingExtension;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxInboundRoutingExtension * This,
             /* [annotation][in] */ 
@@ -10117,46 +10815,57 @@ EXTERN_C const IID IID_IFaxInboundRoutingExtension;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_FriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FriendlyName )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFriendlyName);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_ImageName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ImageName )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrImageName);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_UniqueName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UniqueName )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrUniqueName);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_MajorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorVersion )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__out long *plMajorVersion);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_MinorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorVersion )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__out long *plMinorVersion);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_MajorBuild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorBuild )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__out long *plMajorBuild);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_MinorBuild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorBuild )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__out long *plMinorBuild);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_Debug)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Debug )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDebug);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__out FAX_PROVIDER_STATUS_ENUM *pStatus);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_InitErrorCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InitErrorCode )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__out long *plInitErrorCode);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingExtension, get_Methods)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Methods )( 
             __RPC__in IFaxInboundRoutingExtension * This,
             /* [retval][out] */ __RPC__out VARIANT *pvMethods);
@@ -10275,28 +10984,34 @@ EXTERN_C const IID IID_IFaxInboundRoutingMethods;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxInboundRoutingMethods * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxInboundRoutingMethods * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxInboundRoutingMethods * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxInboundRoutingMethods * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxInboundRoutingMethods * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxInboundRoutingMethods * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10305,6 +11020,7 @@ EXTERN_C const IID IID_IFaxInboundRoutingMethods;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxInboundRoutingMethods * This,
             /* [annotation][in] */ 
@@ -10324,15 +11040,18 @@ EXTERN_C const IID IID_IFaxInboundRoutingMethods;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethods, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxInboundRoutingMethods * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethods, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxInboundRoutingMethods * This,
             /* [in] */ VARIANT vIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxInboundRoutingMethod **pFaxInboundRoutingMethod);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethods, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxInboundRoutingMethods * This,
             /* [retval][out] */ __RPC__out long *plCount);
@@ -10442,28 +11161,34 @@ EXTERN_C const IID IID_IFaxInboundRoutingMethod;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxInboundRoutingMethod * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxInboundRoutingMethod * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10472,6 +11197,7 @@ EXTERN_C const IID IID_IFaxInboundRoutingMethod;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxInboundRoutingMethod * This,
             /* [annotation][in] */ 
@@ -10491,37 +11217,46 @@ EXTERN_C const IID IID_IFaxInboundRoutingMethod;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, get_Name)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Name )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, get_GUID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GUID )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrGUID);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, get_FunctionName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FunctionName )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrFunctionName);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, get_ExtensionFriendlyName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtensionFriendlyName )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtensionFriendlyName);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, get_ExtensionImageName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtensionImageName )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtensionImageName);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, get_Priority)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [retval][out] */ __RPC__out long *plPriority);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, put_Priority)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             __RPC__in IFaxInboundRoutingMethod * This,
             /* [in] */ long lPriority);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxInboundRoutingMethod * This);
         
+        DECLSPEC_XFGVIRT(IFaxInboundRoutingMethod, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxInboundRoutingMethod * This);
         
@@ -10642,28 +11377,34 @@ EXTERN_C const IID IID_IFaxDocument2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxDocument2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxDocument2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxDocument2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -10672,6 +11413,7 @@ EXTERN_C const IID IID_IFaxDocument2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxDocument2 * This,
             /* [annotation][in] */ 
@@ -10691,162 +11433,201 @@ EXTERN_C const IID IID_IFaxDocument2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Body)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Body )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrBody);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_Body)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Body )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in BSTR bstrBody);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Sender)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Sender )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSender **ppFaxSender);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Recipients)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recipients )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipients **ppFaxRecipients);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_CoverPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CoverPage )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCoverPage);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_CoverPage)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CoverPage )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in BSTR bstrCoverPage);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Subject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subject )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_Subject)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Subject )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in BSTR bstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Note)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Note )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrNote);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_Note)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Note )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in BSTR bstrNote);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_ScheduleTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScheduleTime )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateScheduleTime);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_ScheduleTime)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScheduleTime )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ DATE dateScheduleTime);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_ReceiptAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptAddress )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReceiptAddress);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_ReceiptAddress)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReceiptAddress )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in BSTR bstrReceiptAddress);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_DocumentName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentName )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_DocumentName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DocumentName )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in BSTR bstrDocumentName);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_CallHandle)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallHandle )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out long *plCallHandle);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_CallHandle)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CallHandle )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ long lCallHandle);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_CoverPageType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CoverPageType )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out FAX_COVERPAGE_TYPE_ENUM *pCoverPageType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_CoverPageType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_CoverPageType )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ FAX_COVERPAGE_TYPE_ENUM CoverPageType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_ScheduleType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScheduleType )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out FAX_SCHEDULE_TYPE_ENUM *pScheduleType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_ScheduleType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ScheduleType )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ FAX_SCHEDULE_TYPE_ENUM ScheduleType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_ReceiptType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptType )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out FAX_RECEIPT_TYPE_ENUM *pReceiptType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_ReceiptType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReceiptType )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ FAX_RECEIPT_TYPE_ENUM ReceiptType);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_GroupBroadcastReceipts)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GroupBroadcastReceipts )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseGrouping);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_GroupBroadcastReceipts)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_GroupBroadcastReceipts )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ VARIANT_BOOL bUseGrouping);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_Priority)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out FAX_PRIORITY_TYPE_ENUM *pPriority);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_Priority)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Priority )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ FAX_PRIORITY_TYPE_ENUM Priority);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_TapiConnection)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TapiConnection )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IDispatch **ppTapiConnection);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, putref_TapiConnection)
         /* [helpstring][id][propputref] */ HRESULT ( STDMETHODCALLTYPE *putref_TapiConnection )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in_opt IDispatch *pTapiConnection);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, Submit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Submit )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in BSTR bstrFaxServerName,
             /* [retval][out] */ __RPC__out VARIANT *pvFaxOutgoingJobIDs);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, ConnectedSubmit)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ConnectedSubmit )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in_opt IFaxServer *pFaxServer,
             /* [retval][out] */ __RPC__out VARIANT *pvFaxOutgoingJobIDs);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, get_AttachFaxToReceipt)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AttachFaxToReceipt )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbAttachFax);
         
+        DECLSPEC_XFGVIRT(IFaxDocument, put_AttachFaxToReceipt)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AttachFaxToReceipt )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ VARIANT_BOOL bAttachFax);
         
+        DECLSPEC_XFGVIRT(IFaxDocument2, get_SubmissionId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionId )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubmissionId);
         
+        DECLSPEC_XFGVIRT(IFaxDocument2, get_Bodies)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Bodies )( 
             __RPC__in IFaxDocument2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvBodies);
         
+        DECLSPEC_XFGVIRT(IFaxDocument2, put_Bodies)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Bodies )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ VARIANT vBodies);
         
+        DECLSPEC_XFGVIRT(IFaxDocument2, Submit2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Submit2 )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in BSTR bstrFaxServerName,
             /* [out] */ __RPC__out VARIANT *pvFaxOutgoingJobIDs,
             /* [retval][out] */ __RPC__out long *plErrorBodyFile);
         
+        DECLSPEC_XFGVIRT(IFaxDocument2, ConnectedSubmit2)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ConnectedSubmit2 )( 
             __RPC__in IFaxDocument2 * This,
             /* [in] */ __RPC__in_opt IFaxServer *pFaxServer,
@@ -11166,28 +11947,34 @@ EXTERN_C const IID IID_IFaxConfiguration;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxConfiguration * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxConfiguration * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxConfiguration * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11196,6 +11983,7 @@ EXTERN_C const IID IID_IFaxConfiguration;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxConfiguration * This,
             /* [annotation][in] */ 
@@ -11215,169 +12003,211 @@ EXTERN_C const IID IID_IFaxConfiguration;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_UseArchive)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseArchive )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseArchive);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_UseArchive)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseArchive )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bUseArchive);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_ArchiveLocation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ArchiveLocation )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrArchiveLocation);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_ArchiveLocation)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ArchiveLocation )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ __RPC__in BSTR bstrArchiveLocation);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_SizeQuotaWarning)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeQuotaWarning )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbSizeQuotaWarning);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_SizeQuotaWarning)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SizeQuotaWarning )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bSizeQuotaWarning);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_HighQuotaWaterMark)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HighQuotaWaterMark )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out long *plHighQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_HighQuotaWaterMark)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HighQuotaWaterMark )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ long lHighQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_LowQuotaWaterMark)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LowQuotaWaterMark )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out long *plLowQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_LowQuotaWaterMark)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_LowQuotaWaterMark )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ long lLowQuotaWaterMark);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_ArchiveAgeLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ArchiveAgeLimit )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out long *plArchiveAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_ArchiveAgeLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_ArchiveAgeLimit )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ long lArchiveAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_ArchiveSizeLow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ArchiveSizeLow )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out long *plSizeLow);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_ArchiveSizeHigh)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ArchiveSizeHigh )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out long *plSizeHigh);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_OutgoingQueueBlocked)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutgoingQueueBlocked )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbOutgoingBlocked);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_OutgoingQueueBlocked)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OutgoingQueueBlocked )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bOutgoingBlocked);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_OutgoingQueuePaused)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutgoingQueuePaused )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbOutgoingPaused);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_OutgoingQueuePaused)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OutgoingQueuePaused )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bOutgoingPaused);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_AllowPersonalCoverPages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AllowPersonalCoverPages )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbAllowPersonalCoverPages);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_AllowPersonalCoverPages)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AllowPersonalCoverPages )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bAllowPersonalCoverPages);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_UseDeviceTSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseDeviceTSID )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbUseDeviceTSID);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_UseDeviceTSID)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseDeviceTSID )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bUseDeviceTSID);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_Retries)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Retries )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ long lRetries);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_RetryDelay)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RetryDelay )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out long *plRetryDelay);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_RetryDelay)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_RetryDelay )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ long lRetryDelay);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_DiscountRateStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiscountRateStart )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out DATE *pdateDiscountRateStart);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_DiscountRateStart)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DiscountRateStart )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ DATE dateDiscountRateStart);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_DiscountRateEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DiscountRateEnd )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out DATE *pdateDiscountRateEnd);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_DiscountRateEnd)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_DiscountRateEnd )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ DATE dateDiscountRateEnd);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_OutgoingQueueAgeLimit)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutgoingQueueAgeLimit )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out long *plOutgoingQueueAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_OutgoingQueueAgeLimit)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_OutgoingQueueAgeLimit )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ long lOutgoingQueueAgeLimit);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_Branding)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Branding )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbBranding);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_Branding)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Branding )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bBranding);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_IncomingQueueBlocked)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncomingQueueBlocked )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbIncomingBlocked);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_IncomingQueueBlocked)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IncomingQueueBlocked )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bIncomingBlocked);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_AutoCreateAccountOnConnect)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AutoCreateAccountOnConnect )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbAutoCreateAccountOnConnect);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_AutoCreateAccountOnConnect)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_AutoCreateAccountOnConnect )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bAutoCreateAccountOnConnect);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, get_IncomingFaxesArePublic)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncomingFaxesArePublic )( 
             __RPC__in IFaxConfiguration * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbIncomingFaxesArePublic);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, put_IncomingFaxesArePublic)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_IncomingFaxesArePublic )( 
             __RPC__in IFaxConfiguration * This,
             /* [in] */ VARIANT_BOOL bIncomingFaxesArePublic);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxConfiguration * This);
         
+        DECLSPEC_XFGVIRT(IFaxConfiguration, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxConfiguration * This);
         
@@ -11590,28 +12420,34 @@ EXTERN_C const IID IID_IFaxServer2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxServer2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxServer2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxServer2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11620,6 +12456,7 @@ EXTERN_C const IID IID_IFaxServer2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxServer2 * This,
             /* [annotation][in] */ 
@@ -11639,87 +12476,108 @@ EXTERN_C const IID IID_IFaxServer2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxServer, Connect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in BSTR bstrServerName);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_ServerName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ServerName )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrServerName);
         
+        DECLSPEC_XFGVIRT(IFaxServer, GetDeviceProviders)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDeviceProviders )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxDeviceProviders **ppFaxDeviceProviders);
         
+        DECLSPEC_XFGVIRT(IFaxServer, GetDevices)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetDevices )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxDevices **ppFaxDevices);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_InboundRouting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InboundRouting )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxInboundRouting **ppFaxInboundRouting);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_Folders)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Folders )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxFolders **pFaxFolders);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_LoggingOptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_LoggingOptions )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxLoggingOptions **ppFaxLoggingOptions);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_MajorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorVersion )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__out long *plMajorVersion);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_MinorVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorVersion )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__out long *plMinorVersion);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_MajorBuild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MajorBuild )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__out long *plMajorBuild);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_MinorBuild)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_MinorBuild )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__out long *plMinorBuild);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_Debug)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Debug )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbDebug);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_Activity)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Activity )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxActivity **ppFaxActivity);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_OutboundRouting)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutboundRouting )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutboundRouting **ppFaxOutboundRouting);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_ReceiptOptions)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptOptions )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxReceiptOptions **ppFaxReceiptOptions);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_Security)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Security )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSecurity **ppFaxSecurity);
         
+        DECLSPEC_XFGVIRT(IFaxServer, Disconnect)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in IFaxServer2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxServer, GetExtensionProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetExtensionProperty )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in BSTR bstrGUID,
             /* [retval][out] */ __RPC__out VARIANT *pvProperty);
         
+        DECLSPEC_XFGVIRT(IFaxServer, SetExtensionProperty)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *SetExtensionProperty )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in BSTR bstrGUID,
             /* [in] */ VARIANT vProperty);
         
+        DECLSPEC_XFGVIRT(IFaxServer, ListenToServerEvents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenToServerEvents )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ FAX_SERVER_EVENTS_TYPE_ENUM EventTypes);
         
+        DECLSPEC_XFGVIRT(IFaxServer, RegisterDeviceProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterDeviceProvider )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in BSTR bstrGUID,
@@ -11728,10 +12586,12 @@ EXTERN_C const IID IID_IFaxServer2;
             /* [in] */ __RPC__in BSTR TspName,
             /* [in] */ long lFSPIVersion);
         
+        DECLSPEC_XFGVIRT(IFaxServer, UnregisterDeviceProvider)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterDeviceProvider )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in BSTR bstrUniqueName);
         
+        DECLSPEC_XFGVIRT(IFaxServer, RegisterInboundRoutingExtension)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RegisterInboundRoutingExtension )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in BSTR bstrExtensionName,
@@ -11739,30 +12599,37 @@ EXTERN_C const IID IID_IFaxServer2;
             /* [in] */ __RPC__in BSTR bstrImageName,
             /* [in] */ VARIANT vMethods);
         
+        DECLSPEC_XFGVIRT(IFaxServer, UnregisterInboundRoutingExtension)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *UnregisterInboundRoutingExtension )( 
             __RPC__in IFaxServer2 * This,
             /* [in] */ __RPC__in BSTR bstrExtensionUniqueName);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_RegisteredEvents)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RegisteredEvents )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__out FAX_SERVER_EVENTS_TYPE_ENUM *pEventTypes);
         
+        DECLSPEC_XFGVIRT(IFaxServer, get_APIVersion)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_APIVersion )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__out FAX_SERVER_APIVERSION_ENUM *pAPIVersion);
         
+        DECLSPEC_XFGVIRT(IFaxServer2, get_Configuration)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Configuration )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxConfiguration **ppFaxConfiguration);
         
+        DECLSPEC_XFGVIRT(IFaxServer2, get_CurrentAccount)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentAccount )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccount **ppCurrentAccount);
         
+        DECLSPEC_XFGVIRT(IFaxServer2, get_FaxAccountSet)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_FaxAccountSet )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccountSet **ppFaxAccountSet);
         
+        DECLSPEC_XFGVIRT(IFaxServer2, get_Security2)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Security2 )( 
             __RPC__in IFaxServer2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSecurity2 **ppFaxSecurity2);
@@ -11943,28 +12810,34 @@ EXTERN_C const IID IID_IFaxAccountSet;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccountSet * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccountSet * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccountSet * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccountSet * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccountSet * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccountSet * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -11973,6 +12846,7 @@ EXTERN_C const IID IID_IFaxAccountSet;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccountSet * This,
             /* [annotation][in] */ 
@@ -11992,20 +12866,24 @@ EXTERN_C const IID IID_IFaxAccountSet;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxAccountSet, GetAccounts)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAccounts )( 
             __RPC__in IFaxAccountSet * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccounts **ppFaxAccounts);
         
+        DECLSPEC_XFGVIRT(IFaxAccountSet, GetAccount)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetAccount )( 
             __RPC__in IFaxAccountSet * This,
             /* [in] */ __RPC__in BSTR bstrAccountName,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccount **pFaxAccount);
         
+        DECLSPEC_XFGVIRT(IFaxAccountSet, AddAccount)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *AddAccount )( 
             __RPC__in IFaxAccountSet * This,
             /* [in] */ __RPC__in BSTR bstrAccountName,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccount **pFaxAccount);
         
+        DECLSPEC_XFGVIRT(IFaxAccountSet, RemoveAccount)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *RemoveAccount )( 
             __RPC__in IFaxAccountSet * This,
             /* [in] */ __RPC__in BSTR bstrAccountName);
@@ -12103,28 +12981,34 @@ EXTERN_C const IID IID_IFaxAccounts;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccounts * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccounts * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccounts * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccounts * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccounts * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccounts * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12133,6 +13017,7 @@ EXTERN_C const IID IID_IFaxAccounts;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccounts * This,
             /* [annotation][in] */ 
@@ -12152,15 +13037,18 @@ EXTERN_C const IID IID_IFaxAccounts;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxAccounts, get__NewEnum)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get__NewEnum )( 
             __RPC__in IFaxAccounts * This,
             /* [retval][out] */ __RPC__deref_out_opt IUnknown **ppUnk);
         
+        DECLSPEC_XFGVIRT(IFaxAccounts, get_Item)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Item )( 
             __RPC__in IFaxAccounts * This,
             /* [in] */ VARIANT vIndex,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccount **pFaxAccount);
         
+        DECLSPEC_XFGVIRT(IFaxAccounts, get_Count)
         /* [propget][id] */ HRESULT ( STDMETHODCALLTYPE *get_Count )( 
             __RPC__in IFaxAccounts * This,
             /* [retval][out] */ __RPC__out long *plCount);
@@ -12268,28 +13156,34 @@ EXTERN_C const IID IID_IFaxAccount;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccount * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccount * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccount * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccount * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccount * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccount * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12298,6 +13192,7 @@ EXTERN_C const IID IID_IFaxAccount;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccount * This,
             /* [annotation][in] */ 
@@ -12317,18 +13212,22 @@ EXTERN_C const IID IID_IFaxAccount;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxAccount, get_AccountName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AccountName )( 
             __RPC__in IFaxAccount * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrAccountName);
         
+        DECLSPEC_XFGVIRT(IFaxAccount, get_Folders)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Folders )( 
             __RPC__in IFaxAccount * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccountFolders **ppFolders);
         
+        DECLSPEC_XFGVIRT(IFaxAccount, ListenToAccountEvents)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ListenToAccountEvents )( 
             __RPC__in IFaxAccount * This,
             /* [in] */ FAX_ACCOUNT_EVENTS_TYPE_ENUM EventTypes);
         
+        DECLSPEC_XFGVIRT(IFaxAccount, get_RegisteredEvents)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RegisteredEvents )( 
             __RPC__in IFaxAccount * This,
             /* [retval][out] */ __RPC__out FAX_ACCOUNT_EVENTS_TYPE_ENUM *pRegisteredEvents);
@@ -12425,28 +13324,34 @@ EXTERN_C const IID IID_IFaxOutgoingJob2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutgoingJob2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutgoingJob2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12455,6 +13360,7 @@ EXTERN_C const IID IID_IFaxOutgoingJob2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutgoingJob2 * This,
             /* [annotation][in] */ 
@@ -12474,133 +13380,167 @@ EXTERN_C const IID IID_IFaxOutgoingJob2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Subject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subject )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_DocumentName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentName )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Pages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pages )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out long *plPages);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Size)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_SubmissionId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionId )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubmissionId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_OriginalScheduledTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OriginalScheduledTime )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateOriginalScheduledTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_SubmissionTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionTime )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateSubmissionTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_ReceiptType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptType )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out FAX_RECEIPT_TYPE_ENUM *pReceiptType);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Priority)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out FAX_PRIORITY_TYPE_ENUM *pPriority);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Sender)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Sender )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSender **ppFaxSender);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Recipient)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recipient )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipient **ppFaxRecipient);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_CurrentPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CurrentPage )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out long *plCurrentPage);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_DeviceId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceId )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out long *plDeviceId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Status)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Status )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out FAX_JOB_STATUS_ENUM *pStatus);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_ExtendedStatusCode)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedStatusCode )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out FAX_JOB_EXTENDED_STATUS_ENUM *pExtendedStatusCode);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_ExtendedStatus)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ExtendedStatus )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrExtendedStatus);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_AvailableOperations)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_AvailableOperations )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out FAX_JOB_OPERATIONS_ENUM *pAvailableOperations);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_ScheduledTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScheduledTime )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateScheduledTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_TransmissionStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStart )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_TransmissionEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionEnd )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, get_GroupBroadcastReceipts)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GroupBroadcastReceipts )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbGroupBroadcastReceipts);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Pause)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Pause )( 
             __RPC__in IFaxOutgoingJob2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Resume)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Resume )( 
             __RPC__in IFaxOutgoingJob2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Restart)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Restart )( 
             __RPC__in IFaxOutgoingJob2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, CopyTiff)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTiff )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [in] */ __RPC__in BSTR bstrTiffPath);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxOutgoingJob2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob, Cancel)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Cancel )( 
             __RPC__in IFaxOutgoingJob2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob2, get_HasCoverPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HasCoverPage )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbHasCoverPage);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob2, get_ReceiptAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptAddress )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReceiptAddress);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingJob2, get_ScheduleType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ScheduleType )( 
             __RPC__in IFaxOutgoingJob2 * This,
             /* [retval][out] */ __RPC__out FAX_SCHEDULE_TYPE_ENUM *pScheduleType);
@@ -12791,28 +13731,34 @@ EXTERN_C const IID IID_IFaxAccountFolders;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccountFolders * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccountFolders * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccountFolders * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccountFolders * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccountFolders * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccountFolders * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12821,6 +13767,7 @@ EXTERN_C const IID IID_IFaxAccountFolders;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccountFolders * This,
             /* [annotation][in] */ 
@@ -12840,18 +13787,22 @@ EXTERN_C const IID IID_IFaxAccountFolders;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxAccountFolders, get_OutgoingQueue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutgoingQueue )( 
             __RPC__in IFaxAccountFolders * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccountOutgoingQueue **pFaxOutgoingQueue);
         
+        DECLSPEC_XFGVIRT(IFaxAccountFolders, get_IncomingQueue)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncomingQueue )( 
             __RPC__in IFaxAccountFolders * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccountIncomingQueue **pFaxIncomingQueue);
         
+        DECLSPEC_XFGVIRT(IFaxAccountFolders, get_IncomingArchive)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncomingArchive )( 
             __RPC__in IFaxAccountFolders * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccountIncomingArchive **pFaxIncomingArchive);
         
+        DECLSPEC_XFGVIRT(IFaxAccountFolders, get_OutgoingArchive)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OutgoingArchive )( 
             __RPC__in IFaxAccountFolders * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxAccountOutgoingArchive **pFaxOutgoingArchive);
@@ -12946,28 +13897,34 @@ EXTERN_C const IID IID_IFaxAccountIncomingQueue;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccountIncomingQueue * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccountIncomingQueue * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccountIncomingQueue * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccountIncomingQueue * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccountIncomingQueue * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccountIncomingQueue * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -12976,6 +13933,7 @@ EXTERN_C const IID IID_IFaxAccountIncomingQueue;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccountIncomingQueue * This,
             /* [annotation][in] */ 
@@ -12995,10 +13953,12 @@ EXTERN_C const IID IID_IFaxAccountIncomingQueue;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxAccountIncomingQueue, GetJobs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetJobs )( 
             __RPC__in IFaxAccountIncomingQueue * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxIncomingJobs **pFaxIncomingJobs);
         
+        DECLSPEC_XFGVIRT(IFaxAccountIncomingQueue, GetJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetJob )( 
             __RPC__in IFaxAccountIncomingQueue * This,
             /* [in] */ __RPC__in BSTR bstrJobId,
@@ -13088,28 +14048,34 @@ EXTERN_C const IID IID_IFaxAccountOutgoingQueue;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccountOutgoingQueue * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccountOutgoingQueue * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccountOutgoingQueue * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccountOutgoingQueue * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccountOutgoingQueue * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccountOutgoingQueue * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13118,6 +14084,7 @@ EXTERN_C const IID IID_IFaxAccountOutgoingQueue;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccountOutgoingQueue * This,
             /* [annotation][in] */ 
@@ -13137,10 +14104,12 @@ EXTERN_C const IID IID_IFaxAccountOutgoingQueue;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxAccountOutgoingQueue, GetJobs)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetJobs )( 
             __RPC__in IFaxAccountOutgoingQueue * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutgoingJobs **pFaxOutgoingJobs);
         
+        DECLSPEC_XFGVIRT(IFaxAccountOutgoingQueue, GetJob)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetJob )( 
             __RPC__in IFaxAccountOutgoingQueue * This,
             /* [in] */ __RPC__in BSTR bstrJobId,
@@ -13242,28 +14211,34 @@ EXTERN_C const IID IID_IFaxOutgoingMessage2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxOutgoingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxOutgoingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13272,6 +14247,7 @@ EXTERN_C const IID IID_IFaxOutgoingMessage2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxOutgoingMessage2 * This,
             /* [annotation][in] */ 
@@ -13291,104 +14267,130 @@ EXTERN_C const IID IID_IFaxOutgoingMessage2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_SubmissionId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionId )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubmissionId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Subject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subject )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_DocumentName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DocumentName )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDocumentName);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Pages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pages )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out long *plPages);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Size)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_OriginalScheduledTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_OriginalScheduledTime )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateOriginalScheduledTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_SubmissionTime)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SubmissionTime )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateSubmissionTime);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Priority)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Priority )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out FAX_PRIORITY_TYPE_ENUM *pPriority);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Sender)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Sender )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxSender **ppFaxSender);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_Recipient)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recipient )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt IFaxRecipient **ppFaxRecipient);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_DeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceName )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_TransmissionStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStart )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_TransmissionEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionEnd )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, CopyTiff)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTiff )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrTiffPath);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IFaxOutgoingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage2, get_HasCoverPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HasCoverPage )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbHasCoverPage);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage2, get_ReceiptType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptType )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out FAX_RECEIPT_TYPE_ENUM *pReceiptType);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage2, get_ReceiptAddress)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReceiptAddress )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrReceiptAddress);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage2, get_Read)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Read )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRead);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage2, put_Read)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Read )( 
             __RPC__in IFaxOutgoingMessage2 * This,
             /* [in] */ VARIANT_BOOL bRead);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage2, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxOutgoingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxOutgoingMessage2, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxOutgoingMessage2 * This);
         
@@ -13558,28 +14560,34 @@ EXTERN_C const IID IID_IFaxAccountIncomingArchive;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccountIncomingArchive * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccountIncomingArchive * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccountIncomingArchive * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccountIncomingArchive * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccountIncomingArchive * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccountIncomingArchive * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13588,6 +14596,7 @@ EXTERN_C const IID IID_IFaxAccountIncomingArchive;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccountIncomingArchive * This,
             /* [annotation][in] */ 
@@ -13607,22 +14616,27 @@ EXTERN_C const IID IID_IFaxAccountIncomingArchive;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxAccountIncomingArchive, get_SizeLow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeLow )( 
             __RPC__in IFaxAccountIncomingArchive * This,
             /* [retval][out] */ __RPC__out long *plSizeLow);
         
+        DECLSPEC_XFGVIRT(IFaxAccountIncomingArchive, get_SizeHigh)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeHigh )( 
             __RPC__in IFaxAccountIncomingArchive * This,
             /* [retval][out] */ __RPC__out long *plSizeHigh);
         
+        DECLSPEC_XFGVIRT(IFaxAccountIncomingArchive, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxAccountIncomingArchive * This);
         
+        DECLSPEC_XFGVIRT(IFaxAccountIncomingArchive, GetMessages)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMessages )( 
             __RPC__in IFaxAccountIncomingArchive * This,
             /* [defaultvalue][in] */ long lPrefetchSize,
             /* [retval][out] */ __RPC__deref_out_opt IFaxIncomingMessageIterator **pFaxIncomingMessageIterator);
         
+        DECLSPEC_XFGVIRT(IFaxAccountIncomingArchive, GetMessage)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMessage )( 
             __RPC__in IFaxAccountIncomingArchive * This,
             /* [in] */ __RPC__in BSTR bstrMessageId,
@@ -13730,28 +14744,34 @@ EXTERN_C const IID IID_IFaxAccountOutgoingArchive;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccountOutgoingArchive * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccountOutgoingArchive * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccountOutgoingArchive * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccountOutgoingArchive * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccountOutgoingArchive * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccountOutgoingArchive * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13760,6 +14780,7 @@ EXTERN_C const IID IID_IFaxAccountOutgoingArchive;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccountOutgoingArchive * This,
             /* [annotation][in] */ 
@@ -13779,22 +14800,27 @@ EXTERN_C const IID IID_IFaxAccountOutgoingArchive;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxAccountOutgoingArchive, get_SizeLow)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeLow )( 
             __RPC__in IFaxAccountOutgoingArchive * This,
             /* [retval][out] */ __RPC__out long *plSizeLow);
         
+        DECLSPEC_XFGVIRT(IFaxAccountOutgoingArchive, get_SizeHigh)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SizeHigh )( 
             __RPC__in IFaxAccountOutgoingArchive * This,
             /* [retval][out] */ __RPC__out long *plSizeHigh);
         
+        DECLSPEC_XFGVIRT(IFaxAccountOutgoingArchive, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxAccountOutgoingArchive * This);
         
+        DECLSPEC_XFGVIRT(IFaxAccountOutgoingArchive, GetMessages)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMessages )( 
             __RPC__in IFaxAccountOutgoingArchive * This,
             /* [defaultvalue][in] */ long lPrefetchSize,
             /* [retval][out] */ __RPC__deref_out_opt IFaxOutgoingMessageIterator **pFaxOutgoingMessageIterator);
         
+        DECLSPEC_XFGVIRT(IFaxAccountOutgoingArchive, GetMessage)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *GetMessage )( 
             __RPC__in IFaxAccountOutgoingArchive * This,
             /* [in] */ __RPC__in BSTR bstrMessageId,
@@ -13920,28 +14946,34 @@ EXTERN_C const IID IID_IFaxSecurity2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxSecurity2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxSecurity2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxSecurity2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxSecurity2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxSecurity2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxSecurity2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -13950,6 +14982,7 @@ EXTERN_C const IID IID_IFaxSecurity2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxSecurity2 * This,
             /* [annotation][in] */ 
@@ -13969,28 +15002,35 @@ EXTERN_C const IID IID_IFaxSecurity2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity2, get_Descriptor)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Descriptor )( 
             __RPC__in IFaxSecurity2 * This,
             /* [retval][out] */ __RPC__out VARIANT *pvDescriptor);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity2, put_Descriptor)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Descriptor )( 
             __RPC__in IFaxSecurity2 * This,
             /* [in] */ VARIANT vDescriptor);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity2, get_GrantedRights)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_GrantedRights )( 
             __RPC__in IFaxSecurity2 * This,
             /* [retval][out] */ __RPC__out FAX_ACCESS_RIGHTS_ENUM_2 *pGrantedRights);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity2, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxSecurity2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity2, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxSecurity2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity2, get_InformationType)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_InformationType )( 
             __RPC__in IFaxSecurity2 * This,
             /* [retval][out] */ __RPC__out long *plInformationType);
         
+        DECLSPEC_XFGVIRT(IFaxSecurity2, put_InformationType)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_InformationType )( 
             __RPC__in IFaxSecurity2 * This,
             /* [in] */ long lInformationType);
@@ -14132,28 +15172,34 @@ EXTERN_C const IID IID_IFaxIncomingMessage2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxIncomingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxIncomingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -14162,6 +15208,7 @@ EXTERN_C const IID IID_IFaxIncomingMessage2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxIncomingMessage2 * This,
             /* [annotation][in] */ 
@@ -14181,115 +15228,144 @@ EXTERN_C const IID IID_IFaxIncomingMessage2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_Id)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Id )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrId);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_Pages)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Pages )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__out long *plPages);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_Size)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Size )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__out long *plSize);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_DeviceName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeviceName )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrDeviceName);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_Retries)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Retries )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__out long *plRetries);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_TransmissionStart)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionStart )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionStart);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_TransmissionEnd)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TransmissionEnd )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__out DATE *pdateTransmissionEnd);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_CSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CSID )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCSID);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_TSID)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_TSID )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrTSID);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_CallerId)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_CallerId )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCallerId);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, get_RoutingInformation)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_RoutingInformation )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRoutingInformation);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, CopyTiff)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *CopyTiff )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrTiffPath);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage, Delete)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IFaxIncomingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, get_Subject)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Subject )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, put_Subject)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Subject )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrSubject);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, get_SenderName)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SenderName )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSenderName);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, put_SenderName)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SenderName )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrSenderName);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, get_SenderFaxNumber)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_SenderFaxNumber )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrSenderFaxNumber);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, put_SenderFaxNumber)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_SenderFaxNumber )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrSenderFaxNumber);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, get_HasCoverPage)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_HasCoverPage )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbHasCoverPage);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, put_HasCoverPage)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_HasCoverPage )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ VARIANT_BOOL bHasCoverPage);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, get_Recipients)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Recipients )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrRecipients);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, put_Recipients)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Recipients )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ __RPC__in BSTR bstrRecipients);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, get_WasReAssigned)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_WasReAssigned )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbWasReAssigned);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, get_Read)
         /* [helpstring][id][propget] */ HRESULT ( STDMETHODCALLTYPE *get_Read )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [retval][out] */ __RPC__out VARIANT_BOOL *pbRead);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, put_Read)
         /* [helpstring][id][propput] */ HRESULT ( STDMETHODCALLTYPE *put_Read )( 
             __RPC__in IFaxIncomingMessage2 * This,
             /* [in] */ VARIANT_BOOL bRead);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, ReAssign)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *ReAssign )( 
             __RPC__in IFaxIncomingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, Save)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Save )( 
             __RPC__in IFaxIncomingMessage2 * This);
         
+        DECLSPEC_XFGVIRT(IFaxIncomingMessage2, Refresh)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *Refresh )( 
             __RPC__in IFaxIncomingMessage2 * This);
         
@@ -14466,28 +15542,34 @@ EXTERN_C const IID DIID_IFaxServerNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxServerNotify * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxServerNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxServerNotify * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxServerNotify * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxServerNotify * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxServerNotify * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -14496,6 +15578,7 @@ EXTERN_C const IID DIID_IFaxServerNotify;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxServerNotify * This,
             /* [annotation][in] */ 
@@ -14688,28 +15771,34 @@ EXTERN_C const IID IID__IFaxServerNotify2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IFaxServerNotify2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IFaxServerNotify2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -14718,6 +15807,7 @@ EXTERN_C const IID IID__IFaxServerNotify2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IFaxServerNotify2 * This,
             /* [annotation][in] */ 
@@ -14737,98 +15827,119 @@ EXTERN_C const IID IID__IFaxServerNotify2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnIncomingJobAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingJobAdded )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrJobId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnIncomingJobRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingJobRemoved )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrJobId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnIncomingJobChanged)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingJobChanged )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrJobId,
             /* [in] */ __RPC__in_opt IFaxJobStatus *pJobStatus);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutgoingJobAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingJobAdded )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrJobId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutgoingJobRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingJobRemoved )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrJobId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutgoingJobChanged)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingJobChanged )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrJobId,
             /* [in] */ __RPC__in_opt IFaxJobStatus *pJobStatus);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnIncomingMessageAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingMessageAdded )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrMessageId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnIncomingMessageRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingMessageRemoved )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrMessageId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutgoingMessageAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingMessageAdded )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrMessageId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutgoingMessageRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingMessageRemoved )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
             /* [in] */ __RPC__in BSTR bstrMessageId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnReceiptOptionsChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnReceiptOptionsChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnActivityLoggingConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnActivityLoggingConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnSecurityConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnSecurityConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnEventLoggingConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnEventLoggingConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutgoingQueueConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingQueueConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutgoingArchiveConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingArchiveConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnIncomingArchiveConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingArchiveConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnDevicesConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnDevicesConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutboundRoutingGroupsConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutboundRoutingGroupsConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnOutboundRoutingRulesConfigChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutboundRoutingRulesConfigChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnServerActivityChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnServerActivityChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
@@ -14837,6 +15948,7 @@ EXTERN_C const IID IID__IFaxServerNotify2;
             /* [in] */ long lOutgoingMessages,
             /* [in] */ long lQueuedMessages);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnQueuesStatusChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnQueuesStatusChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
@@ -14844,6 +15956,7 @@ EXTERN_C const IID IID__IFaxServerNotify2;
             /* [in] */ VARIANT_BOOL bOutgoingQueuePaused,
             /* [in] */ VARIANT_BOOL bIncomingQueueBlocked);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnNewCall)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnNewCall )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
@@ -14851,10 +15964,12 @@ EXTERN_C const IID IID__IFaxServerNotify2;
             /* [in] */ long lDeviceId,
             /* [in] */ __RPC__in BSTR bstrCallerId);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnServerShutDown)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnServerShutDown )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnDeviceStatusChange)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnDeviceStatusChange )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer,
@@ -14864,6 +15979,7 @@ EXTERN_C const IID IID__IFaxServerNotify2;
             /* [in] */ VARIANT_BOOL bReceiving,
             /* [in] */ VARIANT_BOOL bRinging);
         
+        DECLSPEC_XFGVIRT(_IFaxServerNotify2, OnGeneralServerConfigChanged)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnGeneralServerConfigChanged )( 
             __RPC__in _IFaxServerNotify2 * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
@@ -15015,28 +16131,34 @@ EXTERN_C const IID DIID_IFaxServerNotify2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxServerNotify2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxServerNotify2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxServerNotify2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxServerNotify2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxServerNotify2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxServerNotify2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -15045,6 +16167,7 @@ EXTERN_C const IID DIID_IFaxServerNotify2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxServerNotify2 * This,
             /* [annotation][in] */ 
@@ -15179,28 +16302,34 @@ EXTERN_C const IID IID__IFaxAccountNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in _IFaxAccountNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in _IFaxAccountNotify * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -15209,6 +16338,7 @@ EXTERN_C const IID IID__IFaxAccountNotify;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             _IFaxAccountNotify * This,
             /* [annotation][in] */ 
@@ -15228,60 +16358,71 @@ EXTERN_C const IID IID__IFaxAccountNotify;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnIncomingJobAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingJobAdded )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrJobId);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnIncomingJobRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingJobRemoved )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrJobId);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnIncomingJobChanged)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingJobChanged )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrJobId,
             /* [in] */ __RPC__in_opt IFaxJobStatus *pJobStatus);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnOutgoingJobAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingJobAdded )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrJobId);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnOutgoingJobRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingJobRemoved )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrJobId);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnOutgoingJobChanged)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingJobChanged )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrJobId,
             /* [in] */ __RPC__in_opt IFaxJobStatus *pJobStatus);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnIncomingMessageAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingMessageAdded )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrMessageId,
             /* [in] */ VARIANT_BOOL fAddedToReceiveFolder);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnIncomingMessageRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnIncomingMessageRemoved )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrMessageId,
             /* [in] */ VARIANT_BOOL fRemovedFromReceiveFolder);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnOutgoingMessageAdded)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingMessageAdded )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrMessageId);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnOutgoingMessageRemoved)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnOutgoingMessageRemoved )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxAccount *pFaxAccount,
             /* [in] */ __RPC__in BSTR bstrMessageId);
         
+        DECLSPEC_XFGVIRT(_IFaxAccountNotify, OnServerShutDown)
         /* [helpstring][id] */ HRESULT ( STDMETHODCALLTYPE *OnServerShutDown )( 
             __RPC__in _IFaxAccountNotify * This,
             /* [in] */ __RPC__in_opt IFaxServer2 *pFaxServer);
@@ -15388,28 +16529,34 @@ EXTERN_C const IID DIID_IFaxAccountNotify;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IFaxAccountNotify * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IFaxAccountNotify * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IFaxAccountNotify * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in IFaxAccountNotify * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in IFaxAccountNotify * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in IFaxAccountNotify * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -15418,6 +16565,7 @@ EXTERN_C const IID DIID_IFaxAccountNotify;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             IFaxAccountNotify * This,
             /* [annotation][in] */ 

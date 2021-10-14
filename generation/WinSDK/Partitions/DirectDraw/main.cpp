@@ -10,3 +10,4 @@
 #include <ddrawi.h>
 #include <ddrawint.h>
 #include <dvp.h>
+#include <dxmini.h>

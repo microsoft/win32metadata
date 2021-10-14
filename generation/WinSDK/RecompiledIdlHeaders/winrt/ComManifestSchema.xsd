@@ -9,6 +9,7 @@
            xmlns:com2="http://schemas.microsoft.com/appx/manifest/com/windows10/2"
            xmlns:com3="http://schemas.microsoft.com/appx/manifest/com/windows10/3"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+           xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -16,6 +17,7 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/com/windows10/2"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/com/windows10/3"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
 
   <xs:element name="Extensions" substitutionGroup="f:ComExtensions" type="CT_ComPackageExtensions"/>
 
@@ -141,6 +143,7 @@
       <xs:attribute name="Category" type="t:ST_ExtensionCategory_Com" use="required"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
+      <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
     </xs:complexType>
   </xs:element>
 
@@ -196,7 +199,7 @@
     <xs:attribute name="Executable" type="t:ST_ExecutableAnyCase" use="required"/>
     <xs:attribute name="Arguments" type="t:ST_NonEmptyString"/>
     <xs:attribute name="DisplayName" type="t:ST_DisplayName"/>
-    <xs:attribute name="LaunchAndActivationPermission" type="ST_Permissions" />
+    <xs:attribute name="LaunchAndActivationPermission" type="t:ST_PermissionsCom" />
   </xs:complexType>
 
   <xs:complexType name="CT_Class">
@@ -299,7 +302,7 @@
 
   <xs:complexType name="CT_ConversionFormat">
     <xs:attribute name="FormatName" type="t:ST_NonEmptyString"/>
-    <xs:attribute name="StandardFormat" type="ST_Hexadecimal"/>
+    <xs:attribute name="StandardFormat" type="t:ST_HexadecimalCom"/>
   </xs:complexType>
 
   <xs:complexType name="CT_DataFormats">
@@ -307,27 +310,27 @@
       <xs:element name="DataFormat" type="CT_DataFormat" minOccurs="0" maxOccurs="1000"/>
     </xs:sequence>
     <xs:attribute name="DefaultFormatName" type="t:ST_NonEmptyString"/>
-    <xs:attribute name="DefaultStandardFormat" type="ST_Hexadecimal"/>
+    <xs:attribute name="DefaultStandardFormat" type="t:ST_HexadecimalCom"/>
   </xs:complexType>
 
   <xs:complexType name="CT_DataFormat">
     <xs:attribute name="FormatName" type="t:ST_NonEmptyString"/>
-    <xs:attribute name="StandardFormat" type="ST_Hexadecimal"/>
-    <xs:attribute name="AspectFlag" type="ST_Aspect" use="required"/>
-    <xs:attribute name="MediumFlag" type="ST_Medium" use="required"/>
-    <xs:attribute name="Direction" type="ST_DataFormatDirection" use="required"/>
+    <xs:attribute name="StandardFormat" type="t:ST_HexadecimalCom"/>
+    <xs:attribute name="AspectFlag" type="t:ST_AspectCom" use="required"/>
+    <xs:attribute name="MediumFlag" type="t:ST_MediumCom" use="required"/>
+    <xs:attribute name="Direction" type="t:ST_DataFormatDirectionCom" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="CT_MiscStatus">
     <xs:sequence>
       <xs:element name="Aspect" type="CT_Aspect" minOccurs="0" maxOccurs="1000"/>
     </xs:sequence>
-    <xs:attribute name="OleMiscFlag" type="ST_OleMisc" use="required"/>
+    <xs:attribute name="OleMiscFlag" type="t:ST_OleMiscCom" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="CT_Aspect">
-    <xs:attribute name="Type" type="ST_AspectType" use="required"/>
-    <xs:attribute name="OleMiscFlag" type="ST_OleMisc" use="required"/>
+    <xs:attribute name="Type" type="t:ST_AspectTypeCom" use="required"/>
+    <xs:attribute name="OleMiscFlag" type="t:ST_OleMiscCom" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="CT_Verbs">
@@ -337,10 +340,10 @@
   </xs:complexType>
 
   <xs:complexType name="CT_ComVerb">
-    <xs:attribute name="Id" type="ST_VerbIndex" use="required"/>
+    <xs:attribute name="Id" type="t:ST_VerbIndexCom" use="required"/>
     <xs:attribute name="DisplayName" type="t:ST_DisplayName" use="required"/>
-    <xs:attribute name="AppendMenuFlag" type="ST_AppendMenu" use="required"/>
-    <xs:attribute name="OleVerbFlag" type="ST_OleVerb" use="required"/>
+    <xs:attribute name="AppendMenuFlag" type="t:ST_AppendMenuCom" use="required"/>
+    <xs:attribute name="OleVerbFlag" type="t:ST_OleVerbCom" use="required"/>
   </xs:complexType>
 
   <xs:complexType name="CT_DefaultIcon">
@@ -359,16 +362,16 @@
     </xs:sequence>
     <xs:attribute name="CustomSurrogateExecutable" type="t:ST_ExecutableAnyCase"/>
     <xs:attribute name="DisplayName" type="t:ST_DisplayName" />
-    <xs:attribute name="LaunchAndActivationPermission" type="ST_Permissions" />
+    <xs:attribute name="LaunchAndActivationPermission" type="t:ST_PermissionsCom" />
     <xs:attribute name="AppId" type="t:ST_GUID" />
-    <xs:attribute name="SystemSurrogate" type="ST_SystemSurrogate" />
+    <xs:attribute name="SystemSurrogate" type="t:ST_SystemSurrogateCom" />
   </xs:complexType>
 
   <xs:complexType name="CT_SurrogateClass">
     <xs:complexContent>
       <xs:extension base="CT_OutOfProcClass">
         <xs:attribute name="Path" type="t:ST_FileName" use="required"/>
-        <xs:attribute name="ThreadingModel" type="ST_ThreadingModel" use="required"/>
+        <xs:attribute name="ThreadingModel" type="t:ST_ThreadingModelCom" use="required"/>
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
@@ -397,7 +400,7 @@
 
   <xs:complexType name="CT_TypeLibRef">
     <xs:attribute name="Id" type="t:ST_GUID" use="required"/>
-    <xs:attribute name="VersionNumber" type="ST_Version"/>
+    <xs:attribute name="VersionNumber" type="t:ST_VersionCom"/>
   </xs:complexType>
 
   <xs:complexType name="CT_TypeLib">
@@ -412,9 +415,9 @@
       <xs:element name="Win32Path" type="CT_TypeLibPath" minOccurs="0"/>
       <xs:element name="Win64Path" type="CT_TypeLibPath" minOccurs="0"/>
     </xs:all>
-    <xs:attribute name="VersionNumber" type="ST_Version" use="required"/>
-    <xs:attribute name="LocaleId" type="ST_Hexadecimal" default="0"/>
-    <xs:attribute name="LibraryFlag" type="ST_LibFlag"/>
+    <xs:attribute name="VersionNumber" type="t:ST_VersionCom" use="required"/>
+    <xs:attribute name="LocaleId" type="t:ST_HexadecimalCom" default="0"/>
+    <xs:attribute name="LibraryFlag" type="t:ST_LibFlagCom"/>
     <xs:attribute name="HelpDirectory" type="t:ST_NonEmptyString"/>
     <xs:attribute name="DisplayName" type="t:ST_DisplayName"/>
   </xs:complexType>
@@ -438,105 +441,6 @@
       </xs:extension>
     </xs:complexContent>
   </xs:complexType>
-
-  <xs:simpleType name="ST_Version">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="(0|[1-9a-fA-F][0-9a-fA-F]{0,3})\.(0|[1-9a-fA-F][0-9a-fA-F]{0,3})"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_Permissions">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="(O:[A-Z0-9\-]*)?(G:[A-Z0-9\-]*)?(D:[PARI]*(\([A-Z0-9\-;]*\))*)?(S:[PARI]*(\([A-Z0-9\-;]*\))*)?"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_Hexadecimal">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="[0-9a-fA-F]{1,4}"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_ThreadingModel">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Both"/>
-      <xs:enumeration value="STA"/>
-      <xs:enumeration value="MTA"/>
-      <xs:enumeration value="MainSTA"/>
-      <xs:enumeration value="Neutral"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_AspectType">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Content"/>
-      <xs:enumeration value="Thumbnail"/>
-      <xs:enumeration value="Icon"/>
-      <xs:enumeration value="DocPrint"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_DataFormatDirection">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="Get"/>
-      <xs:enumeration value="Set"/>
-      <xs:enumeration value="GetAndSet"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_SystemSurrogate">
-    <xs:restriction base="xs:string">
-      <xs:enumeration value="PreviewHost"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_VerbIndex">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="-6"/>
-      <xs:maxInclusive value="1000"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_Aspect">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="-1"/>
-      <xs:maxInclusive value="15"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_Medium">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-      <xs:maxInclusive value="127"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_OleMisc">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-      <xs:maxInclusive value="4194303"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_AppendMenu">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-      <xs:maxInclusive value="2431"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_OleVerb">
-    <xs:restriction base="xs:int">
-      <xs:minInclusive value="0"/>
-      <xs:maxInclusive value="3"/>
-    </xs:restriction>
-  </xs:simpleType>
-
-  <xs:simpleType name="ST_LibFlag">
-    <xs:restriction base="xs:string">
-      <xs:pattern value="[0-9a-fA-F]"/>
-    </xs:restriction>
-  </xs:simpleType>
 
 </xs:schema>
 

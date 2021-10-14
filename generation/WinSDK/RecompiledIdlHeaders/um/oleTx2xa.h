@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -182,35 +190,42 @@ EXTERN_C const IID IID_IDtcToXaMapper;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcToXaMapper * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcToXaMapper * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcToXaMapper * This);
         
+        DECLSPEC_XFGVIRT(IDtcToXaMapper, RequestNewResourceManager)
         HRESULT ( STDMETHODCALLTYPE *RequestNewResourceManager )( 
             __RPC__in IDtcToXaMapper * This,
             /* [in] */ __RPC__in char *pszDSN,
             /* [in] */ __RPC__in char *pszClientDllName,
             /* [out][in] */ __RPC__inout DWORD *pdwRMCookie);
         
+        DECLSPEC_XFGVIRT(IDtcToXaMapper, TranslateTridToXid)
         HRESULT ( STDMETHODCALLTYPE *TranslateTridToXid )( 
             __RPC__in IDtcToXaMapper * This,
             /* [in] */ __RPC__in DWORD *pdwITransaction,
             /* [in] */ DWORD dwRMCookie,
             /* [out][in] */ __RPC__inout XID *pXid);
         
+        DECLSPEC_XFGVIRT(IDtcToXaMapper, EnlistResourceManager)
         HRESULT ( STDMETHODCALLTYPE *EnlistResourceManager )( 
             __RPC__in IDtcToXaMapper * This,
             /* [in] */ DWORD dwRMCookie,
             /* [in] */ __RPC__in DWORD *pdwITransaction);
         
+        DECLSPEC_XFGVIRT(IDtcToXaMapper, ReleaseResourceManager)
         HRESULT ( STDMETHODCALLTYPE *ReleaseResourceManager )( 
             __RPC__in IDtcToXaMapper * This,
             /* [in] */ DWORD dwRMCookie);
@@ -291,18 +306,22 @@ EXTERN_C const IID IID_IDtcToXaHelperFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcToXaHelperFactory * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcToXaHelperFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcToXaHelperFactory * This);
         
+        DECLSPEC_XFGVIRT(IDtcToXaHelperFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IDtcToXaHelperFactory * This,
             /* [in] */ __RPC__in char *pszDSN,
@@ -379,22 +398,27 @@ EXTERN_C const IID IID_IDtcToXaHelper;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcToXaHelper * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcToXaHelper * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcToXaHelper * This);
         
+        DECLSPEC_XFGVIRT(IDtcToXaHelper, Close)
         HRESULT ( STDMETHODCALLTYPE *Close )( 
             __RPC__in IDtcToXaHelper * This,
             /* [in] */ BOOL i_fDoRecovery);
         
+        DECLSPEC_XFGVIRT(IDtcToXaHelper, TranslateTridToXid)
         HRESULT ( STDMETHODCALLTYPE *TranslateTridToXid )( 
             __RPC__in IDtcToXaHelper * This,
             /* [in] */ __RPC__in_opt ITransaction *pITransaction,
@@ -487,18 +511,22 @@ EXTERN_C const IID IID_IDtcToXaHelperSinglePipe;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IDtcToXaHelperSinglePipe * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IDtcToXaHelperSinglePipe * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IDtcToXaHelperSinglePipe * This);
         
+        DECLSPEC_XFGVIRT(IDtcToXaHelperSinglePipe, XARMCreate)
         HRESULT ( STDMETHODCALLTYPE *XARMCreate )( 
             IDtcToXaHelperSinglePipe * This,
             /* [annotation][string][in] */ 
@@ -507,12 +535,14 @@ EXTERN_C const IID IID_IDtcToXaHelperSinglePipe;
             _Null_terminated_  char *pszClientDll,
             /* [out][in] */ DWORD *pdwRMCookie);
         
+        DECLSPEC_XFGVIRT(IDtcToXaHelperSinglePipe, ConvertTridToXID)
         HRESULT ( STDMETHODCALLTYPE *ConvertTridToXID )( 
             IDtcToXaHelperSinglePipe * This,
             /* [in] */ DWORD *pdwITrans,
             /* [in] */ DWORD dwRMCookie,
             /* [out][in] */ XID *pxid);
         
+        DECLSPEC_XFGVIRT(IDtcToXaHelperSinglePipe, EnlistWithRM)
         HRESULT ( STDMETHODCALLTYPE *EnlistWithRM )( 
             IDtcToXaHelperSinglePipe * This,
             /* [in] */ DWORD dwRMCookie,
@@ -520,6 +550,7 @@ EXTERN_C const IID IID_IDtcToXaHelperSinglePipe;
             /* [in] */ ITransactionResourceAsync *i_pITransRes,
             /* [out] */ ITransactionEnlistmentAsync **o_ppITransEnslitment);
         
+        DECLSPEC_XFGVIRT(IDtcToXaHelperSinglePipe, ReleaseRMCookie)
         void ( STDMETHODCALLTYPE *ReleaseRMCookie )( 
             IDtcToXaHelperSinglePipe * This,
             /* [in] */ DWORD i_dwRMCookie,

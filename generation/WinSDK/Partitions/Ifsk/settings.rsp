@@ -1,5 +1,6 @@
 --traverse
 <IncludeRoot>/shared/fltUserStructures.h
 <IncludeRoot>/um/fltUser.h
+<IncludeRoot>/shared/wnnc.h
 --namespace
 Windows.Win32.Storage.InstallableFileSystems

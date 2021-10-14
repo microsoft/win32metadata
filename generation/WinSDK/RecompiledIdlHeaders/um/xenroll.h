@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -333,28 +341,34 @@ EXTERN_C const IID IID_ICEnroll;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICEnroll * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICEnroll * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICEnroll * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICEnroll * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -363,6 +377,7 @@ EXTERN_C const IID IID_ICEnroll;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICEnroll * This,
             /* [annotation][in] */ 
@@ -382,234 +397,290 @@ EXTERN_C const IID IID_ICEnroll;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, createFilePKCS10)
         HRESULT ( STDMETHODCALLTYPE *createFilePKCS10 )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR DNName,
             /* [in] */ __RPC__in BSTR Usage,
             /* [in] */ __RPC__in BSTR wszPKCS10FileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, acceptFilePKCS7)
         HRESULT ( STDMETHODCALLTYPE *acceptFilePKCS7 )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR wszPKCS7FileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, createPKCS10)
         HRESULT ( STDMETHODCALLTYPE *createPKCS10 )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR DNName,
             /* [in] */ __RPC__in BSTR Usage,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPKCS10);
         
+        DECLSPEC_XFGVIRT(ICEnroll, acceptPKCS7)
         HRESULT ( STDMETHODCALLTYPE *acceptPKCS7 )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR PKCS7);
         
+        DECLSPEC_XFGVIRT(ICEnroll, getCertFromPKCS7)
         HRESULT ( STDMETHODCALLTYPE *getCertFromPKCS7 )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR wszPKCS7,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll, enumProviders)
         HRESULT ( STDMETHODCALLTYPE *enumProviders )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG dwFlags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, enumContainers)
         HRESULT ( STDMETHODCALLTYPE *enumContainers )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwIndex,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, freeRequestInfo)
         HRESULT ( STDMETHODCALLTYPE *freeRequestInfo )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR PKCS7OrPKCS10);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreName )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreName )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreType )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreType )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreFlags )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreFlags )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreName )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreName )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreType )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreType )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreFlags )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreFlags )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreName )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreName )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreType )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreType )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreFlags )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreFlags )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreName )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreName )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreType )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreType )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreFlags )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreFlags )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ContainerName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainerName )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrContainer);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ContainerName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContainerName )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrContainer);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderName )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvider);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderName )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstrProvider);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderType )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out LONG *pdwType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderType )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_KeySpec)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeySpec )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out LONG *pdw);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_KeySpec)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_KeySpec )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dw);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderFlags )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderFlags )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_UseExistingKeySet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseExistingKeySet )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out BOOL *fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_UseExistingKeySet)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseExistingKeySet )( 
             __RPC__in ICEnroll * This,
             /* [in] */ BOOL fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_GenKeyFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenKeyFlags )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_GenKeyFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenKeyFlags )( 
             __RPC__in ICEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_DeleteRequestCert)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteRequestCert )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out BOOL *fDelete);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_DeleteRequestCert)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteRequestCert )( 
             __RPC__in ICEnroll * This,
             /* [in] */ BOOL fDelete);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_WriteCertToCSP)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToCSP )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_WriteCertToCSP)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToCSP )( 
             __RPC__in ICEnroll * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_SPCFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SPCFileName )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_SPCFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SPCFileName )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_PVKFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PVKFileName )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_PVKFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PVKFileName )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_HashAlgorithm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in ICEnroll * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_HashAlgorithm)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in ICEnroll * This,
             /* [in] */ __RPC__in BSTR bstr);
@@ -872,28 +943,34 @@ EXTERN_C const IID IID_ICEnroll2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICEnroll2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICEnroll2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICEnroll2 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -902,6 +979,7 @@ EXTERN_C const IID IID_ICEnroll2;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICEnroll2 * This,
             /* [annotation][in] */ 
@@ -921,259 +999,321 @@ EXTERN_C const IID IID_ICEnroll2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, createFilePKCS10)
         HRESULT ( STDMETHODCALLTYPE *createFilePKCS10 )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR DNName,
             /* [in] */ __RPC__in BSTR Usage,
             /* [in] */ __RPC__in BSTR wszPKCS10FileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, acceptFilePKCS7)
         HRESULT ( STDMETHODCALLTYPE *acceptFilePKCS7 )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR wszPKCS7FileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, createPKCS10)
         HRESULT ( STDMETHODCALLTYPE *createPKCS10 )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR DNName,
             /* [in] */ __RPC__in BSTR Usage,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPKCS10);
         
+        DECLSPEC_XFGVIRT(ICEnroll, acceptPKCS7)
         HRESULT ( STDMETHODCALLTYPE *acceptPKCS7 )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR PKCS7);
         
+        DECLSPEC_XFGVIRT(ICEnroll, getCertFromPKCS7)
         HRESULT ( STDMETHODCALLTYPE *getCertFromPKCS7 )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR wszPKCS7,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll, enumProviders)
         HRESULT ( STDMETHODCALLTYPE *enumProviders )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG dwFlags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, enumContainers)
         HRESULT ( STDMETHODCALLTYPE *enumContainers )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwIndex,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, freeRequestInfo)
         HRESULT ( STDMETHODCALLTYPE *freeRequestInfo )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR PKCS7OrPKCS10);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreName )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreName )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreType )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreType )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreName )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreName )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreType )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreType )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreName )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreName )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreType )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreType )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreName )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreName )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreType )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreType )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ContainerName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainerName )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrContainer);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ContainerName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContainerName )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrContainer);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderName )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvider);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderName )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstrProvider);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderType )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out LONG *pdwType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderType )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_KeySpec)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeySpec )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out LONG *pdw);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_KeySpec)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_KeySpec )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dw);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_UseExistingKeySet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseExistingKeySet )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out BOOL *fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_UseExistingKeySet)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseExistingKeySet )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ BOOL fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_GenKeyFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenKeyFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_GenKeyFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenKeyFlags )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_DeleteRequestCert)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteRequestCert )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out BOOL *fDelete);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_DeleteRequestCert)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteRequestCert )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ BOOL fDelete);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_WriteCertToCSP)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToCSP )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_WriteCertToCSP)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToCSP )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_SPCFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SPCFileName )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_SPCFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SPCFileName )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_PVKFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PVKFileName )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_PVKFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PVKFileName )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_HashAlgorithm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_HashAlgorithm)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, addCertTypeToRequest)
         HRESULT ( STDMETHODCALLTYPE *addCertTypeToRequest )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR CertType);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, addNameValuePairToSignature)
         HRESULT ( STDMETHODCALLTYPE *addNameValuePairToSignature )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ __RPC__in BSTR Name,
             /* [in] */ __RPC__in BSTR Value);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, get_WriteCertToUserDS)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToUserDS )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, put_WriteCertToUserDS)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToUserDS )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, get_EnableT61DNEncoding)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableT61DNEncoding )( 
             __RPC__in ICEnroll2 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, put_EnableT61DNEncoding)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableT61DNEncoding )( 
             __RPC__in ICEnroll2 * This,
             /* [in] */ BOOL fBool);
@@ -1482,28 +1622,34 @@ EXTERN_C const IID IID_ICEnroll3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICEnroll3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICEnroll3 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICEnroll3 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1512,6 +1658,7 @@ EXTERN_C const IID IID_ICEnroll3;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICEnroll3 * This,
             /* [annotation][in] */ 
@@ -1531,319 +1678,395 @@ EXTERN_C const IID IID_ICEnroll3;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, createFilePKCS10)
         HRESULT ( STDMETHODCALLTYPE *createFilePKCS10 )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR DNName,
             /* [in] */ __RPC__in BSTR Usage,
             /* [in] */ __RPC__in BSTR wszPKCS10FileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, acceptFilePKCS7)
         HRESULT ( STDMETHODCALLTYPE *acceptFilePKCS7 )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR wszPKCS7FileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, createPKCS10)
         HRESULT ( STDMETHODCALLTYPE *createPKCS10 )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR DNName,
             /* [in] */ __RPC__in BSTR Usage,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPKCS10);
         
+        DECLSPEC_XFGVIRT(ICEnroll, acceptPKCS7)
         HRESULT ( STDMETHODCALLTYPE *acceptPKCS7 )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR PKCS7);
         
+        DECLSPEC_XFGVIRT(ICEnroll, getCertFromPKCS7)
         HRESULT ( STDMETHODCALLTYPE *getCertFromPKCS7 )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR wszPKCS7,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll, enumProviders)
         HRESULT ( STDMETHODCALLTYPE *enumProviders )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG dwFlags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, enumContainers)
         HRESULT ( STDMETHODCALLTYPE *enumContainers )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwIndex,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, freeRequestInfo)
         HRESULT ( STDMETHODCALLTYPE *freeRequestInfo )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR PKCS7OrPKCS10);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreName )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreType )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreType )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreName )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreType )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreType )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreName )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreType )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreType )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreName )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreType )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreType )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ContainerName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainerName )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrContainer);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ContainerName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContainerName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrContainer);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderName )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvider);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstrProvider);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderType )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdwType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderType )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_KeySpec)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeySpec )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdw);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_KeySpec)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_KeySpec )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dw);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_UseExistingKeySet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseExistingKeySet )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out BOOL *fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_UseExistingKeySet)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseExistingKeySet )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_GenKeyFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenKeyFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_GenKeyFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenKeyFlags )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_DeleteRequestCert)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteRequestCert )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out BOOL *fDelete);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_DeleteRequestCert)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteRequestCert )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fDelete);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_WriteCertToCSP)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToCSP )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_WriteCertToCSP)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToCSP )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_SPCFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SPCFileName )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_SPCFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SPCFileName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_PVKFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PVKFileName )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_PVKFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PVKFileName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_HashAlgorithm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_HashAlgorithm)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, addCertTypeToRequest)
         HRESULT ( STDMETHODCALLTYPE *addCertTypeToRequest )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR CertType);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, addNameValuePairToSignature)
         HRESULT ( STDMETHODCALLTYPE *addNameValuePairToSignature )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR Name,
             /* [in] */ __RPC__in BSTR Value);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, get_WriteCertToUserDS)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToUserDS )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, put_WriteCertToUserDS)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToUserDS )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, get_EnableT61DNEncoding)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableT61DNEncoding )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, put_EnableT61DNEncoding)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableT61DNEncoding )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, InstallPKCS7)
         HRESULT ( STDMETHODCALLTYPE *InstallPKCS7 )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ __RPC__in BSTR PKCS7);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICEnroll3 * This);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, GetSupportedKeySpec)
         HRESULT ( STDMETHODCALLTYPE *GetSupportedKeySpec )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *pdwKeySpec);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, GetKeyLen)
         HRESULT ( STDMETHODCALLTYPE *GetKeyLen )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fMin,
             /* [in] */ BOOL fExchange,
             /* [retval][out] */ __RPC__out LONG *pdwKeySize);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, EnumAlgs)
         HRESULT ( STDMETHODCALLTYPE *EnumAlgs )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG algClass,
             /* [retval][out] */ __RPC__out LONG *pdwAlgID);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, GetAlgName)
         HRESULT ( STDMETHODCALLTYPE *GetAlgName )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG algID,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, put_ReuseHardwareKeyIfUnableToGenNew)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReuseHardwareKeyIfUnableToGenNew )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fReuseHardwareKeyIfUnableToGenNew);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, get_ReuseHardwareKeyIfUnableToGenNew)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReuseHardwareKeyIfUnableToGenNew )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out BOOL *fReuseHardwareKeyIfUnableToGenNew);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, put_HashAlgID)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgID )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ LONG hashAlgID);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, get_HashAlgID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgID )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out LONG *hashAlgID);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, put_LimitExchangeKeyToEncipherment)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LimitExchangeKeyToEncipherment )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fLimitExchangeKeyToEncipherment);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, get_LimitExchangeKeyToEncipherment)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LimitExchangeKeyToEncipherment )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out BOOL *fLimitExchangeKeyToEncipherment);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, put_EnableSMIMECapabilities)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableSMIMECapabilities )( 
             __RPC__in ICEnroll3 * This,
             /* [in] */ BOOL fEnableSMIMECapabilities);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, get_EnableSMIMECapabilities)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableSMIMECapabilities )( 
             __RPC__in ICEnroll3 * This,
             /* [retval][out] */ __RPC__out BOOL *fEnableSMIMECapabilities);
@@ -2280,28 +2503,34 @@ EXTERN_C const IID IID_ICEnroll4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ICEnroll4 * This,
             /* [out] */ __RPC__out UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ UINT iTInfo,
             /* [in] */ LCID lcid,
             /* [out] */ __RPC__deref_out_opt ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -2310,6 +2539,7 @@ EXTERN_C const IID IID_ICEnroll4;
             /* [in] */ LCID lcid,
             /* [size_is][out] */ __RPC__out_ecount_full(cNames) DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ICEnroll4 * This,
             /* [annotation][in] */ 
@@ -2329,375 +2559,463 @@ EXTERN_C const IID IID_ICEnroll4;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, createFilePKCS10)
         HRESULT ( STDMETHODCALLTYPE *createFilePKCS10 )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR DNName,
             /* [in] */ __RPC__in BSTR Usage,
             /* [in] */ __RPC__in BSTR wszPKCS10FileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, acceptFilePKCS7)
         HRESULT ( STDMETHODCALLTYPE *acceptFilePKCS7 )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR wszPKCS7FileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, createPKCS10)
         HRESULT ( STDMETHODCALLTYPE *createPKCS10 )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR DNName,
             /* [in] */ __RPC__in BSTR Usage,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pPKCS10);
         
+        DECLSPEC_XFGVIRT(ICEnroll, acceptPKCS7)
         HRESULT ( STDMETHODCALLTYPE *acceptPKCS7 )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR PKCS7);
         
+        DECLSPEC_XFGVIRT(ICEnroll, getCertFromPKCS7)
         HRESULT ( STDMETHODCALLTYPE *getCertFromPKCS7 )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR wszPKCS7,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll, enumProviders)
         HRESULT ( STDMETHODCALLTYPE *enumProviders )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG dwFlags,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, enumContainers)
         HRESULT ( STDMETHODCALLTYPE *enumContainers )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwIndex,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, freeRequestInfo)
         HRESULT ( STDMETHODCALLTYPE *freeRequestInfo )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR PKCS7OrPKCS10);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreName )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreType )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreType )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_MyStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_MyStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreName )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreType )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreType )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_CAStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_CAStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreName )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreType )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreType )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RootStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RootStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreName )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrName);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreType )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreType )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_RequestStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_RequestStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ContainerName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainerName )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrContainer);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ContainerName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContainerName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrContainer);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderName )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrProvider);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrProvider);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderType )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdwType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderType )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwType);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_KeySpec)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeySpec )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdw);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_KeySpec)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_KeySpec )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dw);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_ProviderFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_ProviderFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_UseExistingKeySet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseExistingKeySet )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_UseExistingKeySet)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseExistingKeySet )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_GenKeyFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenKeyFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_GenKeyFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenKeyFlags )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_DeleteRequestCert)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteRequestCert )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *fDelete);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_DeleteRequestCert)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteRequestCert )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fDelete);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_WriteCertToCSP)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToCSP )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_WriteCertToCSP)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToCSP )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_SPCFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SPCFileName )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_SPCFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SPCFileName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_PVKFileName)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PVKFileName )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_PVKFileName)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PVKFileName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, get_HashAlgorithm)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithm )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll, put_HashAlgorithm)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithm )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, addCertTypeToRequest)
         HRESULT ( STDMETHODCALLTYPE *addCertTypeToRequest )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR CertType);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, addNameValuePairToSignature)
         HRESULT ( STDMETHODCALLTYPE *addNameValuePairToSignature )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR Name,
             /* [in] */ __RPC__in BSTR Value);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, get_WriteCertToUserDS)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToUserDS )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, put_WriteCertToUserDS)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToUserDS )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, get_EnableT61DNEncoding)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableT61DNEncoding )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll2, put_EnableT61DNEncoding)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableT61DNEncoding )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, InstallPKCS7)
         HRESULT ( STDMETHODCALLTYPE *InstallPKCS7 )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR PKCS7);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             __RPC__in ICEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, GetSupportedKeySpec)
         HRESULT ( STDMETHODCALLTYPE *GetSupportedKeySpec )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *pdwKeySpec);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, GetKeyLen)
         HRESULT ( STDMETHODCALLTYPE *GetKeyLen )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fMin,
             /* [in] */ BOOL fExchange,
             /* [retval][out] */ __RPC__out LONG *pdwKeySize);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, EnumAlgs)
         HRESULT ( STDMETHODCALLTYPE *EnumAlgs )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG algClass,
             /* [retval][out] */ __RPC__out LONG *pdwAlgID);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, GetAlgName)
         HRESULT ( STDMETHODCALLTYPE *GetAlgName )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG algID,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, put_ReuseHardwareKeyIfUnableToGenNew)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReuseHardwareKeyIfUnableToGenNew )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fReuseHardwareKeyIfUnableToGenNew);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, get_ReuseHardwareKeyIfUnableToGenNew)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReuseHardwareKeyIfUnableToGenNew )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *fReuseHardwareKeyIfUnableToGenNew);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, put_HashAlgID)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgID )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG hashAlgID);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, get_HashAlgID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgID )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *hashAlgID);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, put_LimitExchangeKeyToEncipherment)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LimitExchangeKeyToEncipherment )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fLimitExchangeKeyToEncipherment);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, get_LimitExchangeKeyToEncipherment)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LimitExchangeKeyToEncipherment )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *fLimitExchangeKeyToEncipherment);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, put_EnableSMIMECapabilities)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableSMIMECapabilities )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fEnableSMIMECapabilities);
         
+        DECLSPEC_XFGVIRT(ICEnroll3, get_EnableSMIMECapabilities)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableSMIMECapabilities )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *fEnableSMIMECapabilities);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, put_PrivateKeyArchiveCertificate)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PrivateKeyArchiveCertificate )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, get_PrivateKeyArchiveCertificate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PrivateKeyArchiveCertificate )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, put_ThumbPrint)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ThumbPrint )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrThumbPrint);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, get_ThumbPrint)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ThumbPrint )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pbstrThumbPrint);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, binaryToString)
         HRESULT ( STDMETHODCALLTYPE *binaryToString )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ __RPC__in BSTR strBinary,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrEncoded);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, stringToBinary)
         HRESULT ( STDMETHODCALLTYPE *stringToBinary )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ __RPC__in BSTR strEncoded,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrBinary);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, addExtensionToRequest)
         HRESULT ( STDMETHODCALLTYPE *addExtensionToRequest )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ __RPC__in BSTR strName,
             /* [in] */ __RPC__in BSTR strValue);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, addAttributeToRequest)
         HRESULT ( STDMETHODCALLTYPE *addAttributeToRequest )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ __RPC__in BSTR strName,
             /* [in] */ __RPC__in BSTR strValue);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, addNameValuePairToRequest)
         HRESULT ( STDMETHODCALLTYPE *addNameValuePairToRequest )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ __RPC__in BSTR strName,
             /* [in] */ __RPC__in BSTR strValue);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, resetExtensions)
         HRESULT ( STDMETHODCALLTYPE *resetExtensions )( 
             __RPC__in ICEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, resetAttributes)
         HRESULT ( STDMETHODCALLTYPE *resetAttributes )( 
             __RPC__in ICEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, createRequest)
         HRESULT ( STDMETHODCALLTYPE *createRequest )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG Flags,
@@ -2705,6 +3023,7 @@ EXTERN_C const IID IID_ICEnroll4;
             /* [in] */ __RPC__in BSTR Usage,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrRequest);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, createFileRequest)
         HRESULT ( STDMETHODCALLTYPE *createFileRequest )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG Flags,
@@ -2712,34 +3031,41 @@ EXTERN_C const IID IID_ICEnroll4;
             /* [in] */ __RPC__in BSTR strUsage,
             /* [in] */ __RPC__in BSTR strRequestFileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, acceptResponse)
         HRESULT ( STDMETHODCALLTYPE *acceptResponse )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR strResponse);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, acceptFileResponse)
         HRESULT ( STDMETHODCALLTYPE *acceptFileResponse )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR strResponseFileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, getCertFromResponse)
         HRESULT ( STDMETHODCALLTYPE *getCertFromResponse )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR strResponse,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, getCertFromFileResponse)
         HRESULT ( STDMETHODCALLTYPE *getCertFromFileResponse )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR strResponseFileName,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, createPFX)
         HRESULT ( STDMETHODCALLTYPE *createPFX )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR strPassword,
             /* [retval][out] */ __RPC__deref_out_opt BSTR *pstrPFX);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, createFilePFX)
         HRESULT ( STDMETHODCALLTYPE *createFilePFX )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR strPassword,
             /* [in] */ __RPC__in BSTR strPFXFileName);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, setPendingRequestInfo)
         HRESULT ( STDMETHODCALLTYPE *setPendingRequestInfo )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG lRequestID,
@@ -2747,27 +3073,32 @@ EXTERN_C const IID IID_ICEnroll4;
             /* [in] */ __RPC__in BSTR strCAName,
             /* [in] */ __RPC__in BSTR strFriendlyName);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, enumPendingRequest)
         HRESULT ( STDMETHODCALLTYPE *enumPendingRequest )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG lIndex,
             /* [in] */ LONG lDesiredProperty,
             /* [retval][out] */ __RPC__out VARIANT *pvarProperty);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, removePendingRequest)
         HRESULT ( STDMETHODCALLTYPE *removePendingRequest )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR strThumbprint);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, GetKeyLenEx)
         HRESULT ( STDMETHODCALLTYPE *GetKeyLenEx )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG lSizeSpec,
             /* [in] */ LONG lKeySpec,
             /* [retval][out] */ __RPC__out LONG *pdwKeySize);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, InstallPKCS7Ex)
         HRESULT ( STDMETHODCALLTYPE *InstallPKCS7Ex )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR PKCS7,
             /* [retval][out] */ __RPC__out LONG *plCertInstalled);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, addCertTypeToRequestEx)
         HRESULT ( STDMETHODCALLTYPE *addCertTypeToRequestEx )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG lType,
@@ -2776,36 +3107,44 @@ EXTERN_C const IID IID_ICEnroll4;
             /* [in] */ BOOL fMinorVersion,
             /* [in] */ LONG lMinorVersion);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, getProviderType)
         HRESULT ( STDMETHODCALLTYPE *getProviderType )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR strProvName,
             /* [retval][out] */ __RPC__out LONG *plProvType);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, put_SignerCertificate)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SignerCertificate )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ __RPC__in BSTR bstrCert);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, put_ClientId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClientId )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG lClientId);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, get_ClientId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClientId )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out LONG *plClientId);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, addBlobPropertyToCertificate)
         HRESULT ( STDMETHODCALLTYPE *addBlobPropertyToCertificate )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ LONG lPropertyId,
             /* [in] */ LONG lReserved,
             /* [in] */ __RPC__in BSTR bstrProperty);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, resetBlobProperties)
         HRESULT ( STDMETHODCALLTYPE *resetBlobProperties )( 
             __RPC__in ICEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, put_IncludeSubjectKeyID)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IncludeSubjectKeyID )( 
             __RPC__in ICEnroll4 * This,
             /* [in] */ BOOL fInclude);
         
+        DECLSPEC_XFGVIRT(ICEnroll4, get_IncludeSubjectKeyID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncludeSubjectKeyID )( 
             __RPC__in ICEnroll4 * This,
             /* [retval][out] */ __RPC__out BOOL *pfInclude);
@@ -3428,299 +3767,372 @@ EXTERN_C const IID IID_IEnroll;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnroll * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnroll * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnroll * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, createFilePKCS10WStr)
         HRESULT ( STDMETHODCALLTYPE *createFilePKCS10WStr )( 
             IEnroll * This,
             /* [in] */ LPCWSTR DNName,
             /* [in] */ LPCWSTR Usage,
             /* [in] */ LPCWSTR wszPKCS10FileName);
         
+        DECLSPEC_XFGVIRT(IEnroll, acceptFilePKCS7WStr)
         HRESULT ( STDMETHODCALLTYPE *acceptFilePKCS7WStr )( 
             IEnroll * This,
             /* [in] */ LPCWSTR wszPKCS7FileName);
         
+        DECLSPEC_XFGVIRT(IEnroll, createPKCS10WStr)
         HRESULT ( STDMETHODCALLTYPE *createPKCS10WStr )( 
             IEnroll * This,
             /* [in] */ LPCWSTR DNName,
             /* [in] */ LPCWSTR Usage,
             /* [out] */ PCRYPT_DATA_BLOB pPkcs10Blob);
         
+        DECLSPEC_XFGVIRT(IEnroll, acceptPKCS7Blob)
         HRESULT ( STDMETHODCALLTYPE *acceptPKCS7Blob )( 
             IEnroll * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7);
         
+        DECLSPEC_XFGVIRT(IEnroll, getCertContextFromPKCS7)
         PCCERT_CONTEXT ( STDMETHODCALLTYPE *getCertContextFromPKCS7 )( 
             IEnroll * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7);
         
+        DECLSPEC_XFGVIRT(IEnroll, getMyStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getMyStore )( 
             IEnroll * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, getCAStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getCAStore )( 
             IEnroll * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, getROOTHStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getROOTHStore )( 
             IEnroll * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, enumProvidersWStr)
         HRESULT ( STDMETHODCALLTYPE *enumProvidersWStr )( 
             IEnroll * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG dwFlags,
             /* [out] */ LPWSTR *pbstrProvName);
         
+        DECLSPEC_XFGVIRT(IEnroll, enumContainersWStr)
         HRESULT ( STDMETHODCALLTYPE *enumContainersWStr )( 
             IEnroll * This,
             /* [in] */ LONG dwIndex,
             /* [out] */ LPWSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(IEnroll, freeRequestInfoBlob)
         HRESULT ( STDMETHODCALLTYPE *freeRequestInfoBlob )( 
             IEnroll * This,
             /* [in] */ CRYPT_DATA_BLOB pkcs7OrPkcs10);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreNameWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreNameWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreTypeWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreTypeWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreFlags )( 
             IEnroll * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreFlags )( 
             IEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreNameWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreNameWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreTypeWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreTypeWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreFlags )( 
             IEnroll * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreFlags )( 
             IEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreNameWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreNameWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreTypeWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreTypeWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreFlags )( 
             IEnroll * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreFlags )( 
             IEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreNameWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreNameWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreTypeWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreTypeWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreFlags )( 
             IEnroll * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreFlags )( 
             IEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ContainerNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainerNameWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwContainer);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ContainerNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContainerNameWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwContainer);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderNameWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szwProvider);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderNameWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szwProvider);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderType )( 
             IEnroll * This,
             /* [out] */ LONG *pdwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderType )( 
             IEnroll * This,
             /* [in] */ LONG dwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_KeySpec)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeySpec )( 
             IEnroll * This,
             /* [out] */ LONG *pdw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_KeySpec)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_KeySpec )( 
             IEnroll * This,
             /* [in] */ LONG dw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderFlags )( 
             IEnroll * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderFlags )( 
             IEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_UseExistingKeySet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseExistingKeySet )( 
             IEnroll * This,
             /* [out] */ BOOL *fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_UseExistingKeySet)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseExistingKeySet )( 
             IEnroll * This,
             /* [in] */ BOOL fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_GenKeyFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenKeyFlags )( 
             IEnroll * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_GenKeyFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenKeyFlags )( 
             IEnroll * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_DeleteRequestCert)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteRequestCert )( 
             IEnroll * This,
             /* [out] */ BOOL *fDelete);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_DeleteRequestCert)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteRequestCert )( 
             IEnroll * This,
             /* [in] */ BOOL fDelete);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_WriteCertToUserDS)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToUserDS )( 
             IEnroll * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_WriteCertToUserDS)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToUserDS )( 
             IEnroll * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_EnableT61DNEncoding)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableT61DNEncoding )( 
             IEnroll * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_EnableT61DNEncoding)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableT61DNEncoding )( 
             IEnroll * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_WriteCertToCSP)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToCSP )( 
             IEnroll * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_WriteCertToCSP)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToCSP )( 
             IEnroll * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_SPCFileNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SPCFileNameWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_SPCFileNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SPCFileNameWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_PVKFileNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PVKFileNameWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_PVKFileNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PVKFileNameWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_HashAlgorithmWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithmWStr )( 
             IEnroll * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_HashAlgorithmWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithmWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RenewalCertificate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RenewalCertificate )( 
             IEnroll * This,
             /* [out] */ PCCERT_CONTEXT *ppCertContext);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RenewalCertificate)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RenewalCertificate )( 
             IEnroll * This,
             /* [in] */ PCCERT_CONTEXT pCertContext);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddCertTypeToRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *AddCertTypeToRequestWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddNameValuePairToSignatureWStr)
         HRESULT ( STDMETHODCALLTYPE *AddNameValuePairToSignatureWStr )( 
             IEnroll * This,
             /* [in] */ LPWSTR Name,
             /* [in] */ LPWSTR Value);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddExtensionsToRequest)
         HRESULT ( STDMETHODCALLTYPE *AddExtensionsToRequest )( 
             IEnroll * This,
             /* [in] */ PCERT_EXTENSIONS pCertExtensions);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddAuthenticatedAttributesToPKCS7Request)
         HRESULT ( STDMETHODCALLTYPE *AddAuthenticatedAttributesToPKCS7Request )( 
             IEnroll * This,
             /* [in] */ PCRYPT_ATTRIBUTES pAttributes);
         
+        DECLSPEC_XFGVIRT(IEnroll, CreatePKCS7RequestFromRequest)
         HRESULT ( STDMETHODCALLTYPE *CreatePKCS7RequestFromRequest )( 
             IEnroll * This,
             /* [in] */ PCRYPT_DATA_BLOB pRequest,
@@ -4053,377 +4465,468 @@ EXTERN_C const IID IID_IEnroll2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnroll2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnroll2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnroll2 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, createFilePKCS10WStr)
         HRESULT ( STDMETHODCALLTYPE *createFilePKCS10WStr )( 
             IEnroll2 * This,
             /* [in] */ LPCWSTR DNName,
             /* [in] */ LPCWSTR Usage,
             /* [in] */ LPCWSTR wszPKCS10FileName);
         
+        DECLSPEC_XFGVIRT(IEnroll, acceptFilePKCS7WStr)
         HRESULT ( STDMETHODCALLTYPE *acceptFilePKCS7WStr )( 
             IEnroll2 * This,
             /* [in] */ LPCWSTR wszPKCS7FileName);
         
+        DECLSPEC_XFGVIRT(IEnroll, createPKCS10WStr)
         HRESULT ( STDMETHODCALLTYPE *createPKCS10WStr )( 
             IEnroll2 * This,
             /* [in] */ LPCWSTR DNName,
             /* [in] */ LPCWSTR Usage,
             /* [out] */ PCRYPT_DATA_BLOB pPkcs10Blob);
         
+        DECLSPEC_XFGVIRT(IEnroll, acceptPKCS7Blob)
         HRESULT ( STDMETHODCALLTYPE *acceptPKCS7Blob )( 
             IEnroll2 * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7);
         
+        DECLSPEC_XFGVIRT(IEnroll, getCertContextFromPKCS7)
         PCCERT_CONTEXT ( STDMETHODCALLTYPE *getCertContextFromPKCS7 )( 
             IEnroll2 * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7);
         
+        DECLSPEC_XFGVIRT(IEnroll, getMyStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getMyStore )( 
             IEnroll2 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, getCAStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getCAStore )( 
             IEnroll2 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, getROOTHStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getROOTHStore )( 
             IEnroll2 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, enumProvidersWStr)
         HRESULT ( STDMETHODCALLTYPE *enumProvidersWStr )( 
             IEnroll2 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG dwFlags,
             /* [out] */ LPWSTR *pbstrProvName);
         
+        DECLSPEC_XFGVIRT(IEnroll, enumContainersWStr)
         HRESULT ( STDMETHODCALLTYPE *enumContainersWStr )( 
             IEnroll2 * This,
             /* [in] */ LONG dwIndex,
             /* [out] */ LPWSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(IEnroll, freeRequestInfoBlob)
         HRESULT ( STDMETHODCALLTYPE *freeRequestInfoBlob )( 
             IEnroll2 * This,
             /* [in] */ CRYPT_DATA_BLOB pkcs7OrPkcs10);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreNameWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreTypeWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreTypeWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreFlags )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreFlags )( 
             IEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreNameWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreTypeWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreTypeWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreFlags )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreFlags )( 
             IEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreNameWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreTypeWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreTypeWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreFlags )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreFlags )( 
             IEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreNameWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreTypeWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreTypeWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreFlags )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreFlags )( 
             IEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ContainerNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainerNameWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwContainer);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ContainerNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContainerNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwContainer);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderNameWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szwProvider);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szwProvider);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderType )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderType )( 
             IEnroll2 * This,
             /* [in] */ LONG dwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_KeySpec)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeySpec )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_KeySpec)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_KeySpec )( 
             IEnroll2 * This,
             /* [in] */ LONG dw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderFlags )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderFlags )( 
             IEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_UseExistingKeySet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseExistingKeySet )( 
             IEnroll2 * This,
             /* [out] */ BOOL *fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_UseExistingKeySet)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseExistingKeySet )( 
             IEnroll2 * This,
             /* [in] */ BOOL fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_GenKeyFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenKeyFlags )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_GenKeyFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenKeyFlags )( 
             IEnroll2 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_DeleteRequestCert)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteRequestCert )( 
             IEnroll2 * This,
             /* [out] */ BOOL *fDelete);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_DeleteRequestCert)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteRequestCert )( 
             IEnroll2 * This,
             /* [in] */ BOOL fDelete);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_WriteCertToUserDS)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToUserDS )( 
             IEnroll2 * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_WriteCertToUserDS)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToUserDS )( 
             IEnroll2 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_EnableT61DNEncoding)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableT61DNEncoding )( 
             IEnroll2 * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_EnableT61DNEncoding)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableT61DNEncoding )( 
             IEnroll2 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_WriteCertToCSP)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToCSP )( 
             IEnroll2 * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_WriteCertToCSP)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToCSP )( 
             IEnroll2 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_SPCFileNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SPCFileNameWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_SPCFileNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SPCFileNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_PVKFileNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PVKFileNameWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_PVKFileNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PVKFileNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_HashAlgorithmWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithmWStr )( 
             IEnroll2 * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_HashAlgorithmWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithmWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RenewalCertificate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RenewalCertificate )( 
             IEnroll2 * This,
             /* [out] */ PCCERT_CONTEXT *ppCertContext);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RenewalCertificate)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RenewalCertificate )( 
             IEnroll2 * This,
             /* [in] */ PCCERT_CONTEXT pCertContext);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddCertTypeToRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *AddCertTypeToRequestWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddNameValuePairToSignatureWStr)
         HRESULT ( STDMETHODCALLTYPE *AddNameValuePairToSignatureWStr )( 
             IEnroll2 * This,
             /* [in] */ LPWSTR Name,
             /* [in] */ LPWSTR Value);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddExtensionsToRequest)
         HRESULT ( STDMETHODCALLTYPE *AddExtensionsToRequest )( 
             IEnroll2 * This,
             /* [in] */ PCERT_EXTENSIONS pCertExtensions);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddAuthenticatedAttributesToPKCS7Request)
         HRESULT ( STDMETHODCALLTYPE *AddAuthenticatedAttributesToPKCS7Request )( 
             IEnroll2 * This,
             /* [in] */ PCRYPT_ATTRIBUTES pAttributes);
         
+        DECLSPEC_XFGVIRT(IEnroll, CreatePKCS7RequestFromRequest)
         HRESULT ( STDMETHODCALLTYPE *CreatePKCS7RequestFromRequest )( 
             IEnroll2 * This,
             /* [in] */ PCRYPT_DATA_BLOB pRequest,
             /* [in] */ PCCERT_CONTEXT pSigningCertContext,
             /* [out] */ PCRYPT_DATA_BLOB pPkcs7Blob);
         
+        DECLSPEC_XFGVIRT(IEnroll2, InstallPKCS7Blob)
         HRESULT ( STDMETHODCALLTYPE *InstallPKCS7Blob )( 
             IEnroll2 * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7);
         
+        DECLSPEC_XFGVIRT(IEnroll2, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnroll2 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll2, GetSupportedKeySpec)
         HRESULT ( STDMETHODCALLTYPE *GetSupportedKeySpec )( 
             IEnroll2 * This,
             /* [out] */ LONG *pdwKeySpec);
         
+        DECLSPEC_XFGVIRT(IEnroll2, GetKeyLen)
         HRESULT ( STDMETHODCALLTYPE *GetKeyLen )( 
             IEnroll2 * This,
             /* [in] */ BOOL fMin,
             /* [in] */ BOOL fExchange,
             /* [out] */ LONG *pdwKeySize);
         
+        DECLSPEC_XFGVIRT(IEnroll2, EnumAlgs)
         HRESULT ( STDMETHODCALLTYPE *EnumAlgs )( 
             IEnroll2 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG algClass,
             /* [out] */ LONG *pdwAlgID);
         
+        DECLSPEC_XFGVIRT(IEnroll2, GetAlgNameWStr)
         HRESULT ( STDMETHODCALLTYPE *GetAlgNameWStr )( 
             IEnroll2 * This,
             /* [in] */ LONG algID,
             /* [out] */ LPWSTR *ppwsz);
         
+        DECLSPEC_XFGVIRT(IEnroll2, put_ReuseHardwareKeyIfUnableToGenNew)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReuseHardwareKeyIfUnableToGenNew )( 
             IEnroll2 * This,
             /* [in] */ BOOL fReuseHardwareKeyIfUnableToGenNew);
         
+        DECLSPEC_XFGVIRT(IEnroll2, get_ReuseHardwareKeyIfUnableToGenNew)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReuseHardwareKeyIfUnableToGenNew )( 
             IEnroll2 * This,
             /* [out] */ BOOL *fReuseHardwareKeyIfUnableToGenNew);
         
+        DECLSPEC_XFGVIRT(IEnroll2, put_HashAlgID)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgID )( 
             IEnroll2 * This,
             /* [in] */ LONG hashAlgID);
         
+        DECLSPEC_XFGVIRT(IEnroll2, get_HashAlgID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgID )( 
             IEnroll2 * This,
             /* [retval][out] */ LONG *hashAlgID);
         
+        DECLSPEC_XFGVIRT(IEnroll2, SetHStoreMy)
         HRESULT ( STDMETHODCALLTYPE *SetHStoreMy )( 
             IEnroll2 * This,
             /* [in] */ HCERTSTORE hStore);
         
+        DECLSPEC_XFGVIRT(IEnroll2, SetHStoreCA)
         HRESULT ( STDMETHODCALLTYPE *SetHStoreCA )( 
             IEnroll2 * This,
             /* [in] */ HCERTSTORE hStore);
         
+        DECLSPEC_XFGVIRT(IEnroll2, SetHStoreROOT)
         HRESULT ( STDMETHODCALLTYPE *SetHStoreROOT )( 
             IEnroll2 * This,
             /* [in] */ HCERTSTORE hStore);
         
+        DECLSPEC_XFGVIRT(IEnroll2, SetHStoreRequest)
         HRESULT ( STDMETHODCALLTYPE *SetHStoreRequest )( 
             IEnroll2 * This,
             /* [in] */ HCERTSTORE hStore);
         
+        DECLSPEC_XFGVIRT(IEnroll2, put_LimitExchangeKeyToEncipherment)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LimitExchangeKeyToEncipherment )( 
             IEnroll2 * This,
             /* [in] */ BOOL fLimitExchangeKeyToEncipherment);
         
+        DECLSPEC_XFGVIRT(IEnroll2, get_LimitExchangeKeyToEncipherment)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LimitExchangeKeyToEncipherment )( 
             IEnroll2 * This,
             /* [retval][out] */ BOOL *fLimitExchangeKeyToEncipherment);
         
+        DECLSPEC_XFGVIRT(IEnroll2, put_EnableSMIMECapabilities)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableSMIMECapabilities )( 
             IEnroll2 * This,
             /* [in] */ BOOL fEnableSMIMECapabilities);
         
+        DECLSPEC_XFGVIRT(IEnroll2, get_EnableSMIMECapabilities)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableSMIMECapabilities )( 
             IEnroll2 * This,
             /* [retval][out] */ BOOL *fEnableSMIMECapabilities);
@@ -4881,402 +5384,499 @@ EXTERN_C const IID IID_IEnroll4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IEnroll4 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, createFilePKCS10WStr)
         HRESULT ( STDMETHODCALLTYPE *createFilePKCS10WStr )( 
             IEnroll4 * This,
             /* [in] */ LPCWSTR DNName,
             /* [in] */ LPCWSTR Usage,
             /* [in] */ LPCWSTR wszPKCS10FileName);
         
+        DECLSPEC_XFGVIRT(IEnroll, acceptFilePKCS7WStr)
         HRESULT ( STDMETHODCALLTYPE *acceptFilePKCS7WStr )( 
             IEnroll4 * This,
             /* [in] */ LPCWSTR wszPKCS7FileName);
         
+        DECLSPEC_XFGVIRT(IEnroll, createPKCS10WStr)
         HRESULT ( STDMETHODCALLTYPE *createPKCS10WStr )( 
             IEnroll4 * This,
             /* [in] */ LPCWSTR DNName,
             /* [in] */ LPCWSTR Usage,
             /* [out] */ PCRYPT_DATA_BLOB pPkcs10Blob);
         
+        DECLSPEC_XFGVIRT(IEnroll, acceptPKCS7Blob)
         HRESULT ( STDMETHODCALLTYPE *acceptPKCS7Blob )( 
             IEnroll4 * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7);
         
+        DECLSPEC_XFGVIRT(IEnroll, getCertContextFromPKCS7)
         PCCERT_CONTEXT ( STDMETHODCALLTYPE *getCertContextFromPKCS7 )( 
             IEnroll4 * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7);
         
+        DECLSPEC_XFGVIRT(IEnroll, getMyStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getMyStore )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, getCAStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getCAStore )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, getROOTHStore)
         HCERTSTORE ( STDMETHODCALLTYPE *getROOTHStore )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll, enumProvidersWStr)
         HRESULT ( STDMETHODCALLTYPE *enumProvidersWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG dwFlags,
             /* [out] */ LPWSTR *pbstrProvName);
         
+        DECLSPEC_XFGVIRT(IEnroll, enumContainersWStr)
         HRESULT ( STDMETHODCALLTYPE *enumContainersWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG dwIndex,
             /* [out] */ LPWSTR *pbstr);
         
+        DECLSPEC_XFGVIRT(IEnroll, freeRequestInfoBlob)
         HRESULT ( STDMETHODCALLTYPE *freeRequestInfoBlob )( 
             IEnroll4 * This,
             /* [in] */ CRYPT_DATA_BLOB pkcs7OrPkcs10);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreNameWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreTypeWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreTypeWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_MyStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_MyStoreFlags )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_MyStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_MyStoreFlags )( 
             IEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreNameWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreTypeWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreTypeWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_CAStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_CAStoreFlags )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_CAStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_CAStoreFlags )( 
             IEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreNameWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreTypeWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreTypeWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RootStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RootStoreFlags )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RootStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RootStoreFlags )( 
             IEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreNameWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwName);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreTypeWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreTypeWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreTypeWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreTypeWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RequestStoreFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RequestStoreFlags )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RequestStoreFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RequestStoreFlags )( 
             IEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ContainerNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ContainerNameWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwContainer);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ContainerNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ContainerNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwContainer);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderNameWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szwProvider);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szwProvider);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderType)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderType )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderType)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderType )( 
             IEnroll4 * This,
             /* [in] */ LONG dwType);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_KeySpec)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_KeySpec )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_KeySpec)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_KeySpec )( 
             IEnroll4 * This,
             /* [in] */ LONG dw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_ProviderFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ProviderFlags )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_ProviderFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ProviderFlags )( 
             IEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_UseExistingKeySet)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_UseExistingKeySet )( 
             IEnroll4 * This,
             /* [out] */ BOOL *fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_UseExistingKeySet)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_UseExistingKeySet )( 
             IEnroll4 * This,
             /* [in] */ BOOL fUseExistingKeys);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_GenKeyFlags)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_GenKeyFlags )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_GenKeyFlags)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_GenKeyFlags )( 
             IEnroll4 * This,
             /* [in] */ LONG dwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_DeleteRequestCert)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_DeleteRequestCert )( 
             IEnroll4 * This,
             /* [out] */ BOOL *fDelete);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_DeleteRequestCert)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_DeleteRequestCert )( 
             IEnroll4 * This,
             /* [in] */ BOOL fDelete);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_WriteCertToUserDS)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToUserDS )( 
             IEnroll4 * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_WriteCertToUserDS)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToUserDS )( 
             IEnroll4 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_EnableT61DNEncoding)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableT61DNEncoding )( 
             IEnroll4 * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_EnableT61DNEncoding)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableT61DNEncoding )( 
             IEnroll4 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_WriteCertToCSP)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_WriteCertToCSP )( 
             IEnroll4 * This,
             /* [out] */ BOOL *fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_WriteCertToCSP)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_WriteCertToCSP )( 
             IEnroll4 * This,
             /* [in] */ BOOL fBool);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_SPCFileNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_SPCFileNameWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_SPCFileNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_SPCFileNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_PVKFileNameWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_PVKFileNameWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_PVKFileNameWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_PVKFileNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_HashAlgorithmWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgorithmWStr )( 
             IEnroll4 * This,
             /* [out] */ LPWSTR *szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_HashAlgorithmWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgorithmWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, get_RenewalCertificate)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_RenewalCertificate )( 
             IEnroll4 * This,
             /* [out] */ PCCERT_CONTEXT *ppCertContext);
         
+        DECLSPEC_XFGVIRT(IEnroll, put_RenewalCertificate)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_RenewalCertificate )( 
             IEnroll4 * This,
             /* [in] */ PCCERT_CONTEXT pCertContext);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddCertTypeToRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *AddCertTypeToRequestWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR szw);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddNameValuePairToSignatureWStr)
         HRESULT ( STDMETHODCALLTYPE *AddNameValuePairToSignatureWStr )( 
             IEnroll4 * This,
             /* [in] */ LPWSTR Name,
             /* [in] */ LPWSTR Value);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddExtensionsToRequest)
         HRESULT ( STDMETHODCALLTYPE *AddExtensionsToRequest )( 
             IEnroll4 * This,
             /* [in] */ PCERT_EXTENSIONS pCertExtensions);
         
+        DECLSPEC_XFGVIRT(IEnroll, AddAuthenticatedAttributesToPKCS7Request)
         HRESULT ( STDMETHODCALLTYPE *AddAuthenticatedAttributesToPKCS7Request )( 
             IEnroll4 * This,
             /* [in] */ PCRYPT_ATTRIBUTES pAttributes);
         
+        DECLSPEC_XFGVIRT(IEnroll, CreatePKCS7RequestFromRequest)
         HRESULT ( STDMETHODCALLTYPE *CreatePKCS7RequestFromRequest )( 
             IEnroll4 * This,
             /* [in] */ PCRYPT_DATA_BLOB pRequest,
             /* [in] */ PCCERT_CONTEXT pSigningCertContext,
             /* [out] */ PCRYPT_DATA_BLOB pPkcs7Blob);
         
+        DECLSPEC_XFGVIRT(IEnroll2, InstallPKCS7Blob)
         HRESULT ( STDMETHODCALLTYPE *InstallPKCS7Blob )( 
             IEnroll4 * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7);
         
+        DECLSPEC_XFGVIRT(IEnroll2, Reset)
         HRESULT ( STDMETHODCALLTYPE *Reset )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll2, GetSupportedKeySpec)
         HRESULT ( STDMETHODCALLTYPE *GetSupportedKeySpec )( 
             IEnroll4 * This,
             /* [out] */ LONG *pdwKeySpec);
         
+        DECLSPEC_XFGVIRT(IEnroll2, GetKeyLen)
         HRESULT ( STDMETHODCALLTYPE *GetKeyLen )( 
             IEnroll4 * This,
             /* [in] */ BOOL fMin,
             /* [in] */ BOOL fExchange,
             /* [out] */ LONG *pdwKeySize);
         
+        DECLSPEC_XFGVIRT(IEnroll2, EnumAlgs)
         HRESULT ( STDMETHODCALLTYPE *EnumAlgs )( 
             IEnroll4 * This,
             /* [in] */ LONG dwIndex,
             /* [in] */ LONG algClass,
             /* [out] */ LONG *pdwAlgID);
         
+        DECLSPEC_XFGVIRT(IEnroll2, GetAlgNameWStr)
         HRESULT ( STDMETHODCALLTYPE *GetAlgNameWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG algID,
             /* [out] */ LPWSTR *ppwsz);
         
+        DECLSPEC_XFGVIRT(IEnroll2, put_ReuseHardwareKeyIfUnableToGenNew)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ReuseHardwareKeyIfUnableToGenNew )( 
             IEnroll4 * This,
             /* [in] */ BOOL fReuseHardwareKeyIfUnableToGenNew);
         
+        DECLSPEC_XFGVIRT(IEnroll2, get_ReuseHardwareKeyIfUnableToGenNew)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ReuseHardwareKeyIfUnableToGenNew )( 
             IEnroll4 * This,
             /* [out] */ BOOL *fReuseHardwareKeyIfUnableToGenNew);
         
+        DECLSPEC_XFGVIRT(IEnroll2, put_HashAlgID)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_HashAlgID )( 
             IEnroll4 * This,
             /* [in] */ LONG hashAlgID);
         
+        DECLSPEC_XFGVIRT(IEnroll2, get_HashAlgID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_HashAlgID )( 
             IEnroll4 * This,
             /* [retval][out] */ LONG *hashAlgID);
         
+        DECLSPEC_XFGVIRT(IEnroll2, SetHStoreMy)
         HRESULT ( STDMETHODCALLTYPE *SetHStoreMy )( 
             IEnroll4 * This,
             /* [in] */ HCERTSTORE hStore);
         
+        DECLSPEC_XFGVIRT(IEnroll2, SetHStoreCA)
         HRESULT ( STDMETHODCALLTYPE *SetHStoreCA )( 
             IEnroll4 * This,
             /* [in] */ HCERTSTORE hStore);
         
+        DECLSPEC_XFGVIRT(IEnroll2, SetHStoreROOT)
         HRESULT ( STDMETHODCALLTYPE *SetHStoreROOT )( 
             IEnroll4 * This,
             /* [in] */ HCERTSTORE hStore);
         
+        DECLSPEC_XFGVIRT(IEnroll2, SetHStoreRequest)
         HRESULT ( STDMETHODCALLTYPE *SetHStoreRequest )( 
             IEnroll4 * This,
             /* [in] */ HCERTSTORE hStore);
         
+        DECLSPEC_XFGVIRT(IEnroll2, put_LimitExchangeKeyToEncipherment)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_LimitExchangeKeyToEncipherment )( 
             IEnroll4 * This,
             /* [in] */ BOOL fLimitExchangeKeyToEncipherment);
         
+        DECLSPEC_XFGVIRT(IEnroll2, get_LimitExchangeKeyToEncipherment)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_LimitExchangeKeyToEncipherment )( 
             IEnroll4 * This,
             /* [retval][out] */ BOOL *fLimitExchangeKeyToEncipherment);
         
+        DECLSPEC_XFGVIRT(IEnroll2, put_EnableSMIMECapabilities)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_EnableSMIMECapabilities )( 
             IEnroll4 * This,
             /* [in] */ BOOL fEnableSMIMECapabilities);
         
+        DECLSPEC_XFGVIRT(IEnroll2, get_EnableSMIMECapabilities)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_EnableSMIMECapabilities )( 
             IEnroll4 * This,
             /* [retval][out] */ BOOL *fEnableSMIMECapabilities);
         
+        DECLSPEC_XFGVIRT(IEnroll4, put_ThumbPrintWStr)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ThumbPrintWStr )( 
             IEnroll4 * This,
             /* [in] */ CRYPT_DATA_BLOB thumbPrintBlob);
         
+        DECLSPEC_XFGVIRT(IEnroll4, get_ThumbPrintWStr)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ThumbPrintWStr )( 
             IEnroll4 * This,
             /* [retval][out] */ PCRYPT_DATA_BLOB thumbPrintBlob);
         
+        DECLSPEC_XFGVIRT(IEnroll4, SetPrivateKeyArchiveCertificate)
         HRESULT ( STDMETHODCALLTYPE *SetPrivateKeyArchiveCertificate )( 
             IEnroll4 * This,
             /* [in] */ PCCERT_CONTEXT pPrivateKeyArchiveCert);
         
+        DECLSPEC_XFGVIRT(IEnroll4, GetPrivateKeyArchiveCertificate)
         PCCERT_CONTEXT ( STDMETHODCALLTYPE *GetPrivateKeyArchiveCertificate )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll4, binaryBlobToString)
         HRESULT ( STDMETHODCALLTYPE *binaryBlobToString )( 
             IEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ PCRYPT_DATA_BLOB pblobBinary,
             /* [out] */ LPWSTR *ppwszString);
         
+        DECLSPEC_XFGVIRT(IEnroll4, stringToBinaryBlob)
         HRESULT ( STDMETHODCALLTYPE *stringToBinaryBlob )( 
             IEnroll4 * This,
             /* [in] */ LONG Flags,
@@ -5285,30 +5885,36 @@ EXTERN_C const IID IID_IEnroll4;
             /* [out] */ LONG *pdwSkip,
             /* [out] */ LONG *pdwFlags);
         
+        DECLSPEC_XFGVIRT(IEnroll4, addExtensionToRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *addExtensionToRequestWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ LPCWSTR pwszName,
             /* [in] */ PCRYPT_DATA_BLOB pblobValue);
         
+        DECLSPEC_XFGVIRT(IEnroll4, addAttributeToRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *addAttributeToRequestWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ LPCWSTR pwszName,
             /* [in] */ PCRYPT_DATA_BLOB pblobValue);
         
+        DECLSPEC_XFGVIRT(IEnroll4, addNameValuePairToRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *addNameValuePairToRequestWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG Flags,
             /* [in] */ LPCWSTR pwszName,
             /* [in] */ LPCWSTR pwszValue);
         
+        DECLSPEC_XFGVIRT(IEnroll4, resetExtensions)
         HRESULT ( STDMETHODCALLTYPE *resetExtensions )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll4, resetAttributes)
         HRESULT ( STDMETHODCALLTYPE *resetAttributes )( 
             IEnroll4 * This);
         
+        DECLSPEC_XFGVIRT(IEnroll4, createRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *createRequestWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG Flags,
@@ -5316,6 +5922,7 @@ EXTERN_C const IID IID_IEnroll4;
             /* [in] */ LPCWSTR pwszUsage,
             /* [out] */ PCRYPT_DATA_BLOB pblobRequest);
         
+        DECLSPEC_XFGVIRT(IEnroll4, createFileRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *createFileRequestWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG Flags,
@@ -5323,34 +5930,41 @@ EXTERN_C const IID IID_IEnroll4;
             /* [in] */ LPCWSTR pwszUsage,
             /* [in] */ LPCWSTR pwszRequestFileName);
         
+        DECLSPEC_XFGVIRT(IEnroll4, acceptResponseBlob)
         HRESULT ( STDMETHODCALLTYPE *acceptResponseBlob )( 
             IEnroll4 * This,
             /* [in] */ PCRYPT_DATA_BLOB pblobResponse);
         
+        DECLSPEC_XFGVIRT(IEnroll4, acceptFileResponseWStr)
         HRESULT ( STDMETHODCALLTYPE *acceptFileResponseWStr )( 
             IEnroll4 * This,
             /* [in] */ LPCWSTR pwszResponseFileName);
         
+        DECLSPEC_XFGVIRT(IEnroll4, getCertContextFromResponseBlob)
         HRESULT ( STDMETHODCALLTYPE *getCertContextFromResponseBlob )( 
             IEnroll4 * This,
             /* [in] */ PCRYPT_DATA_BLOB pblobResponse,
             /* [out] */ PCCERT_CONTEXT *ppCertContext);
         
+        DECLSPEC_XFGVIRT(IEnroll4, getCertContextFromFileResponseWStr)
         HRESULT ( STDMETHODCALLTYPE *getCertContextFromFileResponseWStr )( 
             IEnroll4 * This,
             /* [in] */ LPCWSTR pwszResponseFileName,
             /* [out] */ PCCERT_CONTEXT *ppCertContext);
         
+        DECLSPEC_XFGVIRT(IEnroll4, createPFXWStr)
         HRESULT ( STDMETHODCALLTYPE *createPFXWStr )( 
             IEnroll4 * This,
             /* [in] */ LPCWSTR pwszPassword,
             /* [out] */ PCRYPT_DATA_BLOB pblobPFX);
         
+        DECLSPEC_XFGVIRT(IEnroll4, createFilePFXWStr)
         HRESULT ( STDMETHODCALLTYPE *createFilePFXWStr )( 
             IEnroll4 * This,
             /* [in] */ LPCWSTR pwszPassword,
             /* [in] */ LPCWSTR pwszPFXFileName);
         
+        DECLSPEC_XFGVIRT(IEnroll4, setPendingRequestInfoWStr)
         HRESULT ( STDMETHODCALLTYPE *setPendingRequestInfoWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG lRequestID,
@@ -5358,27 +5972,32 @@ EXTERN_C const IID IID_IEnroll4;
             /* [in] */ LPCWSTR pwszCAName,
             /* [in] */ LPCWSTR pwszFriendlyName);
         
+        DECLSPEC_XFGVIRT(IEnroll4, enumPendingRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *enumPendingRequestWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG lIndex,
             /* [in] */ LONG lDesiredProperty,
             /* [out] */ LPVOID ppProperty);
         
+        DECLSPEC_XFGVIRT(IEnroll4, removePendingRequestWStr)
         HRESULT ( STDMETHODCALLTYPE *removePendingRequestWStr )( 
             IEnroll4 * This,
             /* [in] */ CRYPT_DATA_BLOB thumbPrintBlob);
         
+        DECLSPEC_XFGVIRT(IEnroll4, GetKeyLenEx)
         HRESULT ( STDMETHODCALLTYPE *GetKeyLenEx )( 
             IEnroll4 * This,
             /* [in] */ LONG lSizeSpec,
             /* [in] */ LONG lKeySpec,
             /* [retval][out] */ LONG *pdwKeySize);
         
+        DECLSPEC_XFGVIRT(IEnroll4, InstallPKCS7BlobEx)
         HRESULT ( STDMETHODCALLTYPE *InstallPKCS7BlobEx )( 
             IEnroll4 * This,
             /* [in] */ PCRYPT_DATA_BLOB pBlobPKCS7,
             /* [retval][out] */ LONG *plCertInstalled);
         
+        DECLSPEC_XFGVIRT(IEnroll4, AddCertTypeToRequestWStrEx)
         HRESULT ( STDMETHODCALLTYPE *AddCertTypeToRequestWStrEx )( 
             IEnroll4 * This,
             /* [in] */ LONG lType,
@@ -5387,33 +6006,40 @@ EXTERN_C const IID IID_IEnroll4;
             /* [in] */ BOOL fMinorVersion,
             /* [in] */ LONG lMinorVersion);
         
+        DECLSPEC_XFGVIRT(IEnroll4, getProviderTypeWStr)
         HRESULT ( STDMETHODCALLTYPE *getProviderTypeWStr )( 
             IEnroll4 * This,
             /* [in] */ LPCWSTR pwszProvName,
             /* [retval][out] */ LONG *plProvType);
         
+        DECLSPEC_XFGVIRT(IEnroll4, addBlobPropertyToCertificateWStr)
         HRESULT ( STDMETHODCALLTYPE *addBlobPropertyToCertificateWStr )( 
             IEnroll4 * This,
             /* [in] */ LONG lPropertyId,
             /* [in] */ LONG lReserved,
             /* [in] */ PCRYPT_DATA_BLOB pBlobProperty);
         
+        DECLSPEC_XFGVIRT(IEnroll4, SetSignerCertificate)
         HRESULT ( STDMETHODCALLTYPE *SetSignerCertificate )( 
             IEnroll4 * This,
             /* [in] */ PCCERT_CONTEXT pSignerCert);
         
+        DECLSPEC_XFGVIRT(IEnroll4, put_ClientId)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_ClientId )( 
             IEnroll4 * This,
             /* [in] */ LONG lClientId);
         
+        DECLSPEC_XFGVIRT(IEnroll4, get_ClientId)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_ClientId )( 
             IEnroll4 * This,
             /* [retval][out] */ LONG *plClientId);
         
+        DECLSPEC_XFGVIRT(IEnroll4, put_IncludeSubjectKeyID)
         /* [propput] */ HRESULT ( STDMETHODCALLTYPE *put_IncludeSubjectKeyID )( 
             IEnroll4 * This,
             /* [in] */ BOOL fInclude);
         
+        DECLSPEC_XFGVIRT(IEnroll4, get_IncludeSubjectKeyID)
         /* [propget] */ HRESULT ( STDMETHODCALLTYPE *get_IncludeSubjectKeyID )( 
             IEnroll4 * This,
             /* [retval][out] */ BOOL *pfInclude);
@@ -5844,9 +6470,9 @@ CEnroll;
 /* interface __MIDL_itf_xenroll_0000_0008 */
 /* [local] */ 
 
-extern "C" IEnroll * WINAPI PIEnrollGetNoCOM(void);
-extern "C" IEnroll2 * WINAPI PIEnroll2GetNoCOM(void);
-extern "C" IEnroll4 * WINAPI PIEnroll4GetNoCOM(void);
+EXTERN_C IEnroll * WINAPI PIEnrollGetNoCOM(void);
+EXTERN_C IEnroll2 * WINAPI PIEnroll2GetNoCOM(void);
+EXTERN_C IEnroll4 * WINAPI PIEnroll4GetNoCOM(void);
 #define CRYPT_ENUM_ALL_PROVIDERS  0x1
 #define XEPR_ENUM_FIRST        -1
 #define XEPR_CADNS           0x01

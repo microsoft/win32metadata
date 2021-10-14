@@ -1,0 +1,7 @@
+--traverse
+<IncludeRoot>/um/rtccore.h
+<IncludeRoot>/um/rtcerr.h
+<IncludeRoot>/um/transportsettings.h
+--namespace
+Windows.Win32.System.RealTimeCommunications
+

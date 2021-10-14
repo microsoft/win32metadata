@@ -369,7 +369,7 @@ typedef struct _DHCP_FILTER_ENUM_INFO {
     DWORD NumElements;
 #if defined( MIDL_PASS )
     [ size_is( NumElements ) ]
-#endif;
+#endif
     _Field_size_(NumElements) LPDHCP_FILTER_RECORD pEnumRecords;
 } DHCP_FILTER_ENUM_INFO, *LPDHCP_FILTER_ENUM_INFO;
 
@@ -1168,7 +1168,7 @@ typedef struct _DHCP_SUPER_SCOPE_TABLE
     DWORD cEntries;
 #if defined( MIDL_PASS )
     [ size_is( cEntries ) ]
-#endif;
+#endif
     DHCP_SUPER_SCOPE_TABLE_ENTRY *pEntries;
 } DHCP_SUPER_SCOPE_TABLE, *LPDHCP_SUPER_SCOPE_TABLE;
 
@@ -1237,9 +1237,9 @@ typedef struct _DHCP_ALL_OPTIONS {
 typedef struct _DHCP_ALL_OPTION_VALUES {
     DWORD                          Flags;         // must be zero -- not used
     DWORD                          NumElements;   // the # of elements in array of Options below..
-#if     defined(MIDL_PASS)
+#if       defined(MIDL_PASS)
     [size_is(NumElements)]
-#endif  MIDL_PASS
+#endif // MIDL_PASS
     struct                         /* anonymous */ {
         LPWSTR                     ClassName;     // for each user class (NULL if none exists)
         LPWSTR                     VendorName;    // for each vendor class (NULL if none exists)
@@ -1254,9 +1254,9 @@ typedef struct _DHCP_ALL_OPTION_VALUES {
 typedef struct _DHCP_ALL_OPTION_VALUES_PB {
     DWORD                          Flags;         // must be zero -- not used
     DWORD                          NumElements;   // the # of elements in array of Options below..
-#if     defined(MIDL_PASS)
+#if       defined(MIDL_PASS)
     [size_is(NumElements)]
-#endif  MIDL_PASS
+#endif // MIDL_PASS
     struct                         /* anonymous */ {
         LPWSTR                     PolicyName;     // for each policy (NULL if none exists)
         LPWSTR                     VendorName;    // for each vendor class (NULL if none exists)
@@ -1289,7 +1289,7 @@ typedef     DHCPDS_SERVERS         DHCP_SERVER_INFO_ARRAY;
 typedef     PDHCPDS_SERVERS        PDHCP_SERVER_INFO_ARRAY;
 typedef     LPDHCPDS_SERVERS       LPDHCP_SERVER_INFO_ARRAY;
 
-#endif      _ST_SRVR_H_
+#endif //   _ST_SRVR_H_
 
 #define     DHCP_FLAGS_DONT_ACCESS_DS             0x01
 #define     DHCP_FLAGS_DONT_DO_RPC                0x02
@@ -1316,19 +1316,19 @@ typedef struct _DHCP_ATTRIB {
     [case(DHCP_ATTRIB_TYPE_BOOL)]  BOOL  DhcpAttribBool;
     [case(DHCP_ATTRIB_TYPE_ULONG)] ULONG DhcpAttribUlong;
     };
-#else MIDL_PASS
+#else // MIDL_PASS
     union               {
     BOOL                           DhcpAttribBool;
     ULONG                          DhcpAttribUlong;
     };
-#endif MIDL_PASS
+#endif // MIDL_PASS
 }   DHCP_ATTRIB, *PDHCP_ATTRIB, *LPDHCP_ATTRIB;
 
 typedef struct _DHCP_ATTRIB_ARRAY {
     ULONG                          NumElements;
 #if defined(MIDL_PASS)
     [size_is(NumElements)]
-#endif MIDL_PASS
+#endif // MIDL_PASS
     _Field_size_(NumElements) LPDHCP_ATTRIB                  DhcpAttribs;
 }   DHCP_ATTRIB_ARRAY, *PDHCP_ATTRIB_ARRAY, *LPDHCP_ATTRIB_ARRAY;
 

@@ -92,7 +92,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -171,6 +171,21 @@ namespace ABI {
 #define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo ABI::Windows::System::Profile::IAnalyticsVersionInfo
 
 #endif // ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_FWD_DEFINED__
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Profile {
+                interface IAnalyticsVersionInfo2;
+            } /* Profile */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+#define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2 ABI::Windows::System::Profile::IAnalyticsVersionInfo2
+
+#endif // ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CProfile_CIAppApplicabilityStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CProfile_CIAppApplicabilityStatics_FWD_DEFINED__
@@ -1125,6 +1140,42 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo;
 
 /*
  *
+ * Interface Windows.System.Profile.IAnalyticsVersionInfo2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Profile.AnalyticsVersionInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Profile_IAnalyticsVersionInfo2[] = L"Windows.System.Profile.IAnalyticsVersionInfo2";
+namespace ABI {
+    namespace Windows {
+        namespace System {
+            namespace Profile {
+                MIDL_INTERFACE("76e915b1-ff36-407c-9f57-160d3e540747")
+                IAnalyticsVersionInfo2 : public IInspectable
+                {
+                public:
+                    virtual HRESULT STDMETHODCALLTYPE get_ProductName(
+                        HSTRING* value
+                        ) = 0;
+                };
+
+                extern MIDL_CONST_ID IID& IID_IAnalyticsVersionInfo2 = _uuidof(IAnalyticsVersionInfo2);
+            } /* Profile */
+        } /* System */
+    } /* Windows */
+} /* ABI */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+/*
+ *
  * Interface Windows.System.Profile.IAppApplicabilityStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 8.0
@@ -1752,8 +1803,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIWindowsIntegrityPolic
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -1775,6 +1826,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.System.Profile.IAnalyticsVersionInfo ** Default Interface **
+ *    Windows.System.Profile.IAnalyticsVersionInfo2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -2071,6 +2123,12 @@ typedef interface __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsInfoStatics2 __x_
 typedef interface __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo;
 
 #endif // ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo_FWD_DEFINED__
+
+#ifndef ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_FWD_DEFINED__
+#define ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_FWD_DEFINED__
+typedef interface __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2 __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2;
+
+#endif // ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_FWD_DEFINED__
 
 #ifndef ____x_ABI_CWindows_CSystem_CProfile_CIAppApplicabilityStatics_FWD_DEFINED__
 #define ____x_ABI_CWindows_CSystem_CProfile_CIAppApplicabilityStatics_FWD_DEFINED__
@@ -3586,6 +3644,75 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo;
 
 /*
  *
+ * Interface Windows.System.Profile.IAnalyticsVersionInfo2
+ *
+ * Introduced to Windows.Foundation.UniversalApiContract in version 11.0
+ *
+ * Interface is a part of the implementation of type Windows.System.Profile.AnalyticsVersionInfo
+ *
+ */
+#if WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+#if !defined(____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_INTERFACE_DEFINED__)
+#define ____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_INTERFACE_DEFINED__
+extern const __declspec(selectany) _Null_terminated_ WCHAR InterfaceName_Windows_System_Profile_IAnalyticsVersionInfo2[] = L"Windows.System.Profile.IAnalyticsVersionInfo2";
+typedef struct __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2Vtbl
+{
+    BEGIN_INTERFACE
+
+    HRESULT (STDMETHODCALLTYPE* QueryInterface)(__x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2* This,
+        REFIID riid,
+        void** ppvObject);
+    ULONG (STDMETHODCALLTYPE* AddRef)(__x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2* This);
+    ULONG (STDMETHODCALLTYPE* Release)(__x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2* This);
+    HRESULT (STDMETHODCALLTYPE* GetIids)(__x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2* This,
+        ULONG* iidCount,
+        IID** iids);
+    HRESULT (STDMETHODCALLTYPE* GetRuntimeClassName)(__x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2* This,
+        HSTRING* className);
+    HRESULT (STDMETHODCALLTYPE* GetTrustLevel)(__x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2* This,
+        TrustLevel* trustLevel);
+    HRESULT (STDMETHODCALLTYPE* get_ProductName)(__x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2* This,
+        HSTRING* value);
+
+    END_INTERFACE
+} __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2Vtbl;
+
+interface __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2
+{
+    CONST_VTBL struct __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2Vtbl* lpVtbl;
+};
+
+#ifdef COBJMACROS
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_QueryInterface(This, riid, ppvObject) \
+    ((This)->lpVtbl->QueryInterface(This, riid, ppvObject))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_AddRef(This) \
+    ((This)->lpVtbl->AddRef(This))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_Release(This) \
+    ((This)->lpVtbl->Release(This))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_GetIids(This, iidCount, iids) \
+    ((This)->lpVtbl->GetIids(This, iidCount, iids))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_GetRuntimeClassName(This, className) \
+    ((This)->lpVtbl->GetRuntimeClassName(This, className))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_GetTrustLevel(This, trustLevel) \
+    ((This)->lpVtbl->GetTrustLevel(This, trustLevel))
+
+#define __x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_get_ProductName(This, value) \
+    ((This)->lpVtbl->get_ProductName(This, value))
+
+#endif /* COBJMACROS */
+
+EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2;
+#endif /* !defined(____x_ABI_CWindows_CSystem_CProfile_CIAnalyticsVersionInfo2_INTERFACE_DEFINED__) */
+#endif // WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION >= 0xb0000
+
+/*
+ *
  * Interface Windows.System.Profile.IAppApplicabilityStatics
  *
  * Introduced to Windows.Foundation.UniversalApiContract in version 8.0
@@ -4749,8 +4876,8 @@ EXTERN_C const IID IID___x_ABI_CWindows_CSystem_CProfile_CIWindowsIntegrityPolic
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics2 interface starting with version 6.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.System.Profile.IAnalyticsInfoStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *
@@ -4772,6 +4899,7 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  *
  * Class implements the following interfaces:
  *    Windows.System.Profile.IAnalyticsVersionInfo ** Default Interface **
+ *    Windows.System.Profile.IAnalyticsVersionInfo2
  *
  * Class Threading Model:  Both Single and Multi Threaded Apartment
  *

@@ -1,5 +1,7 @@
 --traverse
+<IncludeRoot>/um/wcnapi.h
 <IncludeRoot>/um/WcnTypes.h
 <IncludeRoot>/um/WcnDevice.h
+<IncludeRoot>/um/wcnfunctiondiscoverykeys.h
 --namespace
 Windows.Win32.NetworkManagement.WindowsConnectNow

@@ -545,7 +545,10 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 #define ISC_REQ_USE_HTTP_STYLE          0x01000000
 #define ISC_REQ_UNVERIFIED_TARGET_NAME  0x20000000
 #define ISC_REQ_CONFIDENTIALITY_ONLY    0x40000000 // honored by SPNEGO/Kerberos
-#define ISC_REQ_MESSAGES                0x0000000100000000 // Disables the TLS 1.3+ record layer and causes the security context to consume and produce cleartext TLS messages, rather than records.
+#define ISC_REQ_MESSAGES                 0x0000000100000000 // Disables the TLS 1.3+ record layer and causes the security context to consume and produce cleartext TLS messages, rather than records.
+// Request that schannel perform server cert chain validation without failing the handshake on errors (deferred),
+// same as SCH_CRED_DEFERRED_CRED_VALIDATION except applies to context not credential handle.
+#define ISC_REQ_DEFERRED_CRED_VALIDATION 0x0000000200000000
 
 #define ISC_RET_DELEGATE                0x00000001
 #define ISC_RET_MUTUAL_AUTH             0x00000002
@@ -576,7 +579,8 @@ typedef struct _SEC_TRAFFIC_SECRETS {
 #define ISC_RET_NO_ADDITIONAL_TOKEN     0x02000000 // *INTERNAL*
 #define ISC_RET_REAUTHENTICATION        0x08000000 // *INTERNAL*
 #define ISC_RET_CONFIDENTIALITY_ONLY    0x40000000 // honored by SPNEGO/Kerberos
-#define ISC_RET_MESSAGES                0x0000000100000000 // Indicates that the TLS 1.3+ record layer is disabled, and the security context consumes and produces cleartext TLS messages, rather than records.
+#define ISC_RET_MESSAGES                 0x0000000100000000 // Indicates that the TLS 1.3+ record layer is disabled, and the security context consumes and produces cleartext TLS messages, rather than records.
+#define ISC_RET_DEFERRED_CRED_VALIDATION 0x0000000200000000 // Indicates that SCH_CRED_DEFERRED_CRED_VALIDATION/ISC_REQ_DEFERRED_CRED_VALIDATION request will be honored.
 
 #define ASC_REQ_DELEGATE                0x00000001
 #define ASC_REQ_MUTUAL_AUTH             0x00000002
@@ -3162,6 +3166,10 @@ EXTERN_C __declspec(selectany) const GUID SEC_WINNT_AUTH_DATA_TYPE_FIDO =
 EXTERN_C __declspec(selectany) const GUID SEC_WINNT_AUTH_DATA_TYPE_KEYTAB =
 { 0xd587aae8, 0xf78f, 0x4455, { 0xa1, 0x12, 0xc9, 0x34, 0xbe, 0xee, 0x7c, 0xe1 } };
 
+// {12E52E0F-6F9B-4F83-9020-9DE42B226267}
+EXTERN_C __declspec(selectany) const GUID SEC_WINNT_AUTH_DATA_TYPE_DELEGATION_TOKEN =
+{ 0x12e52e0f, 0x6f9b, 0x4f83, { 0x90, 0x20, 0x9d, 0xe4, 0x2b, 0x22, 0x62, 0x67 } };
+
 typedef struct _SEC_WINNT_AUTH_DATA_PASSWORD {
    SEC_WINNT_AUTH_BYTE_VECTOR UnicodePassword;
 } SEC_WINNT_AUTH_DATA_PASSWORD, PSEC_WINNT_AUTH_DATA_PASSWORD;
@@ -3196,6 +3204,7 @@ typedef struct _SEC_WINNT_AUTH_NGC_DATA {
 #define NGC_DATA_FLAG_KERB_CERTIFICATE_LOGON_FLAG_CHECK_DUPLICATES     (0x1) //corresponds to KERB_CERTIFICATE_LOGON_FLAG_CHECK_DUPLICATES
 #define NGC_DATA_FLAG_KERB_CERTIFICATE_LOGON_FLAG_USE_CERTIFICATE_INFO (0x2) //corresponds to  KERB_CERTIFICATE_LOGON_FLAG_USE_CERTIFICATE_INFO
 #define NGC_DATA_FLAG_IS_SMARTCARD_DATA                                (0x4)
+#define NGC_DATA_FLAG_IS_CLOUD_TRUST_CRED                              (0x8) // credential should be treated as "cloud trust" - use Cloud TGTs instead of on-prem PKINIT
 
 typedef struct _SEC_WINNT_AUTH_DATA_TYPE_SMARTCARD_CONTEXTS_DATA
 {

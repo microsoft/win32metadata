@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -668,6 +676,7 @@ EXTERN_C const IID IID_ICommandTree;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICommandTree * This,
             /* [annotation][in] */ 
@@ -675,26 +684,32 @@ EXTERN_C const IID IID_ICommandTree;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICommandTree * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICommandTree * This);
         
+        DECLSPEC_XFGVIRT(ICommandTree, FindErrorNodes)
         HRESULT ( STDMETHODCALLTYPE *FindErrorNodes )( 
             ICommandTree * This,
             /* [in] */ const DBCOMMANDTREE *pRoot,
             /* [out] */ ULONG *pcErrorNodes,
             /* [out] */ DBCOMMANDTREE ***prgErrorNodes);
         
+        DECLSPEC_XFGVIRT(ICommandTree, FreeCommandTree)
         HRESULT ( STDMETHODCALLTYPE *FreeCommandTree )( 
             ICommandTree * This,
             /* [in] */ DBCOMMANDTREE **ppRoot);
         
+        DECLSPEC_XFGVIRT(ICommandTree, GetCommandTree)
         HRESULT ( STDMETHODCALLTYPE *GetCommandTree )( 
             ICommandTree * This,
             /* [out] */ DBCOMMANDTREE **ppRoot);
         
+        DECLSPEC_XFGVIRT(ICommandTree, SetCommandTree)
         HRESULT ( STDMETHODCALLTYPE *SetCommandTree )( 
             ICommandTree * This,
             /* [in] */ DBCOMMANDTREE **ppRoot,
@@ -791,6 +806,7 @@ EXTERN_C const IID IID_IQuery;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IQuery * This,
             /* [annotation][in] */ 
@@ -798,37 +814,45 @@ EXTERN_C const IID IID_IQuery;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IQuery * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IQuery * This);
         
+        DECLSPEC_XFGVIRT(ICommandTree, FindErrorNodes)
         HRESULT ( STDMETHODCALLTYPE *FindErrorNodes )( 
             IQuery * This,
             /* [in] */ const DBCOMMANDTREE *pRoot,
             /* [out] */ ULONG *pcErrorNodes,
             /* [out] */ DBCOMMANDTREE ***prgErrorNodes);
         
+        DECLSPEC_XFGVIRT(ICommandTree, FreeCommandTree)
         HRESULT ( STDMETHODCALLTYPE *FreeCommandTree )( 
             IQuery * This,
             /* [in] */ DBCOMMANDTREE **ppRoot);
         
+        DECLSPEC_XFGVIRT(ICommandTree, GetCommandTree)
         HRESULT ( STDMETHODCALLTYPE *GetCommandTree )( 
             IQuery * This,
             /* [out] */ DBCOMMANDTREE **ppRoot);
         
+        DECLSPEC_XFGVIRT(ICommandTree, SetCommandTree)
         HRESULT ( STDMETHODCALLTYPE *SetCommandTree )( 
             IQuery * This,
             /* [in] */ DBCOMMANDTREE **ppRoot,
             /* [in] */ DBCOMMANDREUSE dwCommandReuse,
             /* [in] */ BOOL fCopy);
         
+        DECLSPEC_XFGVIRT(IQuery, AddPostProcessing)
         HRESULT ( STDMETHODCALLTYPE *AddPostProcessing )( 
             IQuery * This,
             /* [in] */ DBCOMMANDTREE **ppRoot,
             /* [in] */ BOOL fCopy);
         
+        DECLSPEC_XFGVIRT(IQuery, GetCardinalityEstimate)
         HRESULT ( STDMETHODCALLTYPE *GetCardinalityEstimate )( 
             IQuery * This,
             /* [out] */ DBORDINAL *pulCardinality);

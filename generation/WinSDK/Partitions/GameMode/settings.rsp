@@ -1,4 +1,5 @@
 --traverse
 <IncludeRoot>/um/expandedresources.h
+<IncludeRoot>/um/gameux.h
 --namespace
 Windows.Win32.Gaming

@@ -1,0 +1,7 @@
+--traverse
+<IncludeRoot>/um/windowssideshow.h
+<IncludeRoot>/um/windowssideshowapi.h
+<IncludeRoot>/um/windowssideshowdriverevents.h
+--namespace
+Windows.Win32.System.SideShow
+

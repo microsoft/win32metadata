@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -126,6 +134,7 @@ EXTERN_C const IID IID_ITransportSettingsInternal;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITransportSettingsInternal * This,
             /* [annotation][in] */ 
@@ -133,17 +142,21 @@ EXTERN_C const IID IID_ITransportSettingsInternal;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITransportSettingsInternal * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITransportSettingsInternal * This);
         
+        DECLSPEC_XFGVIRT(ITransportSettingsInternal, ApplySetting)
         HRESULT ( STDMETHODCALLTYPE *ApplySetting )( 
             ITransportSettingsInternal * This,
             /* [annotation][out][in] */ 
             _Inout_  TRANSPORT_SETTING *Setting);
         
+        DECLSPEC_XFGVIRT(ITransportSettingsInternal, QuerySetting)
         HRESULT ( STDMETHODCALLTYPE *QuerySetting )( 
             ITransportSettingsInternal * This,
             /* [annotation][out][in] */ 
@@ -237,6 +250,7 @@ EXTERN_C const IID IID_INetworkTransportSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INetworkTransportSettings * This,
             /* [annotation][in] */ 
@@ -244,12 +258,15 @@ EXTERN_C const IID IID_INetworkTransportSettings;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INetworkTransportSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INetworkTransportSettings * This);
         
+        DECLSPEC_XFGVIRT(INetworkTransportSettings, ApplySetting)
         HRESULT ( STDMETHODCALLTYPE *ApplySetting )( 
             __RPC__in INetworkTransportSettings * This,
             /* [annotation][in] */ 
@@ -263,6 +280,7 @@ EXTERN_C const IID IID_INetworkTransportSettings;
             /* [annotation][size_is][size_is][out] */ 
             _Out_writes_(*LengthOut)  BYTE **ValueOut);
         
+        DECLSPEC_XFGVIRT(INetworkTransportSettings, QuerySetting)
         HRESULT ( STDMETHODCALLTYPE *QuerySetting )( 
             __RPC__in INetworkTransportSettings * This,
             /* [annotation][in] */ 
@@ -344,6 +362,7 @@ EXTERN_C const IID IID_INotificationTransportSync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in INotificationTransportSync * This,
             /* [annotation][in] */ 
@@ -351,15 +370,19 @@ EXTERN_C const IID IID_INotificationTransportSync;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in INotificationTransportSync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in INotificationTransportSync * This);
         
+        DECLSPEC_XFGVIRT(INotificationTransportSync, CompleteDelivery)
         HRESULT ( STDMETHODCALLTYPE *CompleteDelivery )( 
             __RPC__in INotificationTransportSync * This);
         
+        DECLSPEC_XFGVIRT(INotificationTransportSync, Flush)
         HRESULT ( STDMETHODCALLTYPE *Flush )( 
             __RPC__in INotificationTransportSync * This);
         

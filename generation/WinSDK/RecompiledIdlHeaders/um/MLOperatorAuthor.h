@@ -1,8 +1,6 @@
-//-----------------------------------------------------------------------------
-//
-//  Copyright (c) Microsoft Corporation. All rights reserved.
-//
-//-----------------------------------------------------------------------------
+// Copyright (c) Microsoft Corporation. All rights reserved.
+// Licensed under the MIT License.
+
 //! \file MLOperatorAuthor.h
 #pragma once
 
@@ -51,7 +49,7 @@ enum class MLOperatorAttributeType : uint32_t
 //! \brief Specifies the data type of a tensor.
 //! Each data type numerically matches corresponding ONNX types.
 enum class MLOperatorTensorDataType : uint32_t
-{	
+{
     //! Undefined (unused).
     Undefined = 0,
 
@@ -751,7 +749,7 @@ IMLOperatorKernelFactory : IUnknown
  
 //! \interface IMLOperatorRegistry
 //! \brief Represents an instance of a registry for custom operator kernel and schema.
-//! Custom operators may be used with Windows.AI.MachineLearning APIs by returning
+//! Custom operators may be used with WinML APIs by returning
 //! instances of IMLOperatorRegistry through ILearningModelOperatorProviderNative.
 interface DECLSPEC_UUID("2AF9DD2D-B516-4672-9AB5-530C208493AD") DECLSPEC_NOVTABLE
 IMLOperatorRegistry : IUnknown

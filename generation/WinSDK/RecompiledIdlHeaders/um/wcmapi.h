@@ -140,7 +140,7 @@ WcmQueryProperty(
     _In_opt_ const GUID* pInterface, // NULL for global properties
     _In_opt_ LPCWSTR strProfileName,
     _In_ WCM_PROPERTY Property,
-    _Reserved_ PVOID pReserved,
+    _Reserved_ void* pReserved,
     _Out_ PDWORD pdwDataSize,
     _Outptr_result_buffer_maybenull_(*pdwDataSize) PBYTE* ppData);
 
@@ -150,20 +150,20 @@ WcmSetProperty(
     _In_opt_ const GUID* pInterface, // NULL for global properties
     _In_opt_ LPCWSTR strProfileName,
     _In_ WCM_PROPERTY Property,
-    _Reserved_ PVOID pReserved,
+    _Reserved_ void* pReserved,
     _In_ DWORD dwDataSize,
     _In_reads_opt_(dwDataSize) const BYTE* pbData);
 
 DWORD
 WINAPI
-WcmGetProfileList(_Reserved_ PVOID pReserved, _Outptr_ WCM_PROFILE_INFO_LIST** ppProfileList);
+WcmGetProfileList(_Reserved_ void* pReserved, _Outptr_ WCM_PROFILE_INFO_LIST** ppProfileList);
 
 // Ethernet pseudo-profiles should not be included in pProfileList
 DWORD
 WINAPI
-WcmSetProfileList(_In_ WCM_PROFILE_INFO_LIST* pProfileList, _In_ DWORD dwPosition, _In_ BOOL fIgnoreUnknownProfiles, _Reserved_ PVOID pReserved);
+WcmSetProfileList(_In_ WCM_PROFILE_INFO_LIST* pProfileList, _In_ DWORD dwPosition, _In_ BOOL fIgnoreUnknownProfiles, _Reserved_ void* pReserved);
 
-VOID WINAPI WcmFreeMemory(__deallocate(Mem) PVOID pMemory);
+void WINAPI WcmFreeMemory(__deallocate(Mem) void* pMemory);
 
 #endif // not __midl
 

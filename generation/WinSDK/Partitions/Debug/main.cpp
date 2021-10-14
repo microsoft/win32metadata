@@ -6,9 +6,24 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+//#include <ntdef.h>
+
+// Would need to use ntdef.h, but we need windows.h
+typedef LONG NTSTATUS;
+typedef UCHAR KIRQL;
+
 #include <wct.h>
 #include <minidumpapiset.h>
 #include <activdbg.h>
 #include <activprof.h>
 #include <webapplication.h>
-#include <dbghelp.h>
+#include <ImageHlp.h>
+#include <bugcodes.h>
+#include <activaut.h>
+#include <activdbg100.h>
+#include <dxcore.h>
+#include <dxcore_interface.h>
+#include <jscript9diag.h>
+#include <mindumpdef.h>
+#include <objsafe.h>
+#include <wheadef.h>

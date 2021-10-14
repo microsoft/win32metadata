@@ -198,7 +198,7 @@ WdsCliLog(
 // that must be present in the request in order for the request to be 
 // considered valid.
 //
-typedef enum
+enum
 {
     WDS_LOG_TYPE_CLIENT_ERROR = 1,
     WDS_LOG_TYPE_CLIENT_STARTED,
@@ -230,7 +230,7 @@ typedef enum
 //
 // Log levels.
 //
-typedef enum
+enum
 {
     WDS_LOG_LEVEL_DISABLED = 0,
     WDS_LOG_LEVEL_ERROR = 1,
@@ -359,7 +359,7 @@ VOID
 
 // Callback messages.
 //
-typedef enum
+enum
 {
     WDS_CLI_MSG_START = 0,
     WDS_CLI_MSG_COMPLETE,

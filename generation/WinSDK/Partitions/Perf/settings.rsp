@@ -4,5 +4,7 @@
 <IncludeRoot>/um/perflib.h
 <IncludeRoot>/um/profileapi.h
 <IncludeRoot>/um/winperf.h
+<IncludeRoot>/um/isysmon.h
+<IncludeRoot>/um/pdhmsg.h
 --namespace
 Windows.Win32.System.Performance

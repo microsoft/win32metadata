@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -227,6 +235,7 @@ EXTERN_C const IID IID_IGetClusterUIInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetClusterUIInfo * This,
             /* [annotation][in] */ 
@@ -234,12 +243,15 @@ EXTERN_C const IID IID_IGetClusterUIInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetClusterUIInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetClusterUIInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterUIInfo, GetClusterName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetClusterName )( 
             IGetClusterUIInfo * This,
             /* [annotation][out] */ 
@@ -247,12 +259,15 @@ EXTERN_C const IID IID_IGetClusterUIInfo;
             /* [annotation][out][in] */ 
             _Inout_  LONG *pcchName);
         
+        DECLSPEC_XFGVIRT(IGetClusterUIInfo, GetLocale)
         /* [local] */ LCID ( STDMETHODCALLTYPE *GetLocale )( 
             IGetClusterUIInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterUIInfo, GetFont)
         /* [local] */ HFONT ( STDMETHODCALLTYPE *GetFont )( 
             IGetClusterUIInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterUIInfo, GetIcon)
         /* [local] */ HICON ( STDMETHODCALLTYPE *GetIcon )( 
             IGetClusterUIInfo * This);
         
@@ -336,6 +351,7 @@ EXTERN_C const IID IID_IGetClusterDataInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetClusterDataInfo * This,
             /* [annotation][in] */ 
@@ -343,12 +359,15 @@ EXTERN_C const IID IID_IGetClusterDataInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetClusterDataInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetClusterDataInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterDataInfo, GetClusterName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetClusterName )( 
             IGetClusterDataInfo * This,
             /* [annotation][out] */ 
@@ -356,9 +375,11 @@ EXTERN_C const IID IID_IGetClusterDataInfo;
             /* [annotation][out][in] */ 
             _Inout_  LONG *pcchName);
         
+        DECLSPEC_XFGVIRT(IGetClusterDataInfo, GetClusterHandle)
         /* [local] */ HCLUSTER ( STDMETHODCALLTYPE *GetClusterHandle )( 
             IGetClusterDataInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterDataInfo, GetObjectCount)
         /* [local] */ LONG ( STDMETHODCALLTYPE *GetObjectCount )( 
             IGetClusterDataInfo * This);
         
@@ -441,6 +462,7 @@ EXTERN_C const IID IID_IGetClusterObjectInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetClusterObjectInfo * This,
             /* [annotation][in] */ 
@@ -448,12 +470,15 @@ EXTERN_C const IID IID_IGetClusterObjectInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetClusterObjectInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetClusterObjectInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterObjectInfo, GetObjectName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetObjectName )( 
             IGetClusterObjectInfo * This,
             /* [annotation][in] */ 
@@ -463,6 +488,7 @@ EXTERN_C const IID IID_IGetClusterObjectInfo;
             /* [annotation][out][in] */ 
             _Inout_  LONG *pcchName);
         
+        DECLSPEC_XFGVIRT(IGetClusterObjectInfo, GetObjectType)
         /* [local] */ CLUADMEX_OBJECT_TYPE ( STDMETHODCALLTYPE *GetObjectType )( 
             IGetClusterObjectInfo * This,
             /* [annotation][in] */ 
@@ -536,6 +562,7 @@ EXTERN_C const IID IID_IGetClusterNodeInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetClusterNodeInfo * This,
             /* [annotation][in] */ 
@@ -543,12 +570,15 @@ EXTERN_C const IID IID_IGetClusterNodeInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetClusterNodeInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetClusterNodeInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterNodeInfo, GetNodeHandle)
         /* [local] */ HNODE ( STDMETHODCALLTYPE *GetNodeHandle )( 
             IGetClusterNodeInfo * This,
             /* [annotation][in] */ 
@@ -619,6 +649,7 @@ EXTERN_C const IID IID_IGetClusterGroupInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetClusterGroupInfo * This,
             /* [annotation][in] */ 
@@ -626,12 +657,15 @@ EXTERN_C const IID IID_IGetClusterGroupInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetClusterGroupInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetClusterGroupInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterGroupInfo, GetGroupHandle)
         /* [local] */ HGROUP ( STDMETHODCALLTYPE *GetGroupHandle )( 
             IGetClusterGroupInfo * This,
             /* [annotation][in] */ 
@@ -718,6 +752,7 @@ EXTERN_C const IID IID_IGetClusterResourceInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetClusterResourceInfo * This,
             /* [annotation][in] */ 
@@ -725,17 +760,21 @@ EXTERN_C const IID IID_IGetClusterResourceInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetClusterResourceInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetClusterResourceInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterResourceInfo, GetResourceHandle)
         /* [local] */ HRESOURCE ( STDMETHODCALLTYPE *GetResourceHandle )( 
             IGetClusterResourceInfo * This,
             /* [annotation][in] */ 
             _In_  LONG lObjIndex);
         
+        DECLSPEC_XFGVIRT(IGetClusterResourceInfo, GetResourceTypeName)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetResourceTypeName )( 
             IGetClusterResourceInfo * This,
             /* [annotation][in] */ 
@@ -745,6 +784,7 @@ EXTERN_C const IID IID_IGetClusterResourceInfo;
             /* [annotation][out][in] */ 
             _Inout_  LONG *pcchResTypeName);
         
+        DECLSPEC_XFGVIRT(IGetClusterResourceInfo, GetResourceNetworkName)
         /* [local] */ BOOL ( STDMETHODCALLTYPE *GetResourceNetworkName )( 
             IGetClusterResourceInfo * This,
             /* [annotation][in] */ 
@@ -825,6 +865,7 @@ EXTERN_C const IID IID_IGetClusterNetworkInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetClusterNetworkInfo * This,
             /* [annotation][in] */ 
@@ -832,12 +873,15 @@ EXTERN_C const IID IID_IGetClusterNetworkInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetClusterNetworkInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetClusterNetworkInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterNetworkInfo, GetNetworkHandle)
         /* [local] */ HNETWORK ( STDMETHODCALLTYPE *GetNetworkHandle )( 
             IGetClusterNetworkInfo * This,
             /* [annotation][in] */ 
@@ -908,6 +952,7 @@ EXTERN_C const IID IID_IGetClusterNetInterfaceInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IGetClusterNetInterfaceInfo * This,
             /* [annotation][in] */ 
@@ -915,12 +960,15 @@ EXTERN_C const IID IID_IGetClusterNetInterfaceInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IGetClusterNetInterfaceInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IGetClusterNetInterfaceInfo * This);
         
+        DECLSPEC_XFGVIRT(IGetClusterNetInterfaceInfo, GetNetInterfaceHandle)
         /* [local] */ HNETINTERFACE ( STDMETHODCALLTYPE *GetNetInterfaceHandle )( 
             IGetClusterNetInterfaceInfo * This,
             /* [annotation][in] */ 
@@ -991,6 +1039,7 @@ EXTERN_C const IID IID_IWCPropertySheetCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWCPropertySheetCallback * This,
             /* [annotation][in] */ 
@@ -998,12 +1047,15 @@ EXTERN_C const IID IID_IWCPropertySheetCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWCPropertySheetCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWCPropertySheetCallback * This);
         
+        DECLSPEC_XFGVIRT(IWCPropertySheetCallback, AddPropertySheetPage)
         HRESULT ( STDMETHODCALLTYPE *AddPropertySheetPage )( 
             __RPC__in IWCPropertySheetCallback * This,
             /* [annotation][in] */ 
@@ -1076,6 +1128,7 @@ EXTERN_C const IID IID_IWEExtendPropertySheet;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWEExtendPropertySheet * This,
             /* [annotation][in] */ 
@@ -1083,12 +1136,15 @@ EXTERN_C const IID IID_IWEExtendPropertySheet;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWEExtendPropertySheet * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWEExtendPropertySheet * This);
         
+        DECLSPEC_XFGVIRT(IWEExtendPropertySheet, CreatePropertySheetPages)
         HRESULT ( STDMETHODCALLTYPE *CreatePropertySheetPages )( 
             __RPC__in IWEExtendPropertySheet * This,
             /* [annotation][in] */ 
@@ -1167,6 +1223,7 @@ EXTERN_C const IID IID_IWCWizardCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWCWizardCallback * This,
             /* [annotation][in] */ 
@@ -1174,17 +1231,21 @@ EXTERN_C const IID IID_IWCWizardCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWCWizardCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWCWizardCallback * This);
         
+        DECLSPEC_XFGVIRT(IWCWizardCallback, AddWizardPage)
         HRESULT ( STDMETHODCALLTYPE *AddWizardPage )( 
             __RPC__in IWCWizardCallback * This,
             /* [annotation][in] */ 
             _In_  LONG *hpage);
         
+        DECLSPEC_XFGVIRT(IWCWizardCallback, EnableNext)
         HRESULT ( STDMETHODCALLTYPE *EnableNext )( 
             __RPC__in IWCWizardCallback * This,
             /* [annotation][in] */ 
@@ -1262,6 +1323,7 @@ EXTERN_C const IID IID_IWEExtendWizard;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWEExtendWizard * This,
             /* [annotation][in] */ 
@@ -1269,12 +1331,15 @@ EXTERN_C const IID IID_IWEExtendWizard;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWEExtendWizard * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWEExtendWizard * This);
         
+        DECLSPEC_XFGVIRT(IWEExtendWizard, CreateWizardPages)
         HRESULT ( STDMETHODCALLTYPE *CreateWizardPages )( 
             __RPC__in IWEExtendWizard * This,
             /* [annotation][in] */ 
@@ -1355,6 +1420,7 @@ EXTERN_C const IID IID_IWCContextMenuCallback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWCContextMenuCallback * This,
             /* [annotation][in] */ 
@@ -1362,12 +1428,15 @@ EXTERN_C const IID IID_IWCContextMenuCallback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWCContextMenuCallback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWCContextMenuCallback * This);
         
+        DECLSPEC_XFGVIRT(IWCContextMenuCallback, AddExtensionMenuItem)
         HRESULT ( STDMETHODCALLTYPE *AddExtensionMenuItem )( 
             __RPC__in IWCContextMenuCallback * This,
             /* [annotation][in] */ 
@@ -1448,6 +1517,7 @@ EXTERN_C const IID IID_IWEExtendContextMenu;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWEExtendContextMenu * This,
             /* [annotation][in] */ 
@@ -1455,12 +1525,15 @@ EXTERN_C const IID IID_IWEExtendContextMenu;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWEExtendContextMenu * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWEExtendContextMenu * This);
         
+        DECLSPEC_XFGVIRT(IWEExtendContextMenu, AddContextMenuItems)
         HRESULT ( STDMETHODCALLTYPE *AddContextMenuItems )( 
             __RPC__in IWEExtendContextMenu * This,
             /* [annotation][in] */ 
@@ -1535,6 +1608,7 @@ EXTERN_C const IID IID_IWEInvokeCommand;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWEInvokeCommand * This,
             /* [annotation][in] */ 
@@ -1542,12 +1616,15 @@ EXTERN_C const IID IID_IWEInvokeCommand;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWEInvokeCommand * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWEInvokeCommand * This);
         
+        DECLSPEC_XFGVIRT(IWEInvokeCommand, InvokeCommand)
         HRESULT ( STDMETHODCALLTYPE *InvokeCommand )( 
             __RPC__in IWEInvokeCommand * This,
             /* [annotation][in] */ 
@@ -1626,6 +1703,7 @@ EXTERN_C const IID IID_IWCWizard97Callback;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWCWizard97Callback * This,
             /* [annotation][in] */ 
@@ -1633,17 +1711,21 @@ EXTERN_C const IID IID_IWCWizard97Callback;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWCWizard97Callback * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWCWizard97Callback * This);
         
+        DECLSPEC_XFGVIRT(IWCWizard97Callback, AddWizard97Page)
         HRESULT ( STDMETHODCALLTYPE *AddWizard97Page )( 
             __RPC__in IWCWizard97Callback * This,
             /* [annotation][in] */ 
             _In_  LONG *hpage);
         
+        DECLSPEC_XFGVIRT(IWCWizard97Callback, EnableNext)
         HRESULT ( STDMETHODCALLTYPE *EnableNext )( 
             __RPC__in IWCWizard97Callback * This,
             /* [annotation][in] */ 
@@ -1721,6 +1803,7 @@ EXTERN_C const IID IID_IWEExtendWizard97;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IWEExtendWizard97 * This,
             /* [annotation][in] */ 
@@ -1728,12 +1811,15 @@ EXTERN_C const IID IID_IWEExtendWizard97;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IWEExtendWizard97 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IWEExtendWizard97 * This);
         
+        DECLSPEC_XFGVIRT(IWEExtendWizard97, CreateWizard97Pages)
         HRESULT ( STDMETHODCALLTYPE *CreateWizard97Pages )( 
             __RPC__in IWEExtendWizard97 * This,
             /* [annotation][in] */ 

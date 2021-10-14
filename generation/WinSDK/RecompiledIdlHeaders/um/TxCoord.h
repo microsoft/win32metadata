@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -227,6 +235,7 @@ EXTERN_C const IID IID_ITransactionResourceAsync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionResourceAsync * This,
             /* [annotation][in] */ 
@@ -234,12 +243,15 @@ EXTERN_C const IID IID_ITransactionResourceAsync;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionResourceAsync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionResourceAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionResourceAsync, PrepareRequest)
         HRESULT ( STDMETHODCALLTYPE *PrepareRequest )( 
             __RPC__in ITransactionResourceAsync * This,
             /* [annotation][in] */ 
@@ -251,6 +263,7 @@ EXTERN_C const IID IID_ITransactionResourceAsync;
             /* [annotation][in] */ 
             _In_  BOOL fSinglePhase);
         
+        DECLSPEC_XFGVIRT(ITransactionResourceAsync, CommitRequest)
         HRESULT ( STDMETHODCALLTYPE *CommitRequest )( 
             __RPC__in ITransactionResourceAsync * This,
             /* [annotation][in] */ 
@@ -258,6 +271,7 @@ EXTERN_C const IID IID_ITransactionResourceAsync;
             /* [annotation][unique][in] */ 
             _In_  XACTUOW *pNewUOW);
         
+        DECLSPEC_XFGVIRT(ITransactionResourceAsync, AbortRequest)
         HRESULT ( STDMETHODCALLTYPE *AbortRequest )( 
             __RPC__in ITransactionResourceAsync * This,
             /* [annotation][unique][in] */ 
@@ -267,6 +281,7 @@ EXTERN_C const IID IID_ITransactionResourceAsync;
             /* [annotation][unique][in] */ 
             _In_  XACTUOW *pNewUOW);
         
+        DECLSPEC_XFGVIRT(ITransactionResourceAsync, TMDown)
         HRESULT ( STDMETHODCALLTYPE *TMDown )( 
             __RPC__in ITransactionResourceAsync * This);
         
@@ -348,6 +363,7 @@ EXTERN_C const IID IID_ITransactionLastResourceAsync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionLastResourceAsync * This,
             /* [annotation][in] */ 
@@ -355,17 +371,21 @@ EXTERN_C const IID IID_ITransactionLastResourceAsync;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionLastResourceAsync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionLastResourceAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionLastResourceAsync, DelegateCommit)
         HRESULT ( STDMETHODCALLTYPE *DelegateCommit )( 
             __RPC__in ITransactionLastResourceAsync * This,
             /* [annotation][in] */ 
             _In_  DWORD grfRM);
         
+        DECLSPEC_XFGVIRT(ITransactionLastResourceAsync, ForgetRequest)
         HRESULT ( STDMETHODCALLTYPE *ForgetRequest )( 
             __RPC__in ITransactionLastResourceAsync * This,
             /* [annotation][in] */ 
@@ -461,6 +481,7 @@ EXTERN_C const IID IID_ITransactionResource;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionResource * This,
             /* [annotation][in] */ 
@@ -468,12 +489,15 @@ EXTERN_C const IID IID_ITransactionResource;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionResource * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionResource * This);
         
+        DECLSPEC_XFGVIRT(ITransactionResource, PrepareRequest)
         HRESULT ( STDMETHODCALLTYPE *PrepareRequest )( 
             __RPC__in ITransactionResource * This,
             /* [annotation][in] */ 
@@ -485,6 +509,7 @@ EXTERN_C const IID IID_ITransactionResource;
             /* [annotation][in] */ 
             _In_  BOOL fSinglePhase);
         
+        DECLSPEC_XFGVIRT(ITransactionResource, CommitRequest)
         HRESULT ( STDMETHODCALLTYPE *CommitRequest )( 
             __RPC__in ITransactionResource * This,
             /* [annotation][in] */ 
@@ -492,6 +517,7 @@ EXTERN_C const IID IID_ITransactionResource;
             /* [annotation][unique][in] */ 
             _In_  XACTUOW *pNewUOW);
         
+        DECLSPEC_XFGVIRT(ITransactionResource, AbortRequest)
         HRESULT ( STDMETHODCALLTYPE *AbortRequest )( 
             __RPC__in ITransactionResource * This,
             /* [annotation][unique][in] */ 
@@ -501,6 +527,7 @@ EXTERN_C const IID IID_ITransactionResource;
             /* [annotation][unique][in] */ 
             _In_  XACTUOW *pNewUOW);
         
+        DECLSPEC_XFGVIRT(ITransactionResource, TMDown)
         HRESULT ( STDMETHODCALLTYPE *TMDown )( 
             __RPC__in ITransactionResource * This);
         
@@ -590,6 +617,7 @@ EXTERN_C const IID IID_ITransactionEnlistmentAsync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionEnlistmentAsync * This,
             /* [annotation][in] */ 
@@ -597,12 +625,15 @@ EXTERN_C const IID IID_ITransactionEnlistmentAsync;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionEnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionEnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionEnlistmentAsync, PrepareRequestDone)
         HRESULT ( STDMETHODCALLTYPE *PrepareRequestDone )( 
             __RPC__in ITransactionEnlistmentAsync * This,
             /* [annotation][in] */ 
@@ -612,11 +643,13 @@ EXTERN_C const IID IID_ITransactionEnlistmentAsync;
             /* [annotation][unique][in] */ 
             _In_  BOID *pboidReason);
         
+        DECLSPEC_XFGVIRT(ITransactionEnlistmentAsync, CommitRequestDone)
         HRESULT ( STDMETHODCALLTYPE *CommitRequestDone )( 
             __RPC__in ITransactionEnlistmentAsync * This,
             /* [annotation][in] */ 
             _In_  HRESULT hr);
         
+        DECLSPEC_XFGVIRT(ITransactionEnlistmentAsync, AbortRequestDone)
         HRESULT ( STDMETHODCALLTYPE *AbortRequestDone )( 
             __RPC__in ITransactionEnlistmentAsync * This,
             /* [annotation][in] */ 
@@ -695,6 +728,7 @@ EXTERN_C const IID IID_ITransactionLastEnlistmentAsync;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionLastEnlistmentAsync * This,
             /* [annotation][in] */ 
@@ -702,12 +736,15 @@ EXTERN_C const IID IID_ITransactionLastEnlistmentAsync;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionLastEnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionLastEnlistmentAsync * This);
         
+        DECLSPEC_XFGVIRT(ITransactionLastEnlistmentAsync, TransactionOutcome)
         HRESULT ( STDMETHODCALLTYPE *TransactionOutcome )( 
             __RPC__in ITransactionLastEnlistmentAsync * This,
             /* [annotation][in] */ 
@@ -788,6 +825,7 @@ EXTERN_C const IID IID_ITransactionExportFactory;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionExportFactory * This,
             /* [annotation][in] */ 
@@ -795,17 +833,21 @@ EXTERN_C const IID IID_ITransactionExportFactory;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionExportFactory * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionExportFactory * This);
         
+        DECLSPEC_XFGVIRT(ITransactionExportFactory, GetRemoteClassId)
         HRESULT ( STDMETHODCALLTYPE *GetRemoteClassId )( 
             __RPC__in ITransactionExportFactory * This,
             /* [annotation][out] */ 
             _Out_  CLSID *pclsid);
         
+        DECLSPEC_XFGVIRT(ITransactionExportFactory, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in ITransactionExportFactory * This,
             /* [annotation][in] */ 
@@ -891,6 +933,7 @@ EXTERN_C const IID IID_ITransactionImportWhereabouts;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionImportWhereabouts * This,
             /* [annotation][in] */ 
@@ -898,17 +941,21 @@ EXTERN_C const IID IID_ITransactionImportWhereabouts;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionImportWhereabouts * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionImportWhereabouts * This);
         
+        DECLSPEC_XFGVIRT(ITransactionImportWhereabouts, GetWhereaboutsSize)
         HRESULT ( STDMETHODCALLTYPE *GetWhereaboutsSize )( 
             __RPC__in ITransactionImportWhereabouts * This,
             /* [annotation][out] */ 
             _Out_  ULONG *pcbWhereabouts);
         
+        DECLSPEC_XFGVIRT(ITransactionImportWhereabouts, GetWhereabouts)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetWhereabouts )( 
             ITransactionImportWhereabouts * This,
             /* [annotation][in] */ 
@@ -1015,6 +1062,7 @@ EXTERN_C const IID IID_ITransactionExport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionExport * This,
             /* [annotation][in] */ 
@@ -1022,12 +1070,15 @@ EXTERN_C const IID IID_ITransactionExport;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionExport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionExport * This);
         
+        DECLSPEC_XFGVIRT(ITransactionExport, Export)
         HRESULT ( STDMETHODCALLTYPE *Export )( 
             __RPC__in ITransactionExport * This,
             /* [annotation][in] */ 
@@ -1035,6 +1086,7 @@ EXTERN_C const IID IID_ITransactionExport;
             /* [annotation][out] */ 
             _Out_  ULONG *pcbTransactionCookie);
         
+        DECLSPEC_XFGVIRT(ITransactionExport, GetTransactionCookie)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *GetTransactionCookie )( 
             ITransactionExport * This,
             /* [annotation][in] */ 
@@ -1139,6 +1191,7 @@ EXTERN_C const IID IID_ITransactionImport;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITransactionImport * This,
             /* [annotation][in] */ 
@@ -1146,12 +1199,15 @@ EXTERN_C const IID IID_ITransactionImport;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITransactionImport * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITransactionImport * This);
         
+        DECLSPEC_XFGVIRT(ITransactionImport, Import)
         HRESULT ( STDMETHODCALLTYPE *Import )( 
             __RPC__in ITransactionImport * This,
             /* [annotation][in] */ 
@@ -1234,6 +1290,7 @@ EXTERN_C const IID IID_ITipTransaction;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITipTransaction * This,
             /* [annotation][in] */ 
@@ -1241,12 +1298,15 @@ EXTERN_C const IID IID_ITipTransaction;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITipTransaction * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITipTransaction * This);
         
+        DECLSPEC_XFGVIRT(ITipTransaction, Push)
         HRESULT ( STDMETHODCALLTYPE *Push )( 
             __RPC__in ITipTransaction * This,
             /* [annotation][in] */ 
@@ -1254,6 +1314,7 @@ EXTERN_C const IID IID_ITipTransaction;
             /* [annotation][out] */ 
             _Out_  LPSTR *o_ppszRemoteTxUrl);
         
+        DECLSPEC_XFGVIRT(ITipTransaction, GetTransactionUrl)
         HRESULT ( STDMETHODCALLTYPE *GetTransactionUrl )( 
             __RPC__in ITipTransaction * This,
             /* [annotation][out] */ 
@@ -1341,6 +1402,7 @@ EXTERN_C const IID IID_ITipHelper;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITipHelper * This,
             /* [annotation][in] */ 
@@ -1348,12 +1410,15 @@ EXTERN_C const IID IID_ITipHelper;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITipHelper * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITipHelper * This);
         
+        DECLSPEC_XFGVIRT(ITipHelper, Pull)
         HRESULT ( STDMETHODCALLTYPE *Pull )( 
             __RPC__in ITipHelper * This,
             /* [annotation][in] */ 
@@ -1361,6 +1426,7 @@ EXTERN_C const IID IID_ITipHelper;
             /* [annotation][out] */ 
             _Out_  ITransaction **o_ppITransaction);
         
+        DECLSPEC_XFGVIRT(ITipHelper, PullAsync)
         HRESULT ( STDMETHODCALLTYPE *PullAsync )( 
             __RPC__in ITipHelper * This,
             /* [annotation][in] */ 
@@ -1370,6 +1436,7 @@ EXTERN_C const IID IID_ITipHelper;
             /* [annotation][out] */ 
             _Out_  ITransaction **o_ppITransaction);
         
+        DECLSPEC_XFGVIRT(ITipHelper, GetLocalTmUrl)
         HRESULT ( STDMETHODCALLTYPE *GetLocalTmUrl )( 
             __RPC__in ITipHelper * This,
             /* [annotation][out] */ 
@@ -1446,6 +1513,7 @@ EXTERN_C const IID IID_ITipPullSink;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ITipPullSink * This,
             /* [annotation][in] */ 
@@ -1453,12 +1521,15 @@ EXTERN_C const IID IID_ITipPullSink;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ITipPullSink * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ITipPullSink * This);
         
+        DECLSPEC_XFGVIRT(ITipPullSink, PullComplete)
         HRESULT ( STDMETHODCALLTYPE *PullComplete )( 
             __RPC__in ITipPullSink * This,
             /* [annotation][in] */ 
@@ -1575,6 +1646,7 @@ EXTERN_C const IID IID_IDtcNetworkAccessConfig;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][in] */ 
@@ -1582,72 +1654,87 @@ EXTERN_C const IID IID_IDtcNetworkAccessConfig;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcNetworkAccessConfig * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcNetworkAccessConfig * This);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetAnyNetworkAccess)
         HRESULT ( STDMETHODCALLTYPE *GetAnyNetworkAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbAnyNetworkAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetAnyNetworkAccess)
         HRESULT ( STDMETHODCALLTYPE *SetAnyNetworkAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][in] */ 
             _In_  BOOL bAnyNetworkAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkAdministrationAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkAdministrationAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkAdministrationAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkAdministrationAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkAdministrationAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkAdministrationAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkTransactionAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkTransactionAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkTransactionAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkTransactionAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkTransactionAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkTransactionAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkClientAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkClientAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkClientAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkClientAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkClientAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkClientAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkTIPAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkTIPAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkTIPAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkTIPAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkTIPAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkTIPAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetXAAccess)
         HRESULT ( STDMETHODCALLTYPE *GetXAAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbXAAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetXAAccess)
         HRESULT ( STDMETHODCALLTYPE *SetXAAccess )( 
             __RPC__in IDtcNetworkAccessConfig * This,
             /* [annotation][in] */ 
             _In_  BOOL bXAAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, RestartDtcService)
         HRESULT ( STDMETHODCALLTYPE *RestartDtcService )( 
             __RPC__in IDtcNetworkAccessConfig * This);
         
@@ -1788,6 +1875,7 @@ EXTERN_C const IID IID_IDtcNetworkAccessConfig2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
@@ -1795,100 +1883,121 @@ EXTERN_C const IID IID_IDtcNetworkAccessConfig2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcNetworkAccessConfig2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcNetworkAccessConfig2 * This);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetAnyNetworkAccess)
         HRESULT ( STDMETHODCALLTYPE *GetAnyNetworkAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbAnyNetworkAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetAnyNetworkAccess)
         HRESULT ( STDMETHODCALLTYPE *SetAnyNetworkAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
             _In_  BOOL bAnyNetworkAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkAdministrationAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkAdministrationAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkAdministrationAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkAdministrationAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkAdministrationAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkAdministrationAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkTransactionAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkTransactionAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkTransactionAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkTransactionAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkTransactionAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkTransactionAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkClientAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkClientAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkClientAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkClientAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkClientAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkClientAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkTIPAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkTIPAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkTIPAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkTIPAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkTIPAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkTIPAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetXAAccess)
         HRESULT ( STDMETHODCALLTYPE *GetXAAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbXAAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetXAAccess)
         HRESULT ( STDMETHODCALLTYPE *SetXAAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
             _In_  BOOL bXAAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, RestartDtcService)
         HRESULT ( STDMETHODCALLTYPE *RestartDtcService )( 
             __RPC__in IDtcNetworkAccessConfig2 * This);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, GetNetworkInboundAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkInboundAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbInbound);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, GetNetworkOutboundAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkOutboundAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbOutbound);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, SetNetworkInboundAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkInboundAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
             _In_  BOOL bInbound);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, SetNetworkOutboundAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkOutboundAccess )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
             _In_  BOOL bOutbound);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, GetAuthenticationLevel)
         HRESULT ( STDMETHODCALLTYPE *GetAuthenticationLevel )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][out] */ 
             _Out_  AUTHENTICATION_LEVEL *pAuthLevel);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, SetAuthenticationLevel)
         HRESULT ( STDMETHODCALLTYPE *SetAuthenticationLevel )( 
             __RPC__in IDtcNetworkAccessConfig2 * This,
             /* [annotation][in] */ 
@@ -2018,6 +2127,7 @@ EXTERN_C const IID IID_IDtcNetworkAccessConfig3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
@@ -2025,110 +2135,133 @@ EXTERN_C const IID IID_IDtcNetworkAccessConfig3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IDtcNetworkAccessConfig3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IDtcNetworkAccessConfig3 * This);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetAnyNetworkAccess)
         HRESULT ( STDMETHODCALLTYPE *GetAnyNetworkAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbAnyNetworkAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetAnyNetworkAccess)
         HRESULT ( STDMETHODCALLTYPE *SetAnyNetworkAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  BOOL bAnyNetworkAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkAdministrationAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkAdministrationAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkAdministrationAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkAdministrationAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkAdministrationAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkAdministrationAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkTransactionAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkTransactionAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkTransactionAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkTransactionAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkTransactionAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkTransactionAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkClientAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkClientAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkClientAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkClientAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkClientAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkClientAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetNetworkTIPAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkTIPAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbNetworkTIPAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetNetworkTIPAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkTIPAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  BOOL bNetworkTIPAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, GetXAAccess)
         HRESULT ( STDMETHODCALLTYPE *GetXAAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbXAAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, SetXAAccess)
         HRESULT ( STDMETHODCALLTYPE *SetXAAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  BOOL bXAAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig, RestartDtcService)
         HRESULT ( STDMETHODCALLTYPE *RestartDtcService )( 
             __RPC__in IDtcNetworkAccessConfig3 * This);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, GetNetworkInboundAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkInboundAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbInbound);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, GetNetworkOutboundAccess)
         HRESULT ( STDMETHODCALLTYPE *GetNetworkOutboundAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbOutbound);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, SetNetworkInboundAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkInboundAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  BOOL bInbound);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, SetNetworkOutboundAccess)
         HRESULT ( STDMETHODCALLTYPE *SetNetworkOutboundAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  BOOL bOutbound);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, GetAuthenticationLevel)
         HRESULT ( STDMETHODCALLTYPE *GetAuthenticationLevel )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  AUTHENTICATION_LEVEL *pAuthLevel);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig2, SetAuthenticationLevel)
         HRESULT ( STDMETHODCALLTYPE *SetAuthenticationLevel )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 
             _In_  AUTHENTICATION_LEVEL AuthLevel);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig3, GetLUAccess)
         HRESULT ( STDMETHODCALLTYPE *GetLUAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][out] */ 
             _Out_  BOOL *pbLUAccess);
         
+        DECLSPEC_XFGVIRT(IDtcNetworkAccessConfig3, SetLUAccess)
         HRESULT ( STDMETHODCALLTYPE *SetLUAccess )( 
             __RPC__in IDtcNetworkAccessConfig3 * This,
             /* [annotation][in] */ 

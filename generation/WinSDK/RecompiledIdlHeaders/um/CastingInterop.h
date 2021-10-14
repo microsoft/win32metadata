@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -138,6 +146,7 @@ EXTERN_C const IID IID_ICastingEventHandler;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICastingEventHandler * This,
             /* [annotation][in] */ 
@@ -145,17 +154,21 @@ EXTERN_C const IID IID_ICastingEventHandler;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICastingEventHandler * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICastingEventHandler * This);
         
+        DECLSPEC_XFGVIRT(ICastingEventHandler, OnStateChanged)
         HRESULT ( STDMETHODCALLTYPE *OnStateChanged )( 
             __RPC__in ICastingEventHandler * This,
             /* [annotation][in] */ 
             _In_  CASTING_CONNECTION_STATE newState);
         
+        DECLSPEC_XFGVIRT(ICastingEventHandler, OnError)
         HRESULT ( STDMETHODCALLTYPE *OnError )( 
             __RPC__in ICastingEventHandler * This,
             /* [annotation][in] */ 
@@ -247,6 +260,7 @@ EXTERN_C const IID IID_ICastingController;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICastingController * This,
             /* [annotation][in] */ 
@@ -254,12 +268,15 @@ EXTERN_C const IID IID_ICastingController;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICastingController * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICastingController * This);
         
+        DECLSPEC_XFGVIRT(ICastingController, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in ICastingController * This,
             /* [annotation][in] */ 
@@ -267,12 +284,15 @@ EXTERN_C const IID IID_ICastingController;
             /* [annotation][in] */ 
             _In_  IUnknown *castingSource);
         
+        DECLSPEC_XFGVIRT(ICastingController, Connect)
         HRESULT ( STDMETHODCALLTYPE *Connect )( 
             __RPC__in ICastingController * This);
         
+        DECLSPEC_XFGVIRT(ICastingController, Disconnect)
         HRESULT ( STDMETHODCALLTYPE *Disconnect )( 
             __RPC__in ICastingController * This);
         
+        DECLSPEC_XFGVIRT(ICastingController, Advise)
         HRESULT ( STDMETHODCALLTYPE *Advise )( 
             __RPC__in ICastingController * This,
             /* [annotation][in] */ 
@@ -280,6 +300,7 @@ EXTERN_C const IID IID_ICastingController;
             /* [annotation][out] */ 
             _Out_  DWORD *cookie);
         
+        DECLSPEC_XFGVIRT(ICastingController, UnAdvise)
         HRESULT ( STDMETHODCALLTYPE *UnAdvise )( 
             __RPC__in ICastingController * This,
             /* [annotation][in] */ 
@@ -366,6 +387,7 @@ EXTERN_C const IID IID_ICastingSourceInfo;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ICastingSourceInfo * This,
             /* [annotation][in] */ 
@@ -373,17 +395,21 @@ EXTERN_C const IID IID_ICastingSourceInfo;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ICastingSourceInfo * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ICastingSourceInfo * This);
         
+        DECLSPEC_XFGVIRT(ICastingSourceInfo, GetController)
         HRESULT ( STDMETHODCALLTYPE *GetController )( 
             __RPC__in ICastingSourceInfo * This,
             /* [annotation][out] */ 
             _Out_  ICastingController **controller);
         
+        DECLSPEC_XFGVIRT(ICastingSourceInfo, GetProperties)
         HRESULT ( STDMETHODCALLTYPE *GetProperties )( 
             __RPC__in ICastingSourceInfo * This,
             /* [annotation][out] */ 

@@ -16,6 +16,10 @@
 //#include <tapi3cc.h>
 #include <rend.h>
 #include <mdhcp.h>
+#include <tapi3err.h>
+
+#include <wabdefs.h>
+#include <tnef.h>
 
 // Implemented classes
 //#include <mspaddr.h>

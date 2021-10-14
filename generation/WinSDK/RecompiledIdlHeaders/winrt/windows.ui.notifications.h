@@ -88,7 +88,7 @@
 //  API Contract Inclusion Definitions
 #if !defined(SPECIFIC_API_CONTRACT_DEFINITIONS)
 #if !defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
-#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x10000
+#define WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION 0x20000
 #endif // defined(WINDOWS_APPLICATIONMODEL_FULLTRUSTAPPCONTRACT_VERSION)
 
 #if !defined(WINDOWS_APPLICATIONMODEL_STARTUPTASKCONTRACT_VERSION)
@@ -100,7 +100,7 @@
 #endif // defined(WINDOWS_FOUNDATION_FOUNDATIONCONTRACT_VERSION)
 
 #if !defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
-#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xa0000
+#define WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION 0xe0000
 #endif // defined(WINDOWS_FOUNDATION_UNIVERSALAPICONTRACT_VERSION)
 
 #if !defined(WINDOWS_SYSTEM_SYSTEMMANAGEMENTCONTRACT_VERSION)
@@ -7134,10 +7134,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Multi Threaded Apartment
  *
@@ -17356,10 +17356,10 @@ extern const __declspec(selectany) _Null_terminated_ WCHAR RuntimeClass_Windows_
  * Introduced to Windows.Foundation.UniversalApiContract in version 1.0
  *
  * RuntimeClass contains static methods.
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
- *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics4 interface starting with version 3.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
  *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics2 interface starting with version 1.0 of the Windows.Foundation.UniversalApiContract API contract
+ *   Static Methods exist on the Windows.UI.Notifications.IToastNotificationManagerStatics5 interface starting with version 4.0 of the Windows.Foundation.UniversalApiContract API contract
  *
  * Class Threading Model:  Multi Threaded Apartment
  *

@@ -6,5 +6,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <wcntypes.h>
-#include <wcndevice.h>
+#include <wcnapi.h>
+#include <wcnfunctiondiscoverykeys.h>
+

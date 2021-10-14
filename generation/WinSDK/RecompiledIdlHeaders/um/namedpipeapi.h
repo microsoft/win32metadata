@@ -34,7 +34,6 @@ CreatePipe(
     _In_ DWORD nSize
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -43,14 +42,12 @@ ConnectNamedPipe(
     _Inout_opt_ LPOVERLAPPED lpOverlapped
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
 DisconnectNamedPipe(
     _In_ HANDLE hNamedPipe
     );
-
 
 WINBASEAPI
 BOOL
@@ -61,7 +58,6 @@ SetNamedPipeHandleState(
     _In_opt_ LPDWORD lpMaxCollectionCount,
     _In_opt_ LPDWORD lpCollectDataTimeout
     );
-
 
 WINBASEAPI
 BOOL
@@ -74,7 +70,6 @@ PeekNamedPipe(
     _Out_opt_ LPDWORD lpTotalBytesAvail,
     _Out_opt_ LPDWORD lpBytesLeftThisMessage
     );
-
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM | WINAPI_PARTITION_GAMES)
 
@@ -92,7 +87,6 @@ TransactNamedPipe(
     _Out_ LPDWORD lpBytesRead,
     _Inout_opt_ LPOVERLAPPED lpOverlapped
     );
-
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
 
@@ -112,7 +106,6 @@ CreateNamedPipeW(
     _In_opt_ LPSECURITY_ATTRIBUTES lpSecurityAttributes
     );
 
-
 #ifdef UNICODE
 #define CreateNamedPipe  CreateNamedPipeW
 #endif
@@ -124,7 +117,6 @@ WaitNamedPipeW(
     _In_ LPCWSTR lpNamedPipeName,
     _In_ DWORD nTimeOut
     );
-
 
 #ifdef UNICODE
 #define WaitNamedPipe  WaitNamedPipeW
@@ -145,7 +137,6 @@ GetNamedPipeClientComputerNameW(
     _In_ ULONG ClientComputerNameLength
     );
 
-
 #endif // (_WIN32_WINNT >= 0x0600)
 
 #ifdef UNICODE
@@ -159,10 +150,8 @@ WINAPI
 ImpersonateNamedPipeClient(
     _In_ HANDLE hNamedPipe
     );
-                               
 
 #endif // WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
-
 
 #pragma region Application Family or OneCore Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_SYSTEM)
@@ -178,7 +167,6 @@ GetNamedPipeInfo(
     _Out_opt_ LPDWORD lpMaxInstances
     );
 
-
 WINBASEAPI
 BOOL
 WINAPI
@@ -191,7 +179,6 @@ GetNamedPipeHandleStateW(
     _Out_writes_opt_(nMaxUserNameSize) LPWSTR lpUserName,
     _In_ DWORD nMaxUserNameSize
     );
-
 #ifdef UNICODE
 #define GetNamedPipeHandleState  GetNamedPipeHandleStateW
 #endif
@@ -214,7 +201,6 @@ CallNamedPipeW(
     _Out_ LPDWORD lpBytesRead,
     _In_ DWORD nTimeOut
     );
-
 
 #ifdef UNICODE
 #define CallNamedPipe  CallNamedPipeW

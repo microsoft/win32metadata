@@ -1421,6 +1421,7 @@ E_FAIL=Windows.Win32.Foundation
 E_INVALIDARG=Windows.Win32.Foundation
 E_NOTIMPL=Windows.Win32.Foundation
 E_OUTOFMEMORY=Windows.Win32.Foundation
+MENROLL_E_*=Windows.Win32.Management.MobileDeviceManagementRegistration
 # endregion winerror.h
 # region wingdi.h
 AbortDoc=Windows.Win32.Storage.Xps

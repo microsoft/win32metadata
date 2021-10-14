@@ -34,5 +34,8 @@ _TEB
 <IncludeRoot>/shared/stralign.h
 <IncludeRoot>/um/appcompatapi.h
 <IncludeRoot>/um/ddkernel.h
+<IncludeRoot>/um/defaultbrowsersyncsettings.h
+<IncludeRoot>/um/delayloadhandler.h
+<IncludeRoot>/um/deletebrowsinghistory.h
 --namespace
 Windows.Win32.System.WindowsProgramming

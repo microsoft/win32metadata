@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -154,6 +162,7 @@ EXTERN_C const IID IID_IGenericDescriptor;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGenericDescriptor * This,
             /* [annotation][in] */ 
@@ -161,12 +170,15 @@ EXTERN_C const IID IID_IGenericDescriptor;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGenericDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IGenericDescriptor * This);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IGenericDescriptor * This,
             /* [annotation][in] */ 
@@ -174,16 +186,19 @@ EXTERN_C const IID IID_IGenericDescriptor;
             /* [annotation][in] */ 
             _In_  INT bCount);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IGenericDescriptor * This,
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IGenericDescriptor * This,
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor, GetBody)
         HRESULT ( STDMETHODCALLTYPE *GetBody )( 
             IGenericDescriptor * This,
             /* [annotation][out] */ 
@@ -269,6 +284,7 @@ EXTERN_C const IID IID_IGenericDescriptor2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IGenericDescriptor2 * This,
             /* [annotation][in] */ 
@@ -276,12 +292,15 @@ EXTERN_C const IID IID_IGenericDescriptor2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IGenericDescriptor2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IGenericDescriptor2 * This);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IGenericDescriptor2 * This,
             /* [annotation][in] */ 
@@ -289,21 +308,25 @@ EXTERN_C const IID IID_IGenericDescriptor2;
             /* [annotation][in] */ 
             _In_  INT bCount);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor, GetTag)
         HRESULT ( STDMETHODCALLTYPE *GetTag )( 
             IGenericDescriptor2 * This,
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IGenericDescriptor2 * This,
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor, GetBody)
         HRESULT ( STDMETHODCALLTYPE *GetBody )( 
             IGenericDescriptor2 * This,
             /* [annotation][out] */ 
             _Out_  BYTE **ppbVal);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor2, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IGenericDescriptor2 * This,
             /* [annotation][in] */ 
@@ -311,6 +334,7 @@ EXTERN_C const IID IID_IGenericDescriptor2;
             /* [annotation][in] */ 
             _In_  WORD wCount);
         
+        DECLSPEC_XFGVIRT(IGenericDescriptor2, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             IGenericDescriptor2 * This,
             /* [annotation][out] */ 
@@ -449,6 +473,7 @@ EXTERN_C const IID IID_IPAT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPAT * This,
             /* [annotation][in] */ 
@@ -456,12 +481,15 @@ EXTERN_C const IID IID_IPAT;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPAT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPAT * This);
         
+        DECLSPEC_XFGVIRT(IPAT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IPAT * This,
             /* [annotation][in] */ 
@@ -469,21 +497,25 @@ EXTERN_C const IID IID_IPAT;
             /* [annotation][in] */ 
             _In_  IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(IPAT, GetTransportStreamId)
         HRESULT ( STDMETHODCALLTYPE *GetTransportStreamId )( 
             IPAT * This,
             /* [annotation][out] */ 
             _Out_  WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IPAT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IPAT * This,
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IPAT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IPAT * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IPAT, GetRecordProgramNumber)
         HRESULT ( STDMETHODCALLTYPE *GetRecordProgramNumber )( 
             IPAT * This,
             /* [annotation][in] */ 
@@ -491,6 +523,7 @@ EXTERN_C const IID IID_IPAT;
             /* [annotation][out] */ 
             _Out_  WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IPAT, GetRecordProgramMapPid)
         HRESULT ( STDMETHODCALLTYPE *GetRecordProgramMapPid )( 
             IPAT * This,
             /* [annotation][in] */ 
@@ -498,6 +531,7 @@ EXTERN_C const IID IID_IPAT;
             /* [annotation][out] */ 
             _Out_  WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IPAT, FindRecordProgramMapPid)
         HRESULT ( STDMETHODCALLTYPE *FindRecordProgramMapPid )( 
             IPAT * This,
             /* [annotation][in] */ 
@@ -505,21 +539,25 @@ EXTERN_C const IID IID_IPAT;
             /* [annotation][out] */ 
             _Out_  WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IPAT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IPAT * This,
             /* [annotation][in] */ 
             _In_  HANDLE hNextTableAvailable);
         
+        DECLSPEC_XFGVIRT(IPAT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IPAT * This,
             /* [annotation][out] */ 
             _Out_  IPAT **ppPAT);
         
+        DECLSPEC_XFGVIRT(IPAT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IPAT * This,
             /* [annotation][in] */ 
             _In_  HANDLE hNextTableIsCurrent);
         
+        DECLSPEC_XFGVIRT(IPAT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
             IPAT * This);
         
@@ -658,6 +696,7 @@ EXTERN_C const IID IID_ICAT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ICAT * This,
             /* [annotation][in] */ 
@@ -665,12 +704,15 @@ EXTERN_C const IID IID_ICAT;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ICAT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ICAT * This);
         
+        DECLSPEC_XFGVIRT(ICAT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             ICAT * This,
             /* [annotation][in] */ 
@@ -678,16 +720,19 @@ EXTERN_C const IID IID_ICAT;
             /* [annotation][in] */ 
             _In_  IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(ICAT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             ICAT * This,
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ICAT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             ICAT * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(ICAT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             ICAT * This,
             /* [annotation][in] */ 
@@ -695,6 +740,7 @@ EXTERN_C const IID IID_ICAT;
             /* [annotation][out] */ 
             _Out_  IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(ICAT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             ICAT * This,
             /* [annotation][in] */ 
@@ -704,11 +750,13 @@ EXTERN_C const IID IID_ICAT;
             /* [annotation][out] */ 
             _Out_  IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(ICAT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             ICAT * This,
             /* [annotation][in] */ 
             _In_  HANDLE hNextTableAvailable);
         
+        DECLSPEC_XFGVIRT(ICAT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             ICAT * This,
             /* [annotation][in] */ 
@@ -716,11 +764,13 @@ EXTERN_C const IID IID_ICAT;
             /* [annotation][out] */ 
             _Out_  ICAT **ppCAT);
         
+        DECLSPEC_XFGVIRT(ICAT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             ICAT * This,
             /* [annotation][in] */ 
             _In_  HANDLE hNextTableIsCurrent);
         
+        DECLSPEC_XFGVIRT(ICAT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
             ICAT * This);
         
@@ -911,6 +961,7 @@ EXTERN_C const IID IID_IPMT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -918,12 +969,15 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IPMT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IPMT * This);
         
+        DECLSPEC_XFGVIRT(IPMT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -931,26 +985,31 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][in] */ 
             _In_  IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(IPMT, GetProgramNumber)
         HRESULT ( STDMETHODCALLTYPE *GetProgramNumber )( 
             IPMT * This,
             /* [annotation][out] */ 
             _Out_  WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IPMT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             IPMT * This,
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IPMT, GetPcrPid)
         HRESULT ( STDMETHODCALLTYPE *GetPcrPid )( 
             IPMT * This,
             /* [annotation][out] */ 
             _Out_  PID *pPidVal);
         
+        DECLSPEC_XFGVIRT(IPMT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             IPMT * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IPMT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -958,6 +1017,7 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IPMT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -967,11 +1027,13 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IPMT, GetCountOfRecords)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfRecords )( 
             IPMT * This,
             /* [annotation][out] */ 
             _Out_  WORD *pwVal);
         
+        DECLSPEC_XFGVIRT(IPMT, GetRecordStreamType)
         HRESULT ( STDMETHODCALLTYPE *GetRecordStreamType )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -979,6 +1041,7 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(IPMT, GetRecordElementaryPid)
         HRESULT ( STDMETHODCALLTYPE *GetRecordElementaryPid )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -986,6 +1049,7 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  PID *pPidVal);
         
+        DECLSPEC_XFGVIRT(IPMT, GetRecordCountOfDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetRecordCountOfDescriptors )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -993,6 +1057,7 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(IPMT, GetRecordDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByIndex )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -1002,6 +1067,7 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IPMT, GetRecordDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetRecordDescriptorByTag )( 
             IPMT * This,
             /* [annotation][in] */ 
@@ -1013,6 +1079,7 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(IPMT, QueryServiceGatewayInfo)
         HRESULT ( STDMETHODCALLTYPE *QueryServiceGatewayInfo )( 
             IPMT * This,
             /* [annotation][out] */ 
@@ -1020,6 +1087,7 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  UINT *puiCount);
         
+        DECLSPEC_XFGVIRT(IPMT, QueryMPEInfo)
         HRESULT ( STDMETHODCALLTYPE *QueryMPEInfo )( 
             IPMT * This,
             /* [annotation][out] */ 
@@ -1027,21 +1095,25 @@ EXTERN_C const IID IID_IPMT;
             /* [annotation][out] */ 
             _Out_  UINT *puiCount);
         
+        DECLSPEC_XFGVIRT(IPMT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             IPMT * This,
             /* [annotation][in] */ 
             _In_  HANDLE hNextTableAvailable);
         
+        DECLSPEC_XFGVIRT(IPMT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             IPMT * This,
             /* [annotation][out] */ 
             _Out_  IPMT **ppPMT);
         
+        DECLSPEC_XFGVIRT(IPMT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             IPMT * This,
             /* [annotation][in] */ 
             _In_  HANDLE hNextTableIsCurrent);
         
+        DECLSPEC_XFGVIRT(IPMT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
             IPMT * This);
         
@@ -1202,6 +1274,7 @@ EXTERN_C const IID IID_ITSDT;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             ITSDT * This,
             /* [annotation][in] */ 
@@ -1209,12 +1282,15 @@ EXTERN_C const IID IID_ITSDT;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             ITSDT * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             ITSDT * This);
         
+        DECLSPEC_XFGVIRT(ITSDT, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             ITSDT * This,
             /* [annotation][in] */ 
@@ -1222,16 +1298,19 @@ EXTERN_C const IID IID_ITSDT;
             /* [annotation][in] */ 
             _In_  IMpeg2Data *pMPEGData);
         
+        DECLSPEC_XFGVIRT(ITSDT, GetVersionNumber)
         HRESULT ( STDMETHODCALLTYPE *GetVersionNumber )( 
             ITSDT * This,
             /* [annotation][out] */ 
             _Out_  BYTE *pbVal);
         
+        DECLSPEC_XFGVIRT(ITSDT, GetCountOfTableDescriptors)
         HRESULT ( STDMETHODCALLTYPE *GetCountOfTableDescriptors )( 
             ITSDT * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwVal);
         
+        DECLSPEC_XFGVIRT(ITSDT, GetTableDescriptorByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByIndex )( 
             ITSDT * This,
             /* [annotation][in] */ 
@@ -1239,6 +1318,7 @@ EXTERN_C const IID IID_ITSDT;
             /* [annotation][out] */ 
             _Out_  IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(ITSDT, GetTableDescriptorByTag)
         HRESULT ( STDMETHODCALLTYPE *GetTableDescriptorByTag )( 
             ITSDT * This,
             /* [annotation][in] */ 
@@ -1248,21 +1328,25 @@ EXTERN_C const IID IID_ITSDT;
             /* [annotation][out] */ 
             _Out_  IGenericDescriptor **ppDescriptor);
         
+        DECLSPEC_XFGVIRT(ITSDT, RegisterForNextTable)
         HRESULT ( STDMETHODCALLTYPE *RegisterForNextTable )( 
             ITSDT * This,
             /* [annotation][in] */ 
             _In_  HANDLE hNextTableAvailable);
         
+        DECLSPEC_XFGVIRT(ITSDT, GetNextTable)
         HRESULT ( STDMETHODCALLTYPE *GetNextTable )( 
             ITSDT * This,
             /* [annotation][out] */ 
             _Out_  ITSDT **ppTSDT);
         
+        DECLSPEC_XFGVIRT(ITSDT, RegisterForWhenCurrent)
         HRESULT ( STDMETHODCALLTYPE *RegisterForWhenCurrent )( 
             ITSDT * This,
             /* [annotation][in] */ 
             _In_  HANDLE hNextTableIsCurrent);
         
+        DECLSPEC_XFGVIRT(ITSDT, ConvertNextToCurrent)
         HRESULT ( STDMETHODCALLTYPE *ConvertNextToCurrent )( 
             ITSDT * This);
         
@@ -1363,6 +1447,7 @@ EXTERN_C const IID IID_IPSITables;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPSITables * This,
             /* [annotation][in] */ 
@@ -1370,12 +1455,15 @@ EXTERN_C const IID IID_IPSITables;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPSITables * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPSITables * This);
         
+        DECLSPEC_XFGVIRT(IPSITables, GetTable)
         HRESULT ( STDMETHODCALLTYPE *GetTable )( 
             __RPC__in IPSITables * This,
             /* [annotation][in] */ 

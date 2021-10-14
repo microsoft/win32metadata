@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -266,52 +274,64 @@ EXTERN_C const IID IID_IPhotoAcquireItem;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoAcquireItem * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoAcquireItem * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, GetItemName)
         HRESULT ( STDMETHODCALLTYPE *GetItemName )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrItemName);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, GetThumbnail)
         HRESULT ( STDMETHODCALLTYPE *GetThumbnail )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [in] */ SIZE sizeThumbnail,
             /* [out] */ __RPC__deref_out_opt HBITMAP *phbmpThumbnail);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
             /* [out] */ __RPC__out PROPVARIANT *pv);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [in] */ __RPC__in REFPROPERTYKEY key,
             /* [in] */ __RPC__in const PROPVARIANT *pv);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, GetStream)
         HRESULT ( STDMETHODCALLTYPE *GetStream )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [out] */ __RPC__deref_out_opt IStream **ppStream);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, CanDelete)
         HRESULT ( STDMETHODCALLTYPE *CanDelete )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [out] */ __RPC__out BOOL *pfCanDelete);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, Delete)
         HRESULT ( STDMETHODCALLTYPE *Delete )( 
             __RPC__in IPhotoAcquireItem * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, GetSubItemCount)
         HRESULT ( STDMETHODCALLTYPE *GetSubItemCount )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [out] */ __RPC__out UINT *pnCount);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireItem, GetSubItemAt)
         HRESULT ( STDMETHODCALLTYPE *GetSubItemAt )( 
             __RPC__in IPhotoAcquireItem * This,
             /* [in] */ UINT nItemIndex,
@@ -442,55 +462,68 @@ EXTERN_C const IID IID_IUserInputString;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IUserInputString * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IUserInputString * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IUserInputString * This);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetSubmitButtonText)
         HRESULT ( STDMETHODCALLTYPE *GetSubmitButtonText )( 
             __RPC__in IUserInputString * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrSubmitButtonText);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetPrompt)
         HRESULT ( STDMETHODCALLTYPE *GetPrompt )( 
             __RPC__in IUserInputString * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrPromptTitle);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetStringId)
         HRESULT ( STDMETHODCALLTYPE *GetStringId )( 
             __RPC__in IUserInputString * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrStringId);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetStringType)
         HRESULT ( STDMETHODCALLTYPE *GetStringType )( 
             __RPC__in IUserInputString * This,
             /* [out] */ __RPC__out USER_INPUT_STRING_TYPE *pnStringType);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetTooltipText)
         HRESULT ( STDMETHODCALLTYPE *GetTooltipText )( 
             __RPC__in IUserInputString * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrTooltipText);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetMaxLength)
         HRESULT ( STDMETHODCALLTYPE *GetMaxLength )( 
             __RPC__in IUserInputString * This,
             /* [out] */ __RPC__out UINT *pcchMaxLength);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetDefault)
         HRESULT ( STDMETHODCALLTYPE *GetDefault )( 
             __RPC__in IUserInputString * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrDefault);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetMruCount)
         HRESULT ( STDMETHODCALLTYPE *GetMruCount )( 
             __RPC__in IUserInputString * This,
             /* [out] */ __RPC__out UINT *pnMruCount);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetMruEntryAt)
         HRESULT ( STDMETHODCALLTYPE *GetMruEntryAt )( 
             __RPC__in IUserInputString * This,
             /* [in] */ UINT nIndex,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrMruEntry);
         
+        DECLSPEC_XFGVIRT(IUserInputString, GetImage)
         HRESULT ( STDMETHODCALLTYPE *GetImage )( 
             __RPC__in IUserInputString * This,
             /* [in] */ UINT nSize,
@@ -676,93 +709,114 @@ EXTERN_C const IID IID_IPhotoAcquireProgressCB;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoAcquireProgressCB * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoAcquireProgressCB * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, Cancelled)
         HRESULT ( STDMETHODCALLTYPE *Cancelled )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [out] */ __RPC__out BOOL *pfCancelled);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, StartEnumeration)
         HRESULT ( STDMETHODCALLTYPE *StartEnumeration )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ __RPC__in_opt IPhotoAcquireSource *pPhotoAcquireSource);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, FoundItem)
         HRESULT ( STDMETHODCALLTYPE *FoundItem )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ __RPC__in_opt IPhotoAcquireItem *pPhotoAcquireItem);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, EndEnumeration)
         HRESULT ( STDMETHODCALLTYPE *EndEnumeration )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, StartTransfer)
         HRESULT ( STDMETHODCALLTYPE *StartTransfer )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ __RPC__in_opt IPhotoAcquireSource *pPhotoAcquireSource);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, StartItemTransfer)
         HRESULT ( STDMETHODCALLTYPE *StartItemTransfer )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ UINT nItemIndex,
             /* [in] */ __RPC__in_opt IPhotoAcquireItem *pPhotoAcquireItem);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, DirectoryCreated)
         HRESULT ( STDMETHODCALLTYPE *DirectoryCreated )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ __RPC__in LPCWSTR pszDirectory);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, UpdateTransferPercent)
         HRESULT ( STDMETHODCALLTYPE *UpdateTransferPercent )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ BOOL fOverall,
             /* [in] */ UINT nPercent);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, EndItemTransfer)
         HRESULT ( STDMETHODCALLTYPE *EndItemTransfer )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ UINT nItemIndex,
             /* [in] */ __RPC__in_opt IPhotoAcquireItem *pPhotoAcquireItem,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, EndTransfer)
         HRESULT ( STDMETHODCALLTYPE *EndTransfer )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, StartDelete)
         HRESULT ( STDMETHODCALLTYPE *StartDelete )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ __RPC__in_opt IPhotoAcquireSource *pPhotoAcquireSource);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, StartItemDelete)
         HRESULT ( STDMETHODCALLTYPE *StartItemDelete )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ UINT nItemIndex,
             /* [in] */ __RPC__in_opt IPhotoAcquireItem *pPhotoAcquireItem);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, UpdateDeletePercent)
         HRESULT ( STDMETHODCALLTYPE *UpdateDeletePercent )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ UINT nPercent);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, EndItemDelete)
         HRESULT ( STDMETHODCALLTYPE *EndItemDelete )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ UINT nItemIndex,
             /* [in] */ __RPC__in_opt IPhotoAcquireItem *pPhotoAcquireItem,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, EndDelete)
         HRESULT ( STDMETHODCALLTYPE *EndDelete )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, EndSession)
         HRESULT ( STDMETHODCALLTYPE *EndSession )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, GetDeleteAfterAcquire)
         HRESULT ( STDMETHODCALLTYPE *GetDeleteAfterAcquire )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [out] */ __RPC__out BOOL *pfDeleteAfterAcquire);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, ErrorAdvise)
         HRESULT ( STDMETHODCALLTYPE *ErrorAdvise )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ HRESULT hr,
@@ -770,6 +824,7 @@ EXTERN_C const IID IID_IPhotoAcquireProgressCB;
             /* [in] */ ERROR_ADVISE_MESSAGE_TYPE nMessageType,
             /* [out] */ __RPC__out ERROR_ADVISE_RESULT *pnErrorAdviseResult);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireProgressCB, GetUserInput)
         HRESULT ( STDMETHODCALLTYPE *GetUserInput )( 
             __RPC__in IPhotoAcquireProgressCB * This,
             /* [in] */ __RPC__in REFIID riidType,
@@ -895,18 +950,22 @@ EXTERN_C const IID IID_IPhotoProgressActionCB;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoProgressActionCB * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoProgressActionCB * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoProgressActionCB * This);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressActionCB, DoAction)
         HRESULT ( STDMETHODCALLTYPE *DoAction )( 
             __RPC__in IPhotoProgressActionCB * This,
             __RPC__in HWND hWndParent);
@@ -1059,92 +1118,113 @@ EXTERN_C const IID IID_IPhotoProgressDialog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoProgressDialog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoProgressDialog * This);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ __RPC__in HWND hwndParent);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, GetWindow)
         HRESULT ( STDMETHODCALLTYPE *GetWindow )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [out] */ __RPC__deref_out_opt HWND *phwndProgressDialog);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, Destroy)
         HRESULT ( STDMETHODCALLTYPE *Destroy )( 
             __RPC__in IPhotoProgressDialog * This);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetTitle)
         HRESULT ( STDMETHODCALLTYPE *SetTitle )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszTitle);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, ShowCheckbox)
         HRESULT ( STDMETHODCALLTYPE *ShowCheckbox )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ PROGRESS_DIALOG_CHECKBOX_ID nCheckboxId,
             /* [in] */ BOOL fShow);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetCheckboxText)
         HRESULT ( STDMETHODCALLTYPE *SetCheckboxText )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ PROGRESS_DIALOG_CHECKBOX_ID nCheckboxId,
             /* [string][in] */ __RPC__in_string LPCWSTR pszCheckboxText);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetCheckboxCheck)
         HRESULT ( STDMETHODCALLTYPE *SetCheckboxCheck )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ PROGRESS_DIALOG_CHECKBOX_ID nCheckboxId,
             /* [in] */ BOOL fChecked);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetCheckboxTooltip)
         HRESULT ( STDMETHODCALLTYPE *SetCheckboxTooltip )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ PROGRESS_DIALOG_CHECKBOX_ID nCheckboxId,
             /* [string][in] */ __RPC__in_string LPCWSTR pszCheckboxTooltipText);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, IsCheckboxChecked)
         HRESULT ( STDMETHODCALLTYPE *IsCheckboxChecked )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ PROGRESS_DIALOG_CHECKBOX_ID nCheckboxId,
             /* [out] */ __RPC__out BOOL *pfChecked);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetCaption)
         HRESULT ( STDMETHODCALLTYPE *SetCaption )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszTitle);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetImage)
         HRESULT ( STDMETHODCALLTYPE *SetImage )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ PROGRESS_DIALOG_IMAGE_TYPE nImageType,
             /* [unique][in] */ __RPC__in_opt HICON hIcon,
             /* [unique][in] */ __RPC__in_opt HBITMAP hBitmap);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetPercentComplete)
         HRESULT ( STDMETHODCALLTYPE *SetPercentComplete )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ int nPercent);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetProgressText)
         HRESULT ( STDMETHODCALLTYPE *SetProgressText )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszProgressText);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetActionLinkCallback)
         HRESULT ( STDMETHODCALLTYPE *SetActionLinkCallback )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ __RPC__in_opt IPhotoProgressActionCB *pPhotoProgressActionCB);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, SetActionLinkText)
         HRESULT ( STDMETHODCALLTYPE *SetActionLinkText )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ __RPC__in LPCWSTR pszCaption);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, ShowActionLink)
         HRESULT ( STDMETHODCALLTYPE *ShowActionLink )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ BOOL fShow);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, IsCancelled)
         HRESULT ( STDMETHODCALLTYPE *IsCancelled )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [out] */ __RPC__out BOOL *pfCancelled);
         
+        DECLSPEC_XFGVIRT(IPhotoProgressDialog, GetUserInput)
         HRESULT ( STDMETHODCALLTYPE *GetUserInput )( 
             __RPC__in IPhotoProgressDialog * This,
             /* [in] */ __RPC__in REFIID riidType,
@@ -1294,51 +1374,62 @@ EXTERN_C const IID IID_IPhotoAcquireSource;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoAcquireSource * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoAcquireSource * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSource, GetFriendlyName)
         HRESULT ( STDMETHODCALLTYPE *GetFriendlyName )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrFriendlyName);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSource, GetDeviceIcons)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceIcons )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [in] */ UINT nSize,
             /* [unique][out][in] */ __RPC__deref_opt_inout_opt HICON *phLargeIcon,
             /* [unique][out][in] */ __RPC__deref_opt_inout_opt HICON *phSmallIcon);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSource, InitializeItemList)
         HRESULT ( STDMETHODCALLTYPE *InitializeItemList )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [in] */ BOOL fForceEnumeration,
             /* [unique][in] */ __RPC__in_opt IPhotoAcquireProgressCB *pPhotoAcquireProgressCB,
             /* [unique][out][in] */ __RPC__inout_opt UINT *pnItemCount);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSource, GetItemCount)
         HRESULT ( STDMETHODCALLTYPE *GetItemCount )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [out] */ __RPC__out UINT *pnItemCount);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSource, GetItemAt)
         HRESULT ( STDMETHODCALLTYPE *GetItemAt )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [in] */ UINT nIndex,
             /* [out] */ __RPC__deref_out_opt IPhotoAcquireItem **ppPhotoAcquireItem);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSource, GetPhotoAcquireSettings)
         HRESULT ( STDMETHODCALLTYPE *GetPhotoAcquireSettings )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [out] */ __RPC__deref_out_opt IPhotoAcquireSettings **ppPhotoAcquireSettings);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSource, GetDeviceId)
         HRESULT ( STDMETHODCALLTYPE *GetDeviceId )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrDeviceId);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSource, BindToObject)
         HRESULT ( STDMETHODCALLTYPE *BindToObject )( 
             __RPC__in IPhotoAcquireSource * This,
             /* [in] */ __RPC__in REFIID riid,
@@ -1440,23 +1531,28 @@ EXTERN_C const IID IID_IPhotoAcquire;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoAcquire * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoAcquire * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoAcquire * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquire, CreatePhotoSource)
         HRESULT ( STDMETHODCALLTYPE *CreatePhotoSource )( 
             __RPC__in IPhotoAcquire * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszDevice,
             /* [out] */ __RPC__deref_out_opt IPhotoAcquireSource **ppPhotoAcquireSource);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquire, Acquire)
         HRESULT ( STDMETHODCALLTYPE *Acquire )( 
             __RPC__in IPhotoAcquire * This,
             /* [in] */ __RPC__in_opt IPhotoAcquireSource *pPhotoAcquireSource,
@@ -1465,6 +1561,7 @@ EXTERN_C const IID IID_IPhotoAcquire;
             /* [unique][in] */ __RPC__in_opt LPCWSTR pszApplicationName,
             /* [unique][in] */ __RPC__in_opt IPhotoAcquireProgressCB *pPhotoAcquireProgressCB);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquire, EnumResults)
         HRESULT ( STDMETHODCALLTYPE *EnumResults )( 
             __RPC__in IPhotoAcquire * This,
             /* [out] */ __RPC__deref_out_opt IEnumString **ppEnumFilePaths);
@@ -1606,66 +1703,82 @@ EXTERN_C const IID IID_IPhotoAcquireSettings;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoAcquireSettings * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoAcquireSettings * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, InitializeFromRegistry)
         HRESULT ( STDMETHODCALLTYPE *InitializeFromRegistry )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [in] */ __RPC__in LPCWSTR pszRegistryKey);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, SetFlags)
         HRESULT ( STDMETHODCALLTYPE *SetFlags )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [in] */ DWORD dwPhotoAcquireFlags);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, SetOutputFilenameTemplate)
         HRESULT ( STDMETHODCALLTYPE *SetOutputFilenameTemplate )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszTemplate);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, SetSequencePaddingWidth)
         HRESULT ( STDMETHODCALLTYPE *SetSequencePaddingWidth )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [in] */ DWORD dwWidth);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, SetSequenceZeroPadding)
         HRESULT ( STDMETHODCALLTYPE *SetSequenceZeroPadding )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [in] */ BOOL fZeroPad);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, SetGroupTag)
         HRESULT ( STDMETHODCALLTYPE *SetGroupTag )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszGroupTag);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, SetAcquisitionTime)
         HRESULT ( STDMETHODCALLTYPE *SetAcquisitionTime )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [in] */ __RPC__in const FILETIME *pftAcquisitionTime);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, GetFlags)
         HRESULT ( STDMETHODCALLTYPE *GetFlags )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [out] */ __RPC__out DWORD *pdwPhotoAcquireFlags);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, GetOutputFilenameTemplate)
         HRESULT ( STDMETHODCALLTYPE *GetOutputFilenameTemplate )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrTemplate);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, GetSequencePaddingWidth)
         HRESULT ( STDMETHODCALLTYPE *GetSequencePaddingWidth )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [out] */ __RPC__out DWORD *pdwWidth);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, GetSequenceZeroPadding)
         HRESULT ( STDMETHODCALLTYPE *GetSequenceZeroPadding )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [out] */ __RPC__out BOOL *pfZeroPad);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, GetGroupTag)
         HRESULT ( STDMETHODCALLTYPE *GetGroupTag )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [out] */ __RPC__deref_out_opt BSTR *pbstrGroupTag);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireSettings, GetAcquisitionTime)
         HRESULT ( STDMETHODCALLTYPE *GetAcquisitionTime )( 
             __RPC__in IPhotoAcquireSettings * This,
             /* [out] */ __RPC__out FILETIME *pftAcquisitionTime);
@@ -1782,35 +1895,43 @@ EXTERN_C const IID IID_IPhotoAcquireOptionsDialog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoAcquireOptionsDialog * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoAcquireOptionsDialog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoAcquireOptionsDialog * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireOptionsDialog, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IPhotoAcquireOptionsDialog * This,
             /* [unique][in] */ __RPC__in_opt LPCWSTR pszRegistryRoot);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireOptionsDialog, Create)
         HRESULT ( STDMETHODCALLTYPE *Create )( 
             __RPC__in IPhotoAcquireOptionsDialog * This,
             /* [in] */ __RPC__in HWND hWndParent,
             /* [out] */ __RPC__deref_out_opt HWND *phWndDialog);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireOptionsDialog, Destroy)
         HRESULT ( STDMETHODCALLTYPE *Destroy )( 
             __RPC__in IPhotoAcquireOptionsDialog * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireOptionsDialog, DoModal)
         HRESULT ( STDMETHODCALLTYPE *DoModal )( 
             __RPC__in IPhotoAcquireOptionsDialog * This,
             /* [in] */ __RPC__in HWND hWndParent,
             /* [unique][out][in] */ __RPC__inout_opt INT_PTR *ppnReturnCode);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireOptionsDialog, SaveData)
         HRESULT ( STDMETHODCALLTYPE *SaveData )( 
             __RPC__in IPhotoAcquireOptionsDialog * This);
         
@@ -1929,26 +2050,32 @@ EXTERN_C const IID IID_IPhotoAcquireDeviceSelectionDialog;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoAcquireDeviceSelectionDialog * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoAcquireDeviceSelectionDialog * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoAcquireDeviceSelectionDialog * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireDeviceSelectionDialog, SetTitle)
         HRESULT ( STDMETHODCALLTYPE *SetTitle )( 
             __RPC__in IPhotoAcquireDeviceSelectionDialog * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszTitle);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireDeviceSelectionDialog, SetSubmitButtonText)
         HRESULT ( STDMETHODCALLTYPE *SetSubmitButtonText )( 
             __RPC__in IPhotoAcquireDeviceSelectionDialog * This,
             /* [string][in] */ __RPC__in_string LPCWSTR pszSubmitButtonText);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquireDeviceSelectionDialog, DoModal)
         HRESULT ( STDMETHODCALLTYPE *DoModal )( 
             __RPC__in IPhotoAcquireDeviceSelectionDialog * This,
             /* [in] */ __RPC__in HWND hWndParent,
@@ -2051,23 +2178,28 @@ EXTERN_C const IID IID_IPhotoAcquirePlugin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in IPhotoAcquirePlugin * This,
             /* [in] */ __RPC__in REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in IPhotoAcquirePlugin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in IPhotoAcquirePlugin * This);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquirePlugin, Initialize)
         HRESULT ( STDMETHODCALLTYPE *Initialize )( 
             __RPC__in IPhotoAcquirePlugin * This,
             /* [in] */ __RPC__in_opt IPhotoAcquireSource *pPhotoAcquireSource,
             /* [in] */ __RPC__in_opt IPhotoAcquireProgressCB *pPhotoAcquireProgressCB);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquirePlugin, ProcessItem)
         HRESULT ( STDMETHODCALLTYPE *ProcessItem )( 
             __RPC__in IPhotoAcquirePlugin * This,
             /* [in] */ DWORD dwAcquireStage,
@@ -2076,10 +2208,12 @@ EXTERN_C const IID IID_IPhotoAcquirePlugin;
             /* [in] */ __RPC__in LPCWSTR pszFinalFilename,
             /* [in] */ __RPC__in_opt IPropertyStore *pPropertyStore);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquirePlugin, TransferComplete)
         HRESULT ( STDMETHODCALLTYPE *TransferComplete )( 
             __RPC__in IPhotoAcquirePlugin * This,
             /* [in] */ HRESULT hr);
         
+        DECLSPEC_XFGVIRT(IPhotoAcquirePlugin, DisplayConfigureDialog)
         HRESULT ( STDMETHODCALLTYPE *DisplayConfigureDialog )( 
             __RPC__in IPhotoAcquirePlugin * This,
             __RPC__in HWND hWndParent);

@@ -22,6 +22,12 @@
 #include <messagedispatcherapi.h>
 #include <ctxtcall.h>
 
+#include <ichannelcredentials.h>
+
+#include <mtx.h>
+#include <mtxadmin.h>
+#include <mtxattr.h>
+
 /*
 #include <urlmon.h>
 #include <accctrl.h>

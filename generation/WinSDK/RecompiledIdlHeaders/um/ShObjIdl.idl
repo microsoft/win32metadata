@@ -1509,6 +1509,23 @@ interface IStorageProviderBanners : IUnknown
 }
 cpp_quote("#endif // NTDDI_WIN10_RS4")
 
+[
+    object,
+    uuid(7bf992a9-af7a-4dba-b2e5-4d080b1ecbc6),
+]
+interface IStorageProviderCopyHook : IUnknown
+{
+    HRESULT CopyCallback(
+        [in, unique] HWND hwnd, 
+        [in] UINT operation, 
+        [in] UINT flags,
+        [in, string] LPCWSTR srcFile, 
+        [in] DWORD srcAttribs,
+        [in, unique, string] LPCWSTR destFile, 
+        [in] DWORD destAttribs,
+        [out] UINT* result);
+};
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP) */")
 
 #pragma endregion

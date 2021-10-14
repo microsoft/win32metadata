@@ -14,7 +14,7 @@
 
 #ifndef __WRL_ASSERT__
 #ifdef __WRL_CONFIGURATION_LEGACY__
-// Take NT_ASSERT for windows build 
+// Take NT_ASSERT for windows build
 #include <ntassert.h>
 #define __WRL_ASSERT__(cond)    NT_ASSERT(cond)
 #else
@@ -56,6 +56,9 @@ namespace Details {
     inline void __declspec(noreturn) RaiseException(HRESULT hr, DWORD dwExceptionFlags = EXCEPTION_NONCONTINUABLE) throw()
     {
         ::RaiseException(static_cast<DWORD>(hr), dwExceptionFlags, 0, NULL);
+#ifdef __clang__
+        __builtin_unreachable();
+#endif
     }
 
     template <class From, class To>
@@ -127,7 +130,7 @@ namespace Details {
         typedef T Type;
     };
 
-    template<class T> 
+    template<class T>
     inline T&& Forward(typename Identity<T>::Type& arg) throw()
     {
         // Forward arg, given explicitly specified Type parameter

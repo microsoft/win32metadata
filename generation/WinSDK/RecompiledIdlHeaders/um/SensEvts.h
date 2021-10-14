@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -176,6 +184,7 @@ EXTERN_C const IID IID_ISensNetwork;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][in] */ 
@@ -183,17 +192,21 @@ EXTERN_C const IID IID_ISensNetwork;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensNetwork * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensNetwork * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][in] */ 
@@ -203,6 +216,7 @@ EXTERN_C const IID IID_ISensNetwork;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][in] */ 
@@ -215,6 +229,7 @@ EXTERN_C const IID IID_ISensNetwork;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISensNetwork * This,
             /* [annotation][in] */ 
@@ -234,6 +249,7 @@ EXTERN_C const IID IID_ISensNetwork;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISensNetwork, ConnectionMade)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectionMade )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][in] */ 
@@ -243,6 +259,7 @@ EXTERN_C const IID IID_ISensNetwork;
             /* [annotation][in] */ 
             _In_  LPSENS_QOCINFO lpQOCInfo);
         
+        DECLSPEC_XFGVIRT(ISensNetwork, ConnectionMadeNoQOCInfo)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectionMadeNoQOCInfo )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][in] */ 
@@ -250,6 +267,7 @@ EXTERN_C const IID IID_ISensNetwork;
             /* [annotation][in] */ 
             _In_  ULONG ulType);
         
+        DECLSPEC_XFGVIRT(ISensNetwork, ConnectionLost)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *ConnectionLost )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][in] */ 
@@ -257,6 +275,7 @@ EXTERN_C const IID IID_ISensNetwork;
             /* [annotation][in] */ 
             _In_  ULONG ulType);
         
+        DECLSPEC_XFGVIRT(ISensNetwork, DestinationReachable)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DestinationReachable )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][in] */ 
@@ -268,6 +287,7 @@ EXTERN_C const IID IID_ISensNetwork;
             /* [annotation][in] */ 
             _In_  LPSENS_QOCINFO lpQOCInfo);
         
+        DECLSPEC_XFGVIRT(ISensNetwork, DestinationReachableNoQOCInfo)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DestinationReachableNoQOCInfo )( 
             __RPC__in ISensNetwork * This,
             /* [annotation][in] */ 
@@ -373,6 +393,7 @@ EXTERN_C const IID IID_ISensOnNow;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensOnNow * This,
             /* [annotation][in] */ 
@@ -380,17 +401,21 @@ EXTERN_C const IID IID_ISensOnNow;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensOnNow * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensOnNow * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISensOnNow * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISensOnNow * This,
             /* [annotation][in] */ 
@@ -400,6 +425,7 @@ EXTERN_C const IID IID_ISensOnNow;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISensOnNow * This,
             /* [annotation][in] */ 
@@ -412,6 +438,7 @@ EXTERN_C const IID IID_ISensOnNow;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISensOnNow * This,
             /* [annotation][in] */ 
@@ -431,14 +458,17 @@ EXTERN_C const IID IID_ISensOnNow;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISensOnNow, OnACPower)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *OnACPower )( 
             __RPC__in ISensOnNow * This);
         
+        DECLSPEC_XFGVIRT(ISensOnNow, OnBatteryPower)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *OnBatteryPower )( 
             __RPC__in ISensOnNow * This,
             /* [annotation][in] */ 
             _In_  DWORD dwBatteryLifePercent);
         
+        DECLSPEC_XFGVIRT(ISensOnNow, BatteryLow)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *BatteryLow )( 
             __RPC__in ISensOnNow * This,
             /* [annotation][in] */ 
@@ -552,6 +582,7 @@ EXTERN_C const IID IID_ISensLogon;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
@@ -559,17 +590,21 @@ EXTERN_C const IID IID_ISensLogon;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensLogon * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensLogon * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISensLogon * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
@@ -579,6 +614,7 @@ EXTERN_C const IID IID_ISensLogon;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
@@ -591,6 +627,7 @@ EXTERN_C const IID IID_ISensLogon;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISensLogon * This,
             /* [annotation][in] */ 
@@ -610,36 +647,43 @@ EXTERN_C const IID IID_ISensLogon;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISensLogon, Logon)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Logon )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrUserName);
         
+        DECLSPEC_XFGVIRT(ISensLogon, Logoff)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Logoff )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrUserName);
         
+        DECLSPEC_XFGVIRT(ISensLogon, StartShell)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *StartShell )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrUserName);
         
+        DECLSPEC_XFGVIRT(ISensLogon, DisplayLock)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DisplayLock )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrUserName);
         
+        DECLSPEC_XFGVIRT(ISensLogon, DisplayUnlock)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *DisplayUnlock )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrUserName);
         
+        DECLSPEC_XFGVIRT(ISensLogon, StartScreenSaver)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *StartScreenSaver )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
             _In_  BSTR bstrUserName);
         
+        DECLSPEC_XFGVIRT(ISensLogon, StopScreenSaver)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *StopScreenSaver )( 
             __RPC__in ISensLogon * This,
             /* [annotation][in] */ 
@@ -767,6 +811,7 @@ EXTERN_C const IID IID_ISensLogon2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][in] */ 
@@ -774,17 +819,21 @@ EXTERN_C const IID IID_ISensLogon2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in ISensLogon2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in ISensLogon2 * This);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfoCount)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfoCount )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][out] */ 
             _Out_  UINT *pctinfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetTypeInfo)
         HRESULT ( STDMETHODCALLTYPE *GetTypeInfo )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][in] */ 
@@ -794,6 +843,7 @@ EXTERN_C const IID IID_ISensLogon2;
             /* [annotation][out] */ 
             _Out_  ITypeInfo **ppTInfo);
         
+        DECLSPEC_XFGVIRT(IDispatch, GetIDsOfNames)
         HRESULT ( STDMETHODCALLTYPE *GetIDsOfNames )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][in] */ 
@@ -806,6 +856,7 @@ EXTERN_C const IID IID_ISensLogon2;
             /* [annotation][size_is][out] */ 
             _Out_writes_(cNames)  DISPID *rgDispId);
         
+        DECLSPEC_XFGVIRT(IDispatch, Invoke)
         /* [local] */ HRESULT ( STDMETHODCALLTYPE *Invoke )( 
             ISensLogon2 * This,
             /* [annotation][in] */ 
@@ -825,6 +876,7 @@ EXTERN_C const IID IID_ISensLogon2;
             /* [annotation][out] */ 
             _Out_opt_  UINT *puArgErr);
         
+        DECLSPEC_XFGVIRT(ISensLogon2, Logon)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Logon )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][in] */ 
@@ -832,6 +884,7 @@ EXTERN_C const IID IID_ISensLogon2;
             /* [annotation][in] */ 
             _In_  DWORD dwSessionId);
         
+        DECLSPEC_XFGVIRT(ISensLogon2, Logoff)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *Logoff )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][in] */ 
@@ -839,6 +892,7 @@ EXTERN_C const IID IID_ISensLogon2;
             /* [annotation][in] */ 
             _In_  DWORD dwSessionId);
         
+        DECLSPEC_XFGVIRT(ISensLogon2, SessionDisconnect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionDisconnect )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][in] */ 
@@ -846,6 +900,7 @@ EXTERN_C const IID IID_ISensLogon2;
             /* [annotation][in] */ 
             _In_  DWORD dwSessionId);
         
+        DECLSPEC_XFGVIRT(ISensLogon2, SessionReconnect)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *SessionReconnect )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][in] */ 
@@ -853,6 +908,7 @@ EXTERN_C const IID IID_ISensLogon2;
             /* [annotation][in] */ 
             _In_  DWORD dwSessionId);
         
+        DECLSPEC_XFGVIRT(ISensLogon2, PostShell)
         /* [id] */ HRESULT ( STDMETHODCALLTYPE *PostShell )( 
             __RPC__in ISensLogon2 * This,
             /* [annotation][in] */ 

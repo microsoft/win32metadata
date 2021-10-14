@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
            xmlns:xs="http://www.w3.org/2001/XMLSchema"
            targetNamespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10"
@@ -13,6 +13,8 @@
            xmlns:uap7="http://schemas.microsoft.com/appx/manifest/uap/windows10/7"
            xmlns:uap8="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"
            xmlns:uap10="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"
+           xmlns:uap11="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"
+           xmlns:uap13="http://schemas.microsoft.com/appx/manifest/uap/windows10/13"
            xmlns:wincap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/windowscapabilities"
            xmlns:rescap="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities"
            xmlns:rescap6="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/6"
@@ -25,6 +27,7 @@
            xmlns:desktop2="http://schemas.microsoft.com/appx/manifest/desktop/windows10/2"
            xmlns:desktop4="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"
            xmlns:desktop6="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"
+           xmlns:virtualization="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"
            >
 
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/types"/>
@@ -36,10 +39,13 @@
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/7"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/8"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/10"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/11"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/uap/windows10/13"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/iot/windows10/2"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/4"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/desktop/windows10/6"/>
   <xs:import namespace="http://schemas.microsoft.com/appx/manifest/foundation/windows10/restrictedcapabilities/6"/>
+  <xs:import namespace="http://schemas.microsoft.com/appx/manifest/virtualization/windows10"/>
   
   <xs:element name="Package">
     <xs:complexType>
@@ -157,9 +163,12 @@
       <xs:element ref="uap6:AllowExecution" minOccurs="0"/>
       <xs:element ref="desktop6:RegistryWriteVirtualization" minOccurs="0"/>
       <xs:element ref="desktop6:FileSystemWriteVirtualization" minOccurs="0"/>
+      <xs:element ref="virtualization:FileSystemWriteVirtualization" minOccurs="0"/>
+      <xs:element ref="virtualization:RegistryWriteVirtualization" minOccurs="0"/>
       <xs:element ref="rescap6:ModificationPackage" minOccurs="0"/>
       <xs:element ref="uap10:AllowExternalContent" minOccurs="0"/>
       <xs:element ref="uap10:PackageIntegrity" minOccurs="0"/>
+      <xs:element ref="uap13:AutoUpdate" minOccurs="0"/>
     </xs:all>
   </xs:complexType>
 
@@ -184,15 +193,18 @@
           <xs:attribute name="MaxVersionTested" type="t:ST_VersionQuad" use="required"/>
         </xs:complexType>
       </xs:element>
-      <xs:element name="PackageDependency" minOccurs="0" maxOccurs="128">
-        <xs:complexType>
-          <xs:attribute name="Name" type="t:ST_PackageName" use="required"/>
-          <xs:attribute name="Publisher" type="t:ST_Publisher_2010_v2" use="required"/>
-          <xs:attribute name="MinVersion" type="t:ST_VersionQuad" use="required"/>
-          <xs:attribute name="MaxMajorVersionTested" type="xs:unsignedShort" use="optional"/>
-          <xs:attribute ref="uap6:Optional" use="optional"/>
-        </xs:complexType>
-      </xs:element>
+      <xs:choice minOccurs="0" maxOccurs="129">
+        <xs:element name="PackageDependency">
+          <xs:complexType>
+            <xs:attribute name="Name" type="t:ST_PackageName" use="required"/>
+            <xs:attribute name="Publisher" type="t:ST_Publisher_2010_v2" use="required"/>
+            <xs:attribute name="MinVersion" type="t:ST_VersionQuad" use="required"/>
+            <xs:attribute name="MaxMajorVersionTested" type="xs:unsignedShort" use="optional"/>
+            <xs:attribute ref="uap6:Optional" use="optional"/>
+          </xs:complexType>
+        </xs:element>
+        <xs:element ref="uap13:HostRuntimeDependency"/>
+      </xs:choice>
       <xs:element ref="MainPackageDependencyChoice" minOccurs="0" maxOccurs="1"/>
       <xs:element ref="MainPackageDependencyChoice2" minOccurs="0" maxOccurs="1000"/>
       <xs:element ref="uap5:DriverDependency" minOccurs="0" maxOccurs="1000"/>
@@ -257,6 +269,7 @@
           </xs:choice>
           <xs:attribute name="Category" type="t:ST_PackageExtensionCategory_Foundation" use="required"/>
           <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
+          <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
         </xs:complexType>
       </xs:element>
       <xs:element ref="ExtensionChoice"/>
@@ -343,6 +356,8 @@
           <xs:attribute ref="desktop4:SupportsMultipleInstances" use="optional"/>
           <xs:attribute ref="iot2:SupportsMultipleInstances" use="optional"/>
           <xs:attribute ref="uap10:SupportsMultipleInstances" use="optional"/>
+          <xs:attribute ref="uap11:CurrentDirectoryPath" use="optional"/>
+          <xs:attribute ref="uap11:Parameters" use="optional"/>
           <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
         </xs:complexType>
         <xs:unique name="ApplicationContentUrisRule_Match">
@@ -424,6 +439,7 @@
       <xs:attribute name="Category" type="t:ST_ApplicationExtensionCategory_Foundation" use="required"/>
       <xs:attributeGroup ref="t:ExtensionBaseAttributes"/>
       <xs:attributeGroup ref="uap10:TrustLevelGroup"/>
+      <xs:attributeGroup ref="uap11:ManganeseExtensionAttributesGroup"/>
     </xs:complexType>
     <xs:unique name="BackgroundTasks_Type">
       <xs:selector xpath="f:BackgroundTasks/f:Task | f:BackgroundTasks/uap:Task"/>

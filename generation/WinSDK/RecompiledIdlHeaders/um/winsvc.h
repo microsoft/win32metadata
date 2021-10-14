@@ -1828,6 +1828,39 @@ GetServiceDirectory(
 
 #endif // NTDDI_VERSION >= NTDDI_WIN10_RS5
 
+#if (NTDDI_VERSION >= NTDDI_WIN10_MN)
+
+typedef enum SERVICE_SHARED_REGISTRY_STATE_TYPE {
+    ServiceSharedRegistryPersistentState = 0
+} SERVICE_SHARED_REGISTRY_STATE_TYPE;
+
+_Must_inspect_result_
+DWORD
+WINAPI
+GetSharedServiceRegistryStateKey(
+    _In_ SC_HANDLE ServiceHandle,
+    _In_ SERVICE_SHARED_REGISTRY_STATE_TYPE StateType,
+    _In_ DWORD AccessMask,
+    _Out_ HKEY *ServiceStateKey
+    );
+
+typedef enum SERVICE_SHARED_DIRECTORY_TYPE {
+    ServiceSharedDirectoryPersistentState = 0
+} SERVICE_SHARED_DIRECTORY_TYPE;
+
+_Must_inspect_result_
+DWORD
+WINAPI
+GetSharedServiceDirectory(
+    _In_ SC_HANDLE ServiceHandle,
+    _In_ SERVICE_SHARED_DIRECTORY_TYPE DirectoryType,
+    _Out_writes_to_opt_(PathBufferLength, *RequiredBufferLength) PWCHAR PathBuffer,
+    _In_ DWORD PathBufferLength,
+    _Out_ DWORD *RequiredBufferLength
+    );
+
+#endif // NTDDI_VERSION >= NTDDI_WIN10_MN
+
 #endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP | WINAPI_PARTITION_SYSTEM) */
 #pragma endregion
 

@@ -635,5 +635,49 @@
   {
     "name": "OUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK",
     "pointerType": "POUT_OF_PROCESS_FUNCTION_TABLE_CALLBACK"
+  },
+  {
+    "name": "PATCH_PROGRESS_CALLBACK",
+    "pointerType": "PPATCH_PROGRESS_CALLBACK"
+  },
+  {
+    "name": "PATCH_SYMLOAD_CALLBACK",
+    "pointerType": "PPATCH_SYMLOAD_CALLBACK"
+  },
+  {
+    "name": "DISPATCHNOTIFICATIONS",
+    "pointerType": "LPDISPATCHNOTIFICATIONS"
+  },
+  {
+    "name": "CREATECONVERSATIONINDEX",
+    "pointerType": "LPCREATECONVERSATIONINDEX"
+  },
+  {
+    "name": "WABALLOCATEBUFFER",
+    "pointerType": "LPWABALLOCATEBUFFER"
+  },
+  {
+    "name": "WABALLOCATEMORE",
+    "pointerType": "LPWABALLOCATEMORE"
+  },
+  {
+    "name": "WABFREEBUFFER",
+    "pointerType": "LPWABFREEBUFFER"
+  },
+  {
+    "name": "AudioStateMonitorCallback",
+    "pointerType": "PAudioStateMonitorCallback"
+  },
+  {
+    "name": "_WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER",
+    "pointerType": "WHEA_ERROR_SOURCE_INITIALIZE_DEVICE_DRIVER"
+  },
+  {
+    "name": "_WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER",
+    "pointerType": "WHEA_ERROR_SOURCE_UNINITIALIZE_DEVICE_DRIVER"
+  },
+  {
+    "name": "_WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER",
+    "pointerType": "WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER"
   }
 ]

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -233,6 +241,7 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -240,12 +249,15 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in OLEDBSimpleProviderListener * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in OLEDBSimpleProviderListener * This);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProviderListener, aboutToChangeCell)
         HRESULT ( STDMETHODCALLTYPE *aboutToChangeCell )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -253,6 +265,7 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
             /* [annotation][in] */ 
             _In_  DB_LORDINAL iColumn);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProviderListener, cellChanged)
         HRESULT ( STDMETHODCALLTYPE *cellChanged )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -260,6 +273,7 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
             /* [annotation][in] */ 
             _In_  DB_LORDINAL iColumn);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProviderListener, aboutToDeleteRows)
         HRESULT ( STDMETHODCALLTYPE *aboutToDeleteRows )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -267,6 +281,7 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
             /* [annotation][in] */ 
             _In_  DBROWCOUNT cRows);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProviderListener, deletedRows)
         HRESULT ( STDMETHODCALLTYPE *deletedRows )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -274,6 +289,7 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
             /* [annotation][in] */ 
             _In_  DBROWCOUNT cRows);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProviderListener, aboutToInsertRows)
         HRESULT ( STDMETHODCALLTYPE *aboutToInsertRows )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -281,6 +297,7 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
             /* [annotation][in] */ 
             _In_  DBROWCOUNT cRows);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProviderListener, insertedRows)
         HRESULT ( STDMETHODCALLTYPE *insertedRows )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -288,6 +305,7 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
             /* [annotation][in] */ 
             _In_  DBROWCOUNT cRows);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProviderListener, rowsAvailable)
         HRESULT ( STDMETHODCALLTYPE *rowsAvailable )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -295,6 +313,7 @@ EXTERN_C const IID IID_OLEDBSimpleProviderListener;
             /* [annotation][in] */ 
             _In_  DBROWCOUNT cRows);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProviderListener, transferComplete)
         HRESULT ( STDMETHODCALLTYPE *transferComplete )( 
             __RPC__in OLEDBSimpleProviderListener * This,
             /* [annotation][in] */ 
@@ -470,6 +489,7 @@ EXTERN_C const IID IID_OLEDBSimpleProvider;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
@@ -477,22 +497,27 @@ EXTERN_C const IID IID_OLEDBSimpleProvider;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             __RPC__in OLEDBSimpleProvider * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             __RPC__in OLEDBSimpleProvider * This);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, getRowCount)
         HRESULT ( STDMETHODCALLTYPE *getRowCount )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  DBROWCOUNT *pcRows);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, getColumnCount)
         HRESULT ( STDMETHODCALLTYPE *getColumnCount )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  DB_LORDINAL *pcColumns);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, getRWStatus)
         HRESULT ( STDMETHODCALLTYPE *getRWStatus )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
@@ -502,6 +527,7 @@ EXTERN_C const IID IID_OLEDBSimpleProvider;
             /* [annotation][retval][out] */ 
             _Out_retval_  OSPRW *prwStatus);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, getVariant)
         HRESULT ( STDMETHODCALLTYPE *getVariant )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
@@ -513,6 +539,7 @@ EXTERN_C const IID IID_OLEDBSimpleProvider;
             /* [annotation][retval][out] */ 
             _Out_retval_  VARIANT *pVar);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, setVariant)
         HRESULT ( STDMETHODCALLTYPE *setVariant )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
@@ -524,11 +551,13 @@ EXTERN_C const IID IID_OLEDBSimpleProvider;
             /* [annotation][in] */ 
             _In_  VARIANT Var);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, getLocale)
         HRESULT ( STDMETHODCALLTYPE *getLocale )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BSTR *pbstrLocale);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, deleteRows)
         HRESULT ( STDMETHODCALLTYPE *deleteRows )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
@@ -538,6 +567,7 @@ EXTERN_C const IID IID_OLEDBSimpleProvider;
             /* [annotation][retval][out] */ 
             _Out_retval_  DBROWCOUNT *pcRowsDeleted);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, insertRows)
         HRESULT ( STDMETHODCALLTYPE *insertRows )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
@@ -547,6 +577,7 @@ EXTERN_C const IID IID_OLEDBSimpleProvider;
             /* [annotation][retval][out] */ 
             _Out_retval_  DBROWCOUNT *pcRowsInserted);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, find)
         HRESULT ( STDMETHODCALLTYPE *find )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
@@ -562,26 +593,31 @@ EXTERN_C const IID IID_OLEDBSimpleProvider;
             /* [annotation][retval][out] */ 
             _Out_retval_  DBROWCOUNT *piRowFound);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, addOLEDBSimpleProviderListener)
         HRESULT ( STDMETHODCALLTYPE *addOLEDBSimpleProviderListener )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
             _In_  OLEDBSimpleProviderListener *pospIListener);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, removeOLEDBSimpleProviderListener)
         HRESULT ( STDMETHODCALLTYPE *removeOLEDBSimpleProviderListener )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][in] */ 
             _In_  OLEDBSimpleProviderListener *pospIListener);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, isAsync)
         HRESULT ( STDMETHODCALLTYPE *isAsync )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  BOOL *pbAsynch);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, getEstimatedRows)
         HRESULT ( STDMETHODCALLTYPE *getEstimatedRows )( 
             __RPC__in OLEDBSimpleProvider * This,
             /* [annotation][retval][out] */ 
             _Out_retval_  DBROWCOUNT *piRows);
         
+        DECLSPEC_XFGVIRT(OLEDBSimpleProvider, stopTransfer)
         HRESULT ( STDMETHODCALLTYPE *stopTransfer )( 
             __RPC__in OLEDBSimpleProvider * This);
         

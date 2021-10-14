@@ -259,27 +259,27 @@ DWORD WINAPI XInputGetState
 (
     _In_  DWORD         dwUserIndex,  // Index of the gamer associated with the device
     _Out_ XINPUT_STATE* pState        // Receives the current state
-);
+) WIN_NOEXCEPT;
 
 DWORD WINAPI XInputSetState
 (
     _In_ DWORD             dwUserIndex,  // Index of the gamer associated with the device
     _In_ XINPUT_VIBRATION* pVibration    // The vibration information to send to the controller
-);
+) WIN_NOEXCEPT;
 
 DWORD WINAPI XInputGetCapabilities
 (
     _In_  DWORD                dwUserIndex,   // Index of the gamer associated with the device
     _In_  DWORD                dwFlags,       // Input flags that identify the device type
     _Out_ XINPUT_CAPABILITIES* pCapabilities  // Receives the capabilities
-);
+) WIN_NOEXCEPT;
 
 #if(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
 
 void WINAPI XInputEnable
 (
     _In_ BOOL enable     // [in] Indicates whether xinput is enabled or disabled. 
-);
+) WIN_NOEXCEPT;
 
 #if(_WIN32_WINNT >= _WIN32_WINNT_WIN10)
 #pragma deprecated(XInputEnable)
@@ -292,21 +292,21 @@ DWORD WINAPI XInputGetAudioDeviceIds
     _Inout_opt_ UINT*                       pRenderCount,       // Size of render device ID string buffer (in wide-chars)
     _Out_writes_opt_(*pCaptureCount) LPWSTR pCaptureDeviceId,   // Windows Core Audio device ID string for capture (microphone)
     _Inout_opt_ UINT*                       pCaptureCount       // Size of capture device ID string buffer (in wide-chars)
-);
+) WIN_NOEXCEPT;
 
 DWORD WINAPI XInputGetBatteryInformation
 (
     _In_  DWORD                       dwUserIndex,        // Index of the gamer associated with the device
     _In_  BYTE                        devType,            // Which device on this user index
     _Out_ XINPUT_BATTERY_INFORMATION* pBatteryInformation // Contains the level and types of batteries
-);
+) WIN_NOEXCEPT;
 
 DWORD WINAPI XInputGetKeystroke
 (
     _In_       DWORD dwUserIndex,              // Index of the gamer associated with the device
     _Reserved_ DWORD dwReserved,               // Reserved for future use
     _Out_      PXINPUT_KEYSTROKE pKeystroke    // Pointer to an XINPUT_KEYSTROKE structure that receives an input event.
-);
+) WIN_NOEXCEPT;
 
 #endif //(_WIN32_WINNT >= _WIN32_WINNT_WIN8)
 

@@ -135,14 +135,11 @@ WHvEmulatorCreateEmulator(
     _Out_ WHV_EMULATOR_HANDLE* Emulator
     );
 
-
 HRESULT
 WINAPI
 WHvEmulatorDestroyEmulator(
     _In_ WHV_EMULATOR_HANDLE Emulator
     );
-
-
 
 HRESULT
 WINAPI
@@ -154,7 +151,6 @@ WHvEmulatorTryIoEmulation(
     _Out_ WHV_EMULATOR_STATUS* EmulatorReturnStatus
     );
 
-
 HRESULT
 WINAPI
 WHvEmulatorTryMmioEmulation(
@@ -165,7 +161,6 @@ WHvEmulatorTryMmioEmulation(
     _Out_ WHV_EMULATOR_STATUS* EmulatorReturnStatus
     );
 
-
 #ifdef __cplusplus
 }
 #endif
@@ -175,11 +170,8 @@ WHvEmulatorTryMmioEmulation(
 
 #endif // _WINHVEMUAPI_H_
 
-
 #ifndef ext_ms_win_hyperv_hvemulation_l1_1_0_query_routines
 #define ext_ms_win_hyperv_hvemulation_l1_1_0_query_routines
-
-
 
 //
 //Private Extension API Query Routines

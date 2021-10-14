@@ -85,9 +85,9 @@ namespace MetadataUtils
             return GetNameToNamespaceMap(sourceFiles, nameOptions);
         }
 
-        public static HashSet<string> GetConstants(string scraperOutputDir)
+        public static Dictionary<string, string> GetConstants(string scraperOutputDir)
         {
-            HashSet<string> names = new HashSet<string>();
+            Dictionary<string, string> namesAndTypes = new();
 
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions() { MaxDegreeOfParallelism = Environment.ProcessorCount * 2 };
 
@@ -101,15 +101,18 @@ namespace MetadataUtils
             {
                 string fileToRead = Path.GetFullPath(sourceFile);
                 SyntaxTree tree = CSharpSyntaxTree.ParseText(File.ReadAllText(fileToRead), null, fileToRead);
-                HashSet<string> currentNames = ConstantsFinder.GetConstantsNames(tree);
+                Dictionary<string, string> currentNamesAndTypes = ConstantsFinder.GetConstantsNamesAndTypes(tree);
 
-                lock (names)
+                lock (namesAndTypes)
                 {
-                    names.UnionWith(currentNames);
+                    foreach (var item in currentNamesAndTypes)
+                    {
+                        namesAndTypes[item.Key] = item.Value;
+                    }
                 }
             });
 
-            return names;
+            return namesAndTypes;
         }
 
         private static bool IsValidCsSourceFile(string fileName)
@@ -124,22 +127,22 @@ namespace MetadataUtils
 
         private class ConstantsFinder
         {
-            public static HashSet<string> GetConstantsNames(SyntaxTree tree)
+            public static Dictionary<string, string> GetConstantsNamesAndTypes(SyntaxTree tree)
             {
-                HashSet<string> constantsNames = new HashSet<string>();
+                Dictionary<string, string> constantsNamesAndTypes = new();
 
-                new TreeWalker(tree, constantsNames);
+                new TreeWalker(tree, constantsNamesAndTypes);
 
-                return constantsNames;
+                return constantsNamesAndTypes;
             }
 
             private class TreeWalker : CSharpSyntaxWalker
             {
-                private HashSet<string> constantsNames;
+                Dictionary<string, string> constantsNamesAndTypes;
 
-                public TreeWalker(SyntaxTree tree, HashSet<string> constantsNames)
+                public TreeWalker(SyntaxTree tree, Dictionary<string, string> constantsNamesAndTypes)
                 {
-                    this.constantsNames = constantsNames;
+                    this.constantsNamesAndTypes = constantsNamesAndTypes;
                     this.Visit(tree.GetRoot());
                 }
 
@@ -161,15 +164,16 @@ namespace MetadataUtils
                     // Don't process the node as we don't need anything else
                 }
 
-                private void AddNameToMap(SyntaxNode node)
+                private void AddNameToMap(FieldDeclarationSyntax node)
                 {
                     string name = SyntaxUtils.GetFullName(node, false);
 
                     if (!string.IsNullOrEmpty(name))
                     {
-                        if (!this.constantsNames.Contains(name))
+                        if (!this.constantsNamesAndTypes.ContainsKey(name))
                         {
-                            this.constantsNames.Add(name);
+                            var typeName = node.Declaration.Type.ToString();
+                            this.constantsNamesAndTypes.Add(name, typeName);
                         }
                     }
                 }

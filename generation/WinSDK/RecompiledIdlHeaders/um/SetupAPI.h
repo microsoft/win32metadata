@@ -4614,21 +4614,20 @@ SetupInstallFilesFromInfSectionW(
 //
 #define SPSVCINST_NOCLOBBER_TRIGGERS (0x00002000)
 
-#endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
-
-#if _SETUPAPI_VER >= _WIN32_WINNT_WIN10
 //
 // (AddService) don't overwrite service SID type if it already exists
 //
 #define SPSVCINST_NOCLOBBER_SERVICESIDTYPE (0x00004000)
 
-#endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
-
-#if _SETUPAPI_VER >= _WIN32_WINNT_WIN10
 //
 // (AddService) don't overwrite delayed auto start if it already exists
 //
 #define SPSVCINST_NOCLOBBER_DELAYEDAUTOSTART (0x00008000)
+
+//
+// (AddService) create service with a unique name
+//
+#define SPSVCINST_UNIQUE_NAME (0x00010000)
 
 #endif // _SETUPAPI_VER >= _WIN32_WINNT_WIN10
 

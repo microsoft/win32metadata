@@ -1,23 +1,91 @@
 . "$PSScriptRoot\CommonUtils.ps1"
 
-function SearchHeaderFile([string]$name) {
-    Get-ChildItem -Recurse -Filter settings.rsp $partitionsDir | Select-String $name
+$partitionsDir = "$windowsWin32ProjectRoot\Partitions"
+
+function GetTraverseHash()
+{
+    $ret = [System.Collections.Generic.HashSet[string]]::new()
+
+    $selStringRet = Get-ChildItem -Recurse -Filter settings.rsp $partitionsDir | Select-String -pattern "<IncludeRoot>(.+)"
+    foreach ($match in $selStringRet.Matches)
+    {
+        $file = $match.Groups[1].Value.Replace('\', '/').ToLowerInvariant()
+        $ret.Add($file)
+    }
+
+    return $ret
 }
+
+function GetUnconveredFilesMap()
+{
+    $ret = [ordered]@{}
+    $items = Import-Csv "$PSScriptRoot\HeaderFileCoverageExceptions.csv" -Delimiter ','
+    foreach ($item in $items)
+    {
+        if ($item.Skipping -ne "true")
+        {
+            $ret[$item.File] = $item.Reason
+        }
+        else
+        {
+            $ret[$item.File] = "skipping"
+        }
+    }
+
+    return $ret
+}
+
+$traverseFiles = GetTraverseHash
+$uncoveredFilesMap = GetUnconveredFilesMap
 
 Write-Output "Scanning header files..."
 
-$cppSdkRoot = $recompiledIdlHeadersDir
-$sdkIncludePath = "$cppSdkRoot/c/Include/*/"
-$headerFiles = Get-ChildItem -Recurse -Filter *.h "$sdkIncludePath/um", "$sdkIncludePath/shared"
-$missingHeaderFiles = $headerFiles | Where-Object { (SearchHeaderFile $_.Name).Matches.Count -eq 0 } | Sort-Object FullName
+$sdkIncludePath = $recompiledIdlHeadersDir
+$headerFiles = Get-ChildItem -Recurse -Filter *.h "$sdkIncludePath/shared", "$sdkIncludePath/um"
+$total = 0
+$traversed = 0
+$finalList = [ordered]@{}
 
-Write-Output "Scanning completed."
+foreach ($file in $headerFiles)
+{
+    $selStringRet = $file.FullName | select-string -pattern "\\(shared|um)\\.+"
+    $total++
 
-if ($missingHeaderFiles.Count -gt 0) {
-    Write-Output "The below header files are not included in any partition:"
+    $nameToCheck = $selStringRet.Matches[0].Groups[0].Value.ToLowerInvariant().Replace('\', '/')
+    if (!$traverseFiles.Contains($nameToCheck))
+    {
+        $reason = $uncoveredFilesMap[$nameToCheck]
+        if ($reason -eq "skipping")
+        {
+            $traversed++    
 
-    Write-Output $missingHeaderFiles.FullName
-} else {
-    Write-Output "All header files are included in partitions."
+            continue
+        }
+
+        #Write-Output "reason = $reason"
+
+        if (!$reason)
+        {
+            $reason = "Unknown: not found in exceptions list."
+        }
+
+        $finalList[$nameToCheck] = $reason
+    }
+    else
+    {
+        $traversed++    
+    }
 }
 
+if ($finalList.Count -gt 0)
+{
+    Write-Output "The below header files are not included in any partition:"
+    foreach ($item in $finalList.Keys)
+    {
+        $reason = $finalList[$item]
+        Write-Output "$item - $reason"
+    }
+}
+
+$percent = ($traversed/$total).ToString("P")
+Write-Output "$traversed/$total covered by partitions or exceptions ($percent)"

@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 #pragma warning( disable: 4049 )  /* more than 64k source lines */
@@ -31,6 +31,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -165,43 +173,52 @@ EXTERN_C const IID IID_IWamAdmin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWamAdmin * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWamAdmin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWamAdmin * This);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppCreate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppCreate )( 
             IWamAdmin * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fInProc);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppDelete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppDelete )( 
             IWamAdmin * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fRecursive);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppUnLoad)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppUnLoad )( 
             IWamAdmin * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fRecursive);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppGetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppGetStatus )( 
             IWamAdmin * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [out] */ DWORD *pdwAppStatus);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppDeleteRecoverable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppDeleteRecoverable )( 
             IWamAdmin * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fRecursive);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppRecover)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppRecover )( 
             IWamAdmin * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
@@ -287,48 +304,58 @@ EXTERN_C const IID IID_IWamAdmin2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWamAdmin2 * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWamAdmin2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWamAdmin2 * This);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppCreate)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppCreate )( 
             IWamAdmin2 * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fInProc);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppDelete)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppDelete )( 
             IWamAdmin2 * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fRecursive);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppUnLoad)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppUnLoad )( 
             IWamAdmin2 * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fRecursive);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppGetStatus)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppGetStatus )( 
             IWamAdmin2 * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [out] */ DWORD *pdwAppStatus);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppDeleteRecoverable)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppDeleteRecoverable )( 
             IWamAdmin2 * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fRecursive);
         
+        DECLSPEC_XFGVIRT(IWamAdmin, AppRecover)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppRecover )( 
             IWamAdmin2 * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fRecursive);
         
+        DECLSPEC_XFGVIRT(IWamAdmin2, AppCreate2)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *AppCreate2 )( 
             IWamAdmin2 * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
@@ -440,18 +467,22 @@ EXTERN_C const IID IID_IIISApplicationAdmin;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IIISApplicationAdmin * This,
             /* [in] */ REFIID riid,
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IIISApplicationAdmin * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IIISApplicationAdmin * This);
         
+        DECLSPEC_XFGVIRT(IIISApplicationAdmin, CreateApplication)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateApplication )( 
             IIISApplicationAdmin * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
@@ -459,28 +490,34 @@ EXTERN_C const IID IID_IIISApplicationAdmin;
             /* [string][unique][in] */ LPCWSTR szAppPoolId,
             /* [in] */ BOOL fCreatePool);
         
+        DECLSPEC_XFGVIRT(IIISApplicationAdmin, DeleteApplication)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeleteApplication )( 
             IIISApplicationAdmin * This,
             /* [string][unique][in] */ LPCWSTR szMDPath,
             /* [in] */ BOOL fRecursive);
         
+        DECLSPEC_XFGVIRT(IIISApplicationAdmin, CreateApplicationPool)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *CreateApplicationPool )( 
             IIISApplicationAdmin * This,
             /* [string][unique][in] */ LPCWSTR szPool);
         
+        DECLSPEC_XFGVIRT(IIISApplicationAdmin, DeleteApplicationPool)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *DeleteApplicationPool )( 
             IIISApplicationAdmin * This,
             /* [string][unique][in] */ LPCWSTR szPool);
         
+        DECLSPEC_XFGVIRT(IIISApplicationAdmin, EnumerateApplicationsInPool)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *EnumerateApplicationsInPool )( 
             IIISApplicationAdmin * This,
             /* [string][unique][in] */ LPCWSTR szPool,
             /* [out] */ BSTR *bstrBuffer);
         
+        DECLSPEC_XFGVIRT(IIISApplicationAdmin, RecycleApplicationPool)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *RecycleApplicationPool )( 
             IIISApplicationAdmin * This,
             /* [string][unique][in] */ LPCWSTR szPool);
         
+        DECLSPEC_XFGVIRT(IIISApplicationAdmin, GetProcessMode)
         /* [helpstring] */ HRESULT ( STDMETHODCALLTYPE *GetProcessMode )( 
             IIISApplicationAdmin * This,
             /* [out] */ DWORD *pdwMode);

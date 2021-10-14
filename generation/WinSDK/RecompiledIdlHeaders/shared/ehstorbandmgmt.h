@@ -20,6 +20,7 @@
 #pragma region Desktop Family
 #if WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_DESKTOP)
 
+#define _EHSTOR_INTERFACE_
 
 #pragma warning(push)
 // nonstandard extension used : nameless struct/union
@@ -133,23 +134,6 @@ typedef struct _BAND_SECURITY_INFO
     };
     BYTE        Metadata[32];
 } BAND_SECURITY_INFO, *PBAND_SECURITY_INFO;
-
-// BAND_SECURITY_INFO::CryptoAlgoNumericId values
-#define ALGO_AES_128_MASK               0x00010000
-#define ALGO_AES_256_MASK               0x00020000
-#define ALGO_MODE_MASK                  0x0000FFFF
-#define ALGO_MODE_ECB                   0x00000000
-#define ALGO_MODE_CBC                   0x00000001
-#define ALGO_MODE_CFB                   0x00000002
-#define ALGO_MODE_OFB                   0x00000003
-#define ALGO_MODE_GCM                   0x00000004
-#define ALGO_MODE_CTR                   0x00000005
-#define ALGO_MODE_CCM                   0x00000006
-#define ALGO_MODE_XTS                   0x00000007
-#define ALGO_MODE_LRW                   0x00000008
-#define ALGO_MODE_EME                   0x00000009
-#define ALGO_MODE_CMC                   0x0000000A
-#define ALGO_MODE_XEX                   0x0000000B
 
 typedef struct _BAND_TABLE_ENTRY
 {
@@ -298,6 +282,20 @@ typedef struct _ERASE_BAND_PARAMETERS
 #define ERASEBAND_AUTHKEY_CACHING_ENABLED   0x00000001
 
 //
+// IOCTL_EHSTOR_BANDMGMT_SET_SID parameters.
+//
+typedef struct _SET_SID_PARAMETERS
+{
+    ULONG   StructSize;
+    ULONG   CurrentSidPinOffset;
+    ULONG   NewSidPinOffset;
+    //
+    // This structure is followed by two variable-length AUTH_KEY structures
+    // referenced by CurrentSidPinOffset and NewSidPinOffset fields.
+    //
+} SET_SID_PARAMETERS, *PSET_SID_PARAMETERS;
+
+//
 // Band Control IOCTLs
 //
 #define IOCTL_EHSTOR_BANDMGMT_QUERY_CAPABILITIES \
@@ -332,6 +330,9 @@ typedef struct _ERASE_BAND_PARAMETERS
                      FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 #define IOCTL_EHSTOR_BANDMGMT_ERASE_BAND        \
             CTL_CODE(IOCTL_STORAGE_BASE, 0x52a, METHOD_BUFFERED, \
+                     FILE_READ_ACCESS | FILE_WRITE_ACCESS)
+#define IOCTL_EHSTOR_BANDMGMT_SET_SID           \
+            CTL_CODE(IOCTL_STORAGE_BASE, 0x52b, METHOD_BUFFERED, \
                      FILE_READ_ACCESS | FILE_WRITE_ACCESS)
 
 //

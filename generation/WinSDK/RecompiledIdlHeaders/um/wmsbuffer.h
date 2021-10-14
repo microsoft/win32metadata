@@ -3,7 +3,7 @@
 /* this ALWAYS GENERATED file contains the definitions for the interfaces */
 
 
- /* File created by MIDL compiler version 8.01.0622 */
+ /* File created by MIDL compiler version 8.01.0626 */
 /* @@MIDL_FILE_HEADING(  ) */
 
 
@@ -35,6 +35,14 @@
 
 #if defined(_MSC_VER) && (_MSC_VER >= 1020)
 #pragma once
+#endif
+
+#ifndef DECLSPEC_XFGVIRT
+#if _CONTROL_FLOW_GUARD_XFG
+#define DECLSPEC_XFGVIRT(base, func) __declspec(xfg_virtual(base, func))
+#else
+#define DECLSPEC_XFGVIRT(base, func)
+#endif
 #endif
 
 /* Forward Declarations */ 
@@ -156,6 +164,7 @@ EXTERN_C const IID IID_INSSBuffer;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INSSBuffer * This,
             /* [annotation][in] */ 
@@ -163,32 +172,39 @@ EXTERN_C const IID IID_INSSBuffer;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             INSSBuffer * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             INSSBuffer * This);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             INSSBuffer * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, SetLength)
         HRESULT ( STDMETHODCALLTYPE *SetLength )( 
             INSSBuffer * This,
             /* [annotation][in] */ 
             _In_  DWORD dwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetMaxLength)
         HRESULT ( STDMETHODCALLTYPE *GetMaxLength )( 
             INSSBuffer * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             INSSBuffer * This,
             /* [annotation][out] */ 
             _Out_  BYTE **ppdwBuffer);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetBufferAndLength)
         HRESULT ( STDMETHODCALLTYPE *GetBufferAndLength )( 
             INSSBuffer * This,
             /* [annotation][out] */ 
@@ -281,6 +297,7 @@ EXTERN_C const IID IID_INSSBuffer2;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INSSBuffer2 * This,
             /* [annotation][in] */ 
@@ -288,32 +305,39 @@ EXTERN_C const IID IID_INSSBuffer2;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             INSSBuffer2 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             INSSBuffer2 * This);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             INSSBuffer2 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, SetLength)
         HRESULT ( STDMETHODCALLTYPE *SetLength )( 
             INSSBuffer2 * This,
             /* [annotation][in] */ 
             _In_  DWORD dwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetMaxLength)
         HRESULT ( STDMETHODCALLTYPE *GetMaxLength )( 
             INSSBuffer2 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             INSSBuffer2 * This,
             /* [annotation][out] */ 
             _Out_  BYTE **ppdwBuffer);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetBufferAndLength)
         HRESULT ( STDMETHODCALLTYPE *GetBufferAndLength )( 
             INSSBuffer2 * This,
             /* [annotation][out] */ 
@@ -321,6 +345,7 @@ EXTERN_C const IID IID_INSSBuffer2;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer2, GetSampleProperties)
         HRESULT ( STDMETHODCALLTYPE *GetSampleProperties )( 
             INSSBuffer2 * This,
             /* [annotation][in] */ 
@@ -328,6 +353,7 @@ EXTERN_C const IID IID_INSSBuffer2;
             /* [annotation][out] */ 
             _Out_  BYTE *pbProperties);
         
+        DECLSPEC_XFGVIRT(INSSBuffer2, SetSampleProperties)
         HRESULT ( STDMETHODCALLTYPE *SetSampleProperties )( 
             INSSBuffer2 * This,
             /* [annotation][in] */ 
@@ -431,6 +457,7 @@ EXTERN_C const IID IID_INSSBuffer3;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INSSBuffer3 * This,
             /* [annotation][in] */ 
@@ -438,32 +465,39 @@ EXTERN_C const IID IID_INSSBuffer3;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             INSSBuffer3 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             INSSBuffer3 * This);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             INSSBuffer3 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, SetLength)
         HRESULT ( STDMETHODCALLTYPE *SetLength )( 
             INSSBuffer3 * This,
             /* [annotation][in] */ 
             _In_  DWORD dwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetMaxLength)
         HRESULT ( STDMETHODCALLTYPE *GetMaxLength )( 
             INSSBuffer3 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             INSSBuffer3 * This,
             /* [annotation][out] */ 
             _Out_  BYTE **ppdwBuffer);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetBufferAndLength)
         HRESULT ( STDMETHODCALLTYPE *GetBufferAndLength )( 
             INSSBuffer3 * This,
             /* [annotation][out] */ 
@@ -471,6 +505,7 @@ EXTERN_C const IID IID_INSSBuffer3;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer2, GetSampleProperties)
         HRESULT ( STDMETHODCALLTYPE *GetSampleProperties )( 
             INSSBuffer3 * This,
             /* [annotation][in] */ 
@@ -478,6 +513,7 @@ EXTERN_C const IID IID_INSSBuffer3;
             /* [annotation][out] */ 
             _Out_  BYTE *pbProperties);
         
+        DECLSPEC_XFGVIRT(INSSBuffer2, SetSampleProperties)
         HRESULT ( STDMETHODCALLTYPE *SetSampleProperties )( 
             INSSBuffer3 * This,
             /* [annotation][in] */ 
@@ -485,6 +521,7 @@ EXTERN_C const IID IID_INSSBuffer3;
             /* [annotation][in] */ 
             _In_  BYTE *pbProperties);
         
+        DECLSPEC_XFGVIRT(INSSBuffer3, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             INSSBuffer3 * This,
             /* [annotation][in] */ 
@@ -494,6 +531,7 @@ EXTERN_C const IID IID_INSSBuffer3;
             /* [annotation][in] */ 
             _In_  DWORD dwBufferPropertySize);
         
+        DECLSPEC_XFGVIRT(INSSBuffer3, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             INSSBuffer3 * This,
             /* [annotation][in] */ 
@@ -604,6 +642,7 @@ EXTERN_C const IID IID_INSSBuffer4;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             INSSBuffer4 * This,
             /* [annotation][in] */ 
@@ -611,32 +650,39 @@ EXTERN_C const IID IID_INSSBuffer4;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             INSSBuffer4 * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             INSSBuffer4 * This);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetLength)
         HRESULT ( STDMETHODCALLTYPE *GetLength )( 
             INSSBuffer4 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, SetLength)
         HRESULT ( STDMETHODCALLTYPE *SetLength )( 
             INSSBuffer4 * This,
             /* [annotation][in] */ 
             _In_  DWORD dwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetMaxLength)
         HRESULT ( STDMETHODCALLTYPE *GetMaxLength )( 
             INSSBuffer4 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetBuffer)
         HRESULT ( STDMETHODCALLTYPE *GetBuffer )( 
             INSSBuffer4 * This,
             /* [annotation][out] */ 
             _Out_  BYTE **ppdwBuffer);
         
+        DECLSPEC_XFGVIRT(INSSBuffer, GetBufferAndLength)
         HRESULT ( STDMETHODCALLTYPE *GetBufferAndLength )( 
             INSSBuffer4 * This,
             /* [annotation][out] */ 
@@ -644,6 +690,7 @@ EXTERN_C const IID IID_INSSBuffer4;
             /* [annotation][out] */ 
             _Out_  DWORD *pdwLength);
         
+        DECLSPEC_XFGVIRT(INSSBuffer2, GetSampleProperties)
         HRESULT ( STDMETHODCALLTYPE *GetSampleProperties )( 
             INSSBuffer4 * This,
             /* [annotation][in] */ 
@@ -651,6 +698,7 @@ EXTERN_C const IID IID_INSSBuffer4;
             /* [annotation][out] */ 
             _Out_  BYTE *pbProperties);
         
+        DECLSPEC_XFGVIRT(INSSBuffer2, SetSampleProperties)
         HRESULT ( STDMETHODCALLTYPE *SetSampleProperties )( 
             INSSBuffer4 * This,
             /* [annotation][in] */ 
@@ -658,6 +706,7 @@ EXTERN_C const IID IID_INSSBuffer4;
             /* [annotation][in] */ 
             _In_  BYTE *pbProperties);
         
+        DECLSPEC_XFGVIRT(INSSBuffer3, SetProperty)
         HRESULT ( STDMETHODCALLTYPE *SetProperty )( 
             INSSBuffer4 * This,
             /* [annotation][in] */ 
@@ -667,6 +716,7 @@ EXTERN_C const IID IID_INSSBuffer4;
             /* [annotation][in] */ 
             _In_  DWORD dwBufferPropertySize);
         
+        DECLSPEC_XFGVIRT(INSSBuffer3, GetProperty)
         HRESULT ( STDMETHODCALLTYPE *GetProperty )( 
             INSSBuffer4 * This,
             /* [annotation][in] */ 
@@ -676,11 +726,13 @@ EXTERN_C const IID IID_INSSBuffer4;
             /* [annotation][out][in] */ 
             _Inout_  DWORD *pdwBufferPropertySize);
         
+        DECLSPEC_XFGVIRT(INSSBuffer4, GetPropertyCount)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyCount )( 
             INSSBuffer4 * This,
             /* [annotation][out] */ 
             _Out_  DWORD *pcBufferProperties);
         
+        DECLSPEC_XFGVIRT(INSSBuffer4, GetPropertyByIndex)
         HRESULT ( STDMETHODCALLTYPE *GetPropertyByIndex )( 
             INSSBuffer4 * This,
             /* [annotation][in] */ 
@@ -798,6 +850,7 @@ EXTERN_C const IID IID_IWMSBufferAllocator;
     {
         BEGIN_INTERFACE
         
+        DECLSPEC_XFGVIRT(IUnknown, QueryInterface)
         HRESULT ( STDMETHODCALLTYPE *QueryInterface )( 
             IWMSBufferAllocator * This,
             /* [annotation][in] */ 
@@ -805,12 +858,15 @@ EXTERN_C const IID IID_IWMSBufferAllocator;
             /* [annotation][iid_is][out] */ 
             _COM_Outptr_  void **ppvObject);
         
+        DECLSPEC_XFGVIRT(IUnknown, AddRef)
         ULONG ( STDMETHODCALLTYPE *AddRef )( 
             IWMSBufferAllocator * This);
         
+        DECLSPEC_XFGVIRT(IUnknown, Release)
         ULONG ( STDMETHODCALLTYPE *Release )( 
             IWMSBufferAllocator * This);
         
+        DECLSPEC_XFGVIRT(IWMSBufferAllocator, AllocateBuffer)
         HRESULT ( STDMETHODCALLTYPE *AllocateBuffer )( 
             IWMSBufferAllocator * This,
             /* [annotation][in] */ 
@@ -818,6 +874,7 @@ EXTERN_C const IID IID_IWMSBufferAllocator;
             /* [annotation][out] */ 
             _Out_  INSSBuffer **ppBuffer);
         
+        DECLSPEC_XFGVIRT(IWMSBufferAllocator, AllocatePageSizeBuffer)
         HRESULT ( STDMETHODCALLTYPE *AllocatePageSizeBuffer )( 
             IWMSBufferAllocator * This,
             /* [annotation][in] */ 

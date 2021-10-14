@@ -17,3 +17,4 @@
 #include <bits4_0.h>
 #include <bitscfg.h>
 #include <qmgr.h>
+#include <bitsmsg.h>

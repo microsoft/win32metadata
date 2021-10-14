@@ -26,11 +26,11 @@
 
 #ifdef SMTPINITGUID
 #define DECLARE_EVENTGUID_STRING( Name, Value ) \
-    CONST WCHAR Name##[] = L##Value
+    CONST WCHAR Name[] = L##Value
 
 #else //SMTPINITGUID
 #define DECLARE_EVENTGUID_STRING( Name, Value ) \
-    extern CONST WCHAR Name##[]
+    extern CONST WCHAR Name[]
 
 #endif //SMTPINITGUID
 

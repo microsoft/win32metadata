@@ -1,0 +1,14 @@
+--traverse
+<IncludeRoot>/um/adoctint.h
+<IncludeRoot>/um/adodef.h
+<IncludeRoot>/um/adogpool_backcompat.h
+<IncludeRoot>/um/adogpool.h
+<IncludeRoot>/um/adoguids.h
+<IncludeRoot>/um/adoid.h
+<IncludeRoot>/um/adoint_backcompat.h
+<IncludeRoot>/um/adoint.h
+<IncludeRoot>/um/adojet.h
+<IncludeRoot>/um/adomd.h
+<IncludeRoot>/um/icrsint.h
+--namespace
+Windows.Win32.System.Ado

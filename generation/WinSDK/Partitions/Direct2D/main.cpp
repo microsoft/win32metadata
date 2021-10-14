@@ -22,3 +22,4 @@
 #include <d2d1svg.h>
 #include <d2d1effects_1.h>
 #include <d2d1effectauthor_1.h>
+#include <d2derr.h>

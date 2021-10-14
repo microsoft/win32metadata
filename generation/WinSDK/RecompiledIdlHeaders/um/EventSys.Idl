@@ -449,7 +449,7 @@ typedef [hidden] struct
 	GUID				reserved [10];
 } COMEVENTSYSCHANGEINFO ;
 
-cpp_quote( "#endif _COMEVENTSYSCHANGEINFO_" )
+cpp_quote( "#endif // _COMEVENTSYSCHANGEINFO_" )
 
 [
  object,

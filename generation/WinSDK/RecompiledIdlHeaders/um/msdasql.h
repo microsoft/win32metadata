@@ -9,7 +9,7 @@
 //
 // Contents:        Provider Specific definitions
 //
-// Comments:        
+// Comments:
 //
 //-----------------------------------------------------------------------------
 
@@ -25,16 +25,16 @@
 #if _MSC_VER >= 1100 && (!defined(SHx) || (defined(SHx) && _MSC_VER >= 1200))
 #define MSDASQLDECLSPEC __declspec(selectany)
 #else
-#define MSDASQLDECLSPEC 
+#define MSDASQLDECLSPEC
 #endif //_MSC_VER
 
 // Provider Class Id
 // IID_ISQLRequestDiagFields {228972F0-B5FF-11d0-8A80-00C04FD611CD}
-extern const MSDASQLDECLSPEC GUID IID_ISQLRequestDiagFields   = { 0x228972f0, 0xb5ff, 0x11d0, { 0x8a, 0x80, 0x0, 0xc0, 0x4f, 0xd6, 0x11, 0xcd } };
+EXTERN_C const MSDASQLDECLSPEC GUID IID_ISQLRequestDiagFields = { 0x228972f0, 0xb5ff, 0x11d0, { 0x8a, 0x80, 0x0, 0xc0, 0x4f, 0xd6, 0x11, 0xcd } };
 // IID_ISQLGetDiagField {228972F1-B5FF-11d0-8A80-00C04FD611CD}
-extern const MSDASQLDECLSPEC GUID IID_ISQLGetDiagField        = { 0x228972f1, 0xb5ff, 0x11d0, { 0x8a, 0x80, 0x0, 0xc0, 0x4f, 0xd6, 0x11, 0xcd } };
+EXTERN_C const MSDASQLDECLSPEC GUID IID_ISQLGetDiagField      = { 0x228972f1, 0xb5ff, 0x11d0, { 0x8a, 0x80, 0x0, 0xc0, 0x4f, 0xd6, 0x11, 0xcd } };
 // @msg IID_IRowsetChangeExtInfo | {0c733a8f-2a1c-11ce-ade5-00aa0044773d}
-extern const MSDASQLDECLSPEC GUID IID_IRowsetChangeExtInfo    = {0x0C733A8FL,0x2A1C,0x11CE,{0xAD,0xE5,0x00,0xAA,0x00,0x44,0x77,0x3D}};
+EXTERN_C const MSDASQLDECLSPEC GUID IID_IRowsetChangeExtInfo  = {0x0C733A8FL,0x2A1C,0x11CE,{0xAD,0xE5,0x00,0xAA,0x00,0x44,0x77,0x3D}};
 extern const MSDASQLDECLSPEC GUID CLSID_MSDASQL               = {0xC8B522CBL,0x5CF3,0x11CE,{0xAD,0xE5,0x00,0xAA,0x00,0x44,0x77,0x3D}};
 extern const MSDASQLDECLSPEC GUID CLSID_MSDASQL_ENUMERATOR    = {0xC8B522CDL,0x5CF3,0x11CE,{0xAD,0xE5,0x00,0xAA,0x00,0x44,0x77,0x3D}};
 
@@ -46,7 +46,7 @@ extern const MSDASQLDECLSPEC GUID DBPROPSET_PROVIDERDBINIT          = {0x497c60e
 extern const MSDASQLDECLSPEC GUID DBPROPSET_PROVIDERSTMTATTR        = {0x497c60e3,0x7123,0x11cf,{0xb1,0x71,0x0,0xaa,0x0,0x57,0x59,0x9e}};
 extern const MSDASQLDECLSPEC GUID DBPROPSET_PROVIDERCONNATTR        = {0x497c60e4,0x7123,0x11cf,{0xb1,0x71,0x0,0xaa,0x0,0x57,0x59,0x9e}};
 
-// PropIds under DBPROPSET_PROVIDERROWSET 
+// PropIds under DBPROPSET_PROVIDERROWSET
 #define KAGPROP_QUERYBASEDUPDATES           2
 #define KAGPROP_MARSHALLABLE                3
 #define KAGPROP_POSITIONONNEWROW            4
@@ -85,7 +85,7 @@ extern const MSDASQLDECLSPEC GUID DBPROPSET_PROVIDERCONNATTR        = {0x497c60e
 #define KAGPROP_FILEUSAGE                   23
 #define KAGPROP_ACTIVESTATEMENTS            24
 
-// PropIds under DBPROPSET_PROVIDERDBINIT 
+// PropIds under DBPROPSET_PROVIDERDBINIT
 #define KAGPROP_AUTH_TRUSTEDCONNECTION      2
 #define KAGPROP_AUTH_SERVERINTEGRATED       3
 

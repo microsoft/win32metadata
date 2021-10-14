@@ -11,6 +11,7 @@
 #endif
 
 #include <sspi.h>
+
 #if !defined(_WININETEX_)
 #define _WININETEX_
 
@@ -460,9 +461,11 @@ BOOLAPI InternetWriteFileExW(
 #define INTERNET_OPTION_NOCACHE_WRITE_IN_PRIVATE     184
 #define INTERNET_OPTION_ACTIVITY_ID                  185
 #define INTERNET_OPTION_REQUEST_TIMES                186
-
-#define INTERNET_LAST_OPTION_INTERNAL           INTERNET_LAST_OPTION
-
+#define INTERNET_OPTION_GLOBAL_CALLBACK              188
+#define INTERNET_OPTION_ENABLE_TEST_SIGNING          189
+#define INTERNET_OPTION_DISABLE_PROXY_LINK_LOCAL_NAME_RESOLUTION 190
+#define INTERNET_OPTION_HTTP_09                      191
+#define INTERNET_LAST_OPTION_INTERNAL           INTERNET_OPTION_HTTP_09
 #define INTERNET_OPTION_OFFLINE_TIMEOUT INTERNET_OPTION_DISCONNECTED_TIMEOUT
 #define INTERNET_OPTION_LINE_STATE      INTERNET_OPTION_CONNECTED_STATE
 
@@ -2240,6 +2243,38 @@ BOOLAPI HttpWebSocketQueryCloseStatus(
     _Out_range_(0, HTTP_WEB_SOCKET_MAX_CLOSE_REASON_LENGTH) DWORD *pdwReasonLengthConsumed);
 
 
+#ifdef _WS2DEF_
+
+//
+// callback function for INTERNET_OPTION_GLOBAL_CALLBACK option
+//
+
+#define INTERNET_GLOBAL_CALLBACK_SENDING_HTTP_HEADERS          0x00000001
+
+typedef
+DWORD
+(CALLBACK * INTERNET_GLOBAL_NOTIFICATION_CALLBACK)(
+    _In_ HINTERNET hInternet,
+    _In_opt_ PVOID pvContext,
+    _In_ PCSTR pcszUrl,
+    _In_ PCSTR pcszHost,
+    _In_ PSOCKADDR_STORAGE pRemoteAddress,
+    _In_ DWORD dwNotification,
+    _In_opt_ PVOID pvEventData,
+    _In_ DWORD dwEventDataLength
+);
+
+typedef struct _INTERNET_GLOBAL_CALLBACK
+{
+    INTERNET_GLOBAL_NOTIFICATION_CALLBACK pfnGlobalNotificationCallback;
+    DWORD dwNotifications;
+    PVOID pvContext;
+    ULONGLONG ullPriority;
+    GUID guidRegistrationId;
+} INTERNET_GLOBAL_CALLBACK;
+
+#endif
+
 STDAPI_(DWORD)
 InternetConvertUrlFromWireToWideChar(
     _In_reads_(cchUrl) PCSTR pcszUrl,
@@ -2258,6 +2293,27 @@ HttpPreConnect(
     _In_ PCWSTR pwszUrl,
     _In_ DWORD cConnections
 );
+
+typedef enum
+{
+    POLICY_EXTENSION_TYPE_NONE = 0,
+    POLICY_EXTENSION_TYPE_WINHTTP = 1,
+    POLICY_EXTENSION_TYPE_WININET = 2
+} HTTP_POLICY_EXTENSION_TYPE;
+
+typedef enum
+{
+    POLICY_EXTENSION_VERSION1 = 1
+}  HTTP_POLICY_EXTENSION_VERSION;
+
+typedef DWORD
+(WINAPI * HTTP_POLICY_EXTENSION_INIT)(_In_ HTTP_POLICY_EXTENSION_VERSION Version,
+                                      _In_ HTTP_POLICY_EXTENSION_TYPE Type,
+                                      _In_ VOID* pvData,
+                                      _In_ ULONG cbData);
+
+typedef DWORD
+(WINAPI * HTTP_POLICY_EXTENSION_SHUTDOWN)(_In_ HTTP_POLICY_EXTENSION_TYPE Type);
 
 
 #if defined(__cplusplus)
