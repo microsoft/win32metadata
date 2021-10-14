@@ -11,6 +11,7 @@
 <IncludeRoot>/um/pacmanclientapi.h
 <IncludeRoot>/um/patchapi.h
 <IncludeRoot>/um/patchwiz.h
+<IncludeRoot>/um/msdelta.h
 --exclude
 UIALL
 --namespace
