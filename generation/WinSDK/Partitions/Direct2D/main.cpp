@@ -10,6 +10,7 @@
 
 #include <winerror.h>
 #include <dcommon.h>
+#include <d3dcommon.h>
 #include <d2dbasetypes.h>
 #include <d2d1.h>
 #include <dciddi.h>

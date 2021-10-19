@@ -17,6 +17,7 @@ tagMPEG2VIDEOINFO
 <IncludeRoot>/um/mediaobj.h
 <IncludeRoot>/um/mfapi.h
 <IncludeRoot>/um/mfcaptureengine.h
+<IncludeRoot>/um/mfd3d12.h
 <IncludeRoot>/um/mfcontentdecryptionmodule.h
 <IncludeRoot>/um/mfidl.h
 <IncludeRoot>/um/mfmediacapture.h

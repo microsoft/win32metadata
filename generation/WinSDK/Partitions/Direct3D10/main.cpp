@@ -8,6 +8,7 @@
 
 #define D3D10_NO_HELPERS
 
+#include <d3dcommon.h>
 #include <d3d10_1.h>
 #include <d3d10.h>
 #include <d3d10sdklayers.h>

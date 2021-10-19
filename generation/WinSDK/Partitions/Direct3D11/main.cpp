@@ -16,5 +16,4 @@
 #include <d3d11sdklayers.h>
 #include <d3d11shader.h>
 #include <d3d11shadertracing.h>
-#include <d3dcommon.h>
 #include <d3dcsx.h>

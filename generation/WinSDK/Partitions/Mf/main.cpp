@@ -27,6 +27,7 @@
 #include <wmcontainer.h>
 #include <mfobjects.h>
 #include <mfcaptureengine.h>
+#include <mfd3d12.h>
 #include <mfapi.h>
 #include <mftransform.h>
 #include <mfmediaengine.h>

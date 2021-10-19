@@ -6,5 +6,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <d3dcompiler.h>
-#include <dxcapi.h>
+#define D3D11_NO_HELPERS
+
+#include <d3dcommon.h>
