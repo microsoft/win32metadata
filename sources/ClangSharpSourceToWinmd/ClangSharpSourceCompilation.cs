@@ -200,7 +200,7 @@ namespace ClangSharpSourceToWinmd
             Console.WriteLine($"  Moving names to correct namespaces...");
             System.Threading.Tasks.Parallel.ForEach(modifiedFiles, opt, (treeFile) =>
             {
-                if (!treeFile.EndsWith("manual.cs"))
+                if (!treeFile.EndsWith(".manual.cs"))
                 {
                     var tree = ReadTree(treeFile);
                     tree = NamesToCorrectNamespacesMover.MoveNamesToCorrectNamespaces(tree, requiredNamespaces);
@@ -249,9 +249,6 @@ namespace ClangSharpSourceToWinmd
                         if (x64Content == File.ReadAllText(x86FileName) && x64Content == File.ReadAllText(arm64FileName))
                         {
                             var parititionName = GetPartitionNameFromFileName(x64FileName);
-                            if (parititionName == "Dfs")
-                            {
-                            }
 
                             File.Delete(x86FileName);
                             File.Delete(arm64FileName);

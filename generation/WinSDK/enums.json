@@ -4425,6 +4425,7 @@
   },
   {
     "name": "CERT_RDN_ATTR_VALUE_TYPE",
+    "namespace": "Windows.Win32.Security.Cryptography",
     "members": [
       {
         "name": "CERT_RDN_ANY_TYPE"
@@ -9884,6 +9885,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.Security",
     "name": "OBJECT_SECURITY_INFORMATION",
     "flags": true,
     "members": [

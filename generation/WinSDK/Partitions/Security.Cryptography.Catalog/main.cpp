@@ -18,12 +18,13 @@ typedef NTSTATUS* PNTSTATUS;
 #include <wincred.h>
 #include <NTSecPKG.h>
 #include <schannel.h>
-#include <bcrypt.h>
-#include <ncryptprotect.h>
-#include <ncrypt.h>
-#include <wincrypt.h>
-#include <cryptxml.h>
-#include <cryptdlg.h>
-#include <cryptuiapi.h>
-#include <i_cryptasn1tls.h>
-#include <infocard.h>
+
+typedef struct _OLD_LARGE_INTEGER {
+    ULONG LowPart;
+    LONG HighPart;
+} OLD_LARGE_INTEGER, *POLD_LARGE_INTEGER;
+
+
+#include <winbase.h>
+#include <winnt.h>
+#include <mscat.h>

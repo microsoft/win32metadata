@@ -37,4 +37,4 @@ typedef struct _OLD_LARGE_INTEGER {
 #include <schnlsp.h>
 #include <slerror.h>
 #include <sliddefs.h>
-
+#include <wdigest.h>

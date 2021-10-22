@@ -36,6 +36,6 @@ foreach ($namespace in $sortedKeys)
     $stream.WriteLine("using $namespace;")
 }
 
-$stream.WriteLine("using IServiceProvider = Windows.Win32.System.SystemServices.IServiceProvider;")
+$stream.WriteLine("using IServiceProvider = Windows.Win32.System.Com.IServiceProvider;")
 
 $stream.Close()

@@ -63,6 +63,7 @@ ID2D1Factory
 <IncludeRoot>/um/sharewindowcommandsourceinterop.h
 <IncludeRoot>/um/windows.ui.viewmanagement.core.coreframeworkinputviewinterop.h
 <IncludeRoot>/um/windowsstoragecom.h
+<IncludeRoot>/um/IMessageDispatcher.h
 <PartitionDir>\main.cpp
 --namespace
 Windows.Win32.System.WinRT

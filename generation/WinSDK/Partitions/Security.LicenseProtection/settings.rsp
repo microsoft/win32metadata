@@ -1,0 +1,10 @@
+--with-type
+_tagSLDATATYPE=uint
+SLDATATYPE=uint
+--exclude
+_CYPHER_BLOCK
+_LM_OWF_PASSWORD
+--traverse
+<IncludeRoot>/um/licenseprotection.h
+--namespace
+Windows.Win32.Security.LicenseProtection
