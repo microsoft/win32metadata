@@ -18,33 +18,5 @@
 #include <objbase.h>
 
 #include <comcat.h>
-#include <callobj.h>
-#include <messagedispatcherapi.h>
 #include <ctxtcall.h>
 
-#include <ichannelcredentials.h>
-
-#include <mtx.h>
-#include <mtxadmin.h>
-#include <mtxattr.h>
-
-/*
-#include <urlmon.h>
-#include <accctrl.h>
-#include <rpcdce.h>
-#include <winerror.h>
-#include <combaseapi.h>
-#include <objidlbase.h>
-#include <wtypesbase.h>
-#include <eventsys.h>
-#include <txlogpub.h>
-#include <shobjidl.h>
-#include <iaccess.h>
-//#include <unknwnbase.h>
-//#include <unknwn.h>
-#include <imessagedispatcher.h>
-#include <dmerror.h>
-#include <roapi.h>
-#include <guiddef.h>
-#include <winddi.h>
-*/

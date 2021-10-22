@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using Windows.Win32.Foundation;
 using Windows.Win32.System.Com;
 
-namespace Windows.Win32.System.OleAutomation
+namespace Windows.Win32.System.Ole.Automation
 {
     // For EXCEPINFO::pfnDeferredFillIn which defines the callback inline with the struct.
     // ClangSharp emits function pointers as IntPtr so we need to write our own signature

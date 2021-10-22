@@ -34,7 +34,7 @@ namespace Windows.Win32.Security
     }
 }
 
-namespace Windows.Win32.Security.Cryptography.Core
+namespace Windows.Win32.Security.Cryptography
 {
     public static unsafe partial class Apis
     {

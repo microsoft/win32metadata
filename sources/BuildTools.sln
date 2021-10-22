@@ -73,7 +73,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestCommon", "..\Tests\Test
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VtablesFromPdb", "..\tests\VtablesFromPdb\VtablesFromPdb.csproj", "{0045FF95-AC14-4C51-B348-E8A5E51E90BC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetadataUtils.Tests", "..\tests\MetadataUtils.Tests\MetadataUtils.Tests.csproj", "{A9D8A468-5027-405F-A334-6A360EC2D019}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetadataUtils.Tests", "..\tests\MetadataUtils.Tests\MetadataUtils.Tests.csproj", "{A9D8A468-5027-405F-A334-6A360EC2D019}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

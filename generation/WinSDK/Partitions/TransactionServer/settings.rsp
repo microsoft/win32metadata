@@ -1,0 +1,10 @@
+--exclude
+_GUID
+--traverse
+<IncludeRoot>/um/mtx.h
+<IncludeRoot>/um/mtxadmin.h
+<IncludeRoot>/um/mtxattr.h
+--namespace
+Windows.Win32.System.TransactionServer
+--with-type
+STREAM_SEEK=uint

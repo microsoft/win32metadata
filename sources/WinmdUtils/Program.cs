@@ -7,8 +7,8 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Metadata;
-using System.Reflection.PortableExecutable;
 using System.Text;
+using System.Text.RegularExpressions;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
@@ -93,6 +93,15 @@ namespace WinmdUtilsProgram
 
             createLibRsp.Handler = CommandHandler.Create<string[], string[], string[], FileInfo, FileInfo, IConsole>(CreateLibRsp);
 
+            var showNamespaceDependencies = new Command("showNamespaceDependencies", "Show namespace dependencies.")
+            {
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--ignoreDependNamespace", "Ignore dependencies to this namespace.", ArgumentArity.OneOrMore),
+                new Option<string>("--namespaceFilter", "Namespace filter", ArgumentArity.OneOrMore),
+            };
+
+            showNamespaceDependencies.Handler = CommandHandler.Create<FileInfo, string[], string[], IConsole>(ShowNamespaceDependencies);
+
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
                 showMissingImportsCommand,
@@ -103,7 +112,8 @@ namespace WinmdUtilsProgram
                 showPointersToDelegates,
                 compareCommand,
                 showLibImports,
-                createLibRsp
+                createLibRsp,
+                showNamespaceDependencies
             };
 
             return rootCommand.Invoke(args);
@@ -407,8 +417,7 @@ namespace WinmdUtilsProgram
 
         public static int ShowDuplicateConstants(FileInfo winmd, IConsole console)
         {
-            DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
-            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(winmd.FullName, settings);
+            DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
             Dictionary<string, List<string>> nameToOwner = new Dictionary<string, List<string>>();
 
             foreach (var type in winmd1.GetTopLevelTypeDefinitions())
@@ -484,8 +493,7 @@ namespace WinmdUtilsProgram
 
         public static int ShowDuplicateTypes(FileInfo winmd, IConsole console)
         {
-            DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
-            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(winmd.FullName, settings);
+            DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
 
             Dictionary<string, List<string>> nameToNamespaces = new Dictionary<string, List<string>>();
 
@@ -622,10 +630,95 @@ namespace WinmdUtilsProgram
             return string.Empty;
         }
 
+        public static int ShowNamespaceDependencies(FileInfo winmd, string[] ignoreDependNamespace, string[] namespaceFilter, IConsole console)
+        {
+            List<Regex> namespaceFilterRegex = new List<Regex>();
+            if (namespaceFilter != null)
+            {
+                foreach (var filterSpec in namespaceFilter)
+                {
+                    string fixedPattern = filterSpec.Replace(".", @"\.");
+                    fixedPattern = fixedPattern.Replace("*", ".*");
+
+                    if (!fixedPattern.StartsWith('^'))
+                    {
+                        fixedPattern = $"^{fixedPattern}";
+                    }
+
+                    if (!fixedPattern.EndsWith('$'))
+                    {
+                        fixedPattern = $"{fixedPattern}$";
+                    }
+
+                    namespaceFilterRegex.Add(new Regex(fixedPattern, RegexOptions.IgnoreCase));
+                }
+            }
+
+            HashSet<string> ignoreNamespaces = new();
+            foreach (var ns in ignoreDependNamespace)
+            {
+                ignoreNamespaces.Add(ns);
+            }
+
+            foreach (var item in NamespaceDependencyUtil.GetNamespaceDependencies(winmd.FullName))
+            {
+                bool isMatch = namespaceFilterRegex.Count == 0 || namespaceFilterRegex.Any(r => r.IsMatch(item.Namespace));
+                if (!isMatch)
+                {
+                    continue;
+                }
+
+                console.Out.Write($"{item.Namespace}\r\n");
+
+                bool hadDepends = false;
+                foreach (var dependsByNamespace in item.GetDependenciesByNamespace())
+                {
+                    var currentNamespace = dependsByNamespace.Key;
+                    if (ignoreNamespaces.Contains(currentNamespace))
+                    {
+                        continue;
+                    }
+
+                    hadDepends = true;
+                    console.Out.Write($"  {dependsByNamespace.Key}\r\n");
+                    foreach (var depend in dependsByNamespace.Value)
+                    {
+                        console.Out.Write($"    {depend.Type.Name}: ");
+
+                        bool first = true;
+                        foreach (var broughtInBy in depend.BroughtInBy)
+                        {
+                            if (first)
+                            {
+                                first = false;
+                            }
+                            else
+                            {
+                                console.Out.Write(", ");
+                            }
+
+                            console.Out.Write(broughtInBy);
+                        }
+
+                        console.Out.Write("\r\n");
+                    }
+
+                    console.Out.Write("\r\n");
+                }
+
+                if (hadDepends)
+                {
+                    console.Out.Write("\r\n\r\n");
+                }
+            }
+
+            return 0;
+        }
+
         public static int ShowDuplicateImports(FileInfo winmd, IConsole console)
         {
             DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
-            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(winmd.FullName, settings);
+            DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
 
             Dictionary<string, List<string>> dllImportsToClassNames = new Dictionary<string, List<string>>();
 
@@ -709,25 +802,6 @@ namespace WinmdUtilsProgram
             }
 
             return dupsFound ? -1 : 0;
-        }
-
-        static PEFile LoadPEFile(string fileName, DecompilerSettings settings)
-        {
-            settings.LoadInMemory = true;
-            return new PEFile(
-                fileName,
-                new FileStream(fileName, FileMode.Open, FileAccess.Read),
-                streamOptions: PEStreamOptions.PrefetchEntireImage,
-                metadataOptions: settings.ApplyWindowsRuntimeProjections ? MetadataReaderOptions.ApplyWindowsRuntimeProjections : MetadataReaderOptions.None
-            );
-        }
-
-        static DecompilerTypeSystem CreateTypeSystemFromFile(string fileName, DecompilerSettings settings)
-        {
-            settings.LoadInMemory = true;
-            var file = LoadPEFile(fileName, settings);
-            var resolver = new UniversalAssemblyResolver(fileName, settings.ThrowOnAssemblyResolveErrors, file.DetectTargetFrameworkId());
-            return new DecompilerTypeSystem(file, resolver);
         }
 
         public static bool CompareFields(IField field1, IField field2, IConsole console)
@@ -1235,9 +1309,8 @@ namespace WinmdUtilsProgram
         {
             bool same = true;
 
-            DecompilerSettings settings = new DecompilerSettings() { ThrowOnAssemblyResolveErrors = false };
-            DecompilerTypeSystem winmd1 = CreateTypeSystemFromFile(first.FullName, settings);
-            DecompilerTypeSystem winmd2 = CreateTypeSystemFromFile(second.FullName, settings);
+            DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(first.FullName);
+            DecompilerTypeSystem winmd2 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(second.FullName);
 
             var winmd1Types = GetSelfDefinedWinmdToplevelTypes(winmd1);
             var winmd2Types = GetSelfDefinedWinmdToplevelTypes(winmd2);

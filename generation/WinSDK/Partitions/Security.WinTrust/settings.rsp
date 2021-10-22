@@ -1,0 +1,11 @@
+--with-type
+_tagSLDATATYPE=uint
+SLDATATYPE=uint
+--exclude
+_CYPHER_BLOCK
+_LM_OWF_PASSWORD
+--traverse
+<IncludeRoot>/um/WinTrust.h
+<IncludeRoot>/um/softpub.h
+--namespace
+Windows.Win32.Security.WinTrust

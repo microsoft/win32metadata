@@ -1,0 +1,12 @@
+--exclude
+PropVariantCopy
+PropVariantClear
+FreePropVariantArray
+CoFileTimeNow
+CLSIDFromProgIDEx
+CreateDataAdviseHolder
+--traverse
+<IncludeRoot>/um/esent.h
+--namespace
+Windows.Win32.Storage.Jet
+

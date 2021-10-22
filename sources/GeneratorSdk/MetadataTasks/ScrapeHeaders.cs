@@ -185,7 +185,7 @@ namespace MetadataTasks
             if (!string.IsNullOrEmpty(this.PartitionFilter))
             {
                 partitionFilter = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
-                foreach (var partName in this.PartitionFilter.Split(';', System.StringSplitOptions.RemoveEmptyEntries))
+                foreach (var partName in this.PartitionFilter.Split(new char[] { ',', ';' }, System.StringSplitOptions.RemoveEmptyEntries))
                 {
                     partitionFilter.Add(partName);
                 }
@@ -195,9 +195,15 @@ namespace MetadataTasks
             {
                 Partition partition = Partition.FromTaskItem(item, this.MSBuildProjectDirectory, this.SdkIncRoot);
 
-                if (partitionFilter != null && !partitionFilter.Contains(partition.Name))
+                if (partitionFilter != null)
                 {
-                    continue;
+                    if (!partitionFilter.Contains(partition.Name))
+                    {
+                        continue;
+                    }
+
+                    // If we were given a filter, force all partitions in the filter to build
+                    partition.ForceOutOfDate = true;
                 }
 
                 ret.Add(partition);

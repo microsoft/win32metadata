@@ -12,6 +12,5 @@ typedef LPVOID* PPVOID;
 
 #include <comsvcs.h>
 #include <combaseapi.h>
-#include <eventsys.h>
 #include <comadmin.h>
 #include <mtxdm.h>

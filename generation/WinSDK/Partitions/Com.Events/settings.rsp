@@ -1,0 +1,7 @@
+--exclude
+IResourceManagerXXX
+--traverse
+<IncludeRoot>/um/EventSys.h
+--namespace
+Windows.Win32.System.Com.Events
+

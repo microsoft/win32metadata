@@ -2,7 +2,6 @@
 IResourceManagerXXX
 --traverse
 <IncludeRoot>/um/ComSvcs.h
-<IncludeRoot>/um/EventSys.h
 <IncludeRoot>/um/ComAdmin.h
 <IncludeRoot>/um/Mtxdm.h
 --namespace
