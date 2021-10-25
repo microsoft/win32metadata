@@ -5,4 +5,4 @@ NaN
 --traverse
 <IncludeRoot>/um/manipulations.h
 --namespace
-Windows.Win32.UI.TouchInput
+Windows.Win32.UI.Input.Touch

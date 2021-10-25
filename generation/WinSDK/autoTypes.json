@@ -98,7 +98,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.UI.TouchInput",
+    "Namespace": "Windows.Win32.UI.Input.Touch",
     "Name": "HGESTUREINFO",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -158,7 +158,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.UI.KeyboardAndMouseInput",
+    "Namespace": "Windows.Win32.UI.Input",
     "Name": "HRAWINPUT",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -183,7 +183,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.UI.TouchInput",
+    "Namespace": "Windows.Win32.UI.Input.Touch",
     "Name": "HTOUCHINPUT",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -831,7 +831,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.UI.HiDpi",
     "Name": "DPI_AWARENESS_CONTEXT",
     "ValueType": "DECLARE_HANDLE"
   },

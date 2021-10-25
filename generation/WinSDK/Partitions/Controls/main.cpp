@@ -12,10 +12,6 @@
 #include <commoncontrols.h>
 #include <shlobj.h>
 #include <prsht.h>
-#include <richedit.h>
-#include <tom.h>
-#include <richole.h>
-#include <textserv.h>
 #include <dpa_dsa.h>
 #include <uxtheme.h>
 #include <commctrl.h>

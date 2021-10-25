@@ -3799,6 +3799,7 @@
   },
   {
     "type": "uint",
+    "namespace": "Windows.Win32.Graphics.Gdi",
     "name": "TEXT_ALIGN_OPTIONS",
     "members": [
       {
@@ -4312,6 +4313,7 @@
   },
   {
     "name": "SCROLLBAR_CONSTANTS",
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "flags": true,
     "members": [
       {
@@ -9525,6 +9527,7 @@
   },
   {
     "name": "IMAGE_FLAGS",
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "flags": true,
     "members": [
       {
@@ -23883,11 +23886,11 @@
     ],
     "uses": [
       {
-        "struct": "tttoolinfoa",
+        "struct": "TTTOOLINFOA",
         "field": "uFlags"
       },
       {
-        "struct": "tttoolinfow",
+        "struct": "TTTOOLINFOW",
         "field": "uFlags"
       }
     ]
