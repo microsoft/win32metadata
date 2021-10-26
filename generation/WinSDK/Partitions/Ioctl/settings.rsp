@@ -1,0 +1,7 @@
+--exclude
+_VIRTUAL_STORAGE_TYPE
+--traverse
+<IncludeRoot>/shared/ntddstor.h
+<IncludeRoot>/um/winioctl.h
+--namespace
+Windows.Win32.System.Ioctl

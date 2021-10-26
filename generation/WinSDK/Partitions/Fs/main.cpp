@@ -17,7 +17,6 @@
 #include <processenv.h>
 #include <minwinbase.h>
 #include <winioctl.h>
-#include <ioapiset.h>
 #include <fileapi.h>
 #include <ntdddisk.h>
 #include <dskquota.h>
@@ -36,4 +35,5 @@
 #include <fttypes.h>
 #include <ioringapi.h>
 #include <ntioring_x.h>
-
+#include <winioctl.h>
+#include <ntddstor.h>

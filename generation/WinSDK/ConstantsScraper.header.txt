@@ -25,5 +25,5 @@ using static Windows.Win32.System.Threading.Apis; // Various constants
 using static Windows.Win32.NetworkManagement.Dns.Apis; // Various constants
 using static Windows.Win32.NetworkManagement.IpHelper.Apis; // Various constants
 using static Windows.Win32.Networking.Clustering.Apis; // Various constants
-
+using static Windows.Win32.System.Ioctl.Apis; // Various constants
 
