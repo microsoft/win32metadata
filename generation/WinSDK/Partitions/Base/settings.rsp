@@ -31,11 +31,9 @@ _D3DVERTEXBLENDFLAGS
 _D3DTEXTURETRANSFORMFLAGS
 PENCLAVE_ROUTINE
 LPENCLAVE_ROUTINE
-_VIRTUAL_STORAGE_TYPE
 --traverse
 <IncludeRoot>/shared/apdevpkey.h
 <IncludeRoot>/shared/devpkey.h
-<IncludeRoot>/shared/ntddstor.h
 <IncludeRoot>/um/dbt.h
 <IncludeRoot>/shared/devpropdef.h
 <IncludeRoot>/shared/ioevent.h
@@ -43,7 +41,6 @@ _VIRTUAL_STORAGE_TYPE
 <IncludeRoot>/um/d3dcaps.h
 <IncludeRoot>/um/d3dtypes.h
 <IncludeRoot>/um/winddi.h
-<IncludeRoot>/um/winioctl.h
 <IncludeRoot>/shared/wtypes.h
 <IncludeRoot>/um/rpcnsip.h
 <IncludeRoot>/um/mmiscapi2.h

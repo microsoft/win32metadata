@@ -7,6 +7,6 @@ namespace Windows.Win32.Storage.IscsiDisc
 {
     public static unsafe partial class Apis
     {
-        public const uint IOCTL_SCSI_BASE = Windows.Win32.System.SystemServices.Apis.FILE_DEVICE_CONTROLLER;
+        public const uint IOCTL_SCSI_BASE = Windows.Win32.System.Ioctl.Apis.FILE_DEVICE_CONTROLLER;
     }
 }

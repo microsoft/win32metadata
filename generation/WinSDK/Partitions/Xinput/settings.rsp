@@ -1,4 +1,4 @@
 --traverse
 <IncludeRoot>/um/Xinput.h
 --namespace
-Windows.Win32.UI.XInput
+Windows.Win32.UI.Input.XboxController

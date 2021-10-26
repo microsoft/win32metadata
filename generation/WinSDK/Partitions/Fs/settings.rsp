@@ -14,7 +14,6 @@ DumpLogRecords
 <IncludeRoot>/um/fileapi.h
 <IncludeRoot>/um/fileapifromapp.h
 <IncludeRoot>/um/FileHC.h
-<IncludeRoot>/um/ioapiset.h
 <IncludeRoot>/um/ktmw32.h
 <IncludeRoot>/um/LMShare.h
 <IncludeRoot>/um/lmstats.h
@@ -28,5 +27,6 @@ DumpLogRecords
 <IncludeRoot>/um/wofapi.h
 <IncludeRoot>/um/ioringapi.h
 <IncludeRoot>/um/ntioring_x.h
+<IncludeRoot>/shared/ntddstor.h
 --namespace
 Windows.Win32.Storage.FileSystem

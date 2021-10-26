@@ -17,11 +17,6 @@
 #include <datetimeapi.h>
 #include <spellcheckprovider.h>
 #include <spellcheck.h>
-#include <msime.h>
-#include <imm.h>
-#include <immdev.h>
-#include <imepad.h>
-#include <msimeapi.h>
 #include <usp10.h>
 #include <muiload.h>
 #include <gb18030.h>
@@ -32,6 +27,3 @@
 #include <icui18n.h>
 #include <ime_cmodes.h>
 #include <mlang.h>
-
-#define _DDKIMM_H_ // Keeps INPUTCONTEXT and IMEINFO from coming in again
-#include <dimm.h>

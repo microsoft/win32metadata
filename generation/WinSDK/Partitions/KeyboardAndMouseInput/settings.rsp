@@ -1,4 +1,4 @@
 --traverse
 <IncludeRoot>/um/kbd.h
 --namespace
-Windows.Win32.UI.KeyboardAndMouseInput
+Windows.Win32.UI.Input.KeyboardAndMouse

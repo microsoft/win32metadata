@@ -5,10 +5,6 @@ UiaRect
 <IncludeRoot>/shared/windowsx.h
 <IncludeRoot>/um/commoncontrols.h
 <IncludeRoot>/um/prsht.h
-<IncludeRoot>/um/Richedit.h
-<IncludeRoot>/um/TOM.h
-<IncludeRoot>/um/RichOle.h
-<IncludeRoot>/um/TextServ.h
 <IncludeRoot>/um/dpa_dsa.h
 <IncludeRoot>/um/Uxtheme.h
 <IncludeRoot>/um/CommCtrl.h
