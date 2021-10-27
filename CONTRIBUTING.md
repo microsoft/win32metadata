@@ -32,6 +32,7 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 
 ## Set up your development environment
 
+* Install [Visual Studio (Desktop C++ Workload)](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&rel=16)
 * Install [Visual Studio Code](https://code.visualstudio.com/Download)
 * Install [PowerShell 7](https://aka.ms/powershell-release?tag=stable)
 * Install [.NET (SDK)](https://dotnet.microsoft.com/download/dotnet)
