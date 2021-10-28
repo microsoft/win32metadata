@@ -8,7 +8,6 @@
 
 #include <mmsystem.h>
 
-#include <mmddk.h>
 #include <dinput.h>
 #include <dinputd.h>
 #include <ntddkbd.h>

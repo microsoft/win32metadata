@@ -6,10 +6,8 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <ddraw.h>
-#include <ddrawi.h>
-#include <ddrawint.h>
-#include <ddkernel.h>
-#include <dvp.h>
-#include <dxmini.h>
-#include <dmemmgr.h>
+#include <mmsystem.h>
+
+#include <audioendpoints.h>
+#include <audioengineendpoint.h>
+#include <endpointvolume.h>

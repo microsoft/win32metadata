@@ -2,6 +2,8 @@
 <IncludeRoot>/um/ddraw.h
 <IncludeRoot>/um/ddrawi.h
 <IncludeRoot>/um/ddrawint.h
+<IncludeRoot>/um/ddkernel.h
+<IncludeRoot>/um/dmemmgr.h
 <IncludeRoot>/um/dvp.h
 <IncludeRoot>/um/dxmini.h
 --namespace

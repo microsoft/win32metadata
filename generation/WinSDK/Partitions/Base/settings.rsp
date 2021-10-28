@@ -43,7 +43,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/winddi.h
 <IncludeRoot>/shared/wtypes.h
 <IncludeRoot>/um/rpcnsip.h
-<IncludeRoot>/um/mmiscapi2.h
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
 <IncludeRoot>/um/atlthunk.h

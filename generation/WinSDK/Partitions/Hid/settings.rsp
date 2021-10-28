@@ -7,6 +7,7 @@
 <IncludeRoot>/shared/ntddkbd.h
 <IncludeRoot>/shared/ntddmou.h
 <IncludeRoot>/um/dinput.h
+<IncludeRoot>/shared/dinputd.h
 <IncludeRoot>/um/gpiobuttontypes.h
 --namespace
 Windows.Win32.Devices.HumanInterfaceDevice

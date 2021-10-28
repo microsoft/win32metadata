@@ -3,10 +3,6 @@
 APPCATEGORYINFO=Windows.Win32.UI.Shell
 APPCATEGORYINFOLIST=Windows.Win32.UI.Shell
 # endregion appmgmt.h
-# region audioapotypes.h
-APO_BUFFER_FLAGS=Windows.Win32.System.RemoteDesktop
-APO_CONNECTION_PROPERTY=Windows.Win32.System.RemoteDesktop
-# endregion audioapotypes.h
 # region audioengineendpoint.h
 AE_CURRENT_POSITION=Windows.Win32.System.RemoteDesktop
 AE_POSITION_FLAGS=Windows.Win32.System.RemoteDesktop
@@ -97,174 +93,19 @@ PSYMBOLSERVERCALLBACKPROC=Windows.Win32.System.Diagnostics.Debug
 DWRITE_GLYPH_IMAGE_FORMATS=Windows.Win32.Graphics.DirectWrite
 DWRITE_MEASURING_MODE=Windows.Win32.Graphics.DirectWrite
 # endregion dcommon.h
-# region ddkernel.h
-DDKERNELCAPS=Windows.Win32.UI.DisplayDevices
-IDirectDrawKernel=Windows.Win32.UI.DisplayDevices
-IDirectDrawSurfaceKernel=Windows.Win32.UI.DisplayDevices
-# endregion ddkernel.h
-# region ddrawi.h
-DDCORECAPS=Windows.Win32.UI.DisplayDevices
-DDHAL_DESTROYDDLOCALDATA=Windows.Win32.UI.DisplayDevices
-DDHAL_WAITFORVERTICALBLANKDATA=Windows.Win32.UI.DisplayDevices
-# endregion ddrawi.h
-# region ddrawint.h
-DD_ADDATTACHEDSURFACEDATA=Windows.Win32.UI.DisplayDevices
-DD_ATTACHLIST=Windows.Win32.UI.DisplayDevices
-DD_BEGINMOCOMPFRAMEDATA=Windows.Win32.UI.DisplayDevices
-DD_BLTDATA=Windows.Win32.UI.DisplayDevices
-DD_CALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_CANCREATESURFACEDATA=Windows.Win32.UI.DisplayDevices
-DD_CANCREATEVPORTDATA=Windows.Win32.UI.DisplayDevices
-DD_CLIPPER_GLOBAL=Windows.Win32.UI.DisplayDevices
-DD_CLIPPER_LOCAL=Windows.Win32.UI.DisplayDevices
-DD_COLORCONTROLCALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_COLORCONTROLDATA=Windows.Win32.UI.DisplayDevices
-DD_CREATEMOCOMPDATA=Windows.Win32.UI.DisplayDevices
-DD_CREATEPALETTEDATA=Windows.Win32.UI.DisplayDevices
-DD_CREATESURFACEDATA=Windows.Win32.UI.DisplayDevices
-DD_CREATESURFACEEXDATA=Windows.Win32.UI.DisplayDevices
-DD_CREATEVPORTDATA=Windows.Win32.UI.DisplayDevices
-DD_D3DBUFCALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_DESTROYMOCOMPDATA=Windows.Win32.UI.DisplayDevices
-DD_DESTROYPALETTEDATA=Windows.Win32.UI.DisplayDevices
-DD_DESTROYSURFACEDATA=Windows.Win32.UI.DisplayDevices
-DD_DESTROYVPORTDATA=Windows.Win32.UI.DisplayDevices
-DD_DIRECTDRAW_GLOBAL=Windows.Win32.UI.DisplayDevices
-DD_DIRECTDRAW_LOCAL=Windows.Win32.UI.DisplayDevices
-DD_ENDMOCOMPFRAMEDATA=Windows.Win32.UI.DisplayDevices
-DD_FLIPDATA=Windows.Win32.UI.DisplayDevices
-DD_FLIPTOGDISURFACEDATA=Windows.Win32.UI.DisplayDevices
-DD_FLIPVPORTDATA=Windows.Win32.UI.DisplayDevices
-DD_FREEDRIVERMEMORYDATA=Windows.Win32.UI.DisplayDevices
-DD_GETAVAILDRIVERMEMORYDATA=Windows.Win32.UI.DisplayDevices
-DD_GETBLTSTATUSDATA=Windows.Win32.UI.DisplayDevices
-DD_GETDRIVERINFODATA=Windows.Win32.UI.DisplayDevices
-DD_GETDRIVERSTATEDATA=Windows.Win32.UI.DisplayDevices
-DD_GETFLIPSTATUSDATA=Windows.Win32.UI.DisplayDevices
-DD_GETINTERNALMOCOMPDATA=Windows.Win32.UI.DisplayDevices
-DD_GETMOCOMPCOMPBUFFDATA=Windows.Win32.UI.DisplayDevices
-DD_GETMOCOMPFORMATSDATA=Windows.Win32.UI.DisplayDevices
-DD_GETMOCOMPGUIDSDATA=Windows.Win32.UI.DisplayDevices
-DD_GETSCANLINEDATA=Windows.Win32.UI.DisplayDevices
-DD_GETVPORTBANDWIDTHDATA=Windows.Win32.UI.DisplayDevices
-DD_GETVPORTCONNECTDATA=Windows.Win32.UI.DisplayDevices
-DD_GETVPORTFIELDDATA=Windows.Win32.UI.DisplayDevices
-DD_GETVPORTFLIPSTATUSDATA=Windows.Win32.UI.DisplayDevices
-DD_GETVPORTINPUTFORMATDATA=Windows.Win32.UI.DisplayDevices
-DD_GETVPORTLINEDATA=Windows.Win32.UI.DisplayDevices
-DD_GETVPORTOUTPUTFORMATDATA=Windows.Win32.UI.DisplayDevices
-DD_GETVPORTSIGNALDATA=Windows.Win32.UI.DisplayDevices
-DD_HALINFO=Windows.Win32.UI.DisplayDevices
-DD_KERNELCALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_LOCKDATA=Windows.Win32.UI.DisplayDevices
-DD_MAPMEMORYDATA=Windows.Win32.UI.DisplayDevices
-DD_MISCELLANEOUS2CALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_MISCELLANEOUSCALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_MORESURFACECAPS=Windows.Win32.UI.DisplayDevices
-DD_MOTIONCOMP_LOCAL=Windows.Win32.UI.DisplayDevices
-DD_MOTIONCOMPCALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_NONLOCALVIDMEMCAPS=Windows.Win32.UI.DisplayDevices
-DD_NTCALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_NTPRIVATEDRIVERCAPS=Windows.Win32.UI.DisplayDevices
-DD_PALETTE_GLOBAL=Windows.Win32.UI.DisplayDevices
-DD_PALETTE_LOCAL=Windows.Win32.UI.DisplayDevices
-DD_PALETTECALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_QUERYMOCOMPSTATUSDATA=Windows.Win32.UI.DisplayDevices
-DD_RENDERMOCOMPDATA=Windows.Win32.UI.DisplayDevices
-DD_SETCOLORKEYDATA=Windows.Win32.UI.DisplayDevices
-DD_SETENTRIESDATA=Windows.Win32.UI.DisplayDevices
-DD_SETEXCLUSIVEMODEDATA=Windows.Win32.UI.DisplayDevices
-DD_SETOVERLAYPOSITIONDATA=Windows.Win32.UI.DisplayDevices
-DD_SETPALETTEDATA=Windows.Win32.UI.DisplayDevices
-DD_STEREOMODE=Windows.Win32.UI.DisplayDevices
-DD_SURFACE_GLOBAL=Windows.Win32.UI.DisplayDevices
-DD_SURFACE_INT=Windows.Win32.UI.DisplayDevices
-DD_SURFACE_LOCAL=Windows.Win32.UI.DisplayDevices
-DD_SURFACE_MORE=Windows.Win32.UI.DisplayDevices
-DD_SURFACECALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_SYNCSURFACEDATA=Windows.Win32.UI.DisplayDevices
-DD_SYNCVIDEOPORTDATA=Windows.Win32.UI.DisplayDevices
-DD_UNLOCKDATA=Windows.Win32.UI.DisplayDevices
-DD_UPDATENONLOCALHEAPDATA=Windows.Win32.UI.DisplayDevices
-DD_UPDATEOVERLAYDATA=Windows.Win32.UI.DisplayDevices
-DD_UPDATEVPORTDATA=Windows.Win32.UI.DisplayDevices
-DD_VIDEOPORT_LOCAL=Windows.Win32.UI.DisplayDevices
-DD_VIDEOPORTCALLBACKS=Windows.Win32.UI.DisplayDevices
-DD_VPORTCOLORDATA=Windows.Win32.UI.DisplayDevices
-DD_WAITFORVERTICALBLANKDATA=Windows.Win32.UI.DisplayDevices
-DD_WAITFORVPORTSYNCDATA=Windows.Win32.UI.DisplayDevices
-DDCOMPBUFFERINFO=Windows.Win32.UI.DisplayDevices
-DDMOCOMPBUFFERINFO=Windows.Win32.UI.DisplayDevices
-PDD_CANCREATESURFACE=Windows.Win32.UI.DisplayDevices
-PDD_COLORCB_COLORCONTROL=Windows.Win32.UI.DisplayDevices
-PDD_CREATEPALETTE=Windows.Win32.UI.DisplayDevices
-PDD_CREATESURFACE=Windows.Win32.UI.DisplayDevices
-PDD_CREATESURFACEEX=Windows.Win32.UI.DisplayDevices
-PDD_DESTROYDDLOCAL=Windows.Win32.UI.DisplayDevices
-PDD_FLIPTOGDISURFACE=Windows.Win32.UI.DisplayDevices
-PDD_FREEDRIVERMEMORY=Windows.Win32.UI.DisplayDevices
-PDD_GETAVAILDRIVERMEMORY=Windows.Win32.UI.DisplayDevices
-PDD_GETDRIVERINFO=Windows.Win32.UI.DisplayDevices
-PDD_GETDRIVERSTATE=Windows.Win32.UI.DisplayDevices
-PDD_GETSCANLINE=Windows.Win32.UI.DisplayDevices
-PDD_KERNELCB_SYNCSURFACE=Windows.Win32.UI.DisplayDevices
-PDD_KERNELCB_SYNCVIDEOPORT=Windows.Win32.UI.DisplayDevices
-PDD_MAPMEMORY=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_BEGINFRAME=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_CREATE=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_DESTROY=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_ENDFRAME=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_GETCOMPBUFFINFO=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_GETFORMATS=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_GETGUIDS=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_GETINTERNALINFO=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_QUERYSTATUS=Windows.Win32.UI.DisplayDevices
-PDD_MOCOMPCB_RENDER=Windows.Win32.UI.DisplayDevices
-PDD_PALCB_DESTROYPALETTE=Windows.Win32.UI.DisplayDevices
-PDD_PALCB_SETENTRIES=Windows.Win32.UI.DisplayDevices
-PDD_SETEXCLUSIVEMODE=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_ADDATTACHEDSURFACE=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_BLT=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_DESTROYSURFACE=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_FLIP=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_GETBLTSTATUS=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_GETFLIPSTATUS=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_LOCK=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_SETCOLORKEY=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_SETOVERLAYPOSITION=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_SETPALETTE=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_UNLOCK=Windows.Win32.UI.DisplayDevices
-PDD_SURFCB_UPDATEOVERLAY=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_CANCREATEVIDEOPORT=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_COLORCONTROL=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_CREATEVIDEOPORT=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_DESTROYVPORT=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_FLIP=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_GETBANDWIDTH=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_GETFIELD=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_GETFLIPSTATUS=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_GETINPUTFORMATS=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_GETLINE=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_GETOUTPUTFORMATS=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_GETSIGNALSTATUS=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_GETVPORTCONNECT=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_UPDATE=Windows.Win32.UI.DisplayDevices
-PDD_VPORTCB_WAITFORSYNC=Windows.Win32.UI.DisplayDevices
-PDD_WAITFORVERTICALBLANK=Windows.Win32.UI.DisplayDevices
-VIDEOMEMORY=Windows.Win32.UI.DisplayDevices
-VIDEOMEMORYINFO=Windows.Win32.UI.DisplayDevices
-# endregion ddrawint.h
+# region devicetopology.h
+IKsControl=Windows.Win32.Media.KernelStreaming
+IKsFormatSupport=Windows.Win32.Media.KernelStreaming
+IKsJackContainerId=Windows.Win32.Media.KernelStreaming
+IKsJackDescription=Windows.Win32.Media.KernelStreaming
+IKsJackDescription2=Windows.Win32.Media.KernelStreaming
+IKsJackSinkInformation=Windows.Win32.Media.KernelStreaming
+# endregion devicetopology.h
 # region dshowasf.h
 _AM_ASFWRITERCONFIG_PARAM=Windows.Win32.Media.WindowsMediaFormat
 IAMWMBufferPass=Windows.Win32.Media.WindowsMediaFormat
 IAMWMBufferPassCallback=Windows.Win32.Media.WindowsMediaFormat
 # endregion dshowasf.h
-# region dvp.h
-DDVIDEOPORTBANDWIDTH=Windows.Win32.UI.DisplayDevices
-DDVIDEOPORTCAPS=Windows.Win32.UI.DisplayDevices
-DDVIDEOPORTDESC=Windows.Win32.UI.DisplayDevices
-DDVIDEOPORTINFO=Windows.Win32.UI.DisplayDevices
-# endregion dvp.h
 # region dxva9typ.h
 COPP_ACP_Protection_Level=Windows.Win32.Graphics.DirectShow
 COPP_BusType=Windows.Win32.Graphics.DirectShow
@@ -286,6 +127,9 @@ DXVA_COPPStatusSignalingCmdData=Windows.Win32.Graphics.DirectShow
 GetLastError=Windows.Win32.Foundation
 SetLastError=Windows.Win32.Foundation
 # endregion errhandlingapi.h
+# region endpointvolume.h
+AUDIO_VOLUME_NOTIFICATION_DATA=Windows.Win32.Media.Audio
+# endregion endpointvolume.h
 # region evcode.h
 AM_WMT_EVENT_DATA=Windows.Win32.Media.WindowsMediaFormat
 # endregion evcode.h
@@ -302,9 +146,6 @@ ICodecAPI=Windows.Win32.Media.MediaFoundation
 IPhraseSink=Windows.Win32.Storage.IndexServer
 WORDREP_BREAK_TYPE=Windows.Win32.Storage.IndexServer
 # endregion indexsrv.h
-# region ks.h
-KSTOPOLOGY_CONNECTION=Windows.Win32.Graphics.DirectShow
-# endregion ks.h
 # region libloaderapi.h
 FindStringOrdinal=Windows.Win32.Globalization
 # endregion libloaderapi.h
@@ -382,6 +223,10 @@ MDEVICECAPSEX=Windows.Win32.Media.Audio.DirectMusic
 MIDIOPENDESC=Windows.Win32.Media.Audio.DirectMusic
 # endregion mmddk.h
 # region mmreg.h
+VOLUMEWAVEFILTER=Windows.Win32.Media.Audio
+ECHOWAVEFILTER=Windows.Win32.Media.Audio
+WAVEFILTER=Windows.Win32.Media.Audio
+WAVEFORMATEXTENSIBLE=Windows.Win32.Media.Audio
 HEAACWAVEFORMAT=Windows.Win32.Graphics.DirectShow
 HEAACWAVEINFO=Windows.Win32.Graphics.DirectShow
 MPEG1WAVEFORMAT=Windows.Win32.Graphics.DirectShow
@@ -532,10 +377,10 @@ StgOpenAsyncDocfileOnIFillLockBytes=Windows.Win32.System.Com.StructuredStorage
 StgGetIFillLockBytesOnILockBytes=Windows.Win32.System.Com.StructuredStorage
 StgGetIFillLockBytesOnFile=Windows.Win32.System.Com.StructuredStorage
 StgOpenLayoutDocfile=Windows.Win32.System.Com.StructuredStorage
-CoRegisterMessageFilter=Windows.Win32.Media.Audio.CoreAudio
+CoRegisterMessageFilter=Windows.Win32.Media.Audio
 # endregion objbase.h
 # region objidl.h
-IMessageFilter=Windows.Win32.Media.Audio.CoreAudio
+IMessageFilter=Windows.Win32.Media.Audio
 IThumbnailExtractor=Windows.Win32.System.Com.UI
 IDummyHICONIncluder=Windows.Win32.System.Com.UI
 # endregion objidl.h
@@ -545,6 +390,8 @@ IEnumConnections=Windows.Win32.System.Com
 IEnumConnectionPoints=Windows.Win32.System.Com
 IConnectionPoint=Windows.Win32.System.Com
 IConnectionPointContainer=Windows.Win32.System.Com
+IPersistMemory=Windows.Win32.System.Com
+IPersistStreamInit=Windows.Win32.System.Com
 # endregion ocidl.h
 # region ole2.h
 OleConvertIStorageToOLESTREAM=Windows.Win32.System.Com.StructuredStorage
@@ -633,8 +480,8 @@ SHAddDefaultPropertiesByExt=Windows.Win32.System.PropertiesSystem
 SYNC_ENGINE_STATE_FLAGS=Windows.Win32.System.PropertiesSystem
 # endregion shobjidl.h
 # region strmif.h
-TIMECODE_SAMPLE=Windows.Win32.Graphics.DirectShow
-TIMECODE=Windows.Win32.Graphics.DirectShow
+TIMECODE_SAMPLE=Windows.Win32.Media.KernelStreaming
+TIMECODE=Windows.Win32.Media.KernelStreaming
 VIDEOENCODER_BITRATE_MODE=Windows.Win32.Graphics.DirectShow
 # endregion strmif.h
 # region sysinfoapi.h
@@ -1662,6 +1509,7 @@ OSVERSIONINFOEXW=Windows.Win32.System.SystemInformation
 OSVERSIONINFOW=Windows.Win32.System.SystemInformation
 OSVERSIONINFOW=Windows.Win32.System.SystemInformation
 SYSTEM_LOGICAL_PROCESSOR_INFORMATION_EX=Windows.Win32.System.SystemInformation
+PAPFUNC=Windows.Win32.System.Threading
 PROCESSOR_CACHE_TYPE=Windows.Win32.System.SystemInformation
 CACHE_DESCRIPTOR=Windows.Win32.System.SystemInformation
 PROCESSOR_RELATIONSHIP=Windows.Win32.System.SystemInformation
@@ -2298,5 +2146,5 @@ STGMOVE=Windows.Win32.System.Com.StructuredStorage
 CLIPDATA=Windows.Win32.System.Com.StructuredStorage
 PROPSPEC_KIND=Windows.Win32.System.Com.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
-VARENUM=Windows.Win32.System.Ole.Automation
+VARENUM=Windows.Win32.System.Ole
 # endregion wtypes.h
