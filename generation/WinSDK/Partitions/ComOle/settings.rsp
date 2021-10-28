@@ -10,6 +10,9 @@ CreateDataAdviseHolder
 <IncludeRoot>/um/ole2.h
 <IncludeRoot>/um/OleDlg.h
 <IncludeRoot>/um/idispids.h
+<IncludeRoot>/um/OAIdl.h
+<IncludeRoot>/um/OleAuto.h
+<IncludeRoot>/um/DispEx.h
 --namespace
 Windows.Win32.System.Ole
 --with-type

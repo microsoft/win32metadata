@@ -5,8 +5,17 @@ using static Windows.Win32.Foundation.Apis;
 using static Windows.Win32.System.Diagnostics.Debug.FACILITY_CODE;
 using static Windows.Win32.System.SystemServices.Apis;
 
+using Windows.Win32.Foundation;
+using Windows.Win32.System.Com;
+
 namespace Windows.Win32.System.Ole
 {
+    // For EXCEPINFO::pfnDeferredFillIn which defines the callback inline with the struct.
+    // ClangSharp emits function pointers as IntPtr so we need to write our own signature
+    // for the metadata
+    [UnmanagedFunctionPointer]
+    public unsafe delegate HRESULT LPEXCEPFINO_DEFERRED_FILLIN(EXCEPINFO *pExcepInfo);
+
     public static unsafe partial class Apis
     {
         public const int CTL_E_ILLEGALFUNCTIONCALL = unchecked(((int)(((uint)(SEVERITY_ERROR) << 31) | ((uint)(FACILITY_CONTROL) << 16) | ((uint)(5)))));

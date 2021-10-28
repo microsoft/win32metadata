@@ -5,11 +5,8 @@
 
 #include "windows.fixed.h"
 #include <sdkddkver.h>
+#include <commdlg.h>
 
-#include <ddraw.h>
-#include <ddrawi.h>
-#include <ddrawint.h>
-#include <ddkernel.h>
-#include <dvp.h>
-#include <dxmini.h>
-#include <dmemmgr.h>
+#include <ks.h>
+#include <ksmedia.h>
+#include <ksproxy.h>

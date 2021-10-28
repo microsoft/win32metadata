@@ -1,0 +1,15 @@
+--with-librarypath
+GetDeviceID=DSOUND
+--exclude
+_D3DVECTOR
+IReferenceClock
+IKsPropertySet
+AUDIO_CURVE_TYPE
+--traverse
+<IncludeRoot>/shared/msapofxproxy.h
+<IncludeRoot>/um/AudioAPOTypes.h
+<IncludeRoot>/um/audioenginebaseapo.h
+<IncludeRoot>/um/audioengineextensionapo.h
+<IncludeRoot>/um/audiomediatype.h
+--namespace
+Windows.Win32.Media.Audio.Apo

@@ -1,3 +1,5 @@
+--exclude
+IKsPropertySet
 --traverse
 <IncludeRoot>/um/audevcod.h
 <IncludeRoot>/um/evcode.h
@@ -5,7 +7,6 @@
 <IncludeRoot>/um/dvdmedia.h
 <IncludeRoot>/um/avifmt.h
 <IncludeRoot>/um/aviriff.h
-<IncludeRoot>/shared/ksproxy.h
 <IncludeRoot>/um/amva.h
 <IncludeRoot>/shared/bdatypes.h
 <IncludeRoot>/um/strmif.h

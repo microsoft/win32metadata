@@ -113,47 +113,47 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDI",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDIIN",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDIOUT",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDISTRM",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIXER",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIXEROBJ",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVE",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVEOUT",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVEIN",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -178,7 +178,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Audio.CoreAudio",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HTASK",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -696,22 +696,22 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMDRIVERID",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMDRIVER",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMSTREAM",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMOBJ",
     "ValueType": "DECLARE_HANDLE"
   },

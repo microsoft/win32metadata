@@ -1,0 +1,15 @@
+--exclude
+_DDPIXELFORMAT
+IKsControl
+_DDVIDEOPORTCONNECT
+joyConfigChanged
+MainAVIHeader
+AVIStreamHeader
+AVIINDEXENTRY
+AVIPALCHANGE
+--traverse
+<IncludeRoot>/shared/ks.h
+<IncludeRoot>/shared/ksmedia.h
+<IncludeRoot>/shared/ksproxy.h
+--namespace
+Windows.Win32.Media.KernelStreaming

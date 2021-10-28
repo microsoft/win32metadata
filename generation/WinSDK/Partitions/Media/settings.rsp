@@ -1,0 +1,12 @@
+--exclude
+joyConfigChanged
+MainAVIHeader
+AVIStreamHeader
+AVIINDEXENTRY
+AVIPALCHANGE
+--traverse
+<IncludeRoot>/um/timeapi.h
+<IncludeRoot>/um/mmsyscom.h
+<IncludeRoot>/um/mmiscapi2.h
+--namespace
+Windows.Win32.Media

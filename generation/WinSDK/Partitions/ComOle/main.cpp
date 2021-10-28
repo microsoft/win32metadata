@@ -29,3 +29,9 @@
 #include <mtxattr.h>
 
 #include <idispids.h>
+
+#include <oaidl.h>
+#include <oleauto.h>
+#include <olectl.h>
+
+#include <DispEx.h>

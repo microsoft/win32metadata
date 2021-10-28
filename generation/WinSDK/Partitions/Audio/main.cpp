@@ -1,4 +1,5 @@
 #define SECURITY_WIN32 // For sspi.h
+#define QCC_OS_GROUP_WINDOWS
 
 #include "intrinfix.h"
 
@@ -7,17 +8,22 @@
 
 #include <mmsystem.h>
 
+// Keeps devicetopology.h from bringing in the IKs* stuff
 #include <ks.h>
 #include <ksmedia.h>
-#include <audioenginebaseapo.h>
-#include <mmreg.h>
-#include <mmddk.h>
-#include <propsys.h>
-#include <dmusics.h>
-#include <audiomediatype.h>
-//#include <baseaudioprocessingobject.h> contains only C++ class implementation
-#include <msapofxproxy.h>
-#include <dls1.h>
-#include <dls2.h>
-#include <dsconf.h>
-#include <dv.h>
+
+#include <spatialaudiohrtf.h>
+#include <spatialaudioclient.h>
+#include <mmeapi.h>
+#include <mmdeviceapi.h>
+#include <devicetopology.h>
+#include <audioclient.h>
+#include <audiopolicy.h>
+#include <spatialaudiometadata.h>
+#include <audiosessiontypes.h>
+#include <functiondiscoverykeys_devpkey.h>
+#include <audioclientactivationparams.h>
+#include <audiostatemonitorapi.h>
+#include <msacm.h>
+#include <playsoundapi.h>
+#include <msacmdrv.h>
