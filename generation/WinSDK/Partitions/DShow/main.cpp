@@ -38,8 +38,6 @@
 #include <amstream.h>
 #include <amvideo.h>
 #include <dmodshow.h>
-#include <ksproxy.h>
-#include <ks.h>
 #include <mixerocx.h>
 #include <mpconfig.h>
 #include <mpegtype.h>

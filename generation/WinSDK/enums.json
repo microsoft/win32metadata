@@ -3799,6 +3799,7 @@
   },
   {
     "type": "uint",
+    "namespace": "Windows.Win32.Graphics.Gdi",
     "name": "TEXT_ALIGN_OPTIONS",
     "members": [
       {
@@ -4312,6 +4313,7 @@
   },
   {
     "name": "SCROLLBAR_CONSTANTS",
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "flags": true,
     "members": [
       {
@@ -4425,6 +4427,7 @@
   },
   {
     "name": "CERT_RDN_ATTR_VALUE_TYPE",
+    "namespace": "Windows.Win32.Security.Cryptography",
     "members": [
       {
         "name": "CERT_RDN_ANY_TYPE"
@@ -9524,6 +9527,7 @@
   },
   {
     "name": "IMAGE_FLAGS",
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
     "flags": true,
     "members": [
       {
@@ -9884,6 +9888,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.Security",
     "name": "OBJECT_SECURITY_INFORMATION",
     "flags": true,
     "members": [
@@ -23881,11 +23886,11 @@
     ],
     "uses": [
       {
-        "struct": "tttoolinfoa",
+        "struct": "TTTOOLINFOA",
         "field": "uFlags"
       },
       {
-        "struct": "tttoolinfow",
+        "struct": "TTTOOLINFOW",
         "field": "uFlags"
       }
     ]

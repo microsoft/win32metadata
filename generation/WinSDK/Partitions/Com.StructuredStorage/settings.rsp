@@ -1,0 +1,14 @@
+--exclude
+PropVariantCopy
+PropVariantClear
+FreePropVariantArray
+CoFileTimeNow
+CLSIDFromProgIDEx
+CreateDataAdviseHolder
+--traverse
+<IncludeRoot>/um/PropIdl.h
+<IncludeRoot>/um/PropIdlBase.h
+<IncludeRoot>/um/coml2api.h
+<IncludeRoot>/um/propapi.h
+--namespace
+Windows.Win32.System.Com.StructuredStorage

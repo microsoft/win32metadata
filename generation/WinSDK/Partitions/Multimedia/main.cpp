@@ -7,12 +7,16 @@
 #include <sdkddkver.h>
 #include <commdlg.h>
 
+#define MMNOJOYDEV
+
+#include <ks.h>
+#include <ksmedia.h>
+
 #include <combaseapi.h>
+#include <mmeapi.h>
 #include <mmreg.h>
 #include <mmsystem.h>
 #include <digitalv.h>
-#include <msacm.h>
-#include <mmeapi.h>
 #include <vfw.h>
 #include <joystickapi.h>
 #include <mmddk.h>
@@ -24,6 +28,5 @@
 #include <asferr.h>
 #include <mciavi.h>
 #include <msacmdlg.h>
-#include <msacmdrv.h>
 #include <nserror.h>
 #include <vfwext.h>

@@ -1,0 +1,10 @@
+--exclude
+_DDPIXELFORMAT
+IKsControl
+_DDVIDEOPORTCONNECT
+--traverse
+<IncludeRoot>/um/audioendpoints.h
+<IncludeRoot>/um/AudioEngineEndpoint.h
+<IncludeRoot>/um/endpointvolume.h
+--namespace
+Windows.Win32.Media.Audio.Endpoints

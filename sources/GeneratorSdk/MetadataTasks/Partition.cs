@@ -26,6 +26,8 @@ namespace MetadataTasks
 
         public ITaskItem TaskItem => this.item;
 
+        public bool ForceOutOfDate { get; set; }
+
         public string Name
         {
             get
@@ -172,7 +174,7 @@ namespace MetadataTasks
 
         public bool IsUpToDate(string markerFile)
         {
-            return TaskUtils.IsUpToDate(this.AllFiles, markerFile);
+            return !this.ForceOutOfDate && TaskUtils.IsUpToDate(this.AllFiles, markerFile);
         }
 
         private IEnumerable<string> GetSettingsValues(string name)

@@ -63,3 +63,4 @@
 #include <sharewindowcommandsourceinterop.h>
 #include <windows.ui.viewmanagement.core.coreframeworkinputviewinterop.h>
 #include <windowsstoragecom.h>
+#include <messagedispatcherapi.h>

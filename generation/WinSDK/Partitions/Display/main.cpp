@@ -9,4 +9,3 @@
 #include <winddi.h>
 #include <devpropdef.h>
 #include <ntddvdeo.h>
-#include <dmemmgr.h>

@@ -1,0 +1,8 @@
+--exclude
+_GUID
+--traverse
+<IncludeRoot>/um/urlmon.h
+--namespace
+Windows.Win32.System.Com.Urlmon
+--with-type
+STREAM_SEEK=uint

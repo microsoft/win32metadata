@@ -3,4 +3,4 @@
 <IncludeRoot>/shared/cderr.h
 <IncludeRoot>/um/colordlg.h
 --namespace
-Windows.Win32.UI.WindowsAndMessaging
+Windows.Win32.UI.Controls.Dialogs

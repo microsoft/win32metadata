@@ -1,0 +1,13 @@
+--traverse
+<IncludeRoot>/shared/dinputd.h
+<IncludeRoot>/shared/hidclass.h
+<IncludeRoot>/shared/hidpi.h
+<IncludeRoot>/shared/hidsdi.h
+<IncludeRoot>/shared/hidusage.h
+<IncludeRoot>/shared/ntddkbd.h
+<IncludeRoot>/shared/ntddmou.h
+<IncludeRoot>/um/dinput.h
+<IncludeRoot>/shared/dinputd.h
+<IncludeRoot>/um/gpiobuttontypes.h
+--namespace
+Windows.Win32.Devices.HumanInterfaceDevice

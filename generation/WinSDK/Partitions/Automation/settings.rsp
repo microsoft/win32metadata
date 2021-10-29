@@ -3,4 +3,4 @@
 <IncludeRoot>/um/OleAuto.h
 <IncludeRoot>/um/DispEx.h
 --namespace
-Windows.Win32.System.OleAutomation
+Windows.Win32.System.Ole

@@ -1,0 +1,10 @@
+--exclude
+UiaRect
+--traverse
+<IncludeRoot>/um/Richedit.h
+<IncludeRoot>/um/TextServ.h
+<IncludeRoot>/um/RichOle.h
+<IncludeRoot>/um/TOM.h
+--namespace
+Windows.Win32.UI.Controls.RichEdit
+

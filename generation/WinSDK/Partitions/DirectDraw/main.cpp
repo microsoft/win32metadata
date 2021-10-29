@@ -9,5 +9,7 @@
 #include <ddraw.h>
 #include <ddrawi.h>
 #include <ddrawint.h>
+#include <ddkernel.h>
 #include <dvp.h>
 #include <dxmini.h>
+#include <dmemmgr.h>

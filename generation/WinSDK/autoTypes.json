@@ -98,7 +98,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.UI.TouchInput",
+    "Namespace": "Windows.Win32.UI.Input.Touch",
     "Name": "HGESTUREINFO",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -113,52 +113,52 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDI",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDIIN",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDIOUT",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIDISTRM",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIXER",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HMIXEROBJ",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVE",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVEOUT",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HWAVEIN",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.UI.KeyboardAndMouseInput",
+    "Namespace": "Windows.Win32.UI.Input",
     "Name": "HRAWINPUT",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -168,7 +168,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.UI.DisplayDevices",
     "Name": "HSURF",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -178,12 +178,12 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Audio.CoreAudio",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HTASK",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.UI.TouchInput",
+    "Namespace": "Windows.Win32.UI.Input.Touch",
     "Name": "HTOUCHINPUT",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -696,22 +696,22 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMDRIVERID",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMDRIVER",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMSTREAM",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Multimedia",
+    "Namespace": "Windows.Win32.Media.Audio",
     "Name": "HACMOBJ",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -831,7 +831,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.UI.HiDpi",
     "Name": "DPI_AWARENESS_CONTEXT",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -1081,7 +1081,7 @@
     "CloseApi": "WHvDeletePartition"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Foundation",
     "Name": "CHAR",
     "ValueType": "byte"
   },
@@ -1111,22 +1111,22 @@
     "ValueType": "UIntPtr"
   },
   {
-    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Namespace": "Windows.Win32.Storage.Jet",
     "Name": "JET_OSSNAPID",
     "ValueType": "UIntPtr"
   },
   {
-    "Namespace": "Windows.Win32.Storage.StructuredStorage",
+    "Namespace": "Windows.Win32.Storage.Jet",
     "Name": "JET_LS",
     "ValueType": "UIntPtr"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Foundation",
     "Name": "SHANDLE_PTR",
     "ValueType": "IntPtr"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Foundation",
     "Name": "HANDLE_PTR",
     "ValueType": "UIntPtr"
   },

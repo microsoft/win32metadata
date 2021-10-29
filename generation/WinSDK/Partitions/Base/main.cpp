@@ -33,7 +33,6 @@
 #include <storprop.h>
 #include <ioapiset.h>
 #include <dbt.h>
-#include <ntddstor.h>
 #include <atlthunk.h>
 #include <lmserver.h>
 #include <windowsceip.h>

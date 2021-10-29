@@ -24,5 +24,6 @@ _SecHandle
 <IncludeRoot>/um/schnlsp.h
 <IncludeRoot>/um/slerror.h
 <IncludeRoot>/um/sliddefs.h
+<IncludeRoot>/um/wdigest.h
 --namespace
-Windows.Win32.Security.Authentication.Identity.Core
+Windows.Win32.Security.Authentication.Identity
