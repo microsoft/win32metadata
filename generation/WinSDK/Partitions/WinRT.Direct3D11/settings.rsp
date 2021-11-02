@@ -1,0 +1,17 @@
+--with-type
+HANDLE_OPTIONS=uint
+--with-attribute
+HANDLE_OPTIONS=Flags
+--exclude
+PFNGETACTIVATIONFACTORY
+RO_REGISTRATION_COOKIE
+RoGetActivatableClassRegistration
+RoErrorReportingFlags
+IDesktopWindowTarget
+ID2D1DeviceContext
+ID2D1Geometry
+ID2D1Factory
+--traverse
+<IncludeRoot>/um/windows.graphics.directx.direct3d11.interop.h
+--namespace
+Windows.Win32.System.WinRT.Direct3D11

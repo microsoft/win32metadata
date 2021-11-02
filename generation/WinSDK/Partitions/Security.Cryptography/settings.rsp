@@ -7,8 +7,6 @@ _LM_OWF_PASSWORD
 --traverse
 <IncludeRoot>/um/casetup.h
 <IncludeRoot>/shared/bcrypt.h
-<IncludeRoot>/um/cryptdlg.h
-<IncludeRoot>/um/cryptuiapi.h
 <IncludeRoot>/um/cryptxml.h
 <IncludeRoot>/um/dpapi.h
 <IncludeRoot>/um/ncrypt.h

@@ -9,3 +9,7 @@
 #include <winddi.h>
 #include <devpropdef.h>
 #include <ntddvdeo.h>
+
+#define USERMODE_DRIVER
+#include <winddi.h>
+#undef USERMODE_DRIVER

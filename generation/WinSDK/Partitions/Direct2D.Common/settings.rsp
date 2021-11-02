@@ -1,0 +1,9 @@
+--exclude
+IWICBitmapSource
+IWICBitmap
+DWRITE_GLYPH_RUN
+DWRITE_GLYPH_RUN_DESCRIPTION
+--traverse
+<IncludeRoot>/um/dcommon.h
+--namespace
+Windows.Win32.Graphics.Direct2D.Common

@@ -538,3 +538,5 @@ SetupDiOpenDeviceInterfaceA::DeviceInterfaceData=[In]
 SetupDiOpenDeviceInterfaceW::DeviceInterfaceData=[In]
 SetupDiRegisterDeviceInfo::DupDeviceInfoData=[In]
 GetLastInputInfo::plii=[In]
+IReferenceClock::AdviseTime::hEvent=HANDLE
+IReferenceClock::AdvisePeriodic::hSemaphore=HANDLE

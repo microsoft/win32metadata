@@ -4,11 +4,19 @@ param
     $assetsScrapedSeparately,
 
     [switch]
-    $skipInstallTools
+    $skipInstallTools,
+
+    [switch]
+    $Clean
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
-    
+
+if ($Clean.IsPresent)
+{
+    & $PSScriptRoot\CleanOutputs.ps1
+}
+
 if (!$skipInstallTools.IsPresent)
 {
     Install-BuildTools
