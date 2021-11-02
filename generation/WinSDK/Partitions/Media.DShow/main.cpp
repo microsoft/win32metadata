@@ -6,7 +6,7 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <uuids.h>
+//#include <uuids.h>
 #include <ks.h>
 #include <ksmedia.h>
 //#include <ksuuids.h>
@@ -62,10 +62,6 @@
 #include <codecapi.h>
 #include <mediaobj.h>
 #include <medparam.h>
-#include <dmoreg.h>
-#include <dmort.h>
-#include <mediaerr.h>
-#include <dmoimpl.h>
 #include <wmp.h>
 #include <austream.h>
 #include <ddstream.h>

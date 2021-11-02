@@ -1,0 +1,9 @@
+--exclude
+DXGI_ADAPTER_FLAG_FORCE_DWORD
+_D3DCOLORVALUE
+--traverse
+<IncludeRoot>/shared/dxgitype.h
+<IncludeRoot>/shared/dxgiformat.h
+<IncludeRoot>/shared/dxgicommon.h
+--namespace
+Windows.Win32.Graphics.Dxgi.Common

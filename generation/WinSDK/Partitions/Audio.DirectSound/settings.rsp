@@ -1,0 +1,10 @@
+--with-librarypath
+GetDeviceID=DSOUND
+--exclude
+_D3DVECTOR
+IReferenceClock
+IKsPropertySet
+--traverse
+<IncludeRoot>/um/dsound.h
+--namespace
+Windows.Win32.Media.Audio.DirectSound

@@ -7,7 +7,6 @@ IKsPropertySet
 --traverse
 <IncludeRoot>/um/dmusicc.h
 <IncludeRoot>/shared/dmusbuff.h
-<IncludeRoot>/um/dsound.h
 <IncludeRoot>/shared/dmdls.h
 <IncludeRoot>/shared/dls1.h
 <IncludeRoot>/shared/dls2.h

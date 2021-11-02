@@ -98,9 +98,18 @@ namespace WinmdUtilsProgram
                 new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
                 new Option<string>("--ignoreDependNamespace", "Ignore dependencies to this namespace.", ArgumentArity.OneOrMore),
                 new Option<string>("--namespaceFilter", "Namespace filter", ArgumentArity.OneOrMore),
+                new Option<int>("--maxBroughtInBy", getDefaultValue: () => int.MaxValue,  description: "The max number of items to display of a type that brought in a namespace"),
+                new Option<int>("--maxDependTypes", getDefaultValue: () => int.MaxValue,  description: "The max number of types to display that brought in a namespace"),
             };
 
-            showNamespaceDependencies.Handler = CommandHandler.Create<FileInfo, string[], string[], IConsole>(ShowNamespaceDependencies);
+            showNamespaceDependencies.Handler = CommandHandler.Create<FileInfo, string[], string[], int, int, IConsole>(ShowNamespaceDependencies);
+
+            var showNamespaceCycles = new Command("showNamespaceCycles", "Show namespace cyclical dependencies.")
+            {
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+            };
+
+            showNamespaceCycles.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowNamespaceCycles);
 
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
@@ -113,7 +122,8 @@ namespace WinmdUtilsProgram
                 compareCommand,
                 showLibImports,
                 createLibRsp,
-                showNamespaceDependencies
+                showNamespaceDependencies,
+                showNamespaceCycles
             };
 
             return rootCommand.Invoke(args);
@@ -630,7 +640,32 @@ namespace WinmdUtilsProgram
             return string.Empty;
         }
 
-        public static int ShowNamespaceDependencies(FileInfo winmd, string[] ignoreDependNamespace, string[] namespaceFilter, IConsole console)
+        public static int ShowNamespaceCycles(FileInfo winmd, IConsole console)
+        {
+            foreach (var cycle in NamespaceDependencyUtil.GetNamespaceCycles(winmd.FullName))
+            {
+                bool first = true;
+                foreach (var ns in cycle)
+                {
+                    if (!first)
+                    {
+                        console.Out.Write(" -> ");
+                    }
+                    else
+                    {
+                        first = false;
+                    }
+
+                    console.Out.Write(ns);
+                }
+
+                console.Out.Write("\r\n");
+            }
+
+            return 0;
+        }
+
+        public static int ShowNamespaceDependencies(FileInfo winmd, string[] ignoreDependNamespace, string[] namespaceFilter, int maxBroughtInBy, int maxDependTypes, IConsole console)
         {
             List<Regex> namespaceFilterRegex = new List<Regex>();
             if (namespaceFilter != null)
@@ -670,24 +705,46 @@ namespace WinmdUtilsProgram
 
                 console.Out.Write($"{item.Namespace}\r\n");
 
-                bool hadDepends = false;
-                foreach (var dependsByNamespace in item.GetDependenciesByNamespace())
+                string[] allDependNamespaces = item.AllDependencyNamespaces.Where(ns => !ignoreNamespaces.Contains(ns)).ToArray();
+                if (allDependNamespaces.Length != 0)
+                {
+                    console.Out.Write($"  All dependent namespaces: {string.Join(", ", allDependNamespaces)}\r\n");
+                }
+
+                var allDependsByNamespace = item.GetDependenciesByNamespace().Where(d => !ignoreNamespaces.Contains(d.Key)).ToArray();
+                foreach (var dependsByNamespace in allDependsByNamespace)
                 {
                     var currentNamespace = dependsByNamespace.Key;
-                    if (ignoreNamespaces.Contains(currentNamespace))
-                    {
-                        continue;
-                    }
 
-                    hadDepends = true;
                     console.Out.Write($"  {dependsByNamespace.Key}\r\n");
-                    foreach (var depend in dependsByNamespace.Value)
+
+                    var allDependTypes = dependsByNamespace.Value.ToArray();
+                    var dependCount = 0;
+                    foreach (var depend in allDependTypes)
                     {
+                        if (dependCount >= maxDependTypes)
+                        {
+                            int remainingCount = allDependTypes.Length - dependCount;
+                            console.Out.Write($"    ({remainingCount} more...)\r\n");
+                            break;
+                        }
+
                         console.Out.Write($"    {depend.Type.Name}: ");
 
+                        dependCount++;
+
                         bool first = true;
-                        foreach (var broughtInBy in depend.BroughtInBy)
+                        string[] broughtInByItems = depend.BroughtInBy.ToArray();
+                        int broughtInCount = 0;
+                        foreach (var broughtInBy in broughtInByItems)
                         {
+                            if (broughtInCount == maxBroughtInBy)
+                            {
+                                int itemsRemaining = broughtInByItems.Length - broughtInCount;
+                                console.Out.Write($" ({itemsRemaining} more...)");
+                                break;
+                            }
+
                             if (first)
                             {
                                 first = false;
@@ -698,6 +755,7 @@ namespace WinmdUtilsProgram
                             }
 
                             console.Out.Write(broughtInBy);
+                            broughtInCount++;
                         }
 
                         console.Out.Write("\r\n");
@@ -706,7 +764,7 @@ namespace WinmdUtilsProgram
                     console.Out.Write("\r\n");
                 }
 
-                if (hadDepends)
+                if (allDependsByNamespace.Length != 0)
                 {
                     console.Out.Write("\r\n\r\n");
                 }

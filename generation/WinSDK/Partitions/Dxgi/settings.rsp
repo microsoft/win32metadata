@@ -2,9 +2,6 @@
 DXGI_ADAPTER_FLAG_FORCE_DWORD
 _D3DCOLORVALUE
 --traverse
-<IncludeRoot>/shared/dxgitype.h
-<IncludeRoot>/shared/dxgiformat.h
-<IncludeRoot>/shared/dxgicommon.h
 <IncludeRoot>/shared/dxgi.h
 <IncludeRoot>/shared/dxgi1_2.h
 <IncludeRoot>/shared/dxgi1_4.h

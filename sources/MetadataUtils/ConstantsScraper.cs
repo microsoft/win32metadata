@@ -39,7 +39,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
-                    @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_KNOWN_FOLDER)\s*\((.*)");
+                    @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_KNOWN_FOLDER|OUR_GUID_ENTRY)\s*\((.*)");
 
             private static readonly Regex DefineAviGuidConstRegex =
                 new Regex(

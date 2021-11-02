@@ -27898,11 +27898,11 @@
     ],
     "uses": [
       {
-        "struct": "cert_viewproperties_struct_a",
+        "struct": "CERT_VIEWPROPERTIES_STRUCT_A",
         "field": "dwFlags"
       },
       {
-        "struct": "cert_viewproperties_struct_w",
+        "struct": "CERT_VIEWPROPERTIES_STRUCT_W",
         "field": "dwFlags"
       }
     ]
