@@ -111,7 +111,7 @@ using Windows.Win32.Security.Authorization.UI;
 using Windows.Win32.Security.ConfigurationSnapin;
 using Windows.Win32.Security.Credentials;
 using Windows.Win32.Security.Cryptography;
-using Windows.Win32.Security.Cryptography.Catalog
+using Windows.Win32.Security.Cryptography.Catalog;
 using Windows.Win32.Security.Cryptography.Certificates;
 using Windows.Win32.Security.Cryptography.Sip;
 using Windows.Win32.Security.Cryptography.UI;
