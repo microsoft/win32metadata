@@ -28,7 +28,6 @@ _TEB
 <IncludeRoot>/um/CompPkgSup.h
 <IncludeRoot>/um/Ime.h
 <IncludeRoot>/um/WinNls32.h
-<IncludeRoot>/um/ExDisp.h
 <IncludeRoot>/um/aux_ulib.h
 <IncludeRoot>/um/rtlsupportapi.h
 <IncludeRoot>/shared/stralign.h

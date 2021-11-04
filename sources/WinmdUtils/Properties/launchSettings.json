@@ -38,11 +38,15 @@
     },
     "showNamespaceDependencies": {
       "commandName": "Project",
-      "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --ignoreNamespace Windows.Win32.Foundation"
+      "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --ignoreDependNamespace Windows.Win32.Foundation --maxBroughtInBy 5 --maxDependTypes 5"
     },
     "Show depends for a few ns": {
       "commandName": "Project",
       "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --ignoreDependNamespace Windows.Win32.Foundation --namespaceFilter Windows.Win32.System.Com"
+    },
+    "showNamespaceCycles": {
+      "commandName": "Project",
+      "commandLineArgs": "showNamespaceCycles --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     }
   }
 }

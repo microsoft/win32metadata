@@ -10,3 +10,4 @@
 #include <timeapi.h>
 #include <mmsyscom.h>
 #include <mmiscapi2.h>
+#include <uuids.h>

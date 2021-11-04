@@ -1,0 +1,6 @@
+--traverse
+<IncludeRoot>/shared/apdevpkey.h
+<IncludeRoot>/shared/devpkey.h
+<IncludeRoot>/shared/devpropdef.h
+--namespace
+Windows.Win32.Devices.Properties

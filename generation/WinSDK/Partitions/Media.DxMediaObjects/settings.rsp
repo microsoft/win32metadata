@@ -1,0 +1,8 @@
+--traverse
+<IncludeRoot>/um/mediaobj.h
+<IncludeRoot>/um/mediaerr.h
+<IncludeRoot>/um/dmoreg.h
+<IncludeRoot>/um/dmort.h
+<IncludeRoot>/um/dmoimpl.h
+--namespace
+Windows.Win32.Media.DxMediaObjects

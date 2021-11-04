@@ -8,7 +8,6 @@ _LM_OWF_PASSWORD
 <IncludeRoot>/shared/sddl.h
 <IncludeRoot>/um/accctrl.h
 <IncludeRoot>/um/AclAPI.h
-<IncludeRoot>/um/AclUI.h
 <IncludeRoot>/um/adtgen.h
 <IncludeRoot>/um/AuthZ.h
 <IncludeRoot>/um/azroles.h

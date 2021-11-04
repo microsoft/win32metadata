@@ -163,12 +163,12 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.LibraryLoader",
+    "Namespace": "Windows.Win32.Foundation",
     "Name": "HRSRC",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.UI.DisplayDevices",
+    "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HSURF",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -178,7 +178,7 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.Media.Audio",
+    "Namespace": "Windows.Win32.Media",
     "Name": "HTASK",
     "ValueType": "DECLARE_HANDLE"
   },
@@ -851,57 +851,37 @@
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
-    "Name": "HUMPD",
-    "ValueType": "DECLARE_HANDLE"
-  },
-  {
-    "Namespace": "Windows.Win32.System.SystemServices",
-    "Name": "HSTR",
-    "ValueType": "DECLARE_HANDLE"
-  },
-  {
-    "Namespace": "Windows.Win32.System.SystemServices",
-    "Name": "HSPRITE",
-    "ValueType": "DECLARE_HANDLE"
-  },
-  {
     "Name": "HSEMAPHORE",
-    "ValueType": "IntPtr",
+    "ValueType": "DECLARE_HANDLE",
     "CloseApi": "EngDeleteSemaphore"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
-    "Name": "HLSURF",
-    "ValueType": "DECLARE_HANDLE"
-  },
-  {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HFASTMUTEX",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HDRVOBJ",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HDEV",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Devices.Display",
     "Name": "HBM",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Devices.Display",
     "Name": "DHSURF",
     "ValueType": "DECLARE_HANDLE"
   },
   {
-    "Namespace": "Windows.Win32.System.SystemServices",
+    "Namespace": "Windows.Win32.Devices.Display",
     "Name": "DHPDEV",
     "ValueType": "DECLARE_HANDLE"
   },

@@ -135,12 +135,13 @@ namespace MetadataTasks
 
             if (!string.IsNullOrEmpty(this.partitionsWithoutCrossarchDifferences))
             {
+                string sortedDifferences = string.Join(';', this.partitionsWithoutCrossarchDifferences.Split(';').OrderBy(s => s).ToArray());
                 this.Log.LogMessage(
                     MessageImportance.High,
                     "There are partitions that have no cross-arch differences. You can exclude them from cross-arch processing and speed up builds by adding this property to the project file:");
                 this.Log.LogMessage(
                     MessageImportance.High,
-                    $"<ExcludeFromCrossarch>{this.partitionsWithoutCrossarchDifferences}</ExcludeFromCrossarch>");
+                    $"<ExcludeFromCrossarch>{sortedDifferences}</ExcludeFromCrossarch>");
                 this.Log.LogMessage(
                     MessageImportance.High,
                     $"Or, add this property to any partitions you want to exclude: <ExcludeFromCrossarch>true</ExcludeFromCrossarch>");
