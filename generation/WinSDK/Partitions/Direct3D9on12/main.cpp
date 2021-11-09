@@ -6,8 +6,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <d3d12.h>
-#include <d3d12sdklayers.h>
-#include <d3d12shader.h>
-#include <d3d12compatibility.h>
-#include <mfd3d12.h>
+#define D3D11_NO_HELPERS
+
+#include <d3d9on12.h>
