@@ -51,6 +51,13 @@ namespace Windows.Win32.Tests
             this.ExecWinmdUtils(args);
         }
 
+        [Fact]
+        public void NoBrokenArchTypes()
+        {
+            string args = $"showBrokenArchTypes --winmd \"{TestUtils.Win32WinmdPath}\"";
+            this.ExecWinmdUtils(args);
+        }
+
         private void ExecWinmdUtils(string args)
         {
             string winmdUtilsDll = Path.Combine(TestUtils.BinPath, "winmdutils.dll");

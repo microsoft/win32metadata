@@ -111,6 +111,13 @@ namespace WinmdUtilsProgram
 
             showNamespaceCycles.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowNamespaceCycles);
 
+            var showBrokenArchTypes = new Command("showBrokenArchTypes", "Show broken architecture types.")
+            {
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+            };
+
+            showBrokenArchTypes.Handler = CommandHandler.Create<FileInfo, IConsole>(ShowBrokenArchTypes);
+
             var rootCommand = new RootCommand("Win32metadata winmd utils")
             {
                 showMissingImportsCommand,
@@ -123,7 +130,8 @@ namespace WinmdUtilsProgram
                 showLibImports,
                 createLibRsp,
                 showNamespaceDependencies,
-                showNamespaceCycles
+                showNamespaceCycles,
+                showBrokenArchTypes
             };
 
             return rootCommand.Invoke(args);
@@ -638,6 +646,139 @@ namespace WinmdUtilsProgram
             }
 
             return string.Empty;
+        }
+
+        private static bool VerifyTypeHasRightArch(
+            Dictionary<string, List<ITypeDefinition>> namesToArchDefs,
+            IEntity owner,
+            IType type,
+            Architecture requiredArch,
+            IConsole console)
+        {
+            bool success = true;
+
+            if (owner != type)
+            {
+                var currentType = type;
+                while (currentType.Kind == TypeKind.Array)
+                {
+                    ArrayType arrayType = (ArrayType)currentType;
+                    currentType = arrayType.ElementType;
+                }
+
+                while (currentType.Kind == TypeKind.Pointer)
+                {
+                    PointerType pointerType = (PointerType)currentType;
+                    currentType = pointerType.ElementType;
+                }
+
+                // If the type isn't in the map, it's not arch-specific, so return success
+                if (!namesToArchDefs.TryGetValue(currentType.FullName, out var foundArchTypes))
+                {
+                    return true;
+                }
+
+                bool found = false;
+                Architecture typeArches = Architecture.None;
+                foreach (var archType in foundArchTypes)
+                {
+                    var typeArchAttr =
+                        archType.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+
+                    var typeArch = (Architecture)typeArchAttr.FixedArguments[0].Value;
+                    typeArches |= typeArch;
+                    if ((typeArches & requiredArch) == requiredArch)
+                    {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if (!found)
+                {
+                    console.Out.Write($"{owner.FullName} supports '{requiredArch}' but referenced type {type.FullName} only supports '{typeArches}'");
+                    success = false;
+                }
+            }
+
+            if (type.Kind == TypeKind.Struct)
+            {
+                foreach (var field in type.GetFields())
+                {
+                    if (!VerifyTypeHasRightArch(namesToArchDefs, owner, field.Type, requiredArch, console))
+                    {
+                        success = false;
+                    }
+                }
+            }
+            else if (type.Kind == TypeKind.Delegate)
+            {
+                var invoke = type.GetMethods(m => m.Name == "Invoke").Single();
+                foreach (var param in invoke.Parameters)
+                {
+                    if (!VerifyTypeHasRightArch(namesToArchDefs, owner, param.Type, requiredArch, console))
+                    {
+                        success = false;
+                    }
+                }
+            }
+
+            return success;
+        }
+
+        public static int ShowBrokenArchTypes(FileInfo winmd, IConsole console)
+        {
+            DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(winmd.FullName);
+
+            int badTopLevelTypes = 0;
+            Dictionary<string, List<ITypeDefinition>> namesToArchDefs = new Dictionary<string, List<ITypeDefinition>>();
+
+            foreach (var type in winmd1.GetTopLevelTypeDefinitions()
+                .Where(t => t.GetAttributes()
+                    .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+            {
+                if (!namesToArchDefs.TryGetValue(type.FullName, out var list))
+                {
+                    list = new();
+                    namesToArchDefs[type.FullName] = list;
+                }
+
+                list.Add(type);
+            }
+
+            foreach (var type in namesToArchDefs.SelectMany(map => map.Value))
+            {
+                var archAttr = type.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
+
+                if (!VerifyTypeHasRightArch(namesToArchDefs, type, type, arch, console))
+                {
+                    badTopLevelTypes++;
+                }
+            }
+
+            foreach (var apisClass in winmd1.GetTopLevelTypeDefinitions().Where(t => t.Kind == TypeKind.Class && t.Name == "Apis"))
+            {
+                foreach (var method in apisClass.Methods.Where(
+                    m => m.IsStatic && m.DeclaringType == apisClass && m.GetAttributes()
+                        .Any(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute")))
+                {
+                    var archAttr = method.GetAttributes().Single(a => a.AttributeType.FullName == "Windows.Win32.Interop.SupportedArchitectureAttribute");
+                    Architecture arch = (Architecture)archAttr.FixedArguments[0].Value;
+
+                    foreach (var param in method.Parameters)
+                    {
+                        VerifyTypeHasRightArch(namesToArchDefs, method, param.Type, arch, console);
+                    }
+                }
+            }
+
+            if (badTopLevelTypes == 0)
+            {
+                console.Out.Write("No broken arch-specific types or methods found.\r\n");
+            }
+
+            return badTopLevelTypes == 0 ? 0 : -1;
         }
 
         public static int ShowNamespaceCycles(FileInfo winmd, IConsole console)

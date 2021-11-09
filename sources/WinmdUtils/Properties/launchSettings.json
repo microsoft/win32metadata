@@ -47,6 +47,10 @@
     "showNamespaceCycles": {
       "commandName": "Project",
       "commandLineArgs": "showNamespaceCycles --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
+    },
+    "showBrokenArchTypes": {
+      "commandName": "Project",
+      "commandLineArgs": "showBrokenArchTypes --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd"
     }
   }
 }
