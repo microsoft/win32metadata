@@ -9,7 +9,6 @@
 <IncludeRoot>/um/activdbg.h
 <IncludeRoot>/um/dbgprop.h
 <IncludeRoot>/um/activprof.h
-<IncludeRoot>/winrt/webapplication.h
 <IncludeRoot>/shared/bugcodes.h
 <IncludeRoot>/um/activaut.h
 <IncludeRoot>/um/activdbg100.h

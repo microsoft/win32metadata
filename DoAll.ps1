@@ -19,7 +19,7 @@ if (!$SkipInstallTools.IsPresent)
 {
     . .\scripts\CommonUtils.ps1
 
-    Install-BuildTools
+    Install-BuildTools -Clean:$Clean.IsPresent
 }
 
 if ($Clean.IsPresent)

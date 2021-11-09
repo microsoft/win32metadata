@@ -20575,6 +20575,7 @@
   },
   {
     "name": "JOB_OBJECT_CPU_RATE_CONTROL",
+    "namespace": "Windows.Win32.System.JobObjects",
     "members": [
       {
         "name": "JOB_OBJECT_CPU_RATE_CONTROL_ENABLE",
@@ -23928,6 +23929,7 @@
   },
   {
     "name": "JOB_OBJECT_TERMINATE_AT_END_ACTION",
+    "namepace": "Windows.Win32.System.JobObjects",
     "members": [
       {
         "name": "JOB_OBJECT_TERMINATE_AT_END_OF_JOB",
@@ -29241,6 +29243,38 @@
       {
         "method": "IsOS",
         "parameter": "dwOS"
+      }
+    ]
+  },
+  {
+    "name": "DEVICEFAMILYINFOENUM",
+    "flags": false,
+    "type": "uint",
+    "autoPopulate": {
+      "header": "winnt.h",
+      "filter": "DEVICEFAMILYINFOENUM_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "RtlGetDeviceFamilyInfoEnum",
+        "parameter": "pulDeviceFamily"
+      }
+    ]
+  },
+  {
+    "name": "DEVICEFAMILYDEVICEFORM",
+    "flags": false,
+    "type": "uint",
+    "autoPopulate": {
+      "header": "winnt.h",
+      "filter": "DEVICEFAMILYDEVICEFORM_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "RtlGetDeviceFamilyInfoEnum",
+        "parameter": "pulDeviceForm"
       }
     ]
   }

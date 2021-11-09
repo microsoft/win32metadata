@@ -38,7 +38,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/d3dcaps.h
 <IncludeRoot>/um/d3dtypes.h
 <IncludeRoot>/shared/wtypes.h
-<IncludeRoot>/um/rpcnsip.h
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
 <IncludeRoot>/um/atlthunk.h
