@@ -554,3 +554,5 @@ IReferenceClock::AdviseTime::hEvent=HANDLE
 IReferenceClock::AdvisePeriodic::hSemaphore=HANDLE
 JsDebugReadMemoryFlags=[ScopedEnum]
 SHCreateItemFromParsingName::ppv=[ComOutPtr]
+PRINTER_OPTIONSA::dwFlags=PRINTER_OPTION_FLAGS
+PRINTER_OPTIONSW::dwFlags=PRINTER_OPTION_FLAGS

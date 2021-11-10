@@ -29281,5 +29281,93 @@
         "parameter": "pulDeviceForm"
       }
     ]
+  },
+  {
+    "name": "PRINTER_ACCESS_RIGHTS",
+    "flags": true,    
+    "autoPopulate": {
+      "filter": "PRINTER_ACCESS_|SERVER_ACCESS_",
+      "header": "winspool.h"
+    },
+    "members": [
+      {
+        "name": "PRINTER_ALL_ACCESS",
+        "value": "(PRINTER_STANDARD_RIGHTS_REQUIRED | PRINTER_ACCESS_ADMINISTER | PRINTER_ACCESS_USE)"
+      },
+      {
+        "name": "PRINTER_READ",
+        "value": "(PRINTER_STANDARD_RIGHTS_READ | PRINTER_ACCESS_USE)"
+      },
+      {
+        "name": "PRINTER_WRITE",
+        "value": "(PRINTER_STANDARD_RIGHTS_WRITE | PRINTER_ACCESS_USE)"
+      },
+      {
+        "name": "PRINTER_EXECUTE",
+        "value": "(PRINTER_STANDARD_RIGHTS_EXECUTE | PRINTER_ACCESS_USE)"
+      },
+      {
+        "name": "SERVER_ALL_ACCESS",
+        "value": "(PRINTER_STANDARD_RIGHTS_REQUIRED | SERVER_ACCESS_ADMINISTER | SERVER_ACCESS_ENUMERATE)"
+      },
+      {
+        "name": "SERVER_READ",
+        "value": "(PRINTER_STANDARD_RIGHTS_READ | SERVER_ACCESS_ENUMERATE)"
+      },
+      {
+        "name": "SERVER_WRITE",
+        "value": "(PRINTER_STANDARD_RIGHTS_WRITE | SERVER_ACCESS_ADMINISTER | SERVER_ACCESS_ENUMERATE)"
+      },
+      {
+        "name": "SERVER_EXECUTE",
+        "value": "(PRINTER_STANDARD_RIGHTS_EXECUTE | SERVER_ACCESS_ENUMERATE)"
+      },
+      {
+        "name": "PRINTER_DELETE",
+        "value": "(0x00010000)"
+      },
+      {
+        "name": "PRINTER_READ_CONTROL",
+        "value": "(0x00020000)"
+      },
+      {
+        "name": "PRINTER_WRITE_DAC",
+        "value": "(0x00040000)"
+      },
+      {
+        "name": "PRINTER_WRITE_OWNER",
+        "value": "(0x00080000)"
+      },
+      {
+        "name": "PRINTER_SYNCHRONIZE",
+        "value": "(0x00100000)"
+      },
+      {
+        "name": "PRINTER_STANDARD_RIGHTS_REQUIRED",
+        "value": "(0x000F0000)"
+      },
+      {
+        "name": "PRINTER_STANDARD_RIGHTS_READ",
+        "value": "(0x00020000)"
+      },
+      {
+        "name": "PRINTER_STANDARD_RIGHTS_WRITE",
+        "value": "(0x00020000)"
+      },
+      {
+        "name": "PRINTER_STANDARD_RIGHTS_EXECUTE",
+        "value": "(0x00020000)"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PRINTER_DEFAULTSA",
+        "field": "DesiredAccess"
+      },
+      {
+        "struct": "PRINTER_DEFAULTSW",
+        "field": "DesiredAccess"
+      }
+    ]
   }
 ]
