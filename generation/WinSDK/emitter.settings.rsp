@@ -541,3 +541,4 @@ GetLastInputInfo::plii=[In]
 IReferenceClock::AdviseTime::hEvent=HANDLE
 IReferenceClock::AdvisePeriodic::hSemaphore=HANDLE
 JsDebugReadMemoryFlags=[ScopedEnum]
+SHCreateItemFromParsingName::ppv=[ComOutPtr]
