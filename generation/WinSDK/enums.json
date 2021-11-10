@@ -3207,6 +3207,10 @@
       {
         "method": "InitiateSystemShutdownExW",
         "parameter": "dwReason"
+      },
+      {
+        "method": "ExitWindowsEx",
+        "parameter": "dwReason"
       }
     ]
   },
