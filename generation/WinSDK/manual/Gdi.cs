@@ -95,6 +95,26 @@ namespace Windows.Win32.Graphics.Gdi
         DIB_RGB_COLORS = 0,
         DIB_PAL_COLORS = 1
     }
+    
+    [NativeTypeName("struct tagMONITORINFOEXA : tagMONITORINFO")]
+    [NativeInheritance("tagMONITORINFO")]
+    public unsafe partial struct MONITORINFOEXA
+    {
+        public MONITORINFO monitorInfo;
+
+        [NativeTypeName("CHAR [32]")]
+        public fixed sbyte szDevice[32];
+    }
+
+    [NativeTypeName("struct tagMONITORINFOEXW : tagMONITORINFO")]
+    [NativeInheritance("tagMONITORINFO")]
+    public unsafe partial struct MONITORINFOEXW
+    {
+        public MONITORINFO monitorInfo;
+
+        [NativeTypeName("WCHAR [32]")]
+        public fixed ushort szDevice[32];
+    }
 
     public static unsafe partial class Apis
     {

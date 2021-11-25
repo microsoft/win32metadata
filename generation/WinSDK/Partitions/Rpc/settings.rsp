@@ -11,5 +11,6 @@ NDR_SCONTEXT
 <IncludeRoot>/shared/rpcndr.h
 <IncludeRoot>/um/ndr64types.h
 <IncludeRoot>/um/rpcproxy.h
+<IncludeRoot>/um/rpcnsip.h
 --namespace
 Windows.Win32.System.Rpc

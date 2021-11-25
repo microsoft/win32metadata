@@ -1051,6 +1051,16 @@
     "ValueType": "IntPtr"
   },
   {
+    "Namespace": "Windows.Win32.UI.Controls",
+    "Name": "HDSA",
+    "ValueType": "IntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Controls",
+    "Name": "HDPA",
+    "ValueType": "IntPtr"
+  },
+  {
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "LPPROC_THREAD_ATTRIBUTE_LIST",
     "ValueType": "void*"

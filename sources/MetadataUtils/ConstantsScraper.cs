@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Runtime.Versioning;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -39,7 +37,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
-                    @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_KNOWN_FOLDER|OUR_GUID_ENTRY)\s*\((.*)");
+                    @"^\s*(DEFINE_GUID|DEFINE_DEVPROPKEY|DEFINE_PROPERTYKEY|DEFINE_KNOWN_FOLDER|OUR_GUID_ENTRY)\s*\((.*)");
 
             private static readonly Regex DefineAviGuidConstRegex =
                 new Regex(
@@ -319,7 +317,7 @@ namespace MetadataUtils
 
                 var writer = this.GetConstantWriter(originalNamespace, name);
 
-                if (defineGuidKeyword == "DEFINE_DEVPROPKEY")
+                if (defineGuidKeyword == "DEFINE_DEVPROPKEY" || defineGuidKeyword == "DEFINE_PROPERTYKEY")
                 {
                     writer.AddPropKey(name, args);
                 }

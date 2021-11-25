@@ -16,7 +16,6 @@ typedef UCHAR KIRQL;
 #include <minidumpapiset.h>
 #include <activdbg.h>
 #include <activprof.h>
-#include <webapplication.h>
 #include <ImageHlp.h>
 #include <bugcodes.h>
 #include <activaut.h>

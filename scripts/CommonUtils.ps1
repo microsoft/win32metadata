@@ -73,8 +73,15 @@ function Install-DotNetTool
 
 function Install-BuildTools
 {
+    Param([switch]$Clean)
+
     Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 11.0.0-beta3
     Install-DotNetTool -Name nbgv
+
+    if ($Clean.IsPresent)
+    {
+        & dotnet clean "$rootDir\buildtools"
+    }
 
     & dotnet build "$rootDir\buildtools" -c Release
     ThrowOnNativeProcessError
