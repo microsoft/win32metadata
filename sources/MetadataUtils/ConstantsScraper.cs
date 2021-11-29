@@ -29,7 +29,7 @@ namespace MetadataUtils
         {
             private static readonly Regex DefineRegex =
                 new Regex(
-                    @"^\s*#define\s+([_A-Z][\dA-Za-z_]+)\s+(.+)");
+                    @"^\s*#\s*define\s+([_A-Z][\dA-Za-z_]+)\s+(.+)");
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(

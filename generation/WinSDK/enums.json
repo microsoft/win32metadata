@@ -19783,7 +19783,7 @@
     ]
   },
   {
-    "name": "PROV_TRUST_SETTINGS",
+    "name": "WINTRUST_DATA_PROVIDER_FLAGS",
     "flags": true,
     "members": [
       {
