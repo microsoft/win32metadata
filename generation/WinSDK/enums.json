@@ -810,6 +810,10 @@
       {
         "method": "AdjustWindowRectEx",
         "parameter": "dwExStyle"
+      },
+      {
+        "method": "AdjustWindowRectExForDpi",
+        "parameter": "dwExStyle"
       }
     ]
   },
@@ -852,6 +856,10 @@
       },
       {
         "method": "AdjustWindowRectEx",
+        "parameter": "dwStyle"
+      },
+      {
+        "method": "AdjustWindowRectExForDpi",
         "parameter": "dwStyle"
       }
     ]
