@@ -49,11 +49,6 @@
   },
   {
     "Namespace": "Windows.Win32.Foundation",
-    "Name": "LSTATUS",
-    "ValueType": "int"
-  },
-  {
-    "Namespace": "Windows.Win32.Foundation",
     "Name": "NTSTATUS",
     "ValueType": "int"
   },
