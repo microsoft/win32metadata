@@ -29377,5 +29377,112 @@
         "field": "DesiredAccess"
       }
     ]
+  },
+  {
+    "name": "STGM",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "STGM_",
+      "header": "coml2api.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IStorage",
+        "method": "CreateStorage",
+        "parameter": "grfMode"
+      },
+      {
+        "interface": "IStorage",
+        "method": "CreateStream",
+        "parameter": "grfMode"
+      },
+      {
+        "interface": "IStorage",
+        "method": "OpenStorage",
+        "parameter": "grfMode"
+      },
+      {
+        "interface": "IStorage",
+        "method": "OpenStream",
+        "parameter": "grfMode"
+      },
+      {
+        "method": "StgCreateDocfile",
+        "parameter": "grfMode"
+      },
+      {
+        "method": "StgCreateDocfileOnILockBytes",
+        "parameter": "grfMode"
+      },
+      {
+        "method": "StgCreateStorageEx",
+        "parameter": "grfMode"
+      },
+      {
+        "method": "StgOpenStorage",
+        "parameter": "grfMode"
+      },
+      {
+        "method": "StgOpenStorageEx",
+        "parameter": "grfMode"
+      },
+      {
+        "interface": "IFunctionInstance",
+        "method": "OpenPropertyStore",
+        "parameter": "dwStgAccess"
+      },
+      {
+        "interface": "IMMDevice",
+        "method": "OpenPropertyStore",
+        "parameter": "stgmAccess"
+      }
+    ]
+  },
+  {
+    "name": "STGFMT",
+    "autoPopulate": {
+      "filter": "STGFMT_",
+      "header": "coml2api.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "StgCreateStorageEx",
+        "parameter": "stgfmt"
+      },
+      {
+        "method": "StgOpenStorageEx",
+        "parameter": "stgfmt"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "STGC",
+    "flags": true,
+    "members": [],
+    "uses": [
+      {
+        "interface": "IStorage",
+        "method": "Commit",
+        "parameter": "grfCommitFlags"
+      },
+      {
+        "interface": "IStream",
+        "method": "Commit",
+        "parameter": "grfCommitFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "STGMOVE",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IStorage",
+        "method": "MoveElementTo",
+        "parameter": "grfFlags"
+      }
+    ]
   }
 ]
