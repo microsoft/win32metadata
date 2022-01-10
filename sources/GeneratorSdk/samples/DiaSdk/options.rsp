@@ -1,6 +1,8 @@
 --exclude
-__MIDL___MIDL_itf_dia2_0000_0033_0001
+SymTagEnum
 __MIDL___MIDL_itf_dia2_0000_0000_0001
+__MIDL___MIDL_itf_dia2_0000_0033_0001
 PfnPDBDebugDirV
 --remap
-__MIDL___MIDL_itf_dia2_0000_0042_0001=FPODATA
+SymTagEnum=SymTag
+__MIDL___MIDL_itf_dia2_0000_0043_0001=FPODATA

@@ -82,5 +82,65 @@ namespace Microsoft.Dia
 
         [NativeTypeName("HRESULT")]
         public const int E_PDB_OBJECT_DISPOSED = E_PDB_OK + 25;
+
+        [NativeTypeName("HRESULT")]
+        public const int E_DIA_INPROLOG = unchecked((int)(((uint)(1)<<31) | ((uint)(((uint)0x6d))<<16) | ((uint)(100))));
+
+        [NativeTypeName("HRESULT")]
+        public const int E_DIA_SYNTAX = E_DIA_INPROLOG + 1;
+
+        [NativeTypeName("HRESULT")]
+        public const int E_DIA_FRAME_ACCESS = E_DIA_INPROLOG + 2;
+
+        [NativeTypeName("HRESULT")]
+        public const int E_DIA_VALUE = E_DIA_INPROLOG + 3;
+    }
+
+    public enum SymTag
+    {
+        SymTagNull,
+        SymTagExe,
+        SymTagCompiland,
+        SymTagCompilandDetails,
+        SymTagCompilandEnv,
+        SymTagFunction,
+        SymTagBlock,
+        SymTagData,
+        SymTagAnnotation,
+        SymTagLabel,
+        SymTagPublicSymbol,
+        SymTagUDT,
+        SymTagEnum,
+        SymTagFunctionType,
+        SymTagPointerType,
+        SymTagArrayType,
+        SymTagBaseType,
+        SymTagTypedef,
+        SymTagBaseClass,
+        SymTagFriend,
+        SymTagFunctionArgType,
+        SymTagFuncDebugStart,
+        SymTagFuncDebugEnd,
+        SymTagUsingNamespace,
+        SymTagVTableShape,
+        SymTagVTable,
+        SymTagCustom,
+        SymTagThunk,
+        SymTagCustomType,
+        SymTagManagedType,
+        SymTagDimension,
+        SymTagCallSite,
+        SymTagInlineSite,
+        SymTagBaseInterface,
+        SymTagVectorType,
+        SymTagMatrixType,
+        SymTagHLSLType,
+        SymTagCaller,
+        SymTagCallee,
+        SymTagExport,
+        SymTagHeapAllocationSite,
+        SymTagCoffGroup,
+        SymTagInlinee,
+        SymTagMax
     }
 }
