@@ -13,7 +13,7 @@ jobs:
   displayName: "Scrape headers: x64"
   timeoutInMinutes: 60
   pool:
-    vmImage: windows-2019
+    vmImage: windows-2022
   workspace:
     clean: all
 
@@ -54,7 +54,7 @@ jobs:
   displayName: "Scrape headers: x86"
   timeoutInMinutes: 60
   pool:
-    vmImage: windows-2019
+    vmImage: windows-2022
   workspace:
     clean: all
   steps:
@@ -82,7 +82,7 @@ jobs:
   displayName: "Scrape headers: arm64"
   timeoutInMinutes: 60
   pool:
-    vmImage: windows-2019
+    vmImage: windows-2022
   workspace:
     clean: all
   steps:
@@ -114,7 +114,7 @@ jobs:
   variables:
     OutputPackagesDir: $(Build.SourcesDirectory)\bin\Packages\Release\NuGet
   pool:
-    vmImage: windows-2019
+    vmImage: windows-2022
   steps:
   - checkout: self
     lfs: true
