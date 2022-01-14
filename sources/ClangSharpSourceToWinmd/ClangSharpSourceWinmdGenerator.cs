@@ -197,7 +197,7 @@ namespace ClangSharpSourceToWinmd
 
             generator.PopulateMetadataBuilder();
 
-            if (generator.diagnostics.Count == 0)
+            if (!generator.diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error))
             {
                 generator.WriteWinmd(outputFileName);
             }
@@ -864,7 +864,7 @@ namespace ClangSharpSourceToWinmd
         private void RemapToMoreSpecificTypeIfPossible(
             string owner,
             string name,
-            ImmutableArray<AttributeData> ownerAttributes, 
+            ImmutableArray<AttributeData> ownerAttributes,
             ref ITypeSymbol typeSymbol)
         {
             // Can't do anything without a NativeTypeNameAttribute 
@@ -886,6 +886,13 @@ namespace ClangSharpSourceToWinmd
             if (typeSymbol.SpecialType == SpecialType.System_UInt16 && IsWcharRegex.IsMatch(nativeType))
             {
                 typeSymbol = this.GetTypeFromShortName("System.Char");
+                return;
+            }
+
+            if (typeSymbol.SpecialType == SpecialType.System_IntPtr && nativeType.Contains("(*)"))
+            {
+                string fullName = $"{owner}.{name}";
+                this.diagnostics.Add(new GeneratorDiagnostic($"{fullName} is a pointer to a function: {nativeType}. To express this properly in metadata, define a delegate and map {fullName} to use it.", DiagnosticSeverity.Warning));
                 return;
             }
 
@@ -2131,7 +2138,18 @@ namespace ClangSharpSourceToWinmd
 
                 var paramType = parameterSymbol.Type;
                 var paramName = parameterSymbol.Name;
-                generator.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, paramName, parameterSymbol.GetAttributes(), ref paramType);
+
+                string methodName;
+                if (methodSymbol.ContainingType != null && methodSymbol.ContainingType.Name != "Apis")
+                {
+                    methodName = $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}";
+                }
+                else
+                {
+                    methodName = methodSymbol.Name;
+                }
+
+                generator.RemapToMoreSpecificTypeIfPossible(methodName, paramName, parameterSymbol.GetAttributes(), ref paramType);
 
                 ParameterAttributes parameterAttributes = ParameterAttributes.None;
                 var symbolAttrs = parameterSymbol.GetAttributes();
