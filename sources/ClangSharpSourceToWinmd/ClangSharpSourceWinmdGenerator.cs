@@ -27,6 +27,7 @@ namespace ClangSharpSourceToWinmd
 
         private const string InteropNamespace = "Windows.Win32.Interop";
         private const string ScannedSuffix = "__scanned__";
+        private const string RemovePrefix = "__remove__";
 
         private const string SystemAssemblyName = "netstandard";
         private const string Win32InteropAssemblyName = "Windows.Win32.Interop";
@@ -208,6 +209,21 @@ namespace ClangSharpSourceToWinmd
         public ReadOnlyCollection<GeneratorDiagnostic> GetDiagnostics()
         {
             return this.diagnostics.AsReadOnly();
+        }
+
+        private static string FixFinalName(string name)
+        {
+            if (name.StartsWith(RemovePrefix))
+            {
+                name = name.Substring(RemovePrefix.Length);
+            }
+
+            if (name.EndsWith(ScannedSuffix))
+            {
+                name = name.Substring(0, name.Length - ScannedSuffix.Length);
+            }
+
+            return name;
         }
 
         private static byte[] ConvertKeyToByteArray(string key)
@@ -1097,10 +1113,7 @@ namespace ClangSharpSourceToWinmd
                         continue;
                     }
 
-                    if (name.EndsWith(ScannedSuffix))
-                    {
-                        name = name.Substring(0, name.Length - ScannedSuffix.Length);
-                    }
+                    name = FixFinalName(name);
 
                     if (name.StartsWith("CLSID_"))
                     {
@@ -1546,7 +1559,7 @@ namespace ClangSharpSourceToWinmd
 
                 this.EncodeTypeSymbol(type, signatureEncoder);
 
-                var memberName = member.Identifier.Text;
+                var memberName = FixFinalName(member.Identifier.Text);
                 if (string.IsNullOrEmpty(memberName))
                 {
                     throw new InvalidOperationException($"Enum {node.Identifier.Text} has a member with no name.");

@@ -135,6 +135,7 @@ namespace MetadataTasks
                         foreach (var traverseLine in RspReader.GetSettingsValues(settingsFile, "--traverse"))
                         {
                             var fixedLine = traverseLine.Replace("<IncludeRoot>", this.sdkIncRoot);
+                            fixedLine = fixedLine.Replace("<PartitionDir>", Path.GetDirectoryName(this.FullPath));
                             files.Add(fixedLine);
                         }
                     }

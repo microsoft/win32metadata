@@ -1,5 +1,3 @@
---file
-<PartitionDir>\main.cpp
 --output
 <GeneratedSourceDir>\<PartitionName>.cs
 --include-directory

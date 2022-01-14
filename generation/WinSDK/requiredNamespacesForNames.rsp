@@ -242,6 +242,7 @@ LPTHREAD_START_ROUTINE=Windows.Win32.System.Threading
 OUTPUT_DEBUG_STRING_INFO=Windows.Win32.System.Diagnostics.Debug
 OVERLAPPED_ENTRY=Windows.Win32.System.IO
 OVERLAPPED=Windows.Win32.System.IO
+PROC_THREAD_ATTRIBUTE_NUM=Windows.Win32.System.Threading
 READ_DIRECTORY_NOTIFY_INFORMATION_CLASS=Windows.Win32.Storage.FileSystem
 RIP_INFO=Windows.Win32.System.Diagnostics.Debug
 SECURITY_ATTRIBUTES=Windows.Win32.Security
