@@ -474,6 +474,22 @@ namespace ClangSharpSourceToWinmd
                     node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
                 }
 
+                // See if there are any attributes directly on the method
+                if (this.GetRemapInfo(fullName, out List<AttributeSyntax> methodAttributes, null, out _, out _))
+                {
+                    if (methodAttributes != null)
+                    {
+                        foreach (var attrNode in methodAttributes)
+                        {
+                            var attrListNode =
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
+
+                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                        }
+                    }
+                }
+
                 // Find remap info for the return parameter for this method and apply any that we find
                 if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, nodeReturnType, out var newType, out _))
                 {
