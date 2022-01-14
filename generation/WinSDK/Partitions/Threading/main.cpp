@@ -6,3 +6,4 @@
 #include <sdkddkver.h>
 
 #include <winnt.h>
+#include <avrt.h>
