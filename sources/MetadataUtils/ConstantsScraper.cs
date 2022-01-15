@@ -29,7 +29,7 @@ namespace MetadataUtils
         {
             private static readonly Regex DefineRegex =
                 new Regex(
-                    @"^\s*#\s*define\s+([_A-Z][\dA-Za-z_]+)\s+(.+)");
+                    @"^\s*#\s*define\s+([_A-Za-z][\dA-Za-z_]+)\s+(.+)");
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
@@ -66,6 +66,10 @@ namespace MetadataUtils
             private static readonly Regex MakeHresultRegex =
                 new Regex(
                     @"^\s*(?:MAKE_HRESULT|MAKE_SCODE)\((.+)\)");
+
+            private static readonly Regex IntCastToLpcstrRegex =
+                new Regex(
+                    @"^\s*\((LPCSTR|LPCWSTR)\)\s*(\d+)");
 
             private static readonly Regex NamePartsRegex = new Regex(@"[A-Z]+[a-z]*");
 
@@ -587,6 +591,15 @@ namespace MetadataUtils
                             }
                         }
 
+                        Match intCastToLpcstrMatch = IntCastToLpcstrRegex.Match(fixedRawValue);
+                        if (intCastToLpcstrMatch.Success)
+                        {
+                            var nativeStrType = intCastToLpcstrMatch.Groups[1].Value;
+                            var value = intCastToLpcstrMatch.Groups[2].Value;
+                            this.AddConstantInteger(currentNamespace, nativeStrType, name, value);
+                            continue;
+                        }
+
                         // See if matches one of our well known constants formats
                         Match match = DefineConstantRegex.Match(fixedRawValue);
                         string valueText;
@@ -700,9 +713,23 @@ namespace MetadataUtils
                         {
                             valueText = rawValue;
 
-                            // Don't do anything with strings. They can't be part of enums
-                            if (valueText.StartsWith('"') || valueText.StartsWith("L\"") || valueText.StartsWith("__TEXT"))
+                            if (valueText.StartsWith("__TEXT("))
                             {
+                                valueText = valueText.Substring("__TEXT(".Length);
+                                if (valueText.EndsWith(')'))
+                                {
+                                    valueText = valueText.Substring(0, valueText.Length - 1);
+                                }
+                            }
+                            else if (valueText.StartsWith("L\""))
+                            {
+                                valueText = valueText.Substring(1);
+                            }
+
+                            // Strings can't be part of enums so go ahead and add the constant directly
+                            if (valueText.StartsWith('"'))
+                            {
+                                this.AddConstantValue(currentNamespace, "string", name, valueText);
                                 continue;
                             }
 

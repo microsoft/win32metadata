@@ -207,7 +207,7 @@ $"        public const {type} {name} = {valueText};");
             }
 
             string type = null;
-            if (nativeTypeName == "HRESULT" || nativeTypeName == "LPCWSTR" || nativeTypeName == "HWND")
+            if (nativeTypeName == "HRESULT" || nativeTypeName == "LPCWSTR" || nativeTypeName == "LPCSTR" || nativeTypeName == "HWND")
             {
                 type = "int";
             }

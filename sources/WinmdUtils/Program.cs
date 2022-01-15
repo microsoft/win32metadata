@@ -1029,9 +1029,22 @@ namespace WinmdUtilsProgram
                         var fieldVal1 = field1.GetConstantValue();
                         var fieldVal2 = field2.GetConstantValue();
 
-                        if (fieldVal1.ToString() != fieldVal2.ToString())
+                        if (fieldVal1 == null)
                         {
-                            console?.Out.Write($"winmd1: {field1.Name} = {fieldVal1}, winmd2 = {fieldVal2}\r\n");
+                            console?.Out.Write($"winmd1: {field1.Name} is a constant with a null value\r\n");
+                        }
+
+                        if (fieldVal2 == null)
+                        {
+                            console?.Out.Write($"winmd2: {field2.Name} is a constant with a null value\r\n");
+                        }
+
+                        string val1 = fieldVal1?.ToString();
+                        string val2 = fieldVal2?.ToString();
+
+                        if (val1 != val2)
+                        {
+                            console?.Out.Write($"winmd1: {field1.Name} = {val1}, winmd2 = {val2}\r\n");
                             ret = false;
                         }
                     }
