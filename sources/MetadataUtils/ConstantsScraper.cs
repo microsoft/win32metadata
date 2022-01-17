@@ -175,16 +175,18 @@ namespace MetadataUtils
 
             private static string StripComments(string rawValue)
             {
-                int commentIndex = rawValue.IndexOf("//");
-                if (commentIndex != -1)
+                bool inQuote = false;
+                for (int i = 0; i <= rawValue.Length - 2; i++)
                 {
-                    rawValue = rawValue.Substring(0, commentIndex).Trim();
-                }
+                    if (rawValue[i] == '\"')
+                    {
+                        inQuote = !inQuote;
+                    }
 
-                commentIndex = rawValue.IndexOf("/*");
-                if (commentIndex != -1)
-                {
-                    rawValue = rawValue.Substring(0, commentIndex).Trim();
+                    if (!inQuote && rawValue[i] == '/' && (rawValue[i + 1] == '/' || rawValue[i + 1] == '*' ))
+                    {
+                        return rawValue.Substring(0, i).Trim();
+                    }
                 }
 
                 return rawValue;
@@ -446,7 +448,15 @@ namespace MetadataUtils
                     string defineGuidKeyword = null;
                     foreach (string currentLine in File.ReadAllLines(header))
                     {
-                        string line = continuation == null ? currentLine : continuation + currentLine;
+                        string fixedCurrentLine = currentLine;
+
+                        if (continuation != null && continuation.EndsWith('"') && currentLine.StartsWith('"'))
+                        {
+                            continuation = continuation.Substring(0, continuation.Length - 1);
+                            fixedCurrentLine = currentLine.Substring(1);
+                        }
+
+                        string line = continuation == null ? fixedCurrentLine : continuation + fixedCurrentLine;
                         if (line.EndsWith("\\"))
                         {
                             continuation = line.Substring(0, line.Length - 1);

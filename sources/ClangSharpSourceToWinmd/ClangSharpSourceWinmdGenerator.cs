@@ -1710,6 +1710,7 @@ namespace ClangSharpSourceToWinmd
                     case "OptionalAttribute":
                     case "DllImportAttribute":
                     case "NativeInheritanceAttribute":
+                    case "PreserveSigAttribute":
                         continue;
                 }
 
@@ -1827,11 +1828,18 @@ namespace ClangSharpSourceToWinmd
                     methodAttributes |= MethodAttributes.SpecialName;
                 }
 
+                MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
+
+                if (methodSymbol.GetAttributes().Any(a => a.AttributeClass.Name == "PreserveSigAttribute"))
+                {
+                    methodImplAttributes |= MethodImplAttributes.PreserveSig;
+                }
+
                 var methodDef =
                     this.AddMethodViaSymbol(
                         methodSymbol,
                         methodAttributes,
-                        MethodImplAttributes.Managed,
+                        methodImplAttributes,
                         true);
 
                 if (firstMethod.IsNil)
