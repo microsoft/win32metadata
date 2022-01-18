@@ -102,7 +102,7 @@ D2D1_COMPOSITE_MODE=Windows.Win32.Graphics.Direct2D.Common
 # Moved up to avoid dragging in D2D when only the types are needed
 D2D1_BORDER_MODE=Windows.Win32.Graphics.Direct2D.Common
 D2D1_BLEND_MODE=Windows.Win32.Graphics.Direct2D.Common
-D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE=Windows.Win32.Graphics
+D2D1_2DAFFINETRANSFORM_INTERPOLATION_MODE=Windows.Win32.Graphics.Direct2D.Common
 # endregion d2deffects.h
 # region d3d9.h
 IDirect3D9ExOverlayExtension=Windows.Win32.Media.MediaFoundation
