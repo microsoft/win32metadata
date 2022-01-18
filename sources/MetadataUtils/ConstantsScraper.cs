@@ -725,7 +725,12 @@ namespace MetadataUtils
 
                             if (valueText.StartsWith("__TEXT("))
                             {
-                                valueText = valueText.Substring("__TEXT(".Length);
+                                valueText = valueText.Substring(2);
+                            }
+
+                            if (valueText.StartsWith("TEXT("))
+                            {
+                                valueText = valueText.Substring("TEXT(".Length);
                                 if (valueText.EndsWith(')'))
                                 {
                                     valueText = valueText.Substring(0, valueText.Length - 1);
