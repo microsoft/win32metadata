@@ -1154,5 +1154,52 @@
     "Namespace": "Windows.Win32.Devices.Bluetooth",
     "Name": "HANDLE_SDP_TYPE",
     "ValueType": "ulong"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "NCRYPT_HANDLE",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "NCRYPT_PROV_HANDLE",
+    "ValueType": "UIntPtr",
+    "CloseApi": "NCryptFreeObject"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "NCRYPT_KEY_HANDLE",
+    "ValueType": "UIntPtr",
+    "CloseApi": "NCryptFreeObject"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "NCRYPT_HASH_HANDLE",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "NCRYPT_SECRET_HANDLE",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "HCRYPTPROV_LEGACY",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "HCRYPTPROV_OR_NCRYPT_KEY_HANDLE",
+    "ValueType": "UIntPtr"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "HCERTSTORE",
+    "ValueType": "void*"
+  },
+  {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "HCERTSTOREPROV",
+    "ValueType": "void*"
   }
 ]

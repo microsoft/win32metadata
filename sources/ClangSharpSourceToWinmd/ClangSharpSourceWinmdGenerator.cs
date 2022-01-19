@@ -923,6 +923,7 @@ namespace ClangSharpSourceToWinmd
                 typeSymbol.SpecialType == SpecialType.System_UInt64 ||
                 typeSymbol.SpecialType == SpecialType.System_Byte ||
                 typeName.StartsWith("System.IntPtr*") ||
+                typeName.StartsWith("System.UIntPtr*") ||
                 typeName.StartsWith("ushort*") ||
                 typeName.StartsWith("sbyte*") ||
                 typeName.StartsWith("int*") ||
