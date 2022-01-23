@@ -5,15 +5,15 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#define USERMODE_DRIVER
-#include <winddi.h>
-#undef USERMODE_DRIVER
+#include <objbase.h>
 
-#define CINTERFACE
 #include <BiDiSpl.h> 
 #include <filterpipeline.h>
 #include <msxml6.h>
-#undef CINTERFACE
+
+#define USERMODE_DRIVER
+#include <winddi.h>
+#undef USERMODE_DRIVER
 
 #include <compstui.h>
 #include <winspool.h>

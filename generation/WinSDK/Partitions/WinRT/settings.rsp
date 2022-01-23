@@ -43,6 +43,5 @@ ID2D1Factory
 <IncludeRoot>/winrt/winstring.h
 <IncludeRoot>/um/sharewindowcommandsourceinterop.h
 <IncludeRoot>/um/IMessageDispatcher.h
-<PartitionDir>\main.cpp
 --namespace
 Windows.Win32.System.WinRT

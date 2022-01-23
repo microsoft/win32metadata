@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31624.102
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32014.148
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GeneratorSdk", "GeneratorSdk", "{D3E6399F-0983-4742-B07C-874B6ED80E51}"
 EndProject
@@ -182,13 +182,11 @@ Global
 		{39AEB794-C1A5-4A2B-A860-0DEF2082F263}.Release|x86.ActiveCfg = Release|Any CPU
 		{39AEB794-C1A5-4A2B-A860-0DEF2082F263}.Release|x86.Build.0 = Release|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Debug|x64.ActiveCfg = Debug|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Debug|x64.Build.0 = Debug|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Debug|x86.Build.0 = Debug|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Release|Any CPU.Build.0 = Release|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Release|x64.ActiveCfg = Release|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Release|x64.Build.0 = Release|Any CPU
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC}.Release|x86.ActiveCfg = Release|Any CPU

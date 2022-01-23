@@ -149,11 +149,14 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
             {
+                const string ForceConstPrefix = "__forceconst__";
+
+                string localName = node.Declaration.Variables.First().Identifier.ValueText;
+
                 // If it's a constant, ignore it if it's already part of an enum
                 if (node.Modifiers.ToString() == "public const")
                 {
-                    string name = node.Declaration.Variables.First().Identifier.ValueText;
-                    if (this.enumMemberNames.Contains(name))
+                    if (this.enumMemberNames.Contains(localName))
                     {
                         return null;
                     }
@@ -170,46 +173,66 @@ namespace ClangSharpSourceToWinmd
                     newType = "string";
                 }
 
-                // Turn public static readonly Guids into string constants with an attribute
-                // to signal language projections to turn them into Guid constants. Guid constants 
-                // aren't allowed in metadata, requiring us to surface them this way
-                if (node.Modifiers.ToString() == "public static readonly" && node.Declaration.Type.ToString() == "Guid")
+                if (node.Modifiers.ToString() == "public static readonly")
                 {
-                    var varInitializer = node.Declaration.Variables.First().Initializer;
-                    if (varInitializer.Value is ObjectCreationExpressionSyntax objCreationSyntax)
+                    // Turn public static readonly Guids into string constants with an attribute
+                    // to signal language projections to turn them into Guid constants. Guid constants 
+                    // aren't allowed in metadata, requiring us to surface them this way
+                    if (node.Declaration.Type.ToString() == "Guid")
                     {
-                        node = node.RemoveNode(varInitializer, SyntaxRemoveOptions.KeepExteriorTrivia | SyntaxRemoveOptions.KeepEndOfLine);
-
-                        var args = objCreationSyntax.ArgumentList.Arguments;
-                        if (args.Count == 11)
+                        var varInitializer = node.Declaration.Variables.First().Initializer;
+                        if (varInitializer.Value is ObjectCreationExpressionSyntax objCreationSyntax)
                         {
-                            var allArgs = $"(uint){args}";
+                            node = node.RemoveNode(varInitializer, SyntaxRemoveOptions.KeepExteriorTrivia | SyntaxRemoveOptions.KeepEndOfLine);
 
-                            string argsFormatted = $"({allArgs})";
-                            var attrsList =
-                                SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
-                                        SyntaxFactory.Attribute(
-                                            SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
-                                            SyntaxFactory.ParseAttributeArgumentList(argsFormatted))));
-
-                            node = node.AddAttributeLists(attrsList).WithLeadingTrivia(node.GetLeadingTrivia());
-                        }
-                        else if (objCreationSyntax.ArgumentList.Arguments.Count == 1)
-                        {
-                            var textValue = EncodeHelpers.RemoveQuotes(objCreationSyntax.ArgumentList.Arguments[0].ToString());
-
-                            // If this is an invalid format, remove the node
-                            if (!Guid.TryParse(textValue, out var guidVal))
+                            var args = objCreationSyntax.ArgumentList.Arguments;
+                            if (args.Count == 11)
                             {
-                                return null;
+                                var allArgs = $"(uint){args}";
+
+                                string argsFormatted = $"({allArgs})";
+                                var attrsList =
+                                    SyntaxFactory.AttributeList(
+                                        SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                            SyntaxFactory.Attribute(
+                                                SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                                                SyntaxFactory.ParseAttributeArgumentList(argsFormatted))));
+
+                                node = node.AddAttributeLists(attrsList).WithLeadingTrivia(node.GetLeadingTrivia());
                             }
+                            else if (objCreationSyntax.ArgumentList.Arguments.Count == 1)
+                            {
+                                var textValue = EncodeHelpers.RemoveQuotes(objCreationSyntax.ArgumentList.Arguments[0].ToString());
 
-                            node = node.AddAttributeLists(EncodeHelpers.ConvertGuidToAttributeList(guidVal).WithLeadingTrivia(node.GetLeadingTrivia()));
+                                // If this is an invalid format, remove the node
+                                if (!Guid.TryParse(textValue, out var guidVal))
+                                {
+                                    return null;
+                                }
+
+                                node = node.AddAttributeLists(EncodeHelpers.ConvertGuidToAttributeList(guidVal).WithLeadingTrivia(node.GetLeadingTrivia()));
+                            }
                         }
-                    }
 
-                    return node;
+                        return node;
+                    }
+                    // Some constants get scraped as public static readonly.
+                    // If we see the prefix, force it to be a const
+                    else if (localName.StartsWith(ForceConstPrefix))
+                    {
+                        var newModifiers =
+                            SyntaxFactory.TokenList(
+                                SyntaxFactory.Token(SyntaxKind.PublicKeyword).WithTrailingTrivia(SyntaxFactory.Space),
+                                SyntaxFactory.Token(SyntaxKind.ConstKeyword).WithTrailingTrivia(SyntaxFactory.Space));
+
+                        node = node.WithModifiers(newModifiers).WithLeadingTrivia(node.GetLeadingTrivia());
+
+                        var variable = node.Declaration.Variables.First();
+                        variable = variable.WithIdentifier(SyntaxFactory.ParseToken(localName.Substring(ForceConstPrefix.Length)));
+                        node = node.WithDeclaration(node.Declaration.WithVariables(SyntaxFactory.SingletonSeparatedList(variable)));
+
+                        return node;
+                    }
                 }
 
                 node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
@@ -472,6 +495,22 @@ namespace ClangSharpSourceToWinmd
                             SyntaxFactory.ParseAttributeArgumentList($"(\"{staticLib}\")"))));
 
                     node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                }
+
+                // See if there are any attributes directly on the method
+                if (this.GetRemapInfo(fullName, out List<AttributeSyntax> methodAttributes, null, out _, out _))
+                {
+                    if (methodAttributes != null)
+                    {
+                        foreach (var attrNode in methodAttributes)
+                        {
+                            var attrListNode =
+                                SyntaxFactory.AttributeList(
+                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
+
+                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
+                        }
+                    }
                 }
 
                 // Find remap info for the return parameter for this method and apply any that we find

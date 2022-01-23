@@ -7,7 +7,10 @@ param
     $skipInstallTools,
 
     [switch]
-    $Clean
+    $Clean,
+
+    [switch]
+    $Debug
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -42,5 +45,14 @@ if ($assetsScrapedSeparately)
     $skipScraping = "true"
 }
 
-dotnet build "$windowsWin32ProjectRoot" -c Release -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping
+if ($Debug)
+{
+    $configuration = "Debug"
+}
+else
+{
+    $configuration = "Release"
+}
+
+dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping
 ThrowOnNativeProcessError

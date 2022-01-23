@@ -27,6 +27,7 @@ namespace ClangSharpSourceToWinmd
 
         private const string InteropNamespace = "Windows.Win32.Interop";
         private const string ScannedSuffix = "__scanned__";
+        private const string RemovePrefix = "__remove__";
 
         private const string SystemAssemblyName = "netstandard";
         private const string Win32InteropAssemblyName = "Windows.Win32.Interop";
@@ -197,7 +198,7 @@ namespace ClangSharpSourceToWinmd
 
             generator.PopulateMetadataBuilder();
 
-            if (generator.diagnostics.Count == 0)
+            if (!generator.diagnostics.Any(d => d.Severity == DiagnosticSeverity.Error))
             {
                 generator.WriteWinmd(outputFileName);
             }
@@ -208,6 +209,21 @@ namespace ClangSharpSourceToWinmd
         public ReadOnlyCollection<GeneratorDiagnostic> GetDiagnostics()
         {
             return this.diagnostics.AsReadOnly();
+        }
+
+        private static string FixFinalName(string name)
+        {
+            if (name.StartsWith(RemovePrefix))
+            {
+                name = name.Substring(RemovePrefix.Length);
+            }
+
+            if (name.EndsWith(ScannedSuffix))
+            {
+                name = name.Substring(0, name.Length - ScannedSuffix.Length);
+            }
+
+            return name;
         }
 
         private static byte[] ConvertKeyToByteArray(string key)
@@ -864,7 +880,7 @@ namespace ClangSharpSourceToWinmd
         private void RemapToMoreSpecificTypeIfPossible(
             string owner,
             string name,
-            ImmutableArray<AttributeData> ownerAttributes, 
+            ImmutableArray<AttributeData> ownerAttributes,
             ref ITypeSymbol typeSymbol)
         {
             // Can't do anything without a NativeTypeNameAttribute 
@@ -889,6 +905,13 @@ namespace ClangSharpSourceToWinmd
                 return;
             }
 
+            if (typeSymbol.SpecialType == SpecialType.System_IntPtr && nativeType.Contains("(*)"))
+            {
+                string fullName = $"{owner}.{name}";
+                this.diagnostics.Add(new GeneratorDiagnostic($"{fullName} is a pointer to a function: {nativeType}. To express this properly in metadata, define a delegate and map {fullName} to use it.", DiagnosticSeverity.Warning));
+                return;
+            }
+
             var typeName = typeSymbol.ToString();
 
             // See if we can map from some generic types to a more specific type
@@ -900,6 +923,7 @@ namespace ClangSharpSourceToWinmd
                 typeSymbol.SpecialType == SpecialType.System_UInt64 ||
                 typeSymbol.SpecialType == SpecialType.System_Byte ||
                 typeName.StartsWith("System.IntPtr*") ||
+                typeName.StartsWith("System.UIntPtr*") ||
                 typeName.StartsWith("ushort*") ||
                 typeName.StartsWith("sbyte*") ||
                 typeName.StartsWith("int*") ||
@@ -1090,10 +1114,7 @@ namespace ClangSharpSourceToWinmd
                         continue;
                     }
 
-                    if (name.EndsWith(ScannedSuffix))
-                    {
-                        name = name.Substring(0, name.Length - ScannedSuffix.Length);
-                    }
+                    name = FixFinalName(name);
 
                     if (name.StartsWith("CLSID_"))
                     {
@@ -1539,7 +1560,7 @@ namespace ClangSharpSourceToWinmd
 
                 this.EncodeTypeSymbol(type, signatureEncoder);
 
-                var memberName = member.Identifier.Text;
+                var memberName = FixFinalName(member.Identifier.Text);
                 if (string.IsNullOrEmpty(memberName))
                 {
                     throw new InvalidOperationException($"Enum {node.Identifier.Text} has a member with no name.");
@@ -1690,6 +1711,7 @@ namespace ClangSharpSourceToWinmd
                     case "OptionalAttribute":
                     case "DllImportAttribute":
                     case "NativeInheritanceAttribute":
+                    case "PreserveSigAttribute":
                         continue;
                 }
 
@@ -1807,11 +1829,18 @@ namespace ClangSharpSourceToWinmd
                     methodAttributes |= MethodAttributes.SpecialName;
                 }
 
+                MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
+
+                if (methodSymbol.GetAttributes().Any(a => a.AttributeClass.Name == "PreserveSigAttribute"))
+                {
+                    methodImplAttributes |= MethodImplAttributes.PreserveSig;
+                }
+
                 var methodDef =
                     this.AddMethodViaSymbol(
                         methodSymbol,
                         methodAttributes,
-                        MethodImplAttributes.Managed,
+                        methodImplAttributes,
                         true);
 
                 if (firstMethod.IsNil)
@@ -2131,7 +2160,18 @@ namespace ClangSharpSourceToWinmd
 
                 var paramType = parameterSymbol.Type;
                 var paramName = parameterSymbol.Name;
-                generator.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, paramName, parameterSymbol.GetAttributes(), ref paramType);
+
+                string methodName;
+                if (methodSymbol.ContainingType != null && methodSymbol.ContainingType.Name != "Apis")
+                {
+                    methodName = $"{methodSymbol.ContainingType.Name}.{methodSymbol.Name}";
+                }
+                else
+                {
+                    methodName = methodSymbol.Name;
+                }
+
+                generator.RemapToMoreSpecificTypeIfPossible(methodName, paramName, parameterSymbol.GetAttributes(), ref paramType);
 
                 ParameterAttributes parameterAttributes = ParameterAttributes.None;
                 var symbolAttrs = parameterSymbol.GetAttributes();

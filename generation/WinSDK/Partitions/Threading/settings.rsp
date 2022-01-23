@@ -22,5 +22,6 @@ SignalObjectAndWait
 <IncludeRoot>/um/threadpoolapiset.h
 <IncludeRoot>/um/threadpoollegacyapiset.h
 <IncludeRoot>/um/wow64apiset.h
+<PartitionDir>/main.cpp
 --namespace
 Windows.Win32.System.Threading
