@@ -1870,6 +1870,7 @@ PROCESS_HEAP_ENTRY=Windows.Win32.System.Memory
 CFG_CALL_TARGET_INFO=Windows.Win32.System.Memory
 MEM_EXTENDED_PARAMETER=Windows.Win32.System.Memory
 MEM_EXTENDED_PARAMETER_TYPE=Windows.Win32.System.Memory
+MEM_ADDRESS_REQUIREMENTS=Windows.Win32.System.Memory
 # endregion winnt.h (SLIST per-architecture design also defined in ntdef.h)
 # region winsock2.h
 QOS=Windows.Win32.NetworkManagement.QoS
