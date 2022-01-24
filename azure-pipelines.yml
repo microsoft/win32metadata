@@ -345,7 +345,7 @@ jobs:
     inputs:
       packageType: runtime
       version: 2.1.x
-  - powershell: dotnet tool install -g nbgv
+  - powershell: dotnet tool update --global nbgv
     displayName: ⚙ Install nbgv
   - script: dotnet pack -c $(BuildConfiguration)
     displayName: 📦 dotnet pack
