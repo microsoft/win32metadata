@@ -175,7 +175,7 @@ jobs:
   - task: EsrpCodeSigning@1
     displayName: 'Authenticode Sign Binaries in Metadata package'
     inputs:
-      ConnectedServiceName: 'Undocked RegFree Signing Connection'
+      ConnectedServiceName: 'Xlang Code Signing'
       FolderPath: '$(Build.SourcesDirectory)\bin'
       Pattern: '*.dll,*.winmd'
       signConfigType: 'inlineSignParams'
@@ -218,7 +218,7 @@ jobs:
   - task: EsrpCodeSigning@1
     displayName: Authenticode sign net5.0 binaries in Generator SDK package
     inputs:
-      ConnectedServiceName: 'Undocked RegFree Signing Connection'
+      ConnectedServiceName: 'Xlang Code Signing'
       FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net5.0'
       Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataUtils.dll,WinmdUtils.dll,MetadataTasks.dll'
       signConfigType: 'inlineSignParams'
@@ -282,7 +282,7 @@ jobs:
   - task: EsrpCodeSigning@1
     displayName: 'Sign nuget packages'
     inputs:
-      ConnectedServiceName: 'Undocked RegFree Signing Connection'
+      ConnectedServiceName: 'Xlang Code Signing'
       FolderPath: '$(OutputPackagesDir)'
       Pattern: '*.nupkg'
       signConfigType: 'inlineSignParams'
@@ -353,7 +353,7 @@ jobs:
   - task: EsrpCodeSigning@1
     displayName: ✒ NuGet sign
     inputs:
-      ConnectedServiceName: Undocked RegFree Signing Connection
+      ConnectedServiceName: Xlang Code Signing
       FolderPath: $(System.DefaultWorkingDirectory)/bin/Packages/$(BuildConfiguration)/NuGet
       Pattern: '*.nupkg'
       signConfigType: inlineSignParams
