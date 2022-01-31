@@ -1183,7 +1183,7 @@ namespace ClangSharpSourceToWinmd
                     this.AddMethodViaSymbol(
                         symbol,
                         MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.PinvokeImpl,
-                        MethodImplAttributes.Managed | MethodImplAttributes.PreserveSig,
+                        MethodImplAttributes.Managed,
                         false);
                 if (firstMethod.IsNil)
                 {
