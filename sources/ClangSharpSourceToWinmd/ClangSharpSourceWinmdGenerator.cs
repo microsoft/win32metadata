@@ -1179,11 +1179,17 @@ namespace ClangSharpSourceToWinmd
 
                 methodName = FixArchSpecificName(methodName);
 
+                MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
+                if (symbol.GetAttributes().Any(a => a.AttributeClass.Name == "PreserveSigAttribute"))
+                {
+                    methodImplAttributes |= MethodImplAttributes.PreserveSig;
+                }
+
                 var methodDef =
                     this.AddMethodViaSymbol(
                         symbol,
                         MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.PinvokeImpl,
-                        MethodImplAttributes.Managed | MethodImplAttributes.PreserveSig,
+                        methodImplAttributes,
                         false);
                 if (firstMethod.IsNil)
                 {
