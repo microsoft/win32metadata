@@ -820,3 +820,4 @@ AppPolicyGetThreadInitializationType::return=WIN32_ERROR
 AppPolicyGetShowDeveloperDiagnostic::return=WIN32_ERROR
 AppPolicyGetProcessTerminationMethod::return=WIN32_ERROR
 AppPolicyGetCreateFileAccess::return=WIN32_ERROR
+WAVEHDR::lpData=[NotNullTerminated]
