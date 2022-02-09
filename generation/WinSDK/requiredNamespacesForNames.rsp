@@ -2410,3 +2410,9 @@ PROPSPEC_KIND=Windows.Win32.System.Com.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.Ole
 # endregion wtypes.h
+# region richedit.h
+WM_CONTEXTMENU=Windows.Win32.UI.WindowsAndMessaging
+WM_UNICHAR=Windows.Win32.UI.WindowsAndMessaging
+WM_PRINTCLIENT=Windows.Win32.UI.WindowsAndMessaging
+WM_NOTIFY=Windows.Win32.UI.WindowsAndMessaging
+# endregion
