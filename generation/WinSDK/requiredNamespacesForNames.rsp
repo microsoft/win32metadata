@@ -511,6 +511,12 @@ StgSerializePropVariant=Windows.Win32.System.Com.StructuredStorage
 # region reconcil.h
 INotifyReplica=Windows.Win32.UI.Shell
 # endregion reconcil.h
+# region richedit.h
+WM_CONTEXTMENU=Windows.Win32.UI.WindowsAndMessaging
+WM_UNICHAR=Windows.Win32.UI.WindowsAndMessaging
+WM_PRINTCLIENT=Windows.Win32.UI.WindowsAndMessaging
+WM_NOTIFY=Windows.Win32.UI.WindowsAndMessaging
+# endregion
 # region securitybaseapi.h
 CveEventWrite=Windows.Win32.System.Diagnostics.Etw
 # endregion securitybaseapi.h
@@ -2410,9 +2416,3 @@ PROPSPEC_KIND=Windows.Win32.System.Com.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.Ole
 # endregion wtypes.h
-# region richedit.h
-WM_CONTEXTMENU=Windows.Win32.UI.WindowsAndMessaging
-WM_UNICHAR=Windows.Win32.UI.WindowsAndMessaging
-WM_PRINTCLIENT=Windows.Win32.UI.WindowsAndMessaging
-WM_NOTIFY=Windows.Win32.UI.WindowsAndMessaging
-# endregion
