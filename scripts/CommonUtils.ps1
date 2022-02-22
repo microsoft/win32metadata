@@ -8,7 +8,12 @@ $sdkGeneratedSourceDir = "$windowsWin32ProjectRoot\obj\generated"
 $recompiledIdlHeadersDir = "$windowsWin32ProjectRoot\RecompiledIdlHeaders"
 $metadataToolsBin = "$binDir\release\net5.0"
 
-Set-StrictMode -Version Latest
+# [VS 1673159]
+# Temporarily disable strict mode to address bug introduced
+# in Visual Studio 17.1.0 that impacts vsdevshell launch
+#
+# Set-StrictMode -Version Latest
+
 $ErrorActionPreference = "Stop"
 
 # This messes up parallel loops
