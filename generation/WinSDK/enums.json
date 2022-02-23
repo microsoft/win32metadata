@@ -11276,6 +11276,30 @@
     ]
   },
   {
+    "name": "ICM_MODE",
+    "type": "int",
+    "members": [
+      {
+        "name": "ICM_OFF"
+      },
+      {
+        "name": "ICM_ON"
+      },
+      {
+        "name": "ICM_QUERY"
+      },
+      {
+        "name": "ICM_DONE_OUTSIDEDC"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SetICMMode",
+        "parameter": "mode"
+      }
+    ]
+  },
+  {
     "name": "USER_OBJECT_INFORMATION_INDEX",
     "members": [
       {
