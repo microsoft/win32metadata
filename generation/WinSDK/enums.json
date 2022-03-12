@@ -29566,5 +29566,143 @@
         "field": "Parity"
       }
     ]
+  },
+  {
+    "name": "PFD_PIXEL_TYPE",
+    "flags": false,
+    "type": "sbyte",
+    "members": [
+      {
+        "name": "PFD_TYPE_RGBA",
+        "value": 0
+      },
+      {
+        "name": "PFD_TYPE_COLORINDEX",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PIXELFORMATDESCRIPTOR",
+        "field": "iPixelType"
+      },
+      {
+        "method": "DescribePixelFormat",
+        "parameter": "iPixelFormat"
+      }
+    ]
+  },
+  {
+    "name": "PFD_LAYER_TYPE",
+    "flags": false,
+    "type": "sbyte",
+    "members": [
+      {
+        "name": "PFD_UNDERLAY_PLANE",
+        "value": -1
+      },
+      {
+        "name": "PFD_MAIN_PLANE",
+        "value": 0
+      },
+      {
+        "name": "PFD_OVERLAY_PLANE",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PIXELFORMATDESCRIPTOR",
+        "field": "iLayerType"
+      }
+    ]
+  },
+  {
+    "name": "PFD_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "PFD_DOUBLEBUFFER",
+        "value": 1
+      },
+      {
+        "name": "PFD_STEREO",
+        "value": 2
+      },
+      {
+        "name": "PFD_DRAW_TO_WINDOW",
+        "value": 4
+      },
+      {
+        "name": "PFD_DRAW_TO_BITMAP",
+        "value": 8
+      },
+      {
+        "name": "PFD_SUPPORT_GDI",
+        "value": "0x10"
+      },
+      {
+        "name": "PFD_SUPPORT_OPENGL",
+        "value": "0x20"
+      },
+      {
+        "name": "PFD_GENERIC_FORMAT",
+        "value": "0x40"
+      },
+      {
+        "name": "PFD_NEED_PALETTE",
+        "value": "0x80"
+      },
+      {
+        "name": "PFD_NEED_SYSTEM_PALETTE",
+        "value": "0x100"
+      },
+      {
+        "name": "PFD_SWAP_EXCHANGE",
+        "value": "0x200"
+      },
+      {
+        "name": "PFD_SWAP_COPY",
+        "value": "0x400"
+      },
+      {
+        "name": "PFD_SWAP_LAYER_BUFFERS",
+        "value": "0x800"
+      },
+      {
+        "name": "PFD_GENERIC_ACCELERATED",
+        "value": "0x1000"
+      },
+      {
+        "name": "PFD_SUPPORT_DIRECTDRAW",
+        "value": "0x2000"
+      },
+      {
+        "name": "PFD_DIRECT3D_ACCELERATED",
+        "value": "0x4000"
+      },
+      {
+        "name": "PFD_SUPPORT_COMPOSITION",
+        "value": "0x8000"
+      },
+      {
+        "name": "PFD_DEPTH_DONTCARE",
+        "value": "0x20000000"
+      },
+      {
+        "name": "PFD_DOUBLEBUFFER_DONTCARE",
+        "value": "0x40000000"
+      },
+      {
+        "name": "PFD_STEREO_DONTCARE",
+        "value": "0x80000000"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PIXELFORMATDESCRIPTOR",
+        "field": "dwFlags"
+      }
+    ]
   }
 ]
