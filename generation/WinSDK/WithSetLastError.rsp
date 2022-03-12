@@ -744,10 +744,16 @@ DialogBoxIndirectParamA
 DialogBoxIndirectParamW
 DialogBoxParamA
 DialogBoxParamW
+DiInstallDevice
+DiInstallDriverA
+DiInstallDriverW
+DiRollbackDriver
 DisableThreadLibraryCalls
 DisconnectNamedPipe
 DiShowUpdateDevice
 DiUninstallDevice
+DiUninstallDriverA
+DiUninstallDriverW
 DlgDirListComboBoxA
 DlgDirListComboBoxW
 DlgDirSelectComboBoxExA
@@ -2994,6 +3000,8 @@ UnregisterWait
 UnregisterWaitEx
 UnregisterWaitUntilOOBECompleted
 UpdateDebugInfoFile
+UpdateDriverForPlugAndPlayDevicesA
+UpdateDriverForPlugAndPlayDevicesW
 UpdateLayeredWindow
 UpdateProcThreadAttribute
 UpdateResourceA
