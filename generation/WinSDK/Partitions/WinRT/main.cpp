@@ -41,3 +41,4 @@
 #include <systemmediatransportcontrolsinterop.h>
 #include <sharewindowcommandsourceinterop.h>
 #include <messagedispatcherapi.h>
+#include <CoreWindow.h>

@@ -27,6 +27,7 @@ ID2D1Factory
 <IncludeRoot>/um/UserConsentVerifierInterop.h
 <IncludeRoot>/um/WebAuthenticationCoreManagerInterop.h
 <IncludeRoot>/winrt/activation.h
+<IncludeRoot>/winrt/corewindow.h
 <IncludeRoot>/winrt/hstring.h
 <IncludeRoot>/winrt/inspectable.h
 <IncludeRoot>/winrt/memorybuffer.h
