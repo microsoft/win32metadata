@@ -447,6 +447,7 @@ CoCreateInstance::dwClsContext=CLSCTX
 CoCreateInstanceEx::dwClsCtx=CLSCTX
 CoCreateInstanceFromApp::dwClsCtx=CLSCTX
 CoRegisterClassObject::dwClsContext=CLSCTX
+CoRegisterClassObject::flags=REGCLS
 CoGetClassObject::dwClsContext=CLSCTX
 CoGetClassObjectFromURL::dwClsContext=CLSCTX
 CoGetInstanceFromFile::dwClsCtx=CLSCTX
