@@ -269,6 +269,9 @@ MPEGLAYER3WAVEFORMAT=Windows.Win32.Media.DirectShow
 # region ntifs.h
 RtlConvertSidToUnicodeString=Windows.Win32.Security
 # endregion ntifs.h
+# region ntstatus.h (also defined in wincred.h)
+STATUS_ACCESS_DENIED=Windows.Win32.Foundation
+# endregion
 # region oaidl.h
 SAFEARRAY=Windows.Win32.System.Com
 SAFEARRAYBOUND=Windows.Win32.System.Com
