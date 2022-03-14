@@ -28,5 +28,7 @@
 <IncludeRoot>/um/routprot.h
 <IncludeRoot>/um/rtinfo.h
 <IncludeRoot>/um/rtutils.h
+--exclude
+INetCfgComponentUpperEdge
 --namespace
 Windows.Win32.NetworkManagement.NetManagement
