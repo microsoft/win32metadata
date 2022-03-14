@@ -24181,6 +24181,7 @@
   },
   {
     "name": "RAWINPUTDEVICE_FLAGS",
+    "flags": true,
     "members": [
       {
         "name": "RIDEV_REMOVE",
