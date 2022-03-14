@@ -91,7 +91,7 @@ function Install-BuildTools
     & dotnet build "$rootDir\buildtools" -c Release
     ThrowOnNativeProcessError
 
-    Update-VsInstallDir
+    Install-VsDevShell
 }
 
 function Replace-Text
@@ -191,22 +191,8 @@ function Get-VcDirPath
     return $null
 }
 
-function Update-VsInstallDir
-{
-    if (!$env:VSINSTALLDIR)
-    {
-        Install-VsDevShell
-        #$vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-        #$dir = & $vswhere -latest -property installationPath
-
-        #$env:VSINSTALLDIR = $dir + "\"
-    }
-}
-
 function Install-VsDevShell
 {
-    #$env:VSINSTALLDIR = $null
-
     if (!$env:VSINSTALLDIR)
     {
         $currentDir = Get-Location

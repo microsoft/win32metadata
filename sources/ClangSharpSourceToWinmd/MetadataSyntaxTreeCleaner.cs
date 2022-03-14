@@ -779,12 +779,17 @@ namespace ClangSharpSourceToWinmd
                         else if (salAttr.P1.StartsWith("__RPC__"))
                         {
                             // TODO: Handle ecount, xcount and others that deal with counts
+                            bool deref = false;
 
                             string[] parts = salAttr.P1.Split('_');
                             foreach (var part in parts)
                             {
                                 switch (part)
                                 {
+                                    case "deref":
+                                        deref = true;
+                                        break;
+
                                     case "in":
                                         isIn = true;
                                         break;
@@ -798,6 +803,12 @@ namespace ClangSharpSourceToWinmd
                                         break;
 
                                     case "opt":
+                                        // As per rpcsal.h, deref_opt means input optional but deref_***_opt doesn't
+                                        if (deref && (isIn || isOut))
+                                        {
+                                            continue;
+                                        }
+
                                         isOpt = true;
                                         break;
                                 }
