@@ -1201,5 +1201,10 @@
     "Namespace": "Windows.Win32.Security.Cryptography",
     "Name": "HCERTSTOREPROV",
     "ValueType": "void*"
+  },
+  {
+    "Namespace": "Windows.Win32.Security",
+    "Name": "PSECURITY_DESCRIPTOR",
+    "ValueType": "void*"
   }
 ]
