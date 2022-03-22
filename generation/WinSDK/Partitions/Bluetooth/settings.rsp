@@ -1,10 +1,10 @@
 --traverse
-<IncludeRoot>/um/ws2bth.h
-<IncludeRoot>/um/bluetoothapis.h
-<IncludeRoot>/um/bthledef.h
 <IncludeRoot>/shared/bthdef.h
-<IncludeRoot>/shared/bthsdpdef.h
-<IncludeRoot>/um/bluetoothleapis.h
 <IncludeRoot>/shared/bthioctl.h
+<IncludeRoot>/shared/bthsdpdef.h
+<IncludeRoot>/um/bluetoothapis.h
+<IncludeRoot>/um/bluetoothleapis.h
+<IncludeRoot>/um/bthledef.h
+<IncludeRoot>/um/ws2bth.h
 --namespace
 Windows.Win32.Devices.Bluetooth
