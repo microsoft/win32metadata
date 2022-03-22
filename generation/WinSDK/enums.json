@@ -4884,6 +4884,7 @@
   },
   {
     "name": "ADDRESS_FAMILY",
+    "namespace": "Windows.Win32.Networking.WinSock",
     "members": [
       {
         "name": "AF_INET",
