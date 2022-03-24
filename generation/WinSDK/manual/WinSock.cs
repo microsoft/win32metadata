@@ -22,5 +22,7 @@ namespace Windows.Win32.Networking.WinSock
         public const int SIOCSLOWAT = -2147192062;
         public const int SIOCGLOWAT = 1074033411;
         public const int SIOCATMARK = 1074033415;
+
+        public const ushort POLLIN = POLLRDNORM | POLLRDBAND;
     }
 }
