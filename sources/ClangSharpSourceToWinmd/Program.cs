@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 
 namespace ClangSharpSourceToWinmd
@@ -88,7 +89,18 @@ namespace ClangSharpSourceToWinmd
 
             try
             {
-                NativeTypedefStructsCreator.CreateNativeTypedefsSourceFile(methodNamesToNamespaces, autoTypeFiles, Path.Combine(archSourceDir, "autotypes.cs"));
+                var autoTypes = AutoTypeHelpers.GetAutoTypesFromFiles(autoTypeFiles);
+                if (autoTypes.Any())
+                {
+                    var outputFilePath = Path.Combine(archSourceDir, "autotypes.cs");
+                    if (!Directory.Exists(Path.GetDirectoryName(outputFilePath)))
+                    {
+                        Directory.CreateDirectory(Path.GetDirectoryName(outputFilePath));
+                    }
+
+                    using var fileStream = new FileStream(outputFilePath, FileMode.Create, FileAccess.Write, FileShare.Read);
+                    NativeTypedefStructsCreator.WriteToStream(methodNamesToNamespaces, autoTypes, fileStream);
+                }
             }
             catch (Exception e)
             {

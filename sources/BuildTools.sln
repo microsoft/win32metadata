@@ -75,6 +75,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VtablesFromPdb", "..\tests\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetadataUtils.Tests", "..\tests\MetadataUtils.Tests\MetadataUtils.Tests.csproj", "{A9D8A468-5027-405F-A334-6A360EC2D019}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangSharpSourceToWinmdTests", "..\tests\ClangSharpSourceToWinmdTests\ClangSharpSourceToWinmdTests.csproj", "{08564AA9-C7EB-4095-BB53-49833A9FDE1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -203,6 +205,18 @@ Global
 		{A9D8A468-5027-405F-A334-6A360EC2D019}.Release|x64.Build.0 = Release|Any CPU
 		{A9D8A468-5027-405F-A334-6A360EC2D019}.Release|x86.ActiveCfg = Release|Any CPU
 		{A9D8A468-5027-405F-A334-6A360EC2D019}.Release|x86.Build.0 = Release|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Debug|x64.Build.0 = Debug|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Debug|x86.Build.0 = Debug|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Release|x64.ActiveCfg = Release|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Release|x64.Build.0 = Release|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Release|x86.ActiveCfg = Release|Any CPU
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -216,6 +230,7 @@ Global
 		{39AEB794-C1A5-4A2B-A860-0DEF2082F263} = {C3EAC69E-9456-4B3A-9BFD-41D387716EE2}
 		{0045FF95-AC14-4C51-B348-E8A5E51E90BC} = {C3EAC69E-9456-4B3A-9BFD-41D387716EE2}
 		{A9D8A468-5027-405F-A334-6A360EC2D019} = {C3EAC69E-9456-4B3A-9BFD-41D387716EE2}
+		{08564AA9-C7EB-4095-BB53-49833A9FDE1E} = {C3EAC69E-9456-4B3A-9BFD-41D387716EE2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {156D7600-E986-417B-9D16-E6FA1039AF42}
