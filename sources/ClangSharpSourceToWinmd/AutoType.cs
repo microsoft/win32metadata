@@ -9,6 +9,6 @@ namespace ClangSharpSourceToWinmd
         public string ValueType { get; set; }
         public string CloseApi { get; set; }
         public string AlsoUsableFor { get; set; }
-        public ulong? InvalidHandleValue { get; set; }
+        public long? InvalidHandleValue { get; set; }
     }
 }
