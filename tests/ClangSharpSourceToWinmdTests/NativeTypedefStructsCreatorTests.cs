@@ -10,7 +10,7 @@ namespace ClangSharpSourceToWinmdTests
     public class NativeTypedefStructsCreatorTests
     {
         [TestMethod]
-        public void NativeTypedefStructsGenerator_NegativeInvalidHandleValue_ValidUnsignedLongGenerated()
+        public void NativeTypedefStructsGenerator_NegativeSingularInvalidHandleValue_ValidAttributeGenerated()
         {
             // Arrange
             var methodNameToNamespacesMap = new Dictionary<string, string>
@@ -20,7 +20,7 @@ namespace ClangSharpSourceToWinmdTests
 
             var autoTypes = new AutoType[]
             {
-                new AutoType { Name = "FindVolumeHandle", ValueType = "IntPtr", CloseApi = "FindVolumeClose", InvalidHandleValue = -1 }
+                new AutoType { Name = "FindVolumeHandle", ValueType = "IntPtr", CloseApi = "FindVolumeClose", InvalidHandleValues = new long[] { -1 } }
             };
 
             using var stream = new MemoryStream();
@@ -34,7 +34,7 @@ namespace ClangSharpSourceToWinmdTests
         }
 
         [TestMethod]
-        public void NativeTypedefStructsGenerator_ZeroInvalidHandleValue_ValidUnsignedLongGenerated()
+        public void NativeTypedefStructsGenerator_ZeroSingularInvalidHandleValue_ValidAttributeGenerated()
         {
             // Arrange
             var methodNameToNamespacesMap = new Dictionary<string, string>
@@ -44,7 +44,7 @@ namespace ClangSharpSourceToWinmdTests
 
             var autoTypes = new AutoType[]
             {
-                new AutoType { Name = "JET_INSTANCE", ValueType = "UIntPtr", Namespace = "Windows.Win32.Storage.StructuredStorage", InvalidHandleValue = 0 }
+                new AutoType { Name = "JET_INSTANCE", ValueType = "UIntPtr", Namespace = "Windows.Win32.Storage.StructuredStorage", InvalidHandleValues = new long[] { 0 } }
             };
 
             using var stream = new MemoryStream();
@@ -58,7 +58,7 @@ namespace ClangSharpSourceToWinmdTests
         }
 
         [TestMethod]
-        public void NativeTypedefStructsGenerator_PositiveInvalidHandleValue_ValidUnsignedLongGenerated()
+        public void NativeTypedefStructsGenerator_PositiveSingularInvalidHandleValue_ValidAttributeGenerated()
         {
             // Arrange
             var methodNameToNamespacesMap = new Dictionary<string, string>
@@ -68,7 +68,7 @@ namespace ClangSharpSourceToWinmdTests
 
             var autoTypes = new AutoType[]
             {
-                new AutoType { Name = "FAUX_HANDLE", ValueType = "IntPtr", Namespace = "Windows.Win32.Nonexistent", InvalidHandleValue = 1 }
+                new AutoType { Name = "FAUX_HANDLE", ValueType = "IntPtr", Namespace = "Windows.Win32.Nonexistent", InvalidHandleValues = new long[] { 1 } }
             };
 
             using var stream = new MemoryStream();
@@ -79,6 +79,114 @@ namespace ClangSharpSourceToWinmdTests
 
             // Assert
             AssertGeneratedStructStreamContainsAttribute(stream, expectedAttribute);
+        }
+
+        [TestMethod]
+        public void NativeTypedefStructsGenerator_NegativeMultipleInvalidHandleValues_ValidAttributesGenerated()
+        {
+            // Arrange
+            var methodNameToNamespacesMap = new Dictionary<string, string>
+            {
+                { "FindVolumeClose", "Windows.Win32.Storage.FileSystem" },
+            };
+
+            var autoTypes = new AutoType[]
+            {
+                new AutoType
+                {
+                    Name = "FindVolumeHandle",
+                    ValueType = "IntPtr",
+                    CloseApi = "FindVolumeClose",
+                    InvalidHandleValues = new long[] { long.MinValue, -1 }
+                }
+            };
+
+            using var stream = new MemoryStream();
+            var expectedAttributes = new[] {
+                "[InvalidHandleValue(-9223372036854775808)]",
+                "[InvalidHandleValue(-1)]",
+            };
+
+            // Act
+            NativeTypedefStructsCreator.WriteToStream(methodNameToNamespacesMap, autoTypes, stream);
+
+            // Assert
+            AssertGeneratedStructStreamContainsAttributes(stream, expectedAttributes);
+        }
+
+        [TestMethod]
+        public void NativeTypedefStructsGenerator_ZeroMultipleInvalidHandleValues_ValidAttributesGenerated()
+        {
+            // Arrange
+            var methodNameToNamespacesMap = new Dictionary<string, string>
+            {
+                { "JET_INSTANCE", "Windows.Win32.Storage.StructuredStorage" },
+            };
+
+            var autoTypes = new AutoType[]
+            {
+                new AutoType
+                {
+                    Name = "JET_INSTANCE",
+                    ValueType = "UIntPtr",
+                    Namespace = "Windows.Win32.Storage.StructuredStorage",
+                    InvalidHandleValues = new long[] { 0, long.MaxValue }
+                }
+            };
+
+            using var stream = new MemoryStream();
+            var expectedAttributes = new[] {
+                "[InvalidHandleValue(0)]",
+                "[InvalidHandleValue(9223372036854775807)]",
+            };
+
+            // Act
+            NativeTypedefStructsCreator.WriteToStream(methodNameToNamespacesMap, autoTypes, stream);
+
+            // Assert
+            AssertGeneratedStructStreamContainsAttributes(stream, expectedAttributes);
+        }
+
+        [TestMethod]
+        public void NativeTypedefStructsGenerator_PositiveMultipleInvalidHandleValues_ValidAttributesGenerated()
+        {
+            // Arrange
+            var methodNameToNamespacesMap = new Dictionary<string, string>
+            {
+                { "JET_INSTANCE", "Windows.Win32.Storage.StructuredStorage" },
+            };
+
+            var autoTypes = new AutoType[]
+            {
+                new AutoType
+                {
+                    Name = "FAUX_HANDLE",
+                    ValueType = "IntPtr",
+                    Namespace = "Windows.Win32.Nonexistent",
+                    InvalidHandleValues = new long[] { long.MinValue, 0, long.MaxValue }
+                }
+            };
+
+            using var stream = new MemoryStream();
+            var expectedAttributes = new[] {
+                "[InvalidHandleValue(-9223372036854775808)]",
+                "[InvalidHandleValue(0)]",
+                "[InvalidHandleValue(9223372036854775807)]",
+            };
+
+            // Act
+            NativeTypedefStructsCreator.WriteToStream(methodNameToNamespacesMap, autoTypes, stream);
+
+            // Assert
+            AssertGeneratedStructStreamContainsAttributes(stream, expectedAttributes);
+        }
+
+        private static void AssertGeneratedStructStreamContainsAttributes(MemoryStream stream, IEnumerable<string> attributes)
+        {
+            foreach (var attribute in attributes)
+            {
+                AssertGeneratedStructStreamContainsAttribute(stream, attribute);
+            }
         }
 
         private static void AssertGeneratedStructStreamContainsAttribute(MemoryStream stream, string attribute)

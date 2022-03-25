@@ -72,9 +72,12 @@ $@"namespace {currentNamespace}
                     writer.WriteLine($"    [AlsoUsableFor(\"{item.AlsoUsableFor}\")]");
                 }
 
-                if (item.InvalidHandleValue.HasValue)
+                if (item.InvalidHandleValues != null)
                 {
-                    writer.WriteLine($"    [InvalidHandleValue({item.InvalidHandleValue.Value})]");
+                    foreach (var invalidHandle in item.InvalidHandleValues)
+                    {
+                        writer.WriteLine($"    [InvalidHandleValue({invalidHandle})]");
+                    }
                 }
 
                 writer.WriteLine(
