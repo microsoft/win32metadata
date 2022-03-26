@@ -10,7 +10,7 @@ namespace ClangSharpSourceToWinmd
         public static IEnumerable<AutoType> GetAutoTypesFromFiles(IEnumerable<string> filePaths)
         {
             var settings = new JsonSerializerSettings { NullValueHandling = NullValueHandling.Ignore };
-            return filePaths.SelectMany(filePath => JsonConvert.DeserializeObject<AutoType[]>(File.ReadAllText(filePath), settings));
+            return filePaths?.SelectMany(filePath => JsonConvert.DeserializeObject<AutoType[]>(File.ReadAllText(filePath), settings));
         }
     }
 }

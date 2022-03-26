@@ -90,7 +90,7 @@ namespace ClangSharpSourceToWinmd
             try
             {
                 var autoTypes = AutoTypeHelpers.GetAutoTypesFromFiles(autoTypeFiles);
-                if (autoTypes.Any())
+                if (autoTypes != null && autoTypes.Any())
                 {
                     var outputFilePath = Path.Combine(archSourceDir, "autotypes.cs");
                     if (!Directory.Exists(Path.GetDirectoryName(outputFilePath)))
