@@ -366,3 +366,4 @@ MigrationBackup/
 !/tests/MetadataUtils.Tests/assets/x64
 !/tests/MetadataUtils.Tests/assets/x86
 !/tests/MetadataUtils.Tests/assets/arm64
+/.vscode

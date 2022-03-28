@@ -47,6 +47,28 @@ namespace MetadataUtils
             return node.Members.Count == 0 && hasNoImportantAttributes;
         }
 
+        public static SyntaxList<AttributeListSyntax> RemoveAttribute(SyntaxList<AttributeListSyntax> attributeLists, string name)
+        {
+            foreach (var attrList in attributeLists.ToArray())
+            {
+                foreach (var attr in attrList.Attributes)
+                {
+                    if (attr.Name.ToString() == name)
+                    {
+                        attributeLists = attributeLists.Remove(attrList);
+
+                        var newAttrList = attrList.RemoveNode(attr, SyntaxRemoveOptions.KeepNoTrivia);
+                        if (newAttrList.Attributes.Count != 0)
+                        {
+                            attributeLists = attributeLists.Add(newAttrList);
+                        }
+                    }
+                }
+            }
+
+            return attributeLists;
+        }
+
         public static AttributeSyntax GetAttribute(SyntaxList<AttributeListSyntax> attributeLists, string name)
         {
             foreach (var attrList in attributeLists)
