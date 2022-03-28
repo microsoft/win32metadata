@@ -333,7 +333,8 @@
   {
     "Name": "FindVolumeHandle",
     "ValueType": "IntPtr",
-    "CloseApi": "FindVolumeClose"
+    "CloseApi": "FindVolumeClose",
+    "InvalidHandleValues": [-1]
   },
   {
     "Name": "FindVolumeMointPointHandle",
