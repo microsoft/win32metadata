@@ -96,6 +96,18 @@ namespace MetadataUtils
             private List<string> output = new List<string>();
             private List<string> suggestedEnumRenames = new List<string>();
 
+            // TODO: These could come from a file so we can edit a .json file instead
+            // of the code
+            private static readonly RegexConstMaker[] regexConstMakers = new RegexConstMaker[]
+            {
+                new RegexConstMaker() { Pattern = @"_WSAIO\((.+),(.+)\)", ConstType = "uint", OutputFormat = "(IOC_VOID|({0})|({1}))" },
+                new RegexConstMaker() { Pattern = @"_WSAIOR\((.+),(.+)\)", ConstType = "uint", OutputFormat = "(IOC_OUT|({0})|({1}))" },
+                new RegexConstMaker() { Pattern = @"_WSAIOW\((.+),(.+)\)", ConstType = "uint", OutputFormat = "(IOC_IN|({0})|({1}))" },
+                new RegexConstMaker() { Pattern = @"_WSAIORW\((.+),(.+)\)", ConstType = "uint", OutputFormat = "(IOC_INOUT|({0})|({1}))" },
+            };
+
+            private RegexConstHelper regexConstHelper;
+
             public ConstantsScraperImpl()
             {
             }
@@ -119,6 +131,8 @@ namespace MetadataUtils
                 this.withAttributes = withAttributes;
                 this.scraperOutputDir = scraperOutputDir;
                 this.defaultNamespace = defaultNamespace;
+
+                this.regexConstHelper = new RegexConstHelper(regexConstMakers, this);
 
                 this.scannedNamesToNamespaces = ScraperUtils.GetNameToNamespaceMap(scraperOutputDir);
 
@@ -548,6 +562,12 @@ namespace MetadataUtils
                             continue;
                         }
 
+#if DEBUG
+                        if (name == "SOME_CONST_NAME")
+                        {
+                        }
+#endif
+
                         // Get rid of trailing comments
                         string rawValue = StripComments(defineMatch.Groups[2].Value.Trim());
 
@@ -607,6 +627,11 @@ namespace MetadataUtils
                             var nativeStrType = intCastToLpcstrMatch.Groups[1].Value;
                             var value = intCastToLpcstrMatch.Groups[2].Value;
                             this.AddConstantInteger(currentNamespace, nativeStrType, name, value);
+                            continue;
+                        }
+
+                        if (this.regexConstHelper.TryProcessingLine(currentNamespace, name, fixedRawValue))
+                        {
                             continue;
                         }
 
@@ -998,6 +1023,72 @@ namespace MetadataUtils
                     this.output.Add("Suggested enum names:");
                     this.output.AddRange(this.suggestedEnumRenames);
                     this.suggestedEnumRenames.Clear();
+                }
+            }
+
+            private class RegexConstMaker
+            {
+                public string Pattern { get; set; }
+                public string OutputFormat { get; set; }
+                public string ConstType { get; set; }
+            }
+
+            private class RegexConstHelper
+            {
+                private ConstantsScraperImpl owner;
+                private List<RegexConstMakerProcessor> processors = new List<RegexConstMakerProcessor>();
+
+                public RegexConstHelper(RegexConstMaker[] regexConstMakers, ConstantsScraperImpl owner)
+                {
+                    this.owner = owner;
+                    foreach (var maker in regexConstMakers)
+                    {
+                        this.processors.Add(new RegexConstMakerProcessor(maker));
+                    }
+                }
+
+                public bool TryProcessingLine(string originalNamespace, string constName, string value)
+                {
+                    foreach (var processor in this.processors)
+                    {
+                        if (processor.TryProcessingItem(this.owner, originalNamespace, constName, value))
+                        {
+                            return true;
+                        }
+                    }
+
+                    return false;
+                }
+
+                private class RegexConstMakerProcessor
+                {
+                    private Regex regex;
+                    private RegexConstMaker maker;
+
+                    public RegexConstMakerProcessor(RegexConstMaker maker)
+                    {
+                        this.regex = new Regex(maker.Pattern);
+                        this.maker = maker;
+                    }
+
+                    public bool TryProcessingItem(ConstantsScraperImpl scraper, string originalNamespace, string constName, string value)
+                    {
+                        var match = this.regex.Match(value);
+                        if (match.Success)
+                        {
+                            List<string> items = new List<string>();
+                            for (int i = 1; i < match.Groups.Count; i++)
+                            {
+                                items.Add(match.Groups[i].Value);
+                            }
+
+                            string finalValue = string.Format(this.maker.OutputFormat, items.ToArray());
+                            scraper.AddConstantValue(originalNamespace, this.maker.ConstType, constName, finalValue);
+                            return true;
+                        }
+
+                        return false;
+                    }
                 }
             }
         }
