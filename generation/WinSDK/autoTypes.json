@@ -2,21 +2,18 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "BOOL",
-    "ValueType": "int",
-    "InvalidHandleValues": []
+    "ValueType": "int"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "BOOLEAN",
-    "ValueType": "byte",
-    "InvalidHandleValues": []
+    "ValueType": "byte"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "BSTR",
     "ValueType": "char*",
-    "CloseApi": "SysFreeString",
-    "InvalidHandleValues": []
+    "CloseApi": "SysFreeString"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
@@ -29,62 +26,52 @@
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HINSTANCE",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "FreeLibrary",
-    "InvalidHandleValues": []
+    "CloseApi": "FreeLibrary"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HRESULT",
-    "ValueType": "int",
-    "InvalidHandleValues": []
+    "ValueType": "int"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HWND",
-    "ValueType": "DECLARE_HANDLE",
-    "InvalidHandleValues": []
+    "ValueType": "DECLARE_HANDLE"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "LPARAM",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": []
+    "ValueType": "IntPtr"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "LRESULT",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": []
+    "ValueType": "IntPtr"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "NTSTATUS",
-    "ValueType": "int",
-    "InvalidHandleValues": []
+    "ValueType": "int"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "PSID",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": []
+    "ValueType": "IntPtr"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "PSTR",
-    "ValueType": "byte*",
-    "InvalidHandleValues": []
+    "ValueType": "byte*"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "PWSTR",
-    "ValueType": "char*",
-    "InvalidHandleValues": []
+    "ValueType": "char*"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "WPARAM",
-    "ValueType": "UIntPtr",
-    "InvalidHandleValues": []
+    "ValueType": "UIntPtr"
   },
   {
     "Namespace": "Windows.Win32.System.DataExchange",
@@ -355,8 +342,7 @@
   {
     "Name": "PTP_POOL",
     "ValueType": "IntPtr",
-    "CloseApi": "CloseThreadpool",
-    "InvalidHandleValues": []
+    "CloseApi": "CloseThreadpool"
   },
   {
     "Name": "NamespaceHandle",
@@ -625,8 +611,7 @@
   {
     "Namespace": "Windows.Win32.UI.Animation",
     "Name": "UI_ANIMATION_KEYFRAME",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": []
+    "ValueType": "IntPtr"
   },
   {
     "Namespace": "Windows.Win32.UI.TabletPC",
@@ -1057,8 +1042,7 @@
   {
     "Namespace": "Windows.Win32.System.SystemInformation",
     "Name": "FIRMWARE_TABLE_ID",
-    "ValueType": "uint",
-    "InvalidHandleValues": []
+    "ValueType": "uint"
   },
   {
     "Namespace": "Windows.Win32.Storage.CloudFilters",
@@ -1069,176 +1053,147 @@
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutdata",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutdatalistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutlistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutobj",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutobjectdescription",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_aboutproxy",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_applicationstatelistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_authlistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_autopinger",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_busattachment",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_buslistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_busobject",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_credentials",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_interfacedescription",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_keystore",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_keystorelistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_message",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_msgarg",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_observer",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_observerlistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_permissionconfigurationlistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_permissionconfigurator",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_pinglistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_proxybusobject",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_proxybusobject_ref",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_securityapplicationproxy",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_sessionlistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_sessionopts",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Namespace": "Windows.Win32.Devices.AllJoyn",
     "Name": "alljoyn_sessionportlistener",
-    "ValueType": "AllJoynHandle",
-    "InvalidHandleValues": []
+    "ValueType": "AllJoynHandle"
   },
   {
     "Name": "HPCON",
@@ -1249,8 +1204,7 @@
   {
     "Namespace": "Windows.Win32.UI.Controls",
     "Name": "HTREEITEM",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": []
+    "ValueType": "IntPtr"
   },
   {
     "Namespace": "Windows.Win32.UI.Controls",
@@ -1267,8 +1221,7 @@
   {
     "Namespace": "Windows.Win32.System.Threading",
     "Name": "LPPROC_THREAD_ATTRIBUTE_LIST",
-    "ValueType": "void*",
-    "InvalidHandleValues": []
+    "ValueType": "void*"
   },
   {
     "Name": "WHV_PARTITION_HANDLE",
@@ -1279,8 +1232,7 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "CHAR",
-    "ValueType": "byte",
-    "InvalidHandleValues": []
+    "ValueType": "byte"
   },
   {
     "Namespace": "Windows.Win32.Storage.StructuredStorage",
@@ -1327,20 +1279,17 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "SHANDLE_PTR",
-    "ValueType": "IntPtr",
-    "InvalidHandleValues": []
+    "ValueType": "IntPtr"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HANDLE_PTR",
-    "ValueType": "UIntPtr",
-    "InvalidHandleValues": []
+    "ValueType": "UIntPtr"
   },
   {
     "Name": "SOCKET",
     "ValueType": "UIntPtr",
-    "CloseApi": "closesocket",
-    "InvalidHandleValues": []
+    "CloseApi": "closesocket"
   },
   {
     "Name": "BCRYPT_ALG_HANDLE",
