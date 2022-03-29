@@ -665,7 +665,7 @@ namespace ClangSharpSourceToWinmd
                     return;
                 }
 
-                var metadataType = GetInfoForNativeType(nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated);
+                var metadataType = this.GetInfoForNativeType(nativeTypeName, out bool isConst, out bool isNullTerminated, out bool isNullNullTerminated);
 
                 if (isConst && !alreadyConst)
                 {
