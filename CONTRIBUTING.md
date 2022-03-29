@@ -163,11 +163,16 @@ To apply an attribute to an API, update the `--memberRemap` section of [emitter.
 * `<API>::<Parameter>=[<Attribute>]`
   * Applies an attribute to a parameter of an API (e.g. `GetProcessHeaps::ProcessHeaps=[DoNotRelease]HeapHandle*`)
 * `<API>::return=[<Attribute>]`
-  * Applies an attribute to the return value of an API (e.g. `DoDragDrop::return=[AlternateSuccessCodes]`)
+  * Applies an attribute to the return value of an API (e.g. `GetCurrentProcess::return=[DoNotRelease]`)
 
-You can apply multiple attributes to an API (e.g. `[DoNotRelease][AlternateSuccessCodes]`) and also combine attributes with type remappings as shown in the `GetProcessHeaps` example above.
+You can apply multiple attributes to an API (e.g. `[<Attribute1>][<Attribute2>]`) and also combine attributes with type remappings as shown in the `GetProcessHeaps` example above.
 
-Language projections can use the context provided by attributes to improve the developer experience for APIs decorated with them.
+Attributes scanned from headers sometimes may not be desired. In those cases, you can remove attributes by prefixing them with a `-` as shown below:
+
+* `CoInitializeSecurity::asAuthSvc=[-NativeArrayInfo]`
+  * Removes an attribute from an API
+
+Language projections can use the context provided by attributes to improve the developer experience for decorated APIs.
 
 ## Validating changes
 

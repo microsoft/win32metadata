@@ -6,7 +6,6 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MetadataUtils;
-using System.Diagnostics.CodeAnalysis;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -75,23 +74,57 @@ namespace ClangSharpSourceToWinmd
                 return base.VisitUsingDirective(node);
             }
 
+            private static SyntaxList<AttributeListSyntax> FixRemappedAttributes(
+                SyntaxList<AttributeListSyntax> existingAttrList,
+                List<AttributeSyntax> remappedListAttributes)
+            {
+                return FixRemappedAttributes(existingAttrList, remappedListAttributes, null);
+            }
+
+            private static SyntaxList<AttributeListSyntax> FixRemappedAttributes(
+                SyntaxList<AttributeListSyntax> existingAttrList,
+                List<AttributeSyntax> remappedListAttributes,
+                AttributeTargetSpecifierSyntax target)
+            {
+                if (remappedListAttributes == null)
+                {
+                    return existingAttrList;
+                }
+
+                foreach (var attrNode in remappedListAttributes)
+                {
+                    var attrName = attrNode.Name.ToString();
+                    if (attrName.EndsWith(EncodeHelpers.AttributeToRemoveSuffix))
+                    {
+                        var attrNameToRemove = attrName.Substring(0, attrName.Length - EncodeHelpers.AttributeToRemoveSuffix.Length);
+
+                        existingAttrList = SyntaxUtils.RemoveAttribute(existingAttrList, attrNameToRemove);
+                    }
+                    else
+                    {
+                        var attrListNode =
+                            SyntaxFactory.AttributeList(
+                                SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
+                        if (target != null)
+                        {
+                            attrListNode = attrListNode.WithTarget(target);
+                        }
+
+                        existingAttrList = existingAttrList.Add(attrListNode);
+                    }
+                }
+
+                return existingAttrList;
+            }
+
             public override SyntaxNode VisitParameter(ParameterSyntax node)
             {
                 string fullName = GetFullNameWithoutArchSuffix(node);
 
-                if (this.GetRemapInfo(fullName, out List<AttributeSyntax> listAttributes, node.Type.ToString(), out string newType, out string newName))
+                if (this.GetRemapInfo(fullName, out var listAttributes, node.Type.ToString(), out string newType, out string newName))
                 {
                     node = (ParameterSyntax)base.VisitParameter(node);
-                    if (listAttributes != null)
-                    {
-                        foreach (var attrNode in listAttributes)
-                        {
-                            var attrListNode =
-                                SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
-                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
-                        }
-                    }
+                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
                         
                     if (newName != null)
                     {
@@ -236,16 +269,7 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 node = (FieldDeclarationSyntax)base.VisitFieldDeclaration(node);
-                if (listAttributes != null)
-                {
-                    foreach (var attrNode in listAttributes)
-                    {
-                        var attrListNode =
-                            SyntaxFactory.AttributeList(
-                                SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
-                        node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
-                    }
-                }
+                node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
 
                 var firstVar = node.Declaration.Variables.First();
 
@@ -336,16 +360,7 @@ namespace ClangSharpSourceToWinmd
                 var enumName = node.Identifier.ValueText;
                 if (this.GetRemapInfo(enumName, out var listAttributes, null, out _, out _))
                 {
-                    if (listAttributes != null)
-                    {
-                        foreach (var attrNode in listAttributes)
-                        {
-                            var attrListNode =
-                                SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
-                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
-                        }
-                    }
+                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
                 }
 
                 if (this.enumAdditions.TryGetValue(enumName, out var additionsList))
@@ -406,23 +421,12 @@ namespace ClangSharpSourceToWinmd
                 string fixedName = GetFullNameWithoutArchSuffix(node);
                 string returnFullName = $"{fixedName}::return";
 
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, node.ReturnType.ToString(), out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, out var listAttributes, node.ReturnType.ToString(), out var newType, out _))
                 {
                     node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
-                    if (listAttributes != null)
-                    {
-                        foreach (var attrNode in listAttributes)
-                        {
-                            var attrListNode =
-                                SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode))
-                                    .WithTarget(
-                                        SyntaxFactory.AttributeTargetSpecifier(
-                                            SyntaxFactory.Token(SyntaxKind.ReturnKeyword)));
 
-                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
-                        }
-                    }
+                    var target = SyntaxFactory.AttributeTargetSpecifier(SyntaxFactory.Token(SyntaxKind.ReturnKeyword));
+                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes, target));
 
                     if (newType != null)
                     {
@@ -498,38 +502,16 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 // See if there are any attributes directly on the method
-                if (this.GetRemapInfo(fullName, out List<AttributeSyntax> methodAttributes, null, out _, out _))
+                if (this.GetRemapInfo(fullName, out var methodAttributes, null, out _, out _))
                 {
-                    if (methodAttributes != null)
-                    {
-                        foreach (var attrNode in methodAttributes)
-                        {
-                            var attrListNode =
-                                SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));
-
-                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
-                        }
-                    }
+                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, methodAttributes));
                 }
 
                 // Find remap info for the return parameter for this method and apply any that we find
-                if (this.GetRemapInfo(returnFullName, out List<AttributeSyntax> listAttributes, nodeReturnType, out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, out var listAttributes, nodeReturnType, out var newType, out _))
                 {
-                    if (listAttributes != null)
-                    {
-                        foreach (var attrNode in listAttributes)
-                        {
-                            var attrListNode =
-                                SyntaxFactory.AttributeList(
-                                    SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode))
-                                    .WithTarget(
-                                        SyntaxFactory.AttributeTargetSpecifier(
-                                            SyntaxFactory.Token(SyntaxKind.ReturnKeyword)));
-
-                            node = node.WithAttributeLists(node.AttributeLists.Add(attrListNode));
-                        }
-                    }
+                    var target = SyntaxFactory.AttributeTargetSpecifier(SyntaxFactory.Token(SyntaxKind.ReturnKeyword));
+                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes, target));
 
                     if (newType != null)
                     {

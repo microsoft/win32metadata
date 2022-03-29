@@ -10,8 +10,10 @@ namespace MetadataUtils
 {
     public static class EncodeHelpers
     {
+        public const string AttributeToRemoveSuffix = "__remove";
+
         private static readonly System.Text.RegularExpressions.Regex RemappedParmRegex = new System.Text.RegularExpressions.Regex(@"(?:\[([^\]]*)\])?(?:\s*(\w+\**)(?:\s+(\w+))?)?");
-        private static readonly System.Text.RegularExpressions.Regex AttributeRegex = new System.Text.RegularExpressions.Regex(@"(\w+)(\([^\)]+\))?");
+        private static readonly System.Text.RegularExpressions.Regex AttributeRegex = new System.Text.RegularExpressions.Regex(@"(-?\w+)(\([^\)]+\))?");
 
         public static bool DecodeRemap(string remappedTo, out List<AttributeSyntax> listAttributes, out string newType, out string newName)
         {
@@ -27,6 +29,14 @@ namespace MetadataUtils
                     if (parseAttrMatch.Success)
                     {
                         var attrName = parseAttrMatch.Groups[1].Value;
+
+                        // If it starts with '-' this means the .rsp is saying to remove it.
+                        // Change it to a name we will know to remove later
+                        if (attrName.StartsWith('-'))
+                        {
+                            attrName = attrName.Substring(1) + AttributeToRemoveSuffix;
+                        }
+
                         var attrArgs = parseAttrMatch.Groups[2].Value;
 
                         var attrNameNode = SyntaxFactory.ParseName(attrName);

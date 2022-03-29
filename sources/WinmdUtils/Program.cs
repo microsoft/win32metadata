@@ -1524,6 +1524,8 @@ namespace WinmdUtilsProgram
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(first.FullName);
             DecompilerTypeSystem winmd2 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(second.FullName);
 
+            CompareAttributes("Assembly (informational only)", winmd1.MainModule.GetAssemblyAttributes(), winmd2.MainModule.GetAssemblyAttributes(), console);
+
             var winmd1Types = GetSelfDefinedWinmdToplevelTypes(winmd1);
             var winmd2Types = GetSelfDefinedWinmdToplevelTypes(winmd2);
 
