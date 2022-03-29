@@ -2178,7 +2178,6 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 generator.RemapToMoreSpecificTypeIfPossible(methodName, paramName, parameterSymbol.GetAttributes(), ref paramType);
-
                 ParameterAttributes parameterAttributes = ParameterAttributes.None;
                 var symbolAttrs = parameterSymbol.GetAttributes();
                 if (symbolAttrs.Any(a => a.AttributeClass.Name == "InAttribute"))
@@ -2186,7 +2185,26 @@ namespace ClangSharpSourceToWinmd
                     parameterAttributes |= ParameterAttributes.In;
                 }
 
-                if (symbolAttrs.Any(a => a.AttributeClass.Name == "OutAttribute" || a.AttributeClass.Name == "ComOutPtrAttribute"))
+                // Figure out if the final type is a pointer or not.
+                IPointerTypeSymbol pointerTypeSymbol = paramType as IPointerTypeSymbol;
+                bool isInterface = pointerTypeSymbol != null && generator.IsSymbolInterface(pointerTypeSymbol.PointedAtType);
+                bool isPointer = pointerTypeSymbol != null && !isInterface;
+
+                // If it's not a pointer, see if it's a native typedef that has a pointer type as its value (like for PWSTR)
+                if (!isPointer)
+                {
+                    if (paramType is INamedTypeSymbol namedType)
+                    {
+                        if (namedType.GetAttributes().Any(a => a.AttributeClass.Name == "NativeTypedefAttribute") &&
+                            (paramType.GetMembers("Value").First() as IFieldSymbol).Type is IPointerTypeSymbol)
+                        {
+                            isPointer = true;
+                        }
+                    }
+                }
+
+                // Make sure we have a pointer before we add the Out attribute
+                if (isPointer && symbolAttrs.Any(a => a.AttributeClass.Name == "OutAttribute" || a.AttributeClass.Name == "ComOutPtrAttribute"))
                 {
                     parameterAttributes |= ParameterAttributes.Out;
                 }
@@ -2204,10 +2222,10 @@ namespace ClangSharpSourceToWinmd
                     // * If it's a pointer it's In, Out, unless it's marked Const, then only In.
                     // * If it's a COM double pointer (e.g. IUnknown**), it's Out.
                     parameterAttributes |= ParameterAttributes.In;
-                    if (paramType is IPointerTypeSymbol pointerTypeSymbol)
+                    if (pointerTypeSymbol != null)
                     {
                         // If we're not pointing at an interface...
-                        if (!generator.IsSymbolInterface(pointerTypeSymbol.PointedAtType))
+                        if (!isInterface)
                         {
                             bool isConst = symbolAttrs.Any(a => a.AttributeClass.Name == "ConstAttribute");
 
