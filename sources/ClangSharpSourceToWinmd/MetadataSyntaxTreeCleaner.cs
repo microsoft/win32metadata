@@ -118,6 +118,9 @@ namespace ClangSharpSourceToWinmd
                     }
                     else
                     {
+                        // Remove any existing attribute with the same name
+                        existingAttrList = SyntaxUtils.RemoveAttribute(existingAttrList, attrName);
+
                         var attrListNode =
                             SyntaxFactory.AttributeList(
                                 SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(attrNode));

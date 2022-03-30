@@ -6,9 +6,11 @@ namespace Windows.Win32.Networking.WinSock
 {
     public static unsafe partial class Apis
     {
-        // (SOCKET)(~0) which equals uint.MaxValue
+        // (SOCKET)(~0) which equals -1 or uint.MaxValue or UIntPtr.MaxValue.
+        // https://github.com/microsoft/win32metadata/issues/848 - we decided projections
+        // could cast the conversion from -1 to uint/UIntPtr depending on the build
         [NativeTypeName("SOCKET")]
-        public const uint INVALID_SOCKET = uint.MaxValue;
+        public const int INVALID_SOCKET = -1;
 
         public const uint WSA_INFINITE = 0xFFFFFFFF;
 
