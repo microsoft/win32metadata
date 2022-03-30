@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
@@ -21,10 +22,12 @@ namespace ClangSharpSourceToWinmd
 
         private class TreeRewriter : CSharpSyntaxRewriter
         {
-            private static readonly System.Text.RegularExpressions.Regex elementCountRegex = new System.Text.RegularExpressions.Regex(@"(?:elementCount|byteCount)\(([^\)]+)\)");
+            private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\(([^\)]+)\)");
+            private static readonly Regex IsRegex = new Regex(@"[^\w::]");
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
             private Dictionary<string, string> remaps;
+            private Dictionary<Regex, string> regexRemaps = new Dictionary<Regex, string>();
             private Dictionary<string, Dictionary<string, string>> enumAdditions;
             private Dictionary<string, string> requiredNamespaces;
             private Dictionary<string, string> staticLibs;
@@ -38,12 +41,25 @@ namespace ClangSharpSourceToWinmd
             public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
                 this.remaps = remaps;
+                this.InitRegexRemaps();
+
                 this.enumAdditions = enumAdditions;
                 this.requiredNamespaces = requiredNamespaces;
                 this.staticLibs = staticLibs;
                 this.nonEmptyStructs = nonEmptyStructs;
                 this.enumMemberNames = enumMemberNames;
                 this.enumsToMakeFlags = enumsToMakeFlags;
+            }
+
+            private void InitRegexRemaps()
+            {
+                foreach (var pair in this.remaps)
+                {
+                    if (IsRegex.IsMatch(pair.Key))
+                    {
+                        this.regexRemaps[new Regex(pair.Key)] = pair.Value;
+                    }
+                }
             }
 
             public override SyntaxNode VisitCompilationUnit(CompilationUnitSyntax node)
@@ -177,7 +193,23 @@ namespace ClangSharpSourceToWinmd
                     return null;
                 }
 
-                return base.VisitStructDeclaration(node);
+                string fullName = GetFullNameWithoutArchSuffix(node);
+                if (this.GetRemapInfo(fullName, out var listAttributes, null, out _, out string newName))
+                {
+                    node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
+                    node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
+
+                    if (newName != null)
+                    {
+                        node = node.WithIdentifier(SyntaxFactory.Identifier(newName));
+                    }
+                }
+                else
+                {
+                    node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
+                }
+
+                return node;
             }
 
             public override SyntaxNode VisitFieldDeclaration(FieldDeclarationSyntax node)
@@ -937,7 +969,7 @@ namespace ClangSharpSourceToWinmd
                 string GetArrayMarshalAsFromP1(ParameterSyntax paramNode, string p1Text)
                 {
                     ParameterListSyntax parameterListNode = (ParameterListSyntax)paramNode.Parent;
-                    var match = elementCountRegex.Match(p1Text);
+                    var match = ElementCountRegex.Match(p1Text);
                     StringBuilder ret = new StringBuilder("(");
 
                     if (match.Success)
@@ -1010,6 +1042,29 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
+            private string GetRemapData(string fullName)
+            {
+                if (string.IsNullOrEmpty(fullName))
+                {
+                    return null;
+                }
+
+                if (this.remaps.TryGetValue(fullName, out var remapData))
+                {
+                    return remapData;
+                }
+
+                foreach (var pair in this.regexRemaps)
+                {
+                    if (pair.Key.IsMatch(fullName))
+                    {
+                        return pair.Value;
+                    }
+                }
+
+                return null;
+            }
+
             private bool GetRemapInfo(string fullName, out List<AttributeSyntax> listAttributes, string currentType, out string newType, out string newName)
             {
                 listAttributes = null;
@@ -1017,8 +1072,8 @@ namespace ClangSharpSourceToWinmd
                 newName = null;
 
                 bool ret = false;
-
-                if (!string.IsNullOrEmpty(fullName) && this.remaps.TryGetValue(fullName, out string remapData))
+                string remapData = this.GetRemapData(fullName);
+                if (!string.IsNullOrEmpty(remapData))
                 {
                     ret = EncodeHelpers.DecodeRemap(remapData, out listAttributes, out newType, out newName);
                     if (newType != null)
