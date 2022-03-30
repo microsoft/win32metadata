@@ -2,3 +2,5 @@
 <IncludeRoot>/um/winhttp.h
 --namespace
 Windows.Win32.Networking.WinHttp
+--exclude
+LPWINHTTP_STATUS_CALLBACK

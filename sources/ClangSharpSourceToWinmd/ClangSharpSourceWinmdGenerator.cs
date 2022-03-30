@@ -2187,18 +2187,26 @@ namespace ClangSharpSourceToWinmd
 
                 // Figure out if the final type is a pointer or not.
                 IPointerTypeSymbol pointerTypeSymbol = paramType as IPointerTypeSymbol;
-                bool isInterface = pointerTypeSymbol != null && generator.IsSymbolInterface(pointerTypeSymbol.PointedAtType);
-                bool isPointer = pointerTypeSymbol != null && !isInterface;
+                bool needsPointerReduction = pointerTypeSymbol != null && generator.NeedsPointerReduction(pointerTypeSymbol.PointedAtType);
+
+                if (needsPointerReduction)
+                {
+                    pointerTypeSymbol = null;
+                }
+
+                bool isPointer = pointerTypeSymbol != null;
 
                 // If it's not a pointer, see if it's a native typedef that has a pointer type as its value (like for PWSTR)
-                if (!isPointer)
+                if (pointerTypeSymbol == null && !needsPointerReduction)
                 {
                     if (paramType is INamedTypeSymbol namedType)
                     {
-                        if (namedType.GetAttributes().Any(a => a.AttributeClass.Name == "NativeTypedefAttribute") &&
-                            (paramType.GetMembers("Value").First() as IFieldSymbol).Type is IPointerTypeSymbol)
+                        if (namedType.GetAttributes().Any(a => a.AttributeClass.Name == "NativeTypedefAttribute"))
                         {
-                            isPointer = true;
+                            isPointer = (paramType.GetMembers("Value").First() as IFieldSymbol).Type is IPointerTypeSymbol;
+
+                            // If we set pointerTypeSymbol to this, we gets lots of PWSTR/BSTRs that have no
+                            // SAL attribution get set In/Out. Seems like most of them should remain just In
                         }
                     }
                 }
@@ -2224,16 +2232,12 @@ namespace ClangSharpSourceToWinmd
                     parameterAttributes |= ParameterAttributes.In;
                     if (pointerTypeSymbol != null)
                     {
-                        // If we're not pointing at an interface...
-                        if (!isInterface)
-                        {
-                            bool isConst = symbolAttrs.Any(a => a.AttributeClass.Name == "ConstAttribute");
+                        bool isConst = symbolAttrs.Any(a => a.AttributeClass.Name == "ConstAttribute");
 
-                            // Only add Out if it's not const
-                            if (!isConst)
-                            {
-                                parameterAttributes |= ParameterAttributes.Out;
-                            }
+                        // Only add Out if it's not const
+                        if (!isConst)
+                        {
+                            parameterAttributes |= ParameterAttributes.Out;
                         }
 
                         // If it's a double pointer...

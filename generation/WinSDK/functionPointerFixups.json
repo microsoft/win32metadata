@@ -679,5 +679,13 @@
   {
     "name": "_WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER",
     "pointerType": "WHEA_ERROR_SOURCE_CORRECT_DEVICE_DRIVER"
+  },
+  {
+    "name": "FNIDLE",
+    "pointerType": "PFNIDLE"
+  },
+  {
+    "name": "DUMP_DEVICE_POWERON_ROUTINE",
+    "pointerType": "PDUMP_DEVICE_POWERON_ROUTINE"
   }
 ]
