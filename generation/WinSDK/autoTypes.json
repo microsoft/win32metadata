@@ -56,7 +56,7 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "PSID",
-    "ValueType": "IntPtr"
+    "ValueType": "void*"
   },
   {
     "Namespace": "Windows.Win32.Foundation",
