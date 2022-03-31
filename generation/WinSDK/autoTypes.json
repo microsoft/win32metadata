@@ -26,7 +26,8 @@
     "Namespace": "Windows.Win32.Foundation",
     "Name": "HINSTANCE",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "FreeLibrary"
+    "CloseApi": "FreeLibrary",
+    "InvalidHandleValues": [ 0 ]
   },
   {
     "Namespace": "Windows.Win32.Foundation",
