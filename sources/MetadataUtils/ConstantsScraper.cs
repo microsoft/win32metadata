@@ -339,7 +339,8 @@ namespace MetadataUtils
 
                 if (defineGuidKeyword == "DEFINE_DEVPROPKEY" || defineGuidKeyword == "DEFINE_PROPERTYKEY")
                 {
-                    writer.AddPropKey(name, args);
+                    string structType = defineGuidKeyword == "DEFINE_DEVPROPKEY" ? "DEVPROPKEY" : "PROPERTYKEY";
+                    writer.AddPropKey(structType, name, args);
                 }
                 else
                 {

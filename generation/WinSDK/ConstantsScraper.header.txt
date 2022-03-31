@@ -1,5 +1,5 @@
 using Windows.Win32.UI.Shell.PropertiesSystem; // For PROPERTYKEY
-using Windows.Win32.System.SystemServices;
+using Windows.Win32.Devices.Properties;  // For DEVPROPKEY
 using static Windows.Win32.Data.Xml.MsXml.Apis; // Various constants
 using static Windows.Win32.Devices.DeviceAccess.Apis; // Various constants
 using static Windows.Win32.Foundation.Apis; // Various constants

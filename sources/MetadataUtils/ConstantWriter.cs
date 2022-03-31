@@ -42,7 +42,7 @@ namespace MetadataUtils
             }
         }
 
-        public void AddPropKey(string name, string args)
+        public void AddPropKey(string structType, string name, string args)
         {
             if (this.namesToValues.ContainsKey(name))
             {
@@ -53,7 +53,7 @@ namespace MetadataUtils
 
             this.Writer.WriteLine(
 $@"        [PropertyKey({args})]
-        public static readonly PROPERTYKEY {name};");
+        public static readonly {structType} {name};");
 
             this.Writer.WriteLine();
         }
