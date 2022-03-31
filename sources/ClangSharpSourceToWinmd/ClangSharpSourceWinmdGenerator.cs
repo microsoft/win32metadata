@@ -34,7 +34,6 @@ namespace ClangSharpSourceToWinmd
         private const string Win32MetadataAssemblyName = "Windows.Win32.winmd";
 
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
-        private static readonly Regex IsSpecialNameRegex = new Regex(@"^(?:get_|put_|add_|remove_|invoke_)");
         private static readonly Regex IsWcharRegex = new Regex(@"^(?:WCHAR|OLECHAR|wchar_t)");
         private static readonly Regex IsCharRegex = new Regex(@"^(?:CHAR|char)");
         private static readonly Regex ArrayMatcher = new Regex(@"\[\d*\]");
@@ -1009,6 +1008,22 @@ namespace ClangSharpSourceToWinmd
         {
             methodName = FixArchSpecificName(methodName);
 
+            if (methodSymbol != null && this.IsSymbolInterface(methodSymbol.ContainingType))
+            {
+                if (methodName.StartsWith("get_") &&
+                    parameters.Count() == 1 &&
+                    (parameters.First().Attrs & ParameterAttributes.Out) == ParameterAttributes.Out)
+                {
+                    methodAttrs |= MethodAttributes.SpecialName;
+                }
+                else if (methodName.StartsWith("put_") &&
+                    parameters.Count() == 1 &&
+                    (parameters.First().Attrs & ParameterAttributes.In) == ParameterAttributes.In)
+                {
+                    methodAttrs |= MethodAttributes.SpecialName;
+                }
+            }
+
             var methodSignature = new BlobBuilder();
             new BlobEncoder(methodSignature)
                 .MethodSignature(
@@ -1829,11 +1844,6 @@ namespace ClangSharpSourceToWinmd
                 var methodSymbol = model.GetDeclaredSymbol(method);
                 var methodName = methodSymbol.Name;
                 MethodAttributes methodAttributes = MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Virtual;
-
-                if (IsSpecialNameRegex.IsMatch(methodName))
-                {
-                    methodAttributes |= MethodAttributes.SpecialName;
-                }
 
                 MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
 
