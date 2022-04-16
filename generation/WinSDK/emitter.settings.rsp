@@ -863,3 +863,6 @@ IAudioClient::GetService::ppv=[ComOutPtr]
 IDataObject::GetCanonicalFormatEtc=[PreserveSig]
 IEnumExplorerCommand::Next=[PreserveSig]
 INetCfgComponentUpperEdge::AddInterfacesToAdapter::pAdapter=[-NativeArrayInfo]
+GetNamedSecurityInfoA::return=WIN32_ERROR
+GetNamedSecurityInfoW::return=WIN32_ERROR
+GetSecurityInfo::return=WIN32_ERROR
