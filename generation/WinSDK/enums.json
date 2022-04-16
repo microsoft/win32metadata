@@ -20612,6 +20612,7 @@
   },
   {
     "name": "JOB_OBJECT_CPU_RATE_CONTROL",
+    "flags": true,
     "namespace": "Windows.Win32.System.JobObjects",
     "members": [
       {
