@@ -15871,18 +15871,38 @@
     ]
   },
   {
-    "name": "SEND_FLAGS",
+    "name": "SEND_RECV_FLAGS",
+    "type": "int",
+    "flags": true,
     "members": [
       {
-        "name": "MSG_DONTROUTE"
+        "name": "MSG_OOB",
+        "value": 1
       },
       {
-        "name": "MSG_OOB"
+        "name": "MSG_PEEK",
+        "value": 2
+      },
+      {
+        "name": "MSG_DONTROUTE",
+        "value": 4
+      },
+      {
+        "name": "MSG_WAITALL",
+        "value": 8
+      },
+      {
+        "name": "MSG_PUSH_IMMEDIATE",
+        "value": 32
       }
     ],
     "uses": [
       {
         "method": "send",
+        "parameter": "flags"
+      },
+      {
+        "method": "recv",
         "parameter": "flags"
       }
     ]
