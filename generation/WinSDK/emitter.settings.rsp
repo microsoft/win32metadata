@@ -887,3 +887,6 @@ IMFReadWriteClassFactory::CreateInstanceFromURL::ppvObject=[ComOutPtr]
 IMFReadWriteClassFactory::CreateInstanceFromObject::ppvObject=[ComOutPtr]
 IClassFactoryEx::CreateInstanceWithContext::ppv=[ComOutPtr]
 ImageList_CoCreateInstance::ppv=[ComOutPtr]
+GetNamedSecurityInfoA::return=WIN32_ERROR
+GetNamedSecurityInfoW::return=WIN32_ERROR
+GetSecurityInfo::return=WIN32_ERROR
