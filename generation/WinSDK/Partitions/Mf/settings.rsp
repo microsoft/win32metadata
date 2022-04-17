@@ -4,6 +4,8 @@ tagVIDEOINFOHEADER
 tagMPEG1VIDEOINFO
 tagVIDEOINFOHEADER2
 tagMPEG2VIDEOINFO
+--remap
+_MFT_ENUM_FLAG=MFT_ENUM_FLAG
 --traverse
 <IncludeRoot>/shared/uuids.h
 <IncludeRoot>/um/codecapi.h
