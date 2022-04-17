@@ -6675,8 +6675,7 @@
         "value": "64"
       },
       {
-        "name": "INTERNET_CONNECTION_LAN_",
-        "value": "2"
+        "name": "INTERNET_CONNECTION_LAN"
       },
       {
         "name": "INTERNET_CONNECTION_MODEM"
@@ -6685,8 +6684,7 @@
         "name": "INTERNET_CONNECTION_MODEM_BUSY"
       },
       {
-        "name": "INTERNET_CONNECTION_OFFLINE_",
-        "value": "32"
+        "name": "INTERNET_CONNECTION_OFFLINE"
       },
       {
         "name": "INTERNET_CONNECTION_PROXY"
@@ -8206,20 +8204,12 @@
         "value": "11"
       },
       {
-        "name": "SERVICE_FILE_SYSTEM_DRIVER_",
-        "value": "2"
-      },
-      {
         "name": "SERVICE_KERNEL_DRIVER",
         "value": "1"
       },
       {
         "name": "SERVICE_WIN32",
         "value": "48"
-      },
-      {
-        "name": "SERVICE_WIN32_OWN_PROCESS_",
-        "value": "16"
       },
       {
         "name": "SERVICE_WIN32_SHARE_PROCESS",
@@ -8784,8 +8774,7 @@
         "value": "1"
       },
       {
-        "name": "CC_UIPICKCONFIGSKIPLOCALCA_",
-        "value": "5"
+        "name": "CC_UIPICKCONFIGSKIPLOCALCA"
       }
     ],
     "uses": [
@@ -9383,10 +9372,6 @@
       },
       {
         "name": "NO_INHERITANCE"
-      },
-      {
-        "name": "INHERIT_ONLY_ACE_",
-        "value": "8"
       }
     ],
     "uses": [
@@ -15198,8 +15183,7 @@
         "value": "23"
       },
       {
-        "name": "SM_SYSTEMDOCKED_",
-        "value": "8196"
+        "name": "SM_SYSTEMDOCKED"
       },
       {
         "name": "SM_TABLETPC",
@@ -25721,12 +25705,10 @@
     "name": "CRYPT_XML_GROUP_ID",
     "members": [
       {
-        "name": "CRYPT_XML_GROUP_ID_HASH_________",
-        "value": "1"
+        "name": "CRYPT_XML_GROUP_ID_HASH"
       },
       {
-        "name": "CRYPT_XML_GROUP_ID_SIGN_________",
-        "value": "2"
+        "name": "CRYPT_XML_GROUP_ID_SIGN"
       }
     ],
     "uses": [
