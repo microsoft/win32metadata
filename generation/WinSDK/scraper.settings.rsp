@@ -71,6 +71,7 @@ __RPCPROXY_H_VERSION__
 _DISPATCHER_CONTEXT_ARM64
 tagMONITORINFOEXA
 tagMONITORINFOEXW
+HSTRING_HEADER
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET
