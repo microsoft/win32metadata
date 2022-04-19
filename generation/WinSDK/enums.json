@@ -20620,24 +20620,22 @@
     "namespace": "Windows.Win32.System.JobObjects",
     "members": [
       {
-        "name": "JOB_OBJECT_CPU_RATE_CONTROL_ENABLE",
-        "value": "1"
+        "name": "JOB_OBJECT_CPU_RATE_CONTROL_ENABLE"
       },
       {
-        "name": "JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED",
-        "value": "2"
+        "name": "JOB_OBJECT_CPU_RATE_CONTROL_WEIGHT_BASED"
       },
       {
-        "name": "JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP",
-        "value": "4"
+        "name": "JOB_OBJECT_CPU_RATE_CONTROL_HARD_CAP"
       },
       {
-        "name": "JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY",
-        "value": "8"
+        "name": "JOB_OBJECT_CPU_RATE_CONTROL_NOTIFY"
       },
       {
-        "name": "JOB_OBJECT__CPU_RATE_CONTROL_MIN_MAX_RATE",
-        "value": "16"
+        "name": "JOB_OBJECT_CPU_RATE_CONTROL_MIN_MAX_RATE"
+      },
+      {
+        "name": "JOB_OBJECT_CPU_RATE_CONTROL_VALID_FLAGS"
       }
     ],
     "uses": [
