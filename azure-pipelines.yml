@@ -1,9 +1,9 @@
 trigger:
   branches:
     include:
-    - master
+    - main
 pr:
-- master
+- main
 
 variables:
   BuildConfiguration: Release
