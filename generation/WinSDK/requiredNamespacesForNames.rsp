@@ -1,4 +1,8 @@
 --requiredNamespaceForName
+# region amvideo.h
+VIDEOINFOHEADER=Windows.Win32.Media.MediaFoundation
+MPEG1VIDEOINFO=Windows.Win32.Media.MediaFoundation
+# endregion emvideo.h
 # region appmgmt.h
 APPCATEGORYINFO=Windows.Win32.UI.Shell
 APPCATEGORYINFOLIST=Windows.Win32.UI.Shell
@@ -135,9 +139,13 @@ IKsJackSinkInformation=Windows.Win32.Media.KernelStreaming
 # endregion devicetopology.h
 # region dshowasf.h
 _AM_ASFWRITERCONFIG_PARAM=Windows.Win32.Media.WindowsMediaFormat
-IAMWMBufferPass=Windows.Win32.Media.WindowsMediaFormat
-IAMWMBufferPassCallback=Windows.Win32.Media.WindowsMediaFormat
+IAMWMBufferPass=Windows.Win32.Media.DirectShow
+IAMWMBufferPassCallback=Windows.Win32.Media.DirectShow
 # endregion dshowasf.h
+# region dvdmedia.h
+VIDEOINFOHEADER2=Windows.Win32.Media.MediaFoundation
+MPEG2VIDEOINFO=Windows.Win32.Media.MediaFoundation
+# dvdmedia dxgi.h
 # region dxgi.h
 DXGI_FORMAT=Windows.Win32.Graphics.Dxgi.Common
 # endregion dxgi.h
@@ -221,8 +229,8 @@ MF_MEDIASOURCE_STATUS_INFO=Windows.Win32.Media.Streaming
 MF_TRANSFER_VIDEO_FRAME_FLAGS=Windows.Win32.Media.Streaming
 # endregion mfidl.h
 # region mftransform.h
-IMFDeviceTransform=Windows.Win32.Media.Streaming
-IMFDeviceTransformCallback=Windows.Win32.Media.Streaming
+IMFDeviceTransform=Windows.Win32.Media.MediaFoundation
+IMFDeviceTransformCallback=Windows.Win32.Media.MediaFoundation
 # endregion mftransform.h
 # region minwinbase.h
 CREATE_PROCESS_DEBUG_INFO=Windows.Win32.System.Diagnostics.Debug
@@ -266,6 +274,9 @@ HEAACWAVEINFO=Windows.Win32.Media.DirectShow
 MPEG1WAVEFORMAT=Windows.Win32.Media.DirectShow
 MPEGLAYER3WAVEFORMAT=Windows.Win32.Media.DirectShow
 # endregion mmreg.h
+# region mssip.h
+MS_ADDINFO_CATALOGMEMBER=Windows.Win32.Security.Cryptography.Catalog
+# endregion mssip.h
 # region ntifs.h
 RtlConvertSidToUnicodeString=Windows.Win32.Security
 # endregion ntifs.h
@@ -511,6 +522,10 @@ ProcessIdToSessionId=Windows.Win32.System.RemoteDesktop
 StgDeserializePropVariant=Windows.Win32.System.Com.StructuredStorage
 StgSerializePropVariant=Windows.Win32.System.Com.StructuredStorage
 # endregion propvarutil.h
+# region qos.h
+QOS=Windows.Win32.Networking.WinSock
+FLOWSPEC=Windows.Win32.Networking.WinSock
+# endregion qos.h
 # region reconcil.h
 INotifyReplica=Windows.Win32.UI.Shell
 # endregion reconcil.h
@@ -566,6 +581,7 @@ CONDITION_TYPE=Windows.Win32.System.Search.Common
 CONDITION_OPERATION=Windows.Win32.System.Search.Common
 # endregion StructuredQueryCondition.h.h
 # region strmif.h
+AM_MEDIA_TYPE=Windows.Win32.Media.MediaFoundation
 TIMECODE_SAMPLE=Windows.Win32.Media
 TIMECODE=Windows.Win32.Media
 VIDEOENCODER_BITRATE_MODE=Windows.Win32.Media.DirectShow
@@ -1881,9 +1897,6 @@ XSTATE_CONFIGURATION=Windows.Win32.System.Diagnostics.Debug
 XSTATE_CONTEXT=Windows.Win32.System.Diagnostics.Debug
 XSTATE_FEATURE=Windows.Win32.System.Diagnostics.Debug
 # endregion winnt.h (SLIST per-architecture design also defined in ntdef.h)
-# region winsock2.h
-QOS=Windows.Win32.NetworkManagement.QoS
-# endregion winsock2.h
 # region winstring.h (duplicate definitions in many headers)
 HSTRING_UserFree=Windows.Win32.System.WinRT
 HSTRING_UserFree64=Windows.Win32.System.WinRT
@@ -2394,6 +2407,10 @@ WinHelpW=Windows.Win32.UI.Shell
 WM_DEVICECHANGE=Windows.Win32.UI.WindowsAndMessaging
 WTSSESSION_NOTIFICATION=Windows.Win32.System.RemoteDesktop
 # endregion winuser.h
+# region wmdxva.h
+IWMCodecVideoAccelerator=Windows.Win32.Media.DirectShow
+IWMCodecAMVideoAccelerator=Windows.Win32.Media.DirectShow
+# endregion wmdxva.h
 # region wow64apiset.h
 GetSystemWow64Directory2A=Windows.Win32.System.SystemInformation
 GetSystemWow64Directory2W=Windows.Win32.System.SystemInformation
@@ -2412,7 +2429,7 @@ DVASPECT=Windows.Win32.System.Com
 PROPERTYKEY=Windows.Win32.UI.Shell.PropertiesSystem
 QUERYCONTEXT=Windows.Win32.System.Com
 STATFLAG=Windows.Win32.System.Com.StructuredStorage
-STGC=Windows.Win32.System.Com.StructuredStorage
+STGC=Windows.Win32.System.Com
 STGMOVE=Windows.Win32.System.Com.StructuredStorage
 CLIPDATA=Windows.Win32.System.Com.StructuredStorage
 PROPSPEC_KIND=Windows.Win32.System.Com.StructuredStorage

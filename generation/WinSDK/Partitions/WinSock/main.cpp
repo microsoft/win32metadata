@@ -34,3 +34,4 @@
 #include <wshisotp.h>
 #include <wsnetbs.h>
 #include <wsvns.h>
+#include <netiodef.h>

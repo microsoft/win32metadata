@@ -12,3 +12,6 @@
 #include <dot1x.h>
 #include <ntddndis.h>
 #include <adhoc.h>
+#include <wlclient.h>
+#include <wlanihv.h>
+#include <wlanihvtypes.h>

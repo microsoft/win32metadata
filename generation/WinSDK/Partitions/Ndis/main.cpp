@@ -14,6 +14,3 @@
 #include <adhoc.h>
 #include <ndisguid.h>
 #include <ndkinfo.h>
-#include <wlanihv.h>
-#include <wlanihvtypes.h>
-#include <wlclient.h>

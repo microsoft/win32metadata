@@ -38,7 +38,7 @@
     },
     "showNamespaceDependencies": {
       "commandName": "Project",
-      "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --ignoreDependNamespace Windows.Win32.Foundation --maxBroughtInBy 5 --maxDependTypes 5"
+      "commandLineArgs": "showNamespaceDependencies --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --maxBroughtInBy 1 --maxDependTypes 1 --namespaceFilter Windows.Win32.System.Com"
     },
     "Show depends for a few ns": {
       "commandName": "Project",

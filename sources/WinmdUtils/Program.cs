@@ -783,27 +783,26 @@ namespace WinmdUtilsProgram
 
         public static int ShowNamespaceCycles(FileInfo winmd, IConsole console)
         {
-            foreach (var cycle in NamespaceDependencyUtil.GetNamespaceCycles(winmd.FullName))
+            bool cyclesFound = false;
+
+            foreach (var item in NamespaceDependencyUtil.GetNamespaceDependencies(winmd.FullName))
             {
-                bool first = true;
-                foreach (var ns in cycle)
+                if (item.CyclicalDependencyNamespaces.Any())
                 {
-                    if (!first)
-                    {
-                        console.Out.Write(" -> ");
-                    }
-                    else
-                    {
-                        first = false;
-                    }
+                    console.Out.Write($"{item.Namespace}\r\n");
 
-                    console.Out.Write(ns);
+                    console.Out.Write($"  Cyclical dependent namespaces: {string.Join(", ", item.CyclicalDependencyNamespaces.ToArray())}\r\n");
+
+                    cyclesFound = true;
                 }
-
-                console.Out.Write("\r\n");
             }
 
-            return 0;
+            if (!cyclesFound)
+            {
+                console.Out.Write("No cycles found between any namespaces.\r\n");
+            }
+
+            return cyclesFound ? 1 : 0;
         }
 
         public static int ShowNamespaceDependencies(FileInfo winmd, string[] ignoreDependNamespace, string[] namespaceFilter, int maxBroughtInBy, int maxDependTypes, IConsole console)
@@ -836,8 +835,15 @@ namespace WinmdUtilsProgram
                 ignoreNamespaces.Add(ns);
             }
 
+            Dictionary<string, DependenciesInNamespace> namespaceToItem = new Dictionary<string, DependenciesInNamespace>();
             foreach (var item in NamespaceDependencyUtil.GetNamespaceDependencies(winmd.FullName))
             {
+                namespaceToItem[item.Namespace] = item;
+            }
+
+            foreach (var pair in namespaceToItem.OrderBy(x => x.Key))
+            {
+                var item = pair.Value;
                 bool isMatch = namespaceFilterRegex.Count == 0 || namespaceFilterRegex.Any(r => r.IsMatch(item.Namespace));
                 if (!isMatch)
                 {
@@ -850,6 +856,11 @@ namespace WinmdUtilsProgram
                 if (allDependNamespaces.Length != 0)
                 {
                     console.Out.Write($"  All dependent namespaces: {string.Join(", ", allDependNamespaces)}\r\n");
+                }
+
+                if (item.CyclicalDependencyNamespaces.Any())
+                {
+                    console.Out.Write($"  Cyclical dependent namespaces: {string.Join(", ", item.CyclicalDependencyNamespaces.ToArray())}\r\n");
                 }
 
                 var allDependsByNamespace = item.GetDependenciesByNamespace().Where(d => !ignoreNamespaces.Contains(d.Key)).ToArray();

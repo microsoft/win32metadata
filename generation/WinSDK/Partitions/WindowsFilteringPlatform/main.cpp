@@ -9,4 +9,3 @@
 #include <fwpmu.h>
 #include <fwptypes.h>
 #include <fwpmtypes.h>
-#include <netiodef.h>
