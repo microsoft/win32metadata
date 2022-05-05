@@ -1,3 +1,5 @@
+--exclude
+_DL_EUI48
 --traverse
 <IncludeRoot>/shared/fwpmtypes.h
 <IncludeRoot>/shared/fwpstypes.h
@@ -5,7 +7,6 @@
 <IncludeRoot>/shared/fwpvi.h.h
 <IncludeRoot>/shared/iketypes.h
 <IncludeRoot>/shared/ipsectypes.h
-<IncludeRoot>/shared/netiodef.h
 <IncludeRoot>/um/fwpmtypes.h
 <IncludeRoot>/um/fwpmu.h
 <IncludeRoot>/um/fwpsu.h

@@ -58,6 +58,13 @@ namespace Windows.Win32.Tests
             this.ExecWinmdUtils(args);
         }
 
+        [Fact]
+        public void NoCyclicalNamespaces()
+        {
+            string args = $"showNamespaceCycles --winmd \"{TestUtils.Win32WinmdPath}\"";
+            this.ExecWinmdUtils(args);
+        }
+
         private void ExecWinmdUtils(string args)
         {
             string winmdUtilsDll = Path.Combine(TestUtils.BinPath, "winmdutils.dll");

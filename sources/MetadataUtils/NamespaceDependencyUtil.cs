@@ -25,12 +25,6 @@ namespace MetadataUtils
             return impl.GetNamespaceDependencies(winmdFileName);
         }
 
-        public static IEnumerable<IEnumerable<string>> GetNamespaceCycles(string winmdFileName)
-        {
-            GetNamespaceCyclesImpl impl = new(winmdFileName);
-            return impl.GetNamespaceCycles();
-        }
-
         public static Dictionary<string, IEnumerable<string>> GetNamespaceToDependencyNamespaces(string winmdFileName)
         {
             Dictionary<string, IEnumerable<string>> namespaceToDepends = new();
@@ -41,54 +35,6 @@ namespace MetadataUtils
             }
 
             return namespaceToDepends;
-        }
-
-        private class GetNamespaceCyclesImpl
-        {
-            private Dictionary<string, IEnumerable<string>> namespaceToDepends;
-            
-            public GetNamespaceCyclesImpl(string winmdFileName)
-            {
-                this.namespaceToDepends = GetNamespaceToDependencyNamespaces(winmdFileName);
-            }
-
-            public IEnumerable<IEnumerable<string>> GetNamespaceCycles()
-            {
-                foreach (var ns in this.namespaceToDepends.Keys)
-                {
-                    var empty = Array.Empty<string>();
-                    foreach (var cycle in this.GetCycles(ns, empty))
-                    {
-                        yield return cycle;
-                    }
-                }
-            }
-
-            private IEnumerable<IEnumerable<string>> GetCycles(string ns, string[] currentList)
-            {
-                int alreadyInListIndex = Array.IndexOf(currentList, ns);
-                if (alreadyInListIndex != -1)
-                {
-                    System.Diagnostics.Debug.WriteLine($"alreadyInListIndex = {alreadyInListIndex} for {ns} : {string.Join(';', currentList)}");
-                    if (alreadyInListIndex == 0)
-                    {
-                        var ret = currentList.Append(ns);
-                        yield return ret;
-                    }
-
-                    yield break;
-                }
-
-                currentList = currentList.Append(ns);
-
-                foreach (var dependNamespace in this.namespaceToDepends[ns])
-                {
-                    foreach (var cycle in this.GetCycles(dependNamespace, currentList))
-                    {
-                        yield return cycle;
-                    }
-                }
-            }
         }
 
         private class GetNamespaceDependenciesImpl
@@ -220,6 +166,7 @@ namespace MetadataUtils
     {
         private Dictionary<string, Dictionary<IType, Dependency>> namespacesToDepends = new();
         private string[] allDependencyNamespaces;
+        private string[] cyclicalDependencyNamespaces;
 
         public DependenciesInNamespace(string ns)
         {
@@ -237,6 +184,7 @@ namespace MetadataUtils
         }
 
         public IEnumerable<string> AllDependencyNamespaces => this.allDependencyNamespaces;
+        public IEnumerable<string> CyclicalDependencyNamespaces => this.cyclicalDependencyNamespaces;
 
         internal void AddTypeDependency(string broughtInBy, IType type)
         {
@@ -259,13 +207,14 @@ namespace MetadataUtils
         internal void LoadAllDependendencyNamespaces(Dictionary<string, IEnumerable<string>> namespaceToDepends)
         {
             HashSet<string> dependencyNamespaces = new();
+            List<string> cyclicalDepends = new List<string>();
 
             foreach (var directNamespace in this.namespacesToDepends.Keys)
             {
-                VisitNamespace(directNamespace, dependencyNamespaces);
+                VisitNamespace(directNamespace, dependencyNamespaces, cyclicalDepends);
             }
 
-            void VisitNamespace(string ns, HashSet<string> dependencyNamespaces)
+            void VisitNamespace(string ns, HashSet<string> dependencyNamespaces, List<string> cyclicalDepends)
             {
                 if (!dependencyNamespaces.Contains(ns))
                 {
@@ -273,12 +222,20 @@ namespace MetadataUtils
 
                     foreach (var dependNamespace in namespaceToDepends[ns])
                     {
-                        VisitNamespace(dependNamespace, dependencyNamespaces);
+                        if (dependNamespace == this.Namespace)
+                        {
+                            cyclicalDepends.Add(ns);
+                        }
+                        else
+                        {
+                            VisitNamespace(dependNamespace, dependencyNamespaces, cyclicalDepends);
+                        }
                     }
                 }
             }
 
             this.allDependencyNamespaces = dependencyNamespaces.ToArray();
+            this.cyclicalDependencyNamespaces = cyclicalDepends.ToArray();
         }
     }
 

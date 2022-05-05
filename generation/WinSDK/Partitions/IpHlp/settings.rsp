@@ -21,7 +21,6 @@ RtlIpv4StringToAddressExW
 RtlIpv6StringToAddressExW
 _DL_EUI48
 --traverse
-<IncludeRoot>/shared/ifdef.h
 <IncludeRoot>/shared/ifmib.h
 <IncludeRoot>/shared/ip2string.h
 <IncludeRoot>/shared/ipifcons.h

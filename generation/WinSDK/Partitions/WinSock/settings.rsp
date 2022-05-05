@@ -1,5 +1,5 @@
 --exclude
-_DL_EUI48
+DL_ADDRESS_TYPE
 --traverse
 <IncludeRoot>/shared/in6addr.h
 <IncludeRoot>/shared/inaddr.h
@@ -29,5 +29,6 @@ _DL_EUI48
 <IncludeRoot>/um/wsipx.h
 <IncludeRoot>/um/wsnetbs.h
 <IncludeRoot>/um/wsvns.h
+<IncludeRoot>/shared/netiodef.h
 --namespace
 Windows.Win32.Networking.WinSock

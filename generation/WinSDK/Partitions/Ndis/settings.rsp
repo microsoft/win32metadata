@@ -12,8 +12,6 @@
 <IncludeRoot>/shared/ndis/version.h
 <IncludeRoot>/shared/ndisguid.h
 <IncludeRoot>/shared/ndkinfo.h
-<IncludeRoot>/um/wlanihv.h
-<IncludeRoot>/um/wlanihvtypes.h
-<IncludeRoot>/um/wlclient.h
+<IncludeRoot>/shared/ifdef.h
 --namespace
 Windows.Win32.NetworkManagement.Ndis

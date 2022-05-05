@@ -6,5 +6,8 @@
 <IncludeRoot>/shared/pciprop.h
 <IncludeRoot>/um/wlanapi.h
 <IncludeRoot>/um/adhoc.h
+<IncludeRoot>/um/wlanihv.h
+<IncludeRoot>/um/wlanihvtypes.h
+<IncludeRoot>/um/wlclient.h
 --namespace
 Windows.Win32.NetworkManagement.WiFi
