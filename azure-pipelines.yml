@@ -216,10 +216,10 @@ jobs:
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: EsrpCodeSigning@1
-    displayName: Authenticode sign net5.0 binaries in Generator SDK package
+    displayName: Authenticode sign net6.0 binaries in Generator SDK package
     inputs:
       ConnectedServiceName: 'Xlang Code Signing'
-      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net5.0'
+      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net6.0'
       Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataUtils.dll,WinmdUtils.dll,MetadataTasks.dll'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
