@@ -171,9 +171,8 @@ function Get-VcDirPath
 {
     param ($Arch = 'x64', $HostArch = 'x64')
 
-    $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-    $installDir = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-    if ($installDir)
+    $installDir = & "$PSScriptRoot\Get-VSPath.ps1"
+    try
     {
         $path = join-path $installDir 'VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt'
         if (test-path $path)
@@ -186,9 +185,14 @@ function Get-VcDirPath
                 return $path
             }
         }
-    }
 
-    return $null
+        return $null
+    }
+    finally
+    {
+        # This doesn't need anything, but putting the script in a try block leads to it aborting
+        # when a child script throws.
+    }
 }
 
 function Install-VsDevShell
@@ -196,9 +200,7 @@ function Install-VsDevShell
     if (!$env:VSINSTALLDIR)
     {
         $currentDir = Get-Location
-        $vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-        $installDir = & $vswhere -latest -property installationPath
-    
+        $installDir = & "$PSScriptRoot\Get-VSPath.ps1"
         $vsInstallScript = Join-Path $installDir "Common7\Tools\Launch-VsDevShell.ps1"
     
         & $vsInstallScript
