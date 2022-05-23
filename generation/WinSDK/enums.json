@@ -13673,6 +13673,81 @@
     ]
   },
   {
+    "name": "SND_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "SND_APPLICATION"
+      },
+      {
+        "name": "SND_ALIAS"
+      },
+      {
+        "name": "SND_ALIAS_ID"
+      },
+      {
+        "name": "SND_ALIAS"
+      },
+      {
+        "name": "SND_FILENAME"
+      },
+      {
+        "name": "SND_RESOURCE"
+      },
+      {
+        "name": "SND_ALIAS_ID"
+      },
+      {
+        "name": "SND_ASYNC"
+      },
+      {
+        "name": "SND_FILENAME"
+      },
+      {
+        "name": "SND_NODEFAULT"
+      },
+      {
+        "name": "SND_LOOP"
+      },
+      {
+        "name": "SND_ASYNC"
+      },
+      {
+        "name": "SND_MEMORY"
+      },
+      {
+        "name": "SND_NODEFAULT"
+      },
+      {
+        "name": "SND_NOSTOP"
+      },
+      {
+        "name": "SND_NOWAIT"
+      },
+      {
+        "name": "SND_PURGE"
+      },
+      {
+        "name": "SND_RESOURCE"
+      },
+      {
+        "name": "SND_SENTRY"
+      },
+      {
+        "name": "SND_SYNC"
+      },
+      {
+        "name": "SND_SYSTEM"
+      }
+    ],
+    "uses": [
+      {
+        "method": "PlaySound",
+        "parameter": "fdwSound"
+      }
+    ]
+  },
+  {
     "name": "CERT_PROPERTY_TYPE",
     "members": [
       {
@@ -29425,7 +29500,7 @@
   },
   {
     "name": "PRINTER_ACCESS_RIGHTS",
-    "flags": true,    
+    "flags": true,
     "autoPopulate": {
       "filter": "PRINTER_ACCESS_|SERVER_ACCESS_",
       "header": "winspool.h"
