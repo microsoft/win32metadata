@@ -18113,11 +18113,93 @@
     ]
   },
   {
-    "addUsesTo": "ROP_CODE",
-    "members": [],
+    "name": "ROP_CODE",
+    "flags": true,
+    "members": [
+      {
+        "name": "BLACKNESS",
+        "value": "0x00000042"
+      },
+      {
+        "name": "NOTSRCERASE",
+        "value": "0x001100A6"
+      },
+      {
+        "name": "NOTSRCCOPY",
+        "value": "0x00330008"
+      },
+      {
+        "name": "SRCERASE",
+        "value": "0x00440328"
+      },
+      {
+        "name": "DSTINVERT",
+        "value": "0x00550009"
+      },
+      {
+        "name": "PATINVERT",
+        "value": "0x005A0049"
+      },
+      {
+        "name": "SRCINVERT",
+        "value": "0x00660046"
+      },
+      {
+        "name": "SRCAND",
+        "value": "0x008800C6"
+      },
+      {
+        "name": "MERGEPAINT",
+        "value": "0x00BB0226"
+      },
+      {
+        "name": "MERGECOPY",
+        "value": "0x00C000CA"
+      },
+      {
+        "name": "SRCCOPY",
+        "value": "0x00CC0020"
+      },
+      {
+        "name": "SRCPAINT",
+        "value": "0x00EE0086"
+      },
+      {
+        "name": "PATCOPY",
+        "value": "0x00F00021"
+      },
+      {
+        "name": "PATPAINT",
+        "value": "0x00FB0A09"
+      },
+      {
+        "name": "WHITENESS",
+        "value": "0x00FF0062"
+      },
+      {
+        "name": "CAPTUREBLT",
+        "value": "0x40000000"
+      },
+      {
+        "name": "NOMIRRORBITMAP",
+        "value": "0x80000000"
+      }
+    ],
     "uses": [
       {
         "method": "PatBlt",
+        "parameter": "rop"
+      },
+      {
+        "method": "BitBlt",
+        "parameter": "rop"
+      },
+      {
+        "method": "StretchBlt",
+        "parameter": "rop"
+      },
+      {
+        "method": "StretchDIBits",
         "parameter": "rop"
       }
     ]
