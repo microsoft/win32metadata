@@ -29813,5 +29813,50 @@
         "field": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "DROPEFFECT",
+    "flags": false,
+    "type": "uint",
+    "members": [
+      {
+        "name": "DROPEFFECT_NONE",
+        "value": 0
+      },
+      {
+        "name": "DROPEFFECT_COPY",
+        "value": 1
+      },
+      {
+        "name": "DROPEFFECT_MOVE",
+        "value": 2
+      },
+      {
+        "name": "DROPEFFECT_LINK",
+        "value": 4
+      },
+      {
+        "name": "DROPEFFECT_SCROLL",
+        "value": "0x80000000"
+      }
+    ],
+    "uses": [
+      {
+        "method": "DoDragDrop",
+        "parameter": "dwOKEffects"
+      },
+      {
+        "method": "DoDragDrop",
+        "parameter": "pdwEffect"
+      },
+      {
+        "method": "SHDoDragDrop",
+        "parameter": "dwEffect"
+      },
+      {
+        "method": "SHDoDragDrop",
+        "parameter": "pdwEffect"
+      }
+    ]
   }
 ]
