@@ -26,6 +26,12 @@ jobs:
     inputs:
       packageType: sdk
       useGlobalJson: true
+    # ClangSharpPInvokeGenerator.exe requires .NET 5.0
+  - task: UseDotNet@2
+    displayName: ⚙ Install .NET 5.0
+    inputs:
+      packageType: runtime
+      version: 5.0.x
 
   - task: PowerShell@2
     displayName: Set build version
@@ -65,6 +71,12 @@ jobs:
     inputs:
       packageType: sdk
       useGlobalJson: true
+    # ClangSharpPInvokeGenerator.exe requires .NET 5.0
+  - task: UseDotNet@2
+    displayName: ⚙ Install .NET 5.0
+    inputs:
+      packageType: runtime
+      version: 5.0.x
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - x86
@@ -93,6 +105,12 @@ jobs:
     inputs:
       packageType: sdk
       useGlobalJson: true
+    # ClangSharpPInvokeGenerator.exe requires .NET 5.0
+  - task: UseDotNet@2
+    displayName: ⚙ Install .NET 5.0
+    inputs:
+      packageType: runtime
+      version: 5.0.x
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - arm64
@@ -131,6 +149,12 @@ jobs:
       packageType: sdk
       useGlobalJson: true
 
+    # ClangSharpPInvokeGenerator.exe requires .NET 5.0
+  - task: UseDotNet@2
+    displayName: ⚙ Install .NET 5.0
+    inputs:
+      packageType: runtime
+      version: 5.0.x
     # ESRP Authenticode sign package DLLs
   - task: UseDotNet@2
     displayName: Install DotNet 2.1.x for signing tasks
@@ -216,10 +240,10 @@ jobs:
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
 
   - task: EsrpCodeSigning@1
-    displayName: Authenticode sign net5.0 binaries in Generator SDK package
+    displayName: Authenticode sign net6.0 binaries in Generator SDK package
     inputs:
       ConnectedServiceName: 'Xlang Code Signing'
-      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net5.0'
+      FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net6.0'
       Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataUtils.dll,WinmdUtils.dll,MetadataTasks.dll'
       signConfigType: 'inlineSignParams'
       inlineOperation: |

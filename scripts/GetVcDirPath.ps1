@@ -1,9 +1,7 @@
 param ($Arch = 'x64', $HostArch = 'x64')
 
-$vswhere = "${env:ProgramFiles(x86)}\Microsoft Visual Studio\Installer\vswhere.exe"
-$installDir = & $vswhere -latest -products * -requires Microsoft.VisualStudio.Component.VC.Tools.x86.x64 -property installationPath
-if ($installDir) 
-{
+try {
+    $installDir = & "$PSScriptRoot\Get-VSPath.ps1"
     $path = join-path $installDir 'VC\Auxiliary\Build\Microsoft.VCToolsVersion.default.txt'
     if (test-path $path) 
     {
@@ -15,6 +13,9 @@ if ($installDir)
             return $path
         }
     }
-}
 
-return $null
+    return $null
+} finally {
+    # This doesn't need anything, but putting the script in a try block leads to it aborting
+    # when a child script throws.
+}
