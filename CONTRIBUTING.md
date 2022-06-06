@@ -178,6 +178,8 @@ Language projections can use the context provided by attributes to improve the d
 
 ### Full builds
 
+The ps1 scripts prescribed below must be run in a PowerShell 7+ terminal. You'll get syntax errors from the scripts if you try to run them from Windows Powershell.
+
 Run `./DoAll.ps1 -Clean` to run a full build, then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes.
 
 If you encounter errors processing .zip or .winmd files, make sure that Git LFS is installed and configured properly per [set up your development environment](#Set-up-your-development-environment).
