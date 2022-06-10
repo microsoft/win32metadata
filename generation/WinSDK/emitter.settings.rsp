@@ -892,3 +892,4 @@ GetSecurityInfo::return=WIN32_ERROR
 MFTEnum2::Flags=MFT_ENUM_FLAG
 MFTEnumEx::Flags=MFT_ENUM_FLAG
 D2D1CreateFactory::ppIFactory=[ComOutPtr]
+IRestrictedErrorInfo=[Agile]
