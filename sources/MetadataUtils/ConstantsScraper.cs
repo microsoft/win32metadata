@@ -681,10 +681,17 @@ namespace MetadataUtils
                                 string part2 = match.Groups[10].Value;
                                 valueText = part1 + part2;
                             }
-                            // MAKEINTRESOURCE(-4)
+                            // MAKEINTRESOURCE(-4), MAKEINTRESOURCEA(-1), MAKEINTRESOURCEW(42)
                             else if (!string.IsNullOrEmpty(match.Groups[11].Value))
                             {
-                                nativeTypeName = "LPCWSTR";
+                                if (match.Groups[11].Value.StartsWith("MAKEINTRESOURCEA"))
+                                {
+                                    nativeTypeName = "LPCSTR";
+                                }
+                                else
+                                {
+                                    nativeTypeName = "LPCWSTR";
+                                }
                                 valueText = match.Groups[12].Value;
                                 this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                 continue;
