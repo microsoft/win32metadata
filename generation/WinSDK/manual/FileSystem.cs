@@ -122,4 +122,9 @@ namespace Windows.Win32.Storage.FileSystem
 
         FILE_GENERIC_EXECUTE = (STANDARD_RIGHTS_EXECUTE | FILE_READ_ATTRIBUTES | FILE_EXECUTE | SYNCHRONIZE)
     }
+
+    public static unsafe partial class Apis
+    {
+        public const uint MAXIMUM_REPARSE_DATA_BUFFER_SIZE = 16 * 1024;
+    }
 }
