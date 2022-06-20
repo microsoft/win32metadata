@@ -33,7 +33,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -681,10 +681,17 @@ namespace MetadataUtils
                                 string part2 = match.Groups[10].Value;
                                 valueText = part1 + part2;
                             }
-                            // MAKEINTRESOURCE(-4)
+                            // MAKEINTRESOURCE(-4), MAKEINTRESOURCEA(-1), MAKEINTRESOURCEW(42)
                             else if (!string.IsNullOrEmpty(match.Groups[11].Value))
                             {
-                                nativeTypeName = "LPCWSTR";
+                                if (match.Groups[11].Value.StartsWith("MAKEINTRESOURCEA"))
+                                {
+                                    nativeTypeName = "LPCSTR";
+                                }
+                                else
+                                {
+                                    nativeTypeName = "LPCWSTR";
+                                }
                                 valueText = match.Groups[12].Value;
                                 this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
                                 continue;
