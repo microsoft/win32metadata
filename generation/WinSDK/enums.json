@@ -3608,6 +3608,30 @@
     ],
     "uses": [
       {
+        "method": "GetSystemWow64Directory2A",
+        "parameter": "ImageFileMachineType"
+      },
+      {
+        "method": "GetSystemWow64Directory2W",
+        "parameter": "ImageFileMachineType"
+      },
+      {
+        "method": "IsWow64GuestMachineSupported",
+        "parameter": "WowGuestMachine"
+      },
+      {
+        "method": "IsWow64Process2",
+        "parameter": "pProcessMachine"
+      },
+      {
+        "method": "IsWow64Process2",
+        "parameter": "pNativeMachine"
+      },
+      {
+        "struct": "PROCESS_MACHINE_INFORMATION",
+        "field": "ProcessMachine"
+      },
+      {
         "struct": "IMAGE_FILE_HEADER",
         "field": "Machine"
       }
