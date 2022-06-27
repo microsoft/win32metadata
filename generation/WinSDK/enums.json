@@ -29951,5 +29951,21 @@
         "field": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "ROT_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "ROTFLAGS_",
+      "header": "wtypes.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IRunningObjectTable",
+        "method": "Register",
+        "parameter": "grfFlags"
+      }
+    ]
   }
 ]
