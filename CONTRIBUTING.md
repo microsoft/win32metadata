@@ -178,15 +178,13 @@ Language projections can use the context provided by attributes to improve the d
 
 ### Full builds
 
-The ps1 scripts prescribed below must be run in a PowerShell 7+ terminal. You'll get syntax errors from the scripts if you try to run them from Windows Powershell.
-
-Run `./DoAll.ps1 -Clean` to run a full build, then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes.
+Run `./DoAll.ps1 -Clean` in [PowerShell 7](https://aka.ms/powershell-release?tag=stable) to run a full build, then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes.
 
 If you encounter errors processing .zip or .winmd files, make sure that Git LFS is installed and configured properly per [set up your development environment](#Set-up-your-development-environment).
 
 ### Incremental builds
 
-Run `./DoAll.ps1` to run an incremental build, then inspect the reported winmd diff to ensure all changes were intentional. `./DoAll.ps1` without `-Clean` will recognize what files have changed and build only the necessary components required for those changes.
+Run `./DoAll.ps1` in [PowerShell 7](https://aka.ms/powershell-release?tag=stable) to run an incremental build, then inspect the reported winmd diff to ensure all changes were intentional. `./DoAll.ps1` without `-Clean` will recognize what files have changed and build only the necessary components required for those changes.
 
 Note that stale artifacts on your system may sometimes result in cryptic errors when attempting incremental builds. If you do encounter cryptic errors during incremental builds that you suspect are the result of previously built changes, reset your system state by running a clean build with `./DoAll.ps1 -Clean`.
 
