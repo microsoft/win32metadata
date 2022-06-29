@@ -1402,5 +1402,11 @@
     "ValueType": "IntPtr",
     "CloseApi": "SetupDiDestroyDeviceInfoList",
     "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.ActiveDirectory",
+    "Name": "ADS_SEARCH_HANDLE",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ -1, 0 ]
   }
 ]
