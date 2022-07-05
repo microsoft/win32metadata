@@ -1,3 +1,5 @@
+--exclude
+IStiDeviceW
 --traverse
 <IncludeRoot>/um/FaxComEx.h
 <IncludeRoot>/um/FaxDev.h
