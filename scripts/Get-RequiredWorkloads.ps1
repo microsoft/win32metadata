@@ -2,5 +2,5 @@
 
 # Please keep this list sorted.
 
-'Microsoft.VisualStudio.Component.VC.Tools.x86.x64'
 'Microsoft.VisualStudio.Component.VC.Tools.ARM64'
+'Microsoft.VisualStudio.Component.VC.Tools.x86.x64'

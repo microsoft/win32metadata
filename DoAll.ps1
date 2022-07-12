@@ -17,6 +17,9 @@ param
     $arch = "crossarch"
 )
 
+# Run this script so it throws if VS isn't installed with the required workloads.
+& "$PSScriptRoot\scripts\Get-VSPath.ps1" | Out-Null
+
 if (!$SkipInstallTools.IsPresent)
 {
     . .\scripts\CommonUtils.ps1
