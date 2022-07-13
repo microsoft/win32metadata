@@ -13766,7 +13766,11 @@
     ],
     "uses": [
       {
-        "method": "PlaySound",
+        "method": "PlaySoundW",
+        "parameter": "fdwSound"
+      },
+      {
+        "method": "PlaySoundA",
         "parameter": "fdwSound"
       }
     ]
