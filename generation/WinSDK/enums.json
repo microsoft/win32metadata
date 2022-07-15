@@ -13766,7 +13766,11 @@
     ],
     "uses": [
       {
-        "method": "PlaySound",
+        "method": "PlaySoundW",
+        "parameter": "fdwSound"
+      },
+      {
+        "method": "PlaySoundA",
         "parameter": "fdwSound"
       }
     ]
@@ -18367,39 +18371,6 @@
       {
         "method": "LPPROGRESS_ROUTINE",
         "parameter": "dwCallbackReason"
-      }
-    ]
-  },
-  {
-    "name": "ACCEPT_SECURITY_CONTEXT_CONTEXT_REQ",
-    "flags": true,
-    "members": [
-      {
-        "name": "ASC_REQ_ALLOCATE_MEMORY"
-      },
-      {
-        "name": "ASC_REQ_CONNECTION"
-      },
-      {
-        "name": "ASC_REQ_DELEGATE"
-      },
-      {
-        "name": "ASC_REQ_EXTENDED_ERROR"
-      },
-      {
-        "name": "ASC_REQ_REPLAY_DETECT"
-      },
-      {
-        "name": "ASC_REQ_SEQUENCE_DETECT"
-      },
-      {
-        "name": "ASC_REQ_STREAM"
-      }
-    ],
-    "uses": [
-      {
-        "method": "AcceptSecurityContext",
-        "parameter": "fContextReq"
       }
     ]
   },
@@ -29965,6 +29936,52 @@
         "interface": "IRunningObjectTable",
         "method": "Register",
         "parameter": "grfFlags"
+      }
+    ]
+  },
+  {
+    "name": "ISC_REQ_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "ISC_REQ_",
+      "header": "sspi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "InitializeSecurityContextA",
+        "parameter": "fContextReq"
+      },
+      {
+        "method": "InitializeSecurityContextW",
+        "parameter": "fContextReq"
+      },
+      {
+        "method": "SaslInitializeSecurityContextA",
+        "parameter": "fContextReq"
+      },
+      {
+        "method": "SaslInitializeSecurityContextW",
+        "parameter": "fContextReq"
+      }
+    ]
+  },
+  {
+    "name": "ASC_REQ_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "ASC_REQ_",
+      "header": "sspi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "AcceptSecurityContext",
+        "parameter": "fContextReq"
+      },
+      {
+        "method": "SaslAcceptSecurityContext",
+        "parameter": "fContextReq"
       }
     ]
   }
