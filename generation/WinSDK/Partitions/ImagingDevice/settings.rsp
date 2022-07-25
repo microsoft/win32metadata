@@ -1,3 +1,5 @@
+--exclude
+IStiDeviceW
 --traverse
 <IncludeRoot>/um/sti.h
 <IncludeRoot>/um/stierr.h
