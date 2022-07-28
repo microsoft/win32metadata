@@ -22,7 +22,7 @@ namespace ClangSharpSourceToWinmd
 
         private class TreeRewriter : CSharpSyntaxRewriter
         {
-            private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\(([^\)]+)\)");
+            private static readonly Regex ElementCountRegex = new Regex(@"(?:elementCount|byteCount)\((?:_Old_\()?([^\)]+)\)+");
             private static readonly Regex IsRegex = new Regex(@"[^\w::]");
 
             private HashSet<SyntaxNode> nodesWithMarshalAs = new HashSet<SyntaxNode>();
