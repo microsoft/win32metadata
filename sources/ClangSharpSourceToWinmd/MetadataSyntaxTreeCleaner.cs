@@ -838,12 +838,11 @@ namespace ClangSharpSourceToWinmd
                             isReserved = true;
                             continue;
                         }
-                    }
-
-                    if (salAttr.Name == "SAL_null" && salAttr.P1 == "__maybe")
-                    {
-                        isOpt = true;
-                        continue;
+                        else if (salAttr.P1.Contains("_opt"))
+                        {
+                            isOpt = true;
+                            continue;
+                        }
                     }
 
                     if (salAttr.Name == "SAL_retval")
