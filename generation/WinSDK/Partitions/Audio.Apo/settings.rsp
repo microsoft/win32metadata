@@ -1,5 +1,5 @@
 --with-librarypath
-GetDeviceID=DSOUND
+GetDeviceID=DSOUND.dll
 --exclude
 _D3DVECTOR
 IReferenceClock

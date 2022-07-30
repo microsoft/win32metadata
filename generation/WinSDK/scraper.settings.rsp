@@ -1,5 +1,5 @@
 --with-librarypath
-VerifierEnumerateResource=verifier
+VerifierEnumerateResource=verifier.dll
 --with-type
 AutoSvcs_Error_Constants=uint
 MF_CAPTURE_ENGINE_SOURCE=uint
