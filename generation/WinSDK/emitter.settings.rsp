@@ -271,6 +271,7 @@ FindFirstFileExW::return=FindFileHandle
 FindFirstFileTransactedA::return=FindFileHandle
 FindFirstFileTransactedW::return=FindFileHandle
 FindNextFileA::hFindFile=FindFileHandle
+FindNextFileW::hFindFile=FindFileHandle
 FindFirstStreamW::return=FindStreamHandle
 FindFirstStreamTransactedW::return=FindStreamHandle
 FindNextStreamW::hFindStream=FindStreamHandle
