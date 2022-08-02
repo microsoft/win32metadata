@@ -40,6 +40,16 @@ namespace Windows.Win32.Security
     }
 }
 
+namespace Windows.Win32.Security.Credentials
+{
+    public static unsafe partial class Apis
+    {
+        public const uint CRED_MAX_CREDENTIAL_BLOB_SIZE = 5*512;
+        public const uint CRED_MAX_USERNAME_LENGTH = 256+1+256;
+        public const uint CRED_MAX_DOMAIN_TARGET_NAME_LENGTH = 256+1+80;
+    }
+}
+
 namespace Windows.Win32.Security.Cryptography
 {
     public static unsafe partial class Apis
