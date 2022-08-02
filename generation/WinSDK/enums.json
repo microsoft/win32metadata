@@ -30010,5 +30010,29 @@
         "parameter": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "CONSOLE_CHARACTER_ATTRIBUTES",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "FOREGROUND_|BACKGROUND_|COMMON_LVB_",
+      "header": "consoleapi2.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "SetConsoleTextAttribute",
+        "parameter": "wAttributes"
+      },
+      {
+        "struct": "CONSOLE_SCREEN_BUFFER_INFO",
+        "field": "wAttributes"
+      },
+      {
+        "struct": "CONSOLE_SCREEN_BUFFER_INFOEX",
+        "field": "wAttributes"
+      }
+    ]
   }
 ]
