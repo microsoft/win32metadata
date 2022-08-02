@@ -221,8 +221,7 @@
   {
     "Name": "HSTRING",
     "ValueType": "DECLARE_HANDLE",
-    "CloseApi": "WindowsDeleteString",
-    "InvalidHandleValues": [ -1, 0 ]
+    "CloseApi": "WindowsDeleteString"
   },
   {
     "Namespace": "Windows.Win32.System.WinRT",
