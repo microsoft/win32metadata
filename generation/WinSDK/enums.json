@@ -29984,5 +29984,31 @@
         "parameter": "fContextReq"
       }
     ]
+  },
+  {
+    "addUsesTo": "PATHCCH_OPTIONS",
+    "members": [],
+    "uses": [
+      {
+        "method": "PathCchCanonicalizeEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "PathCchCombineEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "PathCchAppendEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "PathAllocCombine",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "PathAllocCanonicalize",
+        "parameter": "dwFlags"
+      }
+    ]
   }
 ]
