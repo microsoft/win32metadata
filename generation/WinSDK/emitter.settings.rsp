@@ -916,3 +916,4 @@ IEnumIDList::Skip=[PreserveSig]
 IEnumIDList::Reset=[PreserveSig]
 IEnumIDList::Clone=[PreserveSig]
 IDataObject::QueryGetData=[PreserveSig]
+CallNtPowerInformation::return=NTSTATUS
