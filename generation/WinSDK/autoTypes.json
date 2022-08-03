@@ -1292,15 +1292,37 @@
     "CloseApi": "closesocket"
   },
   {
+    "Namespace": "Windows.Win32.Security.Cryptography",
+    "Name": "BCRYPT_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
     "Name": "BCRYPT_ALG_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "BCryptCloseAlgorithmProvider",
+    "AlsoUsableFor": "BCRYPT_HANDLE",
     "InvalidHandleValues": [ 0 ]
   },
   {
     "Name": "BCRYPT_KEY_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "BCryptDestroyKey",
+    "AlsoUsableFor": "BCRYPT_HANDLE",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Name": "BCRYPT_HASH_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BCryptDestroyHash",
+    "AlsoUsableFor": "BCRYPT_HANDLE",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Name": "BCRYPT_SECRET_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "BCryptDestroySecret",
+    "AlsoUsableFor": "BCRYPT_HANDLE",
     "InvalidHandleValues": [ 0 ]
   },
   {
