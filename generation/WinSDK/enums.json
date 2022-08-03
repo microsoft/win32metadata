@@ -30034,5 +30034,65 @@
         "field": "wAttributes"
       }
     ]
+  },
+  {
+    "name": "GDI_REGION_TYPE",
+    "type": "int",
+    "members": [
+      {
+        "name": "RGN_ERROR"
+      },
+      {
+        "name": "NULLREGION"
+      },
+      {
+        "name": "SIMPLEREGION"
+      },
+      {
+        "name": "COMPLEXREGION"
+      }
+    ],
+    "uses": [
+      {
+        "method": "CombineRgn",
+        "parameter": "return"
+      },
+      {
+        "method": "ExcludeClipRect",
+        "parameter": "return"
+      },
+      {
+        "method": "ExtSelectClipRgn",
+        "parameter": "return"
+      },
+      {
+        "method": "GetClipBox",
+        "parameter": "return"
+      },
+      {
+        "method": "GetRgnBox",
+        "parameter": "return"
+      },
+      {
+        "method": "IntersectClipRect",
+        "parameter": "return"
+      },
+      {
+        "method": "OffsetClipRgn",
+        "parameter": "return"
+      },
+      {
+        "method": "OffsetRgn",
+        "parameter": "return"
+      },
+      {
+        "method": "SelectClipRgn",
+        "parameter": "return"
+      },
+      {
+        "method": "SetMetaRgn",
+        "parameter": "return"
+      }
+    ]
   }
 ]
