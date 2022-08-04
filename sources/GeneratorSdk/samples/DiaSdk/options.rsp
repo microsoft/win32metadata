@@ -1,3 +1,5 @@
+--with-type
+NameSearchOptions=uint
 --exclude
 SymTagEnum
 __MIDL___MIDL_itf_dia2_0000_0000_0001
@@ -6,3 +8,5 @@ PfnPDBDebugDirV
 --remap
 SymTagEnum=SymTag
 __MIDL___MIDL_itf_dia2_0000_0043_0001=FPODATA
+--memberRemap
+IDiaEnumSymbols::get_Count::pRetVal=uint*
