@@ -481,7 +481,7 @@ namespace MetadataUtils
                         if (processingGuidMultiLine)
                         {
                             continuation = StripComments(line).Trim();
-                            if (continuation.EndsWith(';'))
+                            if (continuation.EndsWith(';') || continuation.EndsWith(')'))
                             {
                                 processingGuidMultiLine = false;
                                 this.AddConstantGuid(defineGuidKeyword, currentNamespace, continuation);
