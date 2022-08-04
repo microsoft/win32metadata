@@ -281,7 +281,6 @@ File,Skipping,Reason
 /um/vddsvc.h,true,Ignoring kernel stuff
 /um/vsanimation.h,true,Undocumented can't find uses
 /um/vsbackup.h,true,Can't use C++ classes
-/um/vsstyle.h,false,VisualStyle -- can't find what uses this
 /um/wdscpmsg.h,false,Can't find what uses these errors
 /um/wia_xp.h,true,Using wia_lh.h instead
 /um/wia.h,true,Using wia_lh.h instead

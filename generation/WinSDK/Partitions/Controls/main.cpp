@@ -16,4 +16,5 @@
 #include <uxtheme.h>
 #include <commctrl.h>
 #include <vssym32.h>
+#include <vsstyle.h>
 #include <custcntl.h>
