@@ -30094,5 +30094,89 @@
         "parameter": "return"
       }
     ]
+  },
+  {
+    "name": "SYNCHRONIZATION_ACCESS_RIGHTS",
+    "flags": true,
+    "members": [
+      {
+        "name": "EVENT_ALL_ACCESS",
+        "value": "(0x1F0003)"
+      },
+      {
+        "name": "EVENT_MODIFY_STATE",
+        "value": "(0x0002)"
+      },
+      {
+        "name": "MUTEX_ALL_ACCESS",
+        "value": "(0x1F0001)"
+      },
+      {
+        "name": "MUTEX_MODIFY_STATE",
+        "value": "(0x0001)"
+      },
+      {
+        "name": "SEMAPHORE_ALL_ACCESS",
+        "value": "(0x1F0003)"
+      },
+      {
+        "name": "SEMAPHORE_MODIFY_STATE",
+        "value": "(0x0002)"
+      },
+      {
+        "name": "TIMER_ALL_ACCESS",
+        "value": "(0x1F0003)"
+      },
+      {
+        "name": "TIMER_MODIFY_STATE",
+        "value": "(0x0002)"
+      },
+      {
+        "name": "TIMER_QUERY_STATE",
+        "value": "(0x0001)"
+      },
+      {
+        "name": "SYNCHRONIZATION_DELETE",
+        "value": "(0x00010000)"
+      },
+      {
+        "name": "SYNCHRONIZATION_READ_CONTROL",
+        "value": "(0x00020000)"
+      },
+      {
+        "name": "SYNCHRONIZATION_WRITE_DAC",
+        "value": "(0x00040000)"
+      },
+      {
+        "name": "SYNCHRONIZATION_WRITE_OWNER",
+        "value": "(0x00080000)"
+      },
+      {
+        "name": "SYNCHRONIZATION_SYNCHRONIZE",
+        "value": "(0x00100000)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "OpenEventA",
+        "parameter": "dwDesiredAccess"
+      },
+      {
+        "method": "OpenEventW",
+        "parameter": "dwDesiredAccess"
+      },
+      {
+        "method": "OpenMutexW",
+        "parameter": "dwDesiredAccess"
+      },
+      {
+        "method": "OpenSemaphoreW",
+        "parameter": "dwDesiredAccess"
+      },
+      {
+        "method": "OpenWaitableTimerW",
+        "parameter": "dwDesiredAccess"
+      }
+    ]
   }
 ]
