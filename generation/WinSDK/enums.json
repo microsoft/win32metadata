@@ -10544,10 +10544,6 @@
       {
         "name": "SWP_SHOWWINDOW",
         "value": "64"
-      },
-      {
-        "name": "SWP__NOOWNERZORDER",
-        "value": "512"
       }
     ],
     "uses": [
