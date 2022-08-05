@@ -1429,5 +1429,11 @@
     "Name": "ADS_SEARCH_HANDLE",
     "ValueType": "IntPtr",
     "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Name": "TRACEHANDLE",
+    "ValueType": "ulong",
+    "CloseApi": "CloseTrace",
+    "InvalidHandleValues": [ 0 ]
   }
 ]
