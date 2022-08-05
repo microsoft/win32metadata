@@ -1431,9 +1431,21 @@
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
-    "Name": "TRACEHANDLE",
+    "Namespace": "Windows.Win32.System.Diagnostics.Etw",
+    "Name": "PROCESSTRACE_HANDLE",
     "ValueType": "ulong",
-    "CloseApi": "CloseTrace",
+    "CloseApi": "CloseTrace"
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.Etw",
+    "Name": "CONTROLTRACE_HANDLE",
+    "ValueType": "ulong",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Diagnostics.Etw",
+    "Name": "RELOGSTREAM_HANDLE",
+    "ValueType": "ulong",
     "InvalidHandleValues": [ 0 ]
   }
 ]
