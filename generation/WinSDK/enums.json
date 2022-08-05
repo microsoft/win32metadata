@@ -30174,5 +30174,19 @@
         "parameter": "dwDesiredAccess"
       }
     ]
+  },
+  {
+    "name": "SHELL_AUTOCOMPLETE_FLAGS",
+    "autoPopulate": {
+      "filter": "SHACF_",
+      "header": "shlwapi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "SHAutoComplete",
+        "parameter": "dwFlags"
+      }
+    ]
   }
 ]
