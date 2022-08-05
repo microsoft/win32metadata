@@ -30177,6 +30177,7 @@
   },
   {
     "name": "SHELL_AUTOCOMPLETE_FLAGS",
+    "flags": true,
     "autoPopulate": {
       "filter": "SHACF_",
       "header": "shlwapi.h"
