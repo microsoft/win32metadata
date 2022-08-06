@@ -30189,5 +30189,97 @@
         "parameter": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "IME_CONVERSION_MODE",
+    "type": "uint",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "IME_CMODE_",
+      "header": "Imm.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "ImmGetConversionStatus",
+        "parameter": "lpfdwConversion"
+      },
+      {
+        "method": "ImmSetConversionStatus",
+        "parameter": "param1"
+      }
+    ]
+  },
+  {
+    "name": "IME_SENTENCE_MODE",
+    "type": "uint",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "IME_SMODE_",
+      "header": "Imm.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "ImmGetConversionStatus",
+        "parameter": "lpfdwSentence"
+      },
+      {
+        "method": "ImmSetConversionStatus",
+        "parameter": "param2"
+      }
+    ]
+  },
+  {
+    "name": "IME_COMPOSITION_STRING",
+    "type": "uint",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "GCS_",
+      "header": "Imm.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "ImmGetCompositionString",
+        "parameter": "param1"
+      },
+      {
+        "method": "WM_IME_COMPOSITION",
+        "parameter": "lParam"
+      }
+    ]
+  },
+  {
+    "name": "IME_ESCAPES",
+    "type": "uint",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "IME_ESC_",
+      "header": "Imm.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "ImmEscape",
+        "parameter": "param2"
+      }
+    ]
+  },
+  {
+    "name": "IME_HOTKEY_IDENTIFIERS",
+    "type": "uint",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "IME_CHOTKEY_|IME_ITHOTKEY_|IME_JHOTKEY_|IME_KHOTKEY_|IME_THOTKEY_",
+      "header": "Imm.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "ImmSimulateHotKey",
+        "parameter": "param1"
+      }
+    ]
   }
 ]
