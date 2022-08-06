@@ -1,10 +1,11 @@
 --traverse
-<IncludeRoot>/um/msime.h
+<IncludeRoot>/um/dimm.h
+<IncludeRoot>/um/ime_cmodes.h
+<IncludeRoot>/um/imepad.h
 <IncludeRoot>/um/imm.h
 <IncludeRoot>/um/immdev.h
-<IncludeRoot>/um/imepad.h
+<IncludeRoot>/um/msime.h
 <IncludeRoot>/um/msimeapi.h
-<IncludeRoot>/um/dimm.h
 --namespace
 Windows.Win32.UI.Input.Ime
 

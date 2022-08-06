@@ -15,6 +15,7 @@
 #include <immdev.h>
 #include <imepad.h>
 #include <msimeapi.h>
+#include <ime_cmodes.h>
 
 #define _DDKIMM_H_ // Keeps INPUTCONTEXT and IMEINFO from coming in again
 #include <dimm.h>

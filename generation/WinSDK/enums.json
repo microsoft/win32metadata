@@ -7264,13 +7264,16 @@
     "name": "SET_COMPOSITION_STRING_TYPE",
     "members": [
       {
-        "name": "SCS_SETSTR"
+        "name": "SCS_SETSTR",
+        "value": "(IME_COMPOSITION_STRING.GCS_COMPREADSTR|IME_COMPOSITION_STRING.GCS_COMPSTR)"
       },
       {
-        "name": "SCS_CHANGEATTR"
+        "name": "SCS_CHANGEATTR",
+        "value": "(IME_COMPOSITION_STRING.GCS_COMPREADATTR|IME_COMPOSITION_STRING.GCS_COMPATTR)"
       },
       {
-        "name": "SCS_CHANGECLAUSE"
+        "name": "SCS_CHANGECLAUSE",
+        "value": "(IME_COMPOSITION_STRING.GCS_COMPREADCLAUSE|IME_COMPOSITION_STRING.GCS_COMPCLAUSE)"
       },
       {
         "name": "SCS_SETRECONVERTSTRING"
@@ -30192,13 +30195,49 @@
   },
   {
     "name": "IME_CONVERSION_MODE",
-    "type": "uint",
     "flags": true,
     "autoPopulate": {
       "filter": "IME_CMODE_",
       "header": "Imm.h"
     },
-    "members": [],
+    "members": [
+      {
+        "name": "IME_CMODE_ALPHANUMERIC"
+      },
+      {
+        "name": "IME_CMODE_NATIVE"
+      },
+      {
+        "name": "IME_CMODE_CHINESE"
+      },
+      {
+        "name": "IME_CMODE_HANGUL"
+      },
+      {
+        "name": "IME_CMODE_JAPANESE"
+      },
+      {
+        "name": "IME_CMODE_KATAKANA"
+      },
+      {
+        "name": "IME_CMODE_LANGUAGE"
+      },
+      {
+        "name": "IME_CMODE_FULLSHAPE"
+      },
+      {
+        "name": "IME_CMODE_ROMAN"
+      },
+      {
+        "name": "IME_CMODE_CHARCODE"
+      },
+      {
+        "name": "IME_CMODE_HANJACONVERT"
+      },
+      {
+        "name": "IME_CMODE_NATIVESYMBOL"
+      }
+    ],
     "uses": [
       {
         "method": "ImmGetConversionStatus",
@@ -30212,7 +30251,6 @@
   },
   {
     "name": "IME_SENTENCE_MODE",
-    "type": "uint",
     "flags": true,
     "autoPopulate": {
       "filter": "IME_SMODE_",
@@ -30232,7 +30270,6 @@
   },
   {
     "name": "IME_COMPOSITION_STRING",
-    "type": "uint",
     "flags": true,
     "autoPopulate": {
       "filter": "GCS_",
@@ -30241,19 +30278,17 @@
     "members": [],
     "uses": [
       {
-        "method": "ImmGetCompositionString",
+        "method": "ImmGetCompositionStringA",
         "parameter": "param1"
       },
       {
-        "method": "WM_IME_COMPOSITION",
-        "parameter": "lParam"
+        "method": "ImmGetCompositionStringW",
+        "parameter": "param1"
       }
     ]
   },
   {
-    "name": "IME_ESCAPES",
-    "type": "uint",
-    "flags": true,
+    "name": "IME_ESCAPE",
     "autoPopulate": {
       "filter": "IME_ESC_",
       "header": "Imm.h"
@@ -30261,15 +30296,17 @@
     "members": [],
     "uses": [
       {
-        "method": "ImmEscape",
+        "method": "ImmEscapeA",
+        "parameter": "param2"
+      },
+      {
+        "method": "ImmEscapeW",
         "parameter": "param2"
       }
     ]
   },
   {
-    "name": "IME_HOTKEY_IDENTIFIERS",
-    "type": "uint",
-    "flags": true,
+    "name": "IME_HOTKEY_IDENTIFIER",
     "autoPopulate": {
       "filter": "IME_CHOTKEY_|IME_ITHOTKEY_|IME_JHOTKEY_|IME_KHOTKEY_|IME_THOTKEY_",
       "header": "Imm.h"
