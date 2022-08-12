@@ -14,6 +14,8 @@
 #include <rasshost.h>
 //#include <ipxrtdef.h>
 //#include <routprot.h>
+extern "C" {
 #include <mgm.h>
+}
 #include <rtmv2.h>
 #include <raserror.h>

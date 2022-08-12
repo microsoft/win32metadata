@@ -80,7 +80,7 @@ function Install-BuildTools
 {
     Param([switch]$Clean)
 
-    Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 11.0.0-beta3
+    Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 14.0.0-beta2
     Install-DotNetTool -Name nbgv
 
     if ($Clean.IsPresent)

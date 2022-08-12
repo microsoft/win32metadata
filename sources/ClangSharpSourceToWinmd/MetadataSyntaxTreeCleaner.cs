@@ -241,6 +241,19 @@ namespace ClangSharpSourceToWinmd
                     newType = "string";
                 }
 
+                // We will turn static strings into constants
+                if (node.Modifiers.ToString() == "public static" && node.Declaration.Type.ToString() == "string")
+                {
+                    var newModifiers =
+                        SyntaxFactory.TokenList(
+                            SyntaxFactory.Token(SyntaxKind.PublicKeyword).WithTrailingTrivia(SyntaxFactory.Space),
+                            SyntaxFactory.Token(SyntaxKind.ConstKeyword).WithTrailingTrivia(SyntaxFactory.Space));
+
+                    node = node.WithModifiers(newModifiers).WithLeadingTrivia(node.GetLeadingTrivia());
+
+                    return node;
+                }
+
                 if (node.Modifiers.ToString() == "public static readonly")
                 {
                     // Turn public static readonly Guids into string constants with an attribute
@@ -340,6 +353,18 @@ namespace ClangSharpSourceToWinmd
                             {
                                 return null;
                             }
+                        }
+
+                        // We don't want these for parameters or fields
+                        if (node.Parent is ParameterSyntax || node.Parent is FieldDeclarationSyntax)
+                        {
+                            return null;
+                        }
+
+                        // We don't want these for interface methods
+                        if (node.Parent is MethodDeclarationSyntax && node.Parent.Parent is StructDeclarationSyntax)
+                        {
+                            return null;
                         }
 
                         break;

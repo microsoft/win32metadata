@@ -24,8 +24,9 @@
 #include <dciman.h>
 
 #include <ddrawi.h>
-
+extern "C" {
 #include <ddrawgdi.h>
+}
 #include <advpub.h>
 //#include <comppkgsup.h>
 #include <ime.h>
