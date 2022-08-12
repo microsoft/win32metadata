@@ -59,5 +59,6 @@
 #undef ReportEvent
 #undef TranslateAccelerator
 #undef CreateDirectory
+#undef DeleteFile
 
 #include <combaseapi.h>

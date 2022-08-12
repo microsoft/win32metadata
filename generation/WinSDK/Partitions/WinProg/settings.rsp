@@ -8,6 +8,7 @@ RtlRaiseException
 RtlPcToFileHeader
 RtlCompareMemory
 UiaRect
+_FILE_DISPOSITION_INFO
 _TEB
 --traverse
 <IncludeRoot>/um/wldp.h
