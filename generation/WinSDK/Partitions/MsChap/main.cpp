@@ -6,4 +6,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+extern "C" {
 #include <mschapp.h>
+}

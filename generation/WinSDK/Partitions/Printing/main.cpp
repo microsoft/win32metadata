@@ -28,7 +28,9 @@
 #include <prntfont.h>
 #include <tcpxcv.h>
 #include <usbprint.h>
+extern "C" {
 #include <winppi.h>
+}
 #include <winsplp.h>
 #include <xpsrassvc.h>
 #include <imgerror.h>

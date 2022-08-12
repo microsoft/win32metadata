@@ -17,7 +17,9 @@ typedef NTSTATUS* PNTSTATUS;
 #include <sspi.h>
 #include <wincred.h>
 #include <NTSecPKG.h>
+extern "C" {
 #include <schannel.h>
+}
 
 typedef struct _OLD_LARGE_INTEGER {
     ULONG LowPart;

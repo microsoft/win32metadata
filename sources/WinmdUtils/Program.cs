@@ -1225,7 +1225,7 @@ namespace WinmdUtilsProgram
         private static string ConvertAttributesToText(IEnumerable<IAttribute> attrs)
         {
             StringBuilder stringBuilder = new StringBuilder();
-            foreach (var attr in attrs)
+            foreach (var attr in attrs.OrderBy(a => a.AttributeType.Name))
             {
                 if (stringBuilder.Length != 0)
                 {

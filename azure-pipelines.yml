@@ -26,12 +26,6 @@ jobs:
     inputs:
       packageType: sdk
       useGlobalJson: true
-    # ClangSharpPInvokeGenerator.exe requires .NET 5.0
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET 5.0
-    inputs:
-      packageType: runtime
-      version: 5.0.x
 
   - task: PowerShell@2
     displayName: Set build version
@@ -71,12 +65,6 @@ jobs:
     inputs:
       packageType: sdk
       useGlobalJson: true
-    # ClangSharpPInvokeGenerator.exe requires .NET 5.0
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET 5.0
-    inputs:
-      packageType: runtime
-      version: 5.0.x
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - x86
@@ -105,12 +93,6 @@ jobs:
     inputs:
       packageType: sdk
       useGlobalJson: true
-    # ClangSharpPInvokeGenerator.exe requires .NET 5.0
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET 5.0
-    inputs:
-      packageType: runtime
-      version: 5.0.x
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - arm64
@@ -149,12 +131,6 @@ jobs:
       packageType: sdk
       useGlobalJson: true
 
-    # ClangSharpPInvokeGenerator.exe requires .NET 5.0
-  - task: UseDotNet@2
-    displayName: ⚙ Install .NET 5.0
-    inputs:
-      packageType: runtime
-      version: 5.0.x
     # ESRP Authenticode sign package DLLs
   - task: UseDotNet@2
     displayName: Install DotNet 2.1.x for signing tasks

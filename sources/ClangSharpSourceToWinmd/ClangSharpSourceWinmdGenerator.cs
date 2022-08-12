@@ -28,6 +28,7 @@ namespace ClangSharpSourceToWinmd
         private const string InteropNamespace = "Windows.Win32.Interop";
         private const string ScannedSuffix = "__scanned__";
         private const string RemovePrefix = "__remove__";
+        private const string ForceConstPrefix = "__forceconst__";
 
         private const string SystemAssemblyName = "netstandard";
         private const string Win32InteropAssemblyName = "Windows.Win32.Interop";
@@ -37,6 +38,7 @@ namespace ClangSharpSourceToWinmd
         private static readonly Regex IsWcharRegex = new Regex(@"^(?:WCHAR|OLECHAR|wchar_t)");
         private static readonly Regex IsCharRegex = new Regex(@"^(?:CHAR|char)");
         private static readonly Regex ArrayMatcher = new Regex(@"\[\d*\]");
+        private static readonly Regex NormalizeNativeTypeNameRegex = new Regex(@"((?:const )?(?:unsigned )?\S+)\s?(\*?(?:\[\d*\]))");
 
         private MetadataBuilder metadataBuilder = new MetadataBuilder();
         private CSharpCompilation compilation;
@@ -216,6 +218,10 @@ namespace ClangSharpSourceToWinmd
             {
                 name = name.Substring(RemovePrefix.Length);
             }
+            else if (name.StartsWith(ForceConstPrefix))
+            {
+                name = name.Substring(ForceConstPrefix.Length);
+            }
 
             if (name.EndsWith(ScannedSuffix))
             {
@@ -324,6 +330,31 @@ namespace ClangSharpSourceToWinmd
                 }
             }
         }
+
+        /// <summary>
+        /// Makes sure that if the type has pointer info (e.g. * or [] or *[]), the type
+        /// name is separated by a space
+        /// </summary>
+        /// <param name="ownerAttributes">Owner attributes</param>
+        /// <returns>Normalized native type name</returns>
+        private static string GetNormalizedNativeTypeName(ImmutableArray<AttributeData> ownerAttributes)
+        {
+            var nativeTypeNameAttr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
+            if (nativeTypeNameAttr == null)
+            {
+                return null;
+            }
+
+            var nativeType = nativeTypeNameAttr.ConstructorArguments[0].Value.ToString();
+            var match = NormalizeNativeTypeNameRegex.Match(nativeType);
+            if (match.Success && !string.IsNullOrEmpty(match.Groups[2].Value))
+            {
+                nativeType = match.Groups[1].Value + " " + match.Groups[2].Value;
+            }
+
+            return nativeType;
+        }
+
         private void CacheGuidConst(FieldDeclarationSyntax guidFieldNode)
         {
             this.nameToGuidConstFields[guidFieldNode.Declaration.Variables.First().Identifier.ValueText] = guidFieldNode;
@@ -882,14 +913,14 @@ namespace ClangSharpSourceToWinmd
             ImmutableArray<AttributeData> ownerAttributes,
             ref ITypeSymbol typeSymbol)
         {
+            var nativeType = GetNormalizedNativeTypeName(ownerAttributes);
+
             // Can't do anything without a NativeTypeNameAttribute 
-            var nativeTypeNameAttr = ownerAttributes.FirstOrDefault(a => a.AttributeClass.Name == "NativeTypeNameAttribute");
-            if (nativeTypeNameAttr == null)
+            if (nativeType == null)
             {
                 return;
             }
 
-            var nativeType = nativeTypeNameAttr.ConstructorArguments[0].Value.ToString();
             EnsureEnumSizeMatchesOriginalSize(owner, name, typeSymbol, nativeType);
 
             if (typeSymbol.SpecialType == SpecialType.System_SByte && IsCharRegex.IsMatch(nativeType))
@@ -1111,7 +1142,7 @@ namespace ClangSharpSourceToWinmd
             {
                 var fieldVariable = field.Declaration.Variables.First();
                 IFieldSymbol fieldSymbol = (IFieldSymbol)model.GetDeclaredSymbol(fieldVariable);
-                string name = fieldSymbol.Name;
+                string name = FixFinalName(fieldSymbol.Name);
 
                 FieldAttributes fieldAttributes;
 
@@ -1128,8 +1159,6 @@ namespace ClangSharpSourceToWinmd
                     {
                         continue;
                     }
-
-                    name = FixFinalName(name);
 
                     if (name.StartsWith("CLSID_"))
                     {
@@ -1837,8 +1866,14 @@ namespace ClangSharpSourceToWinmd
 
             var inheritedMethodCount = this.GetInheritedMethodCount(node);
 
-            foreach (MethodDeclarationSyntax method in node.Members.Where(m => m is MethodDeclarationSyntax)
-                .OrderBy(m => SyntaxUtils.GetVtableSlotFromMethodBody((MethodDeclarationSyntax)m))
+            // Find the distinct methods ordered by vtable slot, skipping
+            // the methods that came from inherited interfaces
+            foreach (MethodDeclarationSyntax method in node.Members
+                .Where(m => m is MethodDeclarationSyntax)
+                .Select(m => new MethodAndSlot((MethodDeclarationSyntax)m))
+                .Distinct(new SlotComparer())
+                .OrderBy(m => m.Slot)
+                .Select(m => m.Method)
                 .Skip(inheritedMethodCount))
             {
                 var methodSymbol = model.GetDeclaredSymbol(method);
@@ -2271,6 +2306,25 @@ namespace ClangSharpSourceToWinmd
             public ITypeSymbol Type { get; }
             public ParameterAttributes Attrs { get; }
             public IParameterSymbol Symbol { get; }
+        }
+
+        private class MethodAndSlot
+        {
+            public MethodAndSlot(MethodDeclarationSyntax method)
+            {
+                this.Method = method;
+                this.Slot = SyntaxUtils.GetVtableSlotFromMethodBody(method);
+            }
+
+            public MethodDeclarationSyntax Method { get; }
+            public int Slot { get; }
+        }
+
+        private class SlotComparer : IEqualityComparer<MethodAndSlot>
+        {
+            public bool Equals(MethodAndSlot x, MethodAndSlot y) => x.Slot == y.Slot;
+
+            public int GetHashCode(MethodAndSlot obj) => obj.Slot;
         }
     }
 }
