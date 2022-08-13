@@ -2,6 +2,10 @@
 #define QCC_OS_GROUP_WINDOWS
 
 #include "intrinfix.h"
+
+#define IN _In_
+#define OUT _Out_
+
 #include "windows.fixed.h"
 
 #include <sdkddkver.h>
