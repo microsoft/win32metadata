@@ -146,18 +146,31 @@ namespace MetadataTasks
             return items;
         }
 
+        public static bool CallPowershellScript(string scriptPath, string args, TaskLoggingHelper log, out string scriptOutput)
+        {
+            string scriptArgs = $"-Command \"& {{Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted; & '{scriptPath}' {args}}}\"";
+
+            int ret = TaskUtils.ExecuteCmd("powershell.exe", scriptArgs, out scriptOutput, log);
+            if (ret != 0)
+            {
+                string fileName = Path.GetFileName(scriptPath);
+                log.LogError($"{fileName} failed: {scriptOutput}");
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool EnsureClangSharpInstalled(string scriptsDir, TaskLoggingHelper log)
+        {
+            string scriptPath = Path.Combine(scriptsDir, "InstallTools.ps1");
+            return CallPowershellScript(scriptPath, string.Empty, log, out _);
+        }
 
         public static string GetVcDirPath(string scriptsDir, TaskLoggingHelper log)
         {
             string scriptPath = Path.Combine(scriptsDir, "GetVcDirPath.ps1");
-            string scriptArgs = $"-File \"{scriptPath}\" x86 x86";
-
-            int ret = TaskUtils.ExecuteCmd("powershell.exe", scriptArgs, out var scriptOutput, log);
-            if (ret != 0)
-            {
-                log.LogError($"GetVcDirPath.ps1 failed: {scriptOutput}");
-                return null;
-            }
+            CallPowershellScript(scriptPath, "x86 x86", log, out var scriptOutput);
 
             return scriptOutput;
         }

@@ -8,6 +8,8 @@
       <StampPropsScript>
         $(PowerShell)
 
+        Set-ExecutionPolicy -Scope Process -ExecutionPolicy Unrestricted
+        
         $mainNugetVersion = nbgv get-version -v NuGetPackageVersion -p ..\..\..
         . ..\..\..\scripts\CommonUtils.ps1
 

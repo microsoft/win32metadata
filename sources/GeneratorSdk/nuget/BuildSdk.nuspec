@@ -25,7 +25,7 @@
     <file src="bin\release\net6.0\*.deps.json" target="tools\net6.0"/>
     <file src="bin\release\net6.0\*.runtimeconfig.json" target="tools\net6.0"/>
     <file src="bin\release\net6.0\*.dll" target="tools\net6.0" />
-    <file src="scripts\InstallTools.ps1" target="scripts"/>
+    <file src="scripts\Install-DotNetTool.ps1" target="scripts"/>
     <file src="scripts\ConvertMidlAttributesToSalAnnotations.ps1" target="scripts"/>
     <file src="scripts\GetVcDirPath.ps1" target="scripts"/>
 
