@@ -97,22 +97,20 @@ namespace MetadataTasks
             foreach (var idl in idls)
             {
                 string fixedIdlFile = Path.Combine(this.ObjDir, Path.GetFileName(idl));
-                string scriptArgs = $"-File \"{scriptPath}\" -inputFileName \"{idl}\" -outputFileName \"{fixedIdlFile}\"";
+                string scriptArgs = $"-inputFileName '{idl}' -outputFileName '{fixedIdlFile}'";
                 if (File.Exists(fixedIdlFile))
                 {
                     File.Delete(fixedIdlFile);
                 }
 
-                int ret = TaskUtils.ExecuteCmd("powershell.exe", scriptArgs, out var scriptOutput, this.Log);
-                if (ret != 0)
+                if (!TaskUtils.CallPowershellScript(scriptPath, scriptArgs, this.Log, out _))
                 {
-                    this.Log.LogError($"powershell.exe {scriptArgs} failed: {scriptOutput}");
                     return false;
                 }
 
                 string compiledHeader = Path.Combine(this.CompiledHeadersDir, Path.ChangeExtension(Path.GetFileName(idl), ".h"));
                 string midlArgs = $"\"{fixedIdlFile}\" /header \"{compiledHeader}\" {commonMidlArgs}";
-                ret = TaskUtils.ExecuteCmd(midlPath, midlArgs, out var midlOutput, this.Log, vcPath);
+                int ret = TaskUtils.ExecuteCmd(midlPath, midlArgs, out var midlOutput, this.Log, vcPath);
                 if (ret != 0)
                 {
                     this.Log.LogError($"midl.exe failed: {midlOutput}");

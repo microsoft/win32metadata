@@ -54,34 +54,11 @@ function Remove-Directory([string[]] $Path)
     }
 }
 
-function Install-DotNetTool
-{
-    Param ([string] $Name, [string] $Version = '')
-
-    if ($Version -ne '')
-    {
-        $installed = & dotnet tool list -g | select-string -Pattern "$Name\s+$Version" -Raw
-        if (($installed -eq $null) -or !$installed.Length)
-        {
-            & dotnet tool update --global $Name --version $Version
-        }
-    }
-    else
-    {
-        $installed = & dotnet tool list -g | select-string -Pattern "$Name" -Raw
-        if (($installed -eq $null) -or !$installed.Length)
-        {
-            & dotnet tool update --global $Name
-        }
-    }
-}
-
 function Install-BuildTools
 {
     Param([switch]$Clean)
 
-    Install-DotNetTool -Name ClangSharpPInvokeGenerator -Version 14.0.0-beta2
-    Install-DotNetTool -Name nbgv
+    & "$PSScriptRoot\Install-DotNetTool" -Name nbgv
 
     if ($Clean.IsPresent)
     {

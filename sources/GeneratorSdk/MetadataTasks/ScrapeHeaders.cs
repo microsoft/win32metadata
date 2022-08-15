@@ -13,6 +13,8 @@ namespace MetadataTasks
 {
     public class ScrapeHeaders : Task, ICancelableTask
     {
+        public const string ClangSharpVersion = "14.0.0-beta2";
+
         private static readonly string[] allArches = new string[] { "x64", "x86", "arm64" };
 
         private bool canceled;
@@ -68,6 +70,9 @@ namespace MetadataTasks
 
         public string PartitionFilter { get; set; }
 
+        [Required]
+        public string ScriptsDir { get; set; }
+
         public override bool Execute()
         {
 #if DEBUG
@@ -97,6 +102,11 @@ namespace MetadataTasks
             }
 
             this.Log.LogMessage(MessageImportance.High, $"Scraping headers for {this.ScanArch}...");
+
+            if (!this.EnsureClangSharpInstalled())
+            {
+                return false;
+            }
 
             System.Threading.Tasks.ParallelOptions opt = new System.Threading.Tasks.ParallelOptions();
 
@@ -169,6 +179,13 @@ namespace MetadataTasks
         public void Cancel()
         {
             this.canceled = true;
+        }
+
+        private bool EnsureClangSharpInstalled()
+        {
+            string scriptPath = Path.Combine(this.ScriptsDir, "Install-DotNetTool.ps1");
+            string scriptArgs = $"-Name ClangSharpPInvokeGenerator -Version {ClangSharpVersion}";
+            return TaskUtils.CallPowershellScript(scriptPath, scriptArgs, this.Log, out _);
         }
 
         private bool AreNonPartitionFilesUpToDate()

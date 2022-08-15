@@ -199,6 +199,7 @@
       SdkIncRoot="$(SdkIncRoot)"
       WinSdkRoot="$(TargetPlatformSdkRootOverride)"
       ToolsBinDir="$(ToolsBinDir)"
+      ScriptsDir="$(ScriptsDir)"
       AdditionalIncludes="$(AdditionalIncludes)"
       GeneratedDir="$(GeneratedDir)"
       ScratchDir="$(ScratchOutputDir)"
