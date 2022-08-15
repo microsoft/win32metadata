@@ -174,3 +174,7 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.UpdateLayeredWindow : crKey...UInt32 =
 Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO.crKey...System.UInt32 => Windows.Win32.Foundation.COLORREF
 Windows.Win32.UI.Controls.DTTOPTS_FLAGS added
 Windows.Win32.UI.Controls.DTTOPTS.dwFlags...System.UInt32 => Windows.Win32.UI.Controls.DTTOPTS_FLAGS
+# Fixes to R2_MODE and TEXT_ALIGN_OPTIONS
+Windows.Win32.Graphics.Gdi.Apis.GetROP2 : return...Int32 => R2_MODE
+Windows.Win32.Graphics.Gdi.Apis.GetTextAlign : return...UInt32 => TEXT_ALIGN_OPTIONS
+Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS :  => [Flags]
