@@ -30,11 +30,8 @@ jobs:
   - task: PowerShell@2
     displayName: Set build version
     inputs:
-      targetType: inline
-      script: |
-        . .\scripts\CommonUtils.ps1
-        Install-DotNetTool nbgv
-        nbgv cloud
+      filePath: 'scripts\Install-DotNetTool.ps1'
+      arguments: '-Name nbgv'
       errorActionPreference: 'continue'
       pwsh: true
 
