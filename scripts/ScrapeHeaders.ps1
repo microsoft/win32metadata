@@ -1,6 +1,25 @@
+param
+(
+    [switch]$Clean,
+
+    [string]$Partition
+)
+
 . "$PSScriptRoot\CommonUtils.ps1"
 
 Install-BuildTools
 
-dotnet build "$windowsWin32ProjectRoot" -c Release -t:ScrapeHeaders
+if ($Clean.IsPresent)
+{
+    .\scripts\CleanOutputs.ps1
+}
+
+$params = @('build', $windowsWin32ProjectRoot, '-c:Release', '-t:ScrapeHeaders')
+if ($PartitionFilter)
+{
+    $params += "-p:PartitionFilter=$Partition"
+}
+
+& dotnet $params
+
 ThrowOnNativeProcessError
