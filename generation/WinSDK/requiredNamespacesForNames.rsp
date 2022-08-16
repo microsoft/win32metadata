@@ -2434,5 +2434,5 @@ STGMOVE=Windows.Win32.System.Com.StructuredStorage
 CLIPDATA=Windows.Win32.System.Com.StructuredStorage
 PROPSPEC_KIND=Windows.Win32.System.Com.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
-VARENUM=Windows.Win32.System.Ole
+VARENUM=Windows.Win32.System.Com
 # endregion wtypes.h
