@@ -30318,5 +30318,72 @@
         "parameter": "param1"
       }
     ]
+  },
+  {
+    "name": "DTTOPTS_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "Uxtheme.h",
+      "filter": "DTT_"
+    },
+    "members": [
+      {
+        "name": "DTT_TEXTCOLOR",
+        "value": "0x1"
+      },
+      {
+        "name": "DTT_BORDERCOLOR",
+        "value": "0x2"
+      },
+      {
+        "name": "DTT_SHADOWCOLOR",
+        "value": "0x4"
+      },
+      {
+        "name": "DTT_SHADOWTYPE",
+        "value": "0x8"
+      },
+      {
+        "name": "DTT_SHADOWOFFSET",
+        "value": "0x10"
+      },
+      {
+        "name": "DTT_BORDERSIZE",
+        "value": "0x20"
+      },
+      {
+        "name": "DTT_FONTPROP",
+        "value": "0x40"
+      },
+      {
+        "name": "DTT_COLORPROP",
+        "value": "0x80"
+      },
+      {
+        "name": "DTT_STATEID",
+        "value": "0x100"
+      },
+      {
+        "name": "DTT_CALCRECT",
+        "value": "0x200"
+      },
+      {
+        "name": "DTT_APPLYOVERLAY",
+        "value": "0x400"
+      },
+      {
+        "name": "DTT_GLOWSIZE",
+        "value": "0x800"
+      },
+      {
+        "name": "DTT_VALIDBITS"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "DTTOPTS",
+        "field": "dwFlags"
+      }
+    ]
   }
 ]
