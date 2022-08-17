@@ -30322,10 +30322,6 @@
   {
     "name": "DTTOPTS_FLAGS",
     "flags": true,
-    "autoPopulate": {
-      "header": "Uxtheme.h",
-      "filter": "DTT_"
-    },
     "members": [
       {
         "name": "DTT_TEXTCOLOR",
