@@ -75,6 +75,11 @@
     "ValueType": "UIntPtr"
   },
   {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "COLORREF",
+    "ValueType": "uint",
+  },
+  {
     "Namespace": "Windows.Win32.System.DataExchange",
     "Name": "HSZ",
     "ValueType": "DECLARE_HANDLE",
