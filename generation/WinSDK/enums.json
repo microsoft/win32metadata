@@ -30376,6 +30376,14 @@
         "value": "0x800"
       },
       {
+        "name": "DTT_CALLBACK",
+        "value": "0x1000"
+      },
+      {
+        "name": "DTT_COMPOSITED",
+        "value": "0x2000"
+      },
+      {
         "name": "DTT_VALIDBITS"
       }
     ],
