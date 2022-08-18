@@ -1,0 +1,340 @@
+# Adding baseline since last release
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDeviceInterfaceDetailA : DeviceInterfaceDetailData : [MemorySize(BytesParamIndex=3),Optional,Out] => [In,MemorySize(BytesParamIndex=3),Optional,Out]
+Windows.Win32.Devices.Fax.IStiDevice.Escape : pOutData : [MemorySize(BytesParamIndex=4),Out] => [In,MemorySize(BytesParamIndex=4),Out]
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_GetUsagesEx : ButtonList : [NativeArrayInfo(CountParamIndex=3),Out] => [In,NativeArrayInfo(CountParamIndex=3),Out]
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetData : DataList : [NativeArrayInfo(CountParamIndex=2),Out] => [In,NativeArrayInfo(CountParamIndex=2),Out]
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_SetUsages : UsageList : [NativeArrayInfo(CountParamIndex=4),Out] => [In,NativeArrayInfo(CountParamIndex=4),Out]
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HidP_UnsetUsages : UsageList : [NativeArrayInfo(CountParamIndex=4),Out] => [In,NativeArrayInfo(CountParamIndex=4),Out]
+Windows.Win32.Devices.ImageAcquisition.WIA_PROPERTY_INFO.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.Globalization.Apis.GetFileMUIInfo : pFileMUIInfo : [MemorySize(BytesParamIndex=3),Optional,Out] => [In,MemorySize(BytesParamIndex=3),Optional,Out]
+Windows.Win32.Globalization.Apis.IME_CMODE_ALPHANUMERIC removed
+Windows.Win32.Globalization.Apis.IME_CMODE_CHARCODE removed
+Windows.Win32.Globalization.Apis.IME_CMODE_CHINESE removed
+Windows.Win32.Globalization.Apis.IME_CMODE_FULLSHAPE removed
+Windows.Win32.Globalization.Apis.IME_CMODE_HANGUL removed
+Windows.Win32.Globalization.Apis.IME_CMODE_HANJACONVERT removed
+Windows.Win32.Globalization.Apis.IME_CMODE_JAPANESE removed
+Windows.Win32.Globalization.Apis.IME_CMODE_KATAKANA removed
+Windows.Win32.Globalization.Apis.IME_CMODE_LANGUAGE removed
+Windows.Win32.Globalization.Apis.IME_CMODE_NATIVE removed
+Windows.Win32.Globalization.Apis.IME_CMODE_NATIVESYMBOL removed
+Windows.Win32.Globalization.Apis.IME_CMODE_ROMAN removed
+Windows.Win32.Graphics.Direct2D.Matrix4x3F.__AnonymousBase_d2d1_1helper_L45_C31 removed
+Windows.Win32.Graphics.Direct2D.Matrix4x3F.Base added
+Windows.Win32.Graphics.Direct2D.Matrix4x4F.__AnonymousBase_d2d1_1helper_L97_C31 removed
+Windows.Win32.Graphics.Direct2D.Matrix4x4F.Base added
+Windows.Win32.Graphics.Direct2D.Matrix5x4F.__AnonymousBase_d2d1_1helper_L472_C31 removed
+Windows.Win32.Graphics.Direct2D.Matrix5x4F.Base added
+Windows.Win32.Graphics.Direct3D11.ID3D11VideoContext.DecryptionBlt : pIV : [In,MemorySize(BytesParamIndex=6),Optional] => [In,MemorySize(BytesParamIndex=6),Optional,Out]
+Windows.Win32.Graphics.Direct3D11.ID3D11VideoContext.EncryptionBlt : pIV : [In,MemorySize(BytesParamIndex=3),Optional] => [In,MemorySize(BytesParamIndex=3),Optional,Out]
+Windows.Win32.Graphics.Direct3D9.D3DTRANSFORMSTATETYPE.D3DTS_WORLD added
+Windows.Win32.Graphics.Direct3D9.D3DTRANSFORMSTATETYPE.D3DTS_WORLD1 added
+Windows.Win32.Graphics.Direct3D9.D3DTRANSFORMSTATETYPE.D3DTS_WORLD2 added
+Windows.Win32.Graphics.Direct3D9.D3DTRANSFORMSTATETYPE.D3DTS_WORLD3 added
+Windows.Win32.Graphics.DirectWrite.DWRITE_FONT_METRICS1.__AnonymousBase_DWrite_1_L627_C38 removed
+Windows.Win32.Graphics.DirectWrite.DWRITE_FONT_METRICS1.Base added
+Windows.Win32.Graphics.Gdi.Apis.DrawTextA : lpchText : [Const,In,NativeArrayInfo(CountParamIndex=2)] => [Const,In,NativeArrayInfo(CountParamIndex=2),Out]
+Windows.Win32.Graphics.Gdi.Apis.DrawTextW : lpchText : [Const,In,NativeArrayInfo(CountParamIndex=2)] => [Const,In,NativeArrayInfo(CountParamIndex=2),Out]
+Windows.Win32.Graphics.Printing.Apis.SetJobA : pJob : [In,Optional,Out,Reserved] => [In,Optional,Reserved]
+Windows.Win32.Graphics.Printing.Apis.SetJobW : pJob : [In,Optional,Out,Reserved] => [In,Optional,Reserved]
+Windows.Win32.Media.MediaFoundation.IMFVirtualCamera.SendCameraProperty : data : [MemorySize(BytesParamIndex=6),Optional,Out] => [In,MemorySize(BytesParamIndex=6),Optional,Out]
+Windows.Win32.Media.Speech.ISpeechObjectToken.RemoveStorageFileName(ObjectStorageCLSID,KeyName,DeleteFile) added
+Windows.Win32.Media.Speech.ISpeechObjectToken.RemoveStorageFileName(ObjectStorageCLSID,KeyName,DeleteFileA) removed
+Windows.Win32.Media.Speech.SPPHRASE.__AnonymousBase_sapi53_L5821_C34 removed
+Windows.Win32.Media.Speech.SPPHRASE.Base added
+Windows.Win32.Networking.ActiveDirectory.Apis.DsFreeSpnArrayA : rpszSpn : [NativeArrayInfo(CountParamIndex=0),Out] => [In,NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Networking.ActiveDirectory.Apis.DsFreeSpnArrayW : rpszSpn : [NativeArrayInfo(CountParamIndex=0),Out] => [In,NativeArrayInfo(CountParamIndex=0),Out]
+Windows.Win32.Networking.Clustering.Apis.GetClusterNotifyV2 : lpszName : [NativeArrayInfo(CountParamIndex=10),Optional,Out] => [In,NativeArrayInfo(CountParamIndex=10),Optional,Out]
+Windows.Win32.Networking.Clustering.Apis.GetClusterNotifyV2 : lpszObjectId : [NativeArrayInfo(CountParamIndex=6),Optional,Out] => [In,NativeArrayInfo(CountParamIndex=6),Optional,Out]
+Windows.Win32.Networking.Clustering.Apis.GetClusterNotifyV2 : lpszParentId : [NativeArrayInfo(CountParamIndex=8),Optional,Out] => [In,NativeArrayInfo(CountParamIndex=8),Optional,Out]
+Windows.Win32.Networking.Clustering.Apis.GetClusterNotifyV2 : lpszType : [NativeArrayInfo(CountParamIndex=12),Optional,Out] => [In,NativeArrayInfo(CountParamIndex=12),Optional,Out]
+Windows.Win32.Networking.Clustering.CLUSPROP_BINARY.__AnonymousBase_clusapi_L5129_C41 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_BINARY.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_DWORD.__AnonymousBase_clusapi_L5149_C40 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_DWORD.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_FILETIME.__AnonymousBase_clusapi_L5225_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_FILETIME.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_FTSET_INFO.__AnonymousBase_clusapi_L5555_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_FTSET_INFO.__AnonymousBase_clusapi_L5556_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_FTSET_INFO.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_FTSET_INFO.Base2 added
+Windows.Win32.Networking.Clustering.CLUSPROP_LARGE_INTEGER.__AnonymousBase_clusapi_L5199_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_LARGE_INTEGER.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_LONG.__AnonymousBase_clusapi_L5159_C39 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_LONG.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO_EX.__AnonymousBase_clusapi_L5519_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO_EX.__AnonymousBase_clusapi_L5520_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO_EX.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO_EX.Base2 added
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO_EX2.__AnonymousBase_clusapi_L5533_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO_EX2.__AnonymousBase_clusapi_L5534_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO_EX2.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO_EX2.Base2 added
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO.__AnonymousBase_clusapi_L5507_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO.__AnonymousBase_clusapi_L5508_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_PARTITION_INFO.Base2 added
+Windows.Win32.Networking.Clustering.CLUSPROP_RESOURCE_CLASS_INFO.__AnonymousBase_clusapi_L5261_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_RESOURCE_CLASS_INFO.__AnonymousBase_clusapi_L5262_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_RESOURCE_CLASS_INFO.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_RESOURCE_CLASS_INFO.Base2 added
+Windows.Win32.Networking.Clustering.CLUSPROP_RESOURCE_CLASS.__AnonymousBase_clusapi_L5250_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_RESOURCE_CLASS.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_SCSI_ADDRESS.__AnonymousBase_clusapi_L5583_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_SCSI_ADDRESS.__AnonymousBase_clusapi_L5584_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_SCSI_ADDRESS.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_SCSI_ADDRESS.Base2 added
+Windows.Win32.Networking.Clustering.CLUSPROP_SECURITY_DESCRIPTOR.__AnonymousBase_clusapi_L5211_C54 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_SECURITY_DESCRIPTOR.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_SZ.__AnonymousBase_clusapi_L5169_C37 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_SZ.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_ULARGE_INTEGER.__AnonymousBase_clusapi_L5186_C14 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_ULARGE_INTEGER.Base added
+Windows.Win32.Networking.Clustering.CLUSPROP_WORD.__AnonymousBase_clusapi_L5139_C39 removed
+Windows.Win32.Networking.Clustering.CLUSPROP_WORD.Base added
+Windows.Win32.Networking.Clustering.CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT.__AnonymousBase_clusapi_L5475_C14 removed
+Windows.Win32.Networking.Clustering.CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT.__AnonymousBase_clusapi_L5476_C14 removed
+Windows.Win32.Networking.Clustering.CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT.Base added
+Windows.Win32.Networking.Clustering.CLUSTER_SHARED_VOLUME_RENAME_GUID_INPUT.Base2 added
+Windows.Win32.Networking.Clustering.CLUSTER_SHARED_VOLUME_RENAME_INPUT.__AnonymousBase_clusapi_L5464_C14 removed
+Windows.Win32.Networking.Clustering.CLUSTER_SHARED_VOLUME_RENAME_INPUT.__AnonymousBase_clusapi_L5465_C14 removed
+Windows.Win32.Networking.Clustering.CLUSTER_SHARED_VOLUME_RENAME_INPUT.Base added
+Windows.Win32.Networking.Clustering.CLUSTER_SHARED_VOLUME_RENAME_INPUT.Base2 added
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_V2.__AnonymousBase_http_L1861_C35 removed
+Windows.Win32.Networking.HttpServer.HTTP_REQUEST_V2.Base added
+Windows.Win32.Networking.HttpServer.HTTP_RESPONSE_V2.__AnonymousBase_http_L2050_C36 removed
+Windows.Win32.Networking.HttpServer.HTTP_RESPONSE_V2.Base added
+Windows.Win32.Networking.WebSocket.Apis.WebSocketEndClientHandshake : pulSelectedExtensions : [NativeArrayInfo(CountParamIndex=4),Optional,Out] => [In,NativeArrayInfo(CountParamIndex=4),Optional,Out]
+Windows.Win32.Networking.WebSocket.Apis.WebSocketGetAction : pDataBuffers : [NativeArrayInfo(CountParamIndex=3),Out] => [In,NativeArrayInfo(CountParamIndex=3),Out]
+Windows.Win32.Networking.WebSocket.Apis.WebSocketGetGlobalProperty : pvValue : [NativeArrayInfo(CountParamIndex=2),Out] => [In,NativeArrayInfo(CountParamIndex=2),Out]
+Windows.Win32.Networking.WinInet.Apis.HttpQueryInfoA : lpBuffer : [MemorySize(BytesParamIndex=3),Optional,Out] => [In,MemorySize(BytesParamIndex=3),Optional,Out]
+Windows.Win32.Networking.WinInet.Apis.HttpQueryInfoW : lpBuffer : [MemorySize(BytesParamIndex=3),Optional,Out] => [In,MemorySize(BytesParamIndex=3),Optional,Out]
+Windows.Win32.NetworkManagement.Rras.Apis.MprConfigTransportGetInfo : lplpwsDLLPath : [Optional,Out] => [In,Optional,Out]
+Windows.Win32.Security.Apis.GetLengthSid : pSid : [In] => [In,Out]
+Windows.Win32.Security.Credentials.Apis.SCardGetReaderDeviceInstanceIdA : szDeviceInstanceId : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=3),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardGetReaderDeviceInstanceIdW : szDeviceInstanceId : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=3),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardListCardsA : mszCards : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=5),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardListCardsW : mszCards : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=5),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardListReadersA : mszReaders : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=3),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardListReadersW : mszReaders : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=3),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardListReadersWithDeviceInstanceIdA : mszReaders : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=3),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardListReadersWithDeviceInstanceIdW : mszReaders : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=3),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardStatusA : mszReaderNames : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=2),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardStatusA : pbAtr : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=6),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardStatusW : mszReaderNames : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=2),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Credentials.Apis.SCardStatusW : pbAtr : [NullNullTerminated,Optional,Out] => [NativeArrayInfo(CountParamIndex=6),NullNullTerminated,Optional,Out]
+Windows.Win32.Security.Cryptography.Apis.CryptDecrypt : pbData : [MemorySize(BytesParamIndex=5),Out] => [In,MemorySize(BytesParamIndex=5),Out]
+Windows.Win32.Security.Cryptography.Apis.CryptEncrypt : pbData : [MemorySize(BytesParamIndex=6),Optional,Out] => [In,MemorySize(BytesParamIndex=6),Optional,Out]
+Windows.Win32.Storage.FileSystem.FILE_DISPOSITION_INFO.DeleteFile added
+Windows.Win32.Storage.FileSystem.FILE_DISPOSITION_INFO.DeleteFileA removed
+Windows.Win32.Storage.Vhd.Apis.GetVirtualDiskInformation : VirtualDiskInfo : [MemorySize(BytesParamIndex=1),Out] => [In,MemorySize(BytesParamIndex=1),Out]
+Windows.Win32.System.ApplicationInstallationAndServicing.ACTIVATION_CONTEXT_COMPATIBILITY_INFORMATION.Elements...Windows.Win32.System.ApplicationInstallationAndServicing.COMPATIBILITY_CONTEXT_ELEMENT[] => Windows.Win32.System.ApplicationInstallationAndServicing.COMPATIBILITY_CONTEXT_ELEMENT*
+Windows.Win32.System.Com.BIND_OPTS2.__AnonymousBase_objidl_L9017_C36 removed
+Windows.Win32.System.Com.BIND_OPTS2.Base added
+Windows.Win32.System.Com.BIND_OPTS3.__AnonymousBase_objidl_L9041_C36 removed
+Windows.Win32.System.Com.BIND_OPTS3.Base added
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertIStorageToOLESTREAM : lpolestream : [In,Out] => [Out]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertIStorageToOLESTREAMEx : pmedium : [In,Out] => [In]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertIStorageToOLESTREAMEx : polestm : [In,Out] => [Out]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertOLESTREAMToIStorage : lpolestream : [In,Out] => [In]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertOLESTREAMToIStorageEx : pcfFormat : [In,Out] => [Out]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertOLESTREAMToIStorageEx : pdwSize : [In,Out] => [Out]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertOLESTREAMToIStorageEx : plHeight : [In,Out] => [Out]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertOLESTREAMToIStorageEx : plwWidth : [In,Out] => [Out]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertOLESTREAMToIStorageEx : pmedium : [In,Out] => [Out]
+Windows.Win32.System.Com.StructuredStorage.Apis.OleConvertOLESTREAMToIStorageEx : polestm : [In,Out] => [In]
+Windows.Win32.System.Com.StructuredStorage.Apis.ReadFmtUserTypeStg : pcf : [In,Out] => [Out]
+Windows.Win32.System.Com.StructuredStorage.PROPBAG2.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Com.StructuredStorage.PROPVARIANT._Anonymous_e__Union._Anonymous_e__Struct.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Com.StructuredStorage.STATPROPSTG.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Com.TYPEDESC.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Com.Urlmon.IInternetProtocol.Read : pv : [NativeArrayInfo(CountParamIndex=1),Out] => [In,NativeArrayInfo(CountParamIndex=1),Out]
+Windows.Win32.System.Com.VARENUM added
+Windows.Win32.System.Com.VARIANT._Anonymous_e__Union._Anonymous_e__Struct.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.DeploymentServices.Apis.PxeDhcpv6AppendOption : pReply : [MemorySize(BytesParamIndex=1),Out] => [In,MemorySize(BytesParamIndex=1),Out]
+Windows.Win32.System.DeploymentServices.Apis.PxeDhcpv6AppendOptionRaw : pReply : [MemorySize(BytesParamIndex=1),Out] => [In,MemorySize(BytesParamIndex=1),Out]
+Windows.Win32.System.Diagnostics.Debug.Apis.FormatMessageA : lpBuffer : [Out] => [NativeArrayInfo(CountParamIndex=5),Out]
+Windows.Win32.System.Diagnostics.Debug.Apis.FormatMessageW : lpBuffer : [Out] => [NativeArrayInfo(CountParamIndex=5),Out]
+Windows.Win32.System.Diagnostics.Debug.IDebugDocumentHost.GetDeferredText : pcharText : [NativeArrayInfo(CountParamIndex=4),Out] => [In,NativeArrayInfo(CountParamIndex=4),Out]
+Windows.Win32.System.Diagnostics.Debug.IDebugDocumentHost.GetDeferredText : pstaTextAttr : [NativeArrayInfo(CountParamIndex=4),Out] => [In,NativeArrayInfo(CountParamIndex=4),Out]
+Windows.Win32.System.Diagnostics.Debug.IDebugDocumentText.GetText : pcharText : [NativeArrayInfo(CountParamIndex=4),Out] => [In,NativeArrayInfo(CountParamIndex=4),Out]
+Windows.Win32.System.Diagnostics.Debug.IDebugFormatter.GetStringForVarType : vt...UInt16 => VARENUM
+Windows.Win32.System.Diagnostics.Debug.IModelObject.GetIntrinsicValueAs : vt...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.DispCallFunc : vtReturn...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.DispGetParam : vtTarg...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.DoDragDrop : pdwEffect : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.IsAccelerator : lpMsg : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.IsAccelerator : lpwCmd : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreate : pFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreate : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateDefaultHandler : lplpObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateEmbeddingHelper : lplpObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateEx : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateEx : rgAdvf : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateEx : rgdwConnection : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateEx : rgFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateFromData : pFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateFromData : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateFromDataEx : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateFromDataEx : rgAdvf : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateFromDataEx : rgdwConnection : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateFromDataEx : rgFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateFromFile : lpFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateFromFile : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateFromFileEx : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateFromFileEx : rgAdvf : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateFromFileEx : rgdwConnection : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateFromFileEx : rgFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLink : lpFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLink : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateLinkEx : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateLinkEx : rgAdvf : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkEx : rgdwConnection : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateLinkEx : rgFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromData : pFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromData : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromDataEx : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromDataEx : rgAdvf : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromDataEx : rgFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFile : lpFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFile : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFileEx : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFileEx : rgAdvf : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFileEx : rgdwConnection : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFileEx : rgFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateMenuDescriptor : lpMenuWidths : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateStaticFromData : pFormatEtc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateStaticFromData : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleDoAutoConvert : pClsidNew : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleDraw : lprcBounds : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleGetAutoConvert : pClsidNew : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleInitialize : pvReserved : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleLoad : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleLoadFromStream : ppvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleRegGetMiscStatus : pdwStatus : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleTranslateAccelerator : lpFrameInfo : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleTranslateAccelerator : lpmsg : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.ReleaseStgMedium : param0 : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.SafeArrayAllocDescriptorEx : vt...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.SafeArrayCreate : vt...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.SafeArrayCreateEx : vt...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.SafeArrayCreateVector : vt...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.SafeArrayCreateVectorEx : vt...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.VariantChangeType : vt...UInt16 => VARENUM
+Windows.Win32.System.Ole.Apis.VariantChangeTypeEx : vt...UInt16 => VARENUM
+Windows.Win32.System.Ole.IVariantChangeType.ChangeType : vtNew...UInt16 => VARENUM
+Windows.Win32.System.Ole.METHODDATA.vtReturn...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Ole.PARAMDATA.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Ole.VARENUM removed
+Windows.Win32.System.Performance.Apis.PerfAddCounters : pCounters : [In,MemorySize(BytesParamIndex=2)] => [In,MemorySize(BytesParamIndex=2),Out]
+Windows.Win32.System.Performance.Apis.PerfDeleteCounters : pCounters : [In,MemorySize(BytesParamIndex=2)] => [In,MemorySize(BytesParamIndex=2),Out]
+Windows.Win32.System.Performance.PM_COLLECT_PROC.Invoke : ppData : [In,Out] => [In,MemorySize(BytesParamIndex=2),Out]
+Windows.Win32.System.Registry.Apis.GetRegistryValueWithFallbackW : pvData : [In,Optional,Out] => [MemorySize(BytesParamIndex=8),Optional,Out]
+Windows.Win32.System.Registry.Apis.RegQueryValueExA : lpcbData : [Optional,Out] => [In,Optional,Out]
+Windows.Win32.System.Registry.Apis.RegQueryValueExW : lpcbData : [Optional,Out] => [In,Optional,Out]
+Windows.Win32.System.RemoteManagement.WSMAN_SHELL_STARTUP_INFO_V11.__AnonymousBase_wsman_L665_C48 removed
+Windows.Win32.System.RemoteManagement.WSMAN_SHELL_STARTUP_INFO_V11.Base added
+Windows.Win32.System.Search.DBPROPINFO.vtType...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Search.DBPROPINFO.vtType...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Search.ILoadFilter.LoadIFilter : pwcsSearchDesc : [Out] => [In,Out]
+Windows.Win32.System.Search.ILoadFilter.LoadIFilterFromStorage : pwcsSearchDesc : [Out] => [In,Out]
+Windows.Win32.System.Search.ILoadFilter.LoadIFilterFromStream : pwcsSearchDesc : [Out] => [In,Out]
+Windows.Win32.System.Search.KAGREQDIAG.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.System.Threading.Apis.InitializeProcThreadAttributeList : lpSize : [Out] => [In,Out]
+Windows.Win32.System.WindowsProgramming.Apis.TranslateInfStringExA : pszBuffer : [NativeArrayInfo(CountParamIndex=5),Out] => [In,NativeArrayInfo(CountParamIndex=5),Out]
+Windows.Win32.System.WindowsProgramming.Apis.TranslateInfStringExW : pszBuffer : [NativeArrayInfo(CountParamIndex=5),Out] => [In,NativeArrayInfo(CountParamIndex=5),Out]
+Windows.Win32.UI.Controls.RichEdit.CHARFORMAT2A.__AnonymousBase_richedit_L736_C23 removed
+Windows.Win32.UI.Controls.RichEdit.CHARFORMAT2A.Base added
+Windows.Win32.UI.Controls.RichEdit.CHARFORMAT2W.__AnonymousBase_richedit_L711_C23 removed
+Windows.Win32.UI.Controls.RichEdit.CHARFORMAT2W.Base added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT2.__AnonymousBase_richedit_L1149_C22 removed
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT2.Base added
+Windows.Win32.UI.Input.Apis.GetRawInputDeviceInfoA : pData : [MemorySize(BytesParamIndex=3),Optional,Out] => [In,MemorySize(BytesParamIndex=3),Optional,Out]
+Windows.Win32.UI.Input.Apis.GetRawInputDeviceInfoW : pData : [MemorySize(BytesParamIndex=3),Optional,Out] => [In,MemorySize(BytesParamIndex=3),Optional,Out]
+Windows.Win32.UI.Input.Ime.Apis.GCS_COMPATTR removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_COMPCLAUSE removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_COMPREADATTR removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_COMPREADCLAUSE removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_COMPREADSTR removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_COMPSTR removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_CURSORPOS removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_DELTASTART removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_RESULTCLAUSE removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_RESULTREADCLAUSE removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_RESULTREADSTR removed
+Windows.Win32.UI.Input.Ime.Apis.GCS_RESULTSTR removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CHOTKEY_IME_NONIME_TOGGLE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CHOTKEY_SHAPE_TOGGLE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CHOTKEY_SYMBOL_TOGGLE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CMODE_EUDC removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CMODE_FIXED removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CMODE_NOCONVERSION removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CMODE_RESERVED removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CMODE_SOFTKBD removed
+Windows.Win32.UI.Input.Ime.Apis.IME_CMODE_SYMBOL removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_AUTOMATA removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_GET_EUDC_DICTIONARY removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_GETHELPFILENAME removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_HANJA_MODE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_IME_NAME removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_MAX_KEY removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_PRIVATE_FIRST removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_PRIVATE_HOTKEY removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_PRIVATE_LAST removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_QUERY_SUPPORT removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_RESERVED_FIRST removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_RESERVED_LAST removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_SEQUENCE_TO_INTERNAL removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_SET_EUDC_DICTIONARY removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ESC_SYNC_HOTKEY removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ITHOTKEY_PREVIOUS_COMPOSITION removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ITHOTKEY_RECONVERTSTRING removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ITHOTKEY_RESEND_RESULTSTR removed
+Windows.Win32.UI.Input.Ime.Apis.IME_ITHOTKEY_UISTYLE_TOGGLE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_JHOTKEY_CLOSE_OPEN removed
+Windows.Win32.UI.Input.Ime.Apis.IME_KHOTKEY_ENGLISH removed
+Windows.Win32.UI.Input.Ime.Apis.IME_KHOTKEY_HANJACONVERT removed
+Windows.Win32.UI.Input.Ime.Apis.IME_KHOTKEY_SHAPE_TOGGLE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_SMODE_AUTOMATIC removed
+Windows.Win32.UI.Input.Ime.Apis.IME_SMODE_CONVERSATION removed
+Windows.Win32.UI.Input.Ime.Apis.IME_SMODE_NONE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_SMODE_PHRASEPREDICT removed
+Windows.Win32.UI.Input.Ime.Apis.IME_SMODE_PLAURALCLAUSE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_SMODE_RESERVED removed
+Windows.Win32.UI.Input.Ime.Apis.IME_SMODE_SINGLECONVERT removed
+Windows.Win32.UI.Input.Ime.Apis.IME_THOTKEY_IME_NONIME_TOGGLE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_THOTKEY_SHAPE_TOGGLE removed
+Windows.Win32.UI.Input.Ime.Apis.IME_THOTKEY_SYMBOL_TOGGLE removed
+Windows.Win32.UI.Input.Ime.Apis.ImmEscapeA : param2...UInt32 => IME_ESCAPE
+Windows.Win32.UI.Input.Ime.Apis.ImmEscapeW : param2...UInt32 => IME_ESCAPE
+Windows.Win32.UI.Input.Ime.Apis.ImmGetCompositionStringA : param1...UInt32 => IME_COMPOSITION_STRING
+Windows.Win32.UI.Input.Ime.Apis.ImmGetCompositionStringW : param1...UInt32 => IME_COMPOSITION_STRING
+Windows.Win32.UI.Input.Ime.Apis.ImmGetConversionStatus : lpfdwConversion...UInt32* => IME_CONVERSION_MODE*
+Windows.Win32.UI.Input.Ime.Apis.ImmGetConversionStatus : lpfdwSentence...UInt32* => IME_SENTENCE_MODE*
+Windows.Win32.UI.Input.Ime.Apis.ImmSetConversionStatus : param1...UInt32 => IME_CONVERSION_MODE
+Windows.Win32.UI.Input.Ime.Apis.ImmSetConversionStatus : param2...UInt32 => IME_SENTENCE_MODE
+Windows.Win32.UI.Input.Ime.Apis.ImmSimulateHotKey : param1...UInt32 => IME_HOTKEY_IDENTIFIER
+Windows.Win32.UI.Input.Ime.IME_COMPOSITION_STRING added
+Windows.Win32.UI.Input.Ime.IME_CONVERSION_MODE added
+Windows.Win32.UI.Input.Ime.IME_ESCAPE added
+Windows.Win32.UI.Input.Ime.IME_HOTKEY_IDENTIFIER added
+Windows.Win32.UI.Input.Ime.IME_SENTENCE_MODE added
+Windows.Win32.UI.Shell.Apis.SHACF_AUTOAPPEND_FORCE_OFF removed
+Windows.Win32.UI.Shell.Apis.SHACF_AUTOAPPEND_FORCE_ON removed
+Windows.Win32.UI.Shell.Apis.SHACF_AUTOSUGGEST_FORCE_OFF removed
+Windows.Win32.UI.Shell.Apis.SHACF_AUTOSUGGEST_FORCE_ON removed
+Windows.Win32.UI.Shell.Apis.SHACF_DEFAULT removed
+Windows.Win32.UI.Shell.Apis.SHACF_FILESYS_DIRS removed
+Windows.Win32.UI.Shell.Apis.SHACF_FILESYS_ONLY removed
+Windows.Win32.UI.Shell.Apis.SHACF_FILESYSTEM removed
+Windows.Win32.UI.Shell.Apis.SHACF_URLHISTORY removed
+Windows.Win32.UI.Shell.Apis.SHACF_URLMRU removed
+Windows.Win32.UI.Shell.Apis.SHACF_USETAB removed
+Windows.Win32.UI.Shell.Apis.SHACF_VIRTUAL_NAMESPACE removed
+Windows.Win32.UI.Shell.Apis.SHAutoComplete : dwFlags...UInt32 => SHELL_AUTOCOMPLETE_FLAGS
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PropVariantChangeType : vt...UInt16 => VARENUM
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.PSPropertyBag_ReadType : type...UInt16 => VARENUM
+Windows.Win32.UI.Shell.SHCOLUMNINFO.vt...System.UInt16 => Windows.Win32.System.Com.VARENUM
+Windows.Win32.UI.Shell.SHELL_AUTOCOMPLETE_FLAGS added
+Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX.__AnonymousBase_winuser_L1166_C46 removed
+Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX.Base added
