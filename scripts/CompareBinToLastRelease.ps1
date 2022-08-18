@@ -26,7 +26,7 @@ if ($LastExitCode -lt 0)
 {
     if (!$SuppressSuggestionToCallScript.IsPresent)
     {
-        Write-Error "If all the differences are expected, please update the expected differences list:`n.\scripts\UpdateChangesSinceLastRelease.ps1 '<add a reason here>'"
+        Write-Output "`n`e[32mIf all the differences are expected, please update the expected differences list:`n.\scripts\UpdateChangesSinceLastRelease.ps1 '<add a reason here>'`e[0m"
     }
 
     exit -1
