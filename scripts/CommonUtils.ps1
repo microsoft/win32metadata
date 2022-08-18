@@ -91,14 +91,26 @@ function Get-LibMappingsFile
     return $libMappingOutputFileName
 }
 
-function Get-BuildToolsNugetPropsProperty
+function Get-ChangesSinceLastReleaseFile
 {
-    Param ([string] $name)
+    return Join-Path $PSScriptRoot "ChangesSinceLastRelease.txt"
+}
+
+function Get-NugetPropsProperty
+{
+    Param ([string] $name, [string]$projectName)
+
+    $projNameOnly = Split-Path -Path $projectName -LeafBase
 
     $ns = @{xlmns = "http://schemas.microsoft.com/developer/msbuild/2003"}
     $xpath = "//xlmns:$name"
-    $item = Select-Xml -Path "$rootDir\obj\BuildTools\BuildTools.proj.nuget.g.props" -XPath $xpath -Namespace $ns
+    $item = Select-Xml -Path "$rootDir\obj\$projNameOnly\$projectName.nuget.g.props" -XPath $xpath -Namespace $ns
     return $item.node.InnerXml
+}
+
+function Get-BuildToolsNugetPropsProperty
+{
+    return Get-NugetPropsProperty -name $name -projectName "BuildTools.proj"
 }
 
 function Get-WinSdkCppPkgPath
@@ -109,6 +121,12 @@ function Get-WinSdkCppPkgPath
 function Get-WinSdkCppX64PkgPath
 {
     return Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Windows_SDK_CPP_x64")
+}
+
+function Get-Win32MetadataLastReleaseWinmdPath
+{
+    $dir = Get-NugetPropsProperty -name "PkgMicrosoft_Windows_SDK_Win32Metadata" -projectName "Windows.Win32.Tests.csproj"
+    return Join-Path $dir "Windows.Win32.winmd"
 }
 
 function Invoke-PrepLibMappingsFile

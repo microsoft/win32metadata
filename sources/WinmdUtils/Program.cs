@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections.Specialized;
 using System.CommandLine;
 using System.CommandLine.Invocation;
+using System.CommandLine.IO;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -34,9 +35,10 @@ namespace WinmdUtilsProgram
             {
                 new Option<FileInfo>("--first", "The first winmd.") { IsRequired = true }.ExistingOnly(),
                 new Option<FileInfo>("--second", "The second winmd.") { IsRequired = true }.ExistingOnly(),
+                new Option<FileInfo>("--changeExemptionsFile", "A file containing changes to ignore.") { IsRequired = false }.ExistingOnly(),
             };
 
-            compareCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, string, IConsole>(CompareWinmds);
+            compareCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, FileInfo, IConsole>(CompareWinmds);
 
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
@@ -1014,17 +1016,18 @@ namespace WinmdUtilsProgram
             return dupsFound ? -1 : 0;
         }
 
-        public static bool CompareFields(IField field1, IField field2, IConsole console)
+        private static bool CompareFields(IField field1, IField field2, DifferencesWriter writer)
         {
-            bool ret = CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), console);
+            int before = writer.DifferencesCount;
+
+            CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), writer);
 
             // Using the ReflectionName gets us the name of the type in
             // metadata. The FullName might not be fully resolvable by the
             // library because it doesn't know how to resolve arch-specific types
             if (field1.Type.ReflectionName != field2.Type.ReflectionName)
             {
-                console?.Out.Write($"{field1.DeclaringType.FullName}.{field1.Name}...{field1.Type.ReflectionName} => {field2.Type.ReflectionName}\r\n");
-                ret = false;
+                writer.WriteDifference($"{field1.DeclaringType.FullName}.{field1.Name}...{field1.Type.ReflectionName} => {field2.Type.ReflectionName}");
             }
             else
             {
@@ -1032,8 +1035,7 @@ namespace WinmdUtilsProgram
                 {
                     if (!field2.IsConst)
                     {
-                        console?.Out.Write($"winmd1: {field1.Name} const, winmd2: not\r\n");
-                        ret = false;
+                        writer.WriteDifference($"winmd1: {field1.Name} const, winmd2: not");
                     }
                     else
                     {
@@ -1042,12 +1044,12 @@ namespace WinmdUtilsProgram
 
                         if (fieldVal1 == null)
                         {
-                            console?.Out.Write($"winmd1: {field1.Name} is a constant with a null value\r\n");
+                            writer.WriteDifference($"winmd1: {field1.Name} is a constant with a null value");
                         }
 
                         if (fieldVal2 == null)
                         {
-                            console?.Out.Write($"winmd2: {field2.Name} is a constant with a null value\r\n");
+                            writer.WriteDifference($"winmd2: {field2.Name} is a constant with a null value");
                         }
 
                         string val1 = fieldVal1?.ToString();
@@ -1055,8 +1057,7 @@ namespace WinmdUtilsProgram
 
                         if (val1 != val2)
                         {
-                            console?.Out.Write($"winmd1: {field1.Name} = {val1}, winmd2 = {val2}\r\n");
-                            ret = false;
+                            writer.WriteDifference($"winmd1: {field1.Name} = {val1}, winmd2 = {val2}");
                         }
                     }
                 }
@@ -1064,19 +1065,16 @@ namespace WinmdUtilsProgram
                 {
                     if (!field2.IsConst)
                     {
-                        console?.Out.Write($"winmd1: {field1.Name} not const, winmd2: const\r\n");
-                        ret = false;
+                        writer.WriteDifference($"winmd1: {field1.Name} not const, winmd2: const");
                     }
                 }
             }
 
-            return ret;
+            return writer.DifferencesCount == before;
         }
 
-        public static bool CompareFieldsOnTypes(ITypeDefinition type1, ITypeDefinition type2, IConsole console)
+        private static void CompareFieldsOnTypes(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
         {
-            bool ret = true;
-
             Dictionary<string, IField> type2Fields = new Dictionary<string, IField>();
             foreach (var field2 in type2.Fields)
             {
@@ -1087,23 +1085,19 @@ namespace WinmdUtilsProgram
             {
                 if (!type2Fields.TryGetValue(field1.Name, out var field2))
                 {
-                    ret = false;
-                    console?.Out.Write($"{field1.FullName} not found in 2nd winmd\r\n");
+                    writer.WriteDifference($"{field1.FullName} removed");
                     continue;
                 }
 
                 type2Fields.Remove(field2.Name);
 
-                ret &= CompareFields(field1, field2, console);
+                CompareFields(field1, field2, writer);
             }
 
             foreach (var field2 in type2Fields.Values)
             {
-                console?.Out.Write($"{field2.FullName} not found in 1st winmd\r\n");
-                ret = false;
+                writer.WriteDifference($"{field2.FullName} added");
             }
-
-            return ret;
         }
 
         private static string GetMethodNameWithParams(IMethod method)
@@ -1245,37 +1239,41 @@ namespace WinmdUtilsProgram
             return stringBuilder.ToString();
         }
 
-        public static bool CompareAttributes(string fullName, IEnumerable<IAttribute> attrs1, IEnumerable<IAttribute> attrs2, IConsole console)
+        private static bool CompareAttributes(string fullName, IEnumerable<IAttribute> attrs1, IEnumerable<IAttribute> attrs2, DifferencesWriter writer)
         {
-            bool ret = true;
+            return CompareAttributes(fullName, attrs1, attrs2, writer, false);
+        }
+
+        private static bool CompareAttributes(string fullName, IEnumerable<IAttribute> attrs1, IEnumerable<IAttribute> attrs2, DifferencesWriter writer, bool info)
+        {
+            int before = writer.DifferencesCount;
 
             string attrText1 = ConvertAttributesToText(attrs1);
             string attrText2 = ConvertAttributesToText(attrs2);
 
             if (attrText1 != attrText2)
             {
-                console?.Out.Write($"{fullName} : {attrText1} => {attrText2}\r\n");
-                ret = false;
+                string text = $"{fullName} : {attrText1} => {attrText2}";
+                writer.WriteDifference(text, info);
             }
 
-            return ret;
+            return writer.DifferencesCount == before;
         }
 
-        public static bool CompareMethods(IMethod method1, IMethod method2, IConsole console)
+        private static bool CompareMethods(IMethod method1, IMethod method2, DifferencesWriter writer)
         {
-            bool ret = true;
+            int before = writer.DifferencesCount;
 
             string methodFullName = GetFullMemberName(method1);
 
-            ret &= CompareAttributes(methodFullName, method1.GetAttributes(), method2.GetAttributes(), console);
+            CompareAttributes(methodFullName, method1.GetAttributes(), method2.GetAttributes(), writer);
 
             // Return param
             string returnFullName = $"{methodFullName} : return";
-            ret &= CompareAttributes(returnFullName, method1.GetReturnTypeAttributes(), method2.GetReturnTypeAttributes(), console);
+            CompareAttributes(returnFullName, method1.GetReturnTypeAttributes(), method2.GetReturnTypeAttributes(), writer);
             if (method1.ReturnType.Name != method2.ReturnType.Name)
             {
-                console?.Out.Write($"{returnFullName}...{method1.ReturnType.Name} => {method2.ReturnType.Name}\r\n");
-                ret = false;
+                writer.WriteDifference($"{returnFullName}...{method1.ReturnType.Name} => {method2.ReturnType.Name}");
             }
 
             // Params
@@ -1284,71 +1282,77 @@ namespace WinmdUtilsProgram
                 var param2 = method2.Parameters.FirstOrDefault(p => p.Name == param1.Name);
                 if (param2 == null)
                 {
-                    console?.Out.Write($"{methodFullName}, param {param1.Name} not found in 2nd winmd\r\n");
-                    ret = false;
+                    writer.WriteDifference($"{methodFullName}, param {param1.Name} removed");
                     continue;
                 }
 
                 string paramFullName = $"{methodFullName} : {param1.Name}";
                 if (param1.Type.Name != param2.Type.Name)
                 {
-                    console?.Out.Write($"{paramFullName}...{param1.Type.Name} => {param2.Type.Name}\r\n");
-                    ret = false;
+                    writer.WriteDifference($"{paramFullName}...{param1.Type.Name} => {param2.Type.Name}");
                 }
 
-                ret &= CompareAttributes(paramFullName, param1.GetAttributes(), param2.GetAttributes(), console);
+                CompareAttributes(paramFullName, param1.GetAttributes(), param2.GetAttributes(), writer);
             }
 
-            return ret;
+            return writer.DifferencesCount == before;
         }
 
-        public static bool CompareMethodsOnType(ITypeDefinition type1, ITypeDefinition type2, IConsole console)
+        private static bool CompareMethodsOnType(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
         {
-            bool ret = true;
+            int before = writer.DifferencesCount;
 
             var type1Methods = GetMethodMap(type1);
             var type2Methods = GetMethodMap(type2);
 
-            foreach (var methodPair in type1Methods)
+            foreach (var method1Pair in type1Methods)
             {
-                if (methodPair.Key == ".ctor")
+                if (method1Pair.Key == ".ctor")
                 {
                     continue;
                 }
 
-                string methodFullName = methodPair.Key;
-                if (!type2Methods.TryGetValue(methodFullName, out var method2))
+                string methodWithParamNames = method1Pair.Key;
+                if (!type2Methods.TryGetValue(methodWithParamNames, out var method2))
                 {
-                    console?.Out.Write($"{methodFullName} not found in 2nd winmd\r\n");
-                    ret = false;
+                    string fullMethodName = type1.Namespace + "." + type1.Name + "." + methodWithParamNames;
+                    writer.WriteDifference($"{fullMethodName} removed");
                     continue;
                 }
 
-                var method1 = methodPair.Value;
-                type2Methods.Remove(methodFullName);
+                var method1 = method1Pair.Value;
+                type2Methods.Remove(methodWithParamNames);
 
-                ret &= CompareMethods(method1, method2, console);
+                CompareMethods(method1, method2, writer);
             }
 
-            foreach (var method2 in type2Methods.Values)
+            foreach (var method2Pair in type2Methods)
             {
-                console?.Out.Write($"{method2.FullName} not found in 1st winmd\r\n");
-                ret = false;
+                string methodWithParamNames = method2Pair.Key;
+                string fullMethodName = type2.Namespace + "." + type2.Name + "." + methodWithParamNames;
+                writer.WriteDifference($"{fullMethodName} added");
             }
 
-            return ret;
+            return writer.DifferencesCount == before;
         }
 
-        public static bool CompareTypes(ITypeDefinition type1, ITypeDefinition type2, IConsole console)
+        private static bool CompareTypes(ITypeDefinition type1, ITypeDefinition type2)
         {
-            bool ret = true;
+            DifferencesWriter tempWriter = new DifferencesWriter();
+            CompareTypes(type1, type2, tempWriter);
+            return !tempWriter.DifferencesFound;
+        }
 
-            ret &= CompareFieldsOnTypes(type1, type2, console);
-            ret &= CompareMethodsOnType(type1, type2, console);
-            ret &= CompareAttributes(type1.FullName, type1.GetAttributes(), type2.GetAttributes(), console);
-            ret &= CompareTypes(type1.NestedTypes, type2.NestedTypes, console);
+        private static bool CompareTypes(ITypeDefinition type1, ITypeDefinition type2, DifferencesWriter writer)
+        {
+            int before = writer.DifferencesCount;
 
-            return ret;
+            CompareFieldsOnTypes(type1, type2, writer);
+            CompareMethodsOnType(type1, type2, writer);
+            CompareAttributes(type1.FullName, type1.GetAttributes(), type2.GetAttributes(), writer);
+            CompareTypes(type1.NestedTypes, type2.NestedTypes, writer);
+
+            return writer.DifferencesCount == before;
         }
 
         private static string GetFullTypeName(ITypeDefinition typeDefinition)
@@ -1453,11 +1457,11 @@ namespace WinmdUtilsProgram
                 type => type.ParentModule == winmd.MainModule && type.FullName != "<Module>");
         }
 
-        private static bool CompareTypes(IEnumerable<ITypeDefinition> types1, IEnumerable<ITypeDefinition> types2, IConsole console)
+        private static bool CompareTypes(IEnumerable<ITypeDefinition> types1, IEnumerable<ITypeDefinition> types2, DifferencesWriter writer)
         {
             Dictionary<string, ITypeDefinition> winmd2NamesToTypes = GetNamesToTypeDefinitions(types2);
             Dictionary<string, List<ITypeDefinition>> winmd2ShortNamesToTypes = GetShortNamesToTypeDefinitions(types2);
-            bool same = true;
+            int before = writer.DifferencesCount;
 
             HashSet<string> visitedNames = new HashSet<string>();
             foreach (var type1 in types1)
@@ -1478,12 +1482,11 @@ namespace WinmdUtilsProgram
                     {
                         foreach (var t2 in list)
                         {
-                            if (CompareTypes(type1, t2, null))
+                            if (CompareTypes(type1, t2))
                             {
                                 var type2Name = GetFullTypeName(t2);
-                                console?.Out.Write($"{type1Name} => {type2Name}\r\n");
+                                writer.WriteDifference($"{type1Name} => {type2Name}");
                                 visitedNames.Add(type2Name);
-                                same = false;
                                 type2 = t2;
                                 break;
                             }
@@ -1492,14 +1495,13 @@ namespace WinmdUtilsProgram
 
                     if (type2 == null)
                     {
-                        console?.Out.Write($"{type1Name} not found in 2nd winmd\r\n");
-                        same = false;
+                        writer.WriteDifference($"{type1Name} removed");
                     }
 
                     continue;
                 }
 
-                same &= CompareTypes(type1, type2, console);
+                CompareTypes(type1, type2, writer);
             }
 
             Dictionary<string, ITypeDefinition> winmd1NamesToTypes = GetNamesToTypeDefinitions(types1);
@@ -1520,27 +1522,27 @@ namespace WinmdUtilsProgram
                 winmd1NamesToTypes.TryGetValue(type2FullName, out var type1);
                 if (type1 == null)
                 {
-                    console?.Out.Write($"{type2FullName} not found in 1st winmd\r\n");
-                    same = false;
+                    writer.WriteDifference($"{type2FullName} added");
                 }
             }
 
-            return same;
+            return writer.DifferencesCount == before;
         }
 
-        public static int CompareWinmds(FileInfo first, FileInfo second, string exclusions, IConsole console)
+        public static int CompareWinmds(FileInfo first, FileInfo second, FileInfo changeExemptionsFile, IConsole console)
         {
-            bool same = true;
+            string[] differencesToIgnore = changeExemptionsFile != null ? File.ReadAllLines(changeExemptionsFile.FullName) : new string[0];
+            DifferencesWriter writer = new DifferencesWriter(differencesToIgnore);
 
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(first.FullName);
             DecompilerTypeSystem winmd2 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(second.FullName);
 
-            CompareAttributes("Assembly (informational only)", winmd1.MainModule.GetAssemblyAttributes(), winmd2.MainModule.GetAssemblyAttributes(), console);
+            CompareAttributes("Assembly (informational only)", winmd1.MainModule.GetAssemblyAttributes(), winmd2.MainModule.GetAssemblyAttributes(), writer, true);
 
             var winmd1Types = GetSelfDefinedWinmdToplevelTypes(winmd1);
             var winmd2Types = GetSelfDefinedWinmdToplevelTypes(winmd2);
 
-            same &= CompareTypes(winmd1Types, winmd2Types, console);
+            CompareTypes(winmd1Types, winmd2Types, writer);
 
             var apiNameToMembers1 = GetApiMemberNamesToMemberDefinitions(winmd1);
             var apiNameToMembers2 = GetApiMemberNamesToMemberDefinitions(winmd2);
@@ -1564,11 +1566,11 @@ namespace WinmdUtilsProgram
                                 bool membersSame;
                                 if (m1 is IField)
                                 {
-                                    membersSame = CompareFields((IField)m1, (IField)m2, console);
+                                    membersSame = CompareFields((IField)m1, (IField)m2, writer);
                                 }
                                 else
                                 {
-                                    membersSame = CompareMethods((IMethod)m1, (IMethod)m2, null);
+                                    membersSame = CompareMethods((IMethod)m1, (IMethod)m2, new DifferencesWriter());
 
                                     // If the members aren't the same on the methods and the namespaces also aren't
                                     // the same, then assume these aren't the same methods and keep going
@@ -1579,7 +1581,7 @@ namespace WinmdUtilsProgram
 
                                     if (!membersSame && console != null)
                                     {
-                                        CompareMethods((IMethod)m1, (IMethod)m2, console);
+                                        CompareMethods((IMethod)m1, (IMethod)m2, writer);
                                     }
                                 }
 
@@ -1587,12 +1589,9 @@ namespace WinmdUtilsProgram
                                 {
                                     if (m1.Namespace != m2.Namespace)
                                     {
-                                        console?.Out.Write($"{m1FullName} => {m2FullName}\r\n");
-                                        membersSame = false;
+                                        writer.WriteDifference($"{m1FullName} => {m2FullName}");
                                     }
                                 }
-
-                                same &= membersSame;
 
                                 visitedM2Names.Add(m2FullName);
                                 found = true;
@@ -1602,7 +1601,7 @@ namespace WinmdUtilsProgram
 
                         if (!found)
                         {
-                            console?.Out.Write($"{m1FullName} not found in 2nd winmd\r\n");
+                            writer.WriteDifference($"{m1FullName} removed");
                         }
                     }
                 }
@@ -1611,8 +1610,7 @@ namespace WinmdUtilsProgram
                     foreach (var m1 in api1MemberInfo.Value)
                     {
                         string m1FullName = GetFullMemberName(m1);
-                        console?.Out.Write($"{m1FullName} not found in 2nd winmd\r\n");
-                        same = false;
+                        writer.WriteDifference($"{m1FullName} removed");
                     }
                 }
             }
@@ -1624,18 +1622,25 @@ namespace WinmdUtilsProgram
                     string m2FullName = GetFullMemberName(api2Member);
                     if (!visitedM2Names.Contains(m2FullName))
                     {
-                        console?.Out.Write($"{m2FullName} not found in 1st winmd\r\n");
-                        same = false;
+                        writer.WriteDifference($"{m2FullName} added");
                     }
                 }
             }
 
-            if (same)
+            if (!writer.DifferencesFound)
             {
                 console.Out.Write($"No differences in winmd contents.\r\n");
+                return 0;
+            }
+            else
+            {
+                foreach (var line in writer.Differences.OrderBy(l => l))
+                {
+                    console.Out.WriteLine(line);
+                }
             }
 
-            return same ? 0 : -1;
+            return -1;
         }
 
         public static int ShowMissingImports(FileInfo first, FileInfo second, string exclusions, IConsole console)
@@ -1676,6 +1681,50 @@ namespace WinmdUtilsProgram
             }
 
             return ret;
+        }
+
+        private class DifferencesWriter
+        {
+            private HashSet<string> differencesToIgnore = new HashSet<string>();
+            private List<string> differences = new List<string>();
+
+            public bool DifferencesFound => this.DifferencesCount != 0;
+
+            public int DifferencesCount { get; private set; }
+
+            public DifferencesWriter()
+            {
+            }
+
+            public DifferencesWriter(string[] differencesToIgnore)
+            {
+                if (differencesToIgnore != null)
+                {
+                    this.differencesToIgnore = new HashSet<string>(differencesToIgnore);
+                }
+            }
+
+            public void WriteDifference(string line, bool infoOnly)
+            {
+                if (!infoOnly)
+                {
+                    if (this.differencesToIgnore.Contains(line))
+                    {
+                        return;
+                    }
+
+                    this.DifferencesCount++;
+                }
+
+                this.differences.Add(line);
+            }
+
+            public void WriteDifference(string line)
+            {
+                this.WriteDifference(line, false);
+            }
+
+            public IEnumerable<string> Differences => this.differences;
         }
     }
 }
