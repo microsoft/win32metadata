@@ -20,7 +20,7 @@
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
 
-    <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="25.0.28-preview" GeneratePathProperty="True">
+    <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="27.0.1-preview" GeneratePathProperty="True">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
     
