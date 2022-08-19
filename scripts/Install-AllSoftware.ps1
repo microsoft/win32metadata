@@ -1,7 +1,5 @@
 # 1. Make sure the Microsoft App Installer is installed:
 #    https://www.microsoft.com/p/app-installer/9nblggh4nns1
-# 2. Run this script as administrator. If running scripts is blocked, you can temporarily unblock them by running 
-	Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
 
 Write-Output "Installing apps"
 $apps = @(
@@ -14,7 +12,7 @@ Foreach ($app in $apps) {
     $listApp = winget list --exact -q $app.packageIDs
     if (![String]::Join("", $listApp).Contains($app.packageID)) {
         Write-output "Installing: " $app.packageID
-        winget install $app.packageID 
+        winget install -h $app.packageID -s winget 
     }
     else {
         Write-output "Skipping: " $app.packageID " (already installed)"
