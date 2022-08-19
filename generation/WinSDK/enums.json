@@ -30318,5 +30318,77 @@
         "parameter": "param1"
       }
     ]
+  },
+  {
+    "name": "DTTOPTS_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "DTT_TEXTCOLOR",
+        "value": "0x1"
+      },
+      {
+        "name": "DTT_BORDERCOLOR",
+        "value": "0x2"
+      },
+      {
+        "name": "DTT_SHADOWCOLOR",
+        "value": "0x4"
+      },
+      {
+        "name": "DTT_SHADOWTYPE",
+        "value": "0x8"
+      },
+      {
+        "name": "DTT_SHADOWOFFSET",
+        "value": "0x10"
+      },
+      {
+        "name": "DTT_BORDERSIZE",
+        "value": "0x20"
+      },
+      {
+        "name": "DTT_FONTPROP",
+        "value": "0x40"
+      },
+      {
+        "name": "DTT_COLORPROP",
+        "value": "0x80"
+      },
+      {
+        "name": "DTT_STATEID",
+        "value": "0x100"
+      },
+      {
+        "name": "DTT_CALCRECT",
+        "value": "0x200"
+      },
+      {
+        "name": "DTT_APPLYOVERLAY",
+        "value": "0x400"
+      },
+      {
+        "name": "DTT_GLOWSIZE",
+        "value": "0x800"
+      },
+      {
+        "name": "DTT_CALLBACK",
+        "value": "0x1000"
+      },
+      {
+        "name": "DTT_COMPOSITED",
+        "value": "0x2000"
+      },
+      {
+        "name": "DTT_VALIDBITS",
+        "value": "(DTT_TEXTCOLOR | DTT_BORDERCOLOR | DTT_SHADOWCOLOR | DTT_SHADOWTYPE | DTT_SHADOWOFFSET | DTT_BORDERSIZE | DTT_FONTPROP | DTT_COLORPROP | DTT_STATEID | DTT_CALCRECT | DTT_APPLYOVERLAY | DTT_GLOWSIZE | DTT_COMPOSITED)"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "DTTOPTS",
+        "field": "dwFlags"
+      }
+    ]
   }
 ]
