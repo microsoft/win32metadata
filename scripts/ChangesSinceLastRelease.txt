@@ -172,3 +172,5 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SetLayeredWindowAttributes : crKey...U
 Windows.Win32.UI.WindowsAndMessaging.Apis.SetSysColors : lpaRgbValues...UInt32* => COLORREF*
 Windows.Win32.UI.WindowsAndMessaging.Apis.UpdateLayeredWindow : crKey...UInt32 => COLORREF
 Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO.crKey...System.UInt32 => Windows.Win32.Foundation.COLORREF
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS added
+Windows.Win32.UI.Controls.DTTOPTS.dwFlags...System.UInt32 => Windows.Win32.UI.Controls.DTTOPTS_FLAGS
