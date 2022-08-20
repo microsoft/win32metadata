@@ -223,3 +223,16 @@ Windows.Win32.Graphics.Gdi.LOGFONTW.lfOutPrecision...System.Byte => Windows.Win3
 Windows.Win32.Graphics.Gdi.LOGFONTW.lfPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY
 Windows.Win32.Graphics.Gdi.LOGFONTW.lfQuality...System.Byte => Windows.Win32.Graphics.Gdi.FONT_QUALITY
 Windows.Win32.Graphics.Gdi.LOGFONTW.lfWeight...System.Int32 => Windows.Win32.Graphics.Gdi.FONT_WEIGHT
+# uxtheme enum changes
+Windows.Win32.UI.Controls.Apis.GetThemeAppProperties : return...UInt32 => SET_THEME_APP_PROPERTIES_FLAGS
+Windows.Win32.UI.Controls.Apis.GetThemeColor : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeEnumValue : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeFilename : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeInt : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeIntList : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeMargins : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemePosition : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeSysBool : iBoolId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeSysInt : iIntId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.SetThemeAppProperties : dwFlags...UInt32 => SET_THEME_APP_PROPERTIES_FLAGS
+Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS added

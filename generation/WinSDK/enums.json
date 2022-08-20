@@ -30,6 +30,75 @@
       {
         "method": "GetThemeSysColorBrush",
         "parameter": "iColorId"
+      },
+      {
+        "method": "GetThemeColor",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeSysBool",
+        "parameter": "iBoolId"
+      },
+      {
+        "method": "GetThemeSysInt",
+        "parameter": "iIntId"
+      },
+      {
+        "method": "GetThemeInt",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeIntList",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemePosition",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeMargins",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeFilename",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeEnumValue",
+        "parameter": "iPropId"
+      }
+    ]
+  },
+  {
+    "name": "SET_THEME_APP_PROPERTIES_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "members": [
+      {
+        "name": "ALLOW_NONCLIENT",
+        "value": "(1 << 0)"
+      },
+      {
+        "name": "ALLOW_CONTROLS",
+        "value": "(1 << 1)"
+      },
+      {
+        "name": "ALLOW_WEBCONTENT",
+        "value": "(1 << 2)"
+      },
+      {
+        "name": "VALIDBITS",
+        "value": "(ALLOW_NONCLIENT|ALLOW_CONTROLS|ALLOW_WEBCONTENT)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SetThemeAppProperties",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "GetThemeAppProperties",
+        "parameter": "return"
       }
     ]
   },
