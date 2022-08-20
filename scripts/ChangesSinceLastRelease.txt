@@ -173,6 +173,21 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SetSysColors : lpaRgbValues...UInt32* 
 Windows.Win32.UI.WindowsAndMessaging.Apis.UpdateLayeredWindow : crKey...UInt32 => COLORREF
 Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO.crKey...System.UInt32 => Windows.Win32.Foundation.COLORREF
 Windows.Win32.UI.Controls.DTTOPTS_FLAGS added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_APPLYOVERLAY added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_BORDERCOLOR added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_BORDERSIZE added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_CALCRECT added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_CALLBACK added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_COLORPROP added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_COMPOSITED added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_FONTPROP added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_GLOWSIZE added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_SHADOWCOLOR added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_SHADOWOFFSET added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_SHADOWTYPE added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_STATEID added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_TEXTCOLOR added
+Windows.Win32.UI.Controls.DTTOPTS_FLAGS.DTT_VALIDBITS added
 Windows.Win32.UI.Controls.DTTOPTS.dwFlags...System.UInt32 => Windows.Win32.UI.Controls.DTTOPTS_FLAGS
 # LOGFONT enum changes
 Windows.Win32.Graphics.Gdi.Apis.ANSI_CHARSET removed
@@ -211,7 +226,42 @@ Windows.Win32.Graphics.Gdi.Apis.THAI_CHARSET removed
 Windows.Win32.Graphics.Gdi.Apis.TURKISH_CHARSET removed
 Windows.Win32.Graphics.Gdi.Apis.VIETNAMESE_CHARSET removed
 Windows.Win32.Graphics.Gdi.FONT_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.ANSI_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.ARABIC_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.BALTIC_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.CHINESEBIG5_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.DEFAULT_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.EASTEUROPE_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.GB2312_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.GREEK_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.HANGEUL_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.HANGUL_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.HEBREW_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.JOHAB_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.MAC_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.OEM_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.RUSSIAN_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.SHIFTJIS_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.SYMBOL_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.THAI_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.TURKISH_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.VIETNAMESE_CHARSET added
 Windows.Win32.Graphics.Gdi.FONT_WEIGHT added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_BLACK added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_BOLD added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_DEMIBOLD added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_DONTCARE added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_EXTRABOLD added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_EXTRALIGHT added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_HEAVY added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_LIGHT added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_MEDIUM added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_NORMAL added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_REGULAR added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_SEMIBOLD added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_THIN added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_ULTRABOLD added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_ULTRALIGHT added
 Windows.Win32.Graphics.Gdi.LOGFONTA.lfClipPrecision...System.Byte => Windows.Win32.Graphics.Gdi.FONT_CLIP_PRECISION
 Windows.Win32.Graphics.Gdi.LOGFONTA.lfOutPrecision...System.Byte => Windows.Win32.Graphics.Gdi.FONT_OUTPUT_PRECISION
 Windows.Win32.Graphics.Gdi.LOGFONTA.lfPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY
@@ -236,6 +286,10 @@ Windows.Win32.UI.Controls.Apis.GetThemeSysBool : iBoolId...Int32 => THEME_PROPER
 Windows.Win32.UI.Controls.Apis.GetThemeSysInt : iIntId...Int32 => THEME_PROPERTY_SYMBOL_ID
 Windows.Win32.UI.Controls.Apis.SetThemeAppProperties : dwFlags...UInt32 => SET_THEME_APP_PROPERTIES_FLAGS
 Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS added
+Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS.ALLOW_CONTROLS added
+Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS.ALLOW_NONCLIENT added
+Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS.ALLOW_WEBCONTENT added
+Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS.VALIDBITS added
 # Fixes to R2_MODE and TEXT_ALIGN_OPTIONS
 Windows.Win32.Graphics.Gdi.Apis.GetROP2 : return...Int32 => R2_MODE
 Windows.Win32.Graphics.Gdi.Apis.GetTextAlign : return...UInt32 => TEXT_ALIGN_OPTIONS

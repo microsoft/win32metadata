@@ -1022,12 +1022,14 @@ namespace WinmdUtilsProgram
 
             CompareAttributes(field1.Name, field1.GetAttributes(), field2.GetAttributes(), writer);
 
+            string fullField1Name = GetFullMemberName(field1);
+
             // Using the ReflectionName gets us the name of the type in
             // metadata. The FullName might not be fully resolvable by the
             // library because it doesn't know how to resolve arch-specific types
             if (field1.Type.ReflectionName != field2.Type.ReflectionName)
             {
-                writer.WriteDifference($"{field1.DeclaringType.FullName}.{field1.Name}...{field1.Type.ReflectionName} => {field2.Type.ReflectionName}");
+                writer.WriteDifference($"{fullField1Name}...{field1.Type.ReflectionName} => {field2.Type.ReflectionName}");
             }
             else
             {
@@ -1035,7 +1037,7 @@ namespace WinmdUtilsProgram
                 {
                     if (!field2.IsConst)
                     {
-                        writer.WriteDifference($"winmd1: {field1.Name} const, winmd2: not");
+                        writer.WriteDifference($"winmd1: {fullField1Name} const, winmd2: not");
                     }
                     else
                     {
@@ -1044,12 +1046,12 @@ namespace WinmdUtilsProgram
 
                         if (fieldVal1 == null)
                         {
-                            writer.WriteDifference($"winmd1: {field1.Name} is a constant with a null value");
+                            writer.WriteDifference($"winmd1: {fullField1Name} is a constant with a null value");
                         }
 
                         if (fieldVal2 == null)
                         {
-                            writer.WriteDifference($"winmd2: {field2.Name} is a constant with a null value");
+                            writer.WriteDifference($"winmd2: {fullField1Name} is a constant with a null value");
                         }
 
                         string val1 = fieldVal1?.ToString();
@@ -1057,7 +1059,7 @@ namespace WinmdUtilsProgram
 
                         if (val1 != val2)
                         {
-                            writer.WriteDifference($"winmd1: {field1.Name} = {val1}, winmd2 = {val2}");
+                            writer.WriteDifference($"winmd1: {fullField1Name} = {val1}, winmd2 = {val2}");
                         }
                     }
                 }
@@ -1065,7 +1067,7 @@ namespace WinmdUtilsProgram
                 {
                     if (!field2.IsConst)
                     {
-                        writer.WriteDifference($"winmd1: {field1.Name} not const, winmd2: const");
+                        writer.WriteDifference($"winmd1: {fullField1Name} not const, winmd2: const");
                     }
                 }
             }
@@ -1496,6 +1498,13 @@ namespace WinmdUtilsProgram
                     if (type2 == null)
                     {
                         writer.WriteDifference($"{type1Name} removed");
+                        if (type1.Kind == TypeKind.Enum)
+                        {
+                            foreach (var m in type1.Fields.Where(f => f.IsConst))
+                            {
+                                writer.WriteDifference($"{GetFullMemberName(m)} removed");
+                            }
+                        }
                     }
 
                     continue;
@@ -1523,6 +1532,13 @@ namespace WinmdUtilsProgram
                 if (type1 == null)
                 {
                     writer.WriteDifference($"{type2FullName} added");
+                    if (type2.Kind == TypeKind.Enum)
+                    {
+                        foreach (var m in type2.Fields.Where(f => f.IsConst))
+                        {
+                            writer.WriteDifference($"{GetFullMemberName(m)} added");
+                        }
+                    }
                 }
             }
 
