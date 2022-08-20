@@ -174,7 +174,7 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.UpdateLayeredWindow : crKey...UInt32 =
 Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO.crKey...System.UInt32 => Windows.Win32.Foundation.COLORREF
 Windows.Win32.UI.Controls.DTTOPTS_FLAGS added
 Windows.Win32.UI.Controls.DTTOPTS.dwFlags...System.UInt32 => Windows.Win32.UI.Controls.DTTOPTS_FLAGS
-# uxtheme enum changes
+# LOGFONT enum changes
 Windows.Win32.Graphics.Gdi.Apis.ANSI_CHARSET removed
 Windows.Win32.Graphics.Gdi.Apis.ARABIC_CHARSET removed
 Windows.Win32.Graphics.Gdi.Apis.BALTIC_CHARSET removed
@@ -223,6 +223,7 @@ Windows.Win32.Graphics.Gdi.LOGFONTW.lfOutPrecision...System.Byte => Windows.Win3
 Windows.Win32.Graphics.Gdi.LOGFONTW.lfPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY
 Windows.Win32.Graphics.Gdi.LOGFONTW.lfQuality...System.Byte => Windows.Win32.Graphics.Gdi.FONT_QUALITY
 Windows.Win32.Graphics.Gdi.LOGFONTW.lfWeight...System.Int32 => Windows.Win32.Graphics.Gdi.FONT_WEIGHT
+# uxtheme enum changes
 Windows.Win32.UI.Controls.Apis.GetThemeAppProperties : return...UInt32 => SET_THEME_APP_PROPERTIES_FLAGS
 Windows.Win32.UI.Controls.Apis.GetThemeColor : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
 Windows.Win32.UI.Controls.Apis.GetThemeEnumValue : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
