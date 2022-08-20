@@ -30,6 +30,75 @@
       {
         "method": "GetThemeSysColorBrush",
         "parameter": "iColorId"
+      },
+      {
+        "method": "GetThemeColor",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeSysBool",
+        "parameter": "iBoolId"
+      },
+      {
+        "method": "GetThemeSysInt",
+        "parameter": "iIntId"
+      },
+      {
+        "method": "GetThemeInt",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeIntList",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemePosition",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeMargins",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeFilename",
+        "parameter": "iPropId"
+      },
+      {
+        "method": "GetThemeEnumValue",
+        "parameter": "iPropId"
+      }
+    ]
+  },
+  {
+    "name": "SET_THEME_APP_PROPERTIES_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "members": [
+      {
+        "name": "ALLOW_NONCLIENT",
+        "value": "(1 << 0)"
+      },
+      {
+        "name": "ALLOW_CONTROLS",
+        "value": "(1 << 1)"
+      },
+      {
+        "name": "ALLOW_WEBCONTENT",
+        "value": "(1 << 2)"
+      },
+      {
+        "name": "VALIDBITS",
+        "value": "(ALLOW_NONCLIENT|ALLOW_CONTROLS|ALLOW_WEBCONTENT)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SetThemeAppProperties",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "GetThemeAppProperties",
+        "parameter": "return"
       }
     ]
   },
@@ -7346,6 +7415,14 @@
       {
         "method": "CreateFontA",
         "parameter": "iClipPrecision"
+      },
+      {
+        "struct": "LOGFONTW",
+        "field": "lfClipPrecision"
+      },
+      {
+        "struct": "LOGFONTA",
+        "field": "lfClipPrecision"
       }
     ]
   },
@@ -13202,6 +13279,142 @@
       {
         "method": "CreateFontA",
         "parameter": "iOutPrecision"
+      },
+      {
+        "struct": "LOGFONTW",
+        "field": "lfOutPrecision"
+      },
+      {
+        "struct": "LOGFONTA",
+        "field": "lfOutPrecision"
+      }
+    ]
+  },
+  {
+    "name": "FONT_WEIGHT",
+    "autoPopulate": {
+      "header": "wingdi.h",
+      "filter": "FW_"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LOGFONTW",
+        "field": "lfWeight"
+      },
+      {
+        "struct": "LOGFONTA",
+        "field": "lfWeight"
+      },
+      {
+        "struct": "DLGTEMPLATEEX",
+        "field": "lfWeight"
+      },
+      {
+        "method": "put_Weight",
+        "parameter": "weight"
+      },
+      {
+        "method": "get_Weight",
+        "parameter": "pWeight"
+      }
+    ]
+  },
+  {
+    "name": "FONT_CHARSET",
+    "autoPopulate": {
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "ANSI_CHARSET",
+        "value": "0"
+      },
+      {
+        "name": "DEFAULT_CHARSET",
+        "value": "1"
+      },
+      {
+        "name": "SYMBOL_CHARSET",
+        "value": "2"
+      },
+      {
+        "name": "SHIFTJIS_CHARSET",
+        "value": "128"
+      },
+      {
+        "name": "HANGEUL_CHARSET",
+        "value": "129"
+      },
+      {
+        "name": "HANGUL_CHARSET",
+        "value": "129"
+      },
+      {
+        "name": "GB2312_CHARSET",
+        "value": "134"
+      },
+      {
+        "name": "CHINESEBIG5_CHARSET",
+        "value": "136"
+      },
+      {
+        "name": "OEM_CHARSET",
+        "value": "255"
+      },
+      {
+        "name": "JOHAB_CHARSET",
+        "value": "130"
+      },
+      {
+        "name": "HEBREW_CHARSET",
+        "value": "177"
+      },
+      {
+        "name": "ARABIC_CHARSET",
+        "value": "178"
+      },
+      {
+        "name": "GREEK_CHARSET",
+        "value": "161"
+      },
+      {
+        "name": "TURKISH_CHARSET",
+        "value": "162"
+      },
+      {
+        "name": "VIETNAMESE_CHARSET",
+        "value": "163"
+      },
+      {
+        "name": "THAI_CHARSET",
+        "value": "222"
+      },
+      {
+        "name": "EASTEUROPE_CHARSET",
+        "value": "238"
+      },
+      {
+        "name": "RUSSIAN_CHARSET",
+        "value": "204"
+      },
+      {
+        "name": "MAC_CHARSET",
+        "value": "77"
+      },
+      {
+        "name": "BALTIC_CHARSET",
+        "value": "186"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "LOGFONTW",
+        "field": "lfCharSet"
+      },
+      {
+        "struct": "DLGTEMPLATEEX",
+        "field": "charset"
       }
     ]
   },
@@ -13862,6 +14075,14 @@
       {
         "method": "CreateFontW",
         "parameter": "iQuality"
+      },
+      {
+        "struct": "LOGFONTW",
+        "field": "lfQuality"
+      },
+      {
+        "method": "LOGFONTA",
+        "parameter": "lfQuality"
       }
     ]
   },
@@ -17593,6 +17814,14 @@
       {
         "method": "CreateFontA",
         "parameter": "iPitchAndFamily"
+      },
+      {
+        "struct": "LOGFONTW",
+        "field": "lfPitchAndFamily"
+      },
+      {
+        "method": "LOGFONTA",
+        "parameter": "lfPitchAndFamily"
       }
     ]
   },

@@ -174,7 +174,70 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.UpdateLayeredWindow : crKey...UInt32 =
 Windows.Win32.UI.WindowsAndMessaging.UPDATELAYEREDWINDOWINFO.crKey...System.UInt32 => Windows.Win32.Foundation.COLORREF
 Windows.Win32.UI.Controls.DTTOPTS_FLAGS added
 Windows.Win32.UI.Controls.DTTOPTS.dwFlags...System.UInt32 => Windows.Win32.UI.Controls.DTTOPTS_FLAGS
+# LOGFONT enum changes
+Windows.Win32.Graphics.Gdi.Apis.ANSI_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.ARABIC_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.BALTIC_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.CHINESEBIG5_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.DEFAULT_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.EASTEUROPE_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.FW_BLACK removed
+Windows.Win32.Graphics.Gdi.Apis.FW_BOLD removed
+Windows.Win32.Graphics.Gdi.Apis.FW_DEMIBOLD removed
+Windows.Win32.Graphics.Gdi.Apis.FW_DONTCARE removed
+Windows.Win32.Graphics.Gdi.Apis.FW_EXTRABOLD removed
+Windows.Win32.Graphics.Gdi.Apis.FW_EXTRALIGHT removed
+Windows.Win32.Graphics.Gdi.Apis.FW_HEAVY removed
+Windows.Win32.Graphics.Gdi.Apis.FW_LIGHT removed
+Windows.Win32.Graphics.Gdi.Apis.FW_MEDIUM removed
+Windows.Win32.Graphics.Gdi.Apis.FW_NORMAL removed
+Windows.Win32.Graphics.Gdi.Apis.FW_REGULAR removed
+Windows.Win32.Graphics.Gdi.Apis.FW_SEMIBOLD removed
+Windows.Win32.Graphics.Gdi.Apis.FW_THIN removed
+Windows.Win32.Graphics.Gdi.Apis.FW_ULTRABOLD removed
+Windows.Win32.Graphics.Gdi.Apis.FW_ULTRALIGHT removed
+Windows.Win32.Graphics.Gdi.Apis.GB2312_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.GREEK_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.HANGEUL_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.HANGUL_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.HEBREW_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.JOHAB_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.MAC_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.OEM_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.RUSSIAN_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.SHIFTJIS_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.SYMBOL_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.THAI_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.TURKISH_CHARSET removed
+Windows.Win32.Graphics.Gdi.Apis.VIETNAMESE_CHARSET removed
+Windows.Win32.Graphics.Gdi.FONT_CHARSET added
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT added
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfClipPrecision...System.Byte => Windows.Win32.Graphics.Gdi.FONT_CLIP_PRECISION
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfOutPrecision...System.Byte => Windows.Win32.Graphics.Gdi.FONT_OUTPUT_PRECISION
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfQuality...System.Byte => Windows.Win32.Graphics.Gdi.FONT_QUALITY
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfWeight...System.Int32 => Windows.Win32.Graphics.Gdi.FONT_WEIGHT
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfCharSet...System.Byte => Windows.Win32.Graphics.Gdi.FONT_CHARSET
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfClipPrecision...System.Byte => Windows.Win32.Graphics.Gdi.FONT_CLIP_PRECISION
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfOutPrecision...System.Byte => Windows.Win32.Graphics.Gdi.FONT_OUTPUT_PRECISION
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfQuality...System.Byte => Windows.Win32.Graphics.Gdi.FONT_QUALITY
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfWeight...System.Int32 => Windows.Win32.Graphics.Gdi.FONT_WEIGHT
+# uxtheme enum changes
+Windows.Win32.UI.Controls.Apis.GetThemeAppProperties : return...UInt32 => SET_THEME_APP_PROPERTIES_FLAGS
+Windows.Win32.UI.Controls.Apis.GetThemeColor : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeEnumValue : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeFilename : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeInt : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeIntList : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeMargins : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemePosition : iPropId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeSysBool : iBoolId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.GetThemeSysInt : iIntId...Int32 => THEME_PROPERTY_SYMBOL_ID
+Windows.Win32.UI.Controls.Apis.SetThemeAppProperties : dwFlags...UInt32 => SET_THEME_APP_PROPERTIES_FLAGS
+Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS added
 # Fixes to R2_MODE and TEXT_ALIGN_OPTIONS
 Windows.Win32.Graphics.Gdi.Apis.GetROP2 : return...Int32 => R2_MODE
 Windows.Win32.Graphics.Gdi.Apis.GetTextAlign : return...UInt32 => TEXT_ALIGN_OPTIONS
 Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS :  => [Flags]
+
