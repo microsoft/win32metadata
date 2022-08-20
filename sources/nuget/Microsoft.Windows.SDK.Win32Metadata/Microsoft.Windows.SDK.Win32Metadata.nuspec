@@ -12,13 +12,14 @@
     <releaseNotes>https://github.com/microsoft/win32metadata/releases/tag/v$version$</releaseNotes>
     <projectUrl>https://github.com/microsoft/win32metadata</projectUrl>
     <tags>Win32 Metadata</tags>
-    <licenseUrl>https://aka.ms/WinSDKLicenseURL</licenseUrl>
+    <license type="file">sdk_license.txt</license>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <icon>images\windows.png</icon>
     <repository type="git" url="https://github.com/microsoft/win32metadata.git" />
   </metadata>
 
   <files>
+      <file src="licenses\sdk_license.txt" target=""/>
       <file src="images\windows.png" target="images"/>
 
       <file src="bin\Windows.Win32.winmd" target=""/>
