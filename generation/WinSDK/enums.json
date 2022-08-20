@@ -3930,6 +3930,7 @@
     "type": "uint",
     "namespace": "Windows.Win32.Graphics.Gdi",
     "name": "TEXT_ALIGN_OPTIONS",
+    "flags": true,
     "members": [
       {
         "name": "TA_NOUPDATECP",
@@ -4005,6 +4006,10 @@
       {
         "struct": "RICHEDIT_IMAGE_PARAMETERS",
         "field": "Type"
+      },
+      {
+        "method": "GetTextAlign",
+        "parameter": "return"
       },
       {
         "method": "SetTextAlign",
@@ -14936,8 +14941,16 @@
   },
   {
     "addUsesTo": "R2_MODE",
+    "autoPopulate": {
+      "filter": "R2_",
+      "header": "wingdi.h"
+    },
     "members": [],
     "uses": [
+      {
+        "method": "GetROP2",
+        "parameter": "return"
+      },
       {
         "method": "SetROP2",
         "parameter": "rop2"

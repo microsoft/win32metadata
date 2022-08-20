@@ -236,3 +236,8 @@ Windows.Win32.UI.Controls.Apis.GetThemeSysBool : iBoolId...Int32 => THEME_PROPER
 Windows.Win32.UI.Controls.Apis.GetThemeSysInt : iIntId...Int32 => THEME_PROPERTY_SYMBOL_ID
 Windows.Win32.UI.Controls.Apis.SetThemeAppProperties : dwFlags...UInt32 => SET_THEME_APP_PROPERTIES_FLAGS
 Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS added
+# Fixes to R2_MODE and TEXT_ALIGN_OPTIONS
+Windows.Win32.Graphics.Gdi.Apis.GetROP2 : return...Int32 => R2_MODE
+Windows.Win32.Graphics.Gdi.Apis.GetTextAlign : return...UInt32 => TEXT_ALIGN_OPTIONS
+Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS :  => [Flags]
+
