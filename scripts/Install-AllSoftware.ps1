@@ -1,5 +1,7 @@
 # 1. Make sure the Microsoft App Installer is installed:
 #    https://www.microsoft.com/p/app-installer/9nblggh4nns1
+# 2. Run this script as administrator. If running scripts is blocked, you can temporarily unblock them by running 
+#    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
 
 Write-Output "Installing apps"
 $apps = @(
