@@ -12,11 +12,11 @@ $apps = @(
 Foreach ($app in $apps) {
     $listApp = winget list --exact -q $app.packageIDs
     if (![String]::Join("", $listApp).Contains($app.packageID)) {
-        Write-output "Installing: " $app.packageID
+        Write-Output "Installing: $($app.packageID)"
         winget install -h $app.packageID -s winget 
     }
     else {
-        Write-output "Skipping: " $app.packageID " (already installed)"
+        Write-Output "Skipping: $($app.packageID) (already installed)"
     }
 }
 
