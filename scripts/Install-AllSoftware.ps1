@@ -3,7 +3,6 @@
 
 Write-Output "Installing apps"
 $apps = @(
-	@{packageID = "GitHub.GitLFS" },
 	@{packageID = "icsharpcode.ILSpy" },
 	@{packageID = "Microsoft.DotNet.SDK.6" },
    	@{packageID = "Microsoft.VisualStudioCode" }
