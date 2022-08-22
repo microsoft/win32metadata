@@ -30632,5 +30632,65 @@
         "field": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "BRUSH_STYLE",
+    "flags": "false",
+    "members": [
+      {
+        "name": "BS_SOLID",
+        "value": 0
+      },
+      {
+        "name": "BS_NULL",
+        "value": 1
+      },
+      {
+        "name": "BS_HOLLOW",
+        "value": "BS_NULL"
+      },
+      {
+        "name": "BS_HATCHED",
+        "value": 2
+      },
+      {
+        "name": "BS_PATTERN",
+        "value": 3
+      },
+      {
+        "name": "BS_INDEXED",
+        "value": 4
+      },
+      {
+        "name": "BS_DIBPATTERN",
+        "value": 5
+      },
+      {
+        "name": "BS_DIBPATTERNPT",
+        "value": 6
+      },
+      {
+        "name": "BS_PATTERN8X8",
+        "value": 7
+      },
+      {
+        "name": "BS_DIBPATTERN8X8",
+        "value": 8
+      },
+      {
+        "name": "BS_MONOPATTERN",
+        "value": 9
+      }
+    ],
+    "uses": [
+      {
+        "struct": "tagLOGBRUSH",
+        "field": "lbStyle"
+      },
+      {
+        "struct": "tagLOGBRUSH32",
+        "field": "lbStyle"
+      }
+    ]
   }
 ]

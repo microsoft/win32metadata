@@ -297,3 +297,28 @@ Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS :  => [Flags]
 # Removing inaccurate NativeArrayInfo from FormatMessage
 Windows.Win32.System.Diagnostics.Debug.Apis.FormatMessageA : lpBuffer : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
 Windows.Win32.System.Diagnostics.Debug.Apis.FormatMessageW : lpBuffer : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
+Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN removed
+Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN8X8 removed
+Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERNPT removed
+Windows.Win32.Graphics.Gdi.Apis.BS_HATCHED removed
+Windows.Win32.Graphics.Gdi.Apis.BS_HOLLOW removed
+Windows.Win32.Graphics.Gdi.Apis.BS_INDEXED removed
+Windows.Win32.Graphics.Gdi.Apis.BS_MONOPATTERN removed
+Windows.Win32.Graphics.Gdi.Apis.BS_NULL removed
+Windows.Win32.Graphics.Gdi.Apis.BS_PATTERN removed
+Windows.Win32.Graphics.Gdi.Apis.BS_PATTERN8X8 removed
+Windows.Win32.Graphics.Gdi.Apis.BS_SOLID removed
+Windows.Win32.Graphics.Gdi.LOGBRUSH.lbStyle...System.UInt32 => Windows.Win32.System.SystemServices.BRUSH_STYLE
+Windows.Win32.Graphics.Gdi.LOGBRUSH32.lbStyle...System.UInt32 => Windows.Win32.System.SystemServices.BRUSH_STYLE
+Windows.Win32.System.SystemServices.BRUSH_STYLE added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERN added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERN8X8 added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERNPT added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_HATCHED added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_HOLLOW added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_INDEXED added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_MONOPATTERN added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_NULL added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN8X8 added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_SOLID added
