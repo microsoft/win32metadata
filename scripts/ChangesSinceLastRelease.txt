@@ -294,4 +294,6 @@ Windows.Win32.UI.Controls.SET_THEME_APP_PROPERTIES_FLAGS.VALIDBITS added
 Windows.Win32.Graphics.Gdi.Apis.GetROP2 : return...Int32 => R2_MODE
 Windows.Win32.Graphics.Gdi.Apis.GetTextAlign : return...UInt32 => TEXT_ALIGN_OPTIONS
 Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS :  => [Flags]
-
+# Removing inaccurate NativeArrayInfo from FormatMessage
+Windows.Win32.System.Diagnostics.Debug.Apis.FormatMessageA : lpBuffer : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
+Windows.Win32.System.Diagnostics.Debug.Apis.FormatMessageW : lpBuffer : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
