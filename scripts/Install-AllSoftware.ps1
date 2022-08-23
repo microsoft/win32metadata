@@ -19,11 +19,9 @@ $policy = Get-ExecutionPolicy
 if ($policy -ne "Unrestricted"){
     throw "Please set the execution policy to Unrestricted. You can temporarily unblock them by running
     Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process"
-    exit 2
 }
 elseif (-not(Check-IsElevated)){
     throw "Please run this script as an administrator"
-    exit 2
  }
 else {
     Write-Output "Installing apps"
