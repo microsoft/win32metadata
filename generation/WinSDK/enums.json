@@ -3806,7 +3806,7 @@
       },
       {
         "name": "WAIT_IO_COMPLETION",
-        "value": "0x00000081"
+        "value": "0x000000C0"
       },
       {
         "name": "WAIT_TIMEOUT",
