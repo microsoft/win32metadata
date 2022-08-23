@@ -1057,10 +1057,19 @@ namespace ClangSharpSourceToWinmd
                 }
             }
 
+            SignatureCallingConvention signatureCallingConvention = SignatureCallingConvention.Default;
+
+            // If we see the special varargs name at the end, remove it and mark the method as using varargs
+            if (parameters.Count() > 0 && parameters.Last().Name == MetadataSyntaxTreeCleaner.ArgListVarName)
+            {
+                signatureCallingConvention = SignatureCallingConvention.VarArgs;
+                parameters = parameters.Take(parameters.Count() - 1);
+            }
+
             var methodSignature = new BlobBuilder();
             new BlobEncoder(methodSignature)
                 .MethodSignature(
-                    SignatureCallingConvention.Default,
+                    signatureCallingConvention,
                     0,
                     instanceMethod)
                 .Parameters(
