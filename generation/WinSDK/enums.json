@@ -14335,10 +14335,6 @@
       {
         "method": "SetBkMode",
         "parameter": "mode"
-      },
-      {
-        "method:": "GetBkMode",
-        "parameter": "return"
       }
     ]
   },
