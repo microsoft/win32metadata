@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Added COLORREF
 Windows.Win32.Data.HtmlHelp.HH_POPUP.clrBackground...System.UInt32 => Windows.Win32.Foundation.COLORREF
 Windows.Win32.Data.HtmlHelp.HH_POPUP.clrForeground...System.UInt32 => Windows.Win32.Foundation.COLORREF
@@ -298,35 +297,6 @@ Windows.Win32.Graphics.Gdi.TEXT_ALIGN_OPTIONS :  => [Flags]
 # Removing inaccurate NativeArrayInfo from FormatMessage
 Windows.Win32.System.Diagnostics.Debug.Apis.FormatMessageA : lpBuffer : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
 Windows.Win32.System.Diagnostics.Debug.Apis.FormatMessageW : lpBuffer : [NativeArrayInfo(CountParamIndex=5),Out] => [Out]
-Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN removed
-Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN8X8 removed
-Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERNPT removed
-Windows.Win32.Graphics.Gdi.Apis.BS_HATCHED removed
-Windows.Win32.Graphics.Gdi.Apis.BS_HOLLOW removed
-Windows.Win32.Graphics.Gdi.Apis.BS_INDEXED removed
-Windows.Win32.Graphics.Gdi.Apis.BS_MONOPATTERN removed
-Windows.Win32.Graphics.Gdi.Apis.BS_NULL removed
-Windows.Win32.Graphics.Gdi.Apis.BS_PATTERN removed
-Windows.Win32.Graphics.Gdi.Apis.BS_PATTERN8X8 removed
-Windows.Win32.Graphics.Gdi.Apis.BS_SOLID removed
-Windows.Win32.Graphics.Gdi.LOGBRUSH.lbStyle...System.UInt32 => Windows.Win32.System.SystemServices.BRUSH_STYLE
-Windows.Win32.Graphics.Gdi.LOGBRUSH32.lbStyle...System.UInt32 => Windows.Win32.System.SystemServices.BRUSH_STYLE
-Windows.Win32.System.SystemServices.BRUSH_STYLE added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERN added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERN8X8 added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERNPT added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_HATCHED added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_HOLLOW added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_INDEXED added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_MONOPATTERN added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_NULL added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN8X8 added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_SOLID added
-Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
-Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
-Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
-=======
 # Add .dll suffix to remaining libraries
 Windows.Win32.AI.MachineLearning.DirectML.Apis.DMLCreateDevice : [DllImport(DirectML,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows10.0.10240)] => [DllImport(DirectML.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows10.0.10240)]
 Windows.Win32.AI.MachineLearning.DirectML.Apis.DMLCreateDevice1 : [DllImport(DirectML,ExactSpelling=True,PreserveSig=False)] => [DllImport(DirectML.dll,ExactSpelling=True,PreserveSig=False)]
@@ -17325,4 +17295,32 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_Flags_ExA 
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_Flags_ExW : pDeviceID...UInt16* => PWSTR
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_FlagsA : pDeviceID...SByte* => PSTR
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_FlagsW : pDeviceID...UInt16* => PWSTR
->>>>>>> main
+#Add and modify brush and pen styles 
+Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN removed
+Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN8X8 removed
+Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERNPT removed
+Windows.Win32.Graphics.Gdi.Apis.BS_HATCHED removed
+Windows.Win32.Graphics.Gdi.Apis.BS_HOLLOW removed
+Windows.Win32.Graphics.Gdi.Apis.BS_INDEXED removed
+Windows.Win32.Graphics.Gdi.Apis.BS_MONOPATTERN removed
+Windows.Win32.Graphics.Gdi.Apis.BS_NULL removed
+Windows.Win32.Graphics.Gdi.Apis.BS_PATTERN removed
+Windows.Win32.Graphics.Gdi.Apis.BS_PATTERN8X8 removed
+Windows.Win32.Graphics.Gdi.Apis.BS_SOLID removed
+Windows.Win32.Graphics.Gdi.LOGBRUSH.lbStyle...System.UInt32 => Windows.Win32.System.SystemServices.BRUSH_STYLE
+Windows.Win32.Graphics.Gdi.LOGBRUSH32.lbStyle...System.UInt32 => Windows.Win32.System.SystemServices.BRUSH_STYLE
+Windows.Win32.System.SystemServices.BRUSH_STYLE added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERN added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERN8X8 added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERNPT added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_HATCHED added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_HOLLOW added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_INDEXED added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_MONOPATTERN added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_NULL added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN8X8 added
+Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_SOLID added
+Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
+Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
+Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
