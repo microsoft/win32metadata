@@ -1297,6 +1297,16 @@ namespace WinmdUtilsProgram
                 CompareAttributes(paramFullName, param1.GetAttributes(), param2.GetAttributes(), writer);
             }
 
+            foreach (var param2 in method2.Parameters)
+            {
+                var found = method1.Parameters.Any(p => p.Name == param2.Name);
+                if (!found)
+                {
+                    string name = !string.IsNullOrEmpty(param2.Name) ? param2.Name : param2.Type.Name;
+                    writer.WriteDifference($"{methodFullName}, param {name} added");
+                }
+            }
+
             return writer.DifferencesCount == before;
         }
 
