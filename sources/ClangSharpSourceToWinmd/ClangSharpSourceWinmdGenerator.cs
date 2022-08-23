@@ -848,6 +848,7 @@ namespace ClangSharpSourceToWinmd
                     case "char *":
                     case "const CHAR *":
                     case "const char *":
+                    case "DEVINSTID_A":
                         fixedName = Win32StringType;
                         break;
 
@@ -871,6 +872,7 @@ namespace ClangSharpSourceToWinmd
                     case "PCZZWSTR":
                     case "PNZWCH":
                     case "PCNZWCH":
+                    case "DEVINSTID_W":
                         fixedName = Win32WideStringType;
                         break;
 

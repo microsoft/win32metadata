@@ -16971,3 +16971,28 @@ Windows.Win32.Web.MsHtml.Apis.SniffStream : [DllImport(ImgUtil,ExactSpelling=Tru
 # Fixing WAIT_IO_COMPLETION
 winmd1: Windows.Win32.Foundation.WIN32_ERROR.WAIT_IO_COMPLETION = 129, winmd2 = 192
 winmd1: Windows.Win32.Networking.WinSock.WSA_ERROR.WSA_WAIT_IO_COMPLETION = 129, winmd2 = 192
+# Fix CM_* functions to use PSTR/PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Create_DevNode_ExA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Create_DevNode_ExW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Create_DevNodeA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Create_DevNodeW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_ExA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_ExW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_Size_ExA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_Size_ExW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_SizeA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_List_SizeW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_ListA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_ListW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_HW_Prof_Flags_ExA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_HW_Prof_Flags_ExW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_HW_Prof_FlagsA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_HW_Prof_FlagsW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Locate_DevNode_ExA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Locate_DevNode_ExW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Locate_DevNodeA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Locate_DevNodeW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_Flags_ExA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_Flags_ExW : pDeviceID...UInt16* => PWSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_FlagsA : pDeviceID...SByte* => PSTR
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_FlagsW : pDeviceID...UInt16* => PWSTR
