@@ -322,3 +322,6 @@ Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_NULL added
 Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN added
 Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN8X8 added
 Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_SOLID added
+Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
+Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
+Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
