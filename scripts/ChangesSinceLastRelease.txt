@@ -16968,3 +16968,6 @@ Windows.Win32.Web.MsHtml.Apis.RatingObtainQueryW : [DllImport(MSRATING,ExactSpel
 Windows.Win32.Web.MsHtml.Apis.RatingSetupUI : [DllImport(MSRATING,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSRATING.dll,ExactSpelling=True,PreserveSig=False)]
 Windows.Win32.Web.MsHtml.Apis.RatingSetupUIW : [DllImport(MSRATING,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSRATING.dll,ExactSpelling=True,PreserveSig=False)]
 Windows.Win32.Web.MsHtml.Apis.SniffStream : [DllImport(ImgUtil,ExactSpelling=True,PreserveSig=False)] => [DllImport(ImgUtil.dll,ExactSpelling=True,PreserveSig=False)]
+# Fixing WAIT_IO_COMPLETION
+winmd1: Windows.Win32.Foundation.WIN32_ERROR.WAIT_IO_COMPLETION = 129, winmd2 = 192
+winmd1: Windows.Win32.Networking.WinSock.WSA_ERROR.WSA_WAIT_IO_COMPLETION = 129, winmd2 = 192
