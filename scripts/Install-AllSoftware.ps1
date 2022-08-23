@@ -3,13 +3,37 @@
 # 2. Run this script as administrator. If running scripts is blocked, you can temporarily unblock them by running 
 #    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
 
-Write-Output "Installing apps"
-$apps = @(
-	@{packageID = "icsharpcode.ILSpy" },
-	@{packageID = "Microsoft.DotNet.SDK.6" },
-   	@{packageID = "Microsoft.VisualStudioCode" }
-);
-Foreach ($app in $apps) {
+function Check-IsElevated
+ {
+    $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
+    $p = New-Object System.Security.Principal.WindowsPrincipal($id)
+    if ($p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) { 
+        Write-Output $true 
+    }      
+    else { 
+        Write-Output $false 
+    }   
+ }
+
+$policy = Get-ExecutionPolicy
+if ($policy -ne "Unrestricted"){
+    throw "Please set the execution policy to Unrestricted. You can temporarily unblock them by running
+    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process"
+    exit 2
+}
+elseif (-not(Check-IsElevated)){
+    throw "Please run this script as an administrator"
+    exit 2
+ }
+else {
+    Write-Output "Installing apps"
+    $apps = @(
+    @{packageID = "icsharpcode.ILSpy" },
+    @{packageID = "Microsoft.DotNet.SDK.6" },
+    @{packageID = "Microsoft.VisualStudioCode" }
+    );
+
+    Foreach ($app in $apps) {
     $listApp = winget list --exact -q $app.packageIDs
     if (![String]::Join("", $listApp).Contains($app.packageID)) {
         Write-Output "Installing: $($app.packageID)"
@@ -18,6 +42,8 @@ Foreach ($app in $apps) {
     else {
         Write-Output "Skipping: $($app.packageID) (already installed)"
     }
-}
+    }
 
-& "$PSScriptRoot\Get-VSPath.ps1" | Out-Null 
+    & "$PSScriptRoot\Get-VSPath.ps1" | Out-Null 
+
+}
