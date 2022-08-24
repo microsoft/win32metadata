@@ -166,9 +166,6 @@ jobs:
       arguments: '-assetsScrapedSeparately'
       pwsh: true
 
-  - publish: 'bin'
-    artifact: 'bin'
-
   - task: EsrpCodeSigning@1
     displayName: 'Authenticode Sign Binaries in Metadata package'
     inputs:
