@@ -14335,6 +14335,10 @@
       {
         "method": "SetBkMode",
         "parameter": "mode"
+      },
+      {
+        "method": "GetBkMode",
+        "parameter": "return"
       }
     ]
   },
@@ -19513,6 +19517,10 @@
       {
         "method": "SetMapMode",
         "parameter": "iMode"
+      },
+      {
+        "method": "GetMapMode",
+        "parameter": "return"
       }
     ]
   },

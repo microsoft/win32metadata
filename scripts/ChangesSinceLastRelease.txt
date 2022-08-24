@@ -17324,3 +17324,6 @@ Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_SOLID added
 Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
+#Modify return type for GetBKMode and GetMapMode
+Windows.Win32.Graphics.Gdi.Apis.GetBkMode : return...Int32 => BACKGROUND_MODE
+Windows.Win32.Graphics.Gdi.Apis.GetMapMode : return...Int32 => HDC_MAP_MODE
