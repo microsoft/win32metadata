@@ -17324,6 +17324,18 @@ Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_SOLID added
 Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
-#Modify return type for GetBKMode and GetMapMode
+#Modify Wingdi.h related enums
 Windows.Win32.Graphics.Gdi.Apis.GetBkMode : return...Int32 => BACKGROUND_MODE
 Windows.Win32.Graphics.Gdi.Apis.GetMapMode : return...Int32 => HDC_MAP_MODE
+Windows.Win32.Graphics.Gdi.EMRMODIFYWORLDTRANSFORM.iMode...System.UInt32 => Windows.Win32.Graphics.Gdi.MODIFY_WORLD_TRANSFORM_MODE
+Windows.Win32.Graphics.Gdi.EMREXTSELECTCLIPRGN.iMode...System.UInt32 => Windows.Win32.Graphics.Gdi.RGN_COMBINE_MODE
+Windows.Win32.Graphics.Gdi.Apis.TMPF_DEVICE removed
+Windows.Win32.Graphics.Gdi.Apis.TMPF_FIXED_PITCH removed
+Windows.Win32.Graphics.Gdi.Apis.TMPF_TRUETYPE removed
+Windows.Win32.Graphics.Gdi.Apis.TMPF_VECTOR removed
+Windows.Win32.Graphics.Gdi.TEXTMETRICW.tmPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.TMPF_FLAGS
+Windows.Win32.Graphics.Gdi.TMPF_FLAGS added
+Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_DEVICE added
+Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_FIXED_PITCH added
+Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_TRUETYPE added
+Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_VECTOR added
