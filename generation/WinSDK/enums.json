@@ -247,7 +247,16 @@
       "header": "commdlg.h"
     },
     "members": [],
-    "uses": []
+    "uses": [
+      {
+        "struct": "CHOOSECOLORW",
+        "field": "Flags"
+      },
+      {
+        "struct": "CHOOSECOLORA",
+        "field": "Flags"
+      }
+    ]
   },
   {
     "name": "CLIPBOARD_FORMATS",
@@ -30745,6 +30754,50 @@
       {
         "struct": "TEXTMETRICW",
         "field": "tmPitchAndFamily"
+      }
+    ]
+  },
+  {
+    "name": "BI_COMPRESSION",
+    "flags": "true",
+    "members": [
+      {
+        "name": "BI_RGB",
+        "value": 0
+      },
+      {
+        "name": "BI_RLE8",
+        "value": 1
+      },
+      {
+        "name": "BI_RLE4",
+        "value": 2
+      },
+      {
+        "name": "BI_BITFIELDS",
+        "value": 3
+      },
+      {
+        "name": "BI_JPEG",
+        "value": 4
+      },
+      {
+        "name": "BI_PNG",
+        "value": 5
+      }
+    ],
+    "uses": [
+      {
+        "struct": "BITMAPV5HEADER",
+        "field": "bV5Compression"
+      },
+      {
+        "struct": "BITMAPINFOHEADER",
+        "field": "biCompression"
+      },
+      {
+        "struct": "BITMAPV4HEADER",
+        "field": "bV4V4Compression"
       }
     ]
   }

@@ -17295,7 +17295,7 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_Flags_ExA 
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_Flags_ExW : pDeviceID...UInt16* => PWSTR
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_FlagsA : pDeviceID...SByte* => PSTR
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_FlagsW : pDeviceID...UInt16* => PWSTR
-#Add and modify brush and pen styles 
+#Add and modify brush and pen styles enums
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN removed
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN8X8 removed
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERNPT removed
@@ -17324,7 +17324,7 @@ Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_SOLID added
 Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
-#Modify Wingdi.h related enums
+#More modifying Wingdi.h related enums
 Windows.Win32.Graphics.Gdi.Apis.GetBkMode : return...Int32 => BACKGROUND_MODE
 Windows.Win32.Graphics.Gdi.Apis.GetMapMode : return...Int32 => HDC_MAP_MODE
 Windows.Win32.Graphics.Gdi.EMRMODIFYWORLDTRANSFORM.iMode...System.UInt32 => Windows.Win32.Graphics.Gdi.MODIFY_WORLD_TRANSFORM_MODE
@@ -17340,3 +17340,43 @@ Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_DEVICE added
 Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_FIXED_PITCH added
 Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_TRUETYPE added
 Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_VECTOR added
+# ChooseColor Flags Added
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_ANYCOLOR removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_ENABLEHOOK removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_ENABLETEMPLATE removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_ENABLETEMPLATEHANDLE removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_FULLOPEN removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_PREVENTFULLOPEN removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_RGBINIT removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_SHOWHELP removed
+Windows.Win32.System.SystemServices.CHOOSECOLOR_FLAGS.CC_SOLIDCOLOR removed
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_ANYCOLOR added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_ENABLEHOOK added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_ENABLETEMPLATE added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_ENABLETEMPLATEHANDLE added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_FULLOPEN added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_PREVENTFULLOPEN added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_RGBINIT added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_SHOWHELP added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_SOLIDCOLOR added
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORA.Flags...System.UInt32 => Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORW.Flags...System.UInt32 => Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS
+# BiCompression Enum Added
+Windows.Win32.Graphics.Gdi.Apis.BI_BITFIELDS removed
+Windows.Win32.Graphics.Gdi.Apis.BI_JPEG removed
+Windows.Win32.Graphics.Gdi.Apis.BI_PNG removed
+Windows.Win32.Graphics.Gdi.Apis.BI_RGB removed
+Windows.Win32.Graphics.Gdi.Apis.BI_RLE4 removed
+Windows.Win32.Graphics.Gdi.Apis.BI_RLE8 removed
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION added
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_BITFIELDS added
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_JPEG added
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_PNG added
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_RGB added
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_RLE4 added
+Windows.Win32.Graphics.Gdi.BI_COMPRESSION.BI_RLE8 added
+Windows.Win32.Graphics.Gdi.BITMAPINFOHEADER.biCompression...System.UInt32 => Windows.Win32.Graphics.Gdi.BI_COMPRESSION
+Windows.Win32.Graphics.Gdi.BITMAPV4HEADER.bV4V4Compression...System.UInt32 => Windows.Win32.Graphics.Gdi.BI_COMPRESSION
+Windows.Win32.Graphics.Gdi.BITMAPV5HEADER.bV5Compression...System.UInt32 => Windows.Win32.Graphics.Gdi.BI_COMPRESSION
