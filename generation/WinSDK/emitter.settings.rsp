@@ -1025,9 +1025,4 @@ PropVariantChangeType::vt=VARENUM
 WIA_PROPERTY_INFO::vt=VARENUM
 FormatMessageA::lpBuffer=[-NativeArrayInfo]
 FormatMessageW::lpBuffer=[-NativeArrayInfo]
-LOGBRUSH::lbStyle=BRUSH_STYLE
-LOGBRUSH32::lbStyle=BRUSH_STYLE
-LOGPEN::lopnStyle=PEN_STYLE
-EXTLOGPEN::elpPenStyle=PEN_STYLE
-EXTLOGPEN32::elpPenStyle=PEN_STYLE
 

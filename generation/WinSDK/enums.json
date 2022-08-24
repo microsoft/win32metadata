@@ -4375,6 +4375,18 @@
       {
         "method": "CreatePen",
         "parameter": "iStyle"
+      },
+      {
+        "struct": "LOGPEN",
+        "field": "PEN_STYLE"
+      },
+      {
+        "struct": "EXTLOGPEN",
+        "field": "PEN_STYLE"
+      },
+      {
+        "struct": "EXTLOGPEN32",
+        "field": "PEN_STYLE"
       }
     ]
   },
@@ -30651,7 +30663,6 @@
   },
   {
     "name": "BRUSH_STYLE",
-    "flags": "false",
     "members": [
       {
         "name": "BS_SOLID",
