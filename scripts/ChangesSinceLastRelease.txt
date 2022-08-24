@@ -17329,6 +17329,7 @@ Windows.Win32.Graphics.Gdi.Apis.GetBkMode : return...Int32 => BACKGROUND_MODE
 Windows.Win32.Graphics.Gdi.Apis.GetMapMode : return...Int32 => HDC_MAP_MODE
 Windows.Win32.Graphics.Gdi.EMRMODIFYWORLDTRANSFORM.iMode...System.UInt32 => Windows.Win32.Graphics.Gdi.MODIFY_WORLD_TRANSFORM_MODE
 Windows.Win32.Graphics.Gdi.EMREXTSELECTCLIPRGN.iMode...System.UInt32 => Windows.Win32.Graphics.Gdi.RGN_COMBINE_MODE
+# TPMF flags
 Windows.Win32.Graphics.Gdi.Apis.TMPF_DEVICE removed
 Windows.Win32.Graphics.Gdi.Apis.TMPF_FIXED_PITCH removed
 Windows.Win32.Graphics.Gdi.Apis.TMPF_TRUETYPE removed
