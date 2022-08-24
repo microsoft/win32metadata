@@ -1025,4 +1025,3 @@ PropVariantChangeType::vt=VARENUM
 WIA_PROPERTY_INFO::vt=VARENUM
 FormatMessageA::lpBuffer=[-NativeArrayInfo]
 FormatMessageW::lpBuffer=[-NativeArrayInfo]
-
