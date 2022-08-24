@@ -156,18 +156,12 @@ jobs:
       artifact: 'generated_arm64'
       path: 'generation\WinSDK\obj\generated\arm64'
 
-  - publish: 'generation\WinSDK\obj'
-    artifact: 'assembled_obj'
-
   - task: PowerShell@2
     displayName: Build metadata binary
     inputs:
       filePath: 'scripts\BuildMetadataBin.ps1'
       arguments: '-assetsScrapedSeparately'
       pwsh: true
-
-  - publish: 'bin'
-    artifact: 'bin'
 
   - task: EsrpCodeSigning@1
     displayName: 'Authenticode Sign Binaries in Metadata package'
