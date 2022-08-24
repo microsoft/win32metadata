@@ -4,7 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
@@ -13,7 +12,7 @@ namespace MetadataTasks
 {
     public class ScrapeHeaders : Task, ICancelableTask
     {
-        public const string ClangSharpVersion = "14.0.0-beta2";
+        public const string ClangSharpVersion = "14.0.0-rc1";
 
         private static readonly string[] allArches = new string[] { "x64", "x86", "arm64" };
 

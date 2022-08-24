@@ -12,6 +12,8 @@ namespace ClangSharpSourceToWinmd
 {
     public static class MetadataSyntaxTreeCleaner
     {
+        public const string ArgListVarName = "__arglist__";
+
         public static SyntaxTree CleanSyntaxTree(SyntaxTree tree, Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames, string filePath)
         {
             TreeRewriter treeRewriter = new TreeRewriter(remaps, enumAdditions, enumsMakeFlags, requiredNamespaces, staticLibs, nonEmptyStructs, enumMemberNames);
@@ -138,6 +140,17 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitParameter(ParameterSyntax node)
             {
+                if (node.Identifier.Text == "__arglist")
+                {
+                    // Special case __arglist to give it the type of "object" and a name we'll recognize in the emitter.
+                    // Otherwise the compilation will fail if __arglist is found in any delegates
+                    return node
+                        .WithIdentifier(SyntaxFactory.Identifier(ArgListVarName))
+                        .WithTrailingTrivia(SyntaxFactory.Space)
+                        .WithType(SyntaxFactory.ParseTypeName("object")
+                        .WithTrailingTrivia(SyntaxFactory.Space));
+                }
+
                 string fullName = GetFullNameWithoutArchSuffix(node);
 
                 if (this.GetRemapInfo(fullName, out var listAttributes, node.Type.ToString(), out string newType, out string newName))

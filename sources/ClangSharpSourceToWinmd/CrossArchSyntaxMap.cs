@@ -155,9 +155,13 @@ namespace ClangSharpSourceToWinmd
                     ret.Append(',');
                 }
 
-                var typeName = GetTypeName(param.Type.ToString(), param.AttributeLists);
-                ret.Append(typeName);
-                ret.Append(' ');
+                if (param.Type != null)
+                {
+                    var typeName = GetTypeName(param.Type.ToString(), param.AttributeLists);
+                    ret.Append(typeName);
+                    ret.Append(' ');
+                }
+
                 ret.Append(param.Identifier.ValueText);
             }
 
