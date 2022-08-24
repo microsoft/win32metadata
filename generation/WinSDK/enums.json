@@ -6901,6 +6901,10 @@
       {
         "method": "SelectClipPath",
         "parameter": "mode"
+      },
+      {
+        "method": "EMREXTSELECTCLIPRGN",
+        "parameter": "iMode"
       }
     ]
   },
@@ -7024,6 +7028,10 @@
       {
         "method": "ModifyWorldTransform",
         "parameter": "mode"
+      },
+      {
+        "method": "EMRMODIFYWORLDTRANSFORM",
+        "parameter": "iMode"
       }
     ]
   },
@@ -30698,6 +30706,34 @@
       {
         "struct": "tagLOGBRUSH32",
         "field": "lbStyle"
+      }
+    ]
+  },
+  {
+    "name": "TMPF_FLAGS",
+    "flags": "true",
+    "members": [
+      {
+        "name": "TMPF_FIXED_PITCH",
+        "value": 1
+      },
+      {
+        "name": "TMPF_VECTOR",
+        "value": 2
+      },
+      {
+        "name": "TMPF_DEVICE",
+        "value": 3
+      },
+      {
+        "name": "TMPF_TRUETYPE",
+        "value": 4
+      }
+    ],
+    "uses": [
+      {
+        "struct": "TEXTMETRICW",
+        "field": "tmPitchAndFamily"
       }
     ]
   }
