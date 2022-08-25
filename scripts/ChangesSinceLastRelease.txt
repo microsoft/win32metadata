@@ -16996,7 +16996,355 @@ Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_Flags_ExA 
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_Flags_ExW : pDeviceID...UInt16* => PWSTR
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_FlagsA : pDeviceID...SByte* => PSTR
 Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_HW_Prof_FlagsW : pDeviceID...UInt16* => PWSTR
-#Add and modify brush and pen styles enums
+# Update to latest ClangSharp
+Windows.Win32.AI.MachineLearning.WinML.MLOperatorAttribute.required...System.Boolean => System.Byte
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_interfacedescription_getdescriptionlanguages : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_interfacedescription_getdescriptiontranslationcallback : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_interfacedescription_setargdescription : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_interfacedescription_setdescription : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_interfacedescription_setdescriptionlanguage : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_interfacedescription_setdescriptiontranslationcallback : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_interfacedescription_setmemberdescription : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_interfacedescription_setpropertydescription : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_message_getcompressiontoken : [DllImport(MSAJApi,ExactSpelling=True,PreserveSig=False)] => [DllImport(MSAJApi.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_message_parseargs, param __arglist added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_msgarg_array_get, param __arglist added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_msgarg_array_set_offset, param __arglist added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_msgarg_array_set, param __arglist added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_msgarg_create_and_set, param __arglist added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_msgarg_get, param __arglist added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_msgarg_getdictelement, param __arglist added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_msgarg_set_and_stabilize, param __arglist added
+Windows.Win32.Devices.AllJoyn.Apis.alljoyn_msgarg_set, param __arglist added
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupWriteTextLog, param __arglist added
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupWriteTextLogError, param __arglist added
+Windows.Win32.Globalization.Apis.u_formatMessage, param __arglist added
+Windows.Win32.Globalization.Apis.u_formatMessageWithError, param __arglist added
+Windows.Win32.Globalization.Apis.u_parseMessage, param __arglist added
+Windows.Win32.Globalization.Apis.u_parseMessageWithError, param __arglist added
+Windows.Win32.Globalization.Apis.umsg_format, param __arglist added
+Windows.Win32.Globalization.Apis.umsg_parse, param __arglist added
+Windows.Win32.Globalization.Apis.utrace_format, param __arglist added
+Windows.Win32.Graphics.Direct2D.ID2D1Factory.GetDesktopDpi :  => [Obsolete(Deprecated. Use DisplayInformation::LogicalDpi for Windows Store Apps or GetDpiForWindow for desktop apps)]
+Windows.Win32.Media.Multimedia.Apis.AVISaveA, param __arglist added
+Windows.Win32.Media.Multimedia.Apis.AVISaveW, param __arglist added
+Windows.Win32.Networking.Ldap.Apis.ber_printf, param __arglist added
+Windows.Win32.Networking.Ldap.Apis.ber_scanf, param __arglist added
+Windows.Win32.Networking.WinSock.ADDRINFOEX2A added
+Windows.Win32.Networking.WinSock.addrinfoex2A removed
+Windows.Win32.Networking.WinSock.ADDRINFOEX2W added
+Windows.Win32.Networking.WinSock.addrinfoex2W removed
+Windows.Win32.Networking.WinSock.ADDRINFOEX3 added
+Windows.Win32.Networking.WinSock.addrinfoex3 removed
+Windows.Win32.Networking.WinSock.ADDRINFOEX4 added
+Windows.Win32.Networking.WinSock.addrinfoex4 removed
+Windows.Win32.Networking.WinSock.ADDRINFOEX5 added
+Windows.Win32.Networking.WinSock.addrinfoex5 removed
+Windows.Win32.Networking.WinSock.ADDRINFOEX6 added
+Windows.Win32.Networking.WinSock.addrinfoex6 removed
+Windows.Win32.Networking.WinSock.ADDRINFOEXA added
+Windows.Win32.Networking.WinSock.addrinfoexA removed
+Windows.Win32.Networking.WinSock.ADDRINFOEXW added
+Windows.Win32.Networking.WinSock.addrinfoexW removed
+Windows.Win32.Networking.WinSock.ADDRINFOW added
+Windows.Win32.Networking.WinSock.addrinfoW removed
+Windows.Win32.Networking.WinSock.Apis.FreeAddrInfoEx : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(FreeAddrInfoExW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.FreeAddrInfoEx : pAddrInfoEx...addrinfoexA* => ADDRINFOEXA*
+Windows.Win32.Networking.WinSock.Apis.FreeAddrInfoExW : pAddrInfoEx...addrinfoexW* => ADDRINFOEXW*
+Windows.Win32.Networking.WinSock.Apis.FreeAddrInfoW : pAddrInfo...addrinfoW* => ADDRINFOW*
+Windows.Win32.Networking.WinSock.Apis.GetAddrInfoExA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(GetAddrInfoExW(),SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.Networking.WinSock.Apis.GetAddrInfoExA : hints...addrinfoexA* => ADDRINFOEXA*
+Windows.Win32.Networking.WinSock.Apis.GetAddrInfoExA : ppResult...addrinfoexA** => ADDRINFOEXA**
+Windows.Win32.Networking.WinSock.Apis.GetAddrInfoExW : hints...addrinfoexW* => ADDRINFOEXW*
+Windows.Win32.Networking.WinSock.Apis.GetAddrInfoExW : ppResult...addrinfoexW** => ADDRINFOEXW**
+Windows.Win32.Networking.WinSock.Apis.GetAddrInfoW : pHints...addrinfoW* => ADDRINFOW*
+Windows.Win32.Networking.WinSock.Apis.GetAddrInfoW : ppResult...addrinfoW** => ADDRINFOW**
+Windows.Win32.Networking.WinSock.Apis.gethostbyaddr : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(getnameinfo() or GetNameInfoW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.gethostbyname : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(getaddrinfo() or GetAddrInfoW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.inet_addr : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(inet_pton() or InetPton(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.inet_ntoa : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(inet_ntop() or InetNtop(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.SetAddrInfoExA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(SetAddrInfoExW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAAddressToStringA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAAddressToStringW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetHostByAddr : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(getnameinfo() or GetNameInfoW(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetHostByName : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(GetAddrInfoExW(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetProtoByName : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(getprotobyname(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetProtoByNumber : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(getprotobynumber(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetServByName : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(getservbyname(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncGetServByPort : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(getservbyport(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAAsyncSelect : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAEventSelect(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSACancelAsyncRequest : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSACancelBlockingCall : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(Winsock )]
+Windows.Win32.Networking.WinSock.Apis.WSAConnectByNameA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAConnectByNameW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSADuplicateSocketA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSADuplicateSocketW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAEnumNameSpaceProvidersA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAEnumNameSpaceProvidersW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAEnumNameSpaceProvidersExA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAEnumNameSpaceProvidersW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAEnumProtocolsA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAEnumProtocolsW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAGetQOSByName : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAGetServiceClassInfoA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAGetServiceClassInfoW(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAGetServiceClassNameByClassIdA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAGetServiceClassNameByClassIdW(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAInstallServiceClassA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAInstallServiceClassW(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSAIsBlocking : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(Winsock )]
+Windows.Win32.Networking.WinSock.Apis.WSALookupServiceBeginA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSALookupServiceBeginW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSALookupServiceNextA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSALookupServiceNextW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSARecvDisconnect : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSARecv(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSARecvEx : [DllImport(MSWSOCK,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(MSWSOCK.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSARecv(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSASendDisconnect : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSASend(),SupportedOSPlatform(windows5.0)]
+Windows.Win32.Networking.WinSock.Apis.WSASetBlockingHook : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(Winsock )]
+Windows.Win32.Networking.WinSock.Apis.WSASetServiceA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSASetServiceW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSASocketA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSASocketW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAStringToAddressA : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.1)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(WSAStringToAddressW(),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Networking.WinSock.Apis.WSAUnhookBlockingHook : [DllImport(WS2_32,ExactSpelling=True,PreserveSig=False)] => [DllImport(WS2_32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(Winsock )]
+Windows.Win32.Networking.WinSock.IN6_PKTINFO_EX added
+Windows.Win32.Networking.WinSock.in6_pktinfo_ex removed
+Windows.Win32.Networking.WinSock.nd_neighbor_advert removed
+Windows.Win32.Networking.WinSock.ND_NEIGHBOR_ADVERT_HEADER added
+Windows.Win32.Networking.WinSock.nd_neighbor_solicit removed
+Windows.Win32.Networking.WinSock.ND_NEIGHBOR_SOLICIT_HEADER added
+Windows.Win32.Networking.WinSock.nd_opt_dnssl removed
+Windows.Win32.Networking.WinSock.nd_opt_hdr removed
+Windows.Win32.Networking.WinSock.nd_opt_mtu removed
+Windows.Win32.Networking.WinSock.nd_opt_prefix_info removed
+Windows.Win32.Networking.WinSock.nd_opt_rd_hdr removed
+Windows.Win32.Networking.WinSock.nd_opt_rdnss removed
+Windows.Win32.Networking.WinSock.nd_opt_route_info removed
+Windows.Win32.Networking.WinSock.ND_OPTION_DNSSL added
+Windows.Win32.Networking.WinSock.ND_OPTION_HDR added
+Windows.Win32.Networking.WinSock.ND_OPTION_MTU added
+Windows.Win32.Networking.WinSock.ND_OPTION_PREFIX_INFO added
+Windows.Win32.Networking.WinSock.ND_OPTION_RD_HDR added
+Windows.Win32.Networking.WinSock.ND_OPTION_RDNSS added
+Windows.Win32.Networking.WinSock.ND_OPTION_ROUTE_INFO added
+Windows.Win32.Networking.WinSock.nd_redirect removed
+Windows.Win32.Networking.WinSock.ND_REDIRECT_HEADER added
+Windows.Win32.Networking.WinSock.nd_router_advert removed
+Windows.Win32.Networking.WinSock.ND_ROUTER_ADVERT_HEADER added
+Windows.Win32.Networking.WinSock.WSANAMESPACE_INFOA :  => [Obsolete(WSANAMESPACE_INFO)]
+Windows.Win32.Networking.WinSock.WSANAMESPACE_INFOEXA :  => [Obsolete(WSANAMESPACE_INFOEX)]
+Windows.Win32.Networking.WinSock.WSANSCLASSINFOA :  => [Obsolete(WSANSCLASSINFO)]
+Windows.Win32.Networking.WinSock.WSAPROTOCOL_INFOA :  => [Obsolete(WSAPROTOCOL_INFO)]
+Windows.Win32.Networking.WinSock.WSAQUERYSET2A :  => [Obsolete(WSAQUERYSET2)]
+Windows.Win32.Networking.WinSock.WSAQUERYSETA :  => [Obsolete(WSAQUERYSET)]
+Windows.Win32.Networking.WinSock.WSASERVICECLASSINFOA :  => [Obsolete(WSASERVICECLASSINFO)]
+Windows.Win32.NetworkManagement.NetManagement.Apis.RouterLogEventExA, param __arglist added
+Windows.Win32.NetworkManagement.NetManagement.Apis.RouterLogEventExW, param __arglist added
+Windows.Win32.NetworkManagement.NetManagement.Apis.TracePrintfA, param __arglist added
+Windows.Win32.NetworkManagement.NetManagement.Apis.TracePrintfExA, param __arglist added
+Windows.Win32.NetworkManagement.NetManagement.Apis.TracePrintfExW, param __arglist added
+Windows.Win32.NetworkManagement.NetManagement.Apis.TracePrintfW, param __arglist added
+Windows.Win32.NetworkManagement.NetShell.Apis.PrintError, param __arglist added
+Windows.Win32.NetworkManagement.NetShell.Apis.PrintMessage, param __arglist added
+Windows.Win32.NetworkManagement.NetShell.Apis.PrintMessageFromModule, param __arglist added
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabAddContact : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabAsyncInviteContact : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabAsyncInviteEndpoint : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabCancelInvitation : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabCloseHandle : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabDeleteContact : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabDeleteEndpointData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabDeleteObject : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabEnumApplicationRegistrationInfo : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabEnumApplications : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabEnumContacts : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabEnumEndpoints : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabEnumObjects : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabEnumPeopleNearMe : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabExportContact : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabGetAppLaunchInfo : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabGetApplicationRegistrationInfo : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabGetContact : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabGetEndpointName : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabGetEventData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabGetInvitationResponse : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabGetPresenceInfo : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabGetSigninOptions : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabInviteContact : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabInviteEndpoint : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabParseContact : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabQueryContactData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabRefreshEndpointData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabRegisterApplication : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabRegisterEvent : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabSetEndpointName : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabSetObject : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabSetPresenceInfo : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabShutdown : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabSignin : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabSignout : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabStartup : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabSubscribeEndpointData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabUnregisterApplication : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabUnregisterEvent : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabUnsubscribeEndpointData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCollabUpdateContact : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows6.0.6000)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerCreatePeerName : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerEndEnumeration : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerEnumGroups : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerEnumIdentities : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerFreeData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGetItemCount : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGetNextItem : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphAddRecord : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphClose : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphCloseDirectConnection : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphConnect : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphCreate : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphDelete : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphDeleteRecord : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphEndEnumeration : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphEnumConnections : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphEnumNodes : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphEnumRecords : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphExportDatabase : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphFreeData : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphGetEventData : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphGetItemCount : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphGetNextItem : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphGetNodeInfo : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphGetProperties : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphGetRecord : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphGetStatus : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphImportDatabase : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphListen : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphOpen : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphOpenDirectConnection : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphPeerTimeToUniversalTime : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphRegisterEvent : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphSearchRecords : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphSendData : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphSetNodeAttributes : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphSetPresence : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphSetProperties : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphShutdown : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphStartup : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphUniversalTimeToPeerTime : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphUnregisterEvent : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphUpdateRecord : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGraphValidateDeferredRecords : [DllImport(P2PGRAPH,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2PGRAPH.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupAddRecord : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupClose : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupCloseDirectConnection : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupConnect : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupConnectByAddress : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupCreate : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupCreateInvitation : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupCreatePasswordInvitation : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupDelete : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupDeleteRecord : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupEnumConnections : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupEnumMembers : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupEnumRecords : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupExportConfig : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupExportDatabase : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupGetEventData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupGetProperties : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupGetRecord : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupGetStatus : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupImportConfig : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupImportDatabase : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupIssueCredentials : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupJoin : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupOpen : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupOpenDirectConnection : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupParseInvitation : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupPasswordJoin : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupPeerTimeToUniversalTime : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupRegisterEvent : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupResumePasswordAuthentication : [DllImport(P2P,ExactSpelling=True,PreserveSig=False)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupSearchRecords : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupSendData : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupSetProperties : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupShutdown : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupStartup : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupUniversalTimeToPeerTime : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupUnregisterEvent : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerGroupUpdateRecord : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerHostNameToPeerName : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentityCreate : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentityDelete : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentityExport : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentityGetCryptKey : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentityGetDefault : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentityGetFriendlyName : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentityGetXML : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentityImport : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerIdentitySetFriendlyName : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerNameToPeerHostName : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpEndResolve : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpGetCloudInfo : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpGetEndpoint : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpRegister : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpResolve : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpShutdown : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpStartResolve : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpStartup : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpUnregister : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.Apis.PeerPnrpUpdateRegistration : [DllImport(P2P,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.1.2600)] => [DllImport(P2P.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.1.2600)]
+Windows.Win32.NetworkManagement.P2P.PFNPEER_FREE_SECURITY_DATA : [StructLayout(3,CharSet=4),UnmanagedFunctionPointer(1)] => [Obsolete,StructLayout(3,CharSet=4),UnmanagedFunctionPointer(1)]
+Windows.Win32.NetworkManagement.P2P.PFNPEER_ON_PASSWORD_AUTH_FAILED : [StructLayout(3,CharSet=4),UnmanagedFunctionPointer(1)] => [Obsolete,StructLayout(3,CharSet=4),UnmanagedFunctionPointer(1)]
+Windows.Win32.NetworkManagement.P2P.PFNPEER_SECURE_RECORD : [StructLayout(3,CharSet=4),UnmanagedFunctionPointer(1)] => [Obsolete,StructLayout(3,CharSet=4),UnmanagedFunctionPointer(1)]
+Windows.Win32.NetworkManagement.P2P.PFNPEER_VALIDATE_RECORD : [StructLayout(3,CharSet=4),UnmanagedFunctionPointer(1)] => [Obsolete,StructLayout(3,CharSet=4),UnmanagedFunctionPointer(1)]
+Windows.Win32.NetworkManagement.Snmp.Apis.SnmpUtilDbgPrint, param __arglist added
+Windows.Win32.Security.Authorization.Apis.AuthzInitializeObjectAccessAuditEvent, param __arglist added
+Windows.Win32.Security.Authorization.Apis.AuthzInitializeObjectAccessAuditEvent2, param __arglist added
+Windows.Win32.Security.Authorization.Apis.AuthzReportSecurityEvent, param __arglist added
+Windows.Win32.Security.EnterpriseData.FILE_UNPROTECT_OPTIONS.audit...System.Boolean => System.Byte
+Windows.Win32.Storage.FileHistory.Apis.FhServiceBlockBackup : [DllImport(fhsvcctl,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Obsolete(FhServiceBlockBackup is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceClosePipe : [DllImport(fhsvcctl,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Obsolete(FhServiceClosePipe is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceOpenPipe : [DllImport(fhsvcctl,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Obsolete(FhServiceOpenPipe is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceReloadConfiguration : [DllImport(fhsvcctl,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Obsolete(FhServiceReloadConfiguration is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceStartBackup : [DllImport(fhsvcctl,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Obsolete(FhServiceStartBackup is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceStopBackup : [DllImport(fhsvcctl,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Obsolete(FhServiceStopBackup is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileHistory.Apis.FhServiceUnblockBackup : [DllImport(fhsvcctl,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(fhsvcctl.dll,ExactSpelling=True,PreserveSig=False),Obsolete(FhServiceUnblockBackup is deprecated and might not work on all platforms. For more info, see MSDN),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Storage.FileSystem.Apis.FreeEncryptedFileMetadata : [DllImport(ADVAPI32,ExactSpelling=True,PreserveSig=False)] => [DllImport(ADVAPI32.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Storage.FileSystem.Apis.GetEncryptedFileMetadata : [DllImport(ADVAPI32,ExactSpelling=True,PreserveSig=False)] => [DllImport(ADVAPI32.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.Storage.FileSystem.Apis.SetEncryptedFileMetadata : [DllImport(ADVAPI32,ExactSpelling=True,PreserveSig=False)] => [DllImport(ADVAPI32.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.System.DeploymentServices.Apis.PxeTrace, param __arglist added
+Windows.Win32.System.DeploymentServices.Apis.WdsCliLog, param __arglist added
+Windows.Win32.System.DeploymentServices.Apis.WdsTransportServerTrace, param __arglist added
+Windows.Win32.System.Diagnostics.Debug.Apis.FindFileInPath : [DllImport(dbghelp,ExactSpelling=True,PreserveSig=False)] => [DllImport(dbghelp.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.System.Diagnostics.Debug.Apis.FindFileInSearchPath : [DllImport(dbghelp,ExactSpelling=True,PreserveSig=False)] => [DllImport(dbghelp.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymEnumerateSymbols(X86) : [DllImport(dbghelp,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedArchitecture(1)] => [DllImport(dbghelp.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Obsolete,SupportedArchitecture(1)]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymEnumerateSymbols64 : [DllImport(dbghelp,ExactSpelling=True,PreserveSig=False,SetLastError=True)] => [DllImport(dbghelp.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Obsolete]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymEnumerateSymbolsW(X86) : [DllImport(dbghelp,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedArchitecture(1)] => [DllImport(dbghelp.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Obsolete,SupportedArchitecture(1)]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymEnumerateSymbolsW64 : [DllImport(dbghelp,ExactSpelling=True,PreserveSig=False,SetLastError=True)] => [DllImport(dbghelp.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Obsolete]
+Windows.Win32.System.Diagnostics.Debug.Apis.SymEnumSym : [DllImport(dbghelp,ExactSpelling=True,PreserveSig=False)] => [DllImport(dbghelp.dll,ExactSpelling=True,PreserveSig=False),Obsolete]
+Windows.Win32.System.Diagnostics.Debug.ScriptDebugEventInformation._u_e__Union._ExceptionInformation_e__Struct.IsUncaught...System.Boolean => System.Byte
+Windows.Win32.System.Diagnostics.Etw.Apis.TraceMessage, param __arglist added
+Windows.Win32.System.Ole.Apis.OleUIPromptUserA, param __arglist added
+Windows.Win32.System.Ole.Apis.OleUIPromptUserW, param __arglist added
+Windows.Win32.System.Rpc.Apis.Ndr64AsyncClientCall, param __arglist added
+Windows.Win32.System.Rpc.Apis.Ndr64DcomAsyncClientCall, param __arglist added
+Windows.Win32.System.Rpc.Apis.NdrAsyncClientCall, param __arglist added
+Windows.Win32.System.Rpc.Apis.NdrClientCall2, param __arglist added
+Windows.Win32.System.Rpc.Apis.NdrClientCall3, param __arglist added
+Windows.Win32.System.Rpc.Apis.NdrDcomAsyncClientCall, param __arglist added
+Windows.Win32.System.Rpc.Apis.NdrMesProcEncodeDecode, param __arglist added
+Windows.Win32.System.Rpc.Apis.NdrMesProcEncodeDecode2, param __arglist added
+Windows.Win32.System.Rpc.Apis.NdrMesProcEncodeDecode3, param __arglist added
+Windows.Win32.System.Search.Apis.SQLBindParam(X64, Arm64) : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False),SupportedArchitecture(6)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLBindParam is deprecated. Please use SQLBindParameter instead),SupportedArchitecture(6)]
+Windows.Win32.System.Search.Apis.SQLBindParam(X86) : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False),SupportedArchitecture(1)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLBindParam is deprecated. Please use SQLBindParameter instead),SupportedArchitecture(1)]
+Windows.Win32.System.Search.Apis.SQLGetConnectOption : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLGetConnectOption is deprecated. Please use SQLGetConnectAttr instead)]
+Windows.Win32.System.Search.Apis.SQLGetStmtOption : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLGetStmtOption is deprecated. Please use SQLGetStmtAttr instead)]
+Windows.Win32.System.Search.Apis.SQLSetConnectOption(X64, Arm64) : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False),SupportedArchitecture(6)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLSetConnectOption is deprecated. Please use SQLSetConnectAttr instead),SupportedArchitecture(6)]
+Windows.Win32.System.Search.Apis.SQLSetConnectOption(X86) : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False),SupportedArchitecture(1)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLSetConnectOption is deprecated. Please use SQLSetConnectAttr instead),SupportedArchitecture(1)]
+Windows.Win32.System.Search.Apis.SQLSetParam(X64, Arm64) : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False),SupportedArchitecture(6)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLSetParam is deprecated. Please use SQLBindParameter instead),SupportedArchitecture(6)]
+Windows.Win32.System.Search.Apis.SQLSetParam(X86) : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False),SupportedArchitecture(1)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLSetParam is deprecated. Please use SQLBindParameter instead),SupportedArchitecture(1)]
+Windows.Win32.System.Search.Apis.SQLSetStmtOption(X64, Arm64) : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False),SupportedArchitecture(6)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLSetStmtOption is deprecated. Please use SQLSetStmtAttr instead),SupportedArchitecture(6)]
+Windows.Win32.System.Search.Apis.SQLSetStmtOption(X86) : [DllImport(ODBC32,ExactSpelling=True,PreserveSig=False),SupportedArchitecture(1)] => [DllImport(ODBC32.dll,ExactSpelling=True,PreserveSig=False),Obsolete(ODBC API: SQLSetStmtOption is deprecated. Please use SQLSetStmtAttr instead),SupportedArchitecture(1)]
+Windows.Win32.System.SystemInformation.Apis.GetVersion : [DllImport(KERNEL32,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False),Obsolete,SupportedOSPlatform(windows5.0)]
+Windows.Win32.System.SystemInformation.Apis.GetVersionExA : [DllImport(KERNEL32,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)] => [DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Obsolete,SupportedOSPlatform(windows5.0)]
+Windows.Win32.System.SystemInformation.Apis.GetVersionExW : [DllImport(KERNEL32,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)] => [DllImport(KERNEL32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),Obsolete,SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.ShellMessageBoxA, param __arglist added
+Windows.Win32.UI.Shell.Apis.ShellMessageBoxW, param __arglist added
+Windows.Win32.UI.Shell.Apis.wnsprintfA, param __arglist added
+Windows.Win32.UI.Shell.Apis.wnsprintfW, param __arglist added
+Windows.Win32.UI.Shell.IFolderView2.GetViewProperty :  => [Obsolete]
+Windows.Win32.UI.Shell.IFolderView2.SetExtendedTileViewProperties :  => [Obsolete]
+Windows.Win32.UI.Shell.IFolderView2.SetTileViewProperties :  => [Obsolete]
+Windows.Win32.UI.Shell.IFolderView2.SetViewProperty :  => [Obsolete]
+Windows.Win32.UI.WindowsAndMessaging.Apis.wsprintfA, param __arglist added
+Windows.Win32.UI.WindowsAndMessaging.Apis.wsprintfW, param __arglist added
+	#Add and modify brush and pen styles enums
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN removed
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN8X8 removed
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERNPT removed
