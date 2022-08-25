@@ -17344,7 +17344,7 @@ Windows.Win32.UI.Shell.IFolderView2.SetTileViewProperties :  => [Obsolete]
 Windows.Win32.UI.Shell.IFolderView2.SetViewProperty :  => [Obsolete]
 Windows.Win32.UI.WindowsAndMessaging.Apis.wsprintfA, param __arglist added
 Windows.Win32.UI.WindowsAndMessaging.Apis.wsprintfW, param __arglist added
-	#Add and modify brush and pen styles enums
+#Add and modify brush and pen styles enums
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN removed
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERN8X8 removed
 Windows.Win32.Graphics.Gdi.Apis.BS_DIBPATTERNPT removed
