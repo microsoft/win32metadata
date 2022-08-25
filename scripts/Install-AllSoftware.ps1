@@ -22,7 +22,7 @@ if ($policy -ne "Unrestricted"){
 }
 elseif (-not(Check-IsElevated)){
     throw "Please run this script as an administrator"
- }
+}
 else {
     Write-Output "Installing apps"
     $apps = @(
@@ -30,18 +30,15 @@ else {
     @{packageID = "Microsoft.DotNet.SDK.6" },
     @{packageID = "Microsoft.VisualStudioCode" }
     );
-
     Foreach ($app in $apps) {
-    $listApp = winget list --exact -q $app.packageIDs
-    if (![String]::Join("", $listApp).Contains($app.packageID)) {
-        Write-Output "Installing: $($app.packageID)"
-        winget install -h $app.packageID -s winget 
+        $listApp = winget list --exact -q $app.packageIDs
+        if (![String]::Join("", $listApp).Contains($app.packageID)) {
+            Write-Output "Installing: $($app.packageID)"
+            winget install -h $app.packageID -s winget 
+        }
+        else {
+            Write-Output "Skipping: $($app.packageID) (already installed)"
+        }
     }
-    else {
-        Write-Output "Skipping: $($app.packageID) (already installed)"
-    }
-    }
-
     & "$PSScriptRoot\Get-VSPath.ps1" | Out-Null 
-
 }
