@@ -33,13 +33,12 @@ contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additio
 ## Set up your development environment
 
 * Install [Visual Studio 2022 (Desktop C++ Workload)](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=Community&channel=Release&version=VS2022&source=VSLandingPage&passive=false)
-* Install [Visual Studio Code](https://code.visualstudio.com/Download)
 * Install [PowerShell 7](https://aka.ms/powershell-release?tag=stable)
-* Install [.NET (SDK)](https://dotnet.microsoft.com/download/dotnet)
-* Install [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest)
-
-Run `./scripts/Install-AllSoftware.ps1 ` to install all of the aforementioned software. To use this script, make sure that the [Microsoft App Installer](https://www.microsoft.com/p/app-installer/9nblggh4nns1) is installed, the script is run as an administrator, and running scripts is not blocked. 
-
+* Run [scripts/Install-AllSoftware.ps1](scripts/Install-AllSoftware.ps1) to install the below software
+  * Install [Visual Studio Code](https://code.visualstudio.com/Download)
+  * Install [.NET (SDK)](https://dotnet.microsoft.com/download/dotnet)
+  * Install [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest)
+  * Note: To use this script, make sure that the [Microsoft App Installer](https://www.microsoft.com/p/app-installer/9nblggh4nns1) is installed, the script is run as an administrator, and running scripts is not blocked.
 * Add [NuGet.org](https://api.nuget.org/v3/index.json) as a [package source](https://docs.microsoft.com/en-us/dotnet/core/tools/dotnet-nuget-add-source#examples)
 * Clone the [repo](https://github.com/microsoft/win32metadata.git)
 * Run a [full build](#Full-builds)
