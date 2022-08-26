@@ -174,7 +174,7 @@ jobs:
     inputs:
       ConnectedServiceName: 'Xlang Code Signing'
       FolderPath: '$(Build.SourcesDirectory)\bin'
-      Pattern: '*.dll,*.winmd'
+      Pattern: 'Windows.Win32.Interop.dll,Windows.Win32.winmd'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
         [
@@ -217,7 +217,7 @@ jobs:
     inputs:
       ConnectedServiceName: 'Xlang Code Signing'
       FolderPath: '$(Build.SourcesDirectory)\bin\$(BuildConfiguration)\net6.0'
-      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,MetadataUtils.dll,WinmdUtils.dll,MetadataTasks.dll'
+      Pattern: 'ClangSharpSourceToWinmd.dll,ConstantsScraper.dll,CsvHelper.dll,ICSharpCode.Decompiler.dll,MetadataTasks.dll,MetadataUtils.dll,WinmdUtils.dll'
       signConfigType: 'inlineSignParams'
       inlineOperation: |
         [
