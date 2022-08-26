@@ -30720,39 +30720,52 @@
     ],
     "uses": [
       {
-        "struct": "tagLOGBRUSH",
+        "struct": "LOGBRUSH",
         "field": "lbStyle"
       },
       {
-        "struct": "tagLOGBRUSH32",
+        "struct": "LOGBRUSH32",
         "field": "lbStyle"
       }
     ]
   },
   {
+    "type": "byte",
     "name": "TMPF_FLAGS",
     "flags": "true",
     "members": [
       {
         "name": "TMPF_FIXED_PITCH",
-        "value": 1
+        "value": "0x01"
       },
       {
         "name": "TMPF_VECTOR",
-        "value": 2
+        "value": "0x02"
       },
       {
         "name": "TMPF_DEVICE",
-        "value": 3
+        "value": "0x08"
       },
       {
         "name": "TMPF_TRUETYPE",
-        "value": 4
+        "value": "0x04"
       }
     ],
     "uses": [
       {
         "struct": "TEXTMETRICW",
+        "field": "tmPitchAndFamily"
+      },
+      {
+        "struct": "TEXTMETRICA",
+        "field": "tmPitchAndFamily"
+      },
+      {
+        "struct": "NEWTEXTMETRICA",
+        "field": "tmPitchAndFamily"
+      },
+      {
+        "struct": "NEWTEXTMETRICW",
         "field": "tmPitchAndFamily"
       }
     ]

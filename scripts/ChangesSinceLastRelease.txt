@@ -17356,20 +17356,20 @@ Windows.Win32.Graphics.Gdi.Apis.BS_NULL removed
 Windows.Win32.Graphics.Gdi.Apis.BS_PATTERN removed
 Windows.Win32.Graphics.Gdi.Apis.BS_PATTERN8X8 removed
 Windows.Win32.Graphics.Gdi.Apis.BS_SOLID removed
-Windows.Win32.Graphics.Gdi.LOGBRUSH.lbStyle...System.UInt32 => Windows.Win32.System.SystemServices.BRUSH_STYLE
-Windows.Win32.Graphics.Gdi.LOGBRUSH32.lbStyle...System.UInt32 => Windows.Win32.System.SystemServices.BRUSH_STYLE
-Windows.Win32.System.SystemServices.BRUSH_STYLE added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERN added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERN8X8 added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_DIBPATTERNPT added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_HATCHED added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_HOLLOW added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_INDEXED added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_MONOPATTERN added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_NULL added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_PATTERN8X8 added
-Windows.Win32.System.SystemServices.BRUSH_STYLE.BS_SOLID added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_DIBPATTERN added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_DIBPATTERN8X8 added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_DIBPATTERNPT added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_HATCHED added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_HOLLOW added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_INDEXED added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_MONOPATTERN added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_NULL added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_PATTERN added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_PATTERN8X8 added
+Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_SOLID added
+Windows.Win32.Graphics.Gdi.LOGBRUSH.lbStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.BRUSH_STYLE
+Windows.Win32.Graphics.Gdi.LOGBRUSH32.lbStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.BRUSH_STYLE
 Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
@@ -17384,6 +17384,9 @@ Windows.Win32.Graphics.Gdi.Apis.TMPF_FIXED_PITCH removed
 Windows.Win32.Graphics.Gdi.Apis.TMPF_TRUETYPE removed
 Windows.Win32.Graphics.Gdi.Apis.TMPF_VECTOR removed
 Windows.Win32.Graphics.Gdi.TEXTMETRICW.tmPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.TMPF_FLAGS
+Windows.Win32.Graphics.Gdi.NEWTEXTMETRICA.tmPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.TMPF_FLAGS
+Windows.Win32.Graphics.Gdi.NEWTEXTMETRICW.tmPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.TMPF_FLAGS
+Windows.Win32.Graphics.Gdi.TEXTMETRICA.tmPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.TMPF_FLAGS
 Windows.Win32.Graphics.Gdi.TMPF_FLAGS added
 Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_DEVICE added
 Windows.Win32.Graphics.Gdi.TMPF_FLAGS.TMPF_FIXED_PITCH added
