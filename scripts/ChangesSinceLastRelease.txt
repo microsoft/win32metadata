@@ -17370,9 +17370,6 @@ Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_PATTERN8X8 added
 Windows.Win32.Graphics.Gdi.BRUSH_STYLE.BS_SOLID added
 Windows.Win32.Graphics.Gdi.LOGBRUSH.lbStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.BRUSH_STYLE
 Windows.Win32.Graphics.Gdi.LOGBRUSH32.lbStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.BRUSH_STYLE
-Windows.Win32.Graphics.Gdi.EXTLOGPEN.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
-Windows.Win32.Graphics.Gdi.EXTLOGPEN32.elpPenStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
-Windows.Win32.Graphics.Gdi.LOGPEN.lopnStyle...System.UInt32 => Windows.Win32.Graphics.Gdi.PEN_STYLE
 #More modifying Wingdi.h related enums
 Windows.Win32.Graphics.Gdi.Apis.GetBkMode : return...Int32 => BACKGROUND_MODE
 Windows.Win32.Graphics.Gdi.Apis.GetMapMode : return...Int32 => HDC_MAP_MODE
@@ -17413,8 +17410,10 @@ Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_PREVENTFULLOPEN added
 Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_RGBINIT added
 Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_SHOWHELP added
 Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS.CC_SOLIDCOLOR added
-Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORA.Flags...System.UInt32 => Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS
-Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORW.Flags...System.UInt32 => Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORA.Flags(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORA.Flags(X86)...System.UInt32 => Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORW.Flags(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS
+Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORW.Flags(X86)...System.UInt32 => Windows.Win32.UI.Controls.Dialogs.CHOOSECOLOR_FLAGS
 # BiCompression Enum Added
 Windows.Win32.Graphics.Gdi.Apis.BI_BITFIELDS removed
 Windows.Win32.Graphics.Gdi.Apis.BI_JPEG removed
