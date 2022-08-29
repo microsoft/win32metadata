@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project>
   <!--
     Directory.Build.props is automatically picked up and imported by
@@ -25,6 +25,7 @@
     <PackageProjectUrl>https://github.com/microsoft/win32metadata</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <PackageIcon>images/windows.png</PackageIcon>
+    <LastWin32MetadataReleaseVersion>29.0.6-preview</LastWin32MetadataReleaseVersion>
   </PropertyGroup>
 
   <ItemGroup>

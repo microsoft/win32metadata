@@ -110,6 +110,8 @@ function Get-NugetPropsProperty
 
 function Get-BuildToolsNugetPropsProperty
 {
+    Param ([string] $name)
+
     return Get-NugetPropsProperty -name $name -projectName "BuildTools.proj"
 }
 
@@ -125,7 +127,7 @@ function Get-WinSdkCppX64PkgPath
 
 function Get-Win32MetadataLastReleaseWinmdPath
 {
-    $dir = Get-NugetPropsProperty -name "PkgMicrosoft_Windows_SDK_Win32Metadata" -projectName "Windows.Win32.Tests.csproj"
+    $dir = Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Windows_SDK_Win32Metadata")
     return Join-Path $dir "Windows.Win32.winmd"
 }
 
