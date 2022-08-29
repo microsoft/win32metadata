@@ -4387,15 +4387,15 @@
       },
       {
         "struct": "LOGPEN",
-        "field": "PEN_STYLE"
+        "field": "lopnStyle"
       },
       {
         "struct": "EXTLOGPEN",
-        "field": "PEN_STYLE"
+        "field": "elpPenStyle"
       },
       {
         "struct": "EXTLOGPEN32",
-        "field": "PEN_STYLE"
+        "field": "elpPenStyle"
       }
     ]
   },
