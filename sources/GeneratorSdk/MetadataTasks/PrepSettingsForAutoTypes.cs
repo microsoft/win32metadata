@@ -37,13 +37,14 @@ namespace MetadataTasks
                 foreach (var autoType in autoTypes)
                 {
                     var type = autoType.ValueType;
-                    if (type == "DECLARE_HANDLE")
+                    if (type == "DECLARE_HANDLE" || type == "DECLARE_OPAQUE_KEY")
                     {
                         var typeName = autoType.Name;
                         var handleStructName = typeName + "__";
+                        var nativeType = type == "DECLARE_HANDLE" ? "IntPtr" : "long";
                         typesToExclude.Add(handleStructName);
 
-                        remapSection.AppendLine($"{typeName}=IntPtr");
+                        remapSection.AppendLine($"{typeName}={nativeType}");
                         remapSection.AppendLine($"{handleStructName}*={typeName}");
                     }
                     else if (type == "AllJoynHandle")
