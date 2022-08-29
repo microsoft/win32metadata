@@ -1383,7 +1383,9 @@ namespace WinmdUtilsProgram
         private static string GetFullMemberName(IMember member)
         {
             string name = member.FullName;
-            string archInfo = GetArchInfo(member.GetAttributes());
+            bool useParentArch = member.SymbolKind == SymbolKind.Field || member.SymbolKind == SymbolKind.Parameter;
+            string archInfo = GetArchInfo(useParentArch ? member.DeclaringTypeDefinition.GetAttributes() : member.GetAttributes());
+
             if (!string.IsNullOrEmpty(archInfo))
             {
                 name += $"({archInfo})";
