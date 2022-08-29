@@ -1801,11 +1801,6 @@ namespace WinmdUtilsProgram
                     // The later one will override the older one
                     foreach (var diff in differencesToIgnore)
                     {
-                        if (diff.StartsWith("Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORA.Flags"))
-                        {
-
-                        }
-
                         int arrowPos = diff.IndexOf("=>");
                         if (arrowPos != -1)
                         {
@@ -1821,22 +1816,12 @@ namespace WinmdUtilsProgram
 
                 foreach (string value in arrowedChange.Values)
                 {
-                    if (value.StartsWith("Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORA.Flags"))
-                    {
-
-                    }
-
                     this.differencesToIgnore.Add(value);
                 }
             }
 
             public void WriteDifference(string line, bool infoOnly)
             {
-                if (line.StartsWith("Windows.Win32.UI.Controls.Dialogs.CHOOSECOLORA.Flags...System.UInt32"))
-                {
-
-                }
-
                 if (!infoOnly)
                 {
                     if (this.differencesToIgnore.Contains(line))
