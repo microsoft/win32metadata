@@ -35,10 +35,11 @@ namespace WinmdUtilsProgram
             {
                 new Option<FileInfo>("--first", "The first winmd.") { IsRequired = true }.ExistingOnly(),
                 new Option<FileInfo>("--second", "The second winmd.") { IsRequired = true }.ExistingOnly(),
-                new Option<FileInfo>("--changeExemptionsFile", "A file containing changes to ignore.") { IsRequired = false }.ExistingOnly(),
+                new Option<FileInfo>("--knownDiffsFile", "A file containing known differences.") { IsRequired = false }.ExistingOnly(),
+                new Option<string>("--updateKnownDiffsComment", "A comment used to updated the knownDiffsFile")
             };
 
-            compareCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, FileInfo, IConsole>(CompareWinmds);
+            compareCommand.Handler = CommandHandler.Create<FileInfo, FileInfo, FileInfo, string, IConsole>(CompareWinmds);
 
             var showDuplicateImports = new Command("showDuplicateImports", "Show duplicate imports in a single winmd files.")
             {
@@ -1382,7 +1383,9 @@ namespace WinmdUtilsProgram
         private static string GetFullMemberName(IMember member)
         {
             string name = member.FullName;
-            string archInfo = GetArchInfo(member.GetAttributes());
+            bool useParentArch = member.SymbolKind == SymbolKind.Field || member.SymbolKind == SymbolKind.Parameter;
+            string archInfo = GetArchInfo(useParentArch ? member.DeclaringTypeDefinition.GetAttributes() : member.GetAttributes());
+
             if (!string.IsNullOrEmpty(archInfo))
             {
                 name += $"({archInfo})";
@@ -1555,15 +1558,16 @@ namespace WinmdUtilsProgram
             return writer.DifferencesCount == before;
         }
 
-        public static int CompareWinmds(FileInfo first, FileInfo second, FileInfo changeExemptionsFile, IConsole console)
+        public static int CompareWinmds(FileInfo first, FileInfo second, FileInfo knownDiffsFile, string updateKnownDiffsComment, IConsole console)
         {
-            string[] differencesToIgnore = changeExemptionsFile != null ? File.ReadAllLines(changeExemptionsFile.FullName) : new string[0];
+            IEnumerable<string> differencesToIgnore =
+                    knownDiffsFile != null ?
+                    File.ReadAllLines(knownDiffsFile.FullName).Where(l => !l.StartsWith('#'))
+                    : new string[0];
             DifferencesWriter writer = new DifferencesWriter(differencesToIgnore);
 
             DecompilerTypeSystem winmd1 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(first.FullName);
             DecompilerTypeSystem winmd2 = DecompilerTypeSystemUtils.CreateTypeSystemFromFile(second.FullName);
-
-            CompareAttributes("Assembly (informational only)", winmd1.MainModule.GetAssemblyAttributes(), winmd2.MainModule.GetAssemblyAttributes(), writer, true);
 
             var winmd1Types = GetSelfDefinedWinmdToplevelTypes(winmd1);
             var winmd2Types = GetSelfDefinedWinmdToplevelTypes(winmd2);
@@ -1653,20 +1657,80 @@ namespace WinmdUtilsProgram
                 }
             }
 
-            if (!writer.DifferencesFound)
+            if (knownDiffsFile == null || string.IsNullOrEmpty(updateKnownDiffsComment))
             {
-                console.Out.Write($"No differences in winmd contents.\r\n");
-                return 0;
+                int ret = 0;
+                if (writer.KnownDifferencesNotVisitedFound)
+                {
+                    console.Out.WriteLine("Items from the known differences file that were not used:");
+                    foreach (var diff in writer.KnownDifferencesNotVisited)
+                    {
+                        console.Out.WriteLine(diff);
+                    }
+
+                    ret = -1;
+                }
+
+                if (writer.DifferencesFound)
+                {
+                    console.Out.WriteLine("Unknown differences found:");
+                    foreach (var line in writer.Differences.OrderBy(l => l))
+                    {
+                        console.Out.WriteLine(line);
+                    }
+
+                    ret = -1;
+                }
+
+                if (ret == 0)
+                {
+                    console.Out.WriteLine($"No unknown differences found.");
+                }
+
+                return ret;
             }
             else
             {
-                foreach (var line in writer.Differences.OrderBy(l => l))
+                if (!writer.DifferencesFound && !writer.KnownDifferencesNotVisitedFound)
                 {
-                    console.Out.WriteLine(line);
+                    console.Out.WriteLine($"No unknown differences found. {knownDiffsFile.FullName} was not updated.");
+                    return 0;
                 }
-            }
 
-            return -1;
+                // We have a known changes file and we're supposed to update it
+                string[] oldLines = File.ReadAllLines(knownDiffsFile.FullName);
+                using StreamWriter file = new(knownDiffsFile.FullName);
+
+                HashSet<string> ignorableLines = new HashSet<string>(writer.KnownDifferencesNotVisited);
+                foreach (var line in oldLines)
+                {
+                    if (!line.StartsWith('#') && ignorableLines.Contains(line))
+                    {
+                        continue;
+                    }
+
+                    file.WriteLine(line);
+                }
+
+                if (writer.DifferencesFound)
+                {
+                    // Make sure the comment line starts with #
+                    if (!updateKnownDiffsComment.StartsWith('#'))
+                    {
+                        updateKnownDiffsComment = "# " + updateKnownDiffsComment;
+                    }
+                      
+                    file.WriteLine(updateKnownDiffsComment);
+                    foreach (var line in writer.Differences.OrderBy(l => l))
+                    {
+                        file.WriteLine(line);
+                    }
+                }
+
+                console.Out.WriteLine($"{knownDiffsFile.FullName} was updated with new known differences.");
+
+                return 0;
+            }
         }
 
         public static int ShowMissingImports(FileInfo first, FileInfo second, string exclusions, IConsole console)
@@ -1716,17 +1780,43 @@ namespace WinmdUtilsProgram
 
             public bool DifferencesFound => this.DifferencesCount != 0;
 
+            public bool KnownDifferencesNotVisitedFound => this.differencesToIgnore.Count != 0;
+
             public int DifferencesCount { get; private set; }
 
             public DifferencesWriter()
             {
             }
 
-            public DifferencesWriter(string[] differencesToIgnore)
+            public DifferencesWriter(IEnumerable<string> differencesToIgnore)
             {
+                Dictionary<string, string> arrowedChange = new Dictionary<string, string>();
+
                 if (differencesToIgnore != null)
                 {
-                    this.differencesToIgnore = new HashSet<string>(differencesToIgnore);
+                    // This lets us deal with cases where one change does this:
+                    // Api.Foobar => [X]
+                    // And a later changes adds:
+                    // Api.Foobar => [X,Y]
+                    // The later one will override the older one
+                    foreach (var diff in differencesToIgnore)
+                    {
+                        int arrowPos = diff.IndexOf("=>");
+                        if (arrowPos != -1)
+                        {
+                            string beforeArrow = diff.Substring(0, arrowPos - 1);
+                            arrowedChange[beforeArrow] = diff;
+                        }
+                        else
+                        {
+                            this.differencesToIgnore.Add(diff);
+                        }
+                    }
+                }
+
+                foreach (string value in arrowedChange.Values)
+                {
+                    this.differencesToIgnore.Add(value);
                 }
             }
 
@@ -1736,6 +1826,7 @@ namespace WinmdUtilsProgram
                 {
                     if (this.differencesToIgnore.Contains(line))
                     {
+                        this.differencesToIgnore.Remove(line);
                         return;
                     }
 
@@ -1751,6 +1842,8 @@ namespace WinmdUtilsProgram
             }
 
             public IEnumerable<string> Differences => this.differences;
+
+            public IEnumerable<string> KnownDifferencesNotVisited => this.differencesToIgnore;
         }
     }
 }

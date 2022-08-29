@@ -3,8 +3,8 @@ param (
     [switch]
     $SkipInstallTools,
 
-    [switch]
-    $SuppressSuggestionToCallScript
+    [string]
+    $UpdateDifferencesWithComment
 )
 
 . "$PSScriptRoot\CommonUtils.ps1"
@@ -20,8 +20,16 @@ $winmdUtilsPathBin = Join-Path $metadataToolsBin "WinmdUtils.dll"
 $changesSinceLastRelease = Get-ChangesSinceLastReleaseFile
 
 Write-Verbose "Comparing $winmdPath to previous release $previousReleaseWinmd..."
-Write-Verbose "Calling: dotnet $winmdUtilsPathBin compare --first $previousReleaseWinmd --second $winmdPath --changeExemptionsFile $changesSinceLastRelease"
-& dotnet $winmdUtilsPathBin compare --first $previousReleaseWinmd --second $winmdPath --changeExemptionsFile $changesSinceLastRelease
+
+$utilsArgs = @('compare', '--first', $previousReleaseWinmd, '--second', $winmdPath, '--knownDiffsFile', $changesSinceLastRelease)
+if ($UpdateDifferencesWithComment)
+{
+    $utilsArgs += '--updateKnownDiffsComment', $UpdateDifferencesWithComment
+}
+
+Write-Verbose "Calling: dotnet $utilsArgs"
+
+& dotnet $winmdUtilsPathBin $utilsArgs
 if ($LastExitCode -lt 0)
 {
     if (!$SuppressSuggestionToCallScript.IsPresent)
