@@ -1,0 +1,2 @@
+# Fixing CF_CONNECTION_KEY
+Windows.Win32.Storage.CloudFilters.CF_CONNECTION_KEY.Value...System.IntPtr => System.Int64
