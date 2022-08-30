@@ -122,3 +122,121 @@ Windows.Win32.Graphics.Direct2D.ID2D1TransformedImageSource : [Guid(2132769253,1
 Windows.Win32.Graphics.Direct2D.ID2D1TransformGraph : [Guid(332566584,50150,16436,144,129,19,181,58,65,121,146),SupportedOSPlatform(windows8.0)] => [Agile,Guid(332566584,50150,16436,144,129,19,181,58,65,121,146),SupportedOSPlatform(windows8.0)]
 Windows.Win32.Graphics.Direct2D.ID2D1TransformNode : [Guid(3002065383,29343,16642,148,159,80,95,162,27,246,102),SupportedOSPlatform(windows8.0)] => [Agile,Guid(3002065383,29343,16642,148,159,80,95,162,27,246,102),SupportedOSPlatform(windows8.0)]
 Windows.Win32.Graphics.Direct2D.ID2D1VertexBuffer : [Guid(2609582902,165,18024,146,183,206,213,216,191,155,123),SupportedOSPlatform(windows8.0)] => [Agile,Guid(2609582902,165,18024,146,183,206,213,216,191,155,123),SupportedOSPlatform(windows8.0)]
+# Xinput.h enums
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_DEVTYPE_GAMEPAD removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_DEVTYPE_HEADSET removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_LEVEL_EMPTY removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_LEVEL_FULL removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_LEVEL_LOW removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_LEVEL_MEDIUM removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_TYPE_ALKALINE removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_TYPE_DISCONNECTED removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_TYPE_NIMH removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_TYPE_UNKNOWN removed
+Windows.Win32.UI.Input.XboxController.Apis.BATTERY_TYPE_WIRED removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_CAPS_FFB_SUPPORTED removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_CAPS_NO_NAVIGATION removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_CAPS_PMD_SUPPORTED removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_CAPS_VOICE_SUPPORTED removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_CAPS_WIRELESS removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_ARCADE_PAD removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_ARCADE_STICK removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_DANCE_PAD removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_DRUM_KIT removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_FLIGHT_STICK removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_GAMEPAD removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_GUITAR removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_GUITAR_BASS removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_UNKNOWN removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVSUBTYPE_WHEEL removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_DEVTYPE_GAMEPAD removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_FLAG_GAMEPAD removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_A removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_B removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_BACK removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_DPAD_DOWN removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_DPAD_LEFT removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_DPAD_RIGHT removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_DPAD_UP removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_LEFT_SHOULDER removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_LEFT_THUMB removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_RIGHT_SHOULDER removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_RIGHT_THUMB removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_START removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_TRIGGER_THRESHOLD removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_X removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_GAMEPAD_Y removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_KEYSTROKE_KEYDOWN removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_KEYSTROKE_KEYUP removed
+Windows.Win32.UI.Input.XboxController.Apis.XINPUT_KEYSTROKE_REPEAT removed
+Windows.Win32.UI.Input.XboxController.Apis.XInputGetBatteryInformation : devType...Byte => BATTERY_DEVTYPE
+Windows.Win32.UI.Input.XboxController.Apis.XInputGetCapabilities : dwFlags...UInt32 => XINPUT_FLAG
+Windows.Win32.UI.Input.XboxController.BATTERY_DEVTYPE added
+Windows.Win32.UI.Input.XboxController.BATTERY_DEVTYPE.BATTERY_DEVTYPE_GAMEPAD added
+Windows.Win32.UI.Input.XboxController.BATTERY_DEVTYPE.BATTERY_DEVTYPE_HEADSET added
+Windows.Win32.UI.Input.XboxController.BATTERY_LEVEL added
+Windows.Win32.UI.Input.XboxController.BATTERY_LEVEL.BATTERY_LEVEL_EMPTY added
+Windows.Win32.UI.Input.XboxController.BATTERY_LEVEL.BATTERY_LEVEL_FULL added
+Windows.Win32.UI.Input.XboxController.BATTERY_LEVEL.BATTERY_LEVEL_LOW added
+Windows.Win32.UI.Input.XboxController.BATTERY_LEVEL.BATTERY_LEVEL_MEDIUM added
+Windows.Win32.UI.Input.XboxController.BATTERY_TYPE added
+Windows.Win32.UI.Input.XboxController.BATTERY_TYPE.BATTERY_TYPE_ALKALINE added
+Windows.Win32.UI.Input.XboxController.BATTERY_TYPE.BATTERY_TYPE_DISCONNECTED added
+Windows.Win32.UI.Input.XboxController.BATTERY_TYPE.BATTERY_TYPE_NIMH added
+Windows.Win32.UI.Input.XboxController.BATTERY_TYPE.BATTERY_TYPE_UNKNOWN added
+Windows.Win32.UI.Input.XboxController.BATTERY_TYPE.BATTERY_TYPE_WIRED added
+Windows.Win32.UI.Input.XboxController.XINPUT_BATTERY_INFORMATION.BatteryLevel...System.Byte => Windows.Win32.UI.Input.XboxController.BATTERY_LEVEL
+Windows.Win32.UI.Input.XboxController.XINPUT_BATTERY_INFORMATION.BatteryType...System.Byte => Windows.Win32.UI.Input.XboxController.BATTERY_TYPE
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES_FLAGS added
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_FFB_SUPPORTED added
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_NO_NAVIGATION added
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_PMD_SUPPORTED added
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_VOICE_SUPPORTED added
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES_FLAGS.XINPUT_CAPS_WIRELESS added
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES.Flags...System.UInt16 => Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES_FLAGS
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES.SubType...System.Byte => Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE
+Windows.Win32.UI.Input.XboxController.XINPUT_CAPABILITIES.Type...System.Byte => Windows.Win32.UI.Input.XboxController.XINPUT_DEVTYPE
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_ARCADE_PAD added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_ARCADE_STICK added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_DANCE_PAD added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_DRUM_KIT added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_FLIGHT_STICK added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_GAMEPAD added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_GUITAR added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_GUITAR_ALTERNATE added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_GUITAR_BASS added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_UNKNOWN added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.XINPUT_DEVSUBTYPE_WHEEL added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVTYPE added
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVTYPE.XINPUT_DEVTYPE_GAMEPAD added
+Windows.Win32.UI.Input.XboxController.XINPUT_FLAG added
+Windows.Win32.UI.Input.XboxController.XINPUT_FLAG.XINPUT_FLAG_ALL added
+Windows.Win32.UI.Input.XboxController.XINPUT_FLAG.XINPUT_FLAG_GAMEPAD added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_A added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_B added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_BACK added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_DOWN added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_LEFT added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_RIGHT added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_DPAD_UP added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_SHOULDER added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_THUMB added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_LEFT_THUMB_DEADZONE added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_SHOULDER added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_THUMB added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_RIGHT_THUMB_DEADZONE added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_START added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_TRIGGER_THRESHOLD added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_X added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS.XINPUT_GAMEPAD_Y added
+Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD.wButtons...System.UInt16 => Windows.Win32.UI.Input.XboxController.XINPUT_GAMEPAD_BUTTON_FLAGS
+Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE_FLAGS added
+Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE_FLAGS.XINPUT_KEYSTROKE_KEYDOWN added
+Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE_FLAGS.XINPUT_KEYSTROKE_KEYUP added
+Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE_FLAGS.XINPUT_KEYSTROKE_REPEAT added
+Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE.Flags...System.UInt16 => Windows.Win32.UI.Input.XboxController.XINPUT_KEYSTROKE_FLAGS
