@@ -13322,9 +13322,6 @@
   },
   {
     "name": "FONT_CHARSET",
-    "autoPopulate": {
-      "header": "wingdi.h"
-    },
     "members": [
       {
         "name": "ANSI_CHARSET",
