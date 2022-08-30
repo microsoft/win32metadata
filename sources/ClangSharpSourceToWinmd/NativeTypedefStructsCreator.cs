@@ -23,6 +23,10 @@ using Windows.Win32.Interop;
                 {
                     valueType = "IntPtr";
                 }
+                else if (valueType == "DECLARE_OPAQUE_KEY")
+                {
+                    valueType = "long";
+                }
 
                 if (!string.IsNullOrEmpty(item.CloseApi))
                 {

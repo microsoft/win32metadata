@@ -1562,7 +1562,7 @@ namespace WinmdUtilsProgram
         {
             IEnumerable<string> differencesToIgnore =
                     knownDiffsFile != null ?
-                    File.ReadAllLines(knownDiffsFile.FullName).Where(l => !l.StartsWith('#'))
+                    File.ReadAllLines(knownDiffsFile.FullName).Where(l => !l.StartsWith('#') && l.Trim().Length != 0)
                     : new string[0];
             DifferencesWriter writer = new DifferencesWriter(differencesToIgnore);
 

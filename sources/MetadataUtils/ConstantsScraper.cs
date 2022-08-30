@@ -334,6 +334,7 @@ namespace MetadataUtils
                 string args = line.Substring(firstComma + 1).Trim();
                 int closeParen = args.IndexOf(')');
                 args = args.Substring(0, closeParen);
+                args = this.GetCanonicalGuidConstantIntegerArgs(args);
 
                 var writer = this.GetConstantWriter(originalNamespace, name);
 
@@ -348,6 +349,12 @@ namespace MetadataUtils
                 }
 
                 this.writtenConstants.Add(name, "Guid");
+            }
+
+            private string GetCanonicalGuidConstantIntegerArgs(string args)
+            {
+                return Regex.Replace(args, "\\s*'(.*?)'\\s*", m =>
+                    $"0x{Convert.ToHexString(Encoding.ASCII.GetBytes(m.Groups[1].Value))}", RegexOptions.IgnoreCase);
             }
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
@@ -438,11 +445,16 @@ namespace MetadataUtils
 
                     string currentHeaderName = Path.GetFileName(header).ToLowerInvariant();
 
-                    List<EnumObject> autoEnumObjsForCurrentHeader =
-                        new List<EnumObject>(this.enumObjectsFromJsons.Where(e => e.autoPopulate != null && e.autoPopulate.header.ToLowerInvariant() == currentHeaderName));
+                    var autoEnumObjsForCurrentHeader =
+                        this.enumObjectsFromJsons
+                            .Where(
+                                e => e.autoPopulate != null &&
+                                !string.IsNullOrEmpty(e.autoPopulate.filter) &&
+                                e.autoPopulate.header.ToLowerInvariant() == currentHeaderName)
+                            .ToArray();
                     Regex autoPopulateReg = null;
 
-                    if (autoEnumObjsForCurrentHeader.Count != 0)
+                    if (autoEnumObjsForCurrentHeader.Length != 0)
                     {
                         StringBuilder autoPopulateRegexPattern = new StringBuilder();
                         foreach (EnumObject autoEnumObj in autoEnumObjsForCurrentHeader)
