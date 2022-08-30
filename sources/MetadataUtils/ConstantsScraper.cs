@@ -334,6 +334,7 @@ namespace MetadataUtils
                 string args = line.Substring(firstComma + 1).Trim();
                 int closeParen = args.IndexOf(')');
                 args = args.Substring(0, closeParen);
+                args = this.GetCanonicalGuidConstantIntegerArgs(args);
 
                 var writer = this.GetConstantWriter(originalNamespace, name);
 
@@ -348,6 +349,12 @@ namespace MetadataUtils
                 }
 
                 this.writtenConstants.Add(name, "Guid");
+            }
+
+            private string GetCanonicalGuidConstantIntegerArgs(string args)
+            {
+                return Regex.Replace(args, "\\s*'(.*?)'\\s*", m =>
+                    $"0x{Convert.ToHexString(Encoding.ASCII.GetBytes(m.Groups[1].Value))}", RegexOptions.IgnoreCase);
             }
 
             private void AddConstantInteger(string originalNamespace, string nativeTypeName, string name, string valueText)
