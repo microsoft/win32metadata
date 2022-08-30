@@ -445,11 +445,16 @@ namespace MetadataUtils
 
                     string currentHeaderName = Path.GetFileName(header).ToLowerInvariant();
 
-                    List<EnumObject> autoEnumObjsForCurrentHeader =
-                        new List<EnumObject>(this.enumObjectsFromJsons.Where(e => e.autoPopulate != null && e.autoPopulate.header.ToLowerInvariant() == currentHeaderName));
+                    var autoEnumObjsForCurrentHeader =
+                        this.enumObjectsFromJsons
+                            .Where(
+                                e => e.autoPopulate != null &&
+                                !string.IsNullOrEmpty(e.autoPopulate.filter) &&
+                                e.autoPopulate.header.ToLowerInvariant() == currentHeaderName)
+                            .ToArray();
                     Regex autoPopulateReg = null;
 
-                    if (autoEnumObjsForCurrentHeader.Count != 0)
+                    if (autoEnumObjsForCurrentHeader.Length != 0)
                     {
                         StringBuilder autoPopulateRegexPattern = new StringBuilder();
                         foreach (EnumObject autoEnumObj in autoEnumObjsForCurrentHeader)
