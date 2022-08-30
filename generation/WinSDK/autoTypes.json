@@ -1052,7 +1052,7 @@
   {
     "Namespace": "Windows.Win32.Storage.CloudFilters",
     "Name": "CF_CONNECTION_KEY",
-    "ValueType": "DECLARE_HANDLE",
+    "ValueType": "DECLARE_OPAQUE_KEY",
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
