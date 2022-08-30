@@ -14332,6 +14332,10 @@
       {
         "method": "SetBkMode",
         "parameter": "mode"
+      },
+      {
+        "method": "SetBkMode",
+        "parameter": "return"
       }
     ]
   },
@@ -26797,6 +26801,14 @@
       {
         "struct": "DELETEITEMSTRUCT",
         "field": "CtlType"
+      },
+      {
+        "struct": "MEASUREITEMSTRUCT",
+        "field": "CtlType"
+      },
+      {
+        "struct": "COMPAREITEMSTRUCT",
+        "field": "CtlType"
       }
     ]
   },
@@ -30330,6 +30342,18 @@
       {
         "method": "SetMetaRgn",
         "parameter": "return"
+      },
+      {
+        "method": "GetWindowRgn",
+        "parameter": "return"
+      },
+      {
+        "method": "GetUpdateRgn",
+        "parameter": "return"
+      },
+      {
+        "method": "GetWindowRgnBox",
+        "parameter": "return"
       }
     ]
   },
@@ -30627,6 +30651,67 @@
       {
         "struct": "DTTOPTS",
         "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "MODIFIERKEYS_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "MK_",
+      "header": "WinUser.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "IRichEditOleCallback::GetDragDropEffect",
+        "parameter": "grfKeyState"
+      },
+      {
+        "method": "IDropSource::QueryContinueDrag",
+        "parameter": "grfKeyState"
+      },
+      {
+        "method": "IDropTarget::DragOver",
+        "parameter": "grfKeyState"
+      },
+      {
+        "method": "IDropTarget::DragEnter",
+        "parameter": "grfKeyState"
+      },
+      {
+        "method": "IDropTarget::Drop",
+        "parameter": "grfKeyState"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "STATIC_STYLES",
+    "autoPopulate": {
+      "filter": "SS_",
+      "header": "WinUser.h"
+    },
+    "members": [],
+    "uses": []
+  },
+  {
+    "type": "uint",
+    "name": "ENHANCED_METAFILE_RECORD_TYPE",
+    "autoPopulate": {
+      "filter": "EMR_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "EMR",
+        "parameter": "iType"
+      },
+      {
+        "struct": "ENHMETARECORD",
+        "parameter": "iType"
       }
     ]
   }
