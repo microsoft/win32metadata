@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -1253,7 +1254,8 @@ namespace ClangSharpSourceToWinmd
 
                 this.namesToMethodDefHandles[fullName] = methodDef;
 
-                MethodImportAttributes methodImportAttributes = MethodImportAttributes.CallingConventionWinApi;
+                MethodImportAttributes importCallingConvention = MethodImportAttributes.CallingConventionWinApi;
+                MethodImportAttributes methodImportAttributes = MethodImportAttributes.None;
                 var dllImportAttr = symbol.GetAttributes().First(a => a.AttributeClass.Name == "DllImportAttribute");
                 string moduleName = (string)dllImportAttr.ConstructorArguments[0].Value;
                 StringHandle importedMethodName = this.metadataBuilder.GetOrAddString(methodName);
@@ -1271,7 +1273,27 @@ namespace ClangSharpSourceToWinmd
                     {
                         importedMethodName = this.metadataBuilder.GetOrAddString((string)arg.Value.Value);
                     }
+                    else if (arg.Key == "CallingConvention")
+                    {
+                        var callingConvention = (CallingConvention)arg.Value.Value;
+
+                        switch (callingConvention)
+                        {
+                            case CallingConvention.Cdecl:
+                                importCallingConvention = MethodImportAttributes.CallingConventionCDecl;
+                                break;
+
+                            case CallingConvention.StdCall:
+                                importCallingConvention = MethodImportAttributes.CallingConventionWinApi;
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
                 }
+
+                methodImportAttributes |= importCallingConvention;
 
                 this.AddCustomAttributes(method, methodDef);
 

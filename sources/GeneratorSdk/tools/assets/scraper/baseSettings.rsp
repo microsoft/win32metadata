@@ -29,5 +29,3 @@ dont-use-using-statics-for-enums
 exclude-anonymous-field-helpers
 --methodClassName
 Apis
---with-callconv
-*=Winapi
