@@ -247,7 +247,16 @@
       "header": "commdlg.h"
     },
     "members": [],
-    "uses": []
+    "uses": [
+      {
+        "struct": "CHOOSECOLORW",
+        "field": "Flags"
+      },
+      {
+        "struct": "CHOOSECOLORA",
+        "field": "Flags"
+      }
+    ]
   },
   {
     "name": "CLIPBOARD_FORMATS",
@@ -4375,6 +4384,18 @@
       {
         "method": "CreatePen",
         "parameter": "iStyle"
+      },
+      {
+        "struct": "LOGPEN",
+        "field": "lopnStyle"
+      },
+      {
+        "struct": "EXTLOGPEN",
+        "field": "elpPenStyle"
+      },
+      {
+        "struct": "EXTLOGPEN32",
+        "field": "elpPenStyle"
       }
     ]
   },
@@ -6901,6 +6922,10 @@
       {
         "method": "SelectClipPath",
         "parameter": "mode"
+      },
+      {
+        "method": "EMREXTSELECTCLIPRGN",
+        "parameter": "iMode"
       }
     ]
   },
@@ -7024,6 +7049,10 @@
       {
         "method": "ModifyWorldTransform",
         "parameter": "mode"
+      },
+      {
+        "method": "EMRMODIFYWORLDTRANSFORM",
+        "parameter": "iMode"
       }
     ]
   },
@@ -14334,7 +14363,7 @@
         "parameter": "mode"
       },
       {
-        "method": "SetBkMode",
+        "method": "GetBkMode",
         "parameter": "return"
       }
     ]
@@ -19514,6 +19543,10 @@
       {
         "method": "SetMapMode",
         "parameter": "iMode"
+      },
+      {
+        "method": "GetMapMode",
+        "parameter": "return"
       }
     ]
   },
@@ -30651,6 +30684,213 @@
       {
         "struct": "DTTOPTS",
         "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "BATTERY_TYPE",
+    "autoPopulate": {
+      "filter": "BATTERY_TYPE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_BATTERY_INFORMATION",
+        "field": "BatteryType"
+      }
+    ]
+  },
+  {
+    "name": "BATTERY_LEVEL",
+    "autoPopulate": {
+      "filter": "BATTERY_LEVEL_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_BATTERY_INFORMATION",
+        "field": "BatteryLevel"
+      }
+    ]
+  },
+  {
+    "name": "BATTERY_DEVTYPE",
+    "autoPopulate": {
+      "filter": "BATTERY_DEVTYPE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "XInputGetBatteryInformation",
+        "parameter": "devType"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_DEVTYPE",
+    "autoPopulate": {
+      "filter": "XINPUT_DEVTYPE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_CAPABILITIES",
+        "field": "Type"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_DEVSUBTYPE",
+    "autoPopulate": {
+      "filter": "XINPUT_DEVSUBTYPE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_CAPABILITIES",
+        "field": "SubType"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_CAPABILITIES_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "XINPUT_CAPS_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_CAPABILITIES",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_GAMEPAD_BUTTON_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "XINPUT_GAMEPAD_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_GAMEPAD",
+        "field": "wButtons"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_KEYSTROKE_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "XINPUT_KEYSTROKE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_KEYSTROKE",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_FLAG",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "XINPUT_FLAG_",
+      "header": "Xinput.h"
+    },
+    "members": [
+      {
+        "name": "XINPUT_FLAG_ALL",
+        "value": "0"
+      }
+    ],
+    "uses": [
+      {
+        "method": "XInputGetCapabilities",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "BRUSH_STYLE",
+    "autoPopulate": {
+      "filter": "BS_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LOGBRUSH",
+        "field": "lbStyle"
+      },
+      {
+        "struct": "LOGBRUSH32",
+        "field": "lbStyle"
+      }
+    ]
+  },
+  {
+    "type": "byte",
+    "name": "TMPF_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "TMPF_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "TEXTMETRICW",
+        "field": "tmPitchAndFamily"
+      },
+      {
+        "struct": "TEXTMETRICA",
+        "field": "tmPitchAndFamily"
+      },
+      {
+        "struct": "NEWTEXTMETRICA",
+        "field": "tmPitchAndFamily"
+      },
+      {
+        "struct": "NEWTEXTMETRICW",
+        "field": "tmPitchAndFamily"
+      }
+    ]
+  },
+  {
+    "name": "BI_COMPRESSION",
+    "autoPopulate": {
+      "filter": "BI_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "BITMAPV5HEADER",
+        "field": "bV5Compression"
+      },
+      {
+        "struct": "BITMAPINFOHEADER",
+        "field": "biCompression"
+      },
+      {
+        "struct": "BITMAPV4HEADER",
+        "field": "bV4V4Compression"
       }
     ]
   },
