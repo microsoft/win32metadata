@@ -30629,5 +30629,143 @@
         "field": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "BATTERY_TYPE",
+    "autoPopulate": {
+      "filter": "BATTERY_TYPE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_BATTERY_INFORMATION",
+        "field": "BatteryType"
+      }
+    ]
+  },
+  {
+    "name": "BATTERY_LEVEL",
+    "autoPopulate": {
+      "filter": "BATTERY_LEVEL_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_BATTERY_INFORMATION",
+        "field": "BatteryLevel"
+      }
+    ]
+  },
+  {
+    "name": "BATTERY_DEVTYPE",
+    "autoPopulate": {
+      "filter": "BATTERY_DEVTYPE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "XInputGetBatteryInformation",
+        "parameter": "devType"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_DEVTYPE",
+    "autoPopulate": {
+      "filter": "XINPUT_DEVTYPE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_CAPABILITIES",
+        "field": "Type"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_DEVSUBTYPE",
+    "autoPopulate": {
+      "filter": "XINPUT_DEVSUBTYPE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_CAPABILITIES",
+        "field": "SubType"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_CAPABILITIES_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "XINPUT_CAPS_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_CAPABILITIES",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_GAMEPAD_BUTTON_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "XINPUT_GAMEPAD_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_GAMEPAD",
+        "field": "wButtons"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_KEYSTROKE_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "XINPUT_KEYSTROKE_",
+      "header": "Xinput.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "XINPUT_KEYSTROKE",
+        "field": "Flags"
+      }
+    ]
+  },
+  {
+    "name": "XINPUT_FLAG",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "XINPUT_FLAG_",
+      "header": "Xinput.h"
+    },
+    "members": [
+      {
+        "name": "XINPUT_FLAG_ALL",
+        "value": "0"
+      }
+    ],
+    "uses": [
+      {
+        "method": "XInputGetCapabilities",
+        "parameter": "dwFlags"
+      }
+    ]
   }
 ]
