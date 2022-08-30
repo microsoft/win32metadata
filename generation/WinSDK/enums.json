@@ -30671,53 +30671,13 @@
     ]
   },
   {
+    "type": "uint",
     "name": "BRUSH_STYLE",
-    "members": [
-      {
-        "name": "BS_SOLID",
-        "value": 0
-      },
-      {
-        "name": "BS_NULL",
-        "value": 1
-      },
-      {
-        "name": "BS_HOLLOW",
-        "value": "BS_NULL"
-      },
-      {
-        "name": "BS_HATCHED",
-        "value": 2
-      },
-      {
-        "name": "BS_PATTERN",
-        "value": 3
-      },
-      {
-        "name": "BS_INDEXED",
-        "value": 4
-      },
-      {
-        "name": "BS_DIBPATTERN",
-        "value": 5
-      },
-      {
-        "name": "BS_DIBPATTERNPT",
-        "value": 6
-      },
-      {
-        "name": "BS_PATTERN8X8",
-        "value": 7
-      },
-      {
-        "name": "BS_DIBPATTERN8X8",
-        "value": 8
-      },
-      {
-        "name": "BS_MONOPATTERN",
-        "value": 9
-      }
-    ],
+    "autoPopulate": {
+      "filter": "BS_",
+      "header": "wingdi.h"
+    },
+    "members": [],
     "uses": [
       {
         "struct": "LOGBRUSH",
@@ -30733,24 +30693,11 @@
     "type": "byte",
     "name": "TMPF_FLAGS",
     "flags": "true",
-    "members": [
-      {
-        "name": "TMPF_FIXED_PITCH",
-        "value": "0x01"
-      },
-      {
-        "name": "TMPF_VECTOR",
-        "value": "0x02"
-      },
-      {
-        "name": "TMPF_DEVICE",
-        "value": "0x08"
-      },
-      {
-        "name": "TMPF_TRUETYPE",
-        "value": "0x04"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "TMPF_",
+      "header": "wingdi.h"
+    },
+    "members": [],
     "uses": [
       {
         "struct": "TEXTMETRICW",
@@ -30772,33 +30719,11 @@
   },
   {
     "name": "BI_COMPRESSION",
-    "flags": "true",
-    "members": [
-      {
-        "name": "BI_RGB",
-        "value": 0
-      },
-      {
-        "name": "BI_RLE8",
-        "value": 1
-      },
-      {
-        "name": "BI_RLE4",
-        "value": 2
-      },
-      {
-        "name": "BI_BITFIELDS",
-        "value": 3
-      },
-      {
-        "name": "BI_JPEG",
-        "value": 4
-      },
-      {
-        "name": "BI_PNG",
-        "value": 5
-      }
-    ],
+    "autoPopulate": {
+      "filter": "BI_",
+      "header": "wingdi.h"
+    },
+    "members": [],
     "uses": [
       {
         "struct": "BITMAPV5HEADER",
