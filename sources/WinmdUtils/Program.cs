@@ -465,6 +465,20 @@ namespace WinmdUtilsProgram
                     }
                 }
 
+                // See if this is a struct acting as a guid constant
+                if (type.Kind == TypeKind.Struct &&
+                    type.GetAttributes().Any(a => a.AttributeType.Name == "GuidAttribute") &&
+                    !type.GetFields().Any())
+                {
+                    if (!nameToOwner.TryGetValue(type.Name, out var owners))
+                    {
+                        owners = new List<string>();
+                        nameToOwner[type.Name] = owners;
+                    }
+
+                    owners.Add(type.FullName);
+                }
+
                 if (type.Kind == TypeKind.Enum || (type.Kind == TypeKind.Class && type.Name == "Apis"))
                 {
                     foreach (var field in type.GetFields(options: GetMemberOptions.IgnoreInheritedMembers))
