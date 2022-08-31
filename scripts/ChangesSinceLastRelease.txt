@@ -2255,3 +2255,24 @@ Windows.Win32.UI.Controls.RichEdit.ITextServices2.TxDrawD2D : calling convention
 Windows.Win32.UI.Controls.RichEdit.ITextServices2.TxGetNaturalSize2 : calling convention...Default => ThisCall
 Windows.Win32.UI.Shell.CIE4ConnectionPoint.DoInvokeIE4 : calling convention...Default => ThisCall
 Windows.Win32.UI.Shell.CIE4ConnectionPoint.DoInvokePIDLIE4 : calling convention...Default => ThisCall
+# Fix structs that duplicate guid constants
+Windows.Win32.Media.KernelStreaming.Apis.CODECAPI_ALLSETTINGS => Windows.Win32.Media.MediaFoundation.Apis.CODECAPI_ALLSETTINGS
+Windows.Win32.Media.KernelStreaming.Apis.CODECAPI_AUDIO_ENCODER => Windows.Win32.Media.MediaFoundation.Apis.CODECAPI_AUDIO_ENCODER
+Windows.Win32.Media.KernelStreaming.Apis.CODECAPI_CHANGELISTS => Windows.Win32.Media.MediaFoundation.Apis.CODECAPI_CHANGELISTS
+Windows.Win32.Media.KernelStreaming.Apis.CODECAPI_CURRENTCHANGELIST => Windows.Win32.Media.MediaFoundation.Apis.CODECAPI_CURRENTCHANGELIST
+Windows.Win32.Media.KernelStreaming.Apis.CODECAPI_SETALLDEFAULTS => Windows.Win32.Media.MediaFoundation.Apis.CODECAPI_SETALLDEFAULTS
+Windows.Win32.Media.KernelStreaming.Apis.CODECAPI_SUPPORTSEVENTS => Windows.Win32.Media.MediaFoundation.Apis.CODECAPI_SUPPORTSEVENTS
+Windows.Win32.Media.KernelStreaming.Apis.CODECAPI_VIDEO_ENCODER => Windows.Win32.Media.MediaFoundation.Apis.CODECAPI_VIDEO_ENCODER
+Windows.Win32.Media.KernelStreaming.Apis.ENCAPIPARAM_BITRATE => Windows.Win32.Media.MediaFoundation.Apis.ENCAPIPARAM_BITRATE
+Windows.Win32.Media.KernelStreaming.Apis.ENCAPIPARAM_BITRATE_MODE => Windows.Win32.Media.MediaFoundation.Apis.ENCAPIPARAM_BITRATE_MODE
+Windows.Win32.Media.KernelStreaming.Apis.ENCAPIPARAM_PEAK_BITRATE => Windows.Win32.Media.MediaFoundation.Apis.ENCAPIPARAM_PEAK_BITRATE
+Windows.Win32.Media.KernelStreaming.CODECAPI_ALLSETTINGS removed
+Windows.Win32.Media.KernelStreaming.CODECAPI_AUDIO_ENCODER removed
+Windows.Win32.Media.KernelStreaming.CODECAPI_CHANGELISTS removed
+Windows.Win32.Media.KernelStreaming.CODECAPI_CURRENTCHANGELIST removed
+Windows.Win32.Media.KernelStreaming.CODECAPI_SETALLDEFAULTS removed
+Windows.Win32.Media.KernelStreaming.CODECAPI_SUPPORTSEVENTS removed
+Windows.Win32.Media.KernelStreaming.CODECAPI_VIDEO_ENCODER removed
+Windows.Win32.Media.KernelStreaming.ENCAPIPARAM_BITRATE removed
+Windows.Win32.Media.KernelStreaming.ENCAPIPARAM_BITRATE_MODE removed
+Windows.Win32.Media.KernelStreaming.ENCAPIPARAM_PEAK_BITRATE removed
