@@ -20,6 +20,8 @@ namespace WinmdUtilsProgram
 {
     class Program
     {
+        private static readonly GenericSignatureTypeProvider SignatureProvider = new GenericSignatureTypeProvider();
+
         static int Main(string[] args)
         {
             var showMissingImportsCommand = new Command("showMissingImports", "Show missing imports between two winmd files.")
@@ -1263,6 +1265,14 @@ namespace WinmdUtilsProgram
             return writer.DifferencesCount == before;
         }
 
+        private static SignatureCallingConvention GetCallingConvention(IMethod method)
+        {
+            var metadata = method.ParentModule.PEFile.Metadata;
+            var methodDef = metadata.GetMethodDefinition((MethodDefinitionHandle)method.MetadataToken);
+            var methodSignature = methodDef.DecodeSignature(SignatureProvider, null);
+            return methodSignature.Header.CallingConvention;
+        }
+
         private static bool CompareMethods(IMethod method1, IMethod method2, DifferencesWriter writer)
         {
             int before = writer.DifferencesCount;
@@ -1270,6 +1280,14 @@ namespace WinmdUtilsProgram
             string methodFullName = GetFullMemberName(method1);
 
             CompareAttributes(methodFullName, method1.GetAttributes(), method2.GetAttributes(), writer);
+
+            var method1CallConv = GetCallingConvention(method1);
+            var method2CallConv = GetCallingConvention(method2);
+
+            if (method1CallConv != method2CallConv)
+            {
+                writer.WriteDifference($"{methodFullName} : calling convention...{method1CallConv} => {method2CallConv}");
+            }
 
             // Return param
             string returnFullName = $"{methodFullName} : return";

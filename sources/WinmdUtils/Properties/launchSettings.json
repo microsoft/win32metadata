@@ -6,11 +6,11 @@
     },
     "compare": {
       "commandName": "Project",
-      "commandLineArgs": "compare --first $(USERPROFILE)\\.nuget\\packages\\microsoft.windows.sdk.win32metadata\\28.0.1-preview\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --knownDiffsFile $(ProjectDir)..\\..\\scripts\\ChangesSinceLastRelease.txt"
+      "commandLineArgs": "compare --first $(USERPROFILE)\\.nuget\\packages\\microsoft.windows.sdk.win32metadata\\29.0.6-preview\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --knownDiffsFile $(ProjectDir)..\\..\\scripts\\ChangesSinceLastRelease.txt"
     },
     "compareWithUpdate": {
       "commandName": "Project",
-      "commandLineArgs": "compare --first $(USERPROFILE)\\.nuget\\packages\\microsoft.windows.sdk.win32metadata\\28.0.1-preview\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --knownDiffsFile $(ProjectDir)..\\..\\scripts\\ChangesSinceLastRelease.txt --updateKnownDiffsComment \"Fix me!\""
+      "commandLineArgs": "compare --first $(USERPROFILE)\\.nuget\\packages\\microsoft.windows.sdk.win32metadata\\29.0.6-preview\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --knownDiffsFile $(ProjectDir)..\\..\\scripts\\ChangesSinceLastRelease.txt --updateKnownDiffsComment \"Fix me!\""
     },
     "showDuplicateImports": {
       "commandName": "Project",
