@@ -30927,7 +30927,7 @@
     ]
   },
   {
-    "type": "int",
+    "type": "uint",
     "name": "STATIC_STYLES",
     "autoPopulate": {
       "filter": "SS_",
