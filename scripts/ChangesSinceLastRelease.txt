@@ -2255,3 +2255,153 @@ Windows.Win32.UI.Controls.RichEdit.ITextServices2.TxDrawD2D : calling convention
 Windows.Win32.UI.Controls.RichEdit.ITextServices2.TxGetNaturalSize2 : calling convention...Default => ThisCall
 Windows.Win32.UI.Shell.CIE4ConnectionPoint.DoInvokeIE4 : calling convention...Default => ThisCall
 Windows.Win32.UI.Shell.CIE4ConnectionPoint.DoInvokePIDLIE4 : calling convention...Default => ThisCall
+
+# SFGAO_FLAGS
+Windows.Win32.System.SystemServices.SFGAO_FLAGS added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_BROWSABLE added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_CANCOPY added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_CANDELETE added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_CANLINK added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_CANMONIKER added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_CANMOVE added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_CANRENAME added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_CAPABILITYMASK added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_COMPRESSED added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_CONTENTSMASK added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_DISPLAYATTRMASK added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_DROPTARGET added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_ENCRYPTED added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_FILESYSANCESTOR added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_FILESYSTEM added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_FOLDER added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_GHOSTED added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_HASPROPSHEET added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_HASSTORAGE added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_HASSUBFOLDER added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_HIDDEN added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_ISSLOW added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_LINK added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_NEWCONTENT added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_NONENUMERATED added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_PKEYSFGAOMASK added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_PLACEHOLDER added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_READONLY added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_REMOVABLE added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_SHARE added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_STORAGE added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_STORAGEANCESTOR added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_STORAGECAPMASK added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_STREAM added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_SYSTEM added
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.SFGAO_VALIDATE added
+Windows.Win32.UI.Shell.Apis.SFGAO_BROWSABLE removed
+Windows.Win32.UI.Shell.Apis.SFGAO_CANDELETE removed
+Windows.Win32.UI.Shell.Apis.SFGAO_CANMONIKER removed
+Windows.Win32.UI.Shell.Apis.SFGAO_CANRENAME removed
+Windows.Win32.UI.Shell.Apis.SFGAO_CAPABILITYMASK removed
+Windows.Win32.UI.Shell.Apis.SFGAO_COMPRESSED removed
+Windows.Win32.UI.Shell.Apis.SFGAO_CONTENTSMASK removed
+Windows.Win32.UI.Shell.Apis.SFGAO_DISPLAYATTRMASK removed
+Windows.Win32.UI.Shell.Apis.SFGAO_DROPTARGET removed
+Windows.Win32.UI.Shell.Apis.SFGAO_ENCRYPTED removed
+Windows.Win32.UI.Shell.Apis.SFGAO_FILESYSANCESTOR removed
+Windows.Win32.UI.Shell.Apis.SFGAO_FILESYSTEM removed
+Windows.Win32.UI.Shell.Apis.SFGAO_FOLDER removed
+Windows.Win32.UI.Shell.Apis.SFGAO_GHOSTED removed
+Windows.Win32.UI.Shell.Apis.SFGAO_HASPROPSHEET removed
+Windows.Win32.UI.Shell.Apis.SFGAO_HASSTORAGE removed
+Windows.Win32.UI.Shell.Apis.SFGAO_HASSUBFOLDER removed
+Windows.Win32.UI.Shell.Apis.SFGAO_HIDDEN removed
+Windows.Win32.UI.Shell.Apis.SFGAO_ISSLOW removed
+Windows.Win32.UI.Shell.Apis.SFGAO_LINK removed
+Windows.Win32.UI.Shell.Apis.SFGAO_NEWCONTENT removed
+Windows.Win32.UI.Shell.Apis.SFGAO_NONENUMERATED removed
+Windows.Win32.UI.Shell.Apis.SFGAO_PKEYSFGAOMASK removed
+Windows.Win32.UI.Shell.Apis.SFGAO_PLACEHOLDER removed
+Windows.Win32.UI.Shell.Apis.SFGAO_READONLY removed
+Windows.Win32.UI.Shell.Apis.SFGAO_REMOVABLE removed
+Windows.Win32.UI.Shell.Apis.SFGAO_SHARE removed
+Windows.Win32.UI.Shell.Apis.SFGAO_STORAGE removed
+Windows.Win32.UI.Shell.Apis.SFGAO_STORAGEANCESTOR removed
+Windows.Win32.UI.Shell.Apis.SFGAO_STORAGECAPMASK removed
+Windows.Win32.UI.Shell.Apis.SFGAO_STREAM removed
+Windows.Win32.UI.Shell.Apis.SFGAO_SYSTEM removed
+Windows.Win32.UI.Shell.Apis.SFGAO_VALIDATE removed
+Windows.Win32.UI.Shell.IShellItem.GetAttributes : psfgaoAttribs...UInt32* => SFGAO_FLAGS*
+Windows.Win32.UI.Shell.IShellItem.GetAttributes : sfgaoMask...UInt32 => SFGAO_FLAGS
+Windows.Win32.UI.Shell.IShellItemArray.GetAttributes : psfgaoAttribs...UInt32* => SFGAO_FLAGS*
+Windows.Win32.UI.Shell.IShellItemArray.GetAttributes : sfgaoMask...UInt32 => SFGAO_FLAGS
+# ODA_FLAGS and ODS_FLAGS for DRAWITEMSTRUCT 
+Windows.Win32.UI.Controls.ODA_FLAGS added
+Windows.Win32.UI.Controls.ODA_FLAGS.ODA_DRAWENTIRE added
+Windows.Win32.UI.Controls.ODA_FLAGS.ODA_FOCUS added
+Windows.Win32.UI.Controls.ODA_FLAGS.ODA_SELECT added
+Windows.Win32.UI.Controls.ODS_FLAGS added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_CHECKED added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_COMBOBOXEDIT added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_DEFAULT added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_DISABLED added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_FOCUS added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_GRAYED added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_HOTLIGHT added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_INACTIVE added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_NOACCEL added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_NOFOCUSRECT added
+Windows.Win32.UI.Controls.ODS_FLAGS.ODS_SELECTED added
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODA_DRAWENTIRE removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODA_FOCUS removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODA_SELECT removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_CHECKED removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_COMBOBOXEDIT removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_DEFAULT removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_DISABLED removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_FOCUS removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_GRAYED removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_HOTLIGHT removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_INACTIVE removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_NOACCEL removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_NOFOCUSRECT removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.ODS_SELECTED removed
+Windows.Win32.UI.Controls.DRAWITEMSTRUCT.itemAction...System.UInt32 => Windows.Win32.UI.Controls.ODA_FLAGS
+Windows.Win32.UI.Controls.DRAWITEMSTRUCT.itemState...System.UInt32 => Windows.Win32.UI.Controls.ODS_FLAGS
+# SYSTEM_METRICS_INDEX enum
+Windows.Win32.UI.HiDpi.Apis.GetSystemMetricsForDpi : nIndex...Int32 => SYSTEM_METRICS_INDEX
+# HELP_INFO_TYPE enum
+Windows.Win32.UI.Shell.HELP_INFO_TYPE added
+Windows.Win32.UI.Shell.HELP_INFO_TYPE.HELPINFO_MENUITEM added
+Windows.Win32.UI.Shell.HELP_INFO_TYPE.HELPINFO_WINDOW added
+Windows.Win32.UI.Shell.HELPINFO.iContextType...System.Int32 => Windows.Win32.UI.Shell.HELP_INFO_TYPE
+Windows.Win32.UI.WindowsAndMessaging.Apis.HELPINFO_MENUITEM removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.HELPINFO_WINDOW removed
+# MESSAGEBOX_STYLE
+Windows.Win32.System.Diagnostics.Debug.Apis.MessageBeep : uType...UInt32 => MESSAGEBOX_STYLE
+# DESKTOP OBJECT enums
+Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopA : dwFlags...UInt32 => DESKTOP_CONTROL_FLAGS
+Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopExA : dwFlags...UInt32 => DESKTOP_CONTROL_FLAGS
+Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopExW : dwFlags...UInt32 => DESKTOP_CONTROL_FLAGS
+Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopW : dwFlags...UInt32 => DESKTOP_CONTROL_FLAGS
+Windows.Win32.System.StationsAndDesktops.Apis.OpenDesktopA : dwFlags...UInt32 => DESKTOP_CONTROL_FLAGS
+Windows.Win32.System.StationsAndDesktops.Apis.OpenDesktopW : dwFlags...UInt32 => DESKTOP_CONTROL_FLAGS
+Windows.Win32.System.StationsAndDesktops.Apis.OpenInputDesktop : dwFlags...UInt32 => DESKTOP_CONTROL_FLAGS
+Windows.Win32.System.StationsAndDesktops.DESKTOP_CONTROL_FLAGS added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_CONTROL_FLAGS.DF_ALLOWOTHERACCOUNTHOOK added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_CREATEMENU added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_CREATEWINDOW added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_ENUMERATE added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_HOOKCONTROL added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_JOURNALPLAYBACK added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_JOURNALRECORD added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_READOBJECTS added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_SWITCHDESKTOP added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_WRITEOBJECTS added
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_CREATEMENU removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_CREATEWINDOW removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_ENUMERATE removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_HOOKCONTROL removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_JOURNALPLAYBACK removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_JOURNALRECORD removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_READOBJECTS removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_SWITCHDESKTOP removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_WRITEOBJECTS removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.DF_ALLOWOTHERACCOUNTHOOK removed
