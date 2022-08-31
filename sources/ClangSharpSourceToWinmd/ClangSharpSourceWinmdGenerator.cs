@@ -12,6 +12,7 @@ using System.Reflection;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.Metadata;
 using System.Reflection.PortableExecutable;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -1037,7 +1038,8 @@ namespace ClangSharpSourceToWinmd
             IEnumerable<Parameter> parameters,
             MethodAttributes methodAttrs,
             MethodImplAttributes methodImplAttributes,
-            bool instanceMethod)
+            bool instanceMethod,
+            bool thisCall)
         {
             methodName = FixArchSpecificName(methodName);
 
@@ -1064,6 +1066,11 @@ namespace ClangSharpSourceToWinmd
             {
                 signatureCallingConvention = SignatureCallingConvention.VarArgs;
                 parameters = parameters.Take(parameters.Count() - 1);
+            }
+
+            if (thisCall)
+            {
+                signatureCallingConvention = SignatureCallingConvention.ThisCall;
             }
 
             var methodSignature = new BlobBuilder();
@@ -1113,7 +1120,8 @@ namespace ClangSharpSourceToWinmd
             IMethodSymbol methodSymbol,
             MethodAttributes methodAttrs,
             MethodImplAttributes methodImplAttrs,
-            bool instanceMethod)
+            bool instanceMethod,
+            bool thisCall)
         {
             var returnType = methodSymbol.ReturnType;
             this.RemapToMoreSpecificTypeIfPossible(methodSymbol.Name, "return", methodSymbol.GetReturnTypeAttributes(), ref returnType);
@@ -1124,7 +1132,7 @@ namespace ClangSharpSourceToWinmd
                 parameters.Add(new Parameter(this, methodSymbol, p));
             }
 
-            return this.AddMethodViaParams(methodSymbol, methodSymbol.Name, returnType, parameters, methodAttrs, methodImplAttrs, instanceMethod);
+            return this.AddMethodViaParams(methodSymbol, methodSymbol.Name, returnType, parameters, methodAttrs, methodImplAttrs, instanceMethod, thisCall);
         }
 
         private INamedTypeSymbol GetTypeByMetadataName(string typeName)
@@ -1245,6 +1253,7 @@ namespace ClangSharpSourceToWinmd
                         symbol,
                         MethodAttributes.Public | MethodAttributes.Static | MethodAttributes.HideBySig | MethodAttributes.PinvokeImpl,
                         methodImplAttributes,
+                        false,
                         false);
                 if (firstMethod.IsNil)
                 {
@@ -1253,7 +1262,8 @@ namespace ClangSharpSourceToWinmd
 
                 this.namesToMethodDefHandles[fullName] = methodDef;
 
-                MethodImportAttributes methodImportAttributes = MethodImportAttributes.CallingConventionWinApi;
+                MethodImportAttributes importCallingConvention = MethodImportAttributes.CallingConventionWinApi;
+                MethodImportAttributes methodImportAttributes = MethodImportAttributes.None;
                 var dllImportAttr = symbol.GetAttributes().First(a => a.AttributeClass.Name == "DllImportAttribute");
                 string moduleName = (string)dllImportAttr.ConstructorArguments[0].Value;
                 StringHandle importedMethodName = this.metadataBuilder.GetOrAddString(methodName);
@@ -1271,7 +1281,27 @@ namespace ClangSharpSourceToWinmd
                     {
                         importedMethodName = this.metadataBuilder.GetOrAddString((string)arg.Value.Value);
                     }
+                    else if (arg.Key == "CallingConvention")
+                    {
+                        var callingConvention = (CallingConvention)arg.Value.Value;
+
+                        switch (callingConvention)
+                        {
+                            case CallingConvention.Cdecl:
+                                importCallingConvention = MethodImportAttributes.CallingConventionCDecl;
+                                break;
+
+                            case CallingConvention.StdCall:
+                                importCallingConvention = MethodImportAttributes.CallingConventionWinApi;
+                                break;
+
+                            default:
+                                break;
+                        }
+                    }
                 }
+
+                methodImportAttributes |= importCallingConvention;
 
                 this.AddCustomAttributes(method, methodDef);
 
@@ -1367,7 +1397,8 @@ namespace ClangSharpSourceToWinmd
                     },
                     MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.SpecialName | MethodAttributes.RTSpecialName,
                     MethodImplAttributes.Managed | MethodImplAttributes.Runtime,
-                    true);
+                    true,
+                    false);
             firstMethod = ctorMethodDef;
 
             var invokeMethodSymbol = symbol.GetMembers().First(m => m.Name == "Invoke");
@@ -1376,7 +1407,8 @@ namespace ClangSharpSourceToWinmd
                 (IMethodSymbol)invokeMethodSymbol,
                 MethodAttributes.Public | MethodAttributes.NewSlot | MethodAttributes.HideBySig | MethodAttributes.Virtual,
                 MethodImplAttributes.Managed | MethodImplAttributes.Runtime,
-                true);
+                true,
+                false);
 
             return firstMethod;
         }
@@ -1889,7 +1921,21 @@ namespace ClangSharpSourceToWinmd
             {
                 var methodSymbol = model.GetDeclaredSymbol(method);
                 var methodName = methodSymbol.Name;
+                bool thisCall = false;
                 MethodAttributes methodAttributes = MethodAttributes.Public | MethodAttributes.HideBySig | MethodAttributes.NewSlot | MethodAttributes.Abstract | MethodAttributes.Virtual;
+
+                var delegateDef =
+                    node.Members.FirstOrDefault(
+                        m => m is DelegateDeclarationSyntax &&
+                        ((DelegateDeclarationSyntax)m).Identifier.Text == $"_{methodName}");
+                if (delegateDef != null)
+                {
+                    var attr = SyntaxUtils.GetAttribute(delegateDef.AttributeLists, "UnmanagedFunctionPointer");
+                    if (attr != null && attr.ToString().Contains("ThisCall"))
+                    {
+                        thisCall = true;
+                    }
+                }
 
                 MethodImplAttributes methodImplAttributes = MethodImplAttributes.Managed;
 
@@ -1903,7 +1949,8 @@ namespace ClangSharpSourceToWinmd
                         methodSymbol,
                         methodAttributes,
                         methodImplAttributes,
-                        true);
+                        true,
+                        thisCall);
 
                 if (firstMethod.IsNil)
                 {

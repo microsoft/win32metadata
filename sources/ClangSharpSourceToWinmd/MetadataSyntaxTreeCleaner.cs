@@ -390,10 +390,11 @@ namespace ClangSharpSourceToWinmd
 
                     case "UnmanagedFunctionPointer":
                     {
-                        // ClangSharp is emitting this attribute with no arguments.
+                        // ClangSharp can emit this attribute with no arguments.
                         // The typedef we're using of this attribute has no such ctor,
-                        // so emit one that does, using WinApi as the default calling convention
-                        if (firstAttr.ArgumentList == null)
+                        // so emit one that does, using WinApi as the default calling convention.
+                        // Also, convert StdCall to Winapi
+                        if (firstAttr.ArgumentList == null || firstAttr.ArgumentList.ToString() == "(CallingConvention.StdCall)")
                         {
                             return
                                 SyntaxFactory.AttributeList(
