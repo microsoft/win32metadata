@@ -66,17 +66,20 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<string, FieldDeclarationSyntax> nameToGuidConstFields = new Dictionary<string, FieldDeclarationSyntax>();
         private HashSet<string> structNameWithGuids = new HashSet<string>();
         private Dictionary<string, List<INamedTypeSymbol>> namespaceToGuidOnlyStructSymbols = new Dictionary<string, List<INamedTypeSymbol>>();
-        private HashSet<StructDeclarationSyntax> guidOnlyStructs = new HashSet<StructDeclarationSyntax>();
+        private HashSet<StructDeclarationSyntax> guidOnlyStructsConvertedToConsts = new HashSet<StructDeclarationSyntax>();
+        private HashSet<string> forceGuidConsts;
 
         private ClangSharpSourceWinmdGenerator(
             CSharpCompilation compilation, 
             Dictionary<string, string> typeImports,
-            HashSet<string> reducePointerLevels, 
+            HashSet<string> reducePointerLevels,
+            HashSet<string> forceGuidConsts,
             Version assemblyVersion, 
             string assemblyName)
         {
             this.compilation = compilation;
             this.reducePointerLevels = reducePointerLevels;
+            this.forceGuidConsts = forceGuidConsts;
 
             foreach (var pair in typeImports)
             {
@@ -188,6 +191,7 @@ namespace ClangSharpSourceToWinmd
             ClangSharpSourceCompilation compilation, 
             Dictionary<string, string> typeImports,
             HashSet<string> reducePointerLevels,
+            HashSet<string> forceGuidConsts,
             Version version, 
             string outputFileName)
         {
@@ -195,7 +199,8 @@ namespace ClangSharpSourceToWinmd
                 new ClangSharpSourceWinmdGenerator(
                     compilation.CSharpCompilation, 
                     typeImports, 
-                    reducePointerLevels, 
+                    reducePointerLevels,
+                    forceGuidConsts,
                     version, 
                     Path.GetFileName(outputFileName));
 
@@ -382,6 +387,11 @@ namespace ClangSharpSourceToWinmd
 
         private void CacheGuidOnlyStruct(StructDeclarationSyntax structNode)
         {
+            if (!this.forceGuidConsts.Contains(structNode.Identifier.ValueText))
+            {
+                return;
+            }
+
             var model = this.GetModel(structNode);
             var symbol = model.GetDeclaredSymbol(structNode);
 
@@ -394,7 +404,7 @@ namespace ClangSharpSourceToWinmd
 
             symbols.Add(symbol);
 
-            this.guidOnlyStructs.Add(structNode);
+            this.guidOnlyStructsConvertedToConsts.Add(structNode);
         }
 
         private void CacheInterfaceType(StructDeclarationSyntax interfaceNode)
@@ -709,7 +719,7 @@ namespace ClangSharpSourceToWinmd
                 return;
             }
 
-            if (this.guidOnlyStructs.Contains(node))
+            if (this.guidOnlyStructsConvertedToConsts.Contains(node))
             {
                 return;
             }

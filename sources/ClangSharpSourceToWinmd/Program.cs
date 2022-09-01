@@ -35,7 +35,8 @@ namespace ClangSharpSourceToWinmd
                 new Option<string>("--typeImport", "A type to be imported from another assembly.", ArgumentArity.OneOrMore),
                 new Option<string>("--requiredNamespaceForName", "The required namespace for a named item.", ArgumentArity.OneOrMore),
                 new Option<string>("--autoTypes", "A path to a .json file of auto-types to add to the metadata.", ArgumentArity.OneOrMore),
-                new Option<string>("--staticLibs", "Mapping from DLL names to alternative static libraries.", ArgumentArity.OneOrMore)
+                new Option<string>("--staticLibs", "Mapping from DLL names to alternative static libraries.", ArgumentArity.OneOrMore),
+                new Option<string>("--forceGuidConst", "Forces a guid-only struct to be a guid const.", ArgumentArity.OneOrMore)
             };
 
             rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
@@ -59,6 +60,7 @@ namespace ClangSharpSourceToWinmd
             var autoTypeFiles = context.ParseResult.ValueForOption<string[]>("--autoTypes");
             var refs = context.ParseResult.ValueForOption<string[]>("--ref");
             var staticLibValuePairs = context.ParseResult.ValueForOption<string[]>("--staticLibs");
+            var forceGuidConstsVals = context.ParseResult.ValueForOption<string[]>("--forceGuidConst");
 
             Dictionary<string, string> remaps = ConvertValuePairsToDictionary(remappedNameValuePairs);
             Dictionary<string, Dictionary<string, string>> enumAdditions = ConvertValuePairsToEnumAdditions(enumAdditionsNameValuePairs);
@@ -66,6 +68,7 @@ namespace ClangSharpSourceToWinmd
             Dictionary<string, string> typeImports = ConvertValuePairsToDictionary(typeImportValuePairs);
             Dictionary<string, string> requiredNamespaces = ConvertValuePairsToDictionary(requiredNamespaceValuePairs);
             Dictionary<string, string> staticLibs = ConvertValuePairsToDictionary(staticLibValuePairs);
+            var forceGuidConsts = new HashSet<string>(forceGuidConstsVals ?? (Array.Empty<string>()));
 
             string rawVersion = version.Split('-')[0];
             Version assemblyVersion = Version.Parse(rawVersion);
@@ -157,6 +160,7 @@ namespace ClangSharpSourceToWinmd
                     clangSharpCompliation, 
                     typeImports,
                     reducePointerLevels,
+                    forceGuidConsts,
                     assemblyVersion, 
                     outputFileName);
 
