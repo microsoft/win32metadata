@@ -2255,3 +2255,9 @@ Windows.Win32.UI.Controls.RichEdit.ITextServices2.TxDrawD2D : calling convention
 Windows.Win32.UI.Controls.RichEdit.ITextServices2.TxGetNaturalSize2 : calling convention...Default => ThisCall
 Windows.Win32.UI.Shell.CIE4ConnectionPoint.DoInvokeIE4 : calling convention...Default => ThisCall
 Windows.Win32.UI.Shell.CIE4ConnectionPoint.DoInvokePIDLIE4 : calling convention...Default => ThisCall
+# Annotate WIN32_ERROR returning methods
+Windows.Win32.System.Threading.Apis.WaitForMultipleObjects : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Threading.Apis.WaitForMultipleObjectsEx : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Threading.Apis.WaitForSingleObject : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Threading.Apis.WaitForSingleObjectEx : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.WindowsProgramming.Apis.SignalObjectAndWait : return...UInt32 => WIN32_ERROR
