@@ -3840,6 +3840,26 @@
         "parameter": "dwErrCode"
       },
       {
+        "method": "SignalObjectAndWait",
+        "parameter": "return"
+      },
+      {
+        "method": "WaitForMultipleObjects",
+        "parameter": "return"
+      },
+      {
+        "method": "WaitForMultipleObjectsEx",
+        "parameter": "return"
+      },
+      {
+        "method": "WaitForSingleObject",
+        "parameter": "return"
+      },
+      {
+        "method": "WaitForSingleObjectEx",
+        "parameter": "return"
+      },
+      {
         "struct": "NETINFOSTRUCT",
         "field": "dwStatus"
       }
