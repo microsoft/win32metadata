@@ -65,7 +65,8 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<StructDeclarationSyntax, ISymbol> structNodesToInheritedSymbols = new Dictionary<StructDeclarationSyntax, ISymbol>();
         private Dictionary<string, FieldDeclarationSyntax> nameToGuidConstFields = new Dictionary<string, FieldDeclarationSyntax>();
         private HashSet<string> structNameWithGuids = new HashSet<string>();
-        private Dictionary<string, AssemblyReferenceHandle> assemblyNamesToRefs = new Dictionary<string, AssemblyReferenceHandle>();
+        private Dictionary<string, List<INamedTypeSymbol>> namespaceToGuidOnlyStructSymbols = new Dictionary<string, List<INamedTypeSymbol>>();
+        private HashSet<StructDeclarationSyntax> guidOnlyStructs = new HashSet<StructDeclarationSyntax>();
 
         private ClangSharpSourceWinmdGenerator(
             CSharpCompilation compilation, 
@@ -379,6 +380,23 @@ namespace ClangSharpSourceToWinmd
             }
         }
 
+        private void CacheGuidOnlyStruct(StructDeclarationSyntax structNode)
+        {
+            var model = this.GetModel(structNode);
+            var symbol = model.GetDeclaredSymbol(structNode);
+
+            var symbolNamespace = symbol.ContainingNamespace.ToString();
+            if (!this.namespaceToGuidOnlyStructSymbols.TryGetValue(symbolNamespace, out var symbols))
+            {
+                symbols = new List<INamedTypeSymbol>();
+                this.namespaceToGuidOnlyStructSymbols[symbolNamespace] = symbols;
+            }
+
+            symbols.Add(symbol);
+
+            this.guidOnlyStructs.Add(structNode);
+        }
+
         private void CacheInterfaceType(StructDeclarationSyntax interfaceNode)
         {
             this.interfaceStructs.Add(interfaceNode);
@@ -687,6 +705,11 @@ namespace ClangSharpSourceToWinmd
             string fullName = this.GetFullNameForSymbol(symbol);
 
             if (this.namesToTypeDefHandles.ContainsKey(fullName))
+            {
+                return;
+            }
+
+            if (this.guidOnlyStructs.Contains(node))
             {
                 return;
             }
@@ -1194,7 +1217,6 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 var fieldSignature = this.EncodeFieldSignature(className, model, field, out _);
-
                 var fieldDefinitionHandle =
                     this.metadataBuilder.AddFieldDefinition(
                         fieldAttributes,
@@ -1211,6 +1233,39 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 this.AddCustomAttributes(fieldVariable, fieldDefinitionHandle);
+            }
+
+            // Add guid structs as guid constants
+            var classNamespace = classSymbol.ContainingNamespace.ToString();
+            if (className == "Apis" && this.namespaceToGuidOnlyStructSymbols.TryGetValue(classNamespace, out var symbols))
+            {
+                // Remove this as we may have partials defs that would add these multiple times
+                this.namespaceToGuidOnlyStructSymbols.Remove(classNamespace);
+
+                var guidTypeSymbol = this.compilation.GetTypeByMetadataName("System.Guid");
+                var fieldAttributes = FieldAttributes.Public | FieldAttributes.Static;
+                foreach (var symbol in symbols)
+                {
+                    var name = symbol.Name;
+                    var fieldSignature = new BlobBuilder();
+                    var encoder = new BlobEncoder(fieldSignature);
+                    var signatureEncoder = encoder.FieldSignature();
+
+                    this.EncodeTypeSymbol(guidTypeSymbol, signatureEncoder);
+
+                    var fieldDefinitionHandle =
+                        this.metadataBuilder.AddFieldDefinition(
+                            fieldAttributes,
+                            this.metadataBuilder.GetOrAddString(name),
+                            this.metadataBuilder.GetOrAddBlob(fieldSignature));
+
+                    if (firstField.IsNil)
+                    {
+                        firstField = fieldDefinitionHandle;
+                    }
+
+                    this.AddCustomAttributes(symbol, fieldDefinitionHandle);
+                }
             }
 
             return firstField;
@@ -2230,6 +2285,11 @@ namespace ClangSharpSourceToWinmd
                 if (HasGuidAttribute(node.AttributeLists))
                 {
                     this.parent.structNameWithGuids.Add(node.Identifier.ValueText);
+
+                    if (node.Members.Count == 0)
+                    {
+                        this.parent.CacheGuidOnlyStruct(node);
+                    }
                 }
             }
 
