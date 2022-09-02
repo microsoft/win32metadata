@@ -7445,45 +7445,47 @@
   },
   {
     "name": "FONT_CLIP_PRECISION",
+    "type": "byte",
     "flags": true,
     "members": [
       {
-        "name": "CLIP_CHARACTER_PRECIS"
+        "name": "CLIP_DEFAULT_PRECIS",
+        "value": "0"
       },
       {
-        "name": "CLIP_DEFAULT_PRECIS"
+        "name": "CLIP_CHARACTER_PRECIS",
+        "value": "1"
       },
       {
-        "name": "CLIP_DFA_DISABLE"
+        "name": "CLIP_STROKE_PRECIS",
+        "value": "2"
       },
       {
-        "name": "CLIP_EMBEDDED"
+        "name": "CLIP_MASK",
+        "value": "0xf"
       },
       {
-        "name": "CLIP_LH_ANGLES"
+        "name": "CLIP_LH_ANGLES",
+        "value": "(1<<4)"
       },
       {
-        "name": "CLIP_MASK"
+        "name": "CLIP_TT_ALWAYS",
+        "value": "(2<<4)"
       },
       {
-        "name": "CLIP_DFA_OVERRIDE"
+        "name": "CLIP_DFA_DISABLE",
+        "value": "(4<<4)"
       },
       {
-        "name": "CLIP_STROKE_PRECIS"
+        "name": "CLIP_EMBEDDED",
+        "value": "(8<<4)"
       },
       {
-        "name": "CLIP_TT_ALWAYS"
+        "name": "CLIP_DFA_OVERRIDE",
+        "value": "(CLIP_DFA_DISABLE)"
       }
     ],
     "uses": [
-      {
-        "method": "CreateFontW",
-        "parameter": "iClipPrecision"
-      },
-      {
-        "method": "CreateFontA",
-        "parameter": "iClipPrecision"
-      },
       {
         "struct": "LOGFONTW",
         "field": "lfClipPrecision"
@@ -13233,47 +13235,54 @@
   },
   {
     "name": "FONT_OUTPUT_PRECISION",
+    "type": "byte",
     "members": [
       {
-        "name": "OUT_CHARACTER_PRECIS"
+        "name": "OUT_DEFAULT_PRECIS",
+        "value": "0"
       },
       {
-        "name": "OUT_DEFAULT_PRECIS"
+        "name": "OUT_STRING_PRECIS",
+        "value": "1"
       },
       {
-        "name": "OUT_DEVICE_PRECIS"
+        "name": "OUT_CHARACTER_PRECIS",
+        "value": "2"
       },
       {
-        "name": "OUT_OUTLINE_PRECIS"
+        "name": "OUT_STROKE_PRECIS",
+        "value": "3"
       },
       {
-        "name": "OUT_PS_ONLY_PRECIS"
+        "name": "OUT_TT_PRECIS",
+        "value": "4"
       },
       {
-        "name": "OUT_RASTER_PRECIS"
+        "name": "OUT_DEVICE_PRECIS",
+        "value": "5"
       },
       {
-        "name": "OUT_STRING_PRECIS"
+        "name": "OUT_RASTER_PRECIS",
+        "value": "6"
       },
       {
-        "name": "OUT_STROKE_PRECIS"
+        "name": "OUT_TT_ONLY_PRECIS",
+        "value": "7"
       },
       {
-        "name": "OUT_TT_ONLY_PRECIS"
+        "name": "OUT_OUTLINE_PRECIS",
+        "value": "8"
       },
       {
-        "name": "OUT_TT_PRECIS"
+        "name": "OUT_SCREEN_OUTLINE_PRECIS",
+        "value": "9"
+      },
+      {
+        "name": "OUT_PS_ONLY_PRECIS",
+        "value": "10"
       }
     ],
     "uses": [
-      {
-        "method": "CreateFontW",
-        "parameter": "iOutPrecision"
-      },
-      {
-        "method": "CreateFontA",
-        "parameter": "iOutPrecision"
-      },
       {
         "struct": "LOGFONTW",
         "field": "lfOutPrecision"
@@ -13292,30 +13301,11 @@
     },
     "members": [],
     "uses": [
-      {
-        "struct": "LOGFONTW",
-        "field": "lfWeight"
-      },
-      {
-        "struct": "LOGFONTA",
-        "field": "lfWeight"
-      },
-      {
-        "struct": "DLGTEMPLATEEX",
-        "field": "lfWeight"
-      },
-      {
-        "method": "put_Weight",
-        "parameter": "weight"
-      },
-      {
-        "method": "get_Weight",
-        "parameter": "pWeight"
-      }
     ]
   },
   {
     "name": "FONT_CHARSET",
+    "type": "byte",
     "members": [
       {
         "name": "ANSI_CHARSET",
@@ -13401,6 +13391,10 @@
     "uses": [
       {
         "struct": "LOGFONTW",
+        "field": "lfCharSet"
+      },
+      {
+        "struct": "LOGFONTA",
         "field": "lfCharSet"
       },
       {
@@ -14038,35 +14032,34 @@
   },
   {
     "name": "FONT_QUALITY",
+    "type": "byte",
     "members": [
       {
-        "name": "ANTIALIASED_QUALITY"
+        "name": "DEFAULT_QUALITY",
+        "value": "0"
       },
       {
-        "name": "CLEARTYPE_QUALITY"
+        "name": "DRAFT_QUALITY",
+        "value": "1"
       },
       {
-        "name": "DEFAULT_QUALITY"
+        "name": "PROOF_QUALITY",
+        "value": "2"
       },
       {
-        "name": "DRAFT_QUALITY"
+        "name": "NONANTIALIASED_QUALITY",
+        "value": "3"
       },
       {
-        "name": "NONANTIALIASED_QUALITY"
+        "name": "ANTIALIASED_QUALITY",
+        "value": "4"
       },
       {
-        "name": "PROOF_QUALITY"
+        "name": "CLEARTYPE_QUALITY",
+        "value": "5"
       }
     ],
     "uses": [
-      {
-        "method": "CreateFontA",
-        "parameter": "iQuality"
-      },
-      {
-        "method": "CreateFontW",
-        "parameter": "iQuality"
-      },
       {
         "struct": "LOGFONTW",
         "field": "lfQuality"
@@ -17649,53 +17642,53 @@
     ]
   },
   {
-    "name": "FONT_PITCH_AND_FAMILY",
+    "name": "FONT_PITCH",
+    "namespace": "Windows.Win32.Graphics.Gdi",
+    "type": "byte",
     "members": [
       {
-        "name": "FF_DECORATIVE"
+        "name": "DEFAULT_PITCH"
       },
       {
-        "name": "FF_DONTCARE"
+        "name": "FIXED_PITCH"
       },
       {
-        "name": "FF_MODERN"
-      },
-      {
-        "name": "FF_ROMAN"
-      },
-      {
-        "name": "FF_SCRIPT"
-      },
-      {
-        "name": "FF_SWISS"
+        "name": "VARIABLE_PITCH"
       }
     ],
-    "uses": [
+    "uses": []
+  },
+  {
+    "name": "FONT_FAMILY",
+    "namespace": "Windows.Win32.Graphics.Gdi",
+    "type": "byte",
+    "members": [
       {
-        "method": "CreateFontW",
-        "parameter": "iPitchAndFamily"
+        "name": "FF_DECORATIVE",
+        "value": "(5<<4)"
       },
       {
-        "method": "CreateFontA",
-        "parameter": "iPitchAndFamily"
+        "name": "FF_DONTCARE",
+        "value": "(0<<4)"
       },
       {
-        "struct": "LOGFONTW",
-        "field": "lfPitchAndFamily"
+        "name": "FF_MODERN",
+        "value": "(3<<4)"
       },
       {
-        "method": "LOGFONTA",
-        "parameter": "lfPitchAndFamily"
+        "name": "FF_ROMAN",
+        "value": "(1<<4)"
       },
       {
-        "method": "CHARFORMATA",
-        "parameter": "bPitchAndFamily"
+        "name": "FF_SCRIPT",
+        "value": "(4<<4)"
       },
       {
-        "method": "CHARFORMATW",
-        "parameter": "bPitchAndFamily"
+        "name": "FF_SWISS",
+        "value": "(2<<4)"
       }
-    ]
+    ],
+    "uses": []
   },
   {
     "name": "WINDOW_DISPLAY_AFFINITY",
