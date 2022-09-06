@@ -638,6 +638,10 @@
       {
         "method": "ModifyMenuW",
         "parameter": "uFlags"
+      },
+      {
+        "method": "OLEVERB",
+        "parameter": "fuFlags"
       }
     ]
   },
@@ -19668,6 +19672,10 @@
       {
         "method": "GlobalAlloc",
         "parameter": "uFlags"
+      },
+      {
+        "method": "OleDuplicateData ",
+        "parameter": "uiFlags"
       }
     ]
   },
@@ -27618,26 +27626,6 @@
     ]
   },
   {
-    "name": "NMLVCUSTOMDRAW_ALIGN",
-    "members": [
-      {
-        "name": "LVGA_HEADER_CENTER"
-      },
-      {
-        "name": "LVGA_HEADER_LEFT"
-      },
-      {
-        "name": "LVGA_HEADER_RIGHT"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "NMLVCUSTOMDRAW",
-        "field": "uAlign"
-      }
-    ]
-  },
-  {
     "name": "IMECOMPTEXT_FLAGS",
     "members": [
       {
@@ -31020,6 +31008,691 @@
       {
         "struct": "ENHMETARECORD",
         "parameter": "iType"
+      }
+    ]
+  },
+  {
+    "name": "HEADER_CONTROL_FORMAT_FLAGS",
+    "type": "int",
+    "autoPopulate": {
+      "filter": "HDF_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "HDITEMW",
+        "field": "fmt"
+      },
+      {
+        "struct": "HDITEMA",
+        "field": "fmt"
+      }
+    ]
+  },
+  {
+    "name": "HEADER_CONTROL_FORMAT_TYPE",
+    "autoPopulate": {
+      "filter": "HDFT_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "HDITEMW",
+        "field": "type"
+      },
+      {
+        "struct": "HDITEMA",
+        "field": "type"
+      }
+    ]
+  },
+  {
+    "name": "HEADER_CONTROL_FORMAT_STATE",
+    "autoPopulate": {
+      "filter": "HDIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "HDITEMW",
+        "field": "state"
+      },
+      {
+        "struct": "HDITEMA",
+        "field": "state"
+      }
+    ]
+  },
+  {
+    "name": "HEADER_HITTEST_INFO_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "HHT_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "HDHITTESTINFO",
+        "field": "flags"
+      }
+    ]
+  },
+  {
+    "name": "IMAGE_LIST_WRITE_STREAM_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "ILP_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "ImageList_WriteEx",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "LIST_ITEM_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "LIF_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LITEM",
+        "field": "mask"
+      }
+    ]
+  },
+  {
+    "name": "LIST_ITEM_STATE_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "LIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LITEM",
+        "field": "state"
+      },
+      {
+        "struct": "LITEM",
+        "field": "stateMask"
+      }
+    ]
+  },
+  {
+    "name": "LIST_VIEW_BACKGROUND_IMAGE_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "LVBKIF_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LVBKIMAGEW",
+        "field": "ulFlags"
+      },
+      {
+        "struct": "LVBKIMAGEA",
+        "field": "ulFlags"
+      }
+    ]
+  },
+  {
+    "name": "LIST_VIEW_GROUP_STATE_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "LVGS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LVGROUP",
+        "field": "state"
+      },
+      {
+        "struct": "LVGROUP",
+        "field": "stateMask"
+      }
+    ]
+  },
+  {
+    "name": "LIST_VIEW_GROUP_ALIGN_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "LVGA_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LVGROUP",
+        "field": "uAlign"
+      },
+      {
+        "struct": "NMLVCUSTOMDRAW",
+        "field": "uAlign"
+      }
+    ]
+  },
+  {
+    "name": "LIST_VIEW_INSERT_MARK_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "LVIM_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LVINSERTMARK",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS",
+    "type": "int",
+    "flags": "true",
+    "members": [
+      {
+        "name": "LVCFMT_LINE_BREAK"
+      },
+      {
+        "name": "LVCFMT_FILL"
+      },
+      {
+        "name": "LVCFMT_WRAP"
+      },
+      {
+        "name": "LVCFMT_NO_TITLE"
+      },
+      {
+        "name": "LVCFMT_TILE_PLACEMENTMASK"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "LVITEMW",
+        "field": "piColFmt"
+      },
+      {
+        "struct": "LVITEMA",
+        "field": "piColFmt"
+      }
+    ]
+  },
+  {
+    "name": "MCHITTESTINFO_HIT_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "MCHT_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "MCHITTESTINFO",
+        "field": "uHit"
+      }
+    ]
+  },
+  {
+    "name": "NMCUSTOMDRAW_DRAW_STATE_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "CDIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NMCUSTOMDRAW",
+        "field": "uItemState"
+      }
+    ]
+  },
+  {
+    "name": "NMDATETIMECHANGE_FLAGS",
+    "members": [
+      {
+        "name": "GDT_NONE"
+      },
+      {
+        "name": "GDT_VALID"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "NMDATETIMECHANGE",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "LIST_VIEW_ITEM_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "LVIF_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NMLISTVIEW",
+        "field": "uChanged"
+      },
+      {
+        "struct": "LVITEMW",
+        "field": "mask"
+      },
+      {
+        "struct": "LVITEMA",
+        "field": "mask"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLEMISC",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IOleObject",
+        "struct": "GetMiscStatus",
+        "field": "pdwStatus"
+      },
+      {
+        "struct": "QACONTROL",
+        "field": "dwMiscStatus"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLECMDID",
+    "members": [],
+    "uses": [
+      {
+        "struct": "OLECMD",
+        "field": "cmdID"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLECMDF",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "OLECMD",
+        "field": "cmdf"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLECONTF",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IOleContainer",
+        "method": "EnumObjects",
+        "parameter": "grfFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLEVERBATTRIB",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "OLEVERB",
+        "field": "grfAttribs"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLEWHICHMK",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IOleClientSite",
+        "method": "GetMoniker",
+        "parameter": "dwWhichMoniker"
+      },
+      {
+        "interface": "IOleObject",
+        "method": "GetMoniker",
+        "parameter": "dwWhichMoniker"
+      },
+      {
+        "interface": "IOleObject",
+        "method": "SetMoniker",
+        "parameter": "dwWhichMoniker"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLEGETMONIKER",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IOleClientSite",
+        "method": "GetMoniker",
+        "parameter": "dwAssign"
+      },
+      {
+        "interface": "IOleObject",
+        "method": "GetMoniker",
+        "parameter": "dwAssign"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "QACONTAINERFLAGS",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "QACONTAINER",
+        "parameter": "dwAmbientFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "TYMED",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "STGMEDIUM",
+        "parameter": "tymed"
+      },
+      {
+        "struct": "RemSTGMEDIUM",
+        "parameter": "tymed"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "STATFLAG",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "interface": "ILockBytes",
+        "method": "Stat",
+        "parameter": "grfStatFlag"
+      },
+      {
+        "interface": "IStorage",
+        "method": "Stat",
+        "parameter": "grfStatFlag"
+      },
+      {
+        "interface": "IStream",
+        "method": "Stat",
+        "parameter": "grfStatFlag"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "STGTY",
+    "members": [],
+    "uses": [
+      {
+        "struct": "STATSTG",
+        "field": "grfStatFlag"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "STGM",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "STATSTG",
+        "field": "grfMode"
+      },
+      {
+        "method": "StgOpenStorageOnILockBytes",
+        "parameter": "grfMode"
+      },
+      {
+        "method": "StgCreateDocfileOnILockBytes",
+        "parameter": "grfMode"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "LOCKTYPE",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "STATSTG",
+        "field": "grfLocksSupported"
+      },
+      {
+        "interface": "ILockBytes",
+        "method": "LockRegion",
+        "parameter": "dwLockType"
+      },
+      {
+        "interface": "IStream",
+        "method": "LockRegion",
+        "parameter": "dwLockType"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "USERCLASSTYPE",
+    "members": [],
+    "uses": [
+      {
+        "method": "OleRegGetUserType",
+        "parameter": "dwFormOfType"
+      },
+      {
+        "interface": "IOleObject",
+        "method": "GetUserType",
+        "parameter": "dwFormOfType"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "VIEWSTATUS",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "QACONTROL",
+        "field": "dwViewStatus"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "POINTERINACTIVE",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "QACONTROL",
+        "field": "dwPointerActivationPolicy"
+      },
+      {
+        "interface": "IPointerInactive",
+        "method": "GetActivationPolicy",
+        "parameter": "pdwPolicy"
+      }
+    ]
+  },
+  {
+    "name": "KEYMODIFIERS",
+    "flags": "true",
+    "members": [
+      {
+        "name": "KEYMOD_SHIFT",
+        "value": "0x0001"
+      },
+      {
+        "name": "KEYMOD_CONTROL",
+        "value": "0x0002"
+      },
+      {
+        "name": "KEYMOD_ALT",
+        "value": "0x0004"
+      }
+    ],
+    "uses": [
+      {
+        "interface": "IOleControlSite",
+        "method": "TranslateAccelerator",
+        "parameter": "grfModifiers"
+      }
+    ]
+  },
+  {
+    "name": "ACCEL_VIRT_FLAGS",
+    "type": "byte",
+    "flags": "true",
+    "members": [
+      {
+        "name": "FVIRTKEY"
+      },
+      {
+        "name": "FNOINVERT"
+      },
+      {
+        "name": "FSHIFT"
+      },
+      {
+        "name": "FCONTROL"
+      },
+      {
+        "name": "FALT"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "ACCEL",
+        "field": "fVirt"
+      }
+    ]
+  },
+  {
+    "name": "DEVMODE_FIELD_FLAGS",
+    "flags": "true",
+    "autoPopulate": {
+      "filter": "DM_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW",
+        "field": "dmFields"
+      },
+      {
+        "struct": "DEVMODEA",
+        "field": "dmFields"
+      }
+    ]
+  },
+  {
+    "name": "DEVMODE_COLOR",
+    "autoPopulate": {
+      "filter": "DMCOLOR_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW",
+        "field": "dmColor"
+      },
+      {
+        "struct": "DEVMODEA",
+        "field": "dmColor"
+      }
+    ]
+  },
+  {
+    "name": "DEVMODE_DUPLEX",
+    "autoPopulate": {
+      "filter": "DMDUP_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW",
+        "field": "dmColor"
+      },
+      {
+        "struct": "DEVMODEA",
+        "field": "dmColor"
+      }
+    ]
+  },
+  {
+    "name": "DEVMODE_COLLATE",
+    "autoPopulate": {
+      "filter": "DMCOLLATE_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW",
+        "field": "dmCollate"
+      },
+      {
+        "struct": "DEVMODEA",
+        "field": "dmCollate"
+      }
+    ]
+  },
+  {
+    "name": "DEVMODE_TRUETYPE_OPTION",
+    "autoPopulate": {
+      "filter": "DMTT_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW",
+        "field": "dmTTOption"
+      },
+      {
+        "struct": "DEVMODEA",
+        "field": "dmTTOption"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "VARFLAGS",
+    "flags": "true",
+    "members": [],
+    "uses": [
+      {
+        "struct": "VARDESC",
+        "field": "wVarFlags"
       }
     ]
   },
