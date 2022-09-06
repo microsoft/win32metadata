@@ -31086,7 +31086,7 @@
     ]
   },
   {
-    "name": "PFN_NUMBERING",
+    "name": "PARAFORMAT_NUMBERING",
     "type": "ushort",
     "flags": true,
     "autoPopulate": {

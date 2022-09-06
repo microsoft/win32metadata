@@ -43,14 +43,14 @@ Windows.Win32.UI.Controls.RichEdit.Apis.PFN_LCLETTER removed
 Windows.Win32.UI.Controls.RichEdit.Apis.PFN_LCROMAN removed
 Windows.Win32.UI.Controls.RichEdit.Apis.PFN_UCLETTER removed
 Windows.Win32.UI.Controls.RichEdit.Apis.PFN_UCROMAN removed
-Windows.Win32.UI.Controls.RichEdit.PARAFORMAT.wNumbering...System.UInt16 => Windows.Win32.UI.Controls.RichEdit.PFN_NUMBERING
-Windows.Win32.UI.Controls.RichEdit.PFN_NUMBERING added
-Windows.Win32.UI.Controls.RichEdit.PFN_NUMBERING.PFN_ARABIC added
-Windows.Win32.UI.Controls.RichEdit.PFN_NUMBERING.PFN_BULLET added
-Windows.Win32.UI.Controls.RichEdit.PFN_NUMBERING.PFN_LCLETTER added
-Windows.Win32.UI.Controls.RichEdit.PFN_NUMBERING.PFN_LCROMAN added
-Windows.Win32.UI.Controls.RichEdit.PFN_NUMBERING.PFN_UCLETTER added
-Windows.Win32.UI.Controls.RichEdit.PFN_NUMBERING.PFN_UCROMAN added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_ARABIC added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_BULLET added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_LCLETTER added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_LCROMAN added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_UCLETTER added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_UCROMAN added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT.wNumbering...System.UInt16 => Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING
 # RECO_FLAGS
 Windows.Win32.UI.Controls.RichEdit.Apis.RECO_COPY removed
 Windows.Win32.UI.Controls.RichEdit.Apis.RECO_CUT removed
