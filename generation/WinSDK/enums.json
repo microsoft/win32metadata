@@ -5653,6 +5653,14 @@
       {
         "method": "TTEmbedFontFromFileA",
         "parameter": "ulCharSet"
+      },
+      {
+        "struct": "CHARFORMATA",
+        "field": "bCharSet"
+      },
+      {
+        "struct": "CHARFORMATW",
+        "field": "bCharSet"
       }
     ]
   },
@@ -17876,6 +17884,14 @@
       {
         "method": "LOGFONTA",
         "parameter": "lfPitchAndFamily"
+      },
+      {
+        "method": "CHARFORMATA",
+        "parameter": "bPitchAndFamily"
+      },
+      {
+        "method": "CHARFORMATW",
+        "parameter": "bPitchAndFamily"
       }
     ]
   },
@@ -23622,6 +23638,38 @@
       {
         "method": "SHDoDragDrop",
         "parameter": "pdwEffect"
+      },
+      {
+        "method": "IRichEditOleCallback::GetDragDropEffect",
+        "parameter": "pdwEffect"
+      },
+      {
+        "method": "IDropSource::GiveFeedback",
+        "parameter": "dwEffect"
+      },
+      {
+        "method": "IDropTarget::DragEnter",
+        "parameter": "pdwEffect"
+      },
+      {
+        "method": "IDropTarget::DragOver",
+        "parameter": "pdwEffect"
+      },
+      {
+        "method": "IDropTarget::Drop",
+        "parameter": "pdwEffect"
+      },
+      {
+        "method": "IDropTargetHelper::DragEnter",
+        "parameter": "dwEffect"
+      },
+      {
+        "method": "IDropTargetHelper::DragOver",
+        "parameter": "dwEffect"
+      },
+      {
+        "method": "IDropTargetHelper::Drop",
+        "parameter": "dwEffect"
       }
     ]
   },
@@ -31645,6 +31693,100 @@
       {
         "struct": "VARDESC",
         "field": "wVarFlags"
+      }
+    ]
+  },
+  {
+    "name": "ADVANCED_FEATURE_FLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "FADF_",
+      "header": "oaidl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "SAFEARRAY",
+        "field": "fFeatures"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "tomConstants",
+    "members": [],
+    "uses": [
+      {
+        "interface": "ITextDocument",
+        "method": "Open",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "ITextDocument",
+        "method": "Save",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "ITextRange",
+        "method": "SetPoint",
+        "parameter": "Type"
+      },
+      {
+        "interface": "ITextRange",
+        "method": "GetPoint",
+        "parameter": "Type"
+      },
+      {
+        "interface": "ITextRange",
+        "method": "FindText",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "ITextRange",
+        "method": "FindTextEnd",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "ITextRange",
+        "method": "FindTextStart",
+        "parameter": "Flags"
+      },
+      {
+        "interface": "ITextRange",
+        "method": "ChangeCase",
+        "parameter": "Type"
+      }
+    ]
+  },
+  {
+    "name": "PARAFORMAT_NUMBERING",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "PFN_",
+      "header": "Richedit.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "PARAFORMAT",
+        "field": "wNumbering"
+      }
+    ]
+  },
+  {
+    "name": "RECO_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "RECO_",
+      "header": "RichOle.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "IRichEditOleCallback::QueryAcceptData",
+        "parameter": "reco"
       }
     ]
   }

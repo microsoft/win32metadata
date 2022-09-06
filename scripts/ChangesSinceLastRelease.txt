@@ -512,3 +512,83 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.FCONTROL removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.FNOINVERT removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.FSHIFT removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.FVIRTKEY removed
+# ADVANCED_FEATURE_FLAGS
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_AUTO added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_BSTR added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_DISPATCH added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_EMBEDDED added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_FIXEDSIZE added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_HAVEIID added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_HAVEVARTYPE added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_RECORD added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_RESERVED added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_STATIC added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_UNKNOWN added
+Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS.FADF_VARIANT added
+Windows.Win32.System.Com.SAFEARRAY.fFeatures...System.UInt16 => Windows.Win32.System.Com.ADVANCED_FEATURE_FLAGS
+Windows.Win32.System.Ole.Apis.FADF_AUTO removed
+Windows.Win32.System.Ole.Apis.FADF_BSTR removed
+Windows.Win32.System.Ole.Apis.FADF_DISPATCH removed
+Windows.Win32.System.Ole.Apis.FADF_EMBEDDED removed
+Windows.Win32.System.Ole.Apis.FADF_FIXEDSIZE removed
+Windows.Win32.System.Ole.Apis.FADF_HAVEIID removed
+Windows.Win32.System.Ole.Apis.FADF_HAVEVARTYPE removed
+Windows.Win32.System.Ole.Apis.FADF_RECORD removed
+Windows.Win32.System.Ole.Apis.FADF_RESERVED removed
+Windows.Win32.System.Ole.Apis.FADF_STATIC removed
+Windows.Win32.System.Ole.Apis.FADF_UNKNOWN removed
+Windows.Win32.System.Ole.Apis.FADF_VARIANT removed
+# SafeArrayGetVartype
+Windows.Win32.System.Ole.Apis.SafeArrayGetVartype : pvt...UInt16* => VARENUM*
+# tomConstants
+Windows.Win32.UI.Controls.RichEdit.ITextDocument.Open : Flags...Int32 => tomConstants
+Windows.Win32.UI.Controls.RichEdit.ITextDocument.Save : Flags...Int32 => tomConstants
+Windows.Win32.UI.Controls.RichEdit.ITextRange.ChangeCase : Type...Int32 => tomConstants
+Windows.Win32.UI.Controls.RichEdit.ITextRange.FindText : Flags...Int32 => tomConstants
+Windows.Win32.UI.Controls.RichEdit.ITextRange.FindTextEnd : Flags...Int32 => tomConstants
+Windows.Win32.UI.Controls.RichEdit.ITextRange.FindTextStart : Flags...Int32 => tomConstants
+Windows.Win32.UI.Controls.RichEdit.ITextRange.GetPoint : Type...Int32 => tomConstants
+Windows.Win32.UI.Controls.RichEdit.ITextRange.SetPoint : Type...Int32 => tomConstants
+# PFN_NUMBERING
+Windows.Win32.UI.Controls.RichEdit.Apis.PFN_ARABIC removed
+Windows.Win32.UI.Controls.RichEdit.Apis.PFN_BULLET removed
+Windows.Win32.UI.Controls.RichEdit.Apis.PFN_LCLETTER removed
+Windows.Win32.UI.Controls.RichEdit.Apis.PFN_LCROMAN removed
+Windows.Win32.UI.Controls.RichEdit.Apis.PFN_UCLETTER removed
+Windows.Win32.UI.Controls.RichEdit.Apis.PFN_UCROMAN removed
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_ARABIC added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_BULLET added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_LCLETTER added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_LCROMAN added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_UCLETTER added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING.PFN_UCROMAN added
+Windows.Win32.UI.Controls.RichEdit.PARAFORMAT.wNumbering...System.UInt16 => Windows.Win32.UI.Controls.RichEdit.PARAFORMAT_NUMBERING
+# RECO_FLAGS
+Windows.Win32.UI.Controls.RichEdit.Apis.RECO_COPY removed
+Windows.Win32.UI.Controls.RichEdit.Apis.RECO_CUT removed
+Windows.Win32.UI.Controls.RichEdit.Apis.RECO_DRAG removed
+Windows.Win32.UI.Controls.RichEdit.Apis.RECO_DROP removed
+Windows.Win32.UI.Controls.RichEdit.Apis.RECO_PASTE removed
+Windows.Win32.System.SystemServices.RECO_FLAGS added
+Windows.Win32.System.SystemServices.RECO_FLAGS.RECO_COPY added
+Windows.Win32.System.SystemServices.RECO_FLAGS.RECO_CUT added
+Windows.Win32.System.SystemServices.RECO_FLAGS.RECO_DRAG added
+Windows.Win32.System.SystemServices.RECO_FLAGS.RECO_DROP added
+Windows.Win32.System.SystemServices.RECO_FLAGS.RECO_PASTE added
+Windows.Win32.UI.Controls.RichEdit.IRichEditOleCallback.QueryAcceptData : reco...UInt32 => RECO_FLAGS
+# bPitchAndFamily and bCHarSet
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATA.bPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATW.bPitchAndFamily...System.Byte => Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATA.bCharSet...System.Byte => Windows.Win32.Graphics.Gdi.EMBED_FONT_CHARSET
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATW.bCharSet...System.Byte => Windows.Win32.Graphics.Gdi.EMBED_FONT_CHARSET
+# DROPEFFECT
+Windows.Win32.UI.Controls.RichEdit.IRichEditOleCallback.GetDragDropEffect : pdwEffect...UInt32* => DROPEFFECT*
+Windows.Win32.System.Ole.IDropSource.GiveFeedback : dwEffect...UInt32 => DROPEFFECT
+Windows.Win32.System.Ole.IDropTarget.DragEnter : pdwEffect...UInt32* => DROPEFFECT*
+Windows.Win32.System.Ole.IDropTarget.DragOver : pdwEffect...UInt32* => DROPEFFECT*
+Windows.Win32.System.Ole.IDropTarget.Drop : pdwEffect...UInt32* => DROPEFFECT*
+Windows.Win32.UI.Shell.IDropTargetHelper.DragEnter : dwEffect...UInt32 => DROPEFFECT
+Windows.Win32.UI.Shell.IDropTargetHelper.DragOver : dwEffect...UInt32 => DROPEFFECT
+Windows.Win32.UI.Shell.IDropTargetHelper.Drop : dwEffect...UInt32 => DROPEFFECT
