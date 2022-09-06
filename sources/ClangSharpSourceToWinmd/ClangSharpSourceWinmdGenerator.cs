@@ -277,65 +277,36 @@ namespace ClangSharpSourceToWinmd
             return name;
         }
 
-        private static void EnsureEnumSizeMatchesOriginalSize(string parent, string name, ITypeSymbol type, string nativeType)
+        private static int GetSizeFromEnumType(INamedTypeSymbol underlyingType)
         {
-            if (type is INamedTypeSymbol namedType)
+            int enumSize;
+            switch (underlyingType.SpecialType)
             {
-                var underlyingType = namedType.EnumUnderlyingType;
-                if (underlyingType != null)
-                {
-                    if (nativeType != null)
-                    {
-                        int nativeSize = 0;
+                case SpecialType.System_Byte:
+                case SpecialType.System_SByte:
+                    enumSize = 1;
+                    break;
 
-                        switch (nativeType)
-                        {
-                            case "SHORT":
-                            case "USHORT":
-                            case "WORD":
-                                nativeSize = 2;
-                                break;
+                case SpecialType.System_UInt32:
+                case SpecialType.System_Int32:
+                    enumSize = 4;
+                    break;
 
-                            case "LONG":
-                            case "ULONG":
-                            case "DWORD":
-                            case "UINT":
-                            case "UINT32":
-                            case "BOOL":
-                                nativeSize = 4;
-                                break;
+                case SpecialType.System_UInt16:
+                case SpecialType.System_Int16:
+                    enumSize = 2;
+                    break;
 
-                            default:
-                                System.Diagnostics.Debug.WriteLine($"{parent}.{name} is using an enum {underlyingType} but its native type {nativeType} not handled.");
-                                return;
-                        }
+                case SpecialType.System_UInt64:
+                case SpecialType.System_Int64:
+                    enumSize = 8;
+                    break;
 
-                        int enumSize = 0;
-
-                        switch (underlyingType.SpecialType)
-                        {
-                            case SpecialType.System_UInt32:
-                            case SpecialType.System_Int32:
-                                enumSize = 4;
-                                break;
-
-                            case SpecialType.System_UInt16:
-                            case SpecialType.System_Int16:
-                                enumSize = 2;
-                                break;
-
-                            default:
-                                throw new InvalidOperationException($"Enum type {underlyingType} not handled.");
-                        }
-
-                        if (enumSize != nativeSize)
-                        {
-                            throw new InvalidOperationException(
-                                $"{parent}.{name} was remapped to enum {namedType} (type {underlyingType}, size {enumSize}) but the original field was of type {nativeType} (size {nativeSize}). Either don't use an enum or make sure the enum is of the same size.");
-                        }
-                    }
-                }
+                default:
+                    throw new InvalidOperationException($"Enum type {underlyingType} not handled in EnsureEnumSizeMatchesOriginalSize.");
             }
+
+            return enumSize;
         }
 
         /// <summary>
@@ -360,6 +331,90 @@ namespace ClangSharpSourceToWinmd
             }
 
             return nativeType;
+        }
+
+        private void EnsureEnumSizeMatchesOriginalSize(string parent, string name, ITypeSymbol type, string nativeType, out bool wasEnum)
+        {
+            wasEnum = false;
+
+            INamedTypeSymbol underlyingType;
+            if (type is INamedTypeSymbol namedType &&
+                (underlyingType = namedType.EnumUnderlyingType) != null)
+            {
+                wasEnum = true;
+
+                if (nativeType != null)
+                {
+                    int nativeSize;
+
+                    nativeType = nativeType.Replace("const ", string.Empty);
+                    nativeType = nativeType.Replace("enum ", string.Empty);
+                    nativeType = nativeType.Replace("unsigned ", string.Empty);
+                    switch (nativeType.ToUpperInvariant())
+                    {
+                        case "CHAR":
+                        case "INT8":
+                        case "UINT8":
+                            nativeSize = 1;
+                            break;
+
+                        case "SHORT":
+                        case "USHORT":
+                        case "WORD":
+                        case "INT16":
+                        case "UINT16":
+                            nativeSize = 2;
+                            break;
+
+                        case "LONG":
+                        case "LONG32":
+                        case "ULONG":
+                        case "ULONG32":
+                        case "DWORD":
+                        case "DWORD32":
+                        case "INT":
+                        case "INT32":
+                        case "UINT":
+                        case "UINT32":
+                        case "BOOL":
+                            nativeSize = 4;
+                            break;
+
+                        case "DWORDLONG":
+                        case "DWORD64":
+                        case "ULONG64":
+                        case "INT64":
+                        case "UINT64":
+                        case "__int64":
+                            nativeSize = 8;
+                            break;
+
+                        default:
+                            var nativeTypeSymbol = this.GetTypeFromShortName(nativeType);
+                            if (nativeTypeSymbol != null && nativeTypeSymbol is INamedTypeSymbol nativeNamedTypeSymbol && nativeNamedTypeSymbol.EnumUnderlyingType != null)
+                            {
+                                nativeSize = GetSizeFromEnumType(nativeNamedTypeSymbol.EnumUnderlyingType);
+                            }
+                            else
+                            {
+                                // TODO: If the generator had the original remappings, it could tell if this was just a rename and
+                                // ignore it
+                                System.Diagnostics.Debug.WriteLine($"{parent}.{name} using enum {type} but the size of its native type {nativeType} can't be determined.");
+                                return;
+                            }
+
+                            break;
+                    }
+
+                    int enumSize = GetSizeFromEnumType(underlyingType);
+
+                    if (enumSize != nativeSize)
+                    {
+                        throw new InvalidOperationException(
+                            $"{parent}.{name} was remapped to enum {namedType} (type {underlyingType}, size {enumSize}) but the original field was of type {nativeType} (size {nativeSize}). Either don't use an enum or make sure the enum is of the same size.");
+                    }
+                }
+            }
         }
 
         private void CacheGuidConst(FieldDeclarationSyntax guidFieldNode)
@@ -957,7 +1012,13 @@ namespace ClangSharpSourceToWinmd
                 return;
             }
 
-            EnsureEnumSizeMatchesOriginalSize(owner, name, typeSymbol, nativeType);
+            this.EnsureEnumSizeMatchesOriginalSize(owner, name, typeSymbol, nativeType, out var wasEnum);
+
+            // Don't try to fix up an enum
+            if (wasEnum)
+            {
+                return;
+            }
 
             if (typeSymbol.SpecialType == SpecialType.System_SByte && IsCharRegex.IsMatch(nativeType))
             {
@@ -1435,7 +1496,6 @@ namespace ClangSharpSourceToWinmd
                     methodList: methodDefinition);
 
             this.namesToTypeDefHandles[fullName] = destTypeDefHandle;
-            System.Diagnostics.Debug.WriteLine($"Class: {symbol}");
         }
 
         private MethodDefinitionHandle WriteDelegateMethods(DelegateDeclarationSyntax node)

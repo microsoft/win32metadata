@@ -8049,6 +8049,7 @@
   },
   {
     "name": "LZOPENFILE_STYLE",
+    "type": "ushort",
     "flags": true,
     "members": [
       {
@@ -8123,10 +8124,6 @@
       {
         "method": "LZOpenFileW",
         "parameter": "wStyle"
-      },
-      {
-        "method": "OpenFile",
-        "parameter": "uStyle"
       }
     ]
   },
@@ -16076,6 +16073,7 @@
   },
   {
     "name": "CREATE_FONT_PACKAGE_SUBSET_ENCODING",
+    "type": "ushort",
     "members": [
       {
         "name": "TTFCFP_STD_MAC_CHAR_SET"
@@ -18801,6 +18799,7 @@
   },
   {
     "name": "CREATE_FONT_PACKAGE_SUBSET_PLATFORM",
+    "type": "ushort",
     "members": [
       {
         "name": "TTFCFP_UNICODE_PLATFORMID"
@@ -19360,6 +19359,7 @@
   },
   {
     "name": "DEVICE_CAPABILITIES",
+    "type": "ushort",
     "members": [
       {
         "name": "DC_BINNAMES"
@@ -24740,6 +24740,7 @@
   {
     "name": "FILE_STORAGE_TIER_FLAGS",
     "flags": true,
+    "type": "uint",
     "members": [
       {
         "name": "FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY",
@@ -24747,10 +24748,6 @@
       }
     ],
     "uses": [
-      {
-        "struct": "FILE_STORAGE_TIER",
-        "field": "Flags"
-      },
       {
         "struct": "FSCTL_QUERY_STORAGE_CLASSES_OUTPUT",
         "field": "Flags"
@@ -30287,10 +30284,26 @@
     ]
   },
   {
+    "name": "ISC_REQ_HIGH_FLAGS",
+    "namespace": "Windows.Win32.Security.Authentication.Identity",
+    "flags": true,
+    "type": "ulong",
+    "members": [
+      {
+        "name": "ISC_REQ_MESSAGES",
+        "value": "0x0000000100000000"
+      },
+      {
+        "name": "ISC_REQ_DEFERRED_CRED_VALIDATION",
+        "value": "0x0000000200000000"
+      }
+    ]
+  },
+  {
     "name": "ISC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ISC_REQ_",
+      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION)",
       "header": "sspi.h"
     },
     "members": [],
@@ -30314,10 +30327,22 @@
     ]
   },
   {
+    "name": "ASC_REQ_HIGH_FLAGS",
+    "namespace": "Windows.Win32.Security.Authentication.Identity",
+    "flags": true,
+    "type": "ulong",
+    "members": [
+      {
+        "name": "ASC_REQ_MESSAGES",
+        "value": "0x0000000100000000"
+      }
+    ]
+  },
+  {
     "name": "ASC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ASC_REQ_",
+      "filter": "ASC_REQ_(?!MESSAGES)",
       "header": "sspi.h"
     },
     "members": [],
