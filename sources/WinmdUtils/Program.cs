@@ -465,6 +465,21 @@ namespace WinmdUtilsProgram
                     }
                 }
 
+                // See if this is a guid-only struct. Count it as a guid constant so that we don't
+                // duplicate a guid between a struct and a const
+                if (type.Kind == TypeKind.Struct &&
+                    type.GetAttributes().Any(a => a.AttributeType.Name == "GuidAttribute") &&
+                    !type.GetFields().Any())
+                {
+                    if (!nameToOwner.TryGetValue(type.Name, out var owners))
+                    {
+                        owners = new List<string>();
+                        nameToOwner[type.Name] = owners;
+                    }
+
+                    owners.Add(type.FullName);
+                }
+
                 if (type.Kind == TypeKind.Enum || (type.Kind == TypeKind.Class && type.Name == "Apis"))
                 {
                     foreach (var field in type.GetFields(options: GetMemberOptions.IgnoreInheritedMembers))
