@@ -271,3 +271,244 @@ Windows.Win32.UI.Controls.NMLVCUSTOMDRAW_ALIGN.LVGA_HEADER_CENTER removed
 Windows.Win32.UI.Controls.NMLVCUSTOMDRAW_ALIGN.LVGA_HEADER_LEFT removed
 Windows.Win32.UI.Controls.NMLVCUSTOMDRAW_ALIGN.LVGA_HEADER_RIGHT removed
 Windows.Win32.UI.Controls.NMLVCUSTOMDRAW.uAlign...Windows.Win32.UI.Controls.NMLVCUSTOMDRAW_ALIGN => Windows.Win32.UI.Controls.LIST_VIEW_GROUP_ALIGN_FLAGS
+# Use OLECMDID/OLECMDF on OLECMD
+Windows.Win32.System.Ole.OLECMD.cmdf...System.UInt32 => Windows.Win32.System.Ole.OLECMDF
+Windows.Win32.System.Ole.OLECMD.cmdID...System.UInt32 => Windows.Win32.System.Ole.OLECMDID
+# Winforms enum changes
+Windows.Win32.Foundation.Apis.DM_COPY removed
+Windows.Win32.Foundation.Apis.DM_IN_BUFFER removed
+Windows.Win32.Foundation.Apis.DM_IN_PROMPT removed
+Windows.Win32.Foundation.Apis.DM_MODIFY removed
+Windows.Win32.Foundation.Apis.DM_OUT_BUFFER removed
+Windows.Win32.Foundation.Apis.DM_OUT_DEFAULT removed
+Windows.Win32.Foundation.Apis.DM_PROMPT removed
+Windows.Win32.Foundation.Apis.DM_UPDATE removed
+Windows.Win32.Graphics.Gdi.Apis.DM_BITSPERPEL removed
+Windows.Win32.Graphics.Gdi.Apis.DM_COLLATE removed
+Windows.Win32.Graphics.Gdi.Apis.DM_COLOR removed
+Windows.Win32.Graphics.Gdi.Apis.DM_COPIES removed
+Windows.Win32.Graphics.Gdi.Apis.DM_DEFAULTSOURCE removed
+Windows.Win32.Graphics.Gdi.Apis.DM_DISPLAYFIXEDOUTPUT removed
+Windows.Win32.Graphics.Gdi.Apis.DM_DISPLAYFLAGS removed
+Windows.Win32.Graphics.Gdi.Apis.DM_DISPLAYFREQUENCY removed
+Windows.Win32.Graphics.Gdi.Apis.DM_DISPLAYORIENTATION removed
+Windows.Win32.Graphics.Gdi.Apis.DM_DITHERTYPE removed
+Windows.Win32.Graphics.Gdi.Apis.DM_DUPLEX removed
+Windows.Win32.Graphics.Gdi.Apis.DM_FORMNAME removed
+Windows.Win32.Graphics.Gdi.Apis.DM_ICMINTENT removed
+Windows.Win32.Graphics.Gdi.Apis.DM_ICMMETHOD removed
+Windows.Win32.Graphics.Gdi.Apis.DM_INTERLACED removed
+Windows.Win32.Graphics.Gdi.Apis.DM_LOGPIXELS removed
+Windows.Win32.Graphics.Gdi.Apis.DM_MEDIATYPE removed
+Windows.Win32.Graphics.Gdi.Apis.DM_NUP removed
+Windows.Win32.Graphics.Gdi.Apis.DM_ORIENTATION removed
+Windows.Win32.Graphics.Gdi.Apis.DM_PANNINGHEIGHT removed
+Windows.Win32.Graphics.Gdi.Apis.DM_PANNINGWIDTH removed
+Windows.Win32.Graphics.Gdi.Apis.DM_PAPERLENGTH removed
+Windows.Win32.Graphics.Gdi.Apis.DM_PAPERSIZE removed
+Windows.Win32.Graphics.Gdi.Apis.DM_PAPERWIDTH removed
+Windows.Win32.Graphics.Gdi.Apis.DM_PELSHEIGHT removed
+Windows.Win32.Graphics.Gdi.Apis.DM_PELSWIDTH removed
+Windows.Win32.Graphics.Gdi.Apis.DM_POSITION removed
+Windows.Win32.Graphics.Gdi.Apis.DM_PRINTQUALITY removed
+Windows.Win32.Graphics.Gdi.Apis.DM_SCALE removed
+Windows.Win32.Graphics.Gdi.Apis.DM_SPECVERSION removed
+Windows.Win32.Graphics.Gdi.Apis.DM_TTOPTION removed
+Windows.Win32.Graphics.Gdi.Apis.DM_YRESOLUTION removed
+Windows.Win32.Graphics.Gdi.Apis.DMCOLLATE_FALSE removed
+Windows.Win32.Graphics.Gdi.Apis.DMCOLLATE_TRUE removed
+Windows.Win32.Graphics.Gdi.Apis.DMCOLOR_COLOR removed
+Windows.Win32.Graphics.Gdi.Apis.DMCOLOR_MONOCHROME removed
+Windows.Win32.Graphics.Gdi.Apis.DMDUP_HORIZONTAL removed
+Windows.Win32.Graphics.Gdi.Apis.DMDUP_SIMPLEX removed
+Windows.Win32.Graphics.Gdi.Apis.DMDUP_VERTICAL removed
+Windows.Win32.Graphics.Gdi.Apis.DMTT_BITMAP removed
+Windows.Win32.Graphics.Gdi.Apis.DMTT_DOWNLOAD removed
+Windows.Win32.Graphics.Gdi.Apis.DMTT_DOWNLOAD_OUTLINE removed
+Windows.Win32.Graphics.Gdi.Apis.DMTT_SUBDEV removed
+Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE added
+Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE.DMCOLLATE_FALSE added
+Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE.DMCOLLATE_TRUE added
+Windows.Win32.Graphics.Gdi.DEVMODE_COLOR added
+Windows.Win32.Graphics.Gdi.DEVMODE_COLOR.DMCOLOR_COLOR added
+Windows.Win32.Graphics.Gdi.DEVMODE_COLOR.DMCOLOR_MONOCHROME added
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX added
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX.DMDUP_HORIZONTAL added
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX.DMDUP_SIMPLEX added
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX.DMDUP_VERTICAL added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_BITSPERPEL added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_COLLATE added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_COLOR added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_COPIES added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_COPY added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_DEFAULTSOURCE added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_DISPLAYFIXEDOUTPUT added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_DISPLAYFLAGS added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_DISPLAYFREQUENCY added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_DISPLAYORIENTATION added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_DITHERTYPE added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_DUPLEX added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_FORMNAME added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_ICMINTENT added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_ICMMETHOD added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_IN_BUFFER added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_IN_PROMPT added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_INTERLACED added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_LOGPIXELS added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_MEDIATYPE added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_MODIFY added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_NUP added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_ORIENTATION added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_OUT_BUFFER added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_OUT_DEFAULT added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PANNINGHEIGHT added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PANNINGWIDTH added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PAPERLENGTH added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PAPERSIZE added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PAPERWIDTH added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PELSHEIGHT added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PELSWIDTH added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_POSITION added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PRINTQUALITY added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_PROMPT added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_SCALE added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_SPECVERSION added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_TTOPTION added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_UPDATE added
+Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS.DM_YRESOLUTION added
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION added
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.DMTT_BITMAP added
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.DMTT_DOWNLOAD added
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.DMTT_DOWNLOAD_OUTLINE added
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.DMTT_SUBDEV added
+Windows.Win32.Graphics.Gdi.DEVMODEA.dmCollate...System.Int16 => Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE
+Windows.Win32.Graphics.Gdi.DEVMODEA.dmColor...System.Int16 => Windows.Win32.Graphics.Gdi.DEVMODE_COLOR
+Windows.Win32.Graphics.Gdi.DEVMODEA.dmFields...System.UInt32 => Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS
+Windows.Win32.Graphics.Gdi.DEVMODEA.dmTTOption...System.Int16 => Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION
+Windows.Win32.Graphics.Gdi.DEVMODEW.dmCollate...System.Int16 => Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE
+Windows.Win32.Graphics.Gdi.DEVMODEW.dmColor...System.Int16 => Windows.Win32.Graphics.Gdi.DEVMODE_COLOR
+Windows.Win32.Graphics.Gdi.DEVMODEW.dmFields...System.UInt32 => Windows.Win32.Graphics.Gdi.DEVMODE_FIELD_FLAGS
+Windows.Win32.Graphics.Gdi.DEVMODEW.dmTTOption...System.Int16 => Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION
+Windows.Win32.System.Com.IStream.LockRegion : dwLockType...UInt32 => LOCKTYPE
+Windows.Win32.System.Com.IStream.Stat : grfStatFlag...UInt32 => STATFLAG
+Windows.Win32.System.Com.LOCKTYPE added
+Windows.Win32.System.Com.LOCKTYPE.LOCK_EXCLUSIVE added
+Windows.Win32.System.Com.LOCKTYPE.LOCK_ONLYONCE added
+Windows.Win32.System.Com.LOCKTYPE.LOCK_WRITE added
+Windows.Win32.System.Com.STATFLAG added
+Windows.Win32.System.Com.STATFLAG.STATFLAG_DEFAULT added
+Windows.Win32.System.Com.STATFLAG.STATFLAG_NONAME added
+Windows.Win32.System.Com.STATFLAG.STATFLAG_NOOPEN added
+Windows.Win32.System.Com.STATSTG.grfLocksSupported...System.UInt32 => Windows.Win32.System.Com.LOCKTYPE
+Windows.Win32.System.Com.STATSTG.grfMode...System.UInt32 => Windows.Win32.System.Com.STGM
+Windows.Win32.System.Com.STGM added
+Windows.Win32.System.Com.STGM.STGM_CONVERT added
+Windows.Win32.System.Com.STGM.STGM_CREATE added
+Windows.Win32.System.Com.STGM.STGM_DELETEONRELEASE added
+Windows.Win32.System.Com.STGM.STGM_DIRECT added
+Windows.Win32.System.Com.STGM.STGM_DIRECT_SWMR added
+Windows.Win32.System.Com.STGM.STGM_FAILIFTHERE added
+Windows.Win32.System.Com.STGM.STGM_NOSCRATCH added
+Windows.Win32.System.Com.STGM.STGM_NOSNAPSHOT added
+Windows.Win32.System.Com.STGM.STGM_PRIORITY added
+Windows.Win32.System.Com.STGM.STGM_READ added
+Windows.Win32.System.Com.STGM.STGM_READWRITE added
+Windows.Win32.System.Com.STGM.STGM_SHARE_DENY_NONE added
+Windows.Win32.System.Com.STGM.STGM_SHARE_DENY_READ added
+Windows.Win32.System.Com.STGM.STGM_SHARE_DENY_WRITE added
+Windows.Win32.System.Com.STGM.STGM_SHARE_EXCLUSIVE added
+Windows.Win32.System.Com.STGM.STGM_SIMPLE added
+Windows.Win32.System.Com.STGM.STGM_TRANSACTED added
+Windows.Win32.System.Com.STGM.STGM_WRITE added
+Windows.Win32.System.Com.StructuredStorage.Apis.StgOpenStorageOnILockBytes : grfMode...UInt32 => STGM
+Windows.Win32.System.Com.StructuredStorage.ILockBytes.LockRegion : dwLockType...UInt32 => LOCKTYPE
+Windows.Win32.System.Com.StructuredStorage.ILockBytes.Stat : grfStatFlag...UInt32 => STATFLAG
+Windows.Win32.System.Com.StructuredStorage.IStorage.Stat : grfStatFlag...UInt32 => STATFLAG
+Windows.Win32.System.Com.StructuredStorage.LOCKTYPE removed
+Windows.Win32.System.Com.StructuredStorage.LOCKTYPE.LOCK_EXCLUSIVE removed
+Windows.Win32.System.Com.StructuredStorage.LOCKTYPE.LOCK_ONLYONCE removed
+Windows.Win32.System.Com.StructuredStorage.LOCKTYPE.LOCK_WRITE removed
+Windows.Win32.System.Com.StructuredStorage.STATFLAG removed
+Windows.Win32.System.Com.StructuredStorage.STATFLAG.STATFLAG_DEFAULT removed
+Windows.Win32.System.Com.StructuredStorage.STATFLAG.STATFLAG_NONAME removed
+Windows.Win32.System.Com.StructuredStorage.STATFLAG.STATFLAG_NOOPEN removed
+Windows.Win32.System.Com.StructuredStorage.STGM removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_CONVERT removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_CREATE removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_DELETEONRELEASE removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_DIRECT removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_DIRECT_SWMR removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_FAILIFTHERE removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_NOSCRATCH removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_NOSNAPSHOT removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_PRIORITY removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_READ removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_READWRITE removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_SHARE_DENY_NONE removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_SHARE_DENY_READ removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_SHARE_DENY_WRITE removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_SHARE_EXCLUSIVE removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_SIMPLE removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_TRANSACTED removed
+Windows.Win32.System.Com.StructuredStorage.STGM.STGM_WRITE removed
+Windows.Win32.System.Com.VARDESC.wVarFlags...System.UInt16 => Windows.Win32.System.Com.VARFLAGS
+Windows.Win32.System.Com.VARFLAGS added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FBINDABLE added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FDEFAULTBIND added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FDEFAULTCOLLELEM added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FDISPLAYBIND added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FHIDDEN added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FIMMEDIATEBIND added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FNONBROWSABLE added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FREADONLY added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FREPLACEABLE added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FREQUESTEDIT added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FRESTRICTED added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FSOURCE added
+Windows.Win32.System.Com.VARFLAGS.VARFLAG_FUIDEFAULT added
+Windows.Win32.System.Ole.Apis.OleRegGetUserType : dwFormOfType...UInt32 => USERCLASSTYPE
+Windows.Win32.System.Ole.IOleClientSite.GetMoniker : dwAssign...UInt32 => OLEGETMONIKER
+Windows.Win32.System.Ole.IOleClientSite.GetMoniker : dwWhichMoniker...UInt32 => OLEWHICHMK
+Windows.Win32.System.Ole.IOleContainer.EnumObjects : grfFlags...UInt32 => OLECONTF
+Windows.Win32.System.Ole.IOleControlSite.TranslateAccelerator : grfModifiers...UInt32 => KEYMODIFIERS
+Windows.Win32.System.Ole.IOleObject.GetMoniker : dwAssign...UInt32 => OLEGETMONIKER
+Windows.Win32.System.Ole.IOleObject.GetMoniker : dwWhichMoniker...UInt32 => OLEWHICHMK
+Windows.Win32.System.Ole.IOleObject.GetUserType : dwFormOfType...UInt32 => USERCLASSTYPE
+Windows.Win32.System.Ole.IOleObject.SetMoniker : dwWhichMoniker...UInt32 => OLEWHICHMK
+Windows.Win32.System.Ole.IPointerInactive.GetActivationPolicy : pdwPolicy...UInt32* => POINTERINACTIVE*
+Windows.Win32.System.Ole.KEYMODIFIERS added
+Windows.Win32.System.Ole.KEYMODIFIERS.KEYMOD_ALT added
+Windows.Win32.System.Ole.KEYMODIFIERS.KEYMOD_CONTROL added
+Windows.Win32.System.Ole.KEYMODIFIERS.KEYMOD_SHIFT added
+Windows.Win32.System.Ole.OLEVERB.fuFlags...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.MENU_ITEM_FLAGS
+Windows.Win32.System.Ole.OLEVERB.grfAttribs...System.UInt32 => Windows.Win32.System.Ole.OLEVERBATTRIB
+Windows.Win32.System.Ole.QACONTROL.dwMiscStatus...System.UInt32 => Windows.Win32.System.Ole.OLEMISC
+Windows.Win32.System.Ole.QACONTROL.dwPointerActivationPolicy...System.UInt32 => Windows.Win32.System.Ole.POINTERINACTIVE
+Windows.Win32.System.Ole.QACONTROL.dwViewStatus...System.UInt32 => Windows.Win32.System.Ole.VIEWSTATUS
+Windows.Win32.System.Ole.VARFLAGS removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FBINDABLE removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FDEFAULTBIND removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FDEFAULTCOLLELEM removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FDISPLAYBIND removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FHIDDEN removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FIMMEDIATEBIND removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FNONBROWSABLE removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FREADONLY removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FREPLACEABLE removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FREQUESTEDIT removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FRESTRICTED removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FSOURCE removed
+Windows.Win32.System.Ole.VARFLAGS.VARFLAG_FUIDEFAULT removed
+Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS added
+Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS.FALT added
+Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS.FCONTROL added
+Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS.FNOINVERT added
+Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS.FSHIFT added
+Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS.FVIRTKEY added
+Windows.Win32.UI.WindowsAndMessaging.ACCEL.fVirt...System.Byte => Windows.Win32.UI.WindowsAndMessaging.ACCEL_VIRT_FLAGS
+Windows.Win32.UI.WindowsAndMessaging.Apis.FALT removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.FCONTROL removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.FNOINVERT removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.FSHIFT removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.FVIRTKEY removed

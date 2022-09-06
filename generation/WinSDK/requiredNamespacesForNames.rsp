@@ -62,6 +62,9 @@ SUBCLASSPROC=Windows.Win32.UI.Shell
 #OFNOTIFYEXA=Windows.Win32.UI.Controls
 #OFNOTIFYEXW=Windows.Win32.UI.Controls
 # endregion commdlg.h
+# region coml2api.h
+STGM=Windows.Win32.System.Com
+# endregion coml2api.h
 # region consoleapi2.h (also defined in ntddvdeo.h)
 FOREGROUND_BLUE=Windows.Win32.System.Console
 FOREGROUND_GREEN=Windows.Win32.System.Console
@@ -311,6 +314,7 @@ ITypeComp=Windows.Win32.System.Com
 DESCKIND=Windows.Win32.System.Com
 BINDPTR=Windows.Win32.System.Com
 VARDESC=Windows.Win32.System.Com
+VARFLAGS=Windows.Win32.System.Com
 CUSTDATA=Windows.Win32.System.Com
 CUSTDATAITEM=Windows.Win32.System.Com
 IDLDESC=Windows.Win32.System.Com
@@ -426,7 +430,7 @@ IStorage=Windows.Win32.System.Com.StructuredStorage
 #IStream=Windows.Win32.System.Com.StructuredStorage
 #IPersistStream=Windows.Win32.System.Com.StructuredStorage
 IPersistStorage=Windows.Win32.System.Com.StructuredStorage
-LOCKTYPE=Windows.Win32.System.Com.StructuredStorage
+LOCKTYPE=Windows.Win32.System.Com
 LPSAFEARRAY_UserFree=Windows.Win32.System.Com.Marshal
 LPSAFEARRAY_UserFree64=Windows.Win32.System.Com.Marshal
 LPSAFEARRAY_UserMarshal=Windows.Win32.System.Com.Marshal
@@ -467,6 +471,7 @@ CoRegisterMessageFilter=Windows.Win32.Media.Audio
 IMessageFilter=Windows.Win32.Media.Audio
 IThumbnailExtractor=Windows.Win32.System.Com.UI
 IDummyHICONIncluder=Windows.Win32.System.Com.UI
+STGY=Windows.Win32.System.Com
 # endregion objidl.h
 # region ocidl.h
 CONNECTDATA=Windows.Win32.System.Com
@@ -2428,7 +2433,7 @@ CSPLATFORM=Windows.Win32.System.Com
 DVASPECT=Windows.Win32.System.Com
 PROPERTYKEY=Windows.Win32.UI.Shell.PropertiesSystem
 QUERYCONTEXT=Windows.Win32.System.Com
-STATFLAG=Windows.Win32.System.Com.StructuredStorage
+STATFLAG=Windows.Win32.System.Com
 STGC=Windows.Win32.System.Com
 STGMOVE=Windows.Win32.System.Com.StructuredStorage
 CLIPDATA=Windows.Win32.System.Com.StructuredStorage
