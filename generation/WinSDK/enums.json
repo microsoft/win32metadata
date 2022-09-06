@@ -532,6 +532,10 @@
       {
         "method": "WTSSendMessageW",
         "parameter": "Style"
+      },
+      {
+        "method": "MessageBeep",
+        "parameter": "uType"
       }
     ]
   },
@@ -15623,6 +15627,10 @@
     "uses": [
       {
         "method": "GetSystemMetrics",
+        "parameter": "nIndex"
+      },
+      {
+        "method": "GetSystemMetricsForDpi",
         "parameter": "nIndex"
       }
     ]
@@ -31789,5 +31797,140 @@
         "parameter": "reco"
       }
     ]
+  },
+  {
+    "type": "ulong",
+    "name": "SFGAO_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SFGAO_",
+      "header": "shobjidl_core.h"
+    },
+    "members": [
+      {
+        "name": "SFGAO_CANCOPY",
+        "value": "0x1"
+      },
+      {
+        "name": "SFGAO_CANMOVE",
+        "value": "0x2"
+      },
+      {
+        "name": "SFGAO_CANLINK",
+        "value": "0x4"
+      }
+    ],
+    "uses": [
+      {
+        "method": "IShellItem::GetAttributes",
+        "parameter": "sfgaoMask"
+      },
+      {
+        "method": "IShellItem::GetAttributes",
+        "parameter": "psfgaoAttribs"
+      },
+      {
+        "method": "IShellItemArray::GetAttributes",
+        "parameter": "psfgaoAttribs"
+      },
+      {
+        "method": "IShellItemArray::GetAttributes",
+        "parameter": "sfgaoMask"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "ODA_FLAGS",
+    "autoPopulate": {
+      "filter": "ODA_",
+      "header": "WinUser.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DRAWITEMSTRUCT",
+        "field": "itemAction"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "ODS_FLAGS",
+    "autoPopulate": {
+      "filter": "ODS_",
+      "header": "WinUser.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DRAWITEMSTRUCT",
+        "field": "itemState"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "HELP_INFO_TYPE",
+    "autoPopulate": {
+      "filter": "HELPINFO_",
+      "header": "WinUser.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "HELPINFO",
+        "field": "iContextType"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "DESKTOP_CONTROL_FLAGS",
+    "autoPopulate": {
+      "filter": "DF_",
+      "header": "WinUser.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "CreateDesktopExA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OpenInputDesktop",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "CreateDesktopExW",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "CreateDesktopA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "CreateDesktopW",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OpenDesktopA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OpenDesktopW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "DESKTOP_ACCESS_FLAGS",
+    "autoPopulate": {
+      "filter": "DESKTOP_",
+      "header": "WinUser.h"
+    },
+    "members": [],
+    "uses": []
   }
 ]
