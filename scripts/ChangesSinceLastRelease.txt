@@ -820,45 +820,8 @@ Windows.Win32.Security.Authentication.Identity.ISC_REQ_FLAGS.value__...System.UI
 Windows.Win32.Security.Authentication.Identity.ISC_REQ_HIGH_FLAGS added
 Windows.Win32.Security.Authentication.Identity.ISC_REQ_HIGH_FLAGS.ISC_REQ_DEFERRED_CRED_VALIDATION added
 Windows.Win32.Security.Authentication.Identity.ISC_REQ_HIGH_FLAGS.ISC_REQ_MESSAGES added
-Windows.Win32.Security.Cryptography.CRYPT_EXPORT_KEY_FLAGS added
-Windows.Win32.Security.Cryptography.CRYPT_EXPORT_KEY_FLAGS.CRYPT_BLOB_VER3 added
-Windows.Win32.Security.Cryptography.CRYPT_EXPORT_KEY_FLAGS.CRYPT_DESTROYKEY added
-Windows.Win32.Security.Cryptography.CRYPT_EXPORT_KEY_FLAGS.CRYPT_OAEP added
-Windows.Win32.Security.Cryptography.CRYPT_EXPORT_KEY_FLAGS.CRYPT_SSL2_FALLBACK added
-Windows.Win32.Security.Cryptography.CRYPT_EXPORT_KEY_FLAGS.CRYPT_Y_ONLY added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_MACHINE_KEY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_NO_KEY_VALIDATION added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_NO_PADDING_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_OVERWRITE_KEY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_PAD_OAEP_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_PAD_PKCS1_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_PAD_PSS_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_PERSIST_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_PERSIST_ONLY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_REGISTER_NOTIFY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_SILENT_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_UNPROTECT_NO_DECRYPT added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_UNREGISTER_NOTIFY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_DECRYPT_FLAGS.NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS.NCRYPT_MACHINE_KEY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS.NCRYPT_NO_KEY_VALIDATION added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS.NCRYPT_OVERWRITE_KEY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS.NCRYPT_REGISTER_NOTIFY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS.NCRYPT_SILENT_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS.NCRYPT_UNPROTECT_NO_DECRYPT added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS.NCRYPT_UNREGISTER_NOTIFY_FLAG added
-Windows.Win32.Security.Cryptography.NCRYPT_NOTIFY_CHANGE_KEY_FLAGS.NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG added
 Windows.Win32.Storage.FileSystem.Apis.OpenFile : uStyle...LZOPENFILE_STYLE => UInt32
 Windows.Win32.Storage.FileSystem.LZOPENFILE_STYLE.value__...System.UInt32 => System.UInt16
-Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FLAGS added
-Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FLAGS.VS_FF_DEBUG added
-Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FLAGS.VS_FF_INFOINFERRED added
-Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FLAGS.VS_FF_PATCHED added
-Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FLAGS.VS_FF_PRERELEASE added
-Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FLAGS.VS_FF_PRIVATEBUILD added
-Windows.Win32.Storage.FileSystem.VS_FIXEDFILEINFO_FLAGS.VS_FF_SPECIALBUILD added
 Windows.Win32.Storage.Xps.DEVICE_CAPABILITIES.value__...System.UInt32 => System.UInt16
 Windows.Win32.System.Diagnostics.Debug.Apis.RtlInstallFunctionTableCallback(Arm64) added
 Windows.Win32.System.Diagnostics.Debug.Apis.RtlInstallFunctionTableCallback(X64, Arm64) removed

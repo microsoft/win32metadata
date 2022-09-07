@@ -12574,77 +12574,6 @@
     ]
   },
   {
-    "name": "NCRYPT_NOTIFY_CHANGE_KEY_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "NCRYPT_REGISTER_NOTIFY_FLAG",
-        "value": "1"
-      },
-      {
-        "name": "NCRYPT_UNREGISTER_NOTIFY_FLAG",
-        "value": "2"
-      },
-      {
-        "name": "NCRYPT_MACHINE_KEY_FLAG",
-        "value": "32"
-      },
-      {
-        "name": "NCRYPT_SILENT_FLAG"
-      },
-      {
-        "name": "NCRYPT_UNPROTECT_NO_DECRYPT"
-      },
-      {
-        "name": "NCRYPT_OVERWRITE_KEY_FLAG"
-      },
-      {
-        "name": "NCRYPT_NO_KEY_VALIDATION"
-      },
-      {
-        "name": "NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NCryptNotifyChangeKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptSecretAgreement",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptExportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptImportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptEnumKeys",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptOpenKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptUnprotectSecret",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptCreatePersistedKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptFinalizeKey",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "IMAGE_LIST_DRAW_STYLE",
     "flags": true,
     "members": [
@@ -15741,38 +15670,6 @@
     ]
   },
   {
-    "name": "CRYPT_EXPORT_KEY_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "CRYPT_BLOB_VER3",
-        "value": "128"
-      },
-      {
-        "name": "CRYPT_DESTROYKEY",
-        "value": "4"
-      },
-      {
-        "name": "CRYPT_OAEP",
-        "value": "64"
-      },
-      {
-        "name": "CRYPT_SSL2_FALLBACK",
-        "value": "2"
-      },
-      {
-        "name": "CRYPT_Y_ONLY",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CryptExportKey",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "IMAGE_LIST_COPY_FLAGS",
     "members": [
       {
@@ -16742,110 +16639,6 @@
       },
       {
         "method": "QueryFullProcessImageNameW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "NCRYPT_DECRYPT_FLAGS",
-    "members": [
-      {
-        "name": "NCRYPT_NO_PADDING_FLAG"
-      },
-      {
-        "name": "NCRYPT_PAD_OAEP_FLAG"
-      },
-      {
-        "name": "NCRYPT_PAD_PKCS1_FLAG"
-      },
-      {
-        "name": "NCRYPT_SILENT_FLAG"
-      },
-      {
-        "name": "NCRYPT_REGISTER_NOTIFY_FLAG",
-        "value": "1"
-      },
-      {
-        "name": "NCRYPT_UNREGISTER_NOTIFY_FLAG",
-        "value": "2"
-      },
-      {
-        "name": "NCRYPT_MACHINE_KEY_FLAG",
-        "value": "32"
-      },
-      {
-        "name": "NCRYPT_UNPROTECT_NO_DECRYPT"
-      },
-      {
-        "name": "NCRYPT_OVERWRITE_KEY_FLAG"
-      },
-      {
-        "name": "NCRYPT_NO_KEY_VALIDATION"
-      },
-      {
-        "name": "NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG"
-      },
-      {
-        "name": "NCRYPT_PAD_PSS_FLAG"
-      },
-      {
-        "name": "NCRYPT_PERSIST_FLAG"
-      },
-      {
-        "name": "NCRYPT_PERSIST_ONLY_FLAG"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NCryptDecrypt",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptNotifyChangeKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptSecretAgreement",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptExportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptImportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptEnumKeys",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptOpenKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptUnprotectSecret",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptCreatePersistedKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptFinalizeKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptEncrypt",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptVerifySignature",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptSetProperty",
         "parameter": "dwFlags"
       }
     ]
@@ -27597,36 +27390,6 @@
       {
         "struct": "ENDCOMPOSITIONNOTIFY",
         "field": "dwCode"
-      }
-    ]
-  },
-  {
-    "name": "VS_FIXEDFILEINFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "VS_FF_DEBUG"
-      },
-      {
-        "name": "VS_FF_INFOINFERRED"
-      },
-      {
-        "name": "VS_FF_PATCHED"
-      },
-      {
-        "name": "VS_FF_PRERELEASE"
-      },
-      {
-        "name": "VS_FF_PRIVATEBUILD"
-      },
-      {
-        "name": "VS_FF_SPECIALBUILD"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VS_FIXEDFILEINFO",
-        "field": "dwFileFlags"
       }
     ]
   },
