@@ -24264,34 +24264,13 @@
     ]
   },
   {
-    "name": "TTTOOLINFO_FLAGS",
+    "name": "TOOLTIP_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "TTF_ABSOLUTE"
-      },
-      {
-        "name": "TTF_CENTERTIP"
-      },
-      {
-        "name": "TTF_IDISHWND"
-      },
-      {
-        "name": "TTF_PARSELINKS"
-      },
-      {
-        "name": "TTF_RTLREADING"
-      },
-      {
-        "name": "TTF_SUBCLASS"
-      },
-      {
-        "name": "TTF_TRACK"
-      },
-      {
-        "name": "TTF_TRANSPARENT"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "TTF_",
+      "header": "commctrl.h"
+    },
+    "members": [],
     "uses": [
       {
         "struct": "TTTOOLINFOA",
@@ -24299,6 +24278,14 @@
       },
       {
         "struct": "TTTOOLINFOW",
+        "field": "uFlags"
+      },
+      {
+        "struct": "NMTTDISPINFOW",
+        "field": "uFlags"
+      },
+      {
+        "struct": "NMTTDISPINFOA",
         "field": "uFlags"
       }
     ]
@@ -30799,11 +30786,195 @@
     "uses": [
       {
         "struct": "EMR",
-        "parameter": "iType"
+        "field": "iType"
       },
       {
         "struct": "ENHMETARECORD",
-        "parameter": "iType"
+        "field": "iType"
+      }
+    ]
+  },
+  {
+    "name": "NMLVGETINFOTIP_FLAGS",
+    "members": [
+      {
+        "name": "LVGIT_UNFOLDED"
+      },
+      {
+        "name": "LVGIT_ZERO",
+        "value": "0"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "NMLVGETINFOTIPW",
+        "field": "dwFlags"
+      },
+      {
+        "struct": "NMLVGETINFOTIPA",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "LIST_VIEW_ITEM_STATE_FLAGS",
+    "autoPopulate": {
+      "filter": "LVIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NMLVODSTATECHANGE",
+        "field": "uNewState"
+      },
+      {
+        "struct": "NMLVODSTATECHANGE",
+        "field": "uOldState"
+      },
+      {
+        "struct": "LVITEMW",
+        "field": "state"
+      },
+      {
+        "struct": "LVITEMW",
+        "field": "stateMask"
+      },
+      {
+        "struct": "LVITEMA",
+        "field": "state"
+      },
+      {
+        "struct": "LVITEMA",
+        "field": "stateMask"
+      }
+    ]
+  },
+  {
+    "name": "NM_TREEVIEW_ACTION",
+    "flags":"true",
+    "autoPopulate": {
+      "filter": "TVE_|TVC_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NMTREEVIEWW",
+        "field": "action"
+      },
+      {
+        "struct": "NMTREEVIEWA",
+        "field": "action"
+      }
+    ]
+  },
+  {
+    "name": "MONTH_CALDENDAR_MESSAGES_VIEW",
+    "autoPopulate": {
+      "filter": "MCMV_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NMVIEWCHANGE",
+        "field": "dwOldView"
+      },
+      {
+        "struct": "NMVIEWCHANGE",
+        "field": "dwNewView"
+      }
+    ]
+  },
+  {
+    "name": "TAB_CONTROL_ITEM_STATE",
+    "autoPopulate": {
+      "filter": "TCIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "TCITEMW",
+        "field": "dwState"
+      },
+      {
+        "struct": "TCITEMW",
+        "field": "dwStateMask"
+      },
+      {
+        "struct": "TCITEMA",
+        "field": "dwState"
+      },
+      {
+        "struct": "TCITEMA",
+        "field": "dwStateMask"
+      }
+    ]
+  },
+  {
+    "name": "TREE_VIEW_ITEM_STATE_FLAGS",
+    "autoPopulate": {
+      "filter": "TVIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "TVITEMW",
+        "field": "state"
+      },
+      {
+        "struct": "TVITEMW",
+        "field": "stateMask"
+      },
+      {
+        "struct": "TVITEMA",
+        "field": "state"
+      },
+      {
+        "struct": "TVITEMA",
+        "field": "stateMask"
+      }
+    ]
+  },
+  {
+    "name": "CTRLINFO_FLAGS",
+    "autoPopulate": {
+      "filter": "CTRLINFO_EATS_",
+      "header": "ocidl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "CONTROLINFO",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "INVOKEKIND",
+    "uses": [
+      {
+        "interface": "IRecordInfo",
+        "method": "PutField",
+        "field": "wFlags"
+      },
+      {
+        "interface": "IRecordInfo",
+        "method": "PutFieldNoCopy",
+        "field": "wFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLECLOSE",
+    "uses": [
+      {
+        "interface": "IOleObject",
+        "method": "Close",
+        "field": "dwSaveOption"
       }
     ]
   },
