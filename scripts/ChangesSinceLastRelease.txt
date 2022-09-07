@@ -742,3 +742,132 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_READOBJECTS removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_SWITCHDESKTOP removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_WRITEOBJECTS removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.DF_ALLOWOTHERACCOUNTHOOK removed
+# Winforms enum changes
+Windows.Win32.Graphics.Gdi.EMR.iType...System.UInt32 => Windows.Win32.Graphics.Gdi.ENHANCED_METAFILE_RECORD_TYPE
+Windows.Win32.Graphics.Gdi.ENHMETARECORD.iType...System.UInt32 => Windows.Win32.Graphics.Gdi.ENHANCED_METAFILE_RECORD_TYPE
+Windows.Win32.System.Ole.FUNCFLAGS.value__...System.Int32 => System.UInt16
+Windows.Win32.UI.Controls.Apis.LVGIT_UNFOLDED removed
+Windows.Win32.UI.Controls.Apis.LVIS_ACTIVATING removed
+Windows.Win32.UI.Controls.Apis.LVIS_CUT removed
+Windows.Win32.UI.Controls.Apis.LVIS_DROPHILITED removed
+Windows.Win32.UI.Controls.Apis.LVIS_FOCUSED removed
+Windows.Win32.UI.Controls.Apis.LVIS_GLOW removed
+Windows.Win32.UI.Controls.Apis.LVIS_OVERLAYMASK removed
+Windows.Win32.UI.Controls.Apis.LVIS_SELECTED removed
+Windows.Win32.UI.Controls.Apis.LVIS_STATEIMAGEMASK removed
+Windows.Win32.UI.Controls.Apis.MCMV_CENTURY removed
+Windows.Win32.UI.Controls.Apis.MCMV_DECADE removed
+Windows.Win32.UI.Controls.Apis.MCMV_MAX removed
+Windows.Win32.UI.Controls.Apis.MCMV_MONTH removed
+Windows.Win32.UI.Controls.Apis.MCMV_YEAR removed
+Windows.Win32.UI.Controls.Apis.TCIS_BUTTONPRESSED removed
+Windows.Win32.UI.Controls.Apis.TCIS_HIGHLIGHTED removed
+Windows.Win32.UI.Controls.Apis.TTF_DI_SETITEM removed
+Windows.Win32.UI.Controls.Apis.TVC_BYKEYBOARD removed
+Windows.Win32.UI.Controls.Apis.TVC_BYMOUSE removed
+Windows.Win32.UI.Controls.Apis.TVC_UNKNOWN removed
+Windows.Win32.UI.Controls.Apis.TVE_COLLAPSE removed
+Windows.Win32.UI.Controls.Apis.TVE_COLLAPSERESET removed
+Windows.Win32.UI.Controls.Apis.TVE_EXPAND removed
+Windows.Win32.UI.Controls.Apis.TVE_EXPANDPARTIAL removed
+Windows.Win32.UI.Controls.Apis.TVE_TOGGLE removed
+Windows.Win32.UI.Controls.Apis.TVIS_BOLD removed
+Windows.Win32.UI.Controls.Apis.TVIS_CUT removed
+Windows.Win32.UI.Controls.Apis.TVIS_DROPHILITED removed
+Windows.Win32.UI.Controls.Apis.TVIS_EX_ALL removed
+Windows.Win32.UI.Controls.Apis.TVIS_EX_DISABLED removed
+Windows.Win32.UI.Controls.Apis.TVIS_EX_FLAT removed
+Windows.Win32.UI.Controls.Apis.TVIS_EXPANDED removed
+Windows.Win32.UI.Controls.Apis.TVIS_EXPANDEDONCE removed
+Windows.Win32.UI.Controls.Apis.TVIS_EXPANDPARTIAL removed
+Windows.Win32.UI.Controls.Apis.TVIS_OVERLAYMASK removed
+Windows.Win32.UI.Controls.Apis.TVIS_SELECTED removed
+Windows.Win32.UI.Controls.Apis.TVIS_STATEIMAGEMASK removed
+Windows.Win32.UI.Controls.Apis.TVIS_USERMASK removed
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS added
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS.LVIS_ACTIVATING added
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS.LVIS_CUT added
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS.LVIS_DROPHILITED added
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS.LVIS_FOCUSED added
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS.LVIS_GLOW added
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS.LVIS_OVERLAYMASK added
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS.LVIS_SELECTED added
+Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS.LVIS_STATEIMAGEMASK added
+Windows.Win32.UI.Controls.LVITEMA.state...System.UInt32 => Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.LVITEMA.stateMask...System.UInt32 => Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.LVITEMW.state...System.UInt32 => Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.LVITEMW.stateMask...System.UInt32 => Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.MONTH_CALDENDAR_MESSAGES_VIEW added
+Windows.Win32.UI.Controls.MONTH_CALDENDAR_MESSAGES_VIEW.MCMV_CENTURY added
+Windows.Win32.UI.Controls.MONTH_CALDENDAR_MESSAGES_VIEW.MCMV_DECADE added
+Windows.Win32.UI.Controls.MONTH_CALDENDAR_MESSAGES_VIEW.MCMV_MAX added
+Windows.Win32.UI.Controls.MONTH_CALDENDAR_MESSAGES_VIEW.MCMV_MONTH added
+Windows.Win32.UI.Controls.MONTH_CALDENDAR_MESSAGES_VIEW.MCMV_YEAR added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION.TVC_BYKEYBOARD added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION.TVC_BYMOUSE added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION.TVC_UNKNOWN added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION.TVE_COLLAPSE added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION.TVE_COLLAPSERESET added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION.TVE_EXPAND added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION.TVE_EXPANDPARTIAL added
+Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION.TVE_TOGGLE added
+Windows.Win32.UI.Controls.NMLVGETINFOTIP_FLAGS added
+Windows.Win32.UI.Controls.NMLVGETINFOTIP_FLAGS.LVGIT_UNFOLDED added
+Windows.Win32.UI.Controls.NMLVGETINFOTIP_FLAGS.LVGIT_ZERO added
+Windows.Win32.UI.Controls.NMLVGETINFOTIPA.dwFlags...System.UInt32 => Windows.Win32.UI.Controls.NMLVGETINFOTIP_FLAGS
+Windows.Win32.UI.Controls.NMLVGETINFOTIPW.dwFlags...System.UInt32 => Windows.Win32.UI.Controls.NMLVGETINFOTIP_FLAGS
+Windows.Win32.UI.Controls.NMLVODSTATECHANGE.uNewState...System.UInt32 => Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.NMLVODSTATECHANGE.uOldState...System.UInt32 => Windows.Win32.UI.Controls.LIST_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.NMTREEVIEWA.action...System.UInt32 => Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION
+Windows.Win32.UI.Controls.NMTREEVIEWW.action...System.UInt32 => Windows.Win32.UI.Controls.NM_TREEVIEW_ACTION
+Windows.Win32.UI.Controls.NMTTDISPINFOA.uFlags...System.UInt32 => Windows.Win32.UI.Controls.TOOLTIP_FLAGS
+Windows.Win32.UI.Controls.NMTTDISPINFOW.uFlags...System.UInt32 => Windows.Win32.UI.Controls.TOOLTIP_FLAGS
+Windows.Win32.UI.Controls.NMVIEWCHANGE.dwNewView...System.UInt32 => Windows.Win32.UI.Controls.MONTH_CALDENDAR_MESSAGES_VIEW
+Windows.Win32.UI.Controls.NMVIEWCHANGE.dwOldView...System.UInt32 => Windows.Win32.UI.Controls.MONTH_CALDENDAR_MESSAGES_VIEW
+Windows.Win32.UI.Controls.TAB_CONTROL_ITEM_STATE added
+Windows.Win32.UI.Controls.TAB_CONTROL_ITEM_STATE.TCIS_BUTTONPRESSED added
+Windows.Win32.UI.Controls.TAB_CONTROL_ITEM_STATE.TCIS_HIGHLIGHTED added
+Windows.Win32.UI.Controls.TCITEMA.dwState...System.UInt32 => Windows.Win32.UI.Controls.TAB_CONTROL_ITEM_STATE
+Windows.Win32.UI.Controls.TCITEMA.dwStateMask...System.UInt32 => Windows.Win32.UI.Controls.TAB_CONTROL_ITEM_STATE
+Windows.Win32.UI.Controls.TCITEMW.dwState...System.UInt32 => Windows.Win32.UI.Controls.TAB_CONTROL_ITEM_STATE
+Windows.Win32.UI.Controls.TCITEMW.dwStateMask...System.UInt32 => Windows.Win32.UI.Controls.TAB_CONTROL_ITEM_STATE
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_ABSOLUTE added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_CENTERTIP added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_DI_SETITEM added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_IDISHWND added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_PARSELINKS added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_RTLREADING added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_SUBCLASS added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_TRACK added
+Windows.Win32.UI.Controls.TOOLTIP_FLAGS.TTF_TRANSPARENT added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_BOLD added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_CUT added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_DROPHILITED added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_EX_ALL added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_EX_DISABLED added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_EX_FLAT added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_EXPANDED added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_EXPANDEDONCE added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_EXPANDPARTIAL added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_OVERLAYMASK added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_SELECTED added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_STATEIMAGEMASK added
+Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS.TVIS_USERMASK added
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS removed
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS.TTF_ABSOLUTE removed
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS.TTF_CENTERTIP removed
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS.TTF_IDISHWND removed
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS.TTF_PARSELINKS removed
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS.TTF_RTLREADING removed
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS.TTF_SUBCLASS removed
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS.TTF_TRACK removed
+Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS.TTF_TRANSPARENT removed
+Windows.Win32.UI.Controls.TTTOOLINFOA.uFlags...Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS => Windows.Win32.UI.Controls.TOOLTIP_FLAGS
+Windows.Win32.UI.Controls.TTTOOLINFOW.uFlags...Windows.Win32.UI.Controls.TTTOOLINFO_FLAGS => Windows.Win32.UI.Controls.TOOLTIP_FLAGS
+Windows.Win32.UI.Controls.TVITEMA.state...System.UInt32 => Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.TVITEMA.stateMask...System.UInt32 => Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.TVITEMW.state...System.UInt32 => Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.Controls.TVITEMW.stateMask...System.UInt32 => Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS

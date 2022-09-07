@@ -38,6 +38,7 @@ SHGDNF=uint
 PATHCCH_OPTIONS=uint
 VARENUM=ushort
 VARFLAGS=ushort
+FUNCFLAGS=ushort
 --exclude
 _TREEITEM
 _IMAGELIST
