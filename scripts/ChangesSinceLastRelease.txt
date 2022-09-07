@@ -871,3 +871,89 @@ Windows.Win32.UI.Controls.TVITEMA.state...System.UInt32 => Windows.Win32.UI.Cont
 Windows.Win32.UI.Controls.TVITEMA.stateMask...System.UInt32 => Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS
 Windows.Win32.UI.Controls.TVITEMW.state...System.UInt32 => Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS
 Windows.Win32.UI.Controls.TVITEMW.stateMask...System.UInt32 => Windows.Win32.UI.Controls.TREE_VIEW_ITEM_STATE_FLAGS
+Windows.Win32.UI.WindowsAndMessaging.Apis.DF_ALLOWOTHERACCOUNTHOOK removed
+# Do a better job detecting enums changing param/field sizes
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_ENCODING.value__...System.UInt32 => System.UInt16
+Windows.Win32.Graphics.Gdi.CREATE_FONT_PACKAGE_SUBSET_PLATFORM.value__...System.UInt32 => System.UInt16
+Windows.Win32.Networking.ActiveDirectory.ADS_ATTR_DEF.dwADsType...Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM => Windows.Win32.Networking.ActiveDirectory.ADSTYPE
+Windows.Win32.Networking.ActiveDirectory.ADS_ATTR_INFO.dwADsType...Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM => Windows.Win32.Networking.ActiveDirectory.ADSTYPE
+Windows.Win32.Networking.ActiveDirectory.ads_search_column.dwADsType...Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM => Windows.Win32.Networking.ActiveDirectory.ADSTYPE
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_BACKLINK added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_BOOLEAN added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_CASE_EXACT_STRING added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_CASE_IGNORE_STRING added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_CASEIGNORE_LIST added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_DN_STRING added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_DN_WITH_BINARY added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_DN_WITH_STRING added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_EMAIL added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_FAXNUMBER added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_HOLD added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_INTEGER added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_INVALID added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_LARGE_INTEGER added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_NETADDRESS added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_NT_SECURITY_DESCRIPTOR added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_NUMERIC_STRING added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_OBJECT_CLASS added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_OCTET_LIST added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_OCTET_STRING added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_PATH added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_POSTALADDRESS added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_PRINTABLE_STRING added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_PROV_SPECIFIC added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_REPLICAPOINTER added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_TIMESTAMP added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_TYPEDNAME added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_UNKNOWN added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPE.ADSTYPE_UTC_TIME added
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_BACKLINK removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_BOOLEAN removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_CASE_EXACT_STRING removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_CASE_IGNORE_STRING removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_CASEIGNORE_LIST removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_DN_STRING removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_DN_WITH_BINARY removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_DN_WITH_STRING removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_EMAIL removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_FAXNUMBER removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_HOLD removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_INTEGER removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_INVALID removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_LARGE_INTEGER removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_NETADDRESS removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_NT_SECURITY_DESCRIPTOR removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_NUMERIC_STRING removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_OBJECT_CLASS removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_OCTET_LIST removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_OCTET_STRING removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_PATH removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_POSTALADDRESS removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_PRINTABLE_STRING removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_PROV_SPECIFIC removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_REPLICAPOINTER removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_TIMESTAMP removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_TYPEDNAME removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_UNKNOWN removed
+Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM.ADSTYPE_UTC_TIME removed
+Windows.Win32.Networking.ActiveDirectory.ADSVALUE.dwType...Windows.Win32.Networking.ActiveDirectory.ADSTYPEENUM => Windows.Win32.Networking.ActiveDirectory.ADSTYPE
+Windows.Win32.Networking.ActiveDirectory.IDsDisplaySpecifier.GetAttributeADsType : return...ADSTYPEENUM => ADSTYPE
+Windows.Win32.Security.Authentication.Identity.ASC_REQ_FLAGS.ASC_REQ_MESSAGES removed
+Windows.Win32.Security.Authentication.Identity.ASC_REQ_FLAGS.value__...System.UInt64 => System.UInt32
+Windows.Win32.Security.Authentication.Identity.ASC_REQ_HIGH_FLAGS added
+Windows.Win32.Security.Authentication.Identity.ASC_REQ_HIGH_FLAGS.ASC_REQ_MESSAGES added
+Windows.Win32.Security.Authentication.Identity.ISC_REQ_FLAGS.ISC_REQ_DEFERRED_CRED_VALIDATION removed
+Windows.Win32.Security.Authentication.Identity.ISC_REQ_FLAGS.ISC_REQ_MESSAGES removed
+Windows.Win32.Security.Authentication.Identity.ISC_REQ_FLAGS.value__...System.UInt64 => System.UInt32
+Windows.Win32.Security.Authentication.Identity.ISC_REQ_HIGH_FLAGS added
+Windows.Win32.Security.Authentication.Identity.ISC_REQ_HIGH_FLAGS.ISC_REQ_DEFERRED_CRED_VALIDATION added
+Windows.Win32.Security.Authentication.Identity.ISC_REQ_HIGH_FLAGS.ISC_REQ_MESSAGES added
+Windows.Win32.Storage.FileSystem.Apis.OpenFile : uStyle...LZOPENFILE_STYLE => UInt32
+Windows.Win32.Storage.FileSystem.LZOPENFILE_STYLE.value__...System.UInt32 => System.UInt16
+Windows.Win32.Storage.Xps.DEVICE_CAPABILITIES.value__...System.UInt32 => System.UInt16
+Windows.Win32.System.Diagnostics.Debug.Apis.RtlInstallFunctionTableCallback(Arm64) added
+Windows.Win32.System.Diagnostics.Debug.Apis.RtlInstallFunctionTableCallback(X64, Arm64) removed
+Windows.Win32.System.Diagnostics.Debug.Apis.RtlInstallFunctionTableCallback(X64) added
+Windows.Win32.System.Ioctl.FILE_STORAGE_TIER.Flags...Windows.Win32.System.Ioctl.FILE_STORAGE_TIER_FLAGS => System.UInt64

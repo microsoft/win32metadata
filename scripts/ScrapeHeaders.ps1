@@ -15,7 +15,7 @@ if ($Clean.IsPresent)
 }
 
 $params = @('build', $windowsWin32ProjectRoot, '-c:Release', '-t:ScrapeHeaders')
-if ($PartitionFilter)
+if ($Partition)
 {
     $params += "-p:PartitionFilter=$Partition"
 }
