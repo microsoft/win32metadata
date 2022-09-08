@@ -10,7 +10,7 @@
   <UsingTask TaskName="MetadataTasks.MergeFilesIntoFile" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.PrepSettingsForFunctionPointerFixups" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
   <UsingTask TaskName="MetadataTasks.PrepSettingsForAutoTypes" AssemblyFile="$(TaskBinDir)\MetadataTasks.dll"/>
-  
+
   <UsingTask TaskName="GetFirstPartitionNamespace" TaskFactory="CodeTaskFactory" AssemblyFile="$(MSBuildToolsPath)\Microsoft.Build.Tasks.v12.0.dll">
     <ParameterGroup>
       <Items ParameterType="Microsoft.Build.Framework.ITaskItem[]" Required="true" />
@@ -246,7 +246,9 @@
       HeaderTextFile="$(FinalConstantsScraperHeaderFile)"
       MarkerFileName="$(ScrapedConstantsMarker)"
       SdkIncRoot="$(SdkIncRoot)"
-      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"/>
+      MSBuildProjectDirectory="$(MSBuildProjectDirectory)"
+      StandardErrorImportance="high"
+      />
 
   </Target>
 

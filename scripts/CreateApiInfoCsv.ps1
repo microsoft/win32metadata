@@ -1,4 +1,4 @@
-Write-Output "Name,Title,Header,TechRoot"
+Write-Host "Name,Title,Header,TechRoot"
 
 foreach ($funcFile in Get-ChildItem "$sdkApiPath\n*.md" -r)
 {
@@ -12,7 +12,7 @@ foreach ($funcFile in Get-ChildItem "$sdkApiPath\n*.md" -r)
         foreach ($match in $matchInfo.Matches)
         {
             foreach ($group in $match.Groups)
-            { 
+            {
                 if ($group.Success)
                 {
                     switch ($group.Name)
@@ -29,6 +29,6 @@ foreach ($funcFile in Get-ChildItem "$sdkApiPath\n*.md" -r)
 
     if (!$funcName.Contains("."))
     {
-        Write-Output "$funcName,$title,$reqHeader,$techRoot"
+        Write-Host "$funcName,$title,$reqHeader,$techRoot"
     }
 }

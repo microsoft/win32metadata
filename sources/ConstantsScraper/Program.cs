@@ -62,13 +62,13 @@ namespace ConstantsScraperApp
             ScraperResults results;
             try
             {
-                results = 
+                results =
                     ConstantsScraper.ScrapeConstants(
                         enumJsonFiles, defaultNamespace, scraperOutputDir, headerText, exclusionNames, traversedHeadersToNamespaces, requiredNamespaces, remaps, withTypes, withAttributes);
             }
             catch (System.Exception e)
             {
-                context.Console.Out.Write($"Failed to scrape constants:\r\n{e.Message}\r\n{e.StackTrace}");
+                context.Console.Error.Write($"Failed to scrape constants:\r\n{e.Message}\r\n{e.StackTrace}");
                 return -1;
             }
 

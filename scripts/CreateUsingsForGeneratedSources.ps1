@@ -7,7 +7,7 @@ param
 
 if (!(Test-Path -path $techRootToNamespaceMappingsFileName))
 {
-    Write-Output "Error: Couldn't find csv file $techRootToNamespaceMappingsFileName."
+    Write-Error "Couldn't find csv file $techRootToNamespaceMappingsFileName."
     exit -1
 }
 
