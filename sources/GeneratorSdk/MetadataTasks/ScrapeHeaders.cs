@@ -14,7 +14,7 @@ namespace MetadataTasks
     {
         public const string ClangSharpVersion = "14.0.0-rc1";
 
-        private static readonly string[] allArches = new string[] { "x64", "x86", "arm64" };
+        private static readonly string[] allArches = new string[] { "x86", "x64", "arm64" };
 
         private bool canceled;
         private string[] defaultIncDirs;
@@ -241,7 +241,7 @@ namespace MetadataTasks
             bool excludeFromCrossarch = this.partitionsToExcludeFromCrossarch.Contains(partitionName) || partition.ExcludeFromCrossarch;
             if (excludeFromCrossarch)
             {
-                if (arch == "x86" || arch == "arm64")
+                if (arch == "x64" || arch == "arm64")
                 {
                     return true;
                 }
