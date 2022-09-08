@@ -21,7 +21,7 @@
           },
           "addUsesTo": {
             "type": "string",
-            "description": "The name of an existing enum scraped from the headers, specify this value to add additional uses to the enum."
+            "description": "The name of an existing enum scraped from the headers. Specify this value to add additional uses to the enum."
           },
           "name": {
             "type": "string",
