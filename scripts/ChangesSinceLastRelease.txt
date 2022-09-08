@@ -1417,3 +1417,39 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.DestroyIndexedResults : [DllImport(Mrm
 Windows.Win32.UI.WindowsAndMessaging.Apis.DestroyResourceIndexer : [DllImport(MrmSupport.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows10.0.10240)] => [DllImport(MrmSupport.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows10.0.10240)]
 Windows.Win32.UI.Xaml.Diagnostics.Apis.InitializeXamlDiagnostic : [DllImport(Windows.UI.Xaml.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False)] => [DllImport(Windows.UI.Xaml.dll,ExactSpelling=True,PreserveSig=False)]
 Windows.Win32.UI.Xaml.Diagnostics.Apis.InitializeXamlDiagnosticsEx : [DllImport(Windows.UI.Xaml.dll,CallingConvention=2,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows10.0.15063)] => [DllImport(Windows.UI.Xaml.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows10.0.15063)]
+# Add padding attribute for some structs
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_INPUT :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_CALLBACK_OUTPUT :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_DIRECTORY :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_EXCEPTION_STREAM :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_FUNCTION_TABLE_STREAM :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_DATA_STREAM :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_OBJECT_INFORMATION :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_HANDLE_OPERATION_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_INCLUDE_THREAD_CALLBACK :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_LOCATION_DESCRIPTOR :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MEMORY_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_2 :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_3 :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_4 :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MISC_INFO_5 :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_MODULE_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_STRING :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_INFO :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_SYSTEM_MEMORY_INFO_1 :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_CALLBACK : [SupportedArchitecture(4)] => [StructLayout(0,Pack=4),SupportedArchitecture(4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_CALLBACK(X64) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_CALLBACK(X86, X64) added
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_CALLBACK(X86) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_EX_CALLBACK : [SupportedArchitecture(4)] => [StructLayout(0,Pack=4),SupportedArchitecture(4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_EX_CALLBACK(X64) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_EX_CALLBACK(X86, X64) added
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_EX_CALLBACK(X86) removed
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_EX_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_INFO_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_NAME_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_TOKEN_INFO_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_UNLOADED_MODULE_LIST :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_RECORD :  => [StructLayout(0,Pack=4)]
