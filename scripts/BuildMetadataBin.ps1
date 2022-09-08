@@ -35,8 +35,8 @@ $arch = "crossarch"
 
 $outputWinmdFileName = Get-OutputWinmdFileName -Arch $arch
 
-Write-Output "`n"
-Write-Output "`e[36m*** Creating $outputWinmdFileName...`e[0m"
+Write-Host "`n"
+Write-Host "*** Creating $outputWinmdFileName..." -ForegroundColor Blue
 
 $skipScraping = "false"
 
@@ -54,5 +54,5 @@ else
     $configuration = "Release"
 }
 
-dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping
+dotnet build "$windowsWin32ProjectRoot" -c $configuration -t:EmitWinmd -p:WinmdVersion=$assemblyVersion -p:OutputWinmd=$outputWinmdFileName -p:SkipScraping=$skipScraping "-bl:$PSScriptRoot\..\bin\logs\BuildMetadataBin.binlog"
 ThrowOnNativeProcessError

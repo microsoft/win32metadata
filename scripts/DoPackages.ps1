@@ -10,7 +10,7 @@ if (!$skipInstallTools)
     Install-BuildTools
 }
 
-Write-Output "`e[36m*** Packing packages...`e[0m"
+Write-Host "*** Packing packages..." -ForegroundColor Blue
 
 dotnet pack "$PSScriptRoot\..\sources\packages.proj" -c Release
 ThrowOnNativeProcessError
