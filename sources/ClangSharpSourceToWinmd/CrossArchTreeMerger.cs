@@ -66,7 +66,7 @@ namespace ClangSharpSourceToWinmd
 
             public override SyntaxNode VisitEnumDeclaration(EnumDeclarationSyntax node)
             {
-                if (this.currentArch != Architecture.X64)
+                if (this.currentArch != Architecture.X86)
                 {
                     return null;
                 }
@@ -93,8 +93,8 @@ namespace ClangSharpSourceToWinmd
             {
                 var modifiers = node.Modifiers.ToString();
 
-                // Get rid of constants on Apis classes when arch isn't x64
-                if (this.currentArch != Architecture.X64 && 
+                // Get rid of constants on Apis classes when arch isn't x86
+                if (this.currentArch != Architecture.X86 && 
                     (node.Parent is ClassDeclarationSyntax cDef && cDef.Identifier.ValueText == "Apis") &&
                     (modifiers.Contains("const") || modifiers.Contains("static")))
                 {
@@ -107,6 +107,11 @@ namespace ClangSharpSourceToWinmd
             public override SyntaxNode VisitStructDeclaration(StructDeclarationSyntax node)
             {
                 node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
+
+                if (this.currentArch == Architecture.X86)
+                {
+                    node = this.owner.map.FixX86Struct(node);
+                }
 
                 if (CrossArchSyntaxMap.IsPotentialCrossArch(node))
                 {
@@ -248,8 +253,8 @@ namespace ClangSharpSourceToWinmd
 
                 if (appliesToAll)
                 {
-                    // Get rid of items that are common to all architectures if we're not on x64
-                    removeNode = this.currentArch != Architecture.X64;
+                    // Get rid of items that are common to all architectures if we're not on x86
+                    removeNode = this.currentArch != Architecture.X86;
                     return;
                 }
 

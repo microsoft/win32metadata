@@ -1452,5 +1452,11 @@
     "Name": "RELOGSTREAM_HANDLE",
     "ValueType": "ulong",
     "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Search",
+    "Name": "HACCESSOR",
+    "ValueType": "UIntPtr",
+    "InvalidHandleValues": [ 0 ]
   }
 ]

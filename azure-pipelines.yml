@@ -39,7 +39,7 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - x64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x64 -scrapeConstants'
+      arguments: '-arch x64'
       errorActionPreference: 'continue'
       pwsh: true
 
@@ -67,7 +67,7 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - x86
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x86'
+      arguments: '-arch x86 -scrapeConstants'
       errorActionPreference: 'continue'
       pwsh: true
 

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
@@ -12,6 +13,8 @@ namespace ClangSharpSourceToWinmd
     public class CrossArchSyntaxMap
     {
         private Dictionary<string, List<CrossArchInfo>> namesToInfos = new Dictionary<string, List<CrossArchInfo>>();
+        private Dictionary<string, StructDeclarationSyntax> namesTo64BitStructs = new Dictionary<string, StructDeclarationSyntax>();
+        private HashSet<string> x86StructsNeed64BitAttrs = new HashSet<string>();
 
         public CrossArchSyntaxMap()
         {
@@ -72,6 +75,33 @@ namespace ClangSharpSourceToWinmd
             return false;
         }
 
+        public StructDeclarationSyntax FixX86Struct(StructDeclarationSyntax x86Node)
+        {
+            string name = SyntaxUtils.GetFullName(x86Node, true);
+            if (this.x86StructsNeed64BitAttrs.Contains(name))
+            {
+                return x86Node.AddAttributeLists(this.namesTo64BitStructs[name].AttributeLists.ToArray());
+            }
+
+            return x86Node;
+        }
+
+        public HashSet<string> Get64BitTreesUsedForX86()
+        {
+            HashSet<string> ret = new HashSet<string>();
+
+            foreach (var name in this.x86StructsNeed64BitAttrs)
+            {
+                var nonX86Struct = this.namesTo64BitStructs[name];
+                if (!ret.Contains(nonX86Struct.SyntaxTree.FilePath))
+                {
+                    ret.Add(nonX86Struct.SyntaxTree.FilePath);
+                }
+            }
+
+            return ret;
+        }
+
         public void AddTree(SyntaxTree tree)
         {
             CrossArchSyntaxWalker walker = new CrossArchSyntaxWalker(this);
@@ -99,10 +129,10 @@ namespace ClangSharpSourceToWinmd
         {
             var nativeType = SyntaxUtils.GetNativeTypeNameFromAttributesLists(attributeLists);
 
-            // If the native type has a '/' it means it contains a path, which won't compare well
-            // in a cloud build when different architectures are built on different agents. Just
-            // return null in that case
-            if (nativeType != null && nativeType.Contains('/'))
+            // Get rid of ones that won't compare well:
+            // If the native type has a '/' it contains a path
+            // If it contains (*), it's a function pointer prototype
+            if (nativeType != null && (nativeType.Contains('/') || nativeType.Contains("(*)")))
             {
                 nativeType = null;
             }
@@ -123,12 +153,29 @@ namespace ClangSharpSourceToWinmd
 
                 foreach (var attr in list.Attributes)
                 {
-                    if (attr.ToString().StartsWith("return:"))
+                    var attrText = attr.ToString();
+
+                    // Skip return attributes
+                    if (attrText.StartsWith("return:"))
                     {
                         continue;
                     }
 
-                    ret.Append($"[{attr}]");
+                    // Skip UnmanagedFunctionPointer attributes because they can have calling
+                    // conventions that will only be accurate on x86
+                    if (attrText.StartsWith("UnmanagedFunctionPointer"))
+                    {
+                        continue;
+                    }
+
+                    // Skip DllImport attributes because they can have calling
+                    // conventions that will only be accurate on x86
+                    if (attrText.StartsWith("DllImport"))
+                    {
+                        continue;
+                    }
+
+                    ret.Append($"[{attrText}]");
                 }
             }
 
@@ -216,7 +263,7 @@ namespace ClangSharpSourceToWinmd
                         else
                         {
                             ret.Append(',');
-                        }
+                        }   
 
                         var firstVar = field.Declaration.Variables.First();
                         var typeName = GetTypeName(field.Declaration.Type.ToString(), field.AttributeLists);
@@ -244,19 +291,28 @@ namespace ClangSharpSourceToWinmd
         {
             string name = SyntaxUtils.GetFullName(node, true);
             string fullSignature = GetFullSignature(node);
-            string altSignature = string.Empty;
+            string altSignatureForX86 = string.Empty;
 
-            if (arch == Architecture.X86 && node is StructDeclarationSyntax structNode)
+            if (node is StructDeclarationSyntax structNode)
             {
-                var packing4AttrList =
-                    SyntaxFactory.AttributeList(
-                        SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
-                            SyntaxFactory.Attribute(
-                                SyntaxFactory.ParseName("StructLayout"),
-                                SyntaxFactory.ParseAttributeArgumentList("(LayoutKind.Sequential, Pack = 4)"))));
+                // Cache the non-x86 struct attributes in case the x86 doesn't have any.
+                // Clang doesn't seem to always know the packing for -m32 but does better with -m64
+                if (arch != Architecture.X86 && structNode.AttributeLists.Count != 0 && !this.namesTo64BitStructs.ContainsKey(name))
+                {
+                    this.namesTo64BitStructs[name] = structNode;
+                }
 
-                var tempNode = structNode.AddAttributeLists(packing4AttrList);
-                altSignature = GetFullSignature(tempNode);
+                if (arch == Architecture.X86)
+                {
+                    // If the x86 node doesn't have any attributes, try using the ones cached from the non-x86 version
+                    if (structNode.AttributeLists.Count == 0 && this.namesTo64BitStructs.TryGetValue(name, out var nonX86Node))
+                    {
+                        var tempNode = structNode.WithAttributeLists(nonX86Node.AttributeLists);
+
+                        // Save these off to see if we match with previous items
+                        altSignatureForX86 = GetFullSignature(tempNode);
+                    }
+                }
             }
 
             lock (this.namesToInfos)
@@ -269,7 +325,14 @@ namespace ClangSharpSourceToWinmd
 
                 foreach (var info in crossArchInfos)
                 {
-                    if (info.FullSignature == fullSignature || info.FullSignature == altSignature)
+                    if (info.FullSignature == altSignatureForX86)
+                    {
+                        this.x86StructsNeed64BitAttrs.Add(name);
+                        info.Arch |= arch;
+                        return;
+                    }
+
+                    if (info.FullSignature == fullSignature)
                     {
                         info.Arch |= arch;
                         return;

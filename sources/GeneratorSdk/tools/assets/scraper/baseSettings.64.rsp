@@ -1,2 +1,4 @@
 --additional
 -m64
+--with-callconv
+*=stdcall

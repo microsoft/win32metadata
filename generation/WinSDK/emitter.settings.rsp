@@ -1026,3 +1026,5 @@ WIA_PROPERTY_INFO::vt=VARENUM
 FormatMessageA::lpBuffer=[-NativeArrayInfo]
 FormatMessageW::lpBuffer=[-NativeArrayInfo]
 SafeArrayGetVartype::pvt=VARENUM
+IDataSourceLocator::get_hWnd::phwndParent=HWND*
+IDataSourceLocator::put_hWnd::hwndParent=HWND
