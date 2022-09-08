@@ -43,7 +43,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated'
+  - publish: 'generation\WinSDK\obj\generated\x64'
     displayName: Publish x64 generated assets
     artifact: 'generated_x64'
 
@@ -71,7 +71,7 @@ jobs:
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated\x86'
+  - publish: 'generation\WinSDK\obj\generated'
     displayName: Publish x86 generated assets
     artifact: 'generated_x86'
 
@@ -142,13 +142,13 @@ jobs:
     displayName: Download x64 generated assets
     inputs:
       artifact: 'generated_x64'
-      path: 'generation\WinSDK\obj\generated'
+      path: 'generation\WinSDK\obj\generated\x64'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download x86 generated assets
     inputs:
       artifact: 'generated_x86'
-      path: 'generation\WinSDK\obj\generated\x86'
+      path: 'generation\WinSDK\obj\generated'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download arm64 generated assets
