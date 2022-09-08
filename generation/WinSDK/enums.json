@@ -1,3 +1,6 @@
+{
+  "$schema": "enums.schema.json",
+  "items":
 [
   {
     "name": "THEME_PROPERTY_SYMBOL_ID",
@@ -24323,7 +24326,7 @@
   },
   {
     "name": "JOB_OBJECT_TERMINATE_AT_END_ACTION",
-    "namepace": "Windows.Win32.System.JobObjects",
+    "namespace": "Windows.Win32.System.JobObjects",
     "members": [
       {
         "name": "JOB_OBJECT_TERMINATE_AT_END_OF_JOB",
@@ -30686,7 +30689,7 @@
   {
     "type": "byte",
     "name": "TMPF_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "TMPF_",
       "header": "wingdi.h"
@@ -30736,7 +30739,7 @@
   {
     "type": "uint",
     "name": "MODIFIERKEYS_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "MK_",
       "header": "WinUser.h"
@@ -30852,7 +30855,7 @@
   },
   {
     "name": "NM_TREEVIEW_ACTION",
-    "flags":"true",
+    "flags": true,
     "autoPopulate": {
       "filter": "TVE_|TVC_",
       "header": "commctrl.h"
@@ -30959,12 +30962,12 @@
       {
         "interface": "IRecordInfo",
         "method": "PutField",
-        "field": "wFlags"
+        "parameter": "wFlags"
       },
       {
         "interface": "IRecordInfo",
         "method": "PutFieldNoCopy",
-        "field": "wFlags"
+        "parameter": "wFlags"
       }
     ]
   },
@@ -30974,7 +30977,7 @@
       {
         "interface": "IOleObject",
         "method": "Close",
-        "field": "dwSaveOption"
+        "parameter": "dwSaveOption"
       }
     ]
   },
@@ -31035,7 +31038,7 @@
   },
   {
     "name": "HEADER_HITTEST_INFO_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "HHT_",
       "header": "commctrl.h"
@@ -31050,7 +31053,7 @@
   },
   {
     "name": "IMAGE_LIST_WRITE_STREAM_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "ILP_",
       "header": "commctrl.h"
@@ -31059,13 +31062,13 @@
     "uses": [
       {
         "method": "ImageList_WriteEx",
-        "field": "dwFlags"
+        "parameter": "dwFlags"
       }
     ]
   },
   {
     "name": "LIST_ITEM_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LIF_",
       "header": "commctrl.h"
@@ -31080,7 +31083,7 @@
   },
   {
     "name": "LIST_ITEM_STATE_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LIS_",
       "header": "commctrl.h"
@@ -31099,7 +31102,7 @@
   },
   {
     "name": "LIST_VIEW_BACKGROUND_IMAGE_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVBKIF_",
       "header": "commctrl.h"
@@ -31118,7 +31121,7 @@
   },
   {
     "name": "LIST_VIEW_GROUP_STATE_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVGS_",
       "header": "commctrl.h"
@@ -31137,7 +31140,7 @@
   },
   {
     "name": "LIST_VIEW_GROUP_ALIGN_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVGA_",
       "header": "commctrl.h"
@@ -31156,7 +31159,7 @@
   },
   {
     "name": "LIST_VIEW_INSERT_MARK_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVIM_",
       "header": "commctrl.h"
@@ -31172,7 +31175,7 @@
   {
     "name": "LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS",
     "type": "int",
-    "flags": "true",
+    "flags": true,
     "members": [
       {
         "name": "LVCFMT_LINE_BREAK"
@@ -31203,7 +31206,7 @@
   },
   {
     "name": "MCHITTESTINFO_HIT_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "MCHT_",
       "header": "commctrl.h"
@@ -31218,7 +31221,7 @@
   },
   {
     "name": "NMCUSTOMDRAW_DRAW_STATE_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "CDIS_",
       "header": "commctrl.h"
@@ -31250,7 +31253,7 @@
   },
   {
     "name": "LIST_VIEW_ITEM_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVIF_",
       "header": "commctrl.h"
@@ -31277,8 +31280,8 @@
     "uses": [
       {
         "interface": "IOleObject",
-        "struct": "GetMiscStatus",
-        "field": "pdwStatus"
+        "method": "GetMiscStatus",
+        "parameter": "pdwStatus"
       },
       {
         "struct": "QACONTROL",
@@ -31298,7 +31301,7 @@
   },
   {
     "addUsesTo": "OLECMDF",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31309,7 +31312,7 @@
   },
   {
     "addUsesTo": "OLECONTF",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31321,7 +31324,7 @@
   },
   {
     "addUsesTo": "OLEVERBATTRIB",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31332,7 +31335,7 @@
   },
   {
     "addUsesTo": "OLEWHICHMK",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31370,33 +31373,33 @@
   },
   {
     "addUsesTo": "QACONTAINERFLAGS",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
         "struct": "QACONTAINER",
-        "parameter": "dwAmbientFlags"
+        "field": "dwAmbientFlags"
       }
     ]
   },
   {
     "addUsesTo": "TYMED",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
         "struct": "STGMEDIUM",
-        "parameter": "tymed"
+        "field": "tymed"
       },
       {
         "struct": "RemSTGMEDIUM",
-        "parameter": "tymed"
+        "field": "tymed"
       }
     ]
   },
   {
     "addUsesTo": "STATFLAG",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31428,7 +31431,7 @@
   },
   {
     "addUsesTo": "STGM",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31447,7 +31450,7 @@
   },
   {
     "addUsesTo": "LOCKTYPE",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31483,7 +31486,7 @@
   },
   {
     "addUsesTo": "VIEWSTATUS",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31494,7 +31497,7 @@
   },
   {
     "addUsesTo": "POINTERINACTIVE",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31510,7 +31513,7 @@
   },
   {
     "name": "KEYMODIFIERS",
-    "flags": "true",
+    "flags": true,
     "members": [
       {
         "name": "KEYMOD_SHIFT",
@@ -31536,7 +31539,7 @@
   {
     "name": "ACCEL_VIRT_FLAGS",
     "type": "byte",
-    "flags": "true",
+    "flags": true,
     "members": [
       {
         "name": "FVIRTKEY"
@@ -31563,7 +31566,7 @@
   },
   {
     "name": "DEVMODE_FIELD_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "DM_",
       "header": "wingdi.h"
@@ -31654,7 +31657,7 @@
   },
   {
     "addUsesTo": "VARFLAGS",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31893,3 +31896,4 @@
     "uses": []
   }
 ]
+}

@@ -957,3 +957,12 @@ Windows.Win32.System.Diagnostics.Debug.Apis.RtlInstallFunctionTableCallback(Arm6
 Windows.Win32.System.Diagnostics.Debug.Apis.RtlInstallFunctionTableCallback(X64, Arm64) removed
 Windows.Win32.System.Diagnostics.Debug.Apis.RtlInstallFunctionTableCallback(X64) added
 Windows.Win32.System.Ioctl.FILE_STORAGE_TIER.Flags...Windows.Win32.System.Ioctl.FILE_STORAGE_TIER_FLAGS => System.UInt64
+# Corrected errors in enums.json
+Windows.Win32.System.Com.RemSTGMEDIUM.tymed...System.UInt32 => Windows.Win32.System.Com.TYMED
+Windows.Win32.System.Com.STGMEDIUM.tymed...System.UInt32 => Windows.Win32.System.Com.TYMED
+Windows.Win32.System.Ole.IOleObject.Close : dwSaveOption...UInt32 => OLECLOSE
+Windows.Win32.System.Ole.IOleObject.GetMiscStatus : pdwStatus...UInt32* => OLEMISC*
+Windows.Win32.System.Ole.IRecordInfo.PutField : wFlags...UInt32 => INVOKEKIND
+Windows.Win32.System.Ole.IRecordInfo.PutFieldNoCopy : wFlags...UInt32 => INVOKEKIND
+Windows.Win32.System.Ole.QACONTAINER.dwAmbientFlags...System.UInt32 => Windows.Win32.System.Ole.QACONTAINERFLAGS
+Windows.Win32.UI.Controls.Apis.ImageList_WriteEx : dwFlags...UInt32 => IMAGE_LIST_WRITE_STREAM_FLAGS

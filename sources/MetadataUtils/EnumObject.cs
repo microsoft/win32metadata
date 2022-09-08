@@ -18,7 +18,7 @@ namespace MetadataUtils
             }
             else if (ext == ".json")
             {
-                return Newtonsoft.Json.JsonConvert.DeserializeObject<EnumObject[]>(File.ReadAllText(fileName));
+                return Newtonsoft.Json.JsonConvert.DeserializeObject<JsonWrapper>(File.ReadAllText(fileName)).items;
             }
             else
             {
@@ -162,6 +162,11 @@ namespace MetadataUtils
                     this.enumObjects.Add(enumObject);
                 }
             }
+        }
+
+        private class JsonWrapper
+        {
+            public EnumObject[] items { get; set; }
         }
 
         public void AddUse(Use use)
