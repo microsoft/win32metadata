@@ -75,7 +75,7 @@
   {
     "name": "SET_THEME_APP_PROPERTIES_FLAGS",
     "type": "uint",
-    "flags": false,
+    "flags": true,
     "members": [
       {
         "name": "ALLOW_NONCLIENT",
