@@ -3810,11 +3810,11 @@
     "members": [
       {
         "name": "NO_ERROR",
-        "value": "0"
+        "value": 0
       },
       {
         "name": "WAIT_OBJECT_0",
-        "value": "0"
+        "value": 0
       },
       {
         "name": "WAIT_ABANDONED",
@@ -10795,11 +10795,11 @@
     "members": [
       {
         "name": "OATRUE",
-        "value": "-1"
+        "value": -1
       },
       {
         "name": "OAFALSE",
-        "value": "0"
+        "value": 0
       }
     ],
     "uses": [
@@ -12183,15 +12183,15 @@
     "members": [
       {
         "name": "USE_NOFORCE",
-        "value": "0"
+        "value": 0
       },
       {
         "name": "USE_FORCE",
-        "value": "1"
+        "value": 1
       },
       {
         "name": "USE_LOTS_OF_FORCE",
-        "value": "2"
+        "value": 2
       }
     ],
     "uses": [
@@ -13731,15 +13731,15 @@
     "members": [
       {
         "name": "ACPI",
-        "value": "1094930505"
+        "value": 1094930505
       },
       {
         "name": "FIRM",
-        "value": "1179210317"
+        "value": 1179210317
       },
       {
         "name": "RSMB",
-        "value": "1381190978"
+        "value": 1381190978
       }
     ],
     "uses": [
@@ -16189,23 +16189,23 @@
     "members": [
       {
         "name": "MSG_OOB",
-        "value": "1"
+        "value": 1
       },
       {
         "name": "MSG_PEEK",
-        "value": "2"
+        "value": 2
       },
       {
         "name": "MSG_DONTROUTE",
-        "value": "4"
+        "value": 4
       },
       {
         "name": "MSG_WAITALL",
-        "value": "8"
+        "value": 8
       },
       {
         "name": "MSG_PUSH_IMMEDIATE",
-        "value": "32"
+        "value": 32
       }
     ],
     "uses": [
@@ -29831,15 +29831,15 @@
     "members": [
       {
         "name": "ONESTOPBIT",
-        "value": "0"
+        "value": 0
       },
       {
         "name": "ONE5STOPBITS",
-        "value": "1"
+        "value": 1
       },
       {
         "name": "TWOSTOPBITS",
-        "value": "2"
+        "value": 2
       }
     ],
     "uses": [
@@ -29856,23 +29856,23 @@
     "members": [
       {
         "name": "EVENPARITY",
-        "value": "2"
+        "value": 2
       },
       {
         "name": "MARKPARITY",
-        "value": "3"
+        "value": 3
       },
       {
         "name": "NOPARITY",
-        "value": "0"
+        "value": 0
       },
       {
         "name": "ODDPARITY",
-        "value": "1"
+        "value": 1
       },
       {
         "name": "SPACEPARITY",
-        "value": "4"
+        "value": 4
       }
     ],
     "uses": [
@@ -29889,11 +29889,11 @@
     "members": [
       {
         "name": "PFD_TYPE_RGBA",
-        "value": "0"
+        "value": 0
       },
       {
         "name": "PFD_TYPE_COLORINDEX",
-        "value": "1"
+        "value": 1
       }
     ],
     "uses": [
@@ -29914,15 +29914,15 @@
     "members": [
       {
         "name": "PFD_UNDERLAY_PLANE",
-        "value": "-1"
+        "value": -1
       },
       {
         "name": "PFD_MAIN_PLANE",
-        "value": "0"
+        "value": 0
       },
       {
         "name": "PFD_OVERLAY_PLANE",
-        "value": "1"
+        "value": 1
       }
     ],
     "uses": [
@@ -29938,19 +29938,19 @@
     "members": [
       {
         "name": "PFD_DOUBLEBUFFER",
-        "value": "1"
+        "value": 1
       },
       {
         "name": "PFD_STEREO",
-        "value": "2"
+        "value": 2
       },
       {
         "name": "PFD_DRAW_TO_WINDOW",
-        "value": "4"
+        "value": 4
       },
       {
         "name": "PFD_DRAW_TO_BITMAP",
-        "value": "8"
+        "value": 8
       },
       {
         "name": "PFD_SUPPORT_GDI",

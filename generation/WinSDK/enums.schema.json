@@ -68,7 +68,7 @@
                   "description": "The name of the enum member."
                 },
                 "value": {
-                  "type": "string",
+                  "type": ["string", "number"],
                   "description": "The value of the enum member. If you omit value, it will be autopopulated if detected by the ConstantsScraper. Regular expressions can be used. You can use members and autoPopulate in the same enum."
                 }
               }
