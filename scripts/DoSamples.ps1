@@ -10,7 +10,7 @@ if (!$skipInstallTools)
     Install-BuildTools
 }
 
-Write-Output "`e[36m*** Building samples...`e[0m"
+Write-Host "*** Building samples..." -ForegroundColor Blue
 
 & "$PSScriptRoot\UpdateGlobalJsonWinmdGeneratorVersion.ps1"
 

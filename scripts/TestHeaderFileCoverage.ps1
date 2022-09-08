@@ -38,7 +38,7 @@ function GetUnconveredFilesMap()
 $traverseFiles = GetTraverseHash
 $uncoveredFilesMap = GetUnconveredFilesMap
 
-Write-Output "Scanning header files..."
+Write-Host "Scanning header files..."
 
 $sdkIncludePath = $recompiledIdlHeadersDir
 $headerFiles = Get-ChildItem -Recurse -Filter *.h "$sdkIncludePath/shared", "$sdkIncludePath/um"
@@ -57,12 +57,12 @@ foreach ($file in $headerFiles)
         $reason = $uncoveredFilesMap[$nameToCheck]
         if ($reason -eq "skipping")
         {
-            $traversed++    
+            $traversed++
 
             continue
         }
 
-        #Write-Output "reason = $reason"
+        #Write-Host "reason = $reason"
 
         if (!$reason)
         {
@@ -73,19 +73,19 @@ foreach ($file in $headerFiles)
     }
     else
     {
-        $traversed++    
+        $traversed++
     }
 }
 
 if ($finalList.Count -gt 0)
 {
-    Write-Output "The below header files are not included in any partition:"
+    Write-Host "The below header files are not included in any partition:"
     foreach ($item in $finalList.Keys)
     {
         $reason = $finalList[$item]
-        Write-Output "$item - $reason"
+        Write-Host "$item - $reason"
     }
 }
 
 $percent = ($traversed/$total).ToString("P")
-Write-Output "$traversed/$total covered by partitions or exceptions ($percent)"
+Write-Host "$traversed/$total covered by partitions or exceptions ($percent)"

@@ -7,7 +7,7 @@ param
 
 if (!(Test-Path -path $apiCsvFileName))
 {
-    Write-Output "Error: Couldn't find csv file $apiCsvFileName."
+    Write-Error "Couldn't find csv file $apiCsvFileName."
     exit -1
 }
 
@@ -40,4 +40,3 @@ foreach ($item in $apiData)
 }
 
 Add-Content -Path $baseRemapRsp -Value $sb.ToString()
-

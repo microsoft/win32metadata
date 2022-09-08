@@ -1,18 +1,18 @@
 # 1. Make sure the Microsoft App Installer is installed:
 #    https://www.microsoft.com/p/app-installer/9nblggh4nns1
-# 2. Run this script as administrator. If running scripts is blocked, you can temporarily unblock them by running 
+# 2. Run this script as administrator. If running scripts is blocked, you can temporarily unblock them by running
 #    Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Scope Process
 
 function Check-IsElevated
  {
     $id = [System.Security.Principal.WindowsIdentity]::GetCurrent()
     $p = New-Object System.Security.Principal.WindowsPrincipal($id)
-    if ($p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) { 
-        Write-Output $true 
-    }      
-    else { 
-        Write-Output $false 
-    }   
+    if ($p.IsInRole([System.Security.Principal.WindowsBuiltInRole]::Administrator)) {
+        return $true
+    }
+    else {
+        return $false
+    }
  }
 
 $policy = Get-ExecutionPolicy
@@ -24,7 +24,7 @@ elseif (-not(Check-IsElevated)){
     throw "Please run this script as an administrator"
 }
 else {
-    Write-Output "Installing apps"
+    Write-Host "Installing apps"
     $apps = @(
     @{packageID = "icsharpcode.ILSpy" },
     @{packageID = "Microsoft.DotNet.SDK.6" },
@@ -33,12 +33,12 @@ else {
     Foreach ($app in $apps) {
         $listApp = winget list --exact -q $app.packageIDs
         if (![String]::Join("", $listApp).Contains($app.packageID)) {
-            Write-Output "Installing: $($app.packageID)"
-            winget install -h $app.packageID -s winget 
+            Write-Host "Installing: $($app.packageID)"
+            winget install -h $app.packageID -s winget
         }
         else {
-            Write-Output "Skipping: $($app.packageID) (already installed)"
+            Write-Host "Skipping: $($app.packageID) (already installed)"
         }
     }
-    & "$PSScriptRoot\Get-VSPath.ps1" | Out-Null 
+    & "$PSScriptRoot\Get-VSPath.ps1" | Out-Null
 }

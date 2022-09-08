@@ -11,13 +11,13 @@ param
 
 if (!(Test-Path -path $apiCsvFileName))
 {
-    Write-Output "Error: Couldn't find csv file $apiCsvFileName."
+    Write-Error "Couldn't find csv file $apiCsvFileName."
     exit -1
 }
 
 if (!(Test-Path -path $techRootToNamespaceMappingsFileName))
 {
-    Write-Output "Error: Couldn't find csv file $techRootToNamespaceMappingsFileName."
+    Write-Error "Couldn't find csv file $techRootToNamespaceMappingsFileName."
     exit -1
 }
 

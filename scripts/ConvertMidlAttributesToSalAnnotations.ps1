@@ -12,7 +12,7 @@ param
 
 if (!(Test-Path -path $inputFileName))
 {
-    Write-Output "Error: Couldn't find $inputFileName."
+    Write-Error "Couldn't find $inputFileName."
     exit -1
 }
 
@@ -110,7 +110,7 @@ foreach ($line in $srcLines)
             }
             elseif ($out)
             {
-                $annotation = "_Out_"    
+                $annotation = "_Out_"
                 $ptrOp = "writes_"
             }
 
@@ -165,7 +165,7 @@ foreach ($line in $srcLines)
                 # lists in this line
                 $beginLookAt = $match.Groups[0].Index + $match.Groups[0].Length + $annotationAttr.Length
             }
-            else 
+            else
             {
                 break
             }

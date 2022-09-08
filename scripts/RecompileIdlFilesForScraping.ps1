@@ -12,17 +12,17 @@ $sdkIncludeDir = (Get-ChildItem -Path "$cppPkgPath\c\include").FullName
 
 if (!(Test-Path -path $sdkIncludeDir))
 {
-    Write-Output "Error: Couldn't find $sdkIncludeDir."
+    Write-Error "Couldn't find $sdkIncludeDir."
     exit -1
 }
 
-Write-Output "Copying headers from Win SDK...$sdkIncludeDir to $recompiledIdlHeadersDir"
+Write-Host "Copying headers from Win SDK...$sdkIncludeDir to $recompiledIdlHeadersDir"
 copy-item -Path "$sdkIncludeDir\um" -destination "$recompiledIdlHeadersDir" -recurse
 copy-item -Path "$sdkIncludeDir\shared" -destination "$recompiledIdlHeadersDir" -recurse
 copy-item -Path "$sdkIncludeDir\winrt" -destination "$recompiledIdlHeadersDir" -recurse
 copy-item -Path "$sdkIncludeDir\ucrt" -destination "$recompiledIdlHeadersDir" -recurse
 
-Write-Output "Recompiling midl headers with SAL annotations in $recompiledIdlHeadersDir"
+Write-Host "Recompiling midl headers with SAL annotations in $recompiledIdlHeadersDir"
 
 $version = [System.IO.Path]::GetFileName($cppPkgPath)
 $sdkParts = $version.Split('.')
@@ -32,7 +32,7 @@ $sdkBinDir = "$cppPkgPath\c\bin\$sdkVersion\x86"
 
 if (!(Test-Path -path $sdkBinDir))
 {
-    Write-Output "Error: Couldn't find $sdkBinDir."
+    Write-Error "Couldn't find $sdkBinDir."
     exit -1
 }
 
@@ -61,11 +61,11 @@ if ($throttleCount -lt 2)
     $throttleCount = 2
 }
 
-Write-Output "Updating annotations in idl files..."
+Write-Host "Updating annotations in idl files..."
 
 $idlFiles = Get-ChildItem "$sdkIncludeDir\um\*.idl","$sdkIncludeDir\shared\*.idl"
 $foundIdlFiles = [System.Collections.ArrayList]@()
-foreach ($idlFile in $idlFiles)    
+foreach ($idlFile in $idlFiles)
 {
     if ($idlFile.BaseName -in $excludedHeaders)
     {
@@ -98,7 +98,7 @@ foreach ($idlFile in $idlFiles)
 $ErrorActionPreference = "Continue"
 $foundIdlFiles | ForEach-Object -Parallel {
     $idlFile = $_
- 
+
     $origHeader = [io.path]::ChangeExtension($idlFile.FullName, "h")
 
     $fixedIdlFile =  "$using:scratchDir\$($idlFile.Name)"
@@ -113,9 +113,9 @@ $foundIdlFiles | ForEach-Object -Parallel {
         $outText += Get-Content -Path $outputLog -Raw
         Write-Error $outText
     }
-    else 
+    else
     {
-        Write-Output "Compiled $($idlFile.Name)"
+        Write-Host "Compiled $($idlFile.Name)"
 
         # This line gets pulled out in the Windows build of the header. We need to do the same or it won't compile
         if ($idlFile.BaseName -eq "d3d10_1")
