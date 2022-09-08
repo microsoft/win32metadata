@@ -1,6 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
+  "additionalProperties": false,
   "properties": {
     "$schema": {
       "description": "The URL for the schema used by this document.",
@@ -12,6 +13,7 @@
     "items": {
       "type": "array",
       "items": {
+        "additionalProperties": false,
         "properties": {
           "finished": {
             "type": "boolean",
@@ -40,6 +42,8 @@
           "autoPopulate": {
             "type": "object",
             "description": "For automatically defined members, rules for how to populate them.",
+            "required": ["header", "filter"],
+            "additionalProperties": false,
             "properties": {
               "header": {
                 "type": "string",
@@ -56,6 +60,8 @@
             "description": "For manually defined members, a list of members.",
             "items": {
               "type": "object",
+              "required": ["name"],
+              "additionalProperties": false,
               "properties": {
                 "name": {
                   "type": "string",
@@ -74,36 +80,48 @@
             "description": "A list of APIs where this enum is used.",
             "items": {
               "type": "object",
-              "description": "An API definition where the enum is used. Note: Define only the subset of properties relevant to an API.",
-              "properties": {
-                "interface": {
-                  "type": "string",
-                  "description": "The COM interface name."
+              "description": "An API definition where the enum is used.",
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": ["struct", "field"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "struct": {
+                      "type": "string",
+                      "description": "The struct name."
+                    },
+                    "field": {
+                      "type": "string",
+                      "description": "The field name of struct."
+                    }
+                  }
                 },
-                "method": {
-                  "type": "string",
-                  "description": "The method name."
-                },
-                "parameter": {
-                  "type": "string",
-                  "description": "The parameter name of method or 'return' for the return value."
-                },
-                "struct": {
-                  "type": "string",
-                  "description": "The struct name."
-                },
-                "field": {
-                  "type": "string",
-                  "description": "The field name of struct."
+                {
+                  "type": "object",
+                  "required": ["method", "parameter"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "interface": {
+                      "type": "string",
+                      "description": "The COM interface name."
+                    },
+                    "method": {
+                      "type": "string",
+                      "description": "The method name."
+                    },
+                    "parameter": {
+                      "type": "string",
+                      "description": "The parameter name of method or 'return' for the return value."
+                    }
+                  }
                 }
-              }
+              ]
             },
             "additionalItems": true
           }
-        },
-        "additionalProperties": false
+        }
       }
     }
-  },
-  "additionalProperties": false
+  }
 }

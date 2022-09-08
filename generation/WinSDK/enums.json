@@ -30961,12 +30961,12 @@
         {
           "interface": "IRecordInfo",
           "method": "PutField",
-          "field": "wFlags"
+          "parameter": "wFlags"
         },
         {
           "interface": "IRecordInfo",
           "method": "PutFieldNoCopy",
-          "field": "wFlags"
+          "parameter": "wFlags"
         }
       ]
     },
@@ -30976,7 +30976,7 @@
         {
           "interface": "IOleObject",
           "method": "Close",
-          "field": "dwSaveOption"
+          "parameter": "dwSaveOption"
         }
       ]
     },
@@ -31061,7 +31061,7 @@
       "uses": [
         {
           "method": "ImageList_WriteEx",
-          "field": "dwFlags"
+          "parameter": "dwFlags"
         }
       ]
     },
@@ -31279,8 +31279,8 @@
       "uses": [
         {
           "interface": "IOleObject",
-          "struct": "GetMiscStatus",
-          "field": "pdwStatus"
+          "method": "GetMiscStatus",
+          "parameter": "pdwStatus"
         },
         {
           "struct": "QACONTROL",
@@ -31377,7 +31377,7 @@
       "uses": [
         {
           "struct": "QACONTAINER",
-          "parameter": "dwAmbientFlags"
+          "field": "dwAmbientFlags"
         }
       ]
     },
@@ -31388,11 +31388,11 @@
       "uses": [
         {
           "struct": "STGMEDIUM",
-          "parameter": "tymed"
+          "field": "tymed"
         },
         {
           "struct": "RemSTGMEDIUM",
-          "parameter": "tymed"
+          "field": "tymed"
         }
       ]
     },
