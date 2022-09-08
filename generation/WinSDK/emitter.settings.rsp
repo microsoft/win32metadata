@@ -1026,3 +1026,6 @@ WIA_PROPERTY_INFO::vt=VARENUM
 FormatMessageA::lpBuffer=[-NativeArrayInfo]
 FormatMessageW::lpBuffer=[-NativeArrayInfo]
 SafeArrayGetVartype::pvt=VARENUM
+ShellExecuteW::nShowCmd=SHOW_WINDOW_CMD
+ShellExecuteA::nShowCmd=SHOW_WINDOW_CMD
+SHGetKnownFolderPath::dwFlags=KNOWN_FOLDER_FLAG

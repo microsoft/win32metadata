@@ -14969,6 +14969,10 @@
       {
         "method": "GetSysColor",
         "parameter": "nIndex"
+      },
+      {
+        "method": "GetSysColorBrush",
+        "parameter": "nIndex"
       }
     ]
   },
@@ -31932,5 +31936,43 @@
     },
     "members": [],
     "uses": []
+  },
+  {
+    "type": "uint",
+    "name": "NOTIFY_ICON_INFOTIP_FLAGS",
+    "autoPopulate": {
+      "filter": "NIIF_",
+      "header": "shellapi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NOTIFYICONDATAW",
+        "field": "dwInfoFlags"
+      },
+      {
+        "struct": "NOTIFYICONDATAA",
+        "field": "dwInfoFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "NOTIFY_ICON_STATE",
+    "autoPopulate": {
+      "filter": "NIS_",
+      "header": "shellapi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NOTIFYICONDATAW",
+        "field": "dwState"
+      },
+      {
+        "struct": "NOTIFYICONDATAA",
+        "field": "dwState"
+      }
+    ]
   }
 ]

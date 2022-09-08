@@ -742,3 +742,45 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_READOBJECTS removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_SWITCHDESKTOP removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.DESKTOP_WRITEOBJECTS removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.DF_ALLOWOTHERACCOUNTHOOK removed
+# NIIF FLAGS
+Windows.Win32.UI.Shell.Apis.NIIF_ERROR removed
+Windows.Win32.UI.Shell.Apis.NIIF_ICON_MASK removed
+Windows.Win32.UI.Shell.Apis.NIIF_INFO removed
+Windows.Win32.UI.Shell.Apis.NIIF_LARGE_ICON removed
+Windows.Win32.UI.Shell.Apis.NIIF_NONE removed
+Windows.Win32.UI.Shell.Apis.NIIF_NOSOUND removed
+Windows.Win32.UI.Shell.Apis.NIIF_RESPECT_QUIET_TIME removed
+Windows.Win32.UI.Shell.Apis.NIIF_USER removed
+Windows.Win32.UI.Shell.Apis.NIIF_WARNING removed
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_ERROR added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_ICON_MASK added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_INFO added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_LARGE_ICON added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_NONE added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_NOSOUND added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_RESPECT_QUIET_TIME added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_USER added
+Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS.NIIF_WARNING added
+Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwInfoFlags(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS
+Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwInfoFlags(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS
+Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwInfoFlags(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS
+Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwInfoFlags(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_INFOTIP_FLAGS
+# NIS 
+Windows.Win32.UI.Shell.Apis.NIS_HIDDEN removed
+Windows.Win32.UI.Shell.Apis.NIS_SHAREDICON removed
+Windows.Win32.UI.Shell.NOTIFY_ICON_STATE added
+Windows.Win32.UI.Shell.NOTIFY_ICON_STATE.NIS_HIDDEN added
+Windows.Win32.UI.Shell.NOTIFY_ICON_STATE.NIS_SHAREDICON added
+Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwState(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAA.dwState(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwState(X64, Arm64)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+Windows.Win32.UI.Shell.NOTIFYICONDATAW.dwState(X86)...System.UInt32 => Windows.Win32.UI.Shell.NOTIFY_ICON_STATE
+# SHOW_WIND_CMD
+Windows.Win32.UI.Shell.Apis.ShellExecuteA : nShowCmd...Int32 => SHOW_WINDOW_CMD
+Windows.Win32.UI.Shell.Apis.ShellExecuteW : nShowCmd...Int32 => SHOW_WINDOW_CMD
+# KNOWN_FOLDER_FLAG
+Windows.Win32.UI.Shell.Apis.SHGetKnownFolderPath : dwFlags...UInt32 => KNOWN_FOLDER_FLAG
+
+
+
