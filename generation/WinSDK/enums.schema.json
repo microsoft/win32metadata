@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "description": "The URL for the schema used by this document.",
+      "type": "string",
+      "examples": [
+        "enums.schema.json"
+      ]
+    },
+    "items": {
+      "type": "array",
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "finished": {
+            "type": "boolean",
+            "description": "Stops any additional changes being done by the processing steps (normalizing/merging)."
+          },
+          "addUsesTo": {
+            "type": "string",
+            "description": "The name of an existing enum scraped from the headers. Specify this value to add additional uses to the enum."
+          },
+          "name": {
+            "type": "string",
+            "description": "The name of the enum."
+          },
+          "namespace": {
+            "type": "string",
+            "description": "Optional property indicating the namespace for the enum. Note: If omitted, the enum will inherit the namespace of the first entry in uses"
+          },
+          "type": {
+            "type": "string",
+            "description": "Optional property indicating the type for the enum."
+          },
+          "flags": {
+            "type": "boolean",
+            "description": "Whether this is a flags enum."
+          },
+          "autoPopulate": {
+            "type": "object",
+            "description": "For automatically defined members, rules for how to populate them.",
+            "required": ["header", "filter"],
+            "additionalProperties": false,
+            "properties": {
+              "header": {
+                "type": "string",
+                "description": "The header file to scan."
+              },
+              "filter": {
+                "type": "string",
+                "description": "The constant or macro prefix to search for in header. Note: filter can be a regular expression to match more than a simple prefix (e.g. ERROR_|DNS_ERROR_)"
+              }
+            }
+          },
+          "members": {
+            "type": "array",
+            "description": "For manually defined members, a list of members.",
+            "items": {
+              "type": "object",
+              "required": ["name"],
+              "additionalProperties": false,
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the enum member."
+                },
+                "value": {
+                  "type": ["string", "number"],
+                  "description": "The value of the enum member. If you omit value, it will be autopopulated if detected by the ConstantsScraper. Regular expressions can be used. You can use members and autoPopulate in the same enum."
+                }
+              }
+            },
+            "additionalItems": true
+          },
+          "uses": {
+            "type": "array",
+            "description": "A list of APIs where this enum is used.",
+            "items": {
+              "type": "object",
+              "description": "An API definition where the enum is used.",
+              "oneOf": [
+                {
+                  "type": "object",
+                  "required": ["struct", "field"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "struct": {
+                      "type": "string",
+                      "description": "The struct name."
+                    },
+                    "field": {
+                      "type": "string",
+                      "description": "The field name of struct."
+                    }
+                  }
+                },
+                {
+                  "type": "object",
+                  "required": ["method", "parameter"],
+                  "additionalProperties": false,
+                  "properties": {
+                    "interface": {
+                      "type": "string",
+                      "description": "The COM interface name."
+                    },
+                    "method": {
+                      "type": "string",
+                      "description": "The method name."
+                    },
+                    "parameter": {
+                      "type": "string",
+                      "description": "The parameter name of method or 'return' for the return value."
+                    }
+                  }
+                }
+              ]
+            },
+            "additionalItems": true
+          }
+        }
+      }
+    }
+  }
+}

@@ -84,7 +84,7 @@ Enums are defined in [enums.json](generation/WinSDK/enums.json). This file provi
 * `type` - Optional property indicating the type for the enum
   * Note: If omitted, the default value is `uint`
 * `name` -  The name of the enum
-* `addUsesTo` - The name of an existing enum scraped from the headers, specify this value to add additional uses to the enum.
+* `addUsesTo` - The name of an existing enum scraped from the headers. Specify this value to add additional uses to the enum.
 * `flags` - Whether this is a flags enum
 * `autoPopulate` - For automatically defined members, rules for how to populate them
   * `header` - The header to scan

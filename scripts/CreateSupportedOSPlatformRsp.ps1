@@ -50,13 +50,13 @@ function Remove-Prefix
     {
         return $match.Groups[1].Value
     }
-    else 
+    else
     {
-        return $text    
+        return $text
     }
 }
 
-try 
+try
 {
     $stream = [System.IO.StreamWriter] $outputFileName
     $stream.WriteLine("--with-attribute")
@@ -66,7 +66,7 @@ try
         $name = ""
         $version = ""
         $serverVersion = ""
-    
+
         $fileName = [System.IO.Path]::GetFileName($funcFile.FullName)
         if ($fileName -eq "nf-ktmw32-committransaction.md")
         {
@@ -117,12 +117,12 @@ try
                     {
                         $versionName += "." + $match.Groups[2]
                     }
-        
+
                     if ($versionMap.ContainsKey($versionName))
                     {
                         $fixedVersion = $versionMap[$versionName]
                     }
-                    else 
+                    else
                     {
                         Write-Error "Failed to lookup windows version: $version"
                     }
@@ -144,11 +144,11 @@ try
 
                     if ([string]::IsNullOrEmpty($fixedVersion))
                     {
-                        Write-Output "Warning: regex failed to decode '$version' for $name found in $($funcFile.FullName)"    
+                        Write-Host "Warning: regex failed to decode '$version' for $name found in $($funcFile.FullName)"
                     }
                 }
             }
-            else 
+            else
             {
                 $serverVersion = Remove-Prefix $serverVersion
 
@@ -163,22 +163,22 @@ try
                     {
                         $versionName = "Server" + $match.Groups[2].Value
                     }
-        
+
                     if ($versionMap.ContainsKey($versionName))
                     {
                         $fixedVersion = $versionMap[$versionName]
                     }
-                    else 
+                    else
                     {
                         Write-Error "Failed to lookup windows server version: $serverVersion"
                     }
                 }
                 else
                 {
-                    Write-Output "Warning: regex failed to decode server '$serverVersion' for $name found in $($funcFile.FullName)"    
+                    Write-Host "Warning: regex failed to decode server '$serverVersion' for $name found in $($funcFile.FullName)"
                 }
             }
-    
+
             if (![string]::IsNullOrEmpty($fixedVersion))
             {
                 if ($writtenItems.ContainsKey($name))
@@ -186,7 +186,7 @@ try
                     $oldValue = $writtenItems[$name]
                     if ($oldValue -ne $fixedVersion)
                     {
-                        Write-Output "Duplicate, differing versions for $name - $oldValue vs. $fixedVersion"
+                        Write-Host "Duplicate, differing versions for $name - $oldValue vs. $fixedVersion"
                     }
                 }
                 else
@@ -198,7 +198,7 @@ try
         }
     }
 }
-finally 
+finally
 {
     $stream.Close()
 }

@@ -166,25 +166,6 @@ namespace ClangSharpSourceToWinmd
                     if (newType != null)
                     {
                         node = node.WithType(SyntaxFactory.ParseTypeName(newType).WithTrailingTrivia(SyntaxFactory.Space));
-
-                        // Get rid of the NativeTypeName attribute so the type we just changed to doesn't get overridden
-                        var attr = SyntaxUtils.GetAttribute(node.AttributeLists, "NativeTypeName");
-                        if (attr != null)
-                        {
-                            var attrList = (AttributeListSyntax)attr.Parent;
-
-                            // We want to delete the attribute, but if it's the last one in the list,
-                            // remove the list
-                            if (attrList.Attributes.Count == 1)
-                            {
-                                node = node.RemoveNode(attrList, SyntaxRemoveOptions.KeepLeadingTrivia);
-                            }
-                            // If it's not the last attribute, just remove the attribute
-                            else
-                            {
-                                node = node.RemoveNode(attr, SyntaxRemoveOptions.KeepLeadingTrivia);
-                            }
-                        }
                     }
                 }
                 else
@@ -1019,8 +1000,8 @@ namespace ClangSharpSourceToWinmd
                         string sizeOrParamName = match.Groups[1].Value;
                         if (int.TryParse(sizeOrParamName, out int size))
                         {
-                            // Don't bother marking this as an array if it only has 1
-                            if (size == 1)
+                            // Don't bother marking this as an array if it has 1 or less
+                            if (size <= 1)
                             {
                                 return string.Empty;
                             }

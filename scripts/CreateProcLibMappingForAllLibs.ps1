@@ -14,7 +14,7 @@ $libDirectory = "$libPkgPath\c\um\x64"
 
 if (!(Test-Path -path $libDirectory))
 {
-    Write-Output "Error: Couldn't find $libDirectory."
+    Write-Error "Couldn't find $libDirectory."
     exit -1
 }
 

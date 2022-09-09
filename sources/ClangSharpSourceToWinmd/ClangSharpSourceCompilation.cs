@@ -238,22 +238,22 @@ namespace ClangSharpSourceToWinmd
                 watch.Restart();
 
                 List<string> filesToMerge = new List<string>();
-                foreach (string x64FileName in modifiedFiles.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X64))
+                foreach (string x86FileName in modifiedFiles.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X86))
                 {
-                    string x86FileName = x64FileName.Replace(@"\x64\", @"\x86\", StringComparison.OrdinalIgnoreCase);
-                    string arm64FileName = x64FileName.Replace(@"\x64\", @"\arm64\", StringComparison.OrdinalIgnoreCase);
+                    string x64FileName = x86FileName.Replace(@"\x86\", @"\x64\", StringComparison.OrdinalIgnoreCase);
+                    string arm64FileName = x86FileName.Replace(@"\x86\", @"\arm64\", StringComparison.OrdinalIgnoreCase);
 
-                    if (File.Exists(x86FileName) && File.Exists(arm64FileName))
+                    if (File.Exists(x64FileName) && File.Exists(arm64FileName))
                     {
-                        string x64Content = File.ReadAllText(x64FileName);
-                        if (x64Content == File.ReadAllText(x86FileName) && x64Content == File.ReadAllText(arm64FileName))
+                        string x86Content = File.ReadAllText(x86FileName);
+                        if (x86Content == File.ReadAllText(x64FileName) && x86Content == File.ReadAllText(arm64FileName))
                         {
-                            var parititionName = GetPartitionNameFromFileName(x64FileName);
+                            var parititionName = GetPartitionNameFromFileName(x86FileName);
 
-                            File.Delete(x86FileName);
+                            File.Delete(x64FileName);
                             File.Delete(arm64FileName);
 
-                            partitionsNotNeedingCrossarch.Add(GetPartitionNameFromFileName(x64FileName));
+                            partitionsNotNeedingCrossarch.Add(GetPartitionNameFromFileName(x86FileName));
                         }
                         else
                         {
@@ -265,39 +265,43 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 CrossArchSyntaxMap crossArchSyntaxMap = LoadCrossArchMapFromFiles(filesToMerge, opt);
+                HashSet<string> nonX86TreesUsedForX86 = crossArchSyntaxMap.Get64BitTreesUsedForX86();
 
                 CrossArchTreeMerger crossArchTreeMerger = new CrossArchTreeMerger(crossArchSyntaxMap);
-                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(filesToMerge.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X64)), opt, (x64Tree) =>
+                System.Threading.Tasks.Parallel.ForEach(FilesToTrees(filesToMerge.Where(f => GetArchitectureForFileName(f) == Windows.Win32.Interop.Architecture.X86)), opt, (x86Tree) =>
                 {
-                    string x86FileName = x64Tree.FilePath.Replace(@"\x64\", @"\x86\", StringComparison.OrdinalIgnoreCase);
-                    string arm64FileName = x64Tree.FilePath.Replace(@"\x64\", @"\arm64\", StringComparison.OrdinalIgnoreCase);
+                    string x64FileName = x86Tree.FilePath.Replace(@"\x86\", @"\x64\", StringComparison.OrdinalIgnoreCase);
+                    string arm64FileName = x86Tree.FilePath.Replace(@"\x86\", @"\arm64\", StringComparison.OrdinalIgnoreCase);
 
-                    var parititionName = GetPartitionNameFromFileName(x64Tree.FilePath);
+                    var parititionName = GetPartitionNameFromFileName(x86Tree.FilePath);
 
-                    var fixed64Tree = crossArchTreeMerger.ProcessTree(x64Tree, out _);
-                    var fixed86Tree = crossArchTreeMerger.ProcessTree(ReadTree(x86FileName), out bool x86Contributed);
+                    var fixed86Tree = crossArchTreeMerger.ProcessTree(x86Tree, out _);
+                    var fixed64Tree = crossArchTreeMerger.ProcessTree(ReadTree(x64FileName), out bool x64Contributed);
                     var fixedArm64Tree = crossArchTreeMerger.ProcessTree(ReadTree(arm64FileName), out bool arm64Contributed);
 
-                    if (!x86Contributed && SyntaxUtils.IsTreeEmpty(fixed86Tree) &&
-                         !arm64Contributed & SyntaxUtils.IsTreeEmpty(fixedArm64Tree))
+                    x64Contributed |= nonX86TreesUsedForX86.Contains(x64FileName);
+                    arm64Contributed |= nonX86TreesUsedForX86.Contains(arm64FileName);
+
+                    if (!x64Contributed && SyntaxUtils.IsTreeEmpty(fixed64Tree) &&
+                         !arm64Contributed && SyntaxUtils.IsTreeEmpty(fixedArm64Tree))
                     {
-                        File.Delete(x86FileName);
+                        File.Delete(x64FileName);
                         File.Delete(arm64FileName);
 
                         partitionsNotNeedingCrossarch.Add(GetPartitionNameFromFileName(parititionName));
                     }
                     else
                     {
-                        WriteTree(fixed86Tree, fixed86Tree.FilePath);
+                        WriteTree(fixed64Tree, fixed64Tree.FilePath);
                         WriteTree(fixedArm64Tree, fixedArm64Tree.FilePath);
                     }
 
-                    WriteTree(fixed64Tree, fixed64Tree.FilePath);
+                    WriteTree(fixed86Tree, fixed86Tree.FilePath);
                 });
 
                 if (partitionsNotNeedingCrossarch.Count != 0)
                 {
-                    string partInfo = string.Join(',', partitionsNotNeedingCrossarch.ToArray());
+                    string partInfo = string.Join(';', partitionsNotNeedingCrossarch.ToArray().OrderBy(s => s));
 
                     Console.WriteLine($"ClangSharpSourceToWinmd : warning CSSW001: Partitions detected with no cross-arch differences: {partInfo}");
                 }

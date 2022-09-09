@@ -33,17 +33,17 @@ jobs:
       targetType: inline
       script: |
         .\scripts\Install-DotNetTool.ps1 -Name nbgv
-        nbgv cloud      
+        nbgv cloud
 
   - task: PowerShell@2
     displayName: GenerateMetadataSource.ps1 - x64
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x64 -scrapeConstants'
+      arguments: '-arch x64'
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated'
+  - publish: 'generation\WinSDK\obj\generated\x64'
     displayName: Publish x64 generated assets
     artifact: 'generated_x64'
 
@@ -67,11 +67,11 @@ jobs:
     displayName: GenerateMetadataSource.ps1 - x86
     inputs:
       filePath: 'scripts\GenerateMetadataSource.ps1'
-      arguments: '-arch x86'
+      arguments: '-arch x86 -scrapeConstants'
       errorActionPreference: 'continue'
       pwsh: true
 
-  - publish: 'generation\WinSDK\obj\generated\x86'
+  - publish: 'generation\WinSDK\obj\generated'
     displayName: Publish x86 generated assets
     artifact: 'generated_x86'
 
@@ -142,13 +142,13 @@ jobs:
     displayName: Download x64 generated assets
     inputs:
       artifact: 'generated_x64'
-      path: 'generation\WinSDK\obj\generated'
+      path: 'generation\WinSDK\obj\generated\x64'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download x86 generated assets
     inputs:
       artifact: 'generated_x86'
-      path: 'generation\WinSDK\obj\generated\x86'
+      path: 'generation\WinSDK\obj\generated'
 
   - task: DownloadPipelineArtifact@2
     displayName: Download arm64 generated assets
@@ -298,6 +298,11 @@ jobs:
       MaxConcurrency: '50'
       MaxRetryAttempts: '2'
     condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+
+  - publish: bin/logs
+    artifact: build_logs
+    displayName: 📢 Publish build logs
+    condition: always()
 
   - task: PublishPipelineArtifact@1
     displayName: 'Publish NuGet packages to pipeline artifacts'

@@ -1,3 +1,6 @@
+{
+  "$schema": "enums.schema.json",
+  "items":
 [
   {
     "name": "THEME_PROPERTY_SYMBOL_ID",
@@ -8049,6 +8052,7 @@
   },
   {
     "name": "LZOPENFILE_STYLE",
+    "type": "ushort",
     "flags": true,
     "members": [
       {
@@ -8123,10 +8127,6 @@
       {
         "method": "LZOpenFileW",
         "parameter": "wStyle"
-      },
-      {
-        "method": "OpenFile",
-        "parameter": "uStyle"
       }
     ]
   },
@@ -11019,7 +11019,7 @@
     ]
   },
   {
-    "addUsesTo": "INSTALLOGMODE",
+    "addUsesTo": "INSTALLLOGMODE",
     "flags": true,
     "members": [],
     "uses": [
@@ -12573,77 +12573,6 @@
         "interface": "ITextHost",
         "method": "TxEnableScrollBar",
         "parameter": "fuArrowflags"
-      }
-    ]
-  },
-  {
-    "name": "NCRYPT_NOTIFY_CHANGE_KEY_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "NCRYPT_REGISTER_NOTIFY_FLAG",
-        "value": "1"
-      },
-      {
-        "name": "NCRYPT_UNREGISTER_NOTIFY_FLAG",
-        "value": "2"
-      },
-      {
-        "name": "NCRYPT_MACHINE_KEY_FLAG",
-        "value": "32"
-      },
-      {
-        "name": "NCRYPT_SILENT_FLAG"
-      },
-      {
-        "name": "NCRYPT_UNPROTECT_NO_DECRYPT"
-      },
-      {
-        "name": "NCRYPT_OVERWRITE_KEY_FLAG"
-      },
-      {
-        "name": "NCRYPT_NO_KEY_VALIDATION"
-      },
-      {
-        "name": "NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NCryptNotifyChangeKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptSecretAgreement",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptExportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptImportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptEnumKeys",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptOpenKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptUnprotectSecret",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptCreatePersistedKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptFinalizeKey",
-        "parameter": "dwFlags"
       }
     ]
   },
@@ -15748,38 +15677,6 @@
     ]
   },
   {
-    "name": "CRYPT_EXPORT_KEY_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "CRYPT_BLOB_VER3",
-        "value": "128"
-      },
-      {
-        "name": "CRYPT_DESTROYKEY",
-        "value": "4"
-      },
-      {
-        "name": "CRYPT_OAEP",
-        "value": "64"
-      },
-      {
-        "name": "CRYPT_SSL2_FALLBACK",
-        "value": "2"
-      },
-      {
-        "name": "CRYPT_Y_ONLY",
-        "value": "1"
-      }
-    ],
-    "uses": [
-      {
-        "method": "CryptExportKey",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
     "name": "IMAGE_LIST_COPY_FLAGS",
     "members": [
       {
@@ -16080,6 +15977,7 @@
   },
   {
     "name": "CREATE_FONT_PACKAGE_SUBSET_ENCODING",
+    "type": "ushort",
     "members": [
       {
         "name": "TTFCFP_STD_MAC_CHAR_SET"
@@ -16748,110 +16646,6 @@
       },
       {
         "method": "QueryFullProcessImageNameW",
-        "parameter": "dwFlags"
-      }
-    ]
-  },
-  {
-    "name": "NCRYPT_DECRYPT_FLAGS",
-    "members": [
-      {
-        "name": "NCRYPT_NO_PADDING_FLAG"
-      },
-      {
-        "name": "NCRYPT_PAD_OAEP_FLAG"
-      },
-      {
-        "name": "NCRYPT_PAD_PKCS1_FLAG"
-      },
-      {
-        "name": "NCRYPT_SILENT_FLAG"
-      },
-      {
-        "name": "NCRYPT_REGISTER_NOTIFY_FLAG",
-        "value": "1"
-      },
-      {
-        "name": "NCRYPT_UNREGISTER_NOTIFY_FLAG",
-        "value": "2"
-      },
-      {
-        "name": "NCRYPT_MACHINE_KEY_FLAG",
-        "value": "32"
-      },
-      {
-        "name": "NCRYPT_UNPROTECT_NO_DECRYPT"
-      },
-      {
-        "name": "NCRYPT_OVERWRITE_KEY_FLAG"
-      },
-      {
-        "name": "NCRYPT_NO_KEY_VALIDATION"
-      },
-      {
-        "name": "NCRYPT_WRITE_KEY_TO_LEGACY_STORE_FLAG"
-      },
-      {
-        "name": "NCRYPT_PAD_PSS_FLAG"
-      },
-      {
-        "name": "NCRYPT_PERSIST_FLAG"
-      },
-      {
-        "name": "NCRYPT_PERSIST_ONLY_FLAG"
-      }
-    ],
-    "uses": [
-      {
-        "method": "NCryptDecrypt",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptNotifyChangeKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptSecretAgreement",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptExportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptImportKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptEnumKeys",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptOpenKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptUnprotectSecret",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptCreatePersistedKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptFinalizeKey",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptEncrypt",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptVerifySignature",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "NCryptSetProperty",
         "parameter": "dwFlags"
       }
     ]
@@ -18805,6 +18599,7 @@
   },
   {
     "name": "CREATE_FONT_PACKAGE_SUBSET_PLATFORM",
+    "type": "ushort",
     "members": [
       {
         "name": "TTFCFP_UNICODE_PLATFORMID"
@@ -19364,6 +19159,7 @@
   },
   {
     "name": "DEVICE_CAPABILITIES",
+    "type": "ushort",
     "members": [
       {
         "name": "DC_BINNAMES"
@@ -24475,34 +24271,13 @@
     ]
   },
   {
-    "name": "TTTOOLINFO_FLAGS",
+    "name": "TOOLTIP_FLAGS",
     "flags": true,
-    "members": [
-      {
-        "name": "TTF_ABSOLUTE"
-      },
-      {
-        "name": "TTF_CENTERTIP"
-      },
-      {
-        "name": "TTF_IDISHWND"
-      },
-      {
-        "name": "TTF_PARSELINKS"
-      },
-      {
-        "name": "TTF_RTLREADING"
-      },
-      {
-        "name": "TTF_SUBCLASS"
-      },
-      {
-        "name": "TTF_TRACK"
-      },
-      {
-        "name": "TTF_TRANSPARENT"
-      }
-    ],
+    "autoPopulate": {
+      "filter": "TTF_",
+      "header": "commctrl.h"
+    },
+    "members": [],
     "uses": [
       {
         "struct": "TTTOOLINFOA",
@@ -24510,6 +24285,14 @@
       },
       {
         "struct": "TTTOOLINFOW",
+        "field": "uFlags"
+      },
+      {
+        "struct": "NMTTDISPINFOW",
+        "field": "uFlags"
+      },
+      {
+        "struct": "NMTTDISPINFOA",
         "field": "uFlags"
       }
     ]
@@ -24547,7 +24330,7 @@
   },
   {
     "name": "JOB_OBJECT_TERMINATE_AT_END_ACTION",
-    "namepace": "Windows.Win32.System.JobObjects",
+    "namespace": "Windows.Win32.System.JobObjects",
     "members": [
       {
         "name": "JOB_OBJECT_TERMINATE_AT_END_OF_JOB",
@@ -24744,6 +24527,7 @@
   {
     "name": "FILE_STORAGE_TIER_FLAGS",
     "flags": true,
+    "type": "uint",
     "members": [
       {
         "name": "FILE_STORAGE_TIER_FLAG_NO_SEEK_PENALTY",
@@ -24751,10 +24535,6 @@
       }
     ],
     "uses": [
-      {
-        "struct": "FILE_STORAGE_TIER",
-        "field": "Flags"
-      },
       {
         "struct": "FSCTL_QUERY_STORAGE_CLASSES_OUTPUT",
         "field": "Flags"
@@ -27608,36 +27388,6 @@
     ]
   },
   {
-    "name": "VS_FIXEDFILEINFO_FLAGS",
-    "flags": true,
-    "members": [
-      {
-        "name": "VS_FF_DEBUG"
-      },
-      {
-        "name": "VS_FF_INFOINFERRED"
-      },
-      {
-        "name": "VS_FF_PATCHED"
-      },
-      {
-        "name": "VS_FF_PRERELEASE"
-      },
-      {
-        "name": "VS_FF_PRIVATEBUILD"
-      },
-      {
-        "name": "VS_FF_SPECIALBUILD"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "VS_FIXEDFILEINFO",
-        "field": "dwFileFlags"
-      }
-    ]
-  },
-  {
     "name": "IMECOMPTEXT_FLAGS",
     "members": [
       {
@@ -30291,10 +30041,26 @@
     ]
   },
   {
+    "name": "ISC_REQ_HIGH_FLAGS",
+    "namespace": "Windows.Win32.Security.Authentication.Identity",
+    "flags": true,
+    "type": "ulong",
+    "members": [
+      {
+        "name": "ISC_REQ_MESSAGES",
+        "value": "0x0000000100000000"
+      },
+      {
+        "name": "ISC_REQ_DEFERRED_CRED_VALIDATION",
+        "value": "0x0000000200000000"
+      }
+    ]
+  },
+  {
     "name": "ISC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ISC_REQ_",
+      "filter": "ISC_REQ_(?!MESSAGES|DEFERRED_CRED_VALIDATION)",
       "header": "sspi.h"
     },
     "members": [],
@@ -30318,10 +30084,22 @@
     ]
   },
   {
+    "name": "ASC_REQ_HIGH_FLAGS",
+    "namespace": "Windows.Win32.Security.Authentication.Identity",
+    "flags": true,
+    "type": "ulong",
+    "members": [
+      {
+        "name": "ASC_REQ_MESSAGES",
+        "value": "0x0000000100000000"
+      }
+    ]
+  },
+  {
     "name": "ASC_REQ_FLAGS",
     "flags": true,
     "autoPopulate": {
-      "filter": "ASC_REQ_",
+      "filter": "ASC_REQ_(?!MESSAGES)",
       "header": "sspi.h"
     },
     "members": [],
@@ -30915,7 +30693,7 @@
   {
     "type": "byte",
     "name": "TMPF_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "TMPF_",
       "header": "wingdi.h"
@@ -30965,7 +30743,7 @@
   {
     "type": "uint",
     "name": "MODIFIERKEYS_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "MK_",
       "header": "WinUser.h"
@@ -31015,11 +30793,195 @@
     "uses": [
       {
         "struct": "EMR",
-        "parameter": "iType"
+        "field": "iType"
       },
       {
         "struct": "ENHMETARECORD",
-        "parameter": "iType"
+        "field": "iType"
+      }
+    ]
+  },
+  {
+    "name": "NMLVGETINFOTIP_FLAGS",
+    "members": [
+      {
+        "name": "LVGIT_UNFOLDED"
+      },
+      {
+        "name": "LVGIT_ZERO",
+        "value": "0"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "NMLVGETINFOTIPW",
+        "field": "dwFlags"
+      },
+      {
+        "struct": "NMLVGETINFOTIPA",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "LIST_VIEW_ITEM_STATE_FLAGS",
+    "autoPopulate": {
+      "filter": "LVIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NMLVODSTATECHANGE",
+        "field": "uNewState"
+      },
+      {
+        "struct": "NMLVODSTATECHANGE",
+        "field": "uOldState"
+      },
+      {
+        "struct": "LVITEMW",
+        "field": "state"
+      },
+      {
+        "struct": "LVITEMW",
+        "field": "stateMask"
+      },
+      {
+        "struct": "LVITEMA",
+        "field": "state"
+      },
+      {
+        "struct": "LVITEMA",
+        "field": "stateMask"
+      }
+    ]
+  },
+  {
+    "name": "NM_TREEVIEW_ACTION",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "TVE_|TVC_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NMTREEVIEWW",
+        "field": "action"
+      },
+      {
+        "struct": "NMTREEVIEWA",
+        "field": "action"
+      }
+    ]
+  },
+  {
+    "name": "MONTH_CALDENDAR_MESSAGES_VIEW",
+    "autoPopulate": {
+      "filter": "MCMV_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NMVIEWCHANGE",
+        "field": "dwOldView"
+      },
+      {
+        "struct": "NMVIEWCHANGE",
+        "field": "dwNewView"
+      }
+    ]
+  },
+  {
+    "name": "TAB_CONTROL_ITEM_STATE",
+    "autoPopulate": {
+      "filter": "TCIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "TCITEMW",
+        "field": "dwState"
+      },
+      {
+        "struct": "TCITEMW",
+        "field": "dwStateMask"
+      },
+      {
+        "struct": "TCITEMA",
+        "field": "dwState"
+      },
+      {
+        "struct": "TCITEMA",
+        "field": "dwStateMask"
+      }
+    ]
+  },
+  {
+    "name": "TREE_VIEW_ITEM_STATE_FLAGS",
+    "autoPopulate": {
+      "filter": "TVIS_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "TVITEMW",
+        "field": "state"
+      },
+      {
+        "struct": "TVITEMW",
+        "field": "stateMask"
+      },
+      {
+        "struct": "TVITEMA",
+        "field": "state"
+      },
+      {
+        "struct": "TVITEMA",
+        "field": "stateMask"
+      }
+    ]
+  },
+  {
+    "name": "CTRLINFO_FLAGS",
+    "autoPopulate": {
+      "filter": "CTRLINFO_EATS_",
+      "header": "ocidl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "CONTROLINFO",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "INVOKEKIND",
+    "uses": [
+      {
+        "interface": "IRecordInfo",
+        "method": "PutField",
+        "parameter": "wFlags"
+      },
+      {
+        "interface": "IRecordInfo",
+        "method": "PutFieldNoCopy",
+        "parameter": "wFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "OLECLOSE",
+    "uses": [
+      {
+        "interface": "IOleObject",
+        "method": "Close",
+        "parameter": "dwSaveOption"
       }
     ]
   },
@@ -31080,7 +31042,7 @@
   },
   {
     "name": "HEADER_HITTEST_INFO_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "HHT_",
       "header": "commctrl.h"
@@ -31095,7 +31057,7 @@
   },
   {
     "name": "IMAGE_LIST_WRITE_STREAM_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "ILP_",
       "header": "commctrl.h"
@@ -31104,13 +31066,13 @@
     "uses": [
       {
         "method": "ImageList_WriteEx",
-        "field": "dwFlags"
+        "parameter": "dwFlags"
       }
     ]
   },
   {
     "name": "LIST_ITEM_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LIF_",
       "header": "commctrl.h"
@@ -31125,7 +31087,7 @@
   },
   {
     "name": "LIST_ITEM_STATE_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LIS_",
       "header": "commctrl.h"
@@ -31144,7 +31106,7 @@
   },
   {
     "name": "LIST_VIEW_BACKGROUND_IMAGE_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVBKIF_",
       "header": "commctrl.h"
@@ -31163,7 +31125,7 @@
   },
   {
     "name": "LIST_VIEW_GROUP_STATE_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVGS_",
       "header": "commctrl.h"
@@ -31182,7 +31144,7 @@
   },
   {
     "name": "LIST_VIEW_GROUP_ALIGN_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVGA_",
       "header": "commctrl.h"
@@ -31201,7 +31163,7 @@
   },
   {
     "name": "LIST_VIEW_INSERT_MARK_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVIM_",
       "header": "commctrl.h"
@@ -31217,7 +31179,7 @@
   {
     "name": "LIST_VIEW_ITEM_COLUMN_FORMAT_FLAGS",
     "type": "int",
-    "flags": "true",
+    "flags": true,
     "members": [
       {
         "name": "LVCFMT_LINE_BREAK"
@@ -31248,7 +31210,7 @@
   },
   {
     "name": "MCHITTESTINFO_HIT_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "MCHT_",
       "header": "commctrl.h"
@@ -31263,7 +31225,7 @@
   },
   {
     "name": "NMCUSTOMDRAW_DRAW_STATE_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "CDIS_",
       "header": "commctrl.h"
@@ -31295,7 +31257,7 @@
   },
   {
     "name": "LIST_VIEW_ITEM_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "LVIF_",
       "header": "commctrl.h"
@@ -31322,8 +31284,8 @@
     "uses": [
       {
         "interface": "IOleObject",
-        "struct": "GetMiscStatus",
-        "field": "pdwStatus"
+        "method": "GetMiscStatus",
+        "parameter": "pdwStatus"
       },
       {
         "struct": "QACONTROL",
@@ -31343,7 +31305,7 @@
   },
   {
     "addUsesTo": "OLECMDF",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31354,7 +31316,7 @@
   },
   {
     "addUsesTo": "OLECONTF",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31366,7 +31328,7 @@
   },
   {
     "addUsesTo": "OLEVERBATTRIB",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31377,7 +31339,7 @@
   },
   {
     "addUsesTo": "OLEWHICHMK",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31415,33 +31377,33 @@
   },
   {
     "addUsesTo": "QACONTAINERFLAGS",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
         "struct": "QACONTAINER",
-        "parameter": "dwAmbientFlags"
+        "field": "dwAmbientFlags"
       }
     ]
   },
   {
     "addUsesTo": "TYMED",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
         "struct": "STGMEDIUM",
-        "parameter": "tymed"
+        "field": "tymed"
       },
       {
         "struct": "RemSTGMEDIUM",
-        "parameter": "tymed"
+        "field": "tymed"
       }
     ]
   },
   {
     "addUsesTo": "STATFLAG",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31473,7 +31435,7 @@
   },
   {
     "addUsesTo": "STGM",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31492,7 +31454,7 @@
   },
   {
     "addUsesTo": "LOCKTYPE",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31528,7 +31490,7 @@
   },
   {
     "addUsesTo": "VIEWSTATUS",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31539,7 +31501,7 @@
   },
   {
     "addUsesTo": "POINTERINACTIVE",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -31555,7 +31517,7 @@
   },
   {
     "name": "KEYMODIFIERS",
-    "flags": "true",
+    "flags": true,
     "members": [
       {
         "name": "KEYMOD_SHIFT",
@@ -31581,7 +31543,7 @@
   {
     "name": "ACCEL_VIRT_FLAGS",
     "type": "byte",
-    "flags": "true",
+    "flags": true,
     "members": [
       {
         "name": "FVIRTKEY"
@@ -31608,7 +31570,7 @@
   },
   {
     "name": "DEVMODE_FIELD_FLAGS",
-    "flags": "true",
+    "flags": true,
     "autoPopulate": {
       "filter": "DM_",
       "header": "wingdi.h"
@@ -31699,7 +31661,7 @@
   },
   {
     "addUsesTo": "VARFLAGS",
-    "flags": "true",
+    "flags": true,
     "members": [],
     "uses": [
       {
@@ -32156,3 +32118,4 @@
     "uses": []
   }
 ]
+}

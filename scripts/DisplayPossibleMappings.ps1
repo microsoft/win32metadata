@@ -34,7 +34,7 @@ foreach ($match in $remapMatches)
         continue
     }
 
-    $stream.WriteLine($match.Groups[1].Value)    
+    $stream.WriteLine($match.Groups[1].Value)
     $count++
 }
 
@@ -42,5 +42,5 @@ $stream.Close()
 
 if ($count -ne 0)
 {
-    Write-Output "$count remaps emitted at: $remapsFile"
+    Write-Host "$count remaps emitted at: $remapsFile"
 }

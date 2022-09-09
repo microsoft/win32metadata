@@ -978,8 +978,11 @@ namespace MetadataUtils
                         bool addedEnum = false;
 
                         // If the enum doesn't have any remaps and isn't
-                        // an auto-populate, go to next object
-                        bool shouldWriteEnum = (remapCount != 0 || obj.autoPopulate != null);
+                        // an auto-populate and has no values, go to next object
+                        bool shouldWriteEnum =
+                            remapCount != 0 ||
+                            obj.autoPopulate != null ||
+                            (obj.members != null && obj.members.Any(m => m.value != null));
 
                         if (!shouldWriteEnum)
                         {

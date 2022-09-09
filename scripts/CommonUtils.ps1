@@ -22,7 +22,7 @@ $ErrorActionPreference = "Stop"
 function ThrowOnNativeProcessError
 {
     if (-not $?)
-    {   
+    {
         $var = $?
         throw "Call to process exited with error"
     }
@@ -65,7 +65,7 @@ function Install-BuildTools
         & dotnet clean "$rootDir\buildtools"
     }
 
-    & dotnet build "$rootDir\buildtools" -c Release
+    & dotnet build "$rootDir\buildtools" -c Release "-bl:$PSScriptRoot\..\bin\logs\buildtools.binlog"
     ThrowOnNativeProcessError
 
     Install-VsDevShell
@@ -139,7 +139,7 @@ function Invoke-PrepLibMappingsFile
         $libPkgPath = Get-WinSdkCppX64PkgPath
         $libDirectory = "$libPkgPath\c\um\x64"
 
-        Write-Output "Creating lib mapping file: $libMappingOutputFileName using $libDirectory"
+        Write-Host "Creating lib mapping file: $libMappingOutputFileName using $libDirectory"
 
         & $PSScriptRoot\CreateProcLibMappingForAllLibs.ps1 -libDirectory $libDirectory -outputFileName $libMappingOutputFileName
     }
@@ -152,14 +152,14 @@ function Invoke-RecompileMidlHeaders
         $zipFile = "$scraperDir\RecompiledIdlHeaders.zip"
         if (Test-Path $zipFile)
         {
-            Write-Output "Unzipping recompiled headers from $zipFile..."
+            Write-Host "Unzipping recompiled headers from $zipFile..."
             Expand-Archive $zipFile -DestinationPath $artifactsDir
             return
         }
 
         & $PSScriptRoot\RecompileIdlFilesForScraping.ps1 -sdkBinDir $sdkBinDir -includeDir $recompiledIdlHeadersDir
 
-        Write-Output "Compressing headers to $zipFile..."
+        Write-Host "Compressing headers to $zipFile..."
         Compress-Archive -Path $recompiledIdlHeadersDir -DestinationPath $zipFile
     }
 }
@@ -199,9 +199,9 @@ function Install-VsDevShell
         $currentDir = Get-Location
         $installDir = & "$PSScriptRoot\Get-VSPath.ps1"
         $vsInstallScript = Join-Path $installDir "Common7\Tools\Launch-VsDevShell.ps1"
-    
+
         & $vsInstallScript
-    
+
         Set-Location $currentDir
     }
 }

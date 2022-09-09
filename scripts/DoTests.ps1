@@ -10,10 +10,9 @@ if (!$skipInstallTools)
     Install-BuildTools
 }
 
-Write-Output "`e[36m*** Running metadata utils tests...`e[0m"
+Write-Host "*** Running metadata utils tests..." -ForegroundColor Blue
 
 dotnet test "$PSScriptRoot\..\tests\MetadataUtils.Tests" -c Release
 ThrowOnNativeProcessError
 
 & $PSScriptRoot\TestWinmdBinary.ps1 -SkipInstallTools
-
