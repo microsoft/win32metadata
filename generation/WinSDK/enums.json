@@ -11019,7 +11019,7 @@
     ]
   },
   {
-    "addUsesTo": "INSTALLOGMODE",
+    "addUsesTo": "INSTALLLOGMODE",
     "flags": true,
     "members": [],
     "uses": [
