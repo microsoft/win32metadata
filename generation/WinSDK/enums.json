@@ -32021,7 +32021,7 @@
         "value": 0
       },
       {
-        "name": "PAN__PROP_NO_FIT",
+        "name": "PAN_PROP_NO_FIT",
         "value": 1
       }
     ],
@@ -32064,18 +32064,18 @@
     "uses": []
   },
   {
-    "name": "PAN_LETTER_FORM",
+    "name": "PAN_LETT_FORM",
     "autoPopulate": {
       "filter": "PAN_LETT_",
       "header": "wingdi.h"
     },
     "members": [
       {
-        "name": "PAN_LETTER_FORM_ANY",
+        "name": "PAN_LETT_FORM_ANY",
         "value": 0
       },
       {
-        "name": "PAN_LETTER_FORM_NO_FIT",
+        "name": "PAN_LETT_FORM_NO_FIT",
         "value": 1
       }
     ],
