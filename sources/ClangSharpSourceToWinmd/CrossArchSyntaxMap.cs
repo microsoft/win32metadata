@@ -12,9 +12,10 @@ namespace ClangSharpSourceToWinmd
 {
     public class CrossArchSyntaxMap
     {
-        private Dictionary<string, List<CrossArchInfo>> namesToInfos = new Dictionary<string, List<CrossArchInfo>>();
-        private Dictionary<string, StructDeclarationSyntax> namesTo64BitStructs = new Dictionary<string, StructDeclarationSyntax>();
-        private HashSet<string> x86StructsNeed64BitAttrs = new HashSet<string>();
+        private readonly Dictionary<string, List<CrossArchInfo>> namesToInfos = new();
+        private readonly Dictionary<string, StructDeclarationSyntax> namesTo64BitStructs = new();
+        private readonly HashSet<string> x86StructsNeed64BitAttrs = new();
+        private readonly object syncObj = new();
 
         public CrossArchSyntaxMap()
         {
@@ -78,9 +79,13 @@ namespace ClangSharpSourceToWinmd
         public StructDeclarationSyntax FixX86Struct(StructDeclarationSyntax x86Node)
         {
             string name = SyntaxUtils.GetFullName(x86Node, true);
-            if (this.x86StructsNeed64BitAttrs.Contains(name))
+
+            lock (this.syncObj)
             {
-                return x86Node.AddAttributeLists(this.namesTo64BitStructs[name].AttributeLists.ToArray());
+                if (this.x86StructsNeed64BitAttrs.Contains(name))
+                {
+                    return x86Node.AddAttributeLists(this.namesTo64BitStructs[name].AttributeLists.ToArray());
+                }
             }
 
             return x86Node;
@@ -88,14 +93,17 @@ namespace ClangSharpSourceToWinmd
 
         public HashSet<string> Get64BitTreesUsedForX86()
         {
-            HashSet<string> ret = new HashSet<string>();
+            HashSet<string> ret = new();
 
-            foreach (var name in this.x86StructsNeed64BitAttrs)
+            lock (this.syncObj)
             {
-                var nonX86Struct = this.namesTo64BitStructs[name];
-                if (!ret.Contains(nonX86Struct.SyntaxTree.FilePath))
+                foreach (var name in this.x86StructsNeed64BitAttrs)
                 {
-                    ret.Add(nonX86Struct.SyntaxTree.FilePath);
+                    var nonX86Struct = this.namesTo64BitStructs[name];
+                    if (!ret.Contains(nonX86Struct.SyntaxTree.FilePath))
+                    {
+                        ret.Add(nonX86Struct.SyntaxTree.FilePath);
+                    }
                 }
             }
 
@@ -110,12 +118,19 @@ namespace ClangSharpSourceToWinmd
 
         public IEnumerable<Architecture> GetSignatureArchGroupings(string name)
         {
-            if (this.namesToInfos.TryGetValue(name, out var crossArchInfos))
+            CrossArchInfo[] foundCrossArchInfos = new CrossArchInfo[0];
+
+            lock (this.syncObj)
             {
-                foreach (var info in crossArchInfos)
+                if (this.namesToInfos.TryGetValue(name, out var crossArchInfos))
                 {
-                    yield return info.Arch;
+                    foundCrossArchInfos = crossArchInfos.ToArray();
                 }
+            }
+
+            foreach (var info in foundCrossArchInfos)
+            {
+                yield return info.Arch;
             }
         }
 
@@ -293,30 +308,30 @@ namespace ClangSharpSourceToWinmd
             string fullSignature = GetFullSignature(node);
             string altSignatureForX86 = string.Empty;
 
-            if (node is StructDeclarationSyntax structNode)
+            lock (this.syncObj)
             {
-                // Cache the non-x86 struct attributes in case the x86 doesn't have any.
-                // Clang doesn't seem to always know the packing for -m32 but does better with -m64
-                if (arch != Architecture.X86 && structNode.AttributeLists.Count != 0 && !this.namesTo64BitStructs.ContainsKey(name))
+                if (node is StructDeclarationSyntax structNode)
                 {
-                    this.namesTo64BitStructs[name] = structNode;
-                }
-
-                if (arch == Architecture.X86)
-                {
-                    // If the x86 node doesn't have any attributes, try using the ones cached from the non-x86 version
-                    if (structNode.AttributeLists.Count == 0 && this.namesTo64BitStructs.TryGetValue(name, out var nonX86Node))
+                    // Cache the non-x86 struct attributes in case the x86 doesn't have any.
+                    // Clang doesn't seem to always know the packing for -m32 but does better with -m64
+                    if (arch != Architecture.X86 && structNode.AttributeLists.Count != 0 && !this.namesTo64BitStructs.ContainsKey(name))
                     {
-                        var tempNode = structNode.WithAttributeLists(nonX86Node.AttributeLists);
+                        this.namesTo64BitStructs[name] = structNode;
+                    }
 
-                        // Save these off to see if we match with previous items
-                        altSignatureForX86 = GetFullSignature(tempNode);
+                    if (arch == Architecture.X86)
+                    {
+                        // If the x86 node doesn't have any attributes, try using the ones cached from the non-x86 version
+                        if (structNode.AttributeLists.Count == 0 && this.namesTo64BitStructs.TryGetValue(name, out var nonX86Node))
+                        {
+                            var tempNode = structNode.WithAttributeLists(nonX86Node.AttributeLists);
+
+                            // Save these off to see if we match with previous items
+                            altSignatureForX86 = GetFullSignature(tempNode);
+                        }
                     }
                 }
-            }
 
-            lock (this.namesToInfos)
-            {
                 if (!this.namesToInfos.TryGetValue(name, out var crossArchInfos))
                 {
                     crossArchInfos = new List<CrossArchInfo>();
