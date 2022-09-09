@@ -1453,3 +1453,91 @@ Windows.Win32.System.Diagnostics.Debug.MINIDUMP_THREAD_NAME_LIST :  => [StructLa
 Windows.Win32.System.Diagnostics.Debug.MINIDUMP_TOKEN_INFO_LIST :  => [StructLayout(0,Pack=4)]
 Windows.Win32.System.Diagnostics.Debug.MINIDUMP_UNLOADED_MODULE_LIST :  => [StructLayout(0,Pack=4)]
 Windows.Win32.System.Diagnostics.Debug.MINIDUMP_USER_RECORD :  => [StructLayout(0,Pack=4)]
+# More struct pack fixes
+Windows.Win32.Devices.DeviceAndDriverInstallation.BUSNUMBER_RESOURCE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.DeviceAndDriverInstallation.CS_RESOURCE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.DeviceAndDriverInstallation.DMA_RESOURCE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.DeviceAndDriverInstallation.IRQ_RESOURCE_32 :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.DeviceAndDriverInstallation.IRQ_RESOURCE_64 :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.DeviceAndDriverInstallation.MEM_RESOURCE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.DeviceAndDriverInstallation.MFCARD_RESOURCE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.DeviceAndDriverInstallation.PCCARD_RESOURCE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USB_USB2HW_VERSION_PARAMETERS :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_BANDWIDTH_INFO_REQUEST :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_BUS_STATISTICS_0_REQUEST :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_CLOSE_RAW_DEVICE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_CONTROLLER_INFO_0 :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_CONTROLLER_UNICODE_NAME :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_GET_DRIVER_VERSION :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_GET_USB2HW_VERSION :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_OPEN_RAW_DEVICE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_PASS_THRU_REQUEST :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_POWER_INFO_REQUEST :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_RAW_RESET_ROOT_PORT :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_ROOTPORT_FEATURE_REQUEST :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_ROOTPORT_PARAMETERS :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_SEND_ONE_PACKET :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Devices.Usb.USBUSER_SEND_RAW_COMMAND :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Graphics.Printing.MXDC_PRINTTICKET_DATA_T added
+Windows.Win32.Graphics.Printing.MXDC_PRINTTICKET_ESCAPE_T added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_DICTIONARY added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_ICC_PROFILE added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_JPEG added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_JPEG_THUMBNAIL added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_MAX added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_PNG added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_PNG_THUMBNAIL added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_TIFF added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_TTF added
+Windows.Win32.Graphics.Printing.MXDC_S0_PAGE_ENUMS.MXDC_RESOURCE_WDP added
+Windows.Win32.Graphics.Printing.MXDC_S0PAGE_DATA_T added
+Windows.Win32.Graphics.Printing.MXDC_S0PAGE_PASSTHROUGH_ESCAPE_T added
+Windows.Win32.Graphics.Printing.MXDC_S0PAGE_RESOURCE_ESCAPE_T added
+Windows.Win32.Graphics.Printing.MXDC_XPS_S0PAGE_RESOURCE_T added
+Windows.Win32.Graphics.Printing.MxdcPrintTicketEscape removed
+Windows.Win32.Graphics.Printing.MxdcPrintTicketPassthrough removed
+Windows.Win32.Graphics.Printing.MxdcS0PageData removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_DICTIONARY removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_ICC_PROFILE removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_JPEG removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_JPEG_THUMBNAIL removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_MAX removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_PNG removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_PNG_THUMBNAIL removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_TIFF removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_TTF removed
+Windows.Win32.Graphics.Printing.MxdcS0PageEnums.MXDC_RESOURCE_WDP removed
+Windows.Win32.Graphics.Printing.MxdcS0PagePassthroughEscape removed
+Windows.Win32.Graphics.Printing.MxdcS0PageResourceEscape removed
+Windows.Win32.Graphics.Printing.MxdcXpsS0PageResource removed
+Windows.Win32.Media.DirectShow.MPEG_DATE_AND_TIME :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Media.DirectShow.MPEG_TIME :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Media.DirectShow.SECTION :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Networking.WinSock.DL_TEREDO_ADDRESS :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Networking.WinSock.DL_TEREDO_ADDRESS_PRV :  => [StructLayout(0,Pack=1)]
+Windows.Win32.Networking.WinSock.TCP_OPT_FASTOPEN added
+Windows.Win32.Networking.WinSock.tcp_opt_fastopen removed
+Windows.Win32.Networking.WinSock.TCP_OPT_MSS added
+Windows.Win32.Networking.WinSock.tcp_opt_mss removed
+Windows.Win32.Networking.WinSock.TCP_OPT_SACK added
+Windows.Win32.Networking.WinSock.tcp_opt_sack removed
+Windows.Win32.Networking.WinSock.TCP_OPT_SACK_PERMITTED added
+Windows.Win32.Networking.WinSock.tcp_opt_sack_permitted removed
+Windows.Win32.Networking.WinSock.TCP_OPT_TS added
+Windows.Win32.Networking.WinSock.tcp_opt_ts removed
+Windows.Win32.Networking.WinSock.TCP_OPT_UNKNOWN added
+Windows.Win32.Networking.WinSock.tcp_opt_unknown removed
+Windows.Win32.Networking.WinSock.TCP_OPT_WS added
+Windows.Win32.Networking.WinSock.tcp_opt_ws removed
+Windows.Win32.NetworkManagement.Snmp.AsnAny :  => [StructLayout(0,Pack=4)]
+Windows.Win32.NetworkManagement.Snmp.SnmpVarBind :  => [StructLayout(0,Pack=4)]
+Windows.Win32.Storage.FileSystem.TXF_ID :  => [StructLayout(0,Pack=4)]
+Windows.Win32.Storage.FileSystem.TXF_LOG_RECORD_AFFECTED_FILE :  => [StructLayout(0,Pack=4)]
+Windows.Win32.Storage.FileSystem.TXF_LOG_RECORD_BASE :  => [StructLayout(0,Pack=4)]
+Windows.Win32.System.DeploymentServices.PXE_DHCP_OPTION :  => [StructLayout(0,Pack=1)]
+Windows.Win32.System.DeploymentServices.PXE_DHCPV6_MESSAGE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.System.DeploymentServices.PXE_DHCPV6_MESSAGE_HEADER :  => [StructLayout(0,Pack=1)]
+Windows.Win32.System.DeploymentServices.PXE_DHCPV6_RELAY_MESSAGE :  => [StructLayout(0,Pack=1)]
+Windows.Win32.UI.Shell.Common.ITEMIDLIST :  => [StructLayout(0,Pack=1)]
