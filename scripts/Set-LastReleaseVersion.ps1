@@ -4,7 +4,6 @@ Param(
     [string]$LastReleaseVersion
 )
 
-
 $dirBuildPropsFile = Join-Path $PSScriptRoot "..\Directory.Build.Props"
 
 Write-Verbose "Updating $dirBuildPropsFile..."
