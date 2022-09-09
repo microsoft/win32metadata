@@ -56,19 +56,17 @@ namespace ClangSharpSourceToWinmd
 
             private SyntaxTree AddNames(SyntaxTree tree, Dictionary<string, MovedData> namespaceToMovedData)
             {
-                TreeRewriterForAdding treeRewriter = new TreeRewriterForAdding(this, namespaceToMovedData);
+                TreeRewriterForAdding treeRewriter = new TreeRewriterForAdding(namespaceToMovedData);
                 var newRoot = (CSharpSyntaxNode)treeRewriter.Visit(tree.GetRoot());
                 return CSharpSyntaxTree.Create(newRoot, null);
             }
 
             private class TreeRewriterForAdding : CSharpSyntaxRewriter
             {
-                private NameFixer parent;
                 private Dictionary<string, MovedData> namespaceToMovedData;
 
-                public TreeRewriterForAdding(NameFixer parent, Dictionary<string, MovedData> namespaceToMovedData)
+                public TreeRewriterForAdding(Dictionary<string, MovedData> namespaceToMovedData)
                 {
-                    this.parent = parent;
                     this.namespaceToMovedData = namespaceToMovedData;
                 }
 
@@ -76,10 +74,10 @@ namespace ClangSharpSourceToWinmd
                 {
                     node = (CompilationUnitSyntax)base.VisitCompilationUnit(node);
 
-                    if (namespaceToMovedData.Count != 0)
+                    if (this.namespaceToMovedData.Count != 0)
                     {
                         List<MemberDeclarationSyntax> newNamespaces = new List<MemberDeclarationSyntax>();
-                        foreach (var pair in namespaceToMovedData)
+                        foreach (var pair in this.namespaceToMovedData)
                         {
                             var newNamespace = pair.Key;
                             var moveData = pair.Value;
