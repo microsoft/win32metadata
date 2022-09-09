@@ -1000,8 +1000,8 @@ namespace ClangSharpSourceToWinmd
                         string sizeOrParamName = match.Groups[1].Value;
                         if (int.TryParse(sizeOrParamName, out int size))
                         {
-                            // Don't bother marking this as an array if it only has 1
-                            if (size == 1)
+                            // Don't bother marking this as an array if it has 1 or less
+                            if (size <= 1)
                             {
                                 return string.Empty;
                             }
