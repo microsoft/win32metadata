@@ -31974,5 +31974,185 @@
         "field": "dwState"
       }
     ]
+  },
+  {
+    "name": "PAN_FAMILY_TYPE",
+    "autoPopulate": {
+      "filter": "PAN_FAMILY_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_FAMILY_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_FAMILY_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_SERIF_STYLE",
+    "autoPopulate": {
+      "filter": "PAN_SERIF_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_SERIF_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_SERIF_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_WEIGHT",
+    "autoPopulate": {
+      "filter": "PAN_WEIGHT_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_WEIGHT_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_WEIGHT_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_STROKE_VARIATION",
+    "autoPopulate": {
+      "filter": "PAN_STROKE_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_STROKE_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_STROKE_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_PROPORTION",
+    "autoPopulate": {
+      "filter": "PAN_PROP_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_PROP_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN__PROP_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_CONTRAST",
+    "autoPopulate": {
+      "filter": "PAN_CONTRAST_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_CONTRAST_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_CONTRAST_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_ARM_STYLE",
+    "autoPopulate": {
+      "filter": "PAN_STRAIGHT_|PAN_BENT_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_ARM_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_ARM_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_LETTER_FORM",
+    "autoPopulate": {
+      "filter": "PAN_LETT_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_LETTER_FORM_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_LETTER_FORM_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_MIDLINE",
+    "autoPopulate": {
+      "filter": "PAN_MIDLINE_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_MIDLINE_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_MIDLINE_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
+  },
+  {
+    "name": "PAN_XHEIGHT",
+    "autoPopulate": {
+      "filter": "PAN_XHEIGHT_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_XHEIGHT_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_XHEIGHT_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": []
   }
 ]
