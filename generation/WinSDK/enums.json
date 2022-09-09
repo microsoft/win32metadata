@@ -31894,6 +31894,158 @@
     },
     "members": [],
     "uses": []
+  },
+  {
+    "type": "int",
+    "name": "VAR_FORMAT_FIRST_DAY",
+    "members": [
+      {
+        "name": "VAR_FORMAT_FIRST_DAY_SYSTEM_DEFAULT",
+        "value": 0
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_DAY_MONDAY",
+        "value": 1
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_DAY_TUESDAY",
+        "value": 2
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_DAY_WEDNESDAY",
+        "value": 3
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_DAY_THuRSDAY",
+        "value": 4
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_DAY_FRIDAY",
+        "value": 5
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_DAY_SATURDAY",
+        "value": 6
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_DAY_SUNDAY",
+        "value": 7
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormat",
+        "parameter": "iFirstDay"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VAR_FORMAT_FIRST_WEEK",
+    "members": [
+      {
+        "name": "VAR_FORMAT_FIRST_WEEK_SYSTEM_DEFAULT",
+        "value": 0
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST",
+        "value": 1
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR",
+        "value": 2
+      },
+      {
+        "name": "VAR_FORMAT_HAS_SEVEN_DAYS",
+        "value": 3
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormat",
+        "parameter": "iFirstDay"
+      },
+      {
+        "method": "IVBFormat::Format",
+        "parameter": "sFirstDayOfWeek"
+      },
+      {
+        "method": "VarTokenizeFormatString",
+        "parameter": "iFirstDay"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VAR_FORMAT_INCLUDE_LEADING",
+    "members": [
+      {
+        "name": "VAR_FORMAT_INCLUDE_LEADING_SYSTEM_DEFAULT",
+        "value": 0
+      },
+      {
+        "name": "VAR_FORMAT_INCLUDE_LEADING_INCLUDED",
+        "value": 1
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR",
+        "value": 2
+      },
+      {
+        "name": "VAR_FORMAT_HAS_SEVEN_DAYS",
+        "value": 3
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormat",
+        "parameter": "iFirstWeek"
+      },
+      {
+        "method": "IVBFormat::Format",
+        "parameter": "sFirstWeekOfYear"
+      },
+      {
+        "method": "VarTokenizeFormatString",
+        "parameter": "iFirstWeek"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VAR_FORMAT_GROUP",
+    "members": [
+      {
+        "name": "VAR_FORMAT_GROUP_SYSTEM_DEFAULT",
+        "value": 0
+      },
+      {
+        "name": "VAR_FORMAT_INCLUDE_LEADING_INCLUDED",
+        "value": 1
+      },
+      {
+        "name": "VAR_FORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR",
+        "value": 2
+      },
+      {
+        "name": "VAR_FORMAT_HAS_SEVEN_DAYS",
+        "value": 3
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormat",
+        "parameter": "iFirstWeek"
+      },
+      {
+        "method": "IVBFormat::Format",
+        "parameter": "sFirstWeekOfYear"
+      },
+      {
+        "method": "VarTokenizeFormatString",
+        "parameter": "iFirstWeek"
+      }
+    ]
   }
 ]
 }
