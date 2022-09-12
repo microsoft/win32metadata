@@ -40,6 +40,8 @@ Windows.Win32.UI.Shell.Apis.SHGetKnownFolderPath : dwFlags...UInt32 => KNOWN_FOL
 # SYS_COLOR_INDEX
 Windows.Win32.Graphics.Gdi.Apis.GetSysColorBrush : nIndex...Int32 => SYS_COLOR_INDEX
 Windows.Win32.UI.WindowsAndMessaging.Apis.GetSysColor => Windows.Win32.Graphics.Gdi.Apis.GetSysColor
+Windows.Win32.UI.WindowsAndMessaging.Apis.SetSysColors => Windows.Win32.Graphics.Gdi.Apis.SetSysColors
+Windows.Win32.UI.Controls.RichEdit.ITextHost.TxGetSysColor : nIndex...Int32 => SYS_COLOR_INDEX
 Windows.Win32.UI.WindowsAndMessaging.SYS_COLOR_INDEX removed
 Windows.Win32.UI.WindowsAndMessaging.SYS_COLOR_INDEX.COLOR_3DDKSHADOW removed
 Windows.Win32.UI.WindowsAndMessaging.SYS_COLOR_INDEX.COLOR_3DFACE removed

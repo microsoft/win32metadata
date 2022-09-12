@@ -14748,152 +14748,12 @@
   },
   {
     "name": "SYS_COLOR_INDEX",
-    "members": [
-      {
-        "name": "COLOR_3DDKSHADOW",
-        "value": "21"
-      },
-      {
-        "name": "COLOR_3DFACE",
-        "value": "15"
-      },
-      {
-        "name": "COLOR_3DHIGHLIGHT",
-        "value": "20"
-      },
-      {
-        "name": "COLOR_3DHILIGHT",
-        "value": "20"
-      },
-      {
-        "name": "COLOR_3DLIGHT",
-        "value": "22"
-      },
-      {
-        "name": "COLOR_3DSHADOW",
-        "value": "16"
-      },
-      {
-        "name": "COLOR_ACTIVEBORDER",
-        "value": "10"
-      },
-      {
-        "name": "COLOR_ACTIVECAPTION",
-        "value": "2"
-      },
-      {
-        "name": "COLOR_APPWORKSPACE",
-        "value": "12"
-      },
-      {
-        "name": "COLOR_BACKGROUND",
-        "value": "1"
-      },
-      {
-        "name": "COLOR_BTNFACE",
-        "value": "15"
-      },
-      {
-        "name": "COLOR_BTNHIGHLIGHT",
-        "value": "20"
-      },
-      {
-        "name": "COLOR_BTNHILIGHT",
-        "value": "20"
-      },
-      {
-        "name": "COLOR_BTNSHADOW",
-        "value": "16"
-      },
-      {
-        "name": "COLOR_BTNTEXT",
-        "value": "18"
-      },
-      {
-        "name": "COLOR_CAPTIONTEXT",
-        "value": "9"
-      },
-      {
-        "name": "COLOR_DESKTOP",
-        "value": "1"
-      },
-      {
-        "name": "COLOR_GRADIENTACTIVECAPTION",
-        "value": "27"
-      },
-      {
-        "name": "COLOR_GRADIENTINACTIVECAPTION",
-        "value": "28"
-      },
-      {
-        "name": "COLOR_GRAYTEXT",
-        "value": "17"
-      },
-      {
-        "name": "COLOR_HIGHLIGHT",
-        "value": "13"
-      },
-      {
-        "name": "COLOR_HIGHLIGHTTEXT",
-        "value": "14"
-      },
-      {
-        "name": "COLOR_HOTLIGHT",
-        "value": "26"
-      },
-      {
-        "name": "COLOR_INACTIVEBORDER",
-        "value": "11"
-      },
-      {
-        "name": "COLOR_INACTIVECAPTION",
-        "value": "3"
-      },
-      {
-        "name": "COLOR_INACTIVECAPTIONTEXT",
-        "value": "19"
-      },
-      {
-        "name": "COLOR_INFOBK",
-        "value": "24"
-      },
-      {
-        "name": "COLOR_INFOTEXT",
-        "value": "23"
-      },
-      {
-        "name": "COLOR_MENU",
-        "value": "4"
-      },
-      {
-        "name": "COLOR_MENUHILIGHT",
-        "value": "29"
-      },
-      {
-        "name": "COLOR_MENUBAR",
-        "value": "30"
-      },
-      {
-        "name": "COLOR_MENUTEXT",
-        "value": "7"
-      },
-      {
-        "name": "COLOR_SCROLLBAR",
-        "value": "0"
-      },
-      {
-        "name": "COLOR_WINDOW",
-        "value": "5"
-      },
-      {
-        "name": "COLOR_WINDOWFRAME",
-        "value": "6"
-      },
-      {
-        "name": "COLOR_WINDOWTEXT",
-        "value": "8"
-      }
-    ],
+    "type": "int",
+    "autoPopulate": {
+      "filter": "COLOR_",
+      "header": "WinUser.h"
+    },
+    "members": [],
     "uses": [
       {
         "method": "GetSysColor",
@@ -14901,6 +14761,11 @@
       },
       {
         "method": "GetSysColorBrush",
+        "parameter": "nIndex"
+      },
+      {
+        "interface": "ITextHost",
+        "method": "TxGetSysColor",
         "parameter": "nIndex"
       }
     ]

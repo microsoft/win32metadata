@@ -2351,6 +2351,7 @@ SetRectEmpty=Windows.Win32.Graphics.Gdi
 SetScrollInfo=Windows.Win32.UI.Controls
 SetScrollPos=Windows.Win32.UI.Controls
 SetScrollRange=Windows.Win32.UI.Controls
+SetSysColors=Windows.Win32.Graphics.Gdi
 SetThreadDesktop=Windows.Win32.System.StationsAndDesktops
 SetThreadDpiAwarenessContext=Windows.Win32.UI.HiDpi
 SetThreadDpiHostingBehavior=Windows.Win32.UI.HiDpi
