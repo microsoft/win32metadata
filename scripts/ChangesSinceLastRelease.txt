@@ -1,3 +1,373 @@
+# OLE enum changes
+Windows.Win32.System.Com.IDLDESC.wIDLFlags...System.UInt16 => Windows.Win32.System.Com.IDLFLAGS
+Windows.Win32.System.Com.IDLFLAGS added
+Windows.Win32.System.Com.IDLFLAGS.IDLFLAG_FIN added
+Windows.Win32.System.Com.IDLFLAGS.IDLFLAG_FLCID added
+Windows.Win32.System.Com.IDLFLAGS.IDLFLAG_FOUT added
+Windows.Win32.System.Com.IDLFLAGS.IDLFLAG_FRETVAL added
+Windows.Win32.System.Com.IDLFLAGS.IDLFLAG_NONE added
+Windows.Win32.System.Com.IMPLTYPEFLAGS added
+Windows.Win32.System.Com.IMPLTYPEFLAGS.IMPLTYPEFLAG_FDEFAULT added
+Windows.Win32.System.Com.IMPLTYPEFLAGS.IMPLTYPEFLAG_FDEFAULTVTABLE added
+Windows.Win32.System.Com.IMPLTYPEFLAGS.IMPLTYPEFLAG_FRESTRICTED added
+Windows.Win32.System.Com.IMPLTYPEFLAGS.IMPLTYPEFLAG_FSOURCE added
+Windows.Win32.System.Ole.ACTIVEOBJECT_FLAGS added
+Windows.Win32.System.Ole.ACTIVEOBJECT_FLAGS.ACTIVEOBJECT_STRONG added
+Windows.Win32.System.Ole.ACTIVEOBJECT_FLAGS.ACTIVEOBJECT_WEAK added
+Windows.Win32.System.Ole.Apis.ACTIVEOBJECT_STRONG removed
+Windows.Win32.System.Ole.Apis.ACTIVEOBJECT_WEAK removed
+Windows.Win32.System.Ole.Apis.BZ_DISABLECANCELBUTTON removed
+Windows.Win32.System.Ole.Apis.BZ_DISABLERETRYBUTTON removed
+Windows.Win32.System.Ole.Apis.BZ_DISABLESWITCHTOBUTTON removed
+Windows.Win32.System.Ole.Apis.BZ_NOTRESPONDINGDIALOG removed
+Windows.Win32.System.Ole.Apis.CF_CONVERTONLY removed
+Windows.Win32.System.Ole.Apis.CF_DISABLEACTIVATEAS removed
+Windows.Win32.System.Ole.Apis.CF_DISABLEDISPLAYASICON removed
+Windows.Win32.System.Ole.Apis.CF_HIDECHANGEICON removed
+Windows.Win32.System.Ole.Apis.CF_SELECTACTIVATEAS removed
+Windows.Win32.System.Ole.Apis.CF_SELECTCONVERTTO removed
+Windows.Win32.System.Ole.Apis.CF_SETACTIVATEDEFAULT removed
+Windows.Win32.System.Ole.Apis.CF_SETCONVERTDEFAULT removed
+Windows.Win32.System.Ole.Apis.CF_SHOWHELPBUTTON removed
+Windows.Win32.System.Ole.Apis.CIF_SELECTCURRENT removed
+Windows.Win32.System.Ole.Apis.CIF_SELECTDEFAULT removed
+Windows.Win32.System.Ole.Apis.CIF_SELECTFROMFILE removed
+Windows.Win32.System.Ole.Apis.CIF_SHOWHELP removed
+Windows.Win32.System.Ole.Apis.CIF_USEICONEXE removed
+Windows.Win32.System.Ole.Apis.CSF_EXPLORER removed
+Windows.Win32.System.Ole.Apis.CSF_ONLYGETSOURCE removed
+Windows.Win32.System.Ole.Apis.CSF_SHOWHELP removed
+Windows.Win32.System.Ole.Apis.CSF_VALIDSOURCE removed
+Windows.Win32.System.Ole.Apis.ELF_DISABLECANCELLINK removed
+Windows.Win32.System.Ole.Apis.ELF_DISABLECHANGESOURCE removed
+Windows.Win32.System.Ole.Apis.ELF_DISABLEOPENSOURCE removed
+Windows.Win32.System.Ole.Apis.ELF_DISABLEUPDATENOW removed
+Windows.Win32.System.Ole.Apis.ELF_SHOWHELP removed
+Windows.Win32.System.Ole.Apis.EMBDHLP_CREATENOW removed
+Windows.Win32.System.Ole.Apis.EMBDHLP_DELAYCREATE removed
+Windows.Win32.System.Ole.Apis.EMBDHLP_INPROC_HANDLER removed
+Windows.Win32.System.Ole.Apis.EMBDHLP_INPROC_SERVER removed
+Windows.Win32.System.Ole.Apis.fdexPropCanCall removed
+Windows.Win32.System.Ole.Apis.fdexPropCanConstruct removed
+Windows.Win32.System.Ole.Apis.fdexPropCanGet removed
+Windows.Win32.System.Ole.Apis.fdexPropCannotCall removed
+Windows.Win32.System.Ole.Apis.fdexPropCannotConstruct removed
+Windows.Win32.System.Ole.Apis.fdexPropCannotGet removed
+Windows.Win32.System.Ole.Apis.fdexPropCannotPut removed
+Windows.Win32.System.Ole.Apis.fdexPropCannotPutRef removed
+Windows.Win32.System.Ole.Apis.fdexPropCannotSourceEvents removed
+Windows.Win32.System.Ole.Apis.fdexPropCanPut removed
+Windows.Win32.System.Ole.Apis.fdexPropCanPutRef removed
+Windows.Win32.System.Ole.Apis.fdexPropCanSourceEvents removed
+Windows.Win32.System.Ole.Apis.fdexPropDynamicType removed
+Windows.Win32.System.Ole.Apis.fdexPropNoSideEffects removed
+Windows.Win32.System.Ole.Apis.IDLFLAG_FIN removed
+Windows.Win32.System.Ole.Apis.IDLFLAG_FLCID removed
+Windows.Win32.System.Ole.Apis.IDLFLAG_FOUT removed
+Windows.Win32.System.Ole.Apis.IDLFLAG_FRETVAL removed
+Windows.Win32.System.Ole.Apis.IDLFLAG_NONE removed
+Windows.Win32.System.Ole.Apis.IMPLTYPEFLAG_FDEFAULT removed
+Windows.Win32.System.Ole.Apis.IMPLTYPEFLAG_FDEFAULTVTABLE removed
+Windows.Win32.System.Ole.Apis.IMPLTYPEFLAG_FRESTRICTED removed
+Windows.Win32.System.Ole.Apis.IMPLTYPEFLAG_FSOURCE removed
+Windows.Win32.System.Ole.Apis.IOF_CHECKDISPLAYASICON removed
+Windows.Win32.System.Ole.Apis.IOF_CHECKLINK removed
+Windows.Win32.System.Ole.Apis.IOF_CREATEFILEOBJECT removed
+Windows.Win32.System.Ole.Apis.IOF_CREATELINKOBJECT removed
+Windows.Win32.System.Ole.Apis.IOF_CREATENEWOBJECT removed
+Windows.Win32.System.Ole.Apis.IOF_DISABLEDISPLAYASICON removed
+Windows.Win32.System.Ole.Apis.IOF_DISABLELINK removed
+Windows.Win32.System.Ole.Apis.IOF_HIDECHANGEICON removed
+Windows.Win32.System.Ole.Apis.IOF_SELECTCREATECONTROL removed
+Windows.Win32.System.Ole.Apis.IOF_SELECTCREATEFROMFILE removed
+Windows.Win32.System.Ole.Apis.IOF_SELECTCREATENEW removed
+Windows.Win32.System.Ole.Apis.IOF_SHOWHELP removed
+Windows.Win32.System.Ole.Apis.IOF_SHOWINSERTCONTROL removed
+Windows.Win32.System.Ole.Apis.IOF_VERIFYSERVERSEXIST removed
+Windows.Win32.System.Ole.Apis.LP_COLOR removed
+Windows.Win32.System.Ole.Apis.LP_DEFAULT removed
+Windows.Win32.System.Ole.Apis.LP_MONOCHROME removed
+Windows.Win32.System.Ole.Apis.LP_VGACOLOR removed
+Windows.Win32.System.Ole.Apis.NUMPRS_CURRENCY removed
+Windows.Win32.System.Ole.Apis.NUMPRS_DECIMAL removed
+Windows.Win32.System.Ole.Apis.NUMPRS_EXPONENT removed
+Windows.Win32.System.Ole.Apis.NUMPRS_HEX_OCT removed
+Windows.Win32.System.Ole.Apis.NUMPRS_INEXACT removed
+Windows.Win32.System.Ole.Apis.NUMPRS_LEADING_MINUS removed
+Windows.Win32.System.Ole.Apis.NUMPRS_LEADING_PLUS removed
+Windows.Win32.System.Ole.Apis.NUMPRS_LEADING_WHITE removed
+Windows.Win32.System.Ole.Apis.NUMPRS_NEG removed
+Windows.Win32.System.Ole.Apis.NUMPRS_PARENS removed
+Windows.Win32.System.Ole.Apis.NUMPRS_STD removed
+Windows.Win32.System.Ole.Apis.NUMPRS_THOUSANDS removed
+Windows.Win32.System.Ole.Apis.NUMPRS_TRAILING_MINUS removed
+Windows.Win32.System.Ole.Apis.NUMPRS_TRAILING_PLUS removed
+Windows.Win32.System.Ole.Apis.NUMPRS_TRAILING_WHITE removed
+Windows.Win32.System.Ole.Apis.NUMPRS_USE_ALL removed
+Windows.Win32.System.Ole.Apis.OleCreate : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OLECREATE_LEAVERUNNING removed
+Windows.Win32.System.Ole.Apis.OleCreateEmbeddingHelper : flags...UInt32 => EMBDHLP_FLAGS
+Windows.Win32.System.Ole.Apis.OleCreateEx : dwFlags...UInt32 => OLECREATE
+Windows.Win32.System.Ole.Apis.OleCreateEx : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateFromData : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateFromDataEx : dwFlags...UInt32 => OLECREATE
+Windows.Win32.System.Ole.Apis.OleCreateFromDataEx : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateFromFile : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateFromFileEx : dwFlags...UInt32 => OLECREATE
+Windows.Win32.System.Ole.Apis.OleCreateFromFileEx : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateLink : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateLinkEx : dwFlags...UInt32 => OLECREATE
+Windows.Win32.System.Ole.Apis.OleCreateLinkEx : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromData : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromDataEx : dwFlags...UInt32 => OLECREATE
+Windows.Win32.System.Ole.Apis.OleCreateLinkFromDataEx : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFile : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFileEx : dwFlags...UInt32 => OLECREATE
+Windows.Win32.System.Ole.Apis.OleCreateLinkToFileEx : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleCreateStaticFromData : renderopt...UInt32 => OLERENDER
+Windows.Win32.System.Ole.Apis.OleLoadPictureEx : dwFlags...UInt32 => LOAD_PICTURE_FLAGS
+Windows.Win32.System.Ole.Apis.OleLoadPictureFileEx : dwFlags...UInt32 => LOAD_PICTURE_FLAGS
+Windows.Win32.System.Ole.Apis.OPF_DISABLECONVERT removed
+Windows.Win32.System.Ole.Apis.OPF_NOFILLDEFAULT removed
+Windows.Win32.System.Ole.Apis.OPF_OBJECTISLINK removed
+Windows.Win32.System.Ole.Apis.OPF_SHOWHELP removed
+Windows.Win32.System.Ole.Apis.PARAMFLAG_FHASCUSTDATA removed
+Windows.Win32.System.Ole.Apis.PARAMFLAG_FHASDEFAULT removed
+Windows.Win32.System.Ole.Apis.PARAMFLAG_FIN removed
+Windows.Win32.System.Ole.Apis.PARAMFLAG_FLCID removed
+Windows.Win32.System.Ole.Apis.PARAMFLAG_FOPT removed
+Windows.Win32.System.Ole.Apis.PARAMFLAG_FOUT removed
+Windows.Win32.System.Ole.Apis.PARAMFLAG_FRETVAL removed
+Windows.Win32.System.Ole.Apis.PARAMFLAG_NONE removed
+Windows.Win32.System.Ole.Apis.PICTYPE_BITMAP removed
+Windows.Win32.System.Ole.Apis.PICTYPE_ENHMETAFILE removed
+Windows.Win32.System.Ole.Apis.PICTYPE_ICON removed
+Windows.Win32.System.Ole.Apis.PICTYPE_METAFILE removed
+Windows.Win32.System.Ole.Apis.PICTYPE_NONE removed
+Windows.Win32.System.Ole.Apis.PICTYPE_UNINITIALIZED removed
+Windows.Win32.System.Ole.Apis.PSF_CHECKDISPLAYASICON removed
+Windows.Win32.System.Ole.Apis.PSF_DISABLEDISPLAYASICON removed
+Windows.Win32.System.Ole.Apis.PSF_HIDECHANGEICON removed
+Windows.Win32.System.Ole.Apis.PSF_NOREFRESHDATAOBJECT removed
+Windows.Win32.System.Ole.Apis.PSF_SELECTPASTE removed
+Windows.Win32.System.Ole.Apis.PSF_SELECTPASTELINK removed
+Windows.Win32.System.Ole.Apis.PSF_SHOWHELP removed
+Windows.Win32.System.Ole.Apis.PSF_STAYONCLIPBOARDCHANGE removed
+Windows.Win32.System.Ole.Apis.RegisterActiveObject : dwFlags...UInt32 => ACTIVEOBJECT_FLAGS
+Windows.Win32.System.Ole.Apis.VarCmp : return...HRESULT => VARCMP
+Windows.Win32.System.Ole.Apis.VARCMP_EQ removed
+Windows.Win32.System.Ole.Apis.VARCMP_GT removed
+Windows.Win32.System.Ole.Apis.VARCMP_LT removed
+Windows.Win32.System.Ole.Apis.VARCMP_NULL removed
+Windows.Win32.System.Ole.Apis.VarCyCmp : return...HRESULT => VARCMP
+Windows.Win32.System.Ole.Apis.VarCyCmpR8 : return...HRESULT => VARCMP
+Windows.Win32.System.Ole.Apis.VarDecCmp : return...HRESULT => VARCMP
+Windows.Win32.System.Ole.Apis.VarDecCmpR8 : return...HRESULT => VARCMP
+Windows.Win32.System.Ole.Apis.VarR4CmpR8 : return...HRESULT => VARCMP
+Windows.Win32.System.Ole.Apis.VPF_DISABLERELATIVE removed
+Windows.Win32.System.Ole.Apis.VPF_DISABLESCALE removed
+Windows.Win32.System.Ole.Apis.VPF_SELECTRELATIVE removed
+Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS added
+Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS.BZ_DISABLECANCELBUTTON added
+Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS.BZ_DISABLERETRYBUTTON added
+Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS.BZ_DISABLESWITCHTOBUTTON added
+Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS.BZ_NOTRESPONDINGDIALOG added
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS added
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_SELECTCURRENT added
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_SELECTDEFAULT added
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_SELECTFROMFILE added
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_SHOWHELP added
+Windows.Win32.System.Ole.CHANGE_ICON_FLAGS.CIF_USEICONEXE added
+Windows.Win32.System.Ole.CHANGE_SOURCE_FLAGS added
+Windows.Win32.System.Ole.CHANGE_SOURCE_FLAGS.CSF_EXPLORER added
+Windows.Win32.System.Ole.CHANGE_SOURCE_FLAGS.CSF_ONLYGETSOURCE added
+Windows.Win32.System.Ole.CHANGE_SOURCE_FLAGS.CSF_SHOWHELP added
+Windows.Win32.System.Ole.CHANGE_SOURCE_FLAGS.CSF_VALIDSOURCE added
+Windows.Win32.System.Ole.EDIT_LINKS_FLAGS added
+Windows.Win32.System.Ole.EDIT_LINKS_FLAGS.ELF_DISABLECANCELLINK added
+Windows.Win32.System.Ole.EDIT_LINKS_FLAGS.ELF_DISABLECHANGESOURCE added
+Windows.Win32.System.Ole.EDIT_LINKS_FLAGS.ELF_DISABLEOPENSOURCE added
+Windows.Win32.System.Ole.EDIT_LINKS_FLAGS.ELF_DISABLEUPDATENOW added
+Windows.Win32.System.Ole.EDIT_LINKS_FLAGS.ELF_SHOWHELP added
+Windows.Win32.System.Ole.EMBDHLP_FLAGS added
+Windows.Win32.System.Ole.EMBDHLP_FLAGS.EMBDHLP_CREATENOW added
+Windows.Win32.System.Ole.EMBDHLP_FLAGS.EMBDHLP_DELAYCREATE added
+Windows.Win32.System.Ole.EMBDHLP_FLAGS.EMBDHLP_INPROC_HANDLER added
+Windows.Win32.System.Ole.EMBDHLP_FLAGS.EMBDHLP_INPROC_SERVER added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCanCall added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCanConstruct added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCanGet added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCannotCall added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCannotConstruct added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCannotGet added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCannotPut added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCannotPutRef added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCannotSourceEvents added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCanPut added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCanPutRef added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropCanSourceEvents added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropDynamicType added
+Windows.Win32.System.Ole.FDEX_PROP_FLAGS.fdexPropNoSideEffects added
+Windows.Win32.System.Ole.IDispatchEx.GetMemberProperties : pgrfdex...UInt32* => FDEX_PROP_FLAGS*
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_CHECKDISPLAYASICON added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_CHECKLINK added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_CREATEFILEOBJECT added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_CREATELINKOBJECT added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_CREATENEWOBJECT added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_DISABLEDISPLAYASICON added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_DISABLELINK added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_HIDECHANGEICON added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_SELECTCREATECONTROL added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_SELECTCREATEFROMFILE added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_SELECTCREATENEW added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_SHOWHELP added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_SHOWINSERTCONTROL added
+Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS.IOF_VERIFYSERVERSEXIST added
+Windows.Win32.System.Ole.LOAD_PICTURE_FLAGS added
+Windows.Win32.System.Ole.LOAD_PICTURE_FLAGS.LP_COLOR added
+Windows.Win32.System.Ole.LOAD_PICTURE_FLAGS.LP_DEFAULT added
+Windows.Win32.System.Ole.LOAD_PICTURE_FLAGS.LP_MONOCHROME added
+Windows.Win32.System.Ole.LOAD_PICTURE_FLAGS.LP_VGACOLOR added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_CURRENCY added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_DECIMAL added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_EXPONENT added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_HEX_OCT added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_INEXACT added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_LEADING_MINUS added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_LEADING_PLUS added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_LEADING_WHITE added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_NEG added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_PARENS added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_STD added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_THOUSANDS added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_TRAILING_MINUS added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_TRAILING_PLUS added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_TRAILING_WHITE added
+Windows.Win32.System.Ole.NUMPARSE_FLAGS.NUMPRS_USE_ALL added
+Windows.Win32.System.Ole.NUMPARSE.dwInFlags...System.UInt32 => Windows.Win32.System.Ole.NUMPARSE_FLAGS
+Windows.Win32.System.Ole.NUMPARSE.dwOutFlags...System.UInt32 => Windows.Win32.System.Ole.NUMPARSE_FLAGS
+Windows.Win32.System.Ole.OBJECT_PROPERTIES_FLAGS added
+Windows.Win32.System.Ole.OBJECT_PROPERTIES_FLAGS.OPF_DISABLECONVERT added
+Windows.Win32.System.Ole.OBJECT_PROPERTIES_FLAGS.OPF_NOFILLDEFAULT added
+Windows.Win32.System.Ole.OBJECT_PROPERTIES_FLAGS.OPF_OBJECTISLINK added
+Windows.Win32.System.Ole.OBJECT_PROPERTIES_FLAGS.OPF_SHOWHELP added
+Windows.Win32.System.Ole.OLECREATE added
+Windows.Win32.System.Ole.OLECREATE.OLECREATE_LEAVERUNNING added
+Windows.Win32.System.Ole.OLECREATE.OLECREATE_ZERO added
+Windows.Win32.System.Ole.OLEUICHANGEICONA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.CHANGE_ICON_FLAGS
+Windows.Win32.System.Ole.OLEUICHANGEICONW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.CHANGE_ICON_FLAGS
+Windows.Win32.System.Ole.OLEUICHANGESOURCEA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.CHANGE_SOURCE_FLAGS
+Windows.Win32.System.Ole.OLEUICHANGESOURCEW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.CHANGE_SOURCE_FLAGS
+Windows.Win32.System.Ole.OLEUICONVERTA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.UI_CONVERT_FLAGS
+Windows.Win32.System.Ole.OLEUICONVERTW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.UI_CONVERT_FLAGS
+Windows.Win32.System.Ole.OLEUIEDITLINKSA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.EDIT_LINKS_FLAGS
+Windows.Win32.System.Ole.OLEUIEDITLINKSW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.EDIT_LINKS_FLAGS
+Windows.Win32.System.Ole.OLEUIINSERTOBJECTA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS
+Windows.Win32.System.Ole.OLEUIINSERTOBJECTW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.INSERT_OBJECT_FLAGS
+Windows.Win32.System.Ole.OLEUIOBJECTPROPSA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.OBJECT_PROPERTIES_FLAGS
+Windows.Win32.System.Ole.OLEUIOBJECTPROPSW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.OBJECT_PROPERTIES_FLAGS
+Windows.Win32.System.Ole.OLEUIPASTESPECIALA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS
+Windows.Win32.System.Ole.OLEUIPASTESPECIALW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS
+Windows.Win32.System.Ole.OLEUIVIEWPROPSA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS
+Windows.Win32.System.Ole.OLEUIVIEWPROPSW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS
+Windows.Win32.System.Ole.PARAMDESC.wParamFlags...System.UInt16 => Windows.Win32.System.Ole.PARAMFLAGS
+Windows.Win32.System.Ole.PARAMFLAGS added
+Windows.Win32.System.Ole.PARAMFLAGS.PARAMFLAG_FHASCUSTDATA added
+Windows.Win32.System.Ole.PARAMFLAGS.PARAMFLAG_FHASDEFAULT added
+Windows.Win32.System.Ole.PARAMFLAGS.PARAMFLAG_FIN added
+Windows.Win32.System.Ole.PARAMFLAGS.PARAMFLAG_FLCID added
+Windows.Win32.System.Ole.PARAMFLAGS.PARAMFLAG_FOPT added
+Windows.Win32.System.Ole.PARAMFLAGS.PARAMFLAG_FOUT added
+Windows.Win32.System.Ole.PARAMFLAGS.PARAMFLAG_FRETVAL added
+Windows.Win32.System.Ole.PARAMFLAGS.PARAMFLAG_NONE added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS.PSF_CHECKDISPLAYASICON added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS.PSF_DISABLEDISPLAYASICON added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS.PSF_HIDECHANGEICON added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS.PSF_NOREFRESHDATAOBJECT added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS.PSF_SELECTPASTE added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS.PSF_SELECTPASTELINK added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS.PSF_SHOWHELP added
+Windows.Win32.System.Ole.PASTE_SPECIAL_FLAGS.PSF_STAYONCLIPBOARDCHANGE added
+Windows.Win32.System.Ole.PICTDESC.picType...System.UInt32 => Windows.Win32.System.Ole.PICTYPE
+Windows.Win32.System.Ole.PICTYPE added
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_BITMAP added
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_ENHMETAFILE added
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_ICON added
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_METAFILE added
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_NONE added
+Windows.Win32.System.Ole.PICTYPE.PICTYPE_UNINITIALIZED added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_CONVERTONLY added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_DISABLEACTIVATEAS added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_DISABLEDISPLAYASICON added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_HIDECHANGEICON added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_SELECTACTIVATEAS added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_SELECTCONVERTTO added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_SETACTIVATEDEFAULT added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_SETCONVERTDEFAULT added
+Windows.Win32.System.Ole.UI_CONVERT_FLAGS.CF_SHOWHELPBUTTON added
+Windows.Win32.System.Ole.VARCMP added
+Windows.Win32.System.Ole.VARCMP.VARCMP_EQ added
+Windows.Win32.System.Ole.VARCMP.VARCMP_GT added
+Windows.Win32.System.Ole.VARCMP.VARCMP_LT added
+Windows.Win32.System.Ole.VARCMP.VARCMP_NULL added
+Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS added
+Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS.VPF_DISABLERELATIVE added
+Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS.VPF_DISABLESCALE added
+Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS.VPF_SELECTRELATIVE added
+# winforms enum changes
+Windows.Win32.UI.Controls.Apis.LVTVIF_AUTOSIZE removed
+Windows.Win32.UI.Controls.Apis.LVTVIF_EXTENDED added
+Windows.Win32.UI.Controls.Apis.LVTVIF_FIXEDHEIGHT removed
+Windows.Win32.UI.Controls.Apis.LVTVIF_FIXEDSIZE removed
+Windows.Win32.UI.Controls.Apis.LVTVIF_FIXEDWIDTH removed
+Windows.Win32.UI.Controls.Apis.LVTVIM_COLUMNS removed
+Windows.Win32.UI.Controls.Apis.LVTVIM_LABELMARGIN removed
+Windows.Win32.UI.Controls.Apis.LVTVIM_TILESIZE removed
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS :  => [Flags]
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_AUTOSIZE added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_EXTENDED removed
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_FIXEDHEIGHT added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_FIXEDSIZE added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_FIXEDWIDTH added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK.LVTVIM_COLUMNS added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK.LVTVIM_LABELMARGIN added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK.LVTVIM_TILESIZE added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO.dwMask...System.UInt32 => Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_DONTSHOWIFZERO removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_ENABLEBYDEFAULT removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_ENABLEBYDEFAULT_AUTO removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_HASSETTINGS removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_OUTOFDISKSPACE removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_REMOVEFROMLIST removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_SETTINGSMODE removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_SYSTEMAUTORUN removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_USERCONSENTOBTAINED removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_DONTSHOWIFZERO added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_ENABLEBYDEFAULT added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_ENABLEBYDEFAULT_AUTO added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_HASSETTINGS added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_OUTOFDISKSPACE added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_REMOVEFROMLIST added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_SETTINGSMODE added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_SYSTEMAUTORUN added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_USERCONSENTOBTAINED added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.IEmptyVolumeCache.Deactivate : pdwFlags...UInt32* => EMPTY_VOLUME_CACHE_FLAGS*
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.IEmptyVolumeCache.Initialize : pdwFlags...UInt32* => EMPTY_VOLUME_CACHE_FLAGS*
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.IEmptyVolumeCache2.InitializeEx : pdwFlags...UInt32* => EMPTY_VOLUME_CACHE_FLAGS*
+Windows.Win32.UI.Magnification.Apis.MagGetWindowFilterList : pdwFilterMode...UInt32* => MW_FILTERMODE*
+Windows.Win32.UI.Magnification.Apis.MagSetWindowFilterList : dwFilterMode...UInt32 => MW_FILTERMODE
+Windows.Win32.UI.Magnification.Apis.MW_FILTERMODE_EXCLUDE removed
+Windows.Win32.UI.Magnification.Apis.MW_FILTERMODE_INCLUDE removed
+Windows.Win32.UI.Magnification.MW_FILTERMODE added
+Windows.Win32.UI.Magnification.MW_FILTERMODE.MW_FILTERMODE_EXCLUDE added
+Windows.Win32.UI.Magnification.MW_FILTERMODE.MW_FILTERMODE_INCLUDE added
 # DISPATCH_FLAGS
 Windows.Win32.System.Com.IDispatch.Invoke : wFlags...UInt16 => DISPATCH_FLAGS
 Windows.Win32.System.Com.ITypeInfo.Invoke : wFlags...UInt16 => DISPATCH_FLAGS
