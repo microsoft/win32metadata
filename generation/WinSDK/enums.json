@@ -31906,11 +31906,13 @@
     "members": [],
     "uses": [
       {
-        "method": "IDispatch::Invoke",
+        "interface": "IDispatch",
+        "method": "Invoke",
         "parameter": "wFlags"
       },
       {
-        "method": "ITypeInfo::Invoke",
+        "interface" : "ITypeInfo",
+        "method": "Invoke",
         "parameter": "wFlags"
       }
     ]

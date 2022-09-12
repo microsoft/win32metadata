@@ -5,11 +5,11 @@ Windows.Win32.System.Ole.Apis.DISPATCH_METHOD removed
 Windows.Win32.System.Ole.Apis.DISPATCH_PROPERTYGET removed
 Windows.Win32.System.Ole.Apis.DISPATCH_PROPERTYPUT removed
 Windows.Win32.System.Ole.Apis.DISPATCH_PROPERTYPUTREF removed
-Windows.Win32.System.SystemServices.DISPATCH_FLAGS added
-Windows.Win32.System.SystemServices.DISPATCH_FLAGS.DISPATCH_METHOD added
-Windows.Win32.System.SystemServices.DISPATCH_FLAGS.DISPATCH_PROPERTYGET added
-Windows.Win32.System.SystemServices.DISPATCH_FLAGS.DISPATCH_PROPERTYPUT added
-Windows.Win32.System.SystemServices.DISPATCH_FLAGS.DISPATCH_PROPERTYPUTREF added
+Windows.Win32.System.Com.DISPATCH_FLAGS added
+Windows.Win32.System.Com.DISPATCH_FLAGS.DISPATCH_METHOD added
+Windows.Win32.System.Com.DISPATCH_FLAGS.DISPATCH_PROPERTYGET added
+Windows.Win32.System.Com.DISPATCH_FLAGS.DISPATCH_PROPERTYPUT added
+Windows.Win32.System.Com.DISPATCH_FLAGS.DISPATCH_PROPERTYPUTREF added
 # VARFORMAT_FIRST_DAY
 Windows.Win32.System.Ole.Apis.VarFormat : iFirstDay...Int32 => VARFORMAT_FIRST_DAY
 Windows.Win32.System.Ole.Apis.VarTokenizeFormatString : iFirstDay...Int32 => VARFORMAT_FIRST_DAY
