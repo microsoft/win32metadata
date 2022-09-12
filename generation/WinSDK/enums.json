@@ -24361,15 +24361,40 @@
   },
   {
     "name": "LVTILEVIEWINFO_FLAGS",
+    "flags": true,
     "members": [
       {
-        "name": "LVTVIF_EXTENDED"
+        "name": "LVTVIF_AUTOSIZE"
+      },
+      {
+        "name": "LVTVIF_FIXEDWIDTH"
+      },
+      {
+        "name": "LVTVIF_FIXEDHEIGHT"
+      },
+      {
+        "name": "LVTVIF_FIXEDSIZE"
       }
     ],
     "uses": [
       {
         "struct": "LVTILEVIEWINFO",
         "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "LVTILEVIEWINFO_MASK",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "LVTVIM_",
+      "header": "commctrl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "LVTILEVIEWINFO",
+        "field": "dwMask"
       }
     ]
   },
@@ -32411,6 +32436,49 @@
       {
         "method": "OleCreateStaticFromData",
         "parameter": "renderopt"
+      }
+    ]
+  },
+  {
+    "name": "EMPTY_VOLUME_CACHE_FLAGS",
+    "autoPopulate": {
+      "filter": "EVCF_",
+      "header": "emptyvc.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IEmptyVolumeCache2",
+        "method": "InitializeEx",
+        "parameter": "pdwFlags"
+      },
+      {
+        "interface": "IEmptyVolumeCache",
+        "method": "Initialize",
+        "parameter": "pdwFlags"
+      },
+      {
+        "interface": "IEmptyVolumeCache",
+        "method": "Deactivate",
+        "parameter": "pdwFlags"
+      }
+    ]
+  },
+  {
+    "name": "MW_FILTERMODE",
+    "autoPopulate": {
+      "filter": "MW_FILTERMODE_",
+      "header": "magnification.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "MagSetWindowFilterList",
+        "parameter": "dwFilterMode"
+      },
+      {
+        "method": "MagGetWindowFilterList",
+        "parameter": "pdwFilterMode"
       }
     ]
   }
