@@ -31818,7 +31818,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bFamilyType"
+      }
+    ]
   },
   {
     "name": "PAN_SERIF_STYLE",
@@ -31836,7 +31841,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bSerifStyle"
+      }
+    ]
   },
   {
     "name": "PAN_WEIGHT",
@@ -31854,7 +31864,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bWeight"
+      }
+    ]
   },
   {
     "name": "PAN_STROKE_VARIATION",
@@ -31872,7 +31887,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bStrokeVariation"
+      }
+    ]
   },
   {
     "name": "PAN_PROPORTION",
@@ -31890,7 +31910,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bProportion"
+      }
+    ]
   },
   {
     "name": "PAN_CONTRAST",
@@ -31908,7 +31933,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bContrast"
+      }
+    ]
   },
   {
     "name": "PAN_ARM_STYLE",
@@ -31926,7 +31956,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bArmStyle"
+      }
+    ]
   },
   {
     "name": "PAN_LETT_FORM",
@@ -31944,7 +31979,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bLetterform"
+      }
+    ]
   },
   {
     "name": "PAN_MIDLINE",
@@ -31962,7 +32002,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bMidline"
+      }
+    ]
   },
   {
     "name": "PAN_XHEIGHT",
@@ -31980,7 +32025,12 @@
         "value": 1
       }
     ],
-    "uses": []
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bXHeight"
+      }
+    ]
   }
 ]
 }
