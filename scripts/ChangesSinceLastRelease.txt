@@ -319,3 +319,52 @@ Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS added
 Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS.VPF_DISABLERELATIVE added
 Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS.VPF_DISABLESCALE added
 Windows.Win32.System.Ole.VIEW_OBJECT_PROPERTIES_FLAGS.VPF_SELECTRELATIVE added
+# winforms enum changes
+Windows.Win32.UI.Controls.Apis.LVTVIF_AUTOSIZE removed
+Windows.Win32.UI.Controls.Apis.LVTVIF_EXTENDED added
+Windows.Win32.UI.Controls.Apis.LVTVIF_FIXEDHEIGHT removed
+Windows.Win32.UI.Controls.Apis.LVTVIF_FIXEDSIZE removed
+Windows.Win32.UI.Controls.Apis.LVTVIF_FIXEDWIDTH removed
+Windows.Win32.UI.Controls.Apis.LVTVIM_COLUMNS removed
+Windows.Win32.UI.Controls.Apis.LVTVIM_LABELMARGIN removed
+Windows.Win32.UI.Controls.Apis.LVTVIM_TILESIZE removed
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS :  => [Flags]
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_AUTOSIZE added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_EXTENDED removed
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_FIXEDHEIGHT added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_FIXEDSIZE added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_FLAGS.LVTVIF_FIXEDWIDTH added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK.LVTVIM_COLUMNS added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK.LVTVIM_LABELMARGIN added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK.LVTVIM_TILESIZE added
+Windows.Win32.UI.Controls.LVTILEVIEWINFO.dwMask...System.UInt32 => Windows.Win32.UI.Controls.LVTILEVIEWINFO_MASK
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_DONTSHOWIFZERO removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_ENABLEBYDEFAULT removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_ENABLEBYDEFAULT_AUTO removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_HASSETTINGS removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_OUTOFDISKSPACE removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_REMOVEFROMLIST removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_SETTINGSMODE removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_SYSTEMAUTORUN removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.Apis.EVCF_USERCONSENTOBTAINED removed
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_DONTSHOWIFZERO added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_ENABLEBYDEFAULT added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_ENABLEBYDEFAULT_AUTO added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_HASSETTINGS added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_OUTOFDISKSPACE added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_REMOVEFROMLIST added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_SETTINGSMODE added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_SYSTEMAUTORUN added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.EMPTY_VOLUME_CACHE_FLAGS.EVCF_USERCONSENTOBTAINED added
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.IEmptyVolumeCache.Deactivate : pdwFlags...UInt32* => EMPTY_VOLUME_CACHE_FLAGS*
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.IEmptyVolumeCache.Initialize : pdwFlags...UInt32* => EMPTY_VOLUME_CACHE_FLAGS*
+Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.IEmptyVolumeCache2.InitializeEx : pdwFlags...UInt32* => EMPTY_VOLUME_CACHE_FLAGS*
+Windows.Win32.UI.Magnification.Apis.MagGetWindowFilterList : pdwFilterMode...UInt32* => MW_FILTERMODE*
+Windows.Win32.UI.Magnification.Apis.MagSetWindowFilterList : dwFilterMode...UInt32 => MW_FILTERMODE
+Windows.Win32.UI.Magnification.Apis.MW_FILTERMODE_EXCLUDE removed
+Windows.Win32.UI.Magnification.Apis.MW_FILTERMODE_INCLUDE removed
+Windows.Win32.UI.Magnification.MW_FILTERMODE added
+Windows.Win32.UI.Magnification.MW_FILTERMODE.MW_FILTERMODE_EXCLUDE added
+Windows.Win32.UI.Magnification.MW_FILTERMODE.MW_FILTERMODE_INCLUDE added
