@@ -10,11 +10,9 @@ Windows.Win32.System.SystemServices.DISPATCH_FLAGS.DISPATCH_METHOD added
 Windows.Win32.System.SystemServices.DISPATCH_FLAGS.DISPATCH_PROPERTYGET added
 Windows.Win32.System.SystemServices.DISPATCH_FLAGS.DISPATCH_PROPERTYPUT added
 Windows.Win32.System.SystemServices.DISPATCH_FLAGS.DISPATCH_PROPERTYPUTREF added
-
 # VARFORMAT_FIRST_DAY
 Windows.Win32.System.Ole.Apis.VarFormat : iFirstDay...Int32 => VARFORMAT_FIRST_DAY
 Windows.Win32.System.Ole.Apis.VarTokenizeFormatString : iFirstDay...Int32 => VARFORMAT_FIRST_DAY
-Windows.Win32.System.Ole.IVBFormat.Format : sFirstDayOfWeek...Int16 => VARFORMAT_FIRST_DAY
 Windows.Win32.System.Ole.VARFORMAT_FIRST_DAY added
 Windows.Win32.System.Ole.VARFORMAT_FIRST_DAY.VARFORMAT_FIRST_DAY_FRIDAY added
 Windows.Win32.System.Ole.VARFORMAT_FIRST_DAY.VARFORMAT_FIRST_DAY_MONDAY added
@@ -24,17 +22,14 @@ Windows.Win32.System.Ole.VARFORMAT_FIRST_DAY.VARFORMAT_FIRST_DAY_SYSTEMDEFAULT a
 Windows.Win32.System.Ole.VARFORMAT_FIRST_DAY.VARFORMAT_FIRST_DAY_THURSDAY added
 Windows.Win32.System.Ole.VARFORMAT_FIRST_DAY.VARFORMAT_FIRST_DAY_TUESDAY added
 Windows.Win32.System.Ole.VARFORMAT_FIRST_DAY.VARFORMAT_FIRST_DAY_WEDNESDAY added
-
 # VARFORMAT_FIRST_WEEK
 Windows.Win32.System.Ole.Apis.VarFormat : iFirstWeek...Int32 => VARFORMAT_FIRST_WEEK
 Windows.Win32.System.Ole.Apis.VarTokenizeFormatString : iFirstWeek...Int32 => VARFORMAT_FIRST_WEEK
-Windows.Win32.System.Ole.IVBFormat.Format : sFirstWeekOfYear...UInt16 => VARFORMAT_FIRST_WEEK
 Windows.Win32.System.Ole.VARFORMAT_FIRST_WEEK added
 Windows.Win32.System.Ole.VARFORMAT_FIRST_WEEK.VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST added
 Windows.Win32.System.Ole.VARFORMAT_FIRST_WEEK.VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS added
 Windows.Win32.System.Ole.VARFORMAT_FIRST_WEEK.VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR added
 Windows.Win32.System.Ole.VARFORMAT_FIRST_WEEK.VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT added
-
 # VARFORMAT_NAMED_FORMAT
 Windows.Win32.System.Ole.Apis.VarFormatDateTime : iNamedFormat...Int32 => VARFORMAT_NAMED_FORMAT
 Windows.Win32.System.Ole.VARFORMAT_NAMED_FORMAT added
@@ -43,14 +38,13 @@ Windows.Win32.System.Ole.VARFORMAT_NAMED_FORMAT.VARFORMAT_NAMED_FORMAT_LONGDATE 
 Windows.Win32.System.Ole.VARFORMAT_NAMED_FORMAT.VARFORMAT_NAMED_FORMAT_LONGTIME added
 Windows.Win32.System.Ole.VARFORMAT_NAMED_FORMAT.VARFORMAT_NAMED_FORMAT_SHORTDATE added
 Windows.Win32.System.Ole.VARFORMAT_NAMED_FORMAT.VARFORMAT_NAMED_FORMAT_SHORTTIME added
-
 # VARFORMAT_GROUP
 Windows.Win32.System.Ole.Apis.VarFormatNumber : iGroup...Int32 => VARFORMAT_GROUP
+Windows.Win32.System.Ole.Apis.VarFormatPercent : iGroup...Int32 => VARFORMAT_GROUP
 Windows.Win32.System.Ole.VARFORMAT_GROUP added
 Windows.Win32.System.Ole.VARFORMAT_GROUP.VARFORMAT_GROUP_NOTTHOUSANDS added
 Windows.Win32.System.Ole.VARFORMAT_GROUP.VARFORMAT_GROUP_SYSTEMDEFAULT added
 Windows.Win32.System.Ole.VARFORMAT_GROUP.VARFORMAT_GROUP_THOUSANDS added
-
 # VARFORMAT_LEADING_DIGIT
 Windows.Win32.System.Ole.Apis.VarFormatNumber : iIncLead...Int32 => VARFORMAT_LEADING_DIGIT
 Windows.Win32.System.Ole.Apis.VarFormatPercent : iIncLead...Int32 => VARFORMAT_LEADING_DIGIT
@@ -58,7 +52,6 @@ Windows.Win32.System.Ole.VARFORMAT_LEADING_DIGIT added
 Windows.Win32.System.Ole.VARFORMAT_LEADING_DIGIT.VARFORMAT_LEADING_DIGIT_INCLUDED added
 Windows.Win32.System.Ole.VARFORMAT_LEADING_DIGIT.VARFORMAT_LEADING_DIGIT_NOTINCLUDED added
 Windows.Win32.System.Ole.VARFORMAT_LEADING_DIGIT.VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT added
-
 # VARFORMAT_PARENTHESES
 Windows.Win32.System.Ole.Apis.VarFormatNumber : iUseParens...Int32 => VARFORMAT_PARENTHESES
 Windows.Win32.System.Ole.Apis.VarFormatPercent : iUseParens...Int32 => VARFORMAT_PARENTHESES
@@ -66,10 +59,6 @@ Windows.Win32.System.Ole.VARFORMAT_PARENTHESES added
 Windows.Win32.System.Ole.VARFORMAT_PARENTHESES.VARFORMAT_PARENTHESES_NOTUSED added
 Windows.Win32.System.Ole.VARFORMAT_PARENTHESES.VARFORMAT_PARENTHESES_SYSTEMDEFAULT added
 Windows.Win32.System.Ole.VARFORMAT_PARENTHESES.VARFORMAT_PARENTHESES_USED added
-
-# VARFORMAT_GROUP
-Windows.Win32.System.Ole.Apis.VarFormatPercent : iGroup...Int32 => VARFORMAT_GROUP
-
 # GPFIDL_FLAGS
 Windows.Win32.UI.Shell.Apis.GPFIDL_ALTNAME removed
 Windows.Win32.UI.Shell.Apis.GPFIDL_DEFAULT removed
@@ -79,7 +68,6 @@ Windows.Win32.UI.Shell.GPFIDL_FLAGS added
 Windows.Win32.UI.Shell.GPFIDL_FLAGS.GPFIDL_ALTNAME added
 Windows.Win32.UI.Shell.GPFIDL_FLAGS.GPFIDL_DEFAULT added
 Windows.Win32.UI.Shell.GPFIDL_FLAGS.GPFIDL_UNCPRINTER added
-
 # SCROLLBAR_COMMAND
 Windows.Win32.UI.WindowsAndMessaging.Apis.SB_BOTTOM removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.SB_ENDSCROLL removed
@@ -112,3 +100,16 @@ Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_COMMAND.SB_RIGHT added
 Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_COMMAND.SB_THUMBPOSITION added
 Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_COMMAND.SB_THUMBTRACK added
 Windows.Win32.UI.WindowsAndMessaging.SCROLLBAR_COMMAND.SB_TOP added
+# OleCtl.h functions 
+Windows.Win32.System.Ole.Apis.OleCreateFontIndirect : lpFontDesc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreateFontIndirect : lplpvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreatePictureIndirect : lplpvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleCreatePictureIndirect : lpPictDesc : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreatePropertyFrame : pPageClsID : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreatePropertyFrame : ppUnk : [Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreatePropertyFrame : pvReserved : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleCreatePropertyFrameIndirect : lpParams : [In,Out] => [In]
+Windows.Win32.System.Ole.Apis.OleLoadPicture : lplpvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleLoadPictureEx : lplpvObj : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleLoadPicturePath : ppvRet : [In,Out] => [Out]
+Windows.Win32.System.Ole.Apis.OleTranslateColor : lpcolorref : [In,Out] => [Out]

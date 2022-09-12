@@ -31960,10 +31960,6 @@
       {
         "method": "VarTokenizeFormatString",
         "parameter": "iFirstDay"
-      },
-      {
-        "method": "IVBFormat::Format",
-        "parameter": "sFirstDayOfWeek"
       }
     ]
   },
@@ -31996,10 +31992,6 @@
       {
         "method": "VarTokenizeFormatString",
         "parameter": "iFirstWeek"
-      },
-      {
-        "method": "IVBFormat::Format",
-        "parameter": "sFirstWeekOfYear"
       }
     ]
   },
