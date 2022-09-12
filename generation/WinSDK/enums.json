@@ -31894,6 +31894,525 @@
     },
     "members": [],
     "uses": []
+  },
+  {
+    "name": "ACTIVEOBJECT_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "ACTIVEOBJECT_",
+      "header": "Oleauto.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "RegisterActiveObject",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "BUSY_DIALOG_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "BZ_",
+      "header": "Oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "OLEUIBUSYA",
+        "parameter": "dwFlags"
+      },
+      {
+        "struct": "OLEUIBUSYW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "UI_CONVERT_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CF_",
+      "header": "oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OLEUICONVERTA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OLEUICONVERTW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "CHANGE_ICON_FLAGS",
+    "type": "int",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CIF_",
+      "header": "oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OLEUICHANGEICONA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OLEUICHANGEICONW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "CHANGE_SOURCE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "CSF_",
+      "header": "oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OLEUICHANGESOURCEA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OLEUICHANGESOURCEW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "EDIT_LINKS_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "ELF_",
+      "header": "oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OLEUIEDITLINKSA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OLEUIEDITLINKSW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "INSERT_OBJECT_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "IOF_",
+      "header": "oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OLEUIINSERTOBJECTA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OLEUIINSERTOBJECTW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "OBJECT_PROPERTIES_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "OPF_",
+      "header": "oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OLEUIOBJECTPROPSA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OLEUIOBJECTPROPSW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "VIEW_OBJECT_PROPERTIES_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "VPF_",
+      "header": "oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OLEUIVIEWPROPSA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OLEUIVIEWPROPSW",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "FADF",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "FADF_",
+      "header": "oaidl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "SAFEARRAY",
+        "field": "fFeatures"
+      }
+    ]
+  },
+  {
+    "name": "DISPATCH",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DISPATCH_",
+      "header": "oaidl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "ITypeInfo",
+        "method": "Invoke",
+        "field": "wFlags"
+      }
+    ]
+  },
+  {
+    "name": "IMPLTYPEFLAGS",
+    "type": "int",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "IMPLTYPEFLAG_",
+      "header": "oaidl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "ITypeInfo",
+        "method": "GetImplTypeFlags",
+        "field": "pImplTypeFlags"
+      },
+      {
+        "interface": "ITypeInfo",
+        "method": "SetImplTypeFlags",
+        "field": "ImplTypeFlags"
+      }
+    ]
+  },
+  {
+    "name": "PARAMFLAGS",
+    "type": "ushort",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "PARAMFLAG_",
+      "header": "oaidl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "PARAMDESC",
+        "field": "wParamFlags"
+      }
+    ]
+  },
+  {
+    "name": "IDLFLAGS",
+    "type": "ushort",
+    "flags": true,
+    "members": [
+      {
+        "name": "IDLFLAG_NONE",
+        "value": "0"
+      },
+      {
+        "name": "IDLFLAG_FIN",
+        "value": "0x1"
+      },
+      {
+        "name": "IDLFLAG_FOUT",
+        "value": "0x2"
+      },
+      {
+        "name": "IDLFLAG_FLCID",
+        "value": "0x4"
+      },
+      {
+        "name": "IDLFLAG_FRETVAL",
+        "value": "0x8"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "IDLDESC",
+        "field": "wIDLFlags"
+      }
+    ]
+  },
+  {
+    "name": "NUMPARSE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "NUMPRS_",
+      "header": "oleauto.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NUMPARSE",
+        "field": "dwInFlags"
+      },
+      {
+        "struct": "NUMPARSE",
+        "field": "dwOutFlags"
+      }
+    ]
+  },
+  {
+    "name": "PICTYPE",
+    "type": "int",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "PICTYPE_",
+      "header": "olectl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "PICTDESC",
+        "field": "picType"
+      }
+    ]
+  },
+  {
+    "name": "VARCMP",
+    "autoPopulate": {
+      "filter": "VARCMP_",
+      "header": "oleauto.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "VarCmp",
+        "parameter": "return"
+      },
+      {
+        "method": "VarCyCmp",
+        "parameter": "return"
+      },
+      {
+        "method": "VarCyCmpR8",
+        "parameter": "return"
+      },
+      {
+        "method": "VarDecCmp",
+        "parameter": "return"
+      },
+      {
+        "method": "VarDecCmpR8",
+        "parameter": "return"
+      },
+      {
+        "method": "VarR4CmpR8",
+        "parameter": "return"
+      }
+    ]
+  },
+  {
+    "name": "PASTE_SPECIAL_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "PSF_",
+      "header": "oledlg.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "OLEUIPASTESPECIALA",
+        "field": "dwFlags"
+      },
+      {
+        "struct": "OLEUIPASTESPECIALW",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "EMBDHLP_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "EMBDHLP_",
+      "header": "ole2.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OleCreateEmbeddingHelper",
+        "parameter": "flags"
+      }
+    ]
+  },
+  {
+    "name": "FDEX_PROP_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "fdexProp",
+      "header": "dispex.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IDispatchEx",
+        "method": "GetMemberProperties",
+        "parameter": "pgrfdex"
+      }
+    ]
+  },
+  {
+    "name": "LOAD_PICTURE_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "LP_",
+      "header": "olectl.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "OleLoadPictureFileEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OleLoadPictureEx",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "addUsesTo": "CTRLINFO",
+    "members": [],
+    "uses": [
+      {
+        "struct": "CONTROLINFO",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "OLECREATE",
+    "autoPopulate": {
+      "filter": "OLECREATE_",
+      "header": "ole2.h"
+    },
+    "members": [
+      {
+        "name": "OLECREATE_ZERO",
+        "value": "0"
+      }
+    ],
+    "uses": [
+      {
+        "method": "OleCreateEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OleCreateFromDataEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OleCreateFromFileEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OleCreateLinkEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OleCreateLinkFromDataEx",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "OleCreateLinkToFileEx",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "addUsesTo": "OLERENDER",
+    "members": [],
+    "uses": [
+      {
+        "method": "OleCreate",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateEx",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateFromData",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateFromDataEx",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateFromFile",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateFromFileEx",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateLink",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateLinkEx",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateLinkFromData",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateLinkFromDataEx",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateLinkToFile",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateLinkToFileEx",
+        "parameter": "renderopt"
+      },
+      {
+        "method": "OleCreateStaticFromData",
+        "parameter": "renderopt"
+      }
+    ]
   }
 ]
 }
