@@ -405,43 +405,11 @@ Windows.Win32.Graphics.Gdi.FONT_PITCH.DEFAULT_PITCH added
 Windows.Win32.Graphics.Gdi.FONT_PITCH.FIXED_PITCH added
 Windows.Win32.Graphics.Gdi.FONT_PITCH.VARIABLE_PITCH added
 Windows.Win32.Graphics.Gdi.FONT_QUALITY.value__...System.UInt32 => System.Byte
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_BLACK removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_BOLD removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_DEMIBOLD removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_DONTCARE removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_EXTRABOLD removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_EXTRALIGHT removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_HEAVY removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_LIGHT removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_MEDIUM removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_NORMAL removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_REGULAR removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_SEMIBOLD removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_THIN removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_ULTRABOLD removed
-Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_ULTRALIGHT removed
 Windows.Win32.Graphics.Gdi.LOGFONTA.lfCharSet...System.Byte => Windows.Win32.Graphics.Gdi.FONT_CHARSET
 Windows.Win32.Graphics.Gdi.LOGFONTA.lfPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
 Windows.Win32.Graphics.Gdi.LOGFONTA.lfWeight...Windows.Win32.Graphics.Gdi.FONT_WEIGHT => System.Int32
 Windows.Win32.Graphics.Gdi.LOGFONTW.lfPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
 Windows.Win32.Graphics.Gdi.LOGFONTW.lfWeight...Windows.Win32.Graphics.Gdi.FONT_WEIGHT => System.Int32
-Windows.Win32.System.SystemServices.FONT_WEIGHT added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_BLACK added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_BOLD added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_DEMIBOLD added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_DONTCARE added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_EXTRABOLD added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_EXTRALIGHT added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_HEAVY added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_LIGHT added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_MEDIUM added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_NORMAL added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_REGULAR added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_SEMIBOLD added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_THIN added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_ULTRABOLD added
-Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_ULTRALIGHT added
 Windows.Win32.UI.Controls.RichEdit.CHARFORMATA.bPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
 Windows.Win32.UI.Controls.RichEdit.CHARFORMATW.bPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
 # Added extension to DllImport.

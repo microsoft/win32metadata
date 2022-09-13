@@ -13294,6 +13294,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.Graphics.Gdi",
     "name": "FONT_WEIGHT",
     "autoPopulate": {
       "header": "wingdi.h",
