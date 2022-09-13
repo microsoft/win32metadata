@@ -368,3 +368,79 @@ Windows.Win32.UI.Magnification.Apis.MW_FILTERMODE_INCLUDE removed
 Windows.Win32.UI.Magnification.MW_FILTERMODE added
 Windows.Win32.UI.Magnification.MW_FILTERMODE.MW_FILTERMODE_EXCLUDE added
 Windows.Win32.UI.Magnification.MW_FILTERMODE.MW_FILTERMODE_INCLUDE added
+# LOGFONT enum changes
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iClipPrecision...FONT_CLIP_PRECISION => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iOutPrecision...FONT_OUTPUT_PRECISION => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iPitchAndFamily...FONT_PITCH_AND_FAMILY => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iQuality...FONT_QUALITY => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iClipPrecision...FONT_CLIP_PRECISION => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iOutPrecision...FONT_OUTPUT_PRECISION => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iPitchAndFamily...FONT_PITCH_AND_FAMILY => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iQuality...FONT_QUALITY => UInt32
+Windows.Win32.Graphics.Gdi.Apis.DEFAULT_PITCH removed
+Windows.Win32.Graphics.Gdi.Apis.FIXED_PITCH removed
+Windows.Win32.Graphics.Gdi.Apis.OUT_SCREEN_OUTLINE_PRECIS removed
+Windows.Win32.Graphics.Gdi.Apis.VARIABLE_PITCH removed
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.FONT_CLIP_PRECISION.CLIP_DFA_OVERRIDE added
+Windows.Win32.Graphics.Gdi.FONT_CLIP_PRECISION.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.FONT_FAMILY added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_DECORATIVE added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_DONTCARE added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_MODERN added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_ROMAN added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_SCRIPT added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_SWISS added
+Windows.Win32.Graphics.Gdi.FONT_OUTPUT_PRECISION.OUT_SCREEN_OUTLINE_PRECIS added
+Windows.Win32.Graphics.Gdi.FONT_OUTPUT_PRECISION.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.FONT_PITCH added
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_DECORATIVE removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_DONTCARE removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_MODERN removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_ROMAN removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_SCRIPT removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_SWISS removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH.DEFAULT_PITCH added
+Windows.Win32.Graphics.Gdi.FONT_PITCH.FIXED_PITCH added
+Windows.Win32.Graphics.Gdi.FONT_PITCH.VARIABLE_PITCH added
+Windows.Win32.Graphics.Gdi.FONT_QUALITY.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_BLACK removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_BOLD removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_DEMIBOLD removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_DONTCARE removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_EXTRABOLD removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_EXTRALIGHT removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_HEAVY removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_LIGHT removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_MEDIUM removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_NORMAL removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_REGULAR removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_SEMIBOLD removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_THIN removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_ULTRABOLD removed
+Windows.Win32.Graphics.Gdi.FONT_WEIGHT.FW_ULTRALIGHT removed
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfCharSet...System.Byte => Windows.Win32.Graphics.Gdi.FONT_CHARSET
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfWeight...Windows.Win32.Graphics.Gdi.FONT_WEIGHT => System.Int32
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfWeight...Windows.Win32.Graphics.Gdi.FONT_WEIGHT => System.Int32
+Windows.Win32.System.SystemServices.FONT_WEIGHT added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_BLACK added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_BOLD added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_DEMIBOLD added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_DONTCARE added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_EXTRABOLD added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_EXTRALIGHT added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_HEAVY added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_LIGHT added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_MEDIUM added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_NORMAL added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_REGULAR added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_SEMIBOLD added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_THIN added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_ULTRABOLD added
+Windows.Win32.System.SystemServices.FONT_WEIGHT.FW_ULTRALIGHT added
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATA.bPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATW.bPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
