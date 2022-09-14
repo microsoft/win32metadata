@@ -32475,6 +32475,1657 @@
         "parameter": "pdwFilterMode"
       }
     ]
+  },
+  {
+    "name": "UIA_PATTERN_ID",
+    "members": [ 
+      {
+        "name": "UIA_INVOKEPATTERNID",
+        "value": 10000
+      },
+      {
+        "name": "UIA_SELECTIONPATTERNID",
+        "value": 10001
+      },
+      {
+        "name": "UIA_VALUEPATTERNID",
+        "value": 10002
+      },
+      {
+        "name": "UIA_RANGEVALUEPATTERNID",
+        "value": 10003
+      },
+      {
+        "name": "UIA_SCROLLPATTERNID",
+        "value": 10004
+      },
+      {
+        "name": "UIA_EXPANDCOLLAPSEPATTERNID",
+        "value": 10005
+      },
+      {
+        "name": "UIA_GRIDPATTERNID",
+        "value": 10006
+      },
+      {
+        "name": "UIA_GRIDITEMPATTERNID",
+        "value": 10007
+      },
+      {
+        "name": "UIA_MULTIPLEVIEWPATTERNID",
+        "value": 10008
+      },
+      {
+        "name": "UIA_WINDOWPATTERNID",
+        "value": 10009
+      },
+      {
+        "name": "UIA_SELECTIONITEMPATTERNID",
+        "value": 10010
+      },
+      {
+        "name": "UIA_DOCKPATTERNID",
+        "value": 10011
+      },
+      {
+        "name": "UIA_TABLEPATTERNID",
+        "value": 10012
+      },
+      {
+        "name": "UIA_TABLEITEMPATTERNID",
+        "value": 10013
+      },
+      {
+        "name": "UIA_TEXTPATTERNID",
+        "value": 10014
+      },
+      {
+        "name": "UIA_TOGGLEPATTERNID",
+        "value": 10015
+      },
+      {
+        "name": "UIA_TRANSFORMPATTERNID",
+        "value": 10016
+      },
+      {
+        "name": "UIA_SCROLLITEMPATTERNID",
+        "value": 10017
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLEPATTERNID",
+        "value": 10018
+      },
+      {
+        "name": "UIA_ITEMCONTAINERPATTERNID",
+        "value": 10019
+      },
+      {
+        "name": "UIA_VIRTUALIZEDITEMPATTERNID",
+        "value": 10020
+      },
+      {
+        "name": "UIA_SYNCHRONIZEDINPUTPATTERNID",
+        "value": 10021
+      },
+      {
+        "name": "UIA_OBJECTMODELPATTERNID",
+        "value": 10022
+      },
+      {
+        "name": "UIA_ANNOTATIONPATTERNID",
+        "value": 10023
+      },
+      {
+        "name": "UIA_TEXTPATTERN2ID",
+        "value": 10024
+      },
+      {
+        "name": "UIA_STYLESPATTERNID",
+        "value": 10025
+      },
+      {
+        "name": "UIA_SPREADSHEETPATTERNID",
+        "value": 10026
+      },
+      {
+        "name": "UIA_SPREADSHEETITEMPATTERNID",
+        "value": 10027
+      },
+      {
+        "name": "UIA_TRANSFORMPATTERN2ID",
+        "value": 10028
+      },
+      {
+        "name": "UIA_TEXTCHILDPATTERNID",
+        "value": 10029
+      },
+      {
+        "name": "UIA_DRAGPATTERNID",
+        "value": 10030
+      },
+      {
+        "name": "UIA_DROPTARGETPATTERNID",
+        "value": 10031
+      },
+      {
+        "name": "UIA_TEXTEDITPATTERNID",
+        "value": 10032
+      },
+      {
+        "name": "UIA_CUSTOMNAVIGATIONPATTERNID",
+        "value": 10033
+      },
+      {
+        "name": "UIA_SELECTIONPATTERN2ID",
+        "value": 10034
+      }
+    ],
+    "uses": [
+      {
+        "interface": "IRawElementProviderSimple",
+        "method": "GetPatternProvider",
+        "parameter": "patternId"
+      }
+    ]
+  },
+  {
+    "name": "UIA_EVENT_ID",
+    "members": [ 
+      {
+        "name": "UIA_TOOLTIPOPENEDEVENTID",
+        "value": 20000
+      },
+      {
+        "name": "UIA_TOOLTIPCLOSEDEVENTID",
+        "value": 20001
+      },
+      {
+        "name": "UIA_STRUCTURECHANGEDEVENTID",
+        "value": 20002
+      },
+      {
+        "name": "UIA_MENUOPENEDEVENTID",
+        "value": 20003
+      },
+      {
+        "name": "UIA_AUTOMATIONPROPERTYCHANGEDEVENTID",
+        "value": 20004
+      },
+      {
+        "name": "UIA_AUTOMATIONFOCUSCHANGEDEVENTID",
+        "value": 20005
+      },
+      {
+        "name": "UIA_ASYNCCONTENTLOADEDEVENTID",
+        "value": 20006
+      },
+      {
+        "name": "UIA_MENUCLOSEDEVENTID",
+        "value": 20007
+      },
+      {
+        "name": "UIA_LAYOUTINVALIDATEDEVENTID",
+        "value": 20008
+      },
+      {
+        "name": "UIA_INVOKE_INVOKEDEVENTID",
+        "value": 20009
+      },
+      {
+        "name": "UIA_SELECTIONITEM_ELEMENTADDEDTOSELECTIONEVENTID",
+        "value": 20010
+      },
+      {
+        "name": "UIA_SELECTIONITEM_ELEMENTREMOVEDFROMSELECTIONEVENTID",
+        "value": 20011
+      },
+      {
+        "name": "UIA_SELECTIONITEM_ELEMENTSELECTEDEVENTID",
+        "value": 20012
+      },
+      {
+        "name": "UIA_SELECTION_INVALIDATEDEVENTID",
+        "value": 20013
+      },
+      {
+        "name": "UIA_TEXT_TEXTSELECTIONCHANGEDEVENTID",
+        "value": 20014
+      },
+      {
+        "name": "UIA_TEXT_TEXTCHANGEDEVENTID",
+        "value": 20015
+      },
+      {
+        "name": "UIA_WINDOW_WINDOWOPENEDEVENTID",
+        "value": 20016
+      },
+      {
+        "name": "UIA_WINDOW_WINDOWCLOSEDEVENTID",
+        "value": 20017
+      },
+      {
+        "name": "UIA_MENUMODESTARTEVENTID",
+        "value": 20018
+      },
+      {
+        "name": "UIA_MENUMODEENDEVENTID",
+        "value": 20019
+      },
+      {
+        "name": "UIA_INPUTREACHEDTARGETEVENTID",
+        "value": 20020
+      },
+      {
+        "name": "UIA_INPUTREACHEDOTHERELEMENTEVENTID",
+        "value": 20021
+      },
+      {
+        "name": "UIA_INPUTDISCARDEDEVENTID",
+        "value": 20022
+      },
+      {
+        "name": "UIA_SYSTEMALERTEVENTID",
+        "value": 20023
+      },
+      {
+        "name": "UIA_LIVEREGIONCHANGEDEVENTID",
+        "value": 20024
+      },
+      {
+        "name": "UIA_HOSTEDFRAGMENTROOTSINVALIDATEDEVENTID",
+        "value": 20025
+      },
+      {
+        "name": "UIA_DRAG_DRAGSTARTEVENTID",
+        "value": 20026
+      },
+      {
+        "name": "UIA_DRAG_DRAGCANCELEVENTID",
+        "value": 20027
+      },
+      {
+        "name": "UIA_DRAG_DRAGCOMPLETEEVENTID",
+        "value": 20028
+      },
+      {
+        "name": "UIA_DROPTARGET_DRAGENTEREVENTID",
+        "value": 20029
+      },
+      {
+        "name": "UIA_DROPTARGET_DRAGLEAVEEVENTID",
+        "value": 20030
+      },
+      {
+        "name": "UIA_DROPTARGET_DROPPEDEVENTID",
+        "value": 20031
+      },
+      {
+        "name": "UIA_TEXTEDIT_TEXTCHANGEDEVENTID",
+        "value": 20032
+      },
+      {
+        "name": "UIA_TEXTEDIT_CONVERSIONTARGETCHANGEDEVENTID",
+        "value": 20033
+      },
+      {
+        "name": "UIA_CHANGESEVENTID",
+        "value": 20034
+      },
+      {
+        "name": "UIA_NOTIFICATIONEVENTID",
+        "value": 20035
+      },
+      {
+        "name": "UIA_ACTIVETEXTPOSITIONCHANGEDEVENTID",
+        "value": 20036
+      }
+    ],
+    "uses":[
+      {
+        "method": "UiaRaiseAutomationEvent",
+        "parameter": "id"
+      },
+      {
+        "struct": "UiaPropertyChangedEventArgs",
+        "field": "EventId"
+      }
+    ]
+  },
+  {
+    "name": "UIA_PROPERTY_ID",
+    "members": [ 
+      {
+        "name": "UIA_RUNTIMEIDPROPERTYID",
+        "value": 30000
+      },
+      {
+        "name": "UIA_BOUNDINGRECTANGLEPROPERTYID",
+        "value": 30001
+      },
+      {
+        "name": "UIA_PROCESSIDPROPERTYID",
+        "value": 30002
+      },
+      {
+        "name": "UIA_CONTROLTYPEPROPERTYID",
+        "value": 30003
+      },
+      {
+        "name": "UIA_LOCALIZEDCONTROLTYPEPROPERTYID",
+        "value": 30004
+      },
+      {
+        "name": "UIA_NAMEPROPERTYID",
+        "value": 30005
+      },
+      {
+        "name": "UIA_ACCELERATORKEYPROPERTYID",
+        "value": 30006
+      },
+      {
+        "name": "UIA_ACCESSKEYPROPERTYID",
+        "value": 30007
+      },
+      {
+        "name": "UIA_HASKEYBOARDFOCUSPROPERTYID",
+        "value": 30008
+      },
+      {
+        "name": "UIA_ISKEYBOARDFOCUSABLEPROPERTYID",
+        "value": 30009
+      },
+      {
+        "name": "UIA_ISENABLEDPROPERTYID",
+        "value": 30010
+      },
+      {
+        "name": "UIA_AUTOMATIONIDPROPERTYID",
+        "value": 30011
+      },
+      {
+        "name": "UIA_CLASSNAMEPROPERTYID",
+        "value": 30012
+      },
+      {
+        "name": "UIA_HELPTEXTPROPERTYID",
+        "value": 30013
+      },
+      {
+        "name": "UIA_CLICKABLEPOINTPROPERTYID",
+        "value": 30014
+      },
+      {
+        "name": "UIA_CULTUREPROPERTYID",
+        "value": 30015
+      },
+      {
+        "name": "UIA_ISCONTROLELEMENTPROPERTYID",
+        "value": 30016
+      },
+      {
+        "name": "UIA_ISCONTENTELEMENTPROPERTYID",
+        "value": 30017
+      },
+      {
+        "name": "UIA_LABELEDBYPROPERTYID",
+        "value": 30018
+      },
+      {
+        "name": "UIA_ISPASSWORDPROPERTYID",
+        "value": 30019
+      },
+      {
+        "name": "UIA_NATIVEWINDOWHANDLEPROPERTYID",
+        "value": 30020
+      },
+      {
+        "name": "UIA_ITEMTYPEPROPERTYID",
+        "value": 30021
+      },
+      {
+        "name": "UIA_ISOFFSCREENPROPERTYID",
+        "value": 30022
+      },
+      {
+        "name": "UIA_ORIENTATIONPROPERTYID",
+        "value": 30023
+      },
+      {
+        "name": "UIA_FRAMEWORKIDPROPERTYID",
+        "value": 30024
+      },
+      {
+        "name": "UIA_ISREQUIREDFORFORMPROPERTYID",
+        "value": 30025
+      },
+      {
+        "name": "UIA_ITEMSTATUSPROPERTYID",
+        "value": 30026
+      },
+      {
+        "name": "UIA_ISDOCKPATTERNAVAILABLEPROPERTYID",
+        "value": 30027
+      },
+      {
+        "name": "UIA_ISEXPANDCOLLAPSEPATTERNAVAILABLEPROPERTYID",
+        "value": 30028
+      },
+      {
+        "name": "UIA_ISGRIDITEMPATTERNAVAILABLEPROPERTYID",
+        "value": 30029
+      },
+      {
+        "name": "UIA_ISGRIDPATTERNAVAILABLEPROPERTYID",
+        "value": 30030
+      },
+      {
+        "name": "UIA_ISINVOKEPATTERNAVAILABLEPROPERTYID",
+        "value": 30031
+      },
+      {
+        "name": "UIA_ISMULTIPLEVIEWPATTERNAVAILABLEPROPERTYID",
+        "value": 30032
+      },
+      {
+        "name": "UIA_ISRANGEVALUEPATTERNAVAILABLEPROPERTYID",
+        "value": 30033
+      },
+      {
+        "name": "UIA_ISSCROLLPATTERNAVAILABLEPROPERTYID",
+        "value": 30034
+      },
+      {
+        "name": "UIA_ISSCROLLITEMPATTERNAVAILABLEPROPERTYID",
+        "value": 30035
+      },
+      {
+        "name": "UIA_ISSELECTIONITEMPATTERNAVAILABLEPROPERTYID",
+        "value": 30036
+      },
+      {
+        "name": "UIA_ISSELECTIONPATTERNAVAILABLEPROPERTYID",
+        "value": 30037
+      },
+      {
+        "name": "UIA_ISTABLEPATTERNAVAILABLEPROPERTYID",
+        "value": 30038
+      },
+      {
+        "name": "UIA_ISTABLEITEMPATTERNAVAILABLEPROPERTYID",
+        "value": 30039
+      },
+      {
+        "name": "UIA_ISTEXTPATTERNAVAILABLEPROPERTYID",
+        "value": 30040
+      },
+      {
+        "name": "UIA_ISTOGGLEPATTERNAVAILABLEPROPERTYID",
+        "value": 30041
+      },
+      {
+        "name": "UIA_ISTRANSFORMPATTERNAVAILABLEPROPERTYID",
+        "value": 30042
+      },
+      {
+        "name": "UIA_ISVALUEPATTERNAVAILABLEPROPERTYID",
+        "value": 30043
+      },
+      {
+        "name": "UIA_ISWINDOWPATTERNAVAILABLEPROPERTYID",
+        "value": 30044
+      },
+      {
+        "name": "UIA_VALUEVALUEPROPERTYID",
+        "value": 30045
+      },
+      {
+        "name": "UIA_VALUEISREADONLYPROPERTYID",
+        "value": 30046
+      },
+      {
+        "name": "UIA_RANGEVALUEVALUEPROPERTYID",
+        "value": 30047
+      },
+      {
+        "name": "UIA_RANGEVALUEISREADONLYPROPERTYID",
+        "value": 30048
+      },
+      {
+        "name": "UIA_RANGEVALUEMINIMUMPROPERTYID",
+        "value": 30049
+      },
+      {
+        "name": "UIA_RANGEVALUEMAXIMUMPROPERTYID",
+        "value": 30050
+      },
+      {
+        "name": "UIA_RANGEVALUELARGECHANGEPROPERTYID",
+        "value": 30051
+      },
+      {
+        "name": "UIA_RANGEVALUESMALLCHANGEPROPERTYID",
+        "value": 30052
+      },
+      {
+        "name": "UIA_SCROLLHORIZONTALSCROLLPERCENTPROPERTYID",
+        "value": 30053
+      },
+      {
+        "name": "UIA_SCROLLHORIZONTALVIEWSIZEPROPERTYID",
+        "value": 30054
+      },
+      {
+        "name": "UIA_SCROLLVERTICALSCROLLPERCENTPROPERTYID",
+        "value": 30055
+      },
+      {
+        "name": "UIA_SCROLLVERTICALVIEWSIZEPROPERTYID",
+        "value": 30056
+      },
+      {
+        "name": "UIA_SCROLLHORIZONTALLYSCROLLABLEPROPERTYID",
+        "value": 30057
+      },
+      {
+        "name": "UIA_SCROLLVERTICALLYSCROLLABLEPROPERTYID",
+        "value": 30058
+      },
+      {
+        "name": "UIA_SELECTIONSELECTIONPROPERTYID",
+        "value": 30059
+      },
+      {
+        "name": "UIA_SELECTIONCANSELECTMULTIPLEPROPERTYID",
+        "value": 30060
+      },
+      {
+        "name": "UIA_SELECTIONISSELECTIONREQUIREDPROPERTYID",
+        "value": 30061
+      },
+      {
+        "name": "UIA_GRIDROWCOUNTPROPERTYID",
+        "value": 30062
+      },
+      {
+        "name": "UIA_GRIDCOLUMNCOUNTPROPERTYID",
+        "value": 30063
+      },
+      {
+        "name": "UIA_GRIDITEMROWPROPERTYID",
+        "value": 30064
+      },
+      {
+        "name": "UIA_GRIDITEMCOLUMNPROPERTYID",
+        "value": 30065
+      },
+      {
+        "name": "UIA_GRIDITEMROWSPANPROPERTYID",
+        "value": 30066
+      },
+      {
+        "name": "UIA_GRIDITEMCOLUMNSPANPROPERTYID",
+        "value": 30067
+      },
+      {
+        "name": "UIA_GRIDITEMCONTAININGGRIDPROPERTYID",
+        "value": 30068
+      },
+      {
+        "name": "UIA_DOCKDOCKPOSITIONPROPERTYID",
+        "value": 30069
+      },
+      {
+        "name": "UIA_EXPANDCOLLAPSEEXPANDCOLLAPSESTATEPROPERTYID",
+        "value": 30070
+      },
+      {
+        "name": "UIA_MULTIPLEVIEWCURRENTVIEWPROPERTYID",
+        "value": 30071
+      },
+      {
+        "name": "UIA_MULTIPLEVIEWSUPPORTEDVIEWSPROPERTYID",
+        "value": 30072
+      },
+      {
+        "name": "UIA_WINDOWCANMAXIMIZEPROPERTYID",
+        "value": 30073
+      },
+      {
+        "name": "UIA_WINDOWCANMINIMIZEPROPERTYID",
+        "value": 30074
+      },
+      {
+        "name": "UIA_WINDOWWINDOWVISUALSTATEPROPERTYID",
+        "value": 30075
+      },
+      {
+        "name": "UIA_WINDOWWINDOWINTERACTIONSTATEPROPERTYID",
+        "value": 30076
+      },
+      {
+        "name": "UIA_WINDOWISMODALPROPERTYID",
+        "value": 30077
+      },
+      {
+        "name": "UIA_WINDOWISTOPMOSTPROPERTYID",
+        "value": 30078
+      },
+      {
+        "name": "UIA_SELECTIONITEMISSELECTEDPROPERTYID",
+        "value": 30079
+      },
+      {
+        "name": "UIA_SELECTIONITEMSELECTIONCONTAINERPROPERTYID",
+        "value": 30080
+      },
+      {
+        "name": "UIA_TABLEROWHEADERSPROPERTYID",
+        "value": 30081
+      },
+      {
+        "name": "UIA_TABLECOLUMNHEADERSPROPERTYID",
+        "value": 30082
+      },
+      {
+        "name": "UIA_TABLEROWORCOLUMNMAJORPROPERTYID",
+        "value": 30083
+      },
+      {
+        "name": "UIA_TABLEITEMROWHEADERITEMSPROPERTYID",
+        "value": 30084
+      },
+      {
+        "name": "UIA_TABLEITEMCOLUMNHEADERITEMSPROPERTYID",
+        "value": 30085
+      },
+      {
+        "name": "UIA_TOGGLETOGGLESTATEPROPERTYID",
+        "value": 30086
+      },
+      {
+        "name": "UIA_TRANSFORMCANMOVEPROPERTYID",
+        "value": 30087
+      },
+      {
+        "name": "UIA_TRANSFORMCANRESIZEPROPERTYID",
+        "value": 30088
+      },
+      {
+        "name": "UIA_TRANSFORMCANROTATEPROPERTYID",
+        "value": 30089
+      },
+      {
+        "name": "UIA_ISLEGACYIACCESSIBLEPATTERNAVAILABLEPROPERTYID",
+        "value": 30090
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLECHILDIDPROPERTYID",
+        "value": 30091
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLENAMEPROPERTYID",
+        "value": 30092
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLEVALUEPROPERTYID",
+        "value": 30093
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLEDESCRIPTIONPROPERTYID",
+        "value": 30094
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLEROLEPROPERTYID",
+        "value": 30095
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLESTATEPROPERTYID",
+        "value": 30096
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLEHELPPROPERTYID",
+        "value": 30097
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLEKEYBOARDSHORTCUTPROPERTYID",
+        "value": 30098
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLESELECTIONPROPERTYID",
+        "value": 30099
+      },
+      {
+        "name": "UIA_LEGACYIACCESSIBLEDEFAULTACTIONPROPERTYID",
+        "value": 30100
+      },
+      {
+        "name": "UIA_ARIAROLEPROPERTYID",
+        "value": 30101
+      },
+      {
+        "name": "UIA_ARIAPROPERTIESPROPERTYID",
+        "value": 30102
+      },
+      {
+        "name": "UIA_ISDATAVALIDFORFORMPROPERTYID",
+        "value": 30103
+      },
+      {
+        "name": "UIA_CONTROLLERFORPROPERTYID",
+        "value": 30104
+      },
+      {
+        "name": "UIA_DESCRIBEDBYPROPERTYID",
+        "value": 30105
+      },
+      {
+        "name": "UIA_FLOWSTOPROPERTYID",
+        "value": 30106
+      },
+      {
+        "name": "UIA_PROVIDERDESCRIPTIONPROPERTYID",
+        "value": 30107
+      },
+      {
+        "name": "UIA_ISITEMCONTAINERPATTERNAVAILABLEPROPERTYID",
+        "value": 30108
+      },
+      {
+        "name": "UIA_ISVIRTUALIZEDITEMPATTERNAVAILABLEPROPERTYID",
+        "value": 30109
+      },
+      {
+        "name": "UIA_ISSYNCHRONIZEDINPUTPATTERNAVAILABLEPROPERTYID",
+        "value": 30110
+      },
+      {
+        "name": "UIA_OPTIMIZEFORVISUALCONTENTPROPERTYID",
+        "value": 30111
+      },
+      {
+        "name": "UIA_ISOBJECTMODELPATTERNAVAILABLEPROPERTYID",
+        "value": 30112
+      },
+      {
+        "name": "UIA_ANNOTATIONANNOTATIONTYPEIDPROPERTYID",
+        "value": 30113
+      },
+      {
+        "name": "UIA_ANNOTATIONANNOTATIONTYPENAMEPROPERTYID",
+        "value": 30114
+      },
+      {
+        "name": "UIA_ANNOTATIONAUTHORPROPERTYID",
+        "value": 30115
+      },
+      {
+        "name": "UIA_ANNOTATIONDATETIMEPROPERTYID",
+        "value": 30116
+      },
+      {
+        "name": "UIA_ANNOTATIONTARGETPROPERTYID",
+        "value": 30117
+      },
+      {
+        "name": "UIA_ISANNOTATIONPATTERNAVAILABLEPROPERTYID",
+        "value": 30118
+      },
+      {
+        "name": "UIA_ISTEXTPATTERN2AVAILABLEPROPERTYID",
+        "value": 30119
+      },
+      {
+        "name": "UIA_STYLESSTYLEIDPROPERTYID",
+        "value": 30120
+      },
+      {
+        "name": "UIA_STYLESSTYLENAMEPROPERTYID",
+        "value": 30121
+      },
+      {
+        "name": "UIA_STYLESFILLCOLORPROPERTYID",
+        "value": 30122
+      },
+      {
+        "name": "UIA_STYLESFILLPATTERNSTYLEPROPERTYID",
+        "value": 30123
+      },
+      {
+        "name": "UIA_STYLESSHAPEPROPERTYID",
+        "value": 30124
+      },
+      {
+        "name": "UIA_STYLESFILLPATTERNCOLORPROPERTYID",
+        "value": 30125
+      },
+      {
+        "name": "UIA_STYLESEXTENDEDPROPERTIESPROPERTYID",
+        "value": 30126
+      },
+      {
+        "name": "UIA_ISSTYLESPATTERNAVAILABLEPROPERTYID",
+        "value": 30127
+      },
+      {
+        "name": "UIA_ISSPREADSHEETPATTERNAVAILABLEPROPERTYID",
+        "value": 30128
+      },
+      {
+        "name": "UIA_SPREADSHEETITEMFORMULAPROPERTYID",
+        "value": 30129
+      },
+      {
+        "name": "UIA_SPREADSHEETITEMANNOTATIONOBJECTSPROPERTYID",
+        "value": 30130
+      },
+      {
+        "name": "UIA_SPREADSHEETITEMANNOTATIONTYPESPROPERTYID",
+        "value": 30131
+      },
+      {
+        "name": "UIA_ISSPREADSHEETITEMPATTERNAVAILABLEPROPERTYID",
+        "value": 30132
+      },
+      {
+        "name": "UIA_TRANSFORM2CANZOOMPROPERTYID",
+        "value": 30133
+      },
+      {
+        "name": "UIA_ISTRANSFORMPATTERN2AVAILABLEPROPERTYID",
+        "value": 30134
+      },
+      {
+        "name": "UIA_LIVESETTINGPROPERTYID",
+        "value": 30135
+      },
+      {
+        "name": "UIA_ISTEXTCHILDPATTERNAVAILABLEPROPERTYID",
+        "value": 30136
+      },
+      {
+        "name": "UIA_ISDRAGPATTERNAVAILABLEPROPERTYID",
+        "value": 30137
+      },
+      {
+        "name": "UIA_DRAGISGRABBEDPROPERTYID",
+        "value": 30138
+      },
+      {
+        "name": "UIA_DRAGDROPEFFECTPROPERTYID",
+        "value": 30139
+      },
+      {
+        "name": "UIA_DRAGDROPEFFECTSPROPERTYID",
+        "value": 30140
+      },
+      {
+        "name": "UIA_ISDROPTARGETPATTERNAVAILABLEPROPERTYID",
+        "value": 30141
+      },
+      {
+        "name": "UIA_DROPTARGETDROPTARGETEFFECTPROPERTYID",
+        "value": 30142
+      },
+      {
+        "name": "UIA_DROPTARGETDROPTARGETEFFECTSPROPERTYID",
+        "value": 30143
+      },
+      {
+        "name": "UIA_DRAGGRABBEDITEMSPROPERTYID",
+        "value": 30144
+      },
+      {
+        "name": "UIA_TRANSFORM2ZOOMLEVELPROPERTYID",
+        "value": 30145
+      },
+      {
+        "name": "UIA_TRANSFORM2ZOOMMINIMUMPROPERTYID",
+        "value": 30146
+      },
+      {
+        "name": "UIA_TRANSFORM2ZOOMMAXIMUMPROPERTYID",
+        "value": 30147
+      },
+      {
+        "name": "UIA_FLOWSFROMPROPERTYID",
+        "value": 30148
+      },
+      {
+        "name": "UIA_ISTEXTEDITPATTERNAVAILABLEPROPERTYID",
+        "value": 30149
+      },
+      {
+        "name": "UIA_ISPERIPHERALPROPERTYID",
+        "value": 30150
+      },
+      {
+        "name": "UIA_ISCUSTOMNAVIGATIONPATTERNAVAILABLEPROPERTYID",
+        "value": 30151
+      },
+      {
+        "name": "UIA_POSITIONINSETPROPERTYID",
+        "value": 30152
+      },
+      {
+        "name": "UIA_SIZEOFSETPROPERTYID",
+        "value": 30153
+      },
+      {
+        "name": "UIA_LEVELPROPERTYID",
+        "value": 30154
+      },
+      {
+        "name": "UIA_ANNOTATIONTYPESPROPERTYID",
+        "value": 30155
+      },
+      {
+        "name": "UIA_ANNOTATIONOBJECTSPROPERTYID",
+        "value": 30156
+      },
+      {
+        "name": "UIA_LANDMARKTYPEPROPERTYID",
+        "value": 30157
+      },
+      {
+        "name": "UIA_LOCALIZEDLANDMARKTYPEPROPERTYID",
+        "value": 30158
+      },
+      {
+        "name": "UIA_FULLDESCRIPTIONPROPERTYID",
+        "value": 30159
+      },
+      {
+        "name": "UIA_FILLCOLORPROPERTYID",
+        "value": 30160
+      },
+      {
+        "name": "UIA_OUTLINECOLORPROPERTYID",
+        "value": 30161
+      },
+      {
+        "name": "UIA_FILLTYPEPROPERTYID",
+        "value": 30162
+      },
+      {
+        "name": "UIA_VISUALEFFECTSPROPERTYID",
+        "value": 30163
+      },
+      {
+        "name": "UIA_OUTLINETHICKNESSPROPERTYID",
+        "value": 30164
+      },
+      {
+        "name": "UIA_CENTERPOINTPROPERTYID",
+        "value": 30165
+      },
+      {
+        "name": "UIA_ROTATIONPROPERTYID",
+        "value": 30166
+      },
+      {
+        "name": "UIA_SIZEPROPERTYID",
+        "value": 30167
+      },
+      {
+        "name": "UIA_ISSELECTIONPATTERN2AVAILABLEPROPERTYID",
+        "value": 30168
+      },
+      {
+        "name": "UIA_SELECTION2FIRSTSELECTEDITEMPROPERTYID",
+        "value": 30169
+      },
+      {
+        "name": "UIA_SELECTION2LASTSELECTEDITEMPROPERTYID",
+        "value": 30170
+      },
+      {
+        "name": "UIA_SELECTION2CURRENTSELECTEDITEMPROPERTYID",
+        "value": 30171
+      },
+      {
+        "name": "UIA_SELECTION2ITEMCOUNTPROPERTYID",
+        "value": 30172
+      },
+      {
+        "name": "UIA_HEADINGLEVELPROPERTYID",
+        "value": 30173
+      },
+      {
+        "name": "UIA_ISDIALOGPROPERTYID",
+        "value": 30174
+      }
+    ],
+    "uses": [
+      {
+        "method": "UiaRaiseAutomationPropertyChangedEvent",
+        "parameter": "id"
+      },
+      {
+        "struct": "UiaPropertyChangedEventArgs",
+        "field": "PropertyId"
+      },
+      {
+        "interface": "IRawElementProviderSimple",
+        "method": "GetPropertyValue",
+        "parameter": "propertyId"
+      }
+    ]
+  },
+  {
+    "name": "UIA_TEXTATTRIBUTE_ID",
+    "members": [ 
+      {
+        "name": "UIA_ANIMATIONSTYLEATTRIBUTEID",
+        "value": 40000
+      },
+      {
+        "name": "UIA_BACKGROUNDCOLORATTRIBUTEID",
+        "value": 40001
+      },
+      {
+        "name": "UIA_BULLETSTYLEATTRIBUTEID",
+        "value": 40002
+      },
+      {
+        "name": "UIA_CAPSTYLEATTRIBUTEID",
+        "value": 40003
+      },
+      {
+        "name": "UIA_CULTUREATTRIBUTEID",
+        "value": 40004
+      },
+      {
+        "name": "UIA_FONTNAMEATTRIBUTEID",
+        "value": 40005
+      },
+      {
+        "name": "UIA_FONTSIZEATTRIBUTEID",
+        "value": 40006
+      },
+      {
+        "name": "UIA_FONTWEIGHTATTRIBUTEID",
+        "value": 40007
+      },
+      {
+        "name": "UIA_FOREGROUNDCOLORATTRIBUTEID",
+        "value": 40008
+      },
+      {
+        "name": "UIA_HORIZONTALTEXTALIGNMENTATTRIBUTEID",
+        "value": 40009
+      },
+      {
+        "name": "UIA_INDENTATIONFIRSTLINEATTRIBUTEID",
+        "value": 40010
+      },
+      {
+        "name": "UIA_INDENTATIONLEADINGATTRIBUTEID",
+        "value": 40011
+      },
+      {
+        "name": "UIA_INDENTATIONTRAILINGATTRIBUTEID",
+        "value": 40012
+      },
+      {
+        "name": "UIA_ISHIDDENATTRIBUTEID",
+        "value": 40013
+      },
+      {
+        "name": "UIA_ISITALICATTRIBUTEID",
+        "value": 40014
+      },
+      {
+        "name": "UIA_ISREADONLYATTRIBUTEID",
+        "value": 40015
+      },
+      {
+        "name": "UIA_ISSUBSCRIPTATTRIBUTEID",
+        "value": 40016
+      },
+      {
+        "name": "UIA_ISSUPERSCRIPTATTRIBUTEID",
+        "value": 40017
+      },
+      {
+        "name": "UIA_MARGINBOTTOMATTRIBUTEID",
+        "value": 40018
+      },
+      {
+        "name": "UIA_MARGINLEADINGATTRIBUTEID",
+        "value": 40019
+      },
+      {
+        "name": "UIA_MARGINTOPATTRIBUTEID",
+        "value": 40020
+      },
+      {
+        "name": "UIA_MARGINTRAILINGATTRIBUTEID",
+        "value": 40021
+      },
+      {
+        "name": "UIA_OUTLINESTYLESATTRIBUTEID",
+        "value": 40022
+      },
+      {
+        "name": "UIA_OVERLINECOLORATTRIBUTEID",
+        "value": 40023
+      },
+      {
+        "name": "UIA_OVERLINESTYLEATTRIBUTEID",
+        "value": 40024
+      },
+      {
+        "name": "UIA_STRIKETHROUGHCOLORATTRIBUTEID",
+        "value": 40025
+      },
+      {
+        "name": "UIA_STRIKETHROUGHSTYLEATTRIBUTEID",
+        "value": 40026
+      },
+      {
+        "name": "UIA_TABSATTRIBUTEID",
+        "value": 40027
+      },
+      {
+        "name": "UIA_TEXTFLOWDIRECTIONSATTRIBUTEID",
+        "value": 40028
+      },
+      {
+        "name": "UIA_UNDERLINECOLORATTRIBUTEID",
+        "value": 40029
+      },
+      {
+        "name": "UIA_UNDERLINESTYLEATTRIBUTEID",
+        "value": 40030
+      },
+      {
+        "name": "UIA_ANNOTATIONTYPESATTRIBUTEID",
+        "value": 40031
+      },
+      {
+        "name": "UIA_ANNOTATIONOBJECTSATTRIBUTEID",
+        "value": 40032
+      },
+      {
+        "name": "UIA_STYLENAMEATTRIBUTEID",
+        "value": 40033
+      },
+      {
+        "name": "UIA_STYLEIDATTRIBUTEID",
+        "value": 40034
+      },
+      {
+        "name": "UIA_LINKATTRIBUTEID",
+        "value": 40035
+      },
+      {
+        "name": "UIA_ISACTIVEATTRIBUTEID",
+        "value": 40036
+      },
+      {
+        "name": "UIA_SELECTIONACTIVEENDATTRIBUTEID",
+        "value": 40037
+      },
+      {
+        "name": "UIA_CARETPOSITIONATTRIBUTEID",
+        "value": 40038
+      },
+      {
+        "name": "UIA_CARETBIDIMODEATTRIBUTEID",
+        "value": 40039
+      },
+      {
+        "name": "UIA_LINESPACINGATTRIBUTEID",
+        "value": 40040
+      },
+      {
+        "name": "UIA_BEFOREPARAGRAPHSPACINGATTRIBUTEID",
+        "value": 40041
+      },
+      {
+        "name": "UIA_AFTERPARAGRAPHSPACINGATTRIBUTEID",
+        "value": 40042
+      },
+      {
+        "name": "UIA_SAYASINTERPRETASATTRIBUTEID",
+        "value": 40043
+      }
+    ]
+  },
+  {
+    "name": "UIA_CONTROLTYPE_ID",
+    "members": [ 
+      {
+        "name": "UIA_BUTTONCONTROLTYPEID",
+        "value": 50000
+      },
+      {
+        "name": "UIA_CALENDARCONTROLTYPEID",
+        "value": 50001
+      },
+      {
+        "name": "UIA_CHECKBOXCONTROLTYPEID",
+        "value": 50002
+      },
+      {
+        "name": "UIA_COMBOBOXCONTROLTYPEID",
+        "value": 50003
+      },
+      {
+        "name": "UIA_EDITCONTROLTYPEID",
+        "value": 50004
+      },
+      {
+        "name": "UIA_HYPERLINKCONTROLTYPEID",
+        "value": 50005
+      },
+      {
+        "name": "UIA_IMAGECONTROLTYPEID",
+        "value": 50006
+      },
+      {
+        "name": "UIA_LISTITEMCONTROLTYPEID",
+        "value": 50007
+      },
+      {
+        "name": "UIA_LISTCONTROLTYPEID",
+        "value": 50008
+      },
+      {
+        "name": "UIA_MENUCONTROLTYPEID",
+        "value": 50009
+      },
+      {
+        "name": "UIA_MENUBARCONTROLTYPEID",
+        "value": 50010
+      },
+      {
+        "name": "UIA_MENUITEMCONTROLTYPEID",
+        "value": 50011
+      },
+      {
+        "name": "UIA_PROGRESSBARCONTROLTYPEID",
+        "value": 50012
+      },
+      {
+        "name": "UIA_RADIOBUTTONCONTROLTYPEID",
+        "value": 50013
+      },
+      {
+        "name": "UIA_SCROLLBARCONTROLTYPEID",
+        "value": 50014
+      },
+      {
+        "name": "UIA_SLIDERCONTROLTYPEID",
+        "value": 50015
+      },
+      {
+        "name": "UIA_SPINNERCONTROLTYPEID",
+        "value": 50016
+      },
+      {
+        "name": "UIA_STATUSBARCONTROLTYPEID",
+        "value": 50017
+      },
+      {
+        "name": "UIA_TABCONTROLTYPEID",
+        "value": 50018
+      },
+      {
+        "name": "UIA_TABITEMCONTROLTYPEID",
+        "value": 50019
+      },
+      {
+        "name": "UIA_TEXTCONTROLTYPEID",
+        "value": 50020
+      },
+      {
+        "name": "UIA_TOOLBARCONTROLTYPEID",
+        "value": 50021
+      },
+      {
+        "name": "UIA_TOOLTIPCONTROLTYPEID",
+        "value": 50022
+      },
+      {
+        "name": "UIA_TREECONTROLTYPEID",
+        "value": 50023
+      },
+      {
+        "name": "UIA_TREEITEMCONTROLTYPEID",
+        "value": 50024
+      },
+      {
+        "name": "UIA_CUSTOMCONTROLTYPEID",
+        "value": 50025
+      },
+      {
+        "name": "UIA_GROUPCONTROLTYPEID",
+        "value": 50026
+      },
+      {
+        "name": "UIA_THUMBCONTROLTYPEID",
+        "value": 50027
+      },
+      {
+        "name": "UIA_DATAGRIDCONTROLTYPEID",
+        "value": 50028
+      },
+      {
+        "name": "UIA_DATAITEMCONTROLTYPEID",
+        "value": 50029
+      },
+      {
+        "name": "UIA_DOCUMENTCONTROLTYPEID",
+        "value": 50030
+      },
+      {
+        "name": "UIA_SPLITBUTTONCONTROLTYPEID",
+        "value": 50031
+      },
+      {
+        "name": "UIA_WINDOWCONTROLTYPEID",
+        "value": 50032
+      },
+      {
+        "name": "UIA_PANECONTROLTYPEID",
+        "value": 50033
+      },
+      {
+        "name": "UIA_HEADERCONTROLTYPEID",
+        "value": 50034
+      },
+      {
+        "name": "UIA_HEADERITEMCONTROLTYPEID",
+        "value": 50035
+      },
+      {
+        "name": "UIA_TABLECONTROLTYPEID",
+        "value": 50036
+      },
+      {
+        "name": "UIA_TITLEBARCONTROLTYPEID",
+        "value": 50037
+      },
+      {
+        "name": "UIA_SEPARATORCONTROLTYPEID",
+        "value": 50038
+      },
+      {
+        "name": "UIA_SEMANTICZOOMCONTROLTYPEID",
+        "value": 50039
+      },
+      {
+        "name": "UIA_APPBARCONTROLTYPEID",
+        "value": 50040
+      }
+    ]
+  },
+  {
+    "name": "UIA_ANNOTATIONTYPES",
+    "members": [ 
+      {
+        "name": "ANNOTATIONTYPE_UNKNOWN",
+        "value": 60000
+      },
+      {
+        "name": "ANNOTATIONTYPE_SPELLINGERROR",
+        "value": 60001
+      },
+      {
+        "name": "ANNOTATIONTYPE_GRAMMARERROR",
+        "value": 60002
+      },
+      {
+        "name": "ANNOTATIONTYPE_COMMENT",
+        "value": 60003
+      },
+      {
+        "name": "ANNOTATIONTYPE_FORMULAERROR",
+        "value": 60004
+      },
+      {
+        "name": "ANNOTATIONTYPE_TRACKCHANGES",
+        "value": 60005
+      },
+      {
+        "name": "ANNOTATIONTYPE_HEADER",
+        "value": 60006
+      },
+      {
+        "name": "ANNOTATIONTYPE_FOOTER",
+        "value": 60007
+      },
+      {
+        "name": "ANNOTATIONTYPE_HIGHLIGHTED",
+        "value": 60008
+      },
+      {
+        "name": "ANNOTATIONTYPE_ENDNOTE",
+        "value": 60009
+      },
+      {
+        "name": "ANNOTATIONTYPE_FOOTNOTE",
+        "value": 60010
+      },
+      {
+        "name": "ANNOTATIONTYPE_INSERTIONCHANGE",
+        "value": 60011
+      },
+      {
+        "name": "ANNOTATIONTYPE_DELETIONCHANGE",
+        "value": 60012
+      },
+      {
+        "name": "ANNOTATIONTYPE_MOVECHANGE",
+        "value": 60013
+      },
+      {
+        "name": "ANNOTATIONTYPE_FORMATCHANGE",
+        "value": 60014
+      },
+      {
+        "name": "ANNOTATIONTYPE_UNSYNCEDCHANGE",
+        "value": 60015
+      },
+      {
+        "name": "ANNOTATIONTYPE_EDITINGLOCKEDCHANGE",
+        "value": 60016
+      },
+      {
+        "name": "ANNOTATIONTYPE_EXTERNALCHANGE",
+        "value": 60017
+      },
+      {
+        "name": "ANNOTATIONTYPE_CONFLICTINGCHANGE",
+        "value": 60018
+      },
+      {
+        "name": "ANNOTATIONTYPE_AUTHOR",
+        "value": 60019
+      },
+      {
+        "name": "ANNOTATIONTYPE_ADVANCEDPROOFINGISSUE",
+        "value": 60020
+      },
+      {
+        "name": "ANNOTATIONTYPE_DATAVALIDATIONERROR",
+        "value": 60021
+      },
+      {
+        "name": "ANNOTATIONTYPE_CIRCULARREFERENCEERROR",
+        "value": 60022
+      },
+      {
+        "name": "ANNOTATIONTYPE_MATHEMATICS",
+        "value": 60023
+      },
+      {
+        "name": "ANNOTATIONTYPE_SENSITIVE",
+        "value": 60024
+      }
+    ]
+  },
+  {
+    "name": "UIA_STYLE_ID",
+    "members": [ 
+      {
+        "name": "STYLEID_CUSTOM",
+        "value": 70000
+      },
+      {
+        "name": "STYLEID_HEADING1",
+        "value": 70001
+      },
+      {
+        "name": "STYLEID_HEADING2",
+        "value": 70002
+      },
+      {
+        "name": "STYLEID_HEADING3",
+        "value": 70003
+      },
+      {
+        "name": "STYLEID_HEADING4",
+        "value": 70004
+      },
+      {
+        "name": "STYLEID_HEADING5",
+        "value": 70005
+      },
+      {
+        "name": "STYLEID_HEADING6",
+        "value": 70006
+      },
+      {
+        "name": "STYLEID_HEADING7",
+        "value": 70007
+      },
+      {
+        "name": "STYLEID_HEADING8",
+        "value": 70008
+      },
+      {
+        "name": "STYLEID_HEADING9",
+        "value": 70009
+      },
+      {
+        "name": "STYLEID_TITLE",
+        "value": 70010
+      },
+      {
+        "name": "STYLEID_SUBTITLE",
+        "value": 70011
+      },
+      {
+        "name": "STYLEID_NORMAL",
+        "value": 70012
+      },
+      {
+        "name": "STYLEID_EMPHASIS",
+        "value": 70013
+      },
+      {
+        "name": "STYLEID_QUOTE",
+        "value": 70014
+      },
+      {
+        "name": "STYLEID_BULLETEDLIST",
+        "value": 70015
+      },
+      {
+        "name": "STYLEID_NUMBEREDLIST",
+        "value": 70016
+      }
+    ]
+  },
+  {
+    "name": "UIA_LANDMARKTYPE_ID",
+    "members": [ 
+      {
+        "name": "UIA_CUSTOMLANDMARKTYPEID",
+        "value": 80000
+      },
+      {
+        "name": "UIA_FORMLANDMARKTYPEID",
+        "value": 80001
+      },
+      {
+        "name": "UIA_MAINLANDMARKTYPEID",
+        "value": 80002
+      },
+      {
+        "name": "UIA_NAVIGATIONLANDMARKTYPEID",
+        "value": 80003
+      },
+      {
+        "name": "UIA_SEARCHLANDMARKTYPEID",
+        "value": 80004
+      }
+    ]
+  },
+  {
+    "name": "UIA_HEADINGLEVEL_ID",
+    "members": [ 
+      {
+        "name": "HEADINGLEVEL_NONE",
+        "value": 80050
+      },
+      {
+        "name": "HEADINGLEVEL1",
+        "value": 80051
+      },
+      {
+        "name": "HEADINGLEVEL2",
+        "value": 80052
+      },
+      {
+        "name": "HEADINGLEVEL3",
+        "value": 80053
+      },
+      {
+        "name": "HEADINGLEVEL4",
+        "value": 80054
+      },
+      {
+        "name": "HEADINGLEVEL5",
+        "value": 80055
+      },
+      {
+        "name": "HEADINGLEVEL6",
+        "value": 80056
+      },
+      {
+        "name": "HEADINGLEVEL7",
+        "value": 80057
+      },
+      {
+        "name": "HEADINGLEVEL8",
+        "value": 80058
+      },
+      {
+        "name": "HEADINGLEVEL9",
+        "value": 80059
+      }
+    ]
+  },
+  {
+    "name": "UIA_CHANGE_ID",
+    "members": [ 
+      {
+        "name": "UIA_SUMMARYCHANGEID",
+        "value": 90000
+      }
+    ]
+  },
+  {
+    "name": "UIA_METADATA_ID",
+    "members": [ 
+      {
+        "name": "UIA_SAYASINTERPRETASMETADATAID",
+        "value": 100000
+      }
+    ]
   }
 ]
 }
