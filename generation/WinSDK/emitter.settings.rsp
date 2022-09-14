@@ -495,6 +495,7 @@ LoadCursorW::return=[DoNotRelease]
 GetModuleHandleA::return=[DoNotRelease]
 GetModuleHandleW::return=[DoNotRelease]
 IWeakReference::Resolve::objectReference=[ComOutPtr]void**
+DWriteCreateFactory::factory=[ComOutPtr]void**
 PCEVENT_DESCRIPTOR=[Const]
 PCCERT_CONTEXT=[Const]
 EXCEPTION_RECORD::ExceptionCode=NTSTATUS
