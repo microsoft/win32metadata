@@ -33863,7 +33863,7 @@
     ]
   },
   {
-    "name": "UIA_ANNOTATIONTYPES",
+    "name": "UIA_ANNOTATIONTYPE",
     "members": [ 
       {
         "name": "AnnotationType_Unknown",
