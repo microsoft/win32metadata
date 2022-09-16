@@ -368,6 +368,52 @@ Windows.Win32.UI.Magnification.Apis.MW_FILTERMODE_INCLUDE removed
 Windows.Win32.UI.Magnification.MW_FILTERMODE added
 Windows.Win32.UI.Magnification.MW_FILTERMODE.MW_FILTERMODE_EXCLUDE added
 Windows.Win32.UI.Magnification.MW_FILTERMODE.MW_FILTERMODE_INCLUDE added
+# LOGFONT enum changes
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iClipPrecision...FONT_CLIP_PRECISION => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iOutPrecision...FONT_OUTPUT_PRECISION => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iPitchAndFamily...FONT_PITCH_AND_FAMILY => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontA : iQuality...FONT_QUALITY => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iClipPrecision...FONT_CLIP_PRECISION => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iOutPrecision...FONT_OUTPUT_PRECISION => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iPitchAndFamily...FONT_PITCH_AND_FAMILY => UInt32
+Windows.Win32.Graphics.Gdi.Apis.CreateFontW : iQuality...FONT_QUALITY => UInt32
+Windows.Win32.Graphics.Gdi.Apis.DEFAULT_PITCH removed
+Windows.Win32.Graphics.Gdi.Apis.FIXED_PITCH removed
+Windows.Win32.Graphics.Gdi.Apis.OUT_SCREEN_OUTLINE_PRECIS removed
+Windows.Win32.Graphics.Gdi.Apis.VARIABLE_PITCH removed
+Windows.Win32.Graphics.Gdi.FONT_CHARSET.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.FONT_CLIP_PRECISION.CLIP_DFA_OVERRIDE added
+Windows.Win32.Graphics.Gdi.FONT_CLIP_PRECISION.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.FONT_FAMILY added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_DECORATIVE added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_DONTCARE added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_MODERN added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_ROMAN added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_SCRIPT added
+Windows.Win32.Graphics.Gdi.FONT_FAMILY.FF_SWISS added
+Windows.Win32.Graphics.Gdi.FONT_OUTPUT_PRECISION.OUT_SCREEN_OUTLINE_PRECIS added
+Windows.Win32.Graphics.Gdi.FONT_OUTPUT_PRECISION.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.FONT_PITCH added
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_DECORATIVE removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_DONTCARE removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_MODERN removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_ROMAN removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_SCRIPT removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY.FF_SWISS removed
+Windows.Win32.Graphics.Gdi.FONT_PITCH.DEFAULT_PITCH added
+Windows.Win32.Graphics.Gdi.FONT_PITCH.FIXED_PITCH added
+Windows.Win32.Graphics.Gdi.FONT_PITCH.VARIABLE_PITCH added
+Windows.Win32.Graphics.Gdi.FONT_QUALITY.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfCharSet...System.Byte => Windows.Win32.Graphics.Gdi.FONT_CHARSET
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
+Windows.Win32.Graphics.Gdi.LOGFONTA.lfWeight...Windows.Win32.Graphics.Gdi.FONT_WEIGHT => System.Int32
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
+Windows.Win32.Graphics.Gdi.LOGFONTW.lfWeight...Windows.Win32.Graphics.Gdi.FONT_WEIGHT => System.Int32
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATA.bPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATW.bPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
+# Added extension to DllImport.
+Windows.Win32.System.WindowsProgramming.Apis.IsApiSetImplemented : [DllImport(api-ms-win-core-apiquery-l2-1-0,ExactSpelling=True,PreserveSig=False)] => [DllImport(api-ms-win-core-apiquery-l2-1-0.dll,ExactSpelling=True,PreserveSig=False)]
 # DISPATCH_FLAGS
 Windows.Win32.System.Com.IDispatch.Invoke : wFlags...UInt16 => DISPATCH_FLAGS
 Windows.Win32.System.Com.ITypeInfo.Invoke : wFlags...UInt16 => DISPATCH_FLAGS
