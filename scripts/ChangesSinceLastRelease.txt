@@ -414,3 +414,30 @@ Windows.Win32.UI.Controls.RichEdit.CHARFORMATA.bPitchAndFamily...Windows.Win32.G
 Windows.Win32.UI.Controls.RichEdit.CHARFORMATW.bPitchAndFamily...Windows.Win32.Graphics.Gdi.FONT_PITCH_AND_FAMILY => System.Byte
 # Added extension to DllImport.
 Windows.Win32.System.WindowsProgramming.Apis.IsApiSetImplemented : [DllImport(api-ms-win-core-apiquery-l2-1-0,ExactSpelling=True,PreserveSig=False)] => [DllImport(api-ms-win-core-apiquery-l2-1-0.dll,ExactSpelling=True,PreserveSig=False)]
+# UxTheme enum changes
+Windows.Win32.UI.Controls.Apis.DrawThemeEdge : uEdge...UInt32 => DRAWEDGE_FLAGS
+Windows.Win32.UI.Controls.Apis.DrawThemeEdge : uFlags...UInt32 => DRAW_EDGE_FLAGS
+Windows.Win32.UI.Controls.Apis.DrawThemeText : dwTextFlags...UInt32 => DRAW_TEXT_FORMAT
+Windows.Win32.UI.Controls.Apis.DrawThemeTextEx : dwTextFlags...UInt32 => DRAW_TEXT_FORMAT
+Windows.Win32.UI.Controls.Apis.GetThemeTextExtent : dwTextFlags...UInt32 => DRAW_TEXT_FORMAT
+Windows.Win32.UI.Controls.Apis.HitTestThemeBackground : dwOptions...UInt32 => HIT_TEST_BACKGROUND_OPTIONS
+Windows.Win32.UI.Controls.Apis.HTTB_BACKGROUNDSEG removed
+Windows.Win32.UI.Controls.Apis.HTTB_CAPTION removed
+Windows.Win32.UI.Controls.Apis.HTTB_FIXEDBORDER removed
+Windows.Win32.UI.Controls.Apis.HTTB_RESIZINGBORDER_BOTTOM removed
+Windows.Win32.UI.Controls.Apis.HTTB_RESIZINGBORDER_LEFT removed
+Windows.Win32.UI.Controls.Apis.HTTB_RESIZINGBORDER_RIGHT removed
+Windows.Win32.UI.Controls.Apis.HTTB_RESIZINGBORDER_TOP removed
+Windows.Win32.UI.Controls.Apis.HTTB_SIZINGTEMPLATE removed
+Windows.Win32.UI.Controls.Apis.HTTB_SYSTEMSIZINGMARGINS removed
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_BACKGROUNDSEG added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_CAPTION added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_FIXEDBORDER added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_RESIZINGBORDER added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_RESIZINGBORDER_BOTTOM added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_RESIZINGBORDER_LEFT added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_RESIZINGBORDER_RIGHT added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_RESIZINGBORDER_TOP added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_SIZINGTEMPLATE added
+Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_SYSTEMSIZINGMARGINS added

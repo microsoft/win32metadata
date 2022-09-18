@@ -224,6 +224,10 @@
       {
         "method": "DrawEdge",
         "parameter": "edge"
+      },
+      {
+        "method": "DrawThemeEdge",
+        "parameter": "uEdge"
       }
     ]
   },
@@ -5053,6 +5057,18 @@
       {
         "method": "DrawTextW",
         "parameter": "format"
+      },
+      {
+        "method": "DrawThemeText",
+        "parameter": "dwTextFlags"
+      },
+      {
+        "method": "DrawThemeTextEx",
+        "parameter": "dwTextFlags"
+      },
+      {
+        "method": "GetThemeTextExtent",
+        "parameter": "dwTextFlags"
       }
     ]
   },
@@ -14666,6 +14682,10 @@
       {
         "method": "DrawEdge",
         "parameter": "grfFlags"
+      },
+      {
+        "method": "DrawThemeEdge",
+        "parameter": "uFlags"
       }
     ]
   },
@@ -32473,6 +32493,20 @@
       {
         "method": "MagGetWindowFilterList",
         "parameter": "pdwFilterMode"
+      }
+    ]
+  },
+  {
+    "name": "HIT_TEST_BACKGROUND_OPTIONS",
+    "autoPopulate": {
+      "filter": "HTTB_",
+      "header": "uxtheme.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "method": "HitTestThemeBackground",
+        "parameter": "dwOptions"
       }
     ]
   }
