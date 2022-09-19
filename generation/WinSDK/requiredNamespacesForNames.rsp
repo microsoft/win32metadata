@@ -306,6 +306,7 @@ ITypeInfo2=Windows.Win32.System.Com
 TYPEATTR=Windows.Win32.System.Com
 TYPEKIND=Windows.Win32.System.Com
 FUNCDESC=Windows.Win32.System.Com
+FUNCFLAGS=Windows.Win32.System.Com
 ELEMDESC=Windows.Win32.System.Com
 TYPEDESC=Windows.Win32.System.Com
 INVOKEKIND=Windows.Win32.System.Com

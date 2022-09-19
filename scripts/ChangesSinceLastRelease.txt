@@ -1714,3 +1714,51 @@ Windows.Win32.UI.Controls.HIT_TEST_BACKGROUND_OPTIONS.HTTB_SYSTEMSIZINGMARGINS a
 Windows.Win32.System.Threading.Apis.WaitOnAddress : [DllImport(vertdll.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows8.0)] => [DllImport(api-ms-win-core-synch-l1-2-0.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows8.0)]
 Windows.Win32.System.Threading.Apis.WakeByAddressAll : [DllImport(vertdll.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(api-ms-win-core-synch-l1-2-0.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)]
 Windows.Win32.System.Threading.Apis.WakeByAddressSingle : [DllImport(vertdll.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)] => [DllImport(api-ms-win-core-synch-l1-2-0.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows8.0)]
+# winforms enum changes
+Windows.Win32.System.Com.DVASPECT.DVASPECT_OPAQUE added
+Windows.Win32.System.Com.DVASPECT.DVASPECT_TRANSPARENT added
+Windows.Win32.System.Com.DVASPECT.value__...System.Int32 => System.UInt32
+Windows.Win32.System.Com.FUNCDESC.wFuncFlags...System.UInt16 => Windows.Win32.System.Com.FUNCFLAGS
+Windows.Win32.System.Com.FUNCFLAGS added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FBINDABLE added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FDEFAULTBIND added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FDEFAULTCOLLELEM added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FDISPLAYBIND added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FHIDDEN added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FIMMEDIATEBIND added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FNONBROWSABLE added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FREPLACEABLE added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FREQUESTEDIT added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FRESTRICTED added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FSOURCE added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FUIDEFAULT added
+Windows.Win32.System.Com.FUNCFLAGS.FUNCFLAG_FUSESGETLASTERROR added
+Windows.Win32.System.Ole.CONTROLINFO.dwFlags...System.UInt32 => Windows.Win32.System.Ole.CTRLINFO
+Windows.Win32.System.Ole.DVASPECT2 removed
+Windows.Win32.System.Ole.DVASPECT2.DVASPECT_OPAQUE removed
+Windows.Win32.System.Ole.DVASPECT2.DVASPECT_TRANSPARENT removed
+Windows.Win32.System.Ole.FUNCFLAGS removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FBINDABLE removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FDEFAULTBIND removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FDEFAULTCOLLELEM removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FDISPLAYBIND removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FHIDDEN removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FIMMEDIATEBIND removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FNONBROWSABLE removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FREPLACEABLE removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FREQUESTEDIT removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FRESTRICTED removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FSOURCE removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FUIDEFAULT removed
+Windows.Win32.System.Ole.FUNCFLAGS.FUNCFLAG_FUSESGETLASTERROR removed
+Windows.Win32.System.Ole.IOleObject.GetExtent : dwDrawAspect...UInt32 => DVASPECT
+Windows.Win32.System.Ole.IOleObject.GetMiscStatus : dwAspect...UInt32 => DVASPECT
+Windows.Win32.System.Ole.IOleObject.SetExtent : dwDrawAspect...UInt32 => DVASPECT
+Windows.Win32.System.Ole.IViewObject.Draw : dwDrawAspect...UInt32 => DVASPECT
+Windows.Win32.System.Ole.IViewObject.Freeze : dwDrawAspect...UInt32 => DVASPECT
+Windows.Win32.System.Ole.IViewObject.GetColorSet : dwDrawAspect...UInt32 => DVASPECT
+Windows.Win32.System.Ole.IViewObject.SetAdvise : advf...UInt32 => ADVF
+Windows.Win32.System.Ole.IViewObject.SetAdvise : aspects...UInt32 => DVASPECT
+Windows.Win32.System.Ole.IViewObject2.GetExtent : dwDrawAspect...UInt32 => DVASPECT
+Windows.Win32.Web.MsHtml.DOCHOSTUIINFO.dwDoubleClick...System.UInt32 => Windows.Win32.Web.MsHtml.DOCHOSTUIDBLCLK
+Windows.Win32.Web.MsHtml.DOCHOSTUIINFO.dwFlags...System.UInt32 => Windows.Win32.Web.MsHtml.DOCHOSTUIFLAG
