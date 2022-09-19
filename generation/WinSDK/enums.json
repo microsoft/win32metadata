@@ -32497,7 +32497,6 @@
     ]
   },
   {
-<<<<<<< HEAD
     "name": "UIA_PATTERN_ID",
     "members": [ 
       {
@@ -34146,7 +34145,10 @@
       {
         "name": "UIA_SayAsInterpretAsMetadataId",
         "value": 100000
-=======
+      }
+    ]
+  },
+  {
     "name": "HIT_TEST_BACKGROUND_OPTIONS",
     "autoPopulate": {
       "filter": "HTTB_",
@@ -34157,7 +34159,6 @@
       {
         "method": "HitTestThemeBackground",
         "parameter": "dwOptions"
->>>>>>> main
       }
     ]
   }
