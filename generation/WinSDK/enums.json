@@ -14762,155 +14762,24 @@
   },
   {
     "name": "SYS_COLOR_INDEX",
-    "members": [
-      {
-        "name": "COLOR_3DDKSHADOW",
-        "value": "21"
-      },
-      {
-        "name": "COLOR_3DFACE",
-        "value": "15"
-      },
-      {
-        "name": "COLOR_3DHIGHLIGHT",
-        "value": "20"
-      },
-      {
-        "name": "COLOR_3DHILIGHT",
-        "value": "20"
-      },
-      {
-        "name": "COLOR_3DLIGHT",
-        "value": "22"
-      },
-      {
-        "name": "COLOR_3DSHADOW",
-        "value": "16"
-      },
-      {
-        "name": "COLOR_ACTIVEBORDER",
-        "value": "10"
-      },
-      {
-        "name": "COLOR_ACTIVECAPTION",
-        "value": "2"
-      },
-      {
-        "name": "COLOR_APPWORKSPACE",
-        "value": "12"
-      },
-      {
-        "name": "COLOR_BACKGROUND",
-        "value": "1"
-      },
-      {
-        "name": "COLOR_BTNFACE",
-        "value": "15"
-      },
-      {
-        "name": "COLOR_BTNHIGHLIGHT",
-        "value": "20"
-      },
-      {
-        "name": "COLOR_BTNHILIGHT",
-        "value": "20"
-      },
-      {
-        "name": "COLOR_BTNSHADOW",
-        "value": "16"
-      },
-      {
-        "name": "COLOR_BTNTEXT",
-        "value": "18"
-      },
-      {
-        "name": "COLOR_CAPTIONTEXT",
-        "value": "9"
-      },
-      {
-        "name": "COLOR_DESKTOP",
-        "value": "1"
-      },
-      {
-        "name": "COLOR_GRADIENTACTIVECAPTION",
-        "value": "27"
-      },
-      {
-        "name": "COLOR_GRADIENTINACTIVECAPTION",
-        "value": "28"
-      },
-      {
-        "name": "COLOR_GRAYTEXT",
-        "value": "17"
-      },
-      {
-        "name": "COLOR_HIGHLIGHT",
-        "value": "13"
-      },
-      {
-        "name": "COLOR_HIGHLIGHTTEXT",
-        "value": "14"
-      },
-      {
-        "name": "COLOR_HOTLIGHT",
-        "value": "26"
-      },
-      {
-        "name": "COLOR_INACTIVEBORDER",
-        "value": "11"
-      },
-      {
-        "name": "COLOR_INACTIVECAPTION",
-        "value": "3"
-      },
-      {
-        "name": "COLOR_INACTIVECAPTIONTEXT",
-        "value": "19"
-      },
-      {
-        "name": "COLOR_INFOBK",
-        "value": "24"
-      },
-      {
-        "name": "COLOR_INFOTEXT",
-        "value": "23"
-      },
-      {
-        "name": "COLOR_MENU",
-        "value": "4"
-      },
-      {
-        "name": "COLOR_MENUHILIGHT",
-        "value": "29"
-      },
-      {
-        "name": "COLOR_MENUBAR",
-        "value": "30"
-      },
-      {
-        "name": "COLOR_MENUTEXT",
-        "value": "7"
-      },
-      {
-        "name": "COLOR_SCROLLBAR",
-        "value": "0"
-      },
-      {
-        "name": "COLOR_WINDOW",
-        "value": "5"
-      },
-      {
-        "name": "COLOR_WINDOWFRAME",
-        "value": "6"
-      },
-      {
-        "name": "COLOR_WINDOWTEXT",
-        "value": "8"
-      }
-    ],
+    "type": "int",
+    "autoPopulate": {
+      "filter": "COLOR_",
+      "header": "WinUser.h"
+    },
+    "members": [],
     "uses": [
       {
         "method": "GetSysColor",
+        "parameter": "nIndex"
+      },
+      {
+        "method": "GetSysColorBrush",
+        "parameter": "nIndex"
+      },
+      {
+        "interface": "ITextHost",
+        "method": "TxGetSysColor",
         "parameter": "nIndex"
       }
     ]
@@ -34159,6 +34028,274 @@
       {
         "method": "HitTestThemeBackground",
         "parameter": "dwOptions"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "NOTIFY_ICON_INFOTIP_FLAGS",
+    "autoPopulate": {
+      "filter": "NIIF_",
+      "header": "shellapi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NOTIFYICONDATAW",
+        "field": "dwInfoFlags"
+      },
+      {
+        "struct": "NOTIFYICONDATAA",
+        "field": "dwInfoFlags"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "NOTIFY_ICON_STATE",
+    "autoPopulate": {
+      "filter": "NIS_",
+      "header": "shellapi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "NOTIFYICONDATAW",
+        "field": "dwState"
+      },
+      {
+        "struct": "NOTIFYICONDATAA",
+        "field": "dwState"
+      }
+    ]
+  },
+  {
+    "name": "PAN_FAMILY_TYPE",
+    "autoPopulate": {
+      "filter": "PAN_FAMILY_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_FAMILY_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_FAMILY_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bFamilyType"
+      }
+    ]
+  },
+  {
+    "name": "PAN_SERIF_STYLE",
+    "autoPopulate": {
+      "filter": "PAN_SERIF_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_SERIF_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_SERIF_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bSerifStyle"
+      }
+    ]
+  },
+  {
+    "name": "PAN_WEIGHT",
+    "autoPopulate": {
+      "filter": "PAN_WEIGHT_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_WEIGHT_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_WEIGHT_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bWeight"
+      }
+    ]
+  },
+  {
+    "name": "PAN_STROKE_VARIATION",
+    "autoPopulate": {
+      "filter": "PAN_STROKE_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_STROKE_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_STROKE_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bStrokeVariation"
+      }
+    ]
+  },
+  {
+    "name": "PAN_PROPORTION",
+    "autoPopulate": {
+      "filter": "PAN_PROP_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_PROP_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_PROP_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bProportion"
+      }
+    ]
+  },
+  {
+    "name": "PAN_CONTRAST",
+    "autoPopulate": {
+      "filter": "PAN_CONTRAST_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_CONTRAST_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_CONTRAST_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bContrast"
+      }
+    ]
+  },
+  {
+    "name": "PAN_ARM_STYLE",
+    "autoPopulate": {
+      "filter": "PAN_STRAIGHT_|PAN_BENT_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_ARM_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_ARM_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bArmStyle"
+      }
+    ]
+  },
+  {
+    "name": "PAN_LETT_FORM",
+    "autoPopulate": {
+      "filter": "PAN_LETT_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_LETT_FORM_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_LETT_FORM_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bLetterform"
+      }
+    ]
+  },
+  {
+    "name": "PAN_MIDLINE",
+    "autoPopulate": {
+      "filter": "PAN_MIDLINE_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_MIDLINE_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_MIDLINE_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bMidline"
+      }
+    ]
+  },
+  {
+    "name": "PAN_XHEIGHT",
+    "autoPopulate": {
+      "filter": "PAN_XHEIGHT_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "PAN_XHEIGHT_ANY",
+        "value": 0
+      },
+      {
+        "name": "PAN_XHEIGHT_NO_FIT",
+        "value": 1
+      }
+    ],
+    "uses": [
+      {
+        "struct": "PANOSE",
+        "field": "bXHeight"
       }
     ]
   }

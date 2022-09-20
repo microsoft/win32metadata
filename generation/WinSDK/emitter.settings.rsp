@@ -1153,3 +1153,6 @@ MPEG_DATE_AND_TIME=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 # snmp.h
 AsnAny=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 SnmpVarBind=[StructLayout(LayoutKind.Sequential, Pack = 4)]
+ShellExecuteW::nShowCmd=SHOW_WINDOW_CMD
+ShellExecuteA::nShowCmd=SHOW_WINDOW_CMD
+SHGetKnownFolderPath::dwFlags=KNOWN_FOLDER_FLAG
