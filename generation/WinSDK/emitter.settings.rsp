@@ -1156,3 +1156,15 @@ SnmpVarBind=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 ShellExecuteW::nShowCmd=SHOW_WINDOW_CMD
 ShellExecuteA::nShowCmd=SHOW_WINDOW_CMD
 SHGetKnownFolderPath::dwFlags=KNOWN_FOLDER_FLAG
+OleCreateFontIndirect::lpFontDesc=[In]
+OleCreateFontIndirect::lplpvObj=[Out]
+OleCreatePictureIndirect::lpPictDesc=[In]
+OleCreatePictureIndirect::lplpvObj=[Out]
+OleCreatePropertyFrame::ppUnk=[In]
+OleCreatePropertyFrame::pPageClsID=[In]
+OleCreatePropertyFrame::pvReserved=[In]
+OleCreatePropertyFrameIndirect::lpParams=[In]
+OleLoadPicture::lplpvObj=[Out]
+OleLoadPictureEx::lplpvObj=[Out]
+OleLoadPicturePath::ppvRet=[Out]
+OleTranslateColor::lpcolorref=[Out]

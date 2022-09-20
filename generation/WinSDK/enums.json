@@ -34298,6 +34298,300 @@
         "field": "bXHeight"
       }
     ]
+  },
+  {
+    "type": "ushort",
+    "flags": true,
+    "name": "DISPATCH_FLAGS",
+    "autoPopulate": {
+      "filter": "DISPATCH_",
+      "header": "OleAuto.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "interface": "IDispatch",
+        "method": "Invoke",
+        "parameter": "wFlags"
+      },
+      {
+        "interface" : "ITypeInfo",
+        "method": "Invoke",
+        "parameter": "wFlags"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VARFORMAT_FIRST_DAY",
+    "members": [
+      {
+        "name": "VARFORMAT_FIRST_DAY_SYSTEMDEFAULT",
+        "value": 0
+      },
+      {
+        "name": "VARFORMAT_FIRST_DAY_MONDAY",
+        "value": 1
+      },
+      {
+        "name": "VARFORMAT_FIRST_DAY_TUESDAY",
+        "value": 2
+      },
+      {
+        "name": "VARFORMAT_FIRST_DAY_WEDNESDAY",
+        "value": 3
+      },
+      {
+        "name": "VARFORMAT_FIRST_DAY_THURSDAY",
+        "value": 4
+      },
+      {
+        "name": "VARFORMAT_FIRST_DAY_FRIDAY",
+        "value": 5
+      },
+      {
+        "name": "VARFORMAT_FIRST_DAY_SATURDAY",
+        "value": 6
+      },
+      {
+        "name": "VARFORMAT_FIRST_DAY_SUNDAY",
+        "value": 7
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormat",
+        "parameter": "iFirstDay"
+      },
+      {
+        "method": "VarTokenizeFormatString",
+        "parameter": "iFirstDay"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VARFORMAT_FIRST_WEEK",
+    "members": [
+      {
+        "name": "VARFORMAT_FIRST_WEEK_SYSTEMDEFAULT",
+        "value": 0
+      },
+      {
+        "name": "VARFORMAT_FIRST_WEEK_CONTAINS_JANUARY_FIRST",
+        "value": 1
+      },
+      {
+        "name": "VARFORMAT_FIRST_WEEK_LARGER_HALF_IN_CURRENT_YEAR",
+        "value": 2
+      },
+      {
+        "name": "VARFORMAT_FIRST_WEEK_HAS_SEVEN_DAYS",
+        "value": 3
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormat",
+        "parameter": "iFirstWeek"
+      },
+      {
+        "method": "VarTokenizeFormatString",
+        "parameter": "iFirstWeek"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VARFORMAT_NAMED_FORMAT",
+    "members": [
+      {
+        "name": "VARFORMAT_NAMED_FORMAT_GENERALDATE",
+        "value": 0
+      },
+      {
+        "name": "VARFORMAT_NAMED_FORMAT_LONGDATE",
+        "value": 1
+      },
+      {
+        "name": "VARFORMAT_NAMED_FORMAT_SHORTDATE",
+        "value": 2
+      },
+      {
+        "name": "VARFORMAT_NAMED_FORMAT_LONGTIME",
+        "value": 3
+      },
+      {
+        "name": "VARFORMAT_NAMED_FORMAT_SHORTTIME",
+        "value": 4
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormatDateTime",
+        "parameter": "iNamedFormat"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VARFORMAT_LEADING_DIGIT",
+    "members": [
+      {
+        "name": "VARFORMAT_LEADING_DIGIT_SYSTEMDEFAULT",
+        "value": -2
+      },
+      {
+        "name": "VARFORMAT_LEADING_DIGIT_INCLUDED",
+        "value": -1
+      },
+      {
+        "name": "VARFORMAT_LEADING_DIGIT_NOTINCLUDED",
+        "value": 0
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormatNumber",
+        "parameter": "iIncLead"
+      },
+      {
+        "method": "VarFormatPercent",
+        "parameter": "iIncLead"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VARFORMAT_PARENTHESES",
+    "members": [
+      {
+        "name": "VARFORMAT_PARENTHESES_SYSTEMDEFAULT",
+        "value": -2
+      },
+      {
+        "name": "VARFORMAT_PARENTHESES_USED",
+        "value": -1
+      },
+      {
+        "name": "VARFORMAT_PARENTHESES_NOTUSED",
+        "value": 0
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormatNumber",
+        "parameter": "iUseParens"
+      },
+      {
+        "method": "VarFormatPercent",
+        "parameter": "iUseParens"
+      }
+    ]
+  },
+  {
+    "type": "int",
+    "name": "VARFORMAT_GROUP",
+    "members": [
+      {
+        "name": "VARFORMAT_GROUP_SYSTEMDEFAULT",
+        "value": -2
+      },
+      {
+        "name": "VARFORMAT_GROUP_THOUSANDS",
+        "value": -1
+      },
+      {
+        "name": "VARFORMAT_GROUP_NOTTHOUSANDS",
+        "value": 0
+      }
+    ],
+    "uses": [
+      {
+        "method": "VarFormatNumber",
+        "parameter": "iGroup"
+      },
+      {
+        "method": "VarFormatPercent",
+        "parameter": "iGroup"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "GPFIDL_FLAGS",
+    "members": [
+      {
+        "name": "GPFIDL_DEFAULT",
+        "value": "0x0000"
+      },
+      {
+        "name": "GPFIDL_ALTNAME",
+        "value": "0x0001"
+      },
+      {
+        "name": "GPFIDL_UNCPRINTER",
+        "value": "0x0002"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SHGetPathFromIDListEx",
+        "parameter": "uOpts"
+      }
+    ]
+  },
+  {
+    "type": "int", 
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
+    "name": "SCROLLBAR_COMMAND",
+    "members": [
+      {
+        "name": "SB_LINEUP"
+      },
+      {
+        "name": "SB_LINELEFT"
+      },
+      {
+        "name": "SB_LINEDOWN"
+      },
+      {
+        "name": "SB_LINERIGHT"
+      },
+      {
+        "name": "SB_PAGEUP"
+      },
+      {
+        "name": "SB_PAGELEFT"
+      },
+      {
+        "name": "SB_PAGEDOWN"
+      },
+      {
+        "name": "SB_PAGERIGHT"
+      },
+      {
+        "name": "SB_THUMBPOSITION"
+      },
+      {
+        "name": "SB_THUMBTRACK"
+      },
+      {
+        "name": "SB_TOP"
+      },
+      {
+        "name": "SB_LEFT"
+      },
+      {
+        "name": "SB_RIGHT"
+      },
+      {
+        "name": "SB_BOTTOM"
+      },
+      {
+        "name": "SB_ENDSCROLL"
+      }
+    ]
   }
 ]
 }
