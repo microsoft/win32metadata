@@ -2441,3 +2441,12 @@ PROPSPEC_KIND=Windows.Win32.System.Com.StructuredStorage
 TYSPEC=Windows.Win32.System.Com
 VARENUM=Windows.Win32.System.Com
 # endregion wtypes.h
+UIA_TEXTATTRIBUTE_ID=Windows.Win32.UI.Accessibility
+UIA_ANNOTATIONTYPE=Windows.Win32.UI.Accessibility
+UIA_CHANGE_ID=Windows.Win32.UI.Accessibility
+UIA_CONTROLTYPE_ID=Windows.Win32.UI.Accessibility
+UIA_HEADINGLEVEL_ID=Windows.Win32.UI.Accessibility
+UIA_LANDMARKTYPE_ID=Windows.Win32.UI.Accessibility
+UIA_METADATA_ID=Windows.Win32.UI.Accessibility
+UIA_STYLE_ID=Windows.Win32.UI.Accessibility
+UIA_TEXTATTRIBUTE_ID=Windows.Win32.UI.Accessibility
