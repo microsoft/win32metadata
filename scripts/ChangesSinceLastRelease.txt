@@ -8,3 +8,5 @@ Windows.Win32.System.Wmi.WBEM_GENERIC_FLAG_TYPE.value__...System.Int32 => System
 Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE removed
 Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_INFINITE removed
 Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_NO_WAIT removed
+# Fixed DWriteCreateFactory.
+Windows.Win32.Graphics.DirectWrite.Apis.DWriteCreateFactory : factory...IUnknown* => Void**

@@ -1169,3 +1169,4 @@ OleLoadPicture::lplpvObj=[Out]
 OleLoadPictureEx::lplpvObj=[Out]
 OleLoadPicturePath::ppvRet=[Out]
 OleTranslateColor::lpcolorref=[Out]
+DWriteCreateFactory::factory=[ComOutPtr]void**
