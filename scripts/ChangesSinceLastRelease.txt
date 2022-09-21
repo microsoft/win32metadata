@@ -1,0 +1,10 @@
+# Fixed Rust usability issues.
+Windows.Win32.Networking.BackgroundIntelligentTransferService.IBackgroundCopyJobHttpOptions.GetClientCertificate : ppCertHashBlob : [FreeWith(CoTaskMemFree),NativeArrayInfo(CountConst=20),Out] => [FreeWith(CoTaskMemFree),Out]
+Windows.Win32.System.Wmi.Apis.WBEM_INFINITE added
+Windows.Win32.System.Wmi.Apis.WBEM_NO_WAIT added
+Windows.Win32.System.Wmi.IWbemServices.ExecQuery : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
+Windows.Win32.System.Wmi.WBEM_GENERIC_FLAG_TYPE :  => [Flags]
+Windows.Win32.System.Wmi.WBEM_GENERIC_FLAG_TYPE.value__...System.Int32 => System.UInt32
+Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE removed
+Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_INFINITE removed
+Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_NO_WAIT removed

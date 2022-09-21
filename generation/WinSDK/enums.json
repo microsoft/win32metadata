@@ -34674,6 +34674,17 @@
         "parameter": "advf"
       }
     ]
+  },
+  {
+    "addUsesTo": "WBEM_GENERIC_FLAG_TYPE",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IWbemServices",
+        "method": "ExecQuery",
+        "parameter": "lFlags"
+      }
+    ]
   }
 ]
 }

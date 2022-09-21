@@ -91,6 +91,7 @@ SYNC_ENGINE_STATE_FLAGS
 SYNC_TRANSFER_STATUS
 TAKE_SNAPSHOT_VHDSET_FLAG
 VIRTUAL_DISK_ACCESS_MASK
+WBEM_GENERIC_FLAG_TYPE
 --reducePointerLevel
 RPC_OBJECT_INQ_FN
 RPC_IF_CALLBACK_FN
@@ -858,7 +859,7 @@ AppPolicyGetShowDeveloperDiagnostic::return=WIN32_ERROR
 AppPolicyGetProcessTerminationMethod::return=WIN32_ERROR
 AppPolicyGetCreateFileAccess::return=WIN32_ERROR
 WAVEHDR::lpData=[NotNullTerminated]
-IBackgroundCopyJobHttpOptions::GetClientCertificate::ppCertHashBlob=[FreeWith("CoTaskMemFree")]
+IBackgroundCopyJobHttpOptions::GetClientCertificate::ppCertHashBlob=[-NativeArrayInfo][FreeWith("CoTaskMemFree")]
 IBackgroundCopyJobHttpOptions::GetClientCertificate::pSubjectName=[FreeWith("CoTaskMemFree")]
 IBackgroundCopyJobHttpOptions::GetCustomHeaders::pRequestHeaders=[FreeWith("CoTaskMemFree")]
 IBackgroundCopyJobHttpOptions2::GetHttpMethod::method=[FreeWith("CoTaskMemFree")]
