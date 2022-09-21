@@ -98,6 +98,8 @@ IDirectDraw7Vtbl
 IDirectDrawKernelVtbl
 IDirectDrawSurfaceKernelVtbl
 IDirectDrawGammaControlVtbl
+tagDVASPECT2
+tagDVASPECT
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET
@@ -302,8 +304,6 @@ tagDOMNodeType=DOMNodeType
 tagDRAWITEMSTRUCT=DRAWITEMSTRUCT
 tagDRAWTEXTPARAMS=DRAWTEXTPARAMS
 tagDROPSTRUCT=DROPSTRUCT
-tagDVASPECT2=DVASPECT2
-tagDVASPECT=DVASPECT
 tagDVTARGETDEVICE=DVTARGETDEVICE
 tagELEMDESC=ELEMDESC
 tagEMR=EMR

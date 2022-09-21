@@ -8234,9 +8234,80 @@
     ]
   },
   {
-    "addUsesTo": "DVASPECT",
-    "members": [],
+    "name": "DVASPECT",
+    "type": "uint",
+    "members": [
+      {
+        "name": "DVASPECT_CONTENT",
+        "value": "1"
+      },
+      {
+        "name": "DVASPECT_THUMBNAIL",
+        "value": "2"
+      },
+      {
+        "name": "DVASPECT_ICON",
+        "value": "4"
+      },
+      {
+        "name": "DVASPECT_DOCPRINT",
+        "value": "8"
+      },
+      {
+        "name": "DVASPECT_OPAQUE",
+        "value": "16"
+      },
+      {
+        "name": "DVASPECT_TRANSPARENT",
+        "value": "32"
+      }
+    ],
     "uses": [
+      {
+        "interface": "IOleObject",
+        "method": "GetExtent",
+        "parameter": "dwDrawAspect"
+      },
+      {
+        "interface": "IOleObject",
+        "method": "SetExtent",
+        "parameter": "dwDrawAspect"
+      },
+      {
+        "interface": "IOleObject",
+        "method": "GetMiscStatus",
+        "parameter": "dwAspect"
+      },
+      {
+        "interface": "IViewObject",
+        "method": "Draw",
+        "parameter": "dwDrawAspect"
+      },
+      {
+        "interface": "IViewObject",
+        "method": "SetAdvise",
+        "parameter": "aspects"
+      },
+      {
+        "interface": "IViewObject",
+        "method": "GetAdvise",
+        "parameter": "aspects"
+      },
+      {
+        "interface": "IViewObject",
+        "method": "GetColorSet",
+        "parameter": "dwDrawAspect"
+      },
+      {
+        "interface": "IViewObject",
+        "method": "Freeze",
+        "parameter": "dwDrawAspect"
+      },
+      {
+        "interface": "IViewObject2",
+        "method": "GetExtent",
+        "parameter": "dwDrawAspect"
+      },
       {
         "interface": "ITextServices",
         "method": "TxQueryHitPoint",
@@ -8251,6 +8322,15 @@
         "interface": "ITextServices",
         "method": "OnTxSetCursor",
         "parameter": "dwDrawAspect"
+      },
+      {
+        "interface": "IViewObjectEx",
+        "method": "GetNaturalExtent",
+        "parameter": "dwAspect"
+      },
+      {
+        "struct": "REPASTESPECIAL",
+        "field": "dwAspect"
       }
     ]
   },
@@ -16948,17 +17028,6 @@
     ]
   },
   {
-    "addUsesTo": "DVASPECT",
-    "members": [],
-    "uses": [
-      {
-        "interface": "IViewObjectEx",
-        "method": "GetNaturalExtent",
-        "parameter": "dwAspect"
-      }
-    ]
-  },
-  {
     "name": "IME_PAD_REQUEST_FLAGS",
     "members": [
       {
@@ -20959,16 +21028,6 @@
       {
         "struct": "EV_EXTRA_CERT_CHAIN_POLICY_PARA",
         "field": "dwRootProgramQualifierFlags"
-      }
-    ]
-  },
-  {
-    "addUsesTo": "DVASPECT",
-    "members": [],
-    "uses": [
-      {
-        "struct": "REPASTESPECIAL",
-        "field": "dwAspect"
       }
     ]
   },
@@ -30851,20 +30910,6 @@
     ]
   },
   {
-    "name": "CTRLINFO_FLAGS",
-    "autoPopulate": {
-      "filter": "CTRLINFO_EATS_",
-      "header": "ocidl.h"
-    },
-    "members": [],
-    "uses": [
-      {
-        "struct": "CONTROLINFO",
-        "field": "dwFlags"
-      }
-    ]
-  },
-  {
     "addUsesTo": "INVOKEKIND",
     "uses": [
       {
@@ -32220,7 +32265,7 @@
     "uses": [
       {
         "struct": "CONTROLINFO",
-        "parameter": "dwFlags"
+        "field": "dwFlags"
       }
     ]
   },
@@ -34590,6 +34635,43 @@
       },
       {
         "name": "SB_ENDSCROLL"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "DOCHOSTUIFLAG",
+    "uses": [
+      {
+        "struct": "DOCHOSTUIINFO",
+        "field": "dwFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "DOCHOSTUIDBLCLK",
+    "uses": [
+      {
+        "struct": "DOCHOSTUIINFO",
+        "field": "dwDoubleClick"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "FUNCFLAGS",
+    "uses": [
+      {
+        "struct": "FUNCDESC",
+        "field": "wFuncFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "ADVF",
+    "uses": [
+      {
+        "interface": "IViewObject",
+        "method": "SetAdvise",
+        "parameter": "advf"
       }
     ]
   }
