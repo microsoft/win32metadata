@@ -201,3 +201,9 @@ When validating changes, it's important to evaluate the diffs to ensure all chan
 Additionally, it is useful to load the winmd in [ILSpy](https://github.com/icsharpcode/ILSpy) and navigate through the APIs as another means to identify additional changes that may be required to achieve the desired end result. You may notice that two related APIs are in different namespaces or that a type that an API depends on was not moved as you would have expected. If that happens, search the repo for the API or its header file to identify where it may be being mapped to another namespace.
 
 Once all the changes are validated, update the list of known changes since the last release by following the steps reported in the build output. When a new release is made, the list of changes in [ChangesSinceLastRelease.txt](scripts/ChangesSinceLastRelease.txt) will get reset and will start accumulating again until the next release.
+
+## Releasing
+
+The main branch must have a clean build to publish a new release. Run the [release pipeline](https://dev.azure.com/microsoft/Dart/_build?definitionId=62263) to publish new packages to nuget.org and create a new draft release on GitHub autopopulated with the list of resolved issues. Once the packages are live on nuget.org, publish the GitHub release.
+
+After a release is published, run [Set-LastReleaseVersion.ps1](scripts/Set-LastReleaseVersion.ps1) with the metadata package version published to nuget.org, and run [Set-MajorVersion.ps1](scripts/Set-MajorVersion.ps1) to increment the version number in the build for the next release.
