@@ -32142,7 +32142,6 @@
   {
     "name": "PICTYPE",
     "type": "int",
-    "flags": true,
     "autoPopulate": {
       "filter": "PICTYPE_",
       "header": "olectl.h"

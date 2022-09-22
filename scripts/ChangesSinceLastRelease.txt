@@ -12,3 +12,5 @@ Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_NO_WAIT removed
 Windows.Win32.Graphics.DirectWrite.Apis.DWriteCreateFactory : factory...IUnknown* => Void**
 # Added Optional to TrackPopupMenu::prcRect.
 Windows.Win32.UI.WindowsAndMessaging.Apis.TrackPopupMenu : prcRect : [Const,In,Reserved] => [Const,In,Optional]
+# Fix PICTYPE
+Windows.Win32.System.Ole.PICTYPE : [Flags] => 
