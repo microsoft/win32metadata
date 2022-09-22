@@ -34684,6 +34684,16 @@
         "parameter": "lFlags"
       }
     ]
+  },
+  {
+    "addUsesTo": "LDAP_RETCODE",
+    "members": [],
+    "uses": [
+      {
+        "method": "LdapMapErrorToWin32",
+        "parameter": "LdapError"
+      }
+    ]
   }
 ]
 }

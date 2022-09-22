@@ -14,3 +14,6 @@ Windows.Win32.Graphics.DirectWrite.Apis.DWriteCreateFactory : factory...IUnknown
 Windows.Win32.UI.WindowsAndMessaging.Apis.TrackPopupMenu : prcRect : [Const,In,Reserved] => [Const,In,Optional]
 # Fix PICTYPE
 Windows.Win32.System.Ole.PICTYPE : [Flags] => 
+# Fixed LdapMapErrorToWin32.
+Windows.Win32.Networking.Ldap.Apis.LdapMapErrorToWin32 : LdapError...UInt32 => LDAP_RETCODE
+Windows.Win32.Networking.Ldap.Apis.LdapMapErrorToWin32 : return...UInt32 => WIN32_ERROR
