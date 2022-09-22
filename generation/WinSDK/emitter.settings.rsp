@@ -1171,3 +1171,5 @@ OleLoadPicturePath::ppvRet=[Out]
 OleTranslateColor::lpcolorref=[Out]
 DWriteCreateFactory::factory=[ComOutPtr]void**
 TrackPopupMenu::prcRect=[In][Optional][-Reserved]
+# tsvirtualchannels.h
+IWTSVirtualChannelManager::CreateListener::pszChannelName=PSTR

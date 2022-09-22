@@ -14,3 +14,5 @@ Windows.Win32.Graphics.DirectWrite.Apis.DWriteCreateFactory : factory...IUnknown
 Windows.Win32.UI.WindowsAndMessaging.Apis.TrackPopupMenu : prcRect : [Const,In,Reserved] => [Const,In,Optional]
 # Fix PICTYPE
 Windows.Win32.System.Ole.PICTYPE : [Flags] => 
+# Parameter should be treated as a null terminated string
+Windows.Win32.System.RemoteDesktop.IWTSVirtualChannelManager.CreateListener : pszChannelName...Byte* => PSTR
