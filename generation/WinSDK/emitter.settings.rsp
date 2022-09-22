@@ -1170,3 +1170,4 @@ OleLoadPictureEx::lplpvObj=[Out]
 OleLoadPicturePath::ppvRet=[Out]
 OleTranslateColor::lpcolorref=[Out]
 DWriteCreateFactory::factory=[ComOutPtr]void**
+TrackPopupMenu::prcRect=[In][Optional][-Reserved]
