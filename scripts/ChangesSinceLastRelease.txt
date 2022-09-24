@@ -17,3 +17,11 @@ Windows.Win32.System.Ole.PICTYPE : [Flags] =>
 # Fixed LdapMapErrorToWin32.
 Windows.Win32.Networking.Ldap.Apis.LdapMapErrorToWin32 : LdapError...UInt32 => LDAP_RETCODE
 Windows.Win32.Networking.Ldap.Apis.LdapMapErrorToWin32 : return...UInt32 => WIN32_ERROR
+# Replace xinputuap with xinput 1.4 lib
+Windows.Win32.UI.Input.XboxController.Apis.XInputEnable : [DllImport(XINPUTUAP.dll,ExactSpelling=True,PreserveSig=False)] => [DllImport(xinput1_4.dll,ExactSpelling=True,PreserveSig=False)]
+Windows.Win32.UI.Input.XboxController.Apis.XInputGetAudioDeviceIds : [DllImport(XINPUTUAP.dll,ExactSpelling=True,PreserveSig=False)] => [DllImport(xinput1_4.dll,ExactSpelling=True,PreserveSig=False)]
+Windows.Win32.UI.Input.XboxController.Apis.XInputGetBatteryInformation : [DllImport(XINPUTUAP.dll,ExactSpelling=True,PreserveSig=False)] => [DllImport(xinput1_4.dll,ExactSpelling=True,PreserveSig=False)]
+Windows.Win32.UI.Input.XboxController.Apis.XInputGetCapabilities : [DllImport(XINPUTUAP.dll,ExactSpelling=True,PreserveSig=False)] => [DllImport(xinput1_4.dll,ExactSpelling=True,PreserveSig=False)]
+Windows.Win32.UI.Input.XboxController.Apis.XInputGetKeystroke : [DllImport(XINPUTUAP.dll,ExactSpelling=True,PreserveSig=False)] => [DllImport(xinput1_4.dll,ExactSpelling=True,PreserveSig=False)]
+Windows.Win32.UI.Input.XboxController.Apis.XInputGetState : [DllImport(XINPUTUAP.dll,ExactSpelling=True,PreserveSig=False)] => [DllImport(xinput1_4.dll,ExactSpelling=True,PreserveSig=False)]
+Windows.Win32.UI.Input.XboxController.Apis.XInputSetState : [DllImport(XINPUTUAP.dll,ExactSpelling=True,PreserveSig=False)] => [DllImport(xinput1_4.dll,ExactSpelling=True,PreserveSig=False)]
