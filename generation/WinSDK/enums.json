@@ -16046,6 +16046,30 @@
       {
         "method": "AddMandatoryAce",
         "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessAllowedAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessAllowedAceEx",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessAllowedObjectAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessDeniedAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessDeniedAceEx",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessDeniedObjectAce",
+        "parameter": "dwAceRevision"
       }
     ]
   },
