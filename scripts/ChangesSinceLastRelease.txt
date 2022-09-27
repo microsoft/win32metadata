@@ -1,0 +1,7 @@
+# Apply ACE_REVISION in more places.
+Windows.Win32.Security.Apis.AddAccessAllowedAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessAllowedAceEx : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessAllowedObjectAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessDeniedAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessDeniedAceEx : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessDeniedObjectAce : dwAceRevision...UInt32 => ACE_REVISION
