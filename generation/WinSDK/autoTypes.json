@@ -1458,5 +1458,12 @@
     "Name": "HACCESSOR",
     "ValueType": "UIntPtr",
     "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.UI.Controls",
+    "Name": "HTHEME",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ],
+    "CloseApi": "CloseThemeData"
   }
 ]
