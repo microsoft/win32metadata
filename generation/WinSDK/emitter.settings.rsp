@@ -1173,3 +1173,4 @@ OleTranslateColor::lpcolorref=[Out]
 DWriteCreateFactory::factory=[ComOutPtr]void**
 TrackPopupMenu::prcRect=[In][Optional][-Reserved]
 LdapMapErrorToWin32::return=WIN32_ERROR
+SHGetPropertyStoreFromParsingName::ppv=[ComOutPtr]
