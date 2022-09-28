@@ -162,3 +162,5 @@ Windows.Win32.UI.Controls.Apis.OpenThemeData : return...IntPtr => HTHEME
 Windows.Win32.UI.Controls.Apis.OpenThemeDataEx : return...IntPtr => HTHEME
 Windows.Win32.UI.Controls.HTHEME added
 Windows.Win32.UI.HiDpi.Apis.OpenThemeDataForDpi : return...IntPtr => HTHEME
+# SHGetPropertyStoreFromParsingName
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.SHGetPropertyStoreFromParsingName : ppv : [Out] => [ComOutPtr,Out]
