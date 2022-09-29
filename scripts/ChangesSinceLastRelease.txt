@@ -143,3 +143,15 @@ Windows.Win32.UI.Controls.Apis.OpenThemeData : return...IntPtr => HTHEME
 Windows.Win32.UI.Controls.Apis.OpenThemeDataEx : return...IntPtr => HTHEME
 Windows.Win32.UI.Controls.HTHEME added
 Windows.Win32.UI.HiDpi.Apis.OpenThemeDataForDpi : return...IntPtr => HTHEME
+# SHGSI_FLAGS
+Windows.Win32.UI.Shell.Apis.SHGetStockIconInfo : uFlags...UInt32 => SHGSI_FLAGS
+Windows.Win32.UI.Shell.Apis.SHGSI_ICONLOCATION removed
+Windows.Win32.UI.Shell.SHGSI_FLAGS added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_ICON added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_ICONLOCATION added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_LARGEICON added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_LINKOVERLAY added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SELECTED added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SHELLICONSIZE added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SMALLICON added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SYSICONINDEX added
