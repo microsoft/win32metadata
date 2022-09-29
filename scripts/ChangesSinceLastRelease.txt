@@ -1,22 +1,3 @@
-# Fixed Rust usability issues.
-Windows.Win32.Networking.BackgroundIntelligentTransferService.IBackgroundCopyJobHttpOptions.GetClientCertificate : ppCertHashBlob : [FreeWith(CoTaskMemFree),NativeArrayInfo(CountConst=20),Out] => [FreeWith(CoTaskMemFree),Out]
-Windows.Win32.System.Wmi.Apis.WBEM_INFINITE added
-Windows.Win32.System.Wmi.Apis.WBEM_NO_WAIT added
-Windows.Win32.System.Wmi.IWbemServices.ExecQuery : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
-Windows.Win32.System.Wmi.WBEM_GENERIC_FLAG_TYPE :  => [Flags]
-Windows.Win32.System.Wmi.WBEM_GENERIC_FLAG_TYPE.value__...System.Int32 => System.UInt32
-Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE removed
-Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_INFINITE removed
-Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_NO_WAIT removed
-# Fixed DWriteCreateFactory.
-Windows.Win32.Graphics.DirectWrite.Apis.DWriteCreateFactory : factory...IUnknown* => Void**
-# Added Optional to TrackPopupMenu::prcRect.
-Windows.Win32.UI.WindowsAndMessaging.Apis.TrackPopupMenu : prcRect : [Const,In,Reserved] => [Const,In,Optional]
-# Fix PICTYPE
-Windows.Win32.System.Ole.PICTYPE : [Flags] => 
-# Fixed LdapMapErrorToWin32.
-Windows.Win32.Networking.Ldap.Apis.LdapMapErrorToWin32 : LdapError...UInt32 => LDAP_RETCODE
-Windows.Win32.Networking.Ldap.Apis.LdapMapErrorToWin32 : return...UInt32 => WIN32_ERROR
 # Mark DirectWrite APIs as agile
 Windows.Win32.Graphics.DirectWrite.IDWriteAsyncResult : [Guid(3458595069,34363,19731,150,81,193,248,141,199,63,226)] => [Agile,Guid(3458595069,34363,19731,150,81,193,248,141,199,63,226)]
 Windows.Win32.Graphics.DirectWrite.IDWriteBitmapRenderTarget : [Guid(1582969507,36351,18291,159,246,6,150,234,183,114,103),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1582969507,36351,18291,159,246,6,150,234,183,114,103),SupportedOSPlatform(windows6.1)]
