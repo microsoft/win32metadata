@@ -34718,6 +34718,50 @@
         "parameter": "LdapError"
       }
     ]
+  },
+  {
+    "type": "uint",
+    "name": "SHGSI_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "SHGSI_ICONLOCATION"
+      },
+      {
+        "name": "SHGSI_ICON",
+        "value": "0x000000100"
+      },
+      {
+        "name": "SHGSI_SYSICONINDEX",
+        "value": "0x000004000"
+      },
+      {
+        "name": "SHGSI_LINKOVERLAY",
+        "value": "0x000008000"
+      },
+      {
+        "name": "SHGSI_SELECTED",
+        "value": "0x000010000"
+      },
+      {
+        "name": "SHGSI_LARGEICON",
+        "value": "0x000000000"
+      },
+      {
+        "name": "SHGSI_SMALLICON",
+        "value": "0x000000001"
+      },
+      {
+        "name": "SHGSI_SHELLICONSIZE",
+        "value": "0x000000004"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SHGetStockIconInfo",
+        "parameter": "uFlags"
+      }
+    ]
   }
 ]
 }
