@@ -160,3 +160,5 @@ Windows.Win32.UI.Shell.PropertiesSystem.Apis.SHGetPropertyStoreFromParsingName :
 # Added PreserveSig.
 Windows.Win32.System.Ole.IDropSource.GiveFeedback :  => [PreserveSig]
 Windows.Win32.System.Ole.IDropSource.QueryContinueDrag :  => [PreserveSig]
+# Removed extra space in enum use.
+Windows.Win32.System.Ole.Apis.OleDuplicateData : uiFlags...UInt32 => GLOBAL_ALLOC_FLAGS

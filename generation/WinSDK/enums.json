@@ -19454,7 +19454,7 @@
         "parameter": "uFlags"
       },
       {
-        "method": "OleDuplicateData ",
+        "method": "OleDuplicateData",
         "parameter": "uiFlags"
       }
     ]
