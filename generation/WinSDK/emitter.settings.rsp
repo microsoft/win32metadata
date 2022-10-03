@@ -1174,3 +1174,5 @@ DWriteCreateFactory::factory=[ComOutPtr]void**
 TrackPopupMenu::prcRect=[In][Optional][-Reserved]
 LdapMapErrorToWin32::return=WIN32_ERROR
 SHGetPropertyStoreFromParsingName::ppv=[ComOutPtr]
+IDropSource::QueryContinueDrag=[PreserveSig]
+IDropSource::GiveFeedback=[PreserveSig]

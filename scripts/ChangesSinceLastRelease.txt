@@ -157,3 +157,6 @@ Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SMALLICON added
 Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SYSICONINDEX added
 # SHGetPropertyStoreFromParsingName
 Windows.Win32.UI.Shell.PropertiesSystem.Apis.SHGetPropertyStoreFromParsingName : ppv : [Out] => [ComOutPtr,Out]
+# Added PreserveSig.
+Windows.Win32.System.Ole.IDropSource.GiveFeedback :  => [PreserveSig]
+Windows.Win32.System.Ole.IDropSource.QueryContinueDrag :  => [PreserveSig]
