@@ -162,3 +162,22 @@ Windows.Win32.System.Ole.IDropSource.GiveFeedback :  => [PreserveSig]
 Windows.Win32.System.Ole.IDropSource.QueryContinueDrag :  => [PreserveSig]
 # Removed extra space in enum use.
 Windows.Win32.System.Ole.Apis.OleDuplicateData : uiFlags...UInt32 => GLOBAL_ALLOC_FLAGS
+# Added missing enum members.
+Windows.Win32.UI.Controls.Apis.ILD_ASYNC removed
+Windows.Win32.UI.Controls.Apis.ILD_BLEND25 removed
+Windows.Win32.UI.Controls.Apis.ILD_DPISCALE removed
+Windows.Win32.UI.Controls.Apis.ILD_IMAGE removed
+Windows.Win32.UI.Controls.Apis.ILD_OVERLAYMASK removed
+Windows.Win32.UI.Controls.Apis.ILD_PRESERVEALPHA removed
+Windows.Win32.UI.Controls.Apis.ILD_ROP removed
+Windows.Win32.UI.Controls.Apis.ILD_SCALE removed
+Windows.Win32.UI.Controls.Apis.ILD_TRANSPARENT removed
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_ASYNC added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_BLEND25 added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_DPISCALE added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_IMAGE added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_OVERLAYMASK added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_PRESERVEALPHA added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_ROP added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_SCALE added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_TRANSPARENT added

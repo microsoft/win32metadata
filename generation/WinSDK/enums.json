@@ -12679,22 +12679,49 @@
     "flags": true,
     "members": [
       {
-        "name": "ILD_BLEND"
+        "name": "ILD_NORMAL"
       },
       {
-        "name": "ILD_BLEND50"
+        "name": "ILD_TRANSPARENT"
+      },
+      {
+        "name": "ILD_BLEND25"
       },
       {
         "name": "ILD_FOCUS"
       },
       {
-        "name": "ILD_MASK"
-      },
-      {
-        "name": "ILD_NORMAL"
+        "name": "ILD_BLEND50"
       },
       {
         "name": "ILD_SELECTED"
+      },
+      {
+        "name": "ILD_BLEND"
+      },
+      {
+        "name": "ILD_MASK"
+      },
+      {
+        "name": "ILD_IMAGE"
+      },
+      {
+        "name": "ILD_ROP"
+      },
+      {
+        "name": "ILD_OVERLAYMASK"
+      },
+      {
+        "name": "ILD_PRESERVEALPHA"
+      },
+      {
+        "name": "ILD_SCALE"
+      },
+      {
+        "name": "ILD_DPISCALE"
+      },
+      {
+        "name": "ILD_ASYNC"
       }
     ],
     "uses": [
