@@ -1176,3 +1176,4 @@ LdapMapErrorToWin32::return=WIN32_ERROR
 SHGetPropertyStoreFromParsingName::ppv=[ComOutPtr]
 IDropSource::QueryContinueDrag=[PreserveSig]
 IDropSource::GiveFeedback=[PreserveSig]
+ReleaseStgMedium::param0=[Out]
