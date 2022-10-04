@@ -1,18 +1,187 @@
-# Fixed Rust usability issues.
-Windows.Win32.Networking.BackgroundIntelligentTransferService.IBackgroundCopyJobHttpOptions.GetClientCertificate : ppCertHashBlob : [FreeWith(CoTaskMemFree),NativeArrayInfo(CountConst=20),Out] => [FreeWith(CoTaskMemFree),Out]
-Windows.Win32.System.Wmi.Apis.WBEM_INFINITE added
-Windows.Win32.System.Wmi.Apis.WBEM_NO_WAIT added
-Windows.Win32.System.Wmi.IWbemServices.ExecQuery : lFlags...Int32 => WBEM_GENERIC_FLAG_TYPE
-Windows.Win32.System.Wmi.WBEM_GENERIC_FLAG_TYPE :  => [Flags]
-Windows.Win32.System.Wmi.WBEM_GENERIC_FLAG_TYPE.value__...System.Int32 => System.UInt32
-Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE removed
-Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_INFINITE removed
-Windows.Win32.System.Wmi.WBEM_TIMEOUT_TYPE.WBEM_NO_WAIT removed
-# Fixed DWriteCreateFactory.
-Windows.Win32.Graphics.DirectWrite.Apis.DWriteCreateFactory : factory...IUnknown* => Void**
-# Added Optional to TrackPopupMenu::prcRect.
-Windows.Win32.UI.WindowsAndMessaging.Apis.TrackPopupMenu : prcRect : [Const,In,Reserved] => [Const,In,Optional]
-# Fix PICTYPE
-Windows.Win32.System.Ole.PICTYPE : [Flags] => 
+# Mark DirectWrite APIs as agile
+Windows.Win32.Graphics.DirectWrite.IDWriteAsyncResult : [Guid(3458595069,34363,19731,150,81,193,248,141,199,63,226)] => [Agile,Guid(3458595069,34363,19731,150,81,193,248,141,199,63,226)]
+Windows.Win32.Graphics.DirectWrite.IDWriteBitmapRenderTarget : [Guid(1582969507,36351,18291,159,246,6,150,234,183,114,103),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1582969507,36351,18291,159,246,6,150,234,183,114,103),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteBitmapRenderTarget1 : [Guid(2032042648,16115,16944,152,128,201,189,236,196,32,100),SupportedOSPlatform(windows8.0)] => [Agile,Guid(2032042648,16115,16944,152,128,201,189,236,196,32,100),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteColorGlyphRunEnumerator : [Guid(3542072855,61783,16802,141,36,203,119,158,5,96,232),SupportedOSPlatform(windows8.1)] => [Agile,Guid(3542072855,61783,16802,141,36,203,119,158,5,96,232),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteColorGlyphRunEnumerator1 : [Guid(2086635226,51105,20229,184,225,85,161,121,254,90,53)] => [Agile,Guid(2086635226,51105,20229,184,225,85,161,121,254,90,53)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFactory : [Guid(3092901466,55352,19291,162,232,26,220,125,147,219,72),SupportedOSPlatform(windows6.1)] => [Agile,Guid(3092901466,55352,19291,162,232,26,220,125,147,219,72),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFactory1 : [Guid(811020185,56006,16859,161,110,4,134,48,126,96,106),SupportedOSPlatform(windows8.0)] => [Agile,Guid(811020185,56006,16859,161,110,4,134,48,126,96,106),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFactory2 : [Guid(70909024,51780,18836,141,238,58,154,247,183,50,236),SupportedOSPlatform(windows8.1)] => [Agile,Guid(70909024,51780,18836,141,238,58,154,247,183,50,236),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFactory3 : [Guid(2585477571,54203,18026,135,252,254,103,85,106,59,101),SupportedOSPlatform(windows10.0.10240)] => [Agile,Guid(2585477571,54203,18026,135,252,254,103,85,106,59,101),SupportedOSPlatform(windows10.0.10240)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFactory4 : [Guid(1259035603,1943,17737,138,197,254,145,92,197,56,86)] => [Agile,Guid(1259035603,1943,17737,138,197,254,145,92,197,56,86)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFactory5 : [Guid(2509093274,48682,20233,175,125,101,24,152,3,209,211)] => [Agile,Guid(2509093274,48682,20233,175,125,101,24,152,3,209,211)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFactory6 : [Guid(4084485504,8695,17131,179,93,153,91,199,47,194,35)] => [Agile,Guid(4084485504,8695,17131,179,93,153,91,199,47,194,35)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFactory7 : [Guid(902881459,36982,19758,160,22,169,27,86,138,6,180)] => [Agile,Guid(902881459,36982,19758,160,22,169,27,86,138,6,180)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFont : [Guid(2899404438,35860,20317,135,126,254,63,193,211,39,55),SupportedOSPlatform(windows6.1)] => [Agile,Guid(2899404438,35860,20317,135,126,254,63,193,211,39,55),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFont1 : [Guid(2899404438,35860,20317,135,126,254,63,193,211,39,56),SupportedOSPlatform(windows8.0)] => [Agile,Guid(2899404438,35860,20317,135,126,254,63,193,211,39,56),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFont2 : [Guid(695504598,35996,19050,190,11,217,18,232,83,137,68),SupportedOSPlatform(windows8.1)] => [Agile,Guid(695504598,35996,19050,190,11,217,18,232,83,137,68),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFont3 : [Guid(695504598,35996,19050,190,11,217,18,232,83,137,68),SupportedOSPlatform(windows10.0.10240)] => [Agile,Guid(695504598,35996,19050,190,11,217,18,232,83,137,68),SupportedOSPlatform(windows10.0.10240)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontCollection : [Guid(2823613954,16106,20206,168,39,135,193,160,42,15,204),SupportedOSPlatform(windows6.1)] => [Agile,Guid(2823613954,16106,20206,168,39,135,193,160,42,15,204),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontCollection1 : [Guid(1398296897,55800,16533,131,33,215,60,246,189,17,108),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1398296897,55800,16533,131,33,215,60,246,189,17,108),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontCollection2 : [Guid(1363163590,17943,16484,191,139,146,234,131,229,6,224)] => [Agile,Guid(1363163590,17943,16484,191,139,146,234,131,229,6,224)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontCollection3 : [Guid(2765116838,63971,20005,147,183,158,48,159,58,248,233)] => [Agile,Guid(2765116838,63971,20005,147,183,158,48,159,58,248,233)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontCollectionLoader : [Guid(3433636068,21232,18731,191,168,41,199,46,224,164,104),SupportedOSPlatform(windows6.1)] => [Agile,Guid(3433636068,21232,18731,191,168,41,199,46,224,164,104),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontDownloadListener : [Guid(2960123321,17388,17299,136,27,219,228,220,114,253,167),SupportedOSPlatform(windows8.1)] => [Agile,Guid(2960123321,17388,17299,136,27,219,228,220,114,253,167),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontDownloadQueue : [Guid(3072221266,23274,20387,131,46,246,13,67,31,126,145),SupportedOSPlatform(windows8.1)] => [Agile,Guid(3072221266,23274,20387,131,46,246,13,67,31,126,145),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFace : [Guid(1598652493,28708,19779,191,169,210,89,132,245,56,73),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1598652493,28708,19779,191,169,210,89,132,245,56,73),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFace1 : [Guid(2803826100,40923,18488,173,144,207,195,190,140,61,175),SupportedOSPlatform(windows8.0)] => [Agile,Guid(2803826100,40923,18488,173,144,207,195,190,140,61,175),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFace2 : [Guid(3635898623,25788,20070,152,43,236,142,135,246,147,247),SupportedOSPlatform(windows8.1)] => [Agile,Guid(3635898623,25788,20070,152,43,236,142,135,246,147,247),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFace3 : [Guid(3548214680,2494,16930,162,54,32,129,52,28,193,242),SupportedOSPlatform(windows10.0.10240)] => [Agile,Guid(3548214680,2494,16930,162,54,32,129,52,28,193,242),SupportedOSPlatform(windows10.0.10240)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFace4 : [Guid(670214404,20152,17437,150,120,5,99,245,62,62,47)] => [Agile,Guid(670214404,20152,17437,150,120,5,99,245,62,62,47)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFace5 : [Guid(2565862309,46695,18330,177,69,226,250,91,159,220,41)] => [Agile,Guid(2565862309,46695,18330,177,69,226,250,91,159,220,41)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFace6 : [Guid(3299999259,28292,18389,181,76,165,151,152,27,6,173)] => [Agile,Guid(3299999259,28292,18389,181,76,165,151,152,27,6,173)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFaceReference : [Guid(1585424330,56803,16972,137,240,159,205,111,237,88,205),SupportedOSPlatform(windows10.0.10240)] => [Agile,Guid(1585424330,56803,16972,137,240,159,205,111,237,88,205),SupportedOSPlatform(windows10.0.10240)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFaceReference1 : [Guid(3229744759,12241,16812,165,163,52,152,60,75,166,26)] => [Agile,Guid(3229744759,12241,16812,165,163,52,152,60,75,166,26)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFallback : [Guid(4020242681,63393,18623,176,92,242,36,113,60,192,255),SupportedOSPlatform(windows8.1)] => [Agile,Guid(4020242681,63393,18623,176,92,242,36,113,60,192,255),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFallback1 : [Guid(597121437,56589,18049,189,106,244,243,30,170,222,119)] => [Agile,Guid(597121437,56589,18049,189,106,244,243,30,170,222,119)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFallbackBuilder : [Guid(4253560070,35514,20408,184,73,139,232,183,62,20,222),SupportedOSPlatform(windows8.1)] => [Agile,Guid(4253560070,35514,20408,184,73,139,232,183,62,20,222),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFamily : [Guid(3659585775,33066,19523,152,2,98,236,74,189,122,221),SupportedOSPlatform(windows6.1)] => [Agile,Guid(3659585775,33066,19523,152,2,98,236,74,189,122,221),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFamily1 : [Guid(3659585775,33066,19523,152,2,98,236,74,189,122,223),SupportedOSPlatform(windows10.0.10240)] => [Agile,Guid(3659585775,33066,19523,152,2,98,236,74,189,122,223),SupportedOSPlatform(windows10.0.10240)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFamily2 : [Guid(1054121591,41880,16993,185,207,193,38,194,19,30,243)] => [Agile,Guid(1054121591,41880,16993,185,207,193,38,194,19,30,243)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFile : [Guid(1939703914,52981,18396,135,105,26,139,65,190,187,176),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1939703914,52981,18396,135,105,26,139,65,190,187,176),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFileEnumerator : [Guid(1920290889,24567,17245,131,72,75,233,124,250,108,124),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1920290889,24567,17245,131,72,75,233,124,250,108,124),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFileLoader : [Guid(1920773454,54959,19614,138,8,214,149,177,28,170,73),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1920773454,54959,19614,138,8,214,149,177,28,170,73),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontFileStream : [Guid(1833461246,2744,19857,143,98,93,214,190,52,163,224),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1833461246,2744,19857,143,98,93,214,190,52,163,224),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontList : [Guid(437093432,7575,20161,174,249,162,251,134,237,106,203),SupportedOSPlatform(windows6.1)] => [Agile,Guid(437093432,7575,20161,174,249,162,251,134,237,106,203),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontList1 : [Guid(3659585775,33066,19523,152,2,98,236,74,189,122,222),SupportedOSPlatform(windows10.0.10240)] => [Agile,Guid(3659585775,33066,19523,152,2,98,236,74,189,122,222),SupportedOSPlatform(windows10.0.10240)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontList2 : [Guid(3228973620,30639,17498,183,53,8,195,123,10,91,245)] => [Agile,Guid(3228973620,30639,17498,183,53,8,195,123,10,91,245)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontResource : [Guid(528497270,26737,18664,152,127,185,117,85,28,80,242)] => [Agile,Guid(528497270,26737,18664,152,127,185,117,85,28,80,242)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontSet : [Guid(1398296897,55800,16533,131,33,215,60,246,189,17,107),SupportedOSPlatform(windows10.0.10240)] => [Agile,Guid(1398296897,55800,16533,131,33,215,60,246,189,17,107),SupportedOSPlatform(windows10.0.10240)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontSet1 : [Guid(2124405381,27794,16467,188,71,122,227,83,13,180,211)] => [Agile,Guid(2124405381,27794,16467,188,71,122,227,83,13,180,211)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontSet2 : [Guid(3699289369,58700,17327,178,218,78,43,121,186,63,127)] => [Agile,Guid(3699289369,58700,17327,178,218,78,43,121,186,63,127)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontSet3 : [Guid(2080849650,42996,16453,140,50,138,184,174,100,15,144)] => [Agile,Guid(2080849650,42996,16453,140,50,138,184,174,100,15,144)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontSetBuilder : [Guid(795093758,40040,20288,184,190,69,116,1,175,203,61)] => [Agile,Guid(795093758,40040,20288,184,190,69,116,1,175,203,61)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontSetBuilder1 : [Guid(1073181023,15580,19910,155,114,236,86,33,220,202,253)] => [Agile,Guid(1073181023,15580,19910,155,114,236,86,33,220,202,253)]
+Windows.Win32.Graphics.DirectWrite.IDWriteFontSetBuilder2 : [Guid(3998983698,45361,17980,143,79,49,137,185,64,30,69)] => [Agile,Guid(3998983698,45361,17980,143,79,49,137,185,64,30,69)]
+Windows.Win32.Graphics.DirectWrite.IDWriteGdiInterop : [Guid(517837969,38995,17049,137,143,100,50,152,59,111,58),SupportedOSPlatform(windows6.1)] => [Agile,Guid(517837969,38995,17049,137,143,100,50,152,59,111,58),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteGdiInterop1 : [Guid(1163312752,15037,20336,144,190,66,23,128,166,245,21)] => [Agile,Guid(1163312752,15037,20336,144,190,66,23,128,166,245,21)]
+Windows.Win32.Graphics.DirectWrite.IDWriteGlyphRunAnalysis : [Guid(2107104247,57477,17108,129,227,106,136,59,222,209,24),SupportedOSPlatform(windows6.1)] => [Agile,Guid(2107104247,57477,17108,129,227,106,136,59,222,209,24),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteInlineObject : [Guid(2201615843,4207,18347,131,115,28,98,149,235,16,179),SupportedOSPlatform(windows6.1)] => [Agile,Guid(2201615843,4207,18347,131,115,28,98,149,235,16,179),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteInMemoryFontFileLoader : [Guid(3692048199,41261,19228,130,45,158,17,126,51,4,63)] => [Agile,Guid(3692048199,41261,19228,130,45,158,17,126,51,4,63)]
+Windows.Win32.Graphics.DirectWrite.IDWriteLocalFontFileLoader : [Guid(3000628204,51710,18961,162,236,216,98,8,247,192,162)] => [Agile,Guid(3000628204,51710,18961,162,236,216,98,8,247,192,162)]
+Windows.Win32.Graphics.DirectWrite.IDWriteLocalizedStrings : [Guid(136667657,2458,19252,184,109,194,43,17,14,119,113),SupportedOSPlatform(windows6.1)] => [Agile,Guid(136667657,2458,19252,184,109,194,43,17,14,119,113),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteNumberSubstitution : [Guid(344480969,47792,20368,182,237,92,54,106,44,208,61)] => [Agile,Guid(344480969,47792,20368,182,237,92,54,106,44,208,61)]
+Windows.Win32.Graphics.DirectWrite.IDWritePixelSnapping : [Guid(3941835482,60660,19748,182,68,179,79,104,66,2,75),SupportedOSPlatform(windows6.1)] => [Agile,Guid(3941835482,60660,19748,182,68,179,79,104,66,2,75),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteRemoteFontFileLoader : [Guid(1751420035,28382,18112,171,70,32,8,58,136,127,222)] => [Agile,Guid(1751420035,28382,18112,171,70,32,8,58,136,127,222)]
+Windows.Win32.Graphics.DirectWrite.IDWriteRemoteFontFileStream : [Guid(1303606650,11378,20185,178,182,26,186,190,26,255,156)] => [Agile,Guid(1303606650,11378,20185,178,182,26,186,190,26,255,156)]
+Windows.Win32.Graphics.DirectWrite.IDWriteRenderingParams : [Guid(789423418,10973,18381,130,238,217,236,52,104,142,117),SupportedOSPlatform(windows6.1)] => [Agile,Guid(789423418,10973,18381,130,238,217,236,52,104,142,117),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteRenderingParams1 : [Guid(2487303412,42748,16968,139,80,102,116,52,143,202,211),SupportedOSPlatform(windows8.0)] => [Agile,Guid(2487303412,42748,16968,139,80,102,116,52,143,202,211),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteRenderingParams2 : [Guid(4191621571,38775,16558,135,232,62,90,249,191,9,72),SupportedOSPlatform(windows8.1)] => [Agile,Guid(4191621571,38775,16558,135,232,62,90,249,191,9,72),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteRenderingParams3 : [Guid(3079818154,14619,16682,140,92,228,76,194,216,103,220),SupportedOSPlatform(windows10.0.10240)] => [Agile,Guid(3079818154,14619,16682,140,92,228,76,194,216,103,220),SupportedOSPlatform(windows10.0.10240)]
+Windows.Win32.Graphics.DirectWrite.IDWriteStringList : [Guid(3488493888,4439,18378,139,133,49,191,207,63,45,14)] => [Agile,Guid(3488493888,4439,18378,139,133,49,191,207,63,45,14)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextAnalysisSink : [Guid(1477496132,3232,18177,179,250,190,197,24,42,228,246),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1477496132,3232,18177,179,250,190,197,24,42,228,246),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextAnalysisSink1 : [Guid(2967028128,34279,19851,159,211,92,237,153,52,72,42),SupportedOSPlatform(windows8.0)] => [Agile,Guid(2967028128,34279,19851,159,211,92,237,153,52,72,42),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextAnalysisSource : [Guid(1754143320,20628,18376,173,200,251,206,166,10,233,43),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1754143320,20628,18376,173,200,251,206,166,10,233,43),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextAnalysisSource1 : [Guid(1671232216,4020,19233,165,138,6,121,32,18,0,9),SupportedOSPlatform(windows8.0)] => [Agile,Guid(1671232216,4020,19233,165,138,6,121,32,18,0,9),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextAnalyzer : [Guid(3085309502,32582,17332,132,179,228,230,36,156,54,93),SupportedOSPlatform(windows6.1)] => [Agile,Guid(3085309502,32582,17332,132,179,228,230,36,156,54,93),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextAnalyzer1 : [Guid(2161825792,57887,20099,150,206,191,204,229,0,219,124),SupportedOSPlatform(windows8.0)] => [Agile,Guid(2161825792,57887,20099,150,206,191,204,229,0,219,124),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextAnalyzer2 : [Guid(1429905395,22163,19959,181,43,116,128,111,127,46,185),SupportedOSPlatform(windows8.1)] => [Agile,Guid(1429905395,22163,19959,181,43,116,128,111,127,46,185),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextFormat : [Guid(2626709528,12759,20435,161,81,124,94,34,93,181,90),SupportedOSPlatform(windows6.1)] => [Agile,Guid(2626709528,12759,20435,161,81,124,94,34,93,181,90),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextFormat1 : [Guid(1595362121,3467,19707,139,202,241,204,233,208,108,103),SupportedOSPlatform(windows8.1)] => [Agile,Guid(1595362121,3467,19707,139,202,241,204,233,208,108,103),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextFormat2 : [Guid(4135456477,40509,20172,140,50,65,131,37,61,254,112),SupportedOSPlatform(windows8.1)] => [Agile,Guid(4135456477,40509,20172,140,50,65,131,37,61,254,112),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextFormat3 : [Guid(1832605249,58704,17165,168,91,183,191,72,169,52,39)] => [Agile,Guid(1832605249,58704,17165,168,91,183,191,72,169,52,39)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextLayout : [Guid(1400074295,27924,16651,155,254,11,24,43,183,9,97),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1400074295,27924,16651,155,254,11,24,43,183,9,97),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextLayout1 : [Guid(2422528034,32935,18012,169,134,223,101,247,139,143,235),SupportedOSPlatform(windows8.0)] => [Agile,Guid(2422528034,32935,18012,169,134,223,101,247,139,143,235),SupportedOSPlatform(windows8.0)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextLayout2 : [Guid(278118799,36190,17392,176,100,9,23,49,27,82,94),SupportedOSPlatform(windows8.1)] => [Agile,Guid(278118799,36190,17392,176,100,9,23,49,27,82,94),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextLayout3 : [Guid(131976530,526,19944,172,51,108,149,61,131,249,45),SupportedOSPlatform(windows8.1)] => [Agile,Guid(131976530,526,19944,172,51,108,149,61,131,249,45),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextLayout4 : [Guid(95010626,8767,17473,181,251,130,99,104,95,85,233)] => [Agile,Guid(95010626,8767,17473,181,251,130,99,104,95,85,233)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextRenderer : [Guid(4018831669,23750,17918,136,37,197,160,114,78,184,25),SupportedOSPlatform(windows6.1)] => [Agile,Guid(4018831669,23750,17918,136,37,197,160,114,78,184,25),SupportedOSPlatform(windows6.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTextRenderer1 : [Guid(3554732340,8864,17022,170,228,125,149,116,181,157,177),SupportedOSPlatform(windows8.1)] => [Agile,Guid(3554732340,8864,17022,170,228,125,149,116,181,157,177),SupportedOSPlatform(windows8.1)]
+Windows.Win32.Graphics.DirectWrite.IDWriteTypography : [Guid(1441861931,7618,19260,149,65,244,104,148,237,133,182),SupportedOSPlatform(windows6.1)] => [Agile,Guid(1441861931,7618,19260,149,65,244,104,148,237,133,182),SupportedOSPlatform(windows6.1)]
+# Apply ACE_REVISION in more places.
+Windows.Win32.Security.Apis.AddAccessAllowedAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessAllowedAceEx : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessAllowedObjectAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessDeniedAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessDeniedAceEx : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAccessDeniedObjectAce : dwAceRevision...UInt32 => ACE_REVISION
+# Added HTHEME type
+Windows.Win32.UI.Controls.Apis.CloseThemeData : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.DrawThemeBackground : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.DrawThemeBackgroundEx : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.DrawThemeEdge : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.DrawThemeIcon : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.DrawThemeText : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.DrawThemeTextEx : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeAnimationProperty : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeAnimationTransform : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeBackgroundContentRect : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeBackgroundExtent : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeBackgroundRegion : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeBitmap : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeBool : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeColor : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeEnumValue : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeFilename : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeFont : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeInt : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeIntList : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeMargins : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeMetric : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemePartSize : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemePosition : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemePropertyOrigin : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeRect : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeStream : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeString : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeSysBool : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeSysColor : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeSysColorBrush : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeSysFont : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeSysInt : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeSysSize : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeSysString : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeTextExtent : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeTextMetrics : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeTimingFunction : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetThemeTransitionDuration : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.GetWindowTheme : return...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.HitTestThemeBackground : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.IsThemeBackgroundPartiallyTransparent : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.IsThemePartDefined : hTheme...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.OpenThemeData : return...IntPtr => HTHEME
+Windows.Win32.UI.Controls.Apis.OpenThemeDataEx : return...IntPtr => HTHEME
+Windows.Win32.UI.Controls.HTHEME added
+Windows.Win32.UI.HiDpi.Apis.OpenThemeDataForDpi : return...IntPtr => HTHEME
+# SHGSI_FLAGS
+Windows.Win32.UI.Shell.Apis.SHGetStockIconInfo : uFlags...UInt32 => SHGSI_FLAGS
+Windows.Win32.UI.Shell.Apis.SHGSI_ICONLOCATION removed
+Windows.Win32.UI.Shell.SHGSI_FLAGS added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_ICON added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_ICONLOCATION added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_LARGEICON added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_LINKOVERLAY added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SELECTED added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SHELLICONSIZE added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SMALLICON added
+Windows.Win32.UI.Shell.SHGSI_FLAGS.SHGSI_SYSICONINDEX added
+# SHGetPropertyStoreFromParsingName
+Windows.Win32.UI.Shell.PropertiesSystem.Apis.SHGetPropertyStoreFromParsingName : ppv : [Out] => [ComOutPtr,Out]
+# Added PreserveSig.
+Windows.Win32.System.Ole.IDropSource.GiveFeedback :  => [PreserveSig]
+Windows.Win32.System.Ole.IDropSource.QueryContinueDrag :  => [PreserveSig]
+# Removed extra space in enum use.
+Windows.Win32.System.Ole.Apis.OleDuplicateData : uiFlags...UInt32 => GLOBAL_ALLOC_FLAGS
+# Added missing enum members.
+Windows.Win32.UI.Controls.Apis.ILD_ASYNC removed
+Windows.Win32.UI.Controls.Apis.ILD_BLEND25 removed
+Windows.Win32.UI.Controls.Apis.ILD_DPISCALE removed
+Windows.Win32.UI.Controls.Apis.ILD_IMAGE removed
+Windows.Win32.UI.Controls.Apis.ILD_OVERLAYMASK removed
+Windows.Win32.UI.Controls.Apis.ILD_PRESERVEALPHA removed
+Windows.Win32.UI.Controls.Apis.ILD_ROP removed
+Windows.Win32.UI.Controls.Apis.ILD_SCALE removed
+Windows.Win32.UI.Controls.Apis.ILD_TRANSPARENT removed
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_ASYNC added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_BLEND25 added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_DPISCALE added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_IMAGE added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_OVERLAYMASK added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_PRESERVEALPHA added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_ROP added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_SCALE added
+Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_TRANSPARENT added
+# Added [Out] for WinForms.
+Windows.Win32.System.Ole.Apis.ReleaseStgMedium : param0 : [In] => [In,Out]
 # Parameter should be treated as a null terminated string
 Windows.Win32.System.RemoteDesktop.IWTSVirtualChannelManager.CreateListener : pszChannelName...Byte* => PSTR

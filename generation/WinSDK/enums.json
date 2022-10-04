@@ -12679,22 +12679,49 @@
     "flags": true,
     "members": [
       {
-        "name": "ILD_BLEND"
+        "name": "ILD_NORMAL"
       },
       {
-        "name": "ILD_BLEND50"
+        "name": "ILD_TRANSPARENT"
+      },
+      {
+        "name": "ILD_BLEND25"
       },
       {
         "name": "ILD_FOCUS"
       },
       {
-        "name": "ILD_MASK"
-      },
-      {
-        "name": "ILD_NORMAL"
+        "name": "ILD_BLEND50"
       },
       {
         "name": "ILD_SELECTED"
+      },
+      {
+        "name": "ILD_BLEND"
+      },
+      {
+        "name": "ILD_MASK"
+      },
+      {
+        "name": "ILD_IMAGE"
+      },
+      {
+        "name": "ILD_ROP"
+      },
+      {
+        "name": "ILD_OVERLAYMASK"
+      },
+      {
+        "name": "ILD_PRESERVEALPHA"
+      },
+      {
+        "name": "ILD_SCALE"
+      },
+      {
+        "name": "ILD_DPISCALE"
+      },
+      {
+        "name": "ILD_ASYNC"
       }
     ],
     "uses": [
@@ -16045,6 +16072,30 @@
     "uses": [
       {
         "method": "AddMandatoryAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessAllowedAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessAllowedAceEx",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessAllowedObjectAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessDeniedAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessDeniedAceEx",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAccessDeniedObjectAce",
         "parameter": "dwAceRevision"
       }
     ]
@@ -19430,7 +19481,7 @@
         "parameter": "uFlags"
       },
       {
-        "method": "OleDuplicateData ",
+        "method": "OleDuplicateData",
         "parameter": "uiFlags"
       }
     ]
@@ -34682,6 +34733,60 @@
         "interface": "IWbemServices",
         "method": "ExecQuery",
         "parameter": "lFlags"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "LDAP_RETCODE",
+    "members": [],
+    "uses": [
+      {
+        "method": "LdapMapErrorToWin32",
+        "parameter": "LdapError"
+      }
+    ]
+  },
+  {
+    "type": "uint",
+    "name": "SHGSI_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "SHGSI_ICONLOCATION"
+      },
+      {
+        "name": "SHGSI_ICON",
+        "value": "0x000000100"
+      },
+      {
+        "name": "SHGSI_SYSICONINDEX",
+        "value": "0x000004000"
+      },
+      {
+        "name": "SHGSI_LINKOVERLAY",
+        "value": "0x000008000"
+      },
+      {
+        "name": "SHGSI_SELECTED",
+        "value": "0x000010000"
+      },
+      {
+        "name": "SHGSI_LARGEICON",
+        "value": "0x000000000"
+      },
+      {
+        "name": "SHGSI_SMALLICON",
+        "value": "0x000000001"
+      },
+      {
+        "name": "SHGSI_SHELLICONSIZE",
+        "value": "0x000000004"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SHGetStockIconInfo",
+        "parameter": "uFlags"
       }
     ]
   }
