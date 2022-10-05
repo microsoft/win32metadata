@@ -16071,10 +16071,6 @@
     ],
     "uses": [
       {
-        "method": "AddMandatoryAce",
-        "parameter": "dwAceRevision"
-      },
-      {
         "method": "AddAccessAllowedAce",
         "parameter": "dwAceRevision"
       },
@@ -16096,6 +16092,38 @@
       },
       {
         "method": "AddAccessDeniedObjectAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAuditAccessAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAuditAccessAceEx",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddAuditAccessObjectAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddConditionalAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddMandatoryAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddResourceAttributeAce",
+        "parameter": "dwAceRevision"
+      },
+      {
+        "method": "AddScopedPolicyIDAce",
         "parameter": "dwAceRevision"
       }
     ]

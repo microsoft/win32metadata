@@ -183,3 +183,11 @@ Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_SCALE added
 Windows.Win32.UI.Controls.IMAGE_LIST_DRAW_STYLE.ILD_TRANSPARENT added
 # Added [Out] for WinForms.
 Windows.Win32.System.Ole.Apis.ReleaseStgMedium : param0 : [In] => [In,Out]
+# Added ACE_REVISION in more places.
+Windows.Win32.Security.Apis.AddAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAuditAccessAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAuditAccessAceEx : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddAuditAccessObjectAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddConditionalAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddResourceAttributeAce : dwAceRevision...UInt32 => ACE_REVISION
+Windows.Win32.Security.Apis.AddScopedPolicyIDAce : dwAceRevision...UInt32 => ACE_REVISION
