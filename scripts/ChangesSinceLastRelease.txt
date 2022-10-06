@@ -193,3 +193,7 @@ Windows.Win32.Security.Apis.AddResourceAttributeAce : dwAceRevision...UInt32 => 
 Windows.Win32.Security.Apis.AddScopedPolicyIDAce : dwAceRevision...UInt32 => ACE_REVISION
 # Parameter should be treated as a null terminated string
 Windows.Win32.System.RemoteDesktop.IWTSVirtualChannelManager.CreateListener : pszChannelName...Byte* => PSTR
+# Added PreserveSig.
+Windows.Win32.Graphics.Dxgi.IDXGIAdapter.EnumOutputs :  => [PreserveSig]
+Windows.Win32.Graphics.Dxgi.IDXGIFactory.EnumAdapters :  => [PreserveSig]
+Windows.Win32.Graphics.Dxgi.IDXGIFactory1.EnumAdapters1 :  => [PreserveSig]
