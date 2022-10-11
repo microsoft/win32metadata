@@ -304,7 +304,7 @@ namespace MetadataUtils
                 this.writtenConstants.Add(name, "uint");
             }
 
-            private void AddConstantValue(string originalNamespace, string type, string name, string valueText)
+            private void AddConstantValue(string originalNamespace, string type, string name, string valueText, string context = "")
             {
                 if (this.writtenConstants.ContainsKey(name))
                 {
@@ -312,7 +312,7 @@ namespace MetadataUtils
                 }
 
                 var writer = this.GetConstantWriter(originalNamespace, name);
-                writer.AddValue(type, name, valueText);
+                writer.AddValue(type, name, valueText, context);
 
                 this.writtenConstants.Add(name, type);
             }
@@ -773,8 +773,10 @@ namespace MetadataUtils
                                 valueText = valueText.Substring(2);
                             }
 
+                            bool isUtf16 = false;
                             if (valueText.StartsWith("TEXT("))
                             {
+                                isUtf16 = true;
                                 valueText = valueText.Substring("TEXT(".Length);
                                 if (valueText.EndsWith(')'))
                                 {
@@ -783,13 +785,14 @@ namespace MetadataUtils
                             }
                             else if (valueText.StartsWith("L\""))
                             {
+                                isUtf16 = true;
                                 valueText = valueText.Substring(1);
                             }
 
                             // Strings can't be part of enums so go ahead and add the constant directly
                             if (valueText.StartsWith('"'))
                             {
-                                this.AddConstantValue(currentNamespace, "string", name, valueText);
+                                this.AddConstantValue(currentNamespace, "string", name, valueText, isUtf16 ? "utf-16" : "ansi");
                                 continue;
                             }
 

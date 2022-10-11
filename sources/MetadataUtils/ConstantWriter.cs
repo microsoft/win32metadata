@@ -73,7 +73,7 @@ $@"        public static readonly Guid {name}__scanned__ = new Guid({args});");
             this.Writer.WriteLine();
         }
 
-        public void AddValue(string type, string name, string valueText)
+        public void AddValue(string type, string name, string valueText, string context = "")
         {
             this.namesToValues[name] = valueText;
 
@@ -81,6 +81,12 @@ $@"        public static readonly Guid {name}__scanned__ = new Guid({args});");
             {
                 this.Writer.WriteLine(
 $"        [{extraAttributes}]");
+            }
+
+            if (type == "string" && context == "ansi")
+            {
+                this.Writer.WriteLine(
+$"        [NativeEncoding(\"{context}\"]");
             }
 
             this.Writer.WriteLine(
