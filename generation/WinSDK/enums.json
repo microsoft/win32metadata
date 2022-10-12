@@ -34817,6 +34817,50 @@
         "parameter": "uFlags"
       }
     ]
+  },
+  {
+    "name": "DNS_TYPE",
+    "type": "ushort",
+    "autoPopulate": {
+      "header": "windns.h",
+      "filter": "DNS_TYPE_"
+    },
+    "uses": [
+      {
+        "method": "DnsQuery_A",
+        "parameter": "wType"
+      },
+      {
+        "method": "DnsQuery_W",
+        "parameter": "wType"
+      },
+      {
+        "method": "DnsQuery_UTF8",
+        "parameter": "wType"
+      }
+    ]
+  },
+  {
+    "name": "DNS_QUERY_OPTIONS",
+    "flags": true,
+    "autoPopulate": {
+      "header": "windns.h",
+      "filter": "DNS_QUERY_"
+    },
+    "uses": [
+      {
+        "method": "DnsQuery_A",
+        "parameter": "Options"
+      },
+      {
+        "method": "DnsQuery_W",
+        "parameter": "Options"
+      },
+      {
+        "method": "DnsQuery_UTF8",
+        "parameter": "Options"
+      }
+    ]
   }
 ]
 }

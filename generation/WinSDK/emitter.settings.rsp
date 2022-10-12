@@ -1204,3 +1204,6 @@ TreeResetNamedSecurityInfoA::return=WIN32_ERROR
 TreeResetNamedSecurityInfoW::return=WIN32_ERROR
 TreeSetNamedSecurityInfoA::return=WIN32_ERROR
 TreeSetNamedSecurityInfoW::return=WIN32_ERROR
+DnsQuery_A::return=WIN32_ERROR
+DnsQuery_W::return=WIN32_ERROR
+DnsQuery_UTF8::return=WIN32_ERROR
