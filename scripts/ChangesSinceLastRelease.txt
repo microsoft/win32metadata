@@ -1293,13 +1293,11 @@ Windows.Win32.NetworkManagement.Dns.Apis.DNS_TYPE_X25 removed
 Windows.Win32.NetworkManagement.Dns.Apis.DNS_TYPE_ZERO removed
 Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_A : Options...UInt32 => DNS_QUERY_OPTIONS
 Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_A : wType...UInt16 => DNS_TYPE
-Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_A : return...Int32 => WIN32_ERROR
 Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_UTF8 : Options...UInt32 => DNS_QUERY_OPTIONS
 Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_UTF8 : wType...UInt16 => DNS_TYPE
 Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_UTF8 : return...Int32 => WIN32_ERROR
 Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_W : Options...UInt32 => DNS_QUERY_OPTIONS
 Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_W : wType...UInt16 => DNS_TYPE
-Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_W : return...Int32 => WIN32_ERROR
 Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS added
 Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS.DNS_QUERY_ACCEPT_TRUNCATED_RESPONSE added
 Windows.Win32.NetworkManagement.Dns.DNS_QUERY_OPTIONS.DNS_QUERY_ADDRCONFIG added
@@ -1396,6 +1394,7 @@ Windows.Win32.NetworkManagement.Dns.DNS_TYPE.DNS_TYPE_WKS added
 Windows.Win32.NetworkManagement.Dns.DNS_TYPE.DNS_TYPE_X25 added
 Windows.Win32.NetworkManagement.Dns.DNS_TYPE.DNS_TYPE_ZERO added
 # Reverted #1295.
-Windows.Win32.Graphics.Dxgi.IDXGIAdapter.EnumOutputs : [PreserveSig] =>
-Windows.Win32.Graphics.Dxgi.IDXGIFactory.EnumAdapters : [PreserveSig] =>
-Windows.Win32.Graphics.Dxgi.IDXGIFactory1.EnumAdapters1 : [PreserveSig] =>
+# Fix changes file.
+Windows.Win32.Graphics.Dxgi.IDXGIAdapter.EnumOutputs : [PreserveSig] => 
+Windows.Win32.Graphics.Dxgi.IDXGIFactory.EnumAdapters : [PreserveSig] => 
+Windows.Win32.Graphics.Dxgi.IDXGIFactory1.EnumAdapters1 : [PreserveSig] => 
