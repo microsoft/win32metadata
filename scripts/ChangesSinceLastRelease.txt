@@ -1398,3 +1398,5 @@ Windows.Win32.NetworkManagement.Dns.DNS_TYPE.DNS_TYPE_ZERO added
 Windows.Win32.Graphics.Dxgi.IDXGIAdapter.EnumOutputs : [PreserveSig] => 
 Windows.Win32.Graphics.Dxgi.IDXGIFactory.EnumAdapters : [PreserveSig] => 
 Windows.Win32.Graphics.Dxgi.IDXGIFactory1.EnumAdapters1 : [PreserveSig] => 
+Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_A : return...Int32 => WIN32_ERROR
+Windows.Win32.NetworkManagement.Dns.Apis.DnsQuery_W : return...Int32 => WIN32_ERROR
