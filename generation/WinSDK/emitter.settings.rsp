@@ -1176,9 +1176,6 @@ IDropSource::GiveFeedback=[PreserveSig]
 ReleaseStgMedium::param0=[Out]
 # tsvirtualchannels.h
 IWTSVirtualChannelManager::CreateListener::pszChannelName=PSTR
-IDXGIFactory::EnumAdapters=[PreserveSig]
-IDXGIFactory1::EnumAdapters1=[PreserveSig]
-IDXGIAdapter::EnumOutputs=[PreserveSig]
 BuildSecurityDescriptorA::return=WIN32_ERROR
 BuildSecurityDescriptorW::return=WIN32_ERROR
 FreeInheritedFromArray::return=WIN32_ERROR

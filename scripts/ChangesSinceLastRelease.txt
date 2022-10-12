@@ -1395,3 +1395,7 @@ Windows.Win32.NetworkManagement.Dns.DNS_TYPE.DNS_TYPE_WINSR added
 Windows.Win32.NetworkManagement.Dns.DNS_TYPE.DNS_TYPE_WKS added
 Windows.Win32.NetworkManagement.Dns.DNS_TYPE.DNS_TYPE_X25 added
 Windows.Win32.NetworkManagement.Dns.DNS_TYPE.DNS_TYPE_ZERO added
+# Reverted #1295.
+Windows.Win32.Graphics.Dxgi.IDXGIAdapter.EnumOutputs : [PreserveSig] =>
+Windows.Win32.Graphics.Dxgi.IDXGIFactory.EnumAdapters : [PreserveSig] =>
+Windows.Win32.Graphics.Dxgi.IDXGIFactory1.EnumAdapters1 : [PreserveSig] =>
