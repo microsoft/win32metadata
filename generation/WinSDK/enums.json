@@ -34861,6 +34861,32 @@
         "parameter": "Options"
       }
     ]
+  },
+  {
+    "type": "uint",
+    "name": "DXGI_USAGE",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "DXGI_USAGE_",
+      "header": "dxgi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DXGI_SWAP_CHAIN_DESC",
+        "field": "BufferUsage"
+      },
+      {
+        "interface": "IDXGIResource",
+        "method": "GetUsage",
+        "parameter": "pUsage"
+      },
+      {
+        "interface": "IDXGIDevice",
+        "method": "CreateSurface",
+        "parameter": "Usage"
+      }
+    ]
   }
 ]
 }

@@ -1,0 +1,20 @@
+# Created DXGI_USAGE enum
+Windows.Win32.Graphics.Dxgi.Apis.DXGI_USAGE_BACK_BUFFER removed
+Windows.Win32.Graphics.Dxgi.Apis.DXGI_USAGE_DISCARD_ON_PRESENT removed
+Windows.Win32.Graphics.Dxgi.Apis.DXGI_USAGE_READ_ONLY removed
+Windows.Win32.Graphics.Dxgi.Apis.DXGI_USAGE_RENDER_TARGET_OUTPUT removed
+Windows.Win32.Graphics.Dxgi.Apis.DXGI_USAGE_SHADER_INPUT removed
+Windows.Win32.Graphics.Dxgi.Apis.DXGI_USAGE_SHARED removed
+Windows.Win32.Graphics.Dxgi.Apis.DXGI_USAGE_UNORDERED_ACCESS removed
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC.BufferUsage...System.UInt32 => Windows.Win32.Graphics.Dxgi.DXGI_USAGE
+Windows.Win32.Graphics.Dxgi.DXGI_SWAP_CHAIN_DESC1.BufferUsage...System.UInt32 => Windows.Win32.Graphics.Dxgi.DXGI_USAGE
+Windows.Win32.Graphics.Dxgi.DXGI_USAGE added
+Windows.Win32.Graphics.Dxgi.DXGI_USAGE.DXGI_USAGE_BACK_BUFFER added
+Windows.Win32.Graphics.Dxgi.DXGI_USAGE.DXGI_USAGE_DISCARD_ON_PRESENT added
+Windows.Win32.Graphics.Dxgi.DXGI_USAGE.DXGI_USAGE_READ_ONLY added
+Windows.Win32.Graphics.Dxgi.DXGI_USAGE.DXGI_USAGE_RENDER_TARGET_OUTPUT added
+Windows.Win32.Graphics.Dxgi.DXGI_USAGE.DXGI_USAGE_SHADER_INPUT added
+Windows.Win32.Graphics.Dxgi.DXGI_USAGE.DXGI_USAGE_SHARED added
+Windows.Win32.Graphics.Dxgi.DXGI_USAGE.DXGI_USAGE_UNORDERED_ACCESS added
+Windows.Win32.Graphics.Dxgi.IDXGIDevice.CreateSurface : Usage...UInt32 => DXGI_USAGE
+Windows.Win32.Graphics.Dxgi.IDXGIResource.GetUsage : pUsage...UInt32* => DXGI_USAGE*
