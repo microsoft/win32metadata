@@ -34861,6 +34861,14 @@
         "parameter": "Options"
       }
     ]
+  },
+  {
+    "name": "CDN_CONSTANTS",
+    "type": "int",
+    "autoPopulate": {
+      "header": "CommCtrl.h",
+      "filter": "CDN_"
+    }
   }
 ]
 }
