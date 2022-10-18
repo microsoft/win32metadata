@@ -9,8 +9,6 @@ namespace Windows.Win32.Graphics.Hlsl
 {
     public static unsafe partial class Apis
     {
-        public const string D3DCOMPILER_DLL = "d3dcompiler_47.dll";
-
         public const uint D3DCOMPILE_OPTIMIZATION_LEVEL2 = (1 << 14) | (1 << 15);
 
         public const uint D3D_COMPILE_STANDARD_FILE_INCLUDE = 1;
