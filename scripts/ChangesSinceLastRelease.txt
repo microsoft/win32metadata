@@ -1976,3 +1976,15 @@ Windows.Win32.UI.Shell.IEnumIDList.Reset : [PreserveSig] => [CanReturnMultipleSu
 Windows.Win32.UI.Shell.IEnumIDList.Skip : [PreserveSig] => [CanReturnMultipleSuccessValues]
 Windows.Win32.UI.Shell.IShellFolder.EnumObjects : [PreserveSig] => [CanReturnMultipleSuccessValues]
 Windows.Win32.UI.Wpf.IMILBitmapEffectPrimitiveImpl.IsDirty : [PreserveSig] => [CanReturnMultipleSuccessValues]
+# CDN 
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_FILEOK added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_FIRST added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_FOLDERCHANGE added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_HELP added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_INCLUDEITEM added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_INITDONE added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_LAST added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_SELCHANGE added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_SHAREVIOLATION added
+Windows.Win32.UI.Controls.Dialogs.CDN_CONSTANTS.CDN_TYPECHANGE added
