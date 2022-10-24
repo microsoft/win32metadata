@@ -2032,3 +2032,40 @@ Windows.Win32.UI.Accessibility.IUIAutomationTextRange3.GetAttributeValues : attr
 Windows.Win32.UI.Shell.IAssocHandler.IsRecommended :  => [CanReturnMultipleSuccessValues]
 # Fixed #1326.
 Windows.Win32.System.Com.IPersistFile.Load : dwMode...UInt32 => STGM
+# Fixed #1324.
+Windows.Win32.System.Registry.Apis.RegGetValueA : dwFlags...RRF_RT => REG_ROUTINE_FLAGS
+Windows.Win32.System.Registry.Apis.RegGetValueA : pdwType...UInt32* => REG_VALUE_TYPE*
+Windows.Win32.System.Registry.Apis.RegGetValueW : dwFlags...RRF_RT => REG_ROUTINE_FLAGS
+Windows.Win32.System.Registry.Apis.RegGetValueW : pdwType...UInt32* => REG_VALUE_TYPE*
+Windows.Win32.System.Registry.Apis.RRF_NOEXPAND removed
+Windows.Win32.System.Registry.Apis.RRF_SUBKEY_WOW6432KEY removed
+Windows.Win32.System.Registry.Apis.RRF_SUBKEY_WOW6464KEY removed
+Windows.Win32.System.Registry.Apis.RRF_WOW64_MASK removed
+Windows.Win32.System.Registry.Apis.RRF_ZEROONFAILURE removed
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_NOEXPAND added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_ANY added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_DWORD added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_QWORD added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_REG_BINARY added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_REG_DWORD added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_REG_EXPAND_SZ added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_REG_MULTI_SZ added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_REG_NONE added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_REG_QWORD added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_RT_REG_SZ added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_SUBKEY_WOW6432KEY added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_SUBKEY_WOW6464KEY added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_WOW64_MASK added
+Windows.Win32.System.Registry.REG_ROUTINE_FLAGS.RRF_ZEROONFAILURE added
+Windows.Win32.System.Registry.RRF_RT removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_ANY removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_DWORD removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_QWORD removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_BINARY removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_DWORD removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_EXPAND_SZ removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_MULTI_SZ removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_NONE removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_QWORD removed
+Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_SZ removed

@@ -15987,6 +15987,14 @@
     "members": [],
     "uses": [
       {
+        "method": "RegGetValueA",
+        "parameter": "pdwType"
+      },
+      {
+        "method": "RegGetValueW",
+        "parameter": "pdwType"
+      },
+      {
         "method": "CryptSetOIDFunctionValue",
         "parameter": "dwValueType"
       }
@@ -16342,13 +16350,13 @@
     ]
   },
   {
-    "name": "RRF_RT",
+    "name": "REG_ROUTINE_FLAGS",
     "flags": true,
+    "autoPopulate": {
+      "header": "winreg.h",
+      "filter": "RRF_"
+    },
     "members": [
-      {
-        "name": "RRF_RT_ANY",
-        "value": "65535"
-      },
       {
         "name": "RRF_RT_DWORD",
         "value": "24"
@@ -16356,34 +16364,6 @@
       {
         "name": "RRF_RT_QWORD",
         "value": "72"
-      },
-      {
-        "name": "RRF_RT_REG_BINARY",
-        "value": "8"
-      },
-      {
-        "name": "RRF_RT_REG_DWORD",
-        "value": "16"
-      },
-      {
-        "name": "RRF_RT_REG_EXPAND_SZ",
-        "value": "4"
-      },
-      {
-        "name": "RRF_RT_REG_MULTI_SZ",
-        "value": "32"
-      },
-      {
-        "name": "RRF_RT_REG_NONE",
-        "value": "1"
-      },
-      {
-        "name": "RRF_RT_REG_QWORD",
-        "value": "64"
-      },
-      {
-        "name": "RRF_RT_REG_SZ",
-        "value": "2"
       }
     ],
     "uses": [
