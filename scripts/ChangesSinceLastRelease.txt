@@ -1976,3 +1976,5 @@ Windows.Win32.UI.Shell.IEnumIDList.Reset : [PreserveSig] => [CanReturnMultipleSu
 Windows.Win32.UI.Shell.IEnumIDList.Skip : [PreserveSig] => [CanReturnMultipleSuccessValues]
 Windows.Win32.UI.Shell.IShellFolder.EnumObjects : [PreserveSig] => [CanReturnMultipleSuccessValues]
 Windows.Win32.UI.Wpf.IMILBitmapEffectPrimitiveImpl.IsDirty : [PreserveSig] => [CanReturnMultipleSuccessValues]
+# Fixed #918.
+Windows.Win32.UI.Shell.IAssocHandler.IsRecommended :  => [CanReturnMultipleSuccessValues]
