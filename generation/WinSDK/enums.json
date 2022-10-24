@@ -29821,6 +29821,11 @@
         "interface": "IMMDevice",
         "method": "OpenPropertyStore",
         "parameter": "stgmAccess"
+      },
+      {
+        "interface": "IPersistFile",
+        "method": "Load",
+        "parameter": "dwMode"
       }
     ]
   },
