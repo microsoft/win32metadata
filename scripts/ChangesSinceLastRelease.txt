@@ -2028,3 +2028,5 @@ Windows.Win32.UI.Accessibility.IUIAutomationStylesPattern.get_CurrentStyleId : r
 Windows.Win32.UI.Accessibility.IUIAutomationTextRange.FindAttribute : attr...Int32 => UIA_TEXTATTRIBUTE_ID
 Windows.Win32.UI.Accessibility.IUIAutomationTextRange.GetAttributeValue : attr...Int32 => UIA_TEXTATTRIBUTE_ID
 Windows.Win32.UI.Accessibility.IUIAutomationTextRange3.GetAttributeValues : attributeIds...Int32* => UIA_TEXTATTRIBUTE_ID*
+# Fixed #918.
+Windows.Win32.UI.Shell.IAssocHandler.IsRecommended :  => [CanReturnMultipleSuccessValues]
