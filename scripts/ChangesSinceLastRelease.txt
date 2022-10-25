@@ -2069,3 +2069,63 @@ Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_MULTI_SZ removed
 Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_NONE removed
 Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_QWORD removed
 Windows.Win32.System.Registry.RRF_RT.RRF_RT_REG_SZ removed
+# Fixed #1292.
+Windows.Win32.System.EventLog.Apis.EvtArchiveExportedLog : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtCancel : Object...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtClearLog : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtClose : Object...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtCreateBookmark : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtCreateRenderContext : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtExportLog : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtFormatMessage : Event...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtFormatMessage : PublisherMetadata...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtGetChannelConfigProperty : ChannelConfig...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtGetEventInfo : Event...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtGetEventMetadataProperty : EventMetadata...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtGetLogInfo : Log...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtGetPublisherMetadataProperty : PublisherMetadata...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtGetQueryInfo : QueryOrSubscription...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtNext : ResultSet...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtNextChannelPath : ChannelEnum...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtNextEventMetadata : EventMetadataEnum...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtNextEventMetadata : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtNextPublisherId : PublisherEnum...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenChannelConfig : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenChannelConfig : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenChannelEnum : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenChannelEnum : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenEventMetadataEnum : PublisherMetadata...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenEventMetadataEnum : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenLog : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenLog : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenPublisherEnum : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenPublisherEnum : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenPublisherMetadata : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenPublisherMetadata : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtOpenSession : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtQuery : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtQuery : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtRender : Context...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtRender : Fragment...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtSaveChannelConfig : ChannelConfig...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtSeek : Bookmark...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtSeek : ResultSet...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtSetChannelConfigProperty : ChannelConfig...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtSubscribe : Bookmark...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtSubscribe : return...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtSubscribe : Session...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtUpdateBookmark : Bookmark...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.Apis.EvtUpdateBookmark : Event...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.EVT_CHANNEL_REFERENCE_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_EXPORTLOG_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_FORMAT_MESSAGE_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_HANDLE added
+Windows.Win32.System.EventLog.EVT_OPEN_LOG_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_QUERY_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_RENDER_CONTEXT_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_RENDER_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_RPC_LOGIN_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_SEEK_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_SUBSCRIBE_CALLBACK.Invoke : Event...IntPtr => EVT_HANDLE
+Windows.Win32.System.EventLog.EVT_SUBSCRIBE_FLAGS.value__...System.Int32 => System.UInt32
+Windows.Win32.System.EventLog.EVT_VARIANT._Anonymous_e__Union.EvtHandleVal...System.IntPtr => Windows.Win32.System.EventLog.EVT_HANDLE
