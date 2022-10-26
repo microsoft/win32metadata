@@ -2453,4 +2453,3 @@ UIA_LANDMARKTYPE_ID=Windows.Win32.UI.Accessibility
 UIA_METADATA_ID=Windows.Win32.UI.Accessibility
 UIA_STYLE_ID=Windows.Win32.UI.Accessibility
 UIA_TEXTATTRIBUTE_ID=Windows.Win32.UI.Accessibility
-CDN_CONSTANTS=Windows.Win32.UI.Controls.Dialogs
