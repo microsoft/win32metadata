@@ -3233,6 +3233,7 @@
   {
     "type": "uint",
     "name": "CERT_QUERY_ENCODING_TYPE",
+    "flags": true,
     "members": [
       {
         "name": "X509_ASN_ENCODING",
@@ -3245,16 +3246,196 @@
     ],
     "uses": [
       {
+        "struct": "CERT_CONTEXT",
+        "field": "dwCertEncodingType"
+      },
+      {
+        "method": "CertAddEncodedCertificateToStore",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertAddEncodedCRLToStore",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertCompareCertificate",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertCompareCertificateName",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertComparePublicKeyInfo",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertCreateCertificateContext",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertCreateCRLContext",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertFindCertificateInStore",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertFindChainInStore",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertFindCRLInStore",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertGetIntendedKeyUsage",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertGetPublicKeyLength",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertGetSubjectCertificateFromStore",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertIsRDNAttrsInCertificateName",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertNameToStrA",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertNameToStrW",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertStrToNameA",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertStrToNameW",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CertVerifyCRLRevocation",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "struct": "CRL_CONTEXT",
+        "field": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptCreateKeyIdentifierFromCSP",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptDecodeObject",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptDecodeObjectEx",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptEncodeObject",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptEncodeObjectEx",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptExportPublicKeyInfo",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptExportPublicKeyInfoEx",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptExportPublicKeyInfoFromBCryptKeyHandle",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptFormatObject",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptHashPublicKeyInfo",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptHashToBeSigned",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptImportPublicKeyInfo",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptImportPublicKeyInfoEx",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptImportPublicKeyInfoEx2",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptSignAndEncodeCertificate",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptSignCertificate",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptVerifyCertificateSignature",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "CryptVerifyCertificateSignatureEx",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_GET_SIGNER_CERTIFICATE",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
+        "method": "PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC",
+        "parameter": "dwCertEncodingType"
+      },
+      {
         "method": "CryptQueryObject",
         "parameter": "pdwMsgAndCertEncodingType"
       },
       {
         "method": "CertOpenStore",
         "parameter": "dwEncodingType"
-      },
-      {
-        "method": "CryptEncodeObjectEx",
-        "parameter": "dwCertEncodingType"
       },
       {
         "method": "CryptSIPGetSignedDataMsg",
@@ -3275,6 +3456,10 @@
       {
         "struct": "CRYPT_KEY_SIGN_MESSAGE_PARA",
         "field": "dwMsgAndCertEncodingType"
+      },
+      {
+        "method": "CertAddEncodedCTLToStore",
+        "parameter": "dwMsgAndCertEncodingType"
       }
     ]
   },

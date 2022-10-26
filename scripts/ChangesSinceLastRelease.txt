@@ -2156,3 +2156,51 @@ Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_180 added
 Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_270 added
 Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_90 added
 Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_DEFAULT added
+# Fixed #1323.
+Windows.Win32.Security.Cryptography.Apis.CertAddEncodedCertificateToStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertAddEncodedCRLToStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertAddEncodedCTLToStore : dwMsgAndCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertCompareCertificate : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertCompareCertificateName : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertComparePublicKeyInfo : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertCreateCertificateContext : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertCreateCRLContext : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertFindCertificateInStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertFindChainInStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertFindCRLInStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertGetIntendedKeyUsage : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertGetPublicKeyLength : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertGetSubjectCertificateFromStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertIsRDNAttrsInCertificateName : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertNameToStrA : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertNameToStrW : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertStrToNameA : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertStrToNameW : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertVerifyCRLRevocation : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptCreateKeyIdentifierFromCSP : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptDecodeObject : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptDecodeObjectEx : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptEncodeObject : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptExportPublicKeyInfo : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptExportPublicKeyInfoEx : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptExportPublicKeyInfoFromBCryptKeyHandle : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptFormatObject : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptHashPublicKeyInfo : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptHashToBeSigned : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptImportPublicKeyInfo : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptImportPublicKeyInfoEx : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptImportPublicKeyInfoEx2 : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptSignAndEncodeCertificate : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptSignCertificate : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptVerifyCertificateSignature : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptVerifyCertificateSignatureEx : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.CERT_CONTEXT.dwCertEncodingType...System.UInt32 => Windows.Win32.Security.Cryptography.CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.CERT_QUERY_ENCODING_TYPE :  => [Flags]
+Windows.Win32.Security.Cryptography.CRL_CONTEXT.dwCertEncodingType...System.UInt32 => Windows.Win32.Security.Cryptography.CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_GET_SIGNER_CERTIFICATE.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
