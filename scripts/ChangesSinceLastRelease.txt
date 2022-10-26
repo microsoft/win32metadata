@@ -2129,3 +2129,30 @@ Windows.Win32.System.EventLog.EVT_SEEK_FLAGS.value__...System.Int32 => System.UI
 Windows.Win32.System.EventLog.EVT_SUBSCRIBE_CALLBACK.Invoke : Event...IntPtr => EVT_HANDLE
 Windows.Win32.System.EventLog.EVT_SUBSCRIBE_FLAGS.value__...System.Int32 => System.UInt32
 Windows.Win32.System.EventLog.EVT_VARIANT._Anonymous_e__Union.EvtHandleVal...System.IntPtr => Windows.Win32.System.EventLog.EVT_HANDLE
+# Tweaks to DEVMODE structures
+Windows.Win32.Graphics.Gdi.Apis.DMDFO_CENTER removed
+Windows.Win32.Graphics.Gdi.Apis.DMDFO_DEFAULT removed
+Windows.Win32.Graphics.Gdi.Apis.DMDFO_STRETCH removed
+Windows.Win32.Graphics.Gdi.Apis.DMDO_180 removed
+Windows.Win32.Graphics.Gdi.Apis.DMDO_270 removed
+Windows.Win32.Graphics.Gdi.Apis.DMDO_90 removed
+Windows.Win32.Graphics.Gdi.Apis.DMDO_DEFAULT removed
+Windows.Win32.Graphics.Gdi.DEVMODE_COLLATE.value__...System.UInt32 => System.UInt16
+Windows.Win32.Graphics.Gdi.DEVMODE_COLOR.value__...System.UInt32 => System.UInt16
+Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX.value__...System.UInt32 => System.UInt16
+Windows.Win32.Graphics.Gdi.DEVMODE_TRUETYPE_OPTION.value__...System.UInt32 => System.UInt16
+Windows.Win32.Graphics.Gdi.DEVMODEA._Anonymous1_e__Union._Anonymous2_e__Struct.dmDisplayFixedOutput...System.UInt32 => Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT
+Windows.Win32.Graphics.Gdi.DEVMODEA._Anonymous1_e__Union._Anonymous2_e__Struct.dmDisplayOrientation...System.UInt32 => Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION
+Windows.Win32.Graphics.Gdi.DEVMODEA.dmDuplex...System.Int16 => Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX
+Windows.Win32.Graphics.Gdi.DEVMODEW._Anonymous1_e__Union._Anonymous2_e__Struct.dmDisplayFixedOutput...System.UInt32 => Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT
+Windows.Win32.Graphics.Gdi.DEVMODEW._Anonymous1_e__Union._Anonymous2_e__Struct.dmDisplayOrientation...System.UInt32 => Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION
+Windows.Win32.Graphics.Gdi.DEVMODEW.dmDuplex...System.Int16 => Windows.Win32.Graphics.Gdi.DEVMODE_DUPLEX
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT added
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_CENTER added
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_DEFAULT added
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_STRETCH added
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION added
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_180 added
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_270 added
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_90 added
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_DEFAULT added
