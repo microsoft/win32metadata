@@ -31602,6 +31602,7 @@
   },
   {
     "name": "DEVMODE_COLOR",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "DMCOLOR_",
       "header": "wingdi.h"
@@ -31620,6 +31621,7 @@
   },
   {
     "name": "DEVMODE_DUPLEX",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "DMDUP_",
       "header": "wingdi.h"
@@ -31628,16 +31630,17 @@
     "uses": [
       {
         "struct": "DEVMODEW",
-        "field": "dmColor"
+        "field": "dmDuplex"
       },
       {
         "struct": "DEVMODEA",
-        "field": "dmColor"
+        "field": "dmDuplex"
       }
     ]
   },
   {
     "name": "DEVMODE_COLLATE",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "DMCOLLATE_",
       "header": "wingdi.h"
@@ -31655,7 +31658,44 @@
     ]
   },
   {
+    "name": "DEVMODE_DISPLAY_ORIENTATION",
+    "autoPopulate": {
+      "filter": "DMDO_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW::_Anonymous1_e__Union::_Anonymous2_e__Struct",
+        "field": "dmDisplayOrientation"
+      },
+      {
+        "struct": "DEVMODEA::_Anonymous1_e__Union::_Anonymous2_e__Struct",
+        "field": "dmDisplayOrientation"
+      }
+    ]
+  },
+  {
+    "name": "DEVMODE_DISPLAY_FIXED_OUTPUT",
+    "autoPopulate": {
+      "filter": "DMDFO_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW::_Anonymous1_e__Union::_Anonymous2_e__Struct",
+        "field": "dmDisplayFixedOutput"
+      },
+      {
+        "struct": "DEVMODEA::_Anonymous1_e__Union::_Anonymous2_e__Struct",
+        "field": "dmDisplayFixedOutput"
+      }
+    ]
+  },
+  {
     "name": "DEVMODE_TRUETYPE_OPTION",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "DMTT_",
       "header": "wingdi.h"
