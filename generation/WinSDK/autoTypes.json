@@ -1465,5 +1465,11 @@
     "ValueType": "IntPtr",
     "InvalidHandleValues": [ 0 ],
     "CloseApi": "CloseThemeData"
+  },
+  {
+    "Name": "EVT_HANDLE",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ],
+    "CloseApi": "EvtClose"
   }
 ]

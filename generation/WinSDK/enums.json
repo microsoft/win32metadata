@@ -15987,6 +15987,14 @@
     "members": [],
     "uses": [
       {
+        "method": "RegGetValueA",
+        "parameter": "pdwType"
+      },
+      {
+        "method": "RegGetValueW",
+        "parameter": "pdwType"
+      },
+      {
         "method": "CryptSetOIDFunctionValue",
         "parameter": "dwValueType"
       }
@@ -16342,13 +16350,13 @@
     ]
   },
   {
-    "name": "RRF_RT",
+    "name": "REG_ROUTINE_FLAGS",
     "flags": true,
+    "autoPopulate": {
+      "header": "winreg.h",
+      "filter": "RRF_"
+    },
     "members": [
-      {
-        "name": "RRF_RT_ANY",
-        "value": "65535"
-      },
       {
         "name": "RRF_RT_DWORD",
         "value": "24"
@@ -16356,34 +16364,6 @@
       {
         "name": "RRF_RT_QWORD",
         "value": "72"
-      },
-      {
-        "name": "RRF_RT_REG_BINARY",
-        "value": "8"
-      },
-      {
-        "name": "RRF_RT_REG_DWORD",
-        "value": "16"
-      },
-      {
-        "name": "RRF_RT_REG_EXPAND_SZ",
-        "value": "4"
-      },
-      {
-        "name": "RRF_RT_REG_MULTI_SZ",
-        "value": "32"
-      },
-      {
-        "name": "RRF_RT_REG_NONE",
-        "value": "1"
-      },
-      {
-        "name": "RRF_RT_REG_QWORD",
-        "value": "64"
-      },
-      {
-        "name": "RRF_RT_REG_SZ",
-        "value": "2"
       }
     ],
     "uses": [
@@ -29821,6 +29801,11 @@
         "interface": "IMMDevice",
         "method": "OpenPropertyStore",
         "parameter": "stgmAccess"
+      },
+      {
+        "interface": "IPersistFile",
+        "method": "Load",
+        "parameter": "dwMode"
       }
     ]
   },
@@ -31617,6 +31602,7 @@
   },
   {
     "name": "DEVMODE_COLOR",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "DMCOLOR_",
       "header": "wingdi.h"
@@ -31635,6 +31621,7 @@
   },
   {
     "name": "DEVMODE_DUPLEX",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "DMDUP_",
       "header": "wingdi.h"
@@ -31643,16 +31630,17 @@
     "uses": [
       {
         "struct": "DEVMODEW",
-        "field": "dmColor"
+        "field": "dmDuplex"
       },
       {
         "struct": "DEVMODEA",
-        "field": "dmColor"
+        "field": "dmDuplex"
       }
     ]
   },
   {
     "name": "DEVMODE_COLLATE",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "DMCOLLATE_",
       "header": "wingdi.h"
@@ -31670,7 +31658,44 @@
     ]
   },
   {
+    "name": "DEVMODE_DISPLAY_ORIENTATION",
+    "autoPopulate": {
+      "filter": "DMDO_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW::_Anonymous1_e__Union::_Anonymous2_e__Struct",
+        "field": "dmDisplayOrientation"
+      },
+      {
+        "struct": "DEVMODEA::_Anonymous1_e__Union::_Anonymous2_e__Struct",
+        "field": "dmDisplayOrientation"
+      }
+    ]
+  },
+  {
+    "name": "DEVMODE_DISPLAY_FIXED_OUTPUT",
+    "autoPopulate": {
+      "filter": "DMDFO_",
+      "header": "wingdi.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "DEVMODEW::_Anonymous1_e__Union::_Anonymous2_e__Struct",
+        "field": "dmDisplayFixedOutput"
+      },
+      {
+        "struct": "DEVMODEA::_Anonymous1_e__Union::_Anonymous2_e__Struct",
+        "field": "dmDisplayFixedOutput"
+      }
+    ]
+  },
+  {
     "name": "DEVMODE_TRUETYPE_OPTION",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "DMTT_",
       "header": "wingdi.h"
@@ -32637,6 +32662,36 @@
         "interface": "IRawElementProviderSimple",
         "method": "GetPatternProvider",
         "parameter": "patternId"
+      },
+      {
+        "interface": "IUIAutomationCacheRequest",
+        "method": "AddPattern",
+        "parameter": "patternId"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "GetCurrentPatternAs",
+        "parameter": "patternId"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "GetCachedPatternAs",
+        "parameter": "patternId"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "GetCurrentPattern",
+        "parameter": "patternId"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "GetCachedPattern",
+        "parameter": "patternId"
+      },
+      {
+        "interface": "IUIAutomation",
+        "method": "GetPatternProgrammaticName",
+        "parameter": "pattern"
       }
     ]
   },
@@ -32792,7 +32847,7 @@
         "value": 20036
       }
     ],
-    "uses":[
+    "uses": [
       {
         "method": "UiaRaiseAutomationEvent",
         "parameter": "id"
@@ -32800,6 +32855,51 @@
       {
         "struct": "UiaPropertyChangedEventArgs",
         "field": "EventId"
+      },
+      {
+        "interface": "IRawElementProviderAdviseEvents",
+        "method": "AdviseEventAdded",
+        "parameter": "eventId"
+      },
+      {
+        "interface": "IRawElementProviderAdviseEvents",
+        "method": "AdviseEventRemoved",
+        "parameter": "eventId"
+      },
+      {
+        "interface": "IProxyProviderWinEventSink",
+        "method": "AddAutomationEvent",
+        "parameter": "id"
+      },
+      {
+        "interface": "IUIAutomationEventHandler",
+        "method": "HandleAutomationEvent",
+        "parameter": "eventId"
+      },
+      {
+        "interface": "IUIAutomationProxyFactoryEntry",
+        "method": "SetWinEventsForAutomationEvent",
+        "parameter": "eventId"
+      },
+      {
+        "interface": "IUIAutomationProxyFactoryEntry",
+        "method": "GetWinEventsForAutomationEvent",
+        "parameter": "eventId"
+      },
+      {
+        "interface": "IUIAutomationEventHandlerGroup",
+        "method": "AddAutomationEventHandler",
+        "parameter": "eventId"
+      },
+      {
+        "interface": "IUIAutomation",
+        "method": "AddAutomationEventHandler",
+        "parameter": "eventId"
+      },
+      {
+        "interface": "IUIAutomation",
+        "method": "RemoveAutomationEventHandler",
+        "parameter": "eventId"
       }
     ]
   },
@@ -33520,6 +33620,91 @@
         "interface": "IRawElementProviderSimple",
         "method": "GetPropertyValue",
         "parameter": "propertyId"
+      },
+      {
+        "interface": "IProxyProviderWinEventSink",
+        "method": "AddAutomationPropertyChangedEvent",
+        "parameter": "id"
+      },
+      {
+        "interface": "IItemContainerProvider",
+        "method": "FindItemByProperty",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationPropertyCondition",
+        "method": "get_PropertyId",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationCacheRequest",
+        "method": "AddProperty",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationPropertyChangedEventHandler",
+        "method": "HandlePropertyChangedEvent",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationItemContainerPattern",
+        "method": "FindItemByProperty",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "GetCurrentPropertyValue",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "GetCurrentPropertyValueEx",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "GetCachedPropertyValue",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "GetCachedPropertyValueEx",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationProxyFactoryEntry",
+        "method": "SetWinEventsForAutomationEvent",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationProxyFactoryEntry",
+        "method": "GetWinEventsForAutomationEvent",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomationEventHandlerGroup",
+        "method": "AddPropertyChangedEventHandler",
+        "parameter": "propertyArray"
+      },
+      {
+        "interface": "IUIAutomation",
+        "method": "CreatePropertyCondition",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomation",
+        "method": "CreatePropertyConditionEx",
+        "parameter": "propertyId"
+      },
+      {
+        "interface": "IUIAutomation",
+        "method": "AddPropertyChangedEventHandlerNativeArray",
+        "parameter": "propertyArray"
+      },
+      {
+        "interface": "IUIAutomation",
+        "method": "GetPropertyProgrammaticName",
+        "parameter": "property"
       }
     ]
 
@@ -33703,6 +33888,33 @@
         "name": "UIA_SayAsInterpretAsAttributeId",
         "value": 40043
       }
+    ],
+    "uses": [
+      {
+        "interface": "ITextRangeProvider",
+        "method": "FindAttribute",
+        "parameter": "attributeId"
+      },
+      {
+        "interface": "ITextRangeProvider",
+        "method": "GetAttributeValue",
+        "parameter": "attributeId"
+      },
+      {
+        "interface": "IUIAutomationTextRange",
+        "method": "FindAttribute",
+        "parameter": "attr"
+      },
+      {
+        "interface": "IUIAutomationTextRange",
+        "method": "GetAttributeValue",
+        "parameter": "attr"
+      },
+      {
+        "interface": "IUIAutomationTextRange3",
+        "method": "GetAttributeValues",
+        "parameter": "attributeIds"
+      }
     ]
   },
   {
@@ -33872,6 +34084,18 @@
         "name": "UIA_AppBarControlTypeId",
         "value": 50040
       }
+    ],
+    "uses": [
+      {
+        "interface": "IUIAutomationElement",
+        "method": "get_CurrentControlType",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IUIAutomationElement",
+        "method": "get_CachedControlType",
+        "parameter": "retVal"
+      }
     ]
   },
   {
@@ -33977,6 +34201,23 @@
         "name": "AnnotationType_Sensitive",
         "value": 60024
       }
+    ],
+    "uses": [
+      {
+        "interface": "IAnnotationProvider",
+        "method": "get_AnnotationTypeId",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IUIAutomationAnnotationPattern",
+        "method": "get_CachedAnnotationTypeId",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IUIAutomationAnnotationPattern",
+        "method": "get_CurrentAnnotationTypeId",
+        "parameter": "retVal"
+      }
     ]
   },
   {
@@ -34050,6 +34291,23 @@
         "name": "StyleId_NumberedList",
         "value": 70016
       }
+    ],
+    "uses": [
+      {
+        "interface": "IStylesProvider",
+        "method": "get_StyleId",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IUIAutomationStylesPattern",
+        "method": "get_CachedStyleId",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IUIAutomationStylesPattern",
+        "method": "get_CurrentStyleId",
+        "parameter": "retVal"
+      }
     ]
   },
   {
@@ -34074,6 +34332,18 @@
       {
         "name": "UIA_SearchLandmarkTypeId",
         "value": 80004
+      }
+    ],
+    "uses": [
+      {
+        "interface": "IUIAutomationElement5",
+        "method": "get_CurrentLandmarkType",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IUIAutomationElement5",
+        "method": "get_CachedLandmarkType",
+        "parameter": "retVal"
       }
     ]
   },
@@ -34120,6 +34390,18 @@
         "name": "HeadingLevel9",
         "value": 80059
       }
+    ],
+    "uses": [
+      {
+        "interface": "IUIAutomationElement8",
+        "method": "get_CurrentHeadingLevel",
+        "parameter": "retVal"
+      },
+      {
+        "interface": "IUIAutomationElement8",
+        "method": "get_CachedHeadingLevel",
+        "parameter": "retVal"
+      }
     ]
   },
   {
@@ -34137,6 +34419,18 @@
       {
         "name": "UIA_SayAsInterpretAsMetadataId",
         "value": 100000
+      }
+    ],
+    "uses": [
+      {
+        "interface": "IRawElementProviderSimple3",
+        "method": "GetMetadataValue",
+        "parameter": "metadataId"
+      },
+      {
+        "interface": "IUIAutomationElement7",
+        "method": "GetCurrentMetadataValue",
+        "parameter": "metadataId"
       }
     ]
   },
