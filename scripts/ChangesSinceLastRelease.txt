@@ -2246,3 +2246,10 @@ Windows.Win32.Graphics.Imaging.IWICImagingFactory.CreateDecoderFromFilename : pg
 Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice : dcompositionDevice : [Out] => [ComOutPtr,Out]
 Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice2 : dcompositionDevice : [Out] => [ComOutPtr,Out]
 Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice3 : dcompositionDevice : [Out] => [ComOutPtr,Out]
+# Fixed #1208.
+Windows.Win32.UI.Shell.IExplorerBrowser.SetRect : phdwp...IntPtr* => HDWP*
+Windows.Win32.UI.WindowsAndMessaging.Apis.BeginDeferWindowPos : return...IntPtr => HDWP
+Windows.Win32.UI.WindowsAndMessaging.Apis.DeferWindowPos : hWinPosInfo...IntPtr => HDWP
+Windows.Win32.UI.WindowsAndMessaging.Apis.DeferWindowPos : return...IntPtr => HDWP
+Windows.Win32.UI.WindowsAndMessaging.Apis.EndDeferWindowPos : hWinPosInfo...IntPtr => HDWP
+Windows.Win32.UI.WindowsAndMessaging.HDWP added
