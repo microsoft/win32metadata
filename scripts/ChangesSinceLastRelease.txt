@@ -2242,3 +2242,7 @@ Windows.Win32.Devices.Fax.IFaxServerNotify2.OnServerActivityChange(pFaxServer,lI
 Windows.Win32.Devices.Fax.IFaxServerNotify2.OnServerShutDown(pFaxServer) added
 # Fixed #1332.
 Windows.Win32.Graphics.Imaging.IWICImagingFactory.CreateDecoderFromFilename : pguidVendor : [Const,In] => [Const,In,Optional]
+# Fixed #1333.
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice : dcompositionDevice : [Out] => [ComOutPtr,Out]
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice2 : dcompositionDevice : [Out] => [ComOutPtr,Out]
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice3 : dcompositionDevice : [Out] => [ComOutPtr,Out]
