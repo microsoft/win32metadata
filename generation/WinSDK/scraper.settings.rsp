@@ -112,6 +112,8 @@ IDirectDrawGammaControlVtbl
 tagDVASPECT2
 tagDVASPECT
 tag_WBEM_TIMEOUT_TYPE
+IFaxAccountNotify
+IFaxServerNotify2
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET
@@ -12212,3 +12214,5 @@ __MACINFO=MACINFO
 tag_WBEM_LOGIN_TYPE=WBEM_LOGIN_TYPE
 tagRASCON_IPUI_FLAGS=RASCON_UIINFO_FLAGS
 VARIANT_BOOL=VARIANT_BOOL
+_IFaxAccountNotify=IFaxAccountNotify
+_IFaxServerNotify2=IFaxServerNotify2

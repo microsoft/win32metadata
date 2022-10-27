@@ -74,15 +74,6 @@ Windows.Win32.Data.Xml.MsXml.IXMLDOMSchemaCollection2.put_validateOnLoad : valid
 Windows.Win32.Data.Xml.MsXml.IXSLProcessor.transform : pDone...Int16* => VARIANT_BOOL*
 Windows.Win32.Devices.Enumeration.Pnp.IUPnPDevice.get_HasChildren : pvarb...Int16* => VARIANT_BOOL*
 Windows.Win32.Devices.Enumeration.Pnp.IUPnPDevice.get_IsRootDevice : pvarb...Int16* => VARIANT_BOOL*
-Windows.Win32.Devices.Fax._IFaxAccountNotify.OnIncomingMessageAdded : fAddedToReceiveFolder...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxAccountNotify.OnIncomingMessageRemoved : fRemovedFromReceiveFolder...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnDeviceStatusChange : bPoweredOff...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnDeviceStatusChange : bReceiving...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnDeviceStatusChange : bRinging...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnDeviceStatusChange : bSending...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnQueuesStatusChange : bIncomingQueueBlocked...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnQueuesStatusChange : bOutgoingQueueBlocked...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnQueuesStatusChange : bOutgoingQueuePaused...Int16 => VARIANT_BOOL
 Windows.Win32.Devices.Fax.IFaxActivityLogging.get_LogIncoming : pbLogIncoming...Int16* => VARIANT_BOOL*
 Windows.Win32.Devices.Fax.IFaxActivityLogging.get_LogOutgoing : pbLogOutgoing...Int16* => VARIANT_BOOL*
 Windows.Win32.Devices.Fax.IFaxActivityLogging.put_LogIncoming : bLogIncoming...Int16 => VARIANT_BOOL
@@ -2207,3 +2198,45 @@ Windows.Win32.Security.Cryptography.PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC.Invoke :
 # Fixed #1303.
 Windows.Win32.UI.TextServices.Apis.TF_DEFAULT_SELECTION added
 Windows.Win32.UI.TextServices.Apis.TS_DEFAULT_SELECTION added
+# Fixed #1031.
+Windows.Win32.Devices.Fax._IFaxAccountNotify removed
+Windows.Win32.Devices.Fax._IFaxServerNotify2 removed
+Windows.Win32.Devices.Fax.IFaxAccountNotify : [Guid(190733265,47273,18336,163,35,239,74,41,59,160,106),SupportedOSPlatform(windows6.0.6000)] => [Guid(3115564161,44059,18163,179,157,10,220,48,225,183,136),SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingJobAdded(pFaxAccount,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingJobChanged(pFaxAccount,bstrJobId,pJobStatus) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingJobRemoved(pFaxAccount,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingMessageAdded(pFaxAccount,bstrMessageId,fAddedToReceiveFolder) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingMessageRemoved(pFaxAccount,bstrMessageId,fRemovedFromReceiveFolder) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingJobAdded(pFaxAccount,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingJobChanged(pFaxAccount,bstrJobId,pJobStatus) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingJobRemoved(pFaxAccount,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingMessageAdded(pFaxAccount,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingMessageRemoved(pFaxAccount,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnServerShutDown(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2 : [Guid(1634511062,42874,16482,171,253,14,71,18,65,199,170),SupportedOSPlatform(windows6.0.6000)] => [Guid(3969673657,24551,18437,148,103,130,252,217,106,249,3),SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnActivityLoggingConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnDevicesConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnDeviceStatusChange(pFaxServer,lDeviceId,bPoweredOff,bSending,bReceiving,bRinging) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnEventLoggingConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnGeneralServerConfigChanged(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingArchiveConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingJobAdded(pFaxServer,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingJobChanged(pFaxServer,bstrJobId,pJobStatus) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingJobRemoved(pFaxServer,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingMessageAdded(pFaxServer,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingMessageRemoved(pFaxServer,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnNewCall(pFaxServer,lCallId,lDeviceId,bstrCallerId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutboundRoutingGroupsConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutboundRoutingRulesConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingArchiveConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingJobAdded(pFaxServer,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingJobChanged(pFaxServer,bstrJobId,pJobStatus) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingJobRemoved(pFaxServer,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingMessageAdded(pFaxServer,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingMessageRemoved(pFaxServer,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingQueueConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnQueuesStatusChange(pFaxServer,bOutgoingQueueBlocked,bOutgoingQueuePaused,bIncomingQueueBlocked) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnReceiptOptionsChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnSecurityConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnServerActivityChange(pFaxServer,lIncomingMessages,lRoutingMessages,lOutgoingMessages,lQueuedMessages) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnServerShutDown(pFaxServer) added
