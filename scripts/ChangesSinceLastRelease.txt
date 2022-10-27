@@ -2240,3 +2240,5 @@ Windows.Win32.Devices.Fax.IFaxServerNotify2.OnReceiptOptionsChange(pFaxServer) a
 Windows.Win32.Devices.Fax.IFaxServerNotify2.OnSecurityConfigChange(pFaxServer) added
 Windows.Win32.Devices.Fax.IFaxServerNotify2.OnServerActivityChange(pFaxServer,lIncomingMessages,lRoutingMessages,lOutgoingMessages,lQueuedMessages) added
 Windows.Win32.Devices.Fax.IFaxServerNotify2.OnServerShutDown(pFaxServer) added
+# Fixed #1332.
+Windows.Win32.Graphics.Imaging.IWICImagingFactory.CreateDecoderFromFilename : pguidVendor : [Const,In] => [Const,In,Optional]
