@@ -2204,3 +2204,6 @@ Windows.Win32.Security.Cryptography.PFN_CRYPT_GET_SIGNER_CERTIFICATE.Invoke : dw
 Windows.Win32.Security.Cryptography.PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
 Windows.Win32.Security.Cryptography.PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
 Windows.Win32.Security.Cryptography.PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+# Fixed #1303.
+Windows.Win32.UI.TextServices.Apis.TF_DEFAULT_SELECTION added
+Windows.Win32.UI.TextServices.Apis.TS_DEFAULT_SELECTION added
