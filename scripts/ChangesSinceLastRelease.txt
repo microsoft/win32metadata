@@ -2290,3 +2290,5 @@ Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnectEx : Reserved : [I
 Windows.Win32.Devices.Display.PVIDEO_WIN32K_CALLOUT.Invoke : Params : [In,Out] => [In]
 Windows.Win32.Security.Authorization.UI.ISecurityInformation2.IsDaclCanonical : pDacl : [In,Out] => [In]
 Windows.Win32.Security.Authorization.UI.ISecurityInformation2.LookupSids : rgpSids : [In,Out] => [In]
+# Fixed #1336.
+Windows.Win32.Graphics.DirectComposition.IDCompositionSurface.BeginDraw : updateObject : [Out] => [ComOutPtr,Out]
