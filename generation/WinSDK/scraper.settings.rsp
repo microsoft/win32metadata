@@ -114,6 +114,9 @@ tagDVASPECT
 tag_WBEM_TIMEOUT_TYPE
 IFaxAccountNotify
 IFaxServerNotify2
+Matrix4x3F
+Matrix4x4F
+Matrix5x4F
 --remap
 ABI::Windows::Foundation::IActivatableClassRegistration=IActivatableClassRegistration
 adpcmcoef_tag=ADPCMCOEFSET

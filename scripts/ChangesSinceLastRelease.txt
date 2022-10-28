@@ -2292,3 +2292,7 @@ Windows.Win32.Security.Authorization.UI.ISecurityInformation2.IsDaclCanonical : 
 Windows.Win32.Security.Authorization.UI.ISecurityInformation2.LookupSids : rgpSids : [In,Out] => [In]
 # Fixed #1336.
 Windows.Win32.Graphics.DirectComposition.IDCompositionSurface.BeginDraw : updateObject : [Out] => [ComOutPtr,Out]
+# Fixed #1338.
+Windows.Win32.Graphics.Direct2D.Matrix4x3F removed
+Windows.Win32.Graphics.Direct2D.Matrix4x4F removed
+Windows.Win32.Graphics.Direct2D.Matrix5x4F removed
