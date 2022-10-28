@@ -2286,3 +2286,7 @@ Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDemandStart : Overlapped : [
 Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnect : Overlapped : [In,Out] => [In,Optional]
 Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnectEx : Overlapped : [In,Out] => [In,Optional]
 Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnectEx : Reserved : [In,Reserved] => [In,Optional,Reserved]
+# Parse IN and OUT where possible for #1059.
+Windows.Win32.Devices.Display.PVIDEO_WIN32K_CALLOUT.Invoke : Params : [In,Out] => [In]
+Windows.Win32.Security.Authorization.UI.ISecurityInformation2.IsDaclCanonical : pDacl : [In,Out] => [In]
+Windows.Win32.Security.Authorization.UI.ISecurityInformation2.LookupSids : rgpSids : [In,Out] => [In]
