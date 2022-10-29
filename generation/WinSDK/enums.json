@@ -30747,6 +30747,7 @@
   },
   {
     "name": "BATTERY_TYPE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "BATTERY_TYPE_",
       "header": "Xinput.h"
@@ -30761,6 +30762,7 @@
   },
   {
     "name": "BATTERY_LEVEL",
+    "type": "byte",
     "autoPopulate": {
       "filter": "BATTERY_LEVEL_",
       "header": "Xinput.h"
@@ -30775,6 +30777,7 @@
   },
   {
     "name": "BATTERY_DEVTYPE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "BATTERY_DEVTYPE_",
       "header": "Xinput.h"
@@ -30789,6 +30792,7 @@
   },
   {
     "name": "XINPUT_DEVTYPE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "XINPUT_DEVTYPE_",
       "header": "Xinput.h"
@@ -30803,6 +30807,7 @@
   },
   {
     "name": "XINPUT_DEVSUBTYPE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "XINPUT_DEVSUBTYPE_",
       "header": "Xinput.h"
