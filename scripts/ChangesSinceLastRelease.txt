@@ -2296,3 +2296,9 @@ Windows.Win32.Graphics.DirectComposition.IDCompositionSurface.BeginDraw : update
 Windows.Win32.Graphics.Direct2D.Matrix4x3F removed
 Windows.Win32.Graphics.Direct2D.Matrix4x4F removed
 Windows.Win32.Graphics.Direct2D.Matrix5x4F removed
+# Fixing enum lengths in xinput
+Windows.Win32.UI.Input.XboxController.BATTERY_DEVTYPE.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Input.XboxController.BATTERY_LEVEL.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Input.XboxController.BATTERY_TYPE.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVTYPE.value__...System.UInt32 => System.Byte
