@@ -2345,3 +2345,5 @@ Windows.Win32.System.Power.Apis.PowerWriteValueIncrement : return...UInt32 => WI
 Windows.Win32.System.Power.Apis.PowerWriteValueMax : return...UInt32 => WIN32_ERROR
 Windows.Win32.System.Power.Apis.PowerWriteValueMin : return...UInt32 => WIN32_ERROR
 Windows.Win32.System.Power.Apis.PowerWriteValueUnitsSpecifier : return...UInt32 => WIN32_ERROR
+# Fixed #1344.
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.value__...System.UInt64 => System.UInt32

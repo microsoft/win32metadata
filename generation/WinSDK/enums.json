@@ -32008,7 +32008,6 @@
     ]
   },
   {
-    "type": "ulong",
     "name": "SFGAO_FLAGS",
     "flags": true,
     "autoPopulate": {
