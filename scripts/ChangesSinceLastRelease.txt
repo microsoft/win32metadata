@@ -2347,3 +2347,31 @@ Windows.Win32.System.Power.Apis.PowerWriteValueMin : return...UInt32 => WIN32_ER
 Windows.Win32.System.Power.Apis.PowerWriteValueUnitsSpecifier : return...UInt32 => WIN32_ERROR
 # Fixed #1344.
 Windows.Win32.System.SystemServices.SFGAO_FLAGS.value__...System.UInt64 => System.UInt32
+# Fixed #1335.
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothAuthenticateDevice : pbtbi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothAuthenticateDeviceEx : pbtdiInout...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothAuthenticateMultipleDevices : rgbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothDisplayDeviceProperties : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothEnumerateInstalledServices : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindFirstDevice : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindNextDevice : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothGetDeviceInfo : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothRegisterForAuthentication : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothRegisterForAuthenticationEx : pbtdiIn...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothRemoveDevice : pAddress...BLUETOOTH_ADDRESS_STRUCT* => BLUETOOTH_ADDRESS*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothSendAuthenticationResponse : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothSetLocalServiceInfo : pServiceInfoIn...BLUETOOTH_LOCAL_SERVICE_INFO_STRUCT* => BLUETOOTH_LOCAL_SERVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothSetServiceState : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothUpdateDeviceRecord : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS added
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS_STRUCT removed
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATE_RESPONSE.bthAddressRemote...Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS_STRUCT => Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS.deviceInfo...Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT => Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO added
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT removed
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_LOCAL_SERVICE_INFO added
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_LOCAL_SERVICE_INFO_STRUCT removed
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO.address...Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS_STRUCT => Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_SELECT_DEVICE_PARAMS.pDevices...Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT* => Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.PFN_AUTHENTICATION_CALLBACK.Invoke : pDevice...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.PFN_DEVICE_CALLBACK.Invoke : pDevice...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
