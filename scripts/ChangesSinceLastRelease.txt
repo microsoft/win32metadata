@@ -74,15 +74,6 @@ Windows.Win32.Data.Xml.MsXml.IXMLDOMSchemaCollection2.put_validateOnLoad : valid
 Windows.Win32.Data.Xml.MsXml.IXSLProcessor.transform : pDone...Int16* => VARIANT_BOOL*
 Windows.Win32.Devices.Enumeration.Pnp.IUPnPDevice.get_HasChildren : pvarb...Int16* => VARIANT_BOOL*
 Windows.Win32.Devices.Enumeration.Pnp.IUPnPDevice.get_IsRootDevice : pvarb...Int16* => VARIANT_BOOL*
-Windows.Win32.Devices.Fax._IFaxAccountNotify.OnIncomingMessageAdded : fAddedToReceiveFolder...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxAccountNotify.OnIncomingMessageRemoved : fRemovedFromReceiveFolder...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnDeviceStatusChange : bPoweredOff...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnDeviceStatusChange : bReceiving...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnDeviceStatusChange : bRinging...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnDeviceStatusChange : bSending...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnQueuesStatusChange : bIncomingQueueBlocked...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnQueuesStatusChange : bOutgoingQueueBlocked...Int16 => VARIANT_BOOL
-Windows.Win32.Devices.Fax._IFaxServerNotify2.OnQueuesStatusChange : bOutgoingQueuePaused...Int16 => VARIANT_BOOL
 Windows.Win32.Devices.Fax.IFaxActivityLogging.get_LogIncoming : pbLogIncoming...Int16* => VARIANT_BOOL*
 Windows.Win32.Devices.Fax.IFaxActivityLogging.get_LogOutgoing : pbLogOutgoing...Int16* => VARIANT_BOOL*
 Windows.Win32.Devices.Fax.IFaxActivityLogging.put_LogIncoming : bLogIncoming...Int16 => VARIANT_BOOL
@@ -2156,6 +2147,236 @@ Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_180 added
 Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_270 added
 Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_90 added
 Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_DEFAULT added
+# Fixed #1323.
+Windows.Win32.Security.Cryptography.Apis.CertAddEncodedCertificateToStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertAddEncodedCRLToStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertAddEncodedCTLToStore : dwMsgAndCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertCompareCertificate : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertCompareCertificateName : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertComparePublicKeyInfo : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertCreateCertificateContext : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertCreateCRLContext : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertFindCertificateInStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertFindChainInStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertFindCRLInStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertGetIntendedKeyUsage : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertGetPublicKeyLength : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertGetSubjectCertificateFromStore : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertIsRDNAttrsInCertificateName : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertNameToStrA : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertNameToStrW : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertStrToNameA : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertStrToNameW : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CertVerifyCRLRevocation : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptCreateKeyIdentifierFromCSP : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptDecodeObject : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptDecodeObjectEx : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptEncodeObject : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptExportPublicKeyInfo : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptExportPublicKeyInfoEx : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptExportPublicKeyInfoFromBCryptKeyHandle : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptFormatObject : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptHashPublicKeyInfo : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptHashToBeSigned : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptImportPublicKeyInfo : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptImportPublicKeyInfoEx : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptImportPublicKeyInfoEx2 : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptSignAndEncodeCertificate : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptSignCertificate : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptVerifyCertificateSignature : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.Apis.CryptVerifyCertificateSignatureEx : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.CERT_CONTEXT.dwCertEncodingType...System.UInt32 => Windows.Win32.Security.Cryptography.CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.CERT_QUERY_ENCODING_TYPE :  => [Flags]
+Windows.Win32.Security.Cryptography.CRL_CONTEXT.dwCertEncodingType...System.UInt32 => Windows.Win32.Security.Cryptography.CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_EX2_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_EXPORT_PUBLIC_KEY_INFO_FROM_BCRYPT_HANDLE_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_EXTRACT_ENCODED_SIGNATURE_PARAMETERS_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_GET_SIGNER_CERTIFICATE.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_SIGN_AND_ENCODE_HASH_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_CRYPT_VERIFY_ENCODED_SIGNATURE_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+Windows.Win32.Security.Cryptography.PFN_IMPORT_PUBLIC_KEY_INFO_EX2_FUNC.Invoke : dwCertEncodingType...UInt32 => CERT_QUERY_ENCODING_TYPE
+# Fixed #1303.
+Windows.Win32.UI.TextServices.Apis.TF_DEFAULT_SELECTION added
+Windows.Win32.UI.TextServices.Apis.TS_DEFAULT_SELECTION added
+# Fixed #1031.
+Windows.Win32.Devices.Fax._IFaxAccountNotify removed
+Windows.Win32.Devices.Fax._IFaxServerNotify2 removed
+Windows.Win32.Devices.Fax.IFaxAccountNotify : [Guid(190733265,47273,18336,163,35,239,74,41,59,160,106),SupportedOSPlatform(windows6.0.6000)] => [Guid(3115564161,44059,18163,179,157,10,220,48,225,183,136),SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingJobAdded(pFaxAccount,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingJobChanged(pFaxAccount,bstrJobId,pJobStatus) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingJobRemoved(pFaxAccount,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingMessageAdded(pFaxAccount,bstrMessageId,fAddedToReceiveFolder) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnIncomingMessageRemoved(pFaxAccount,bstrMessageId,fRemovedFromReceiveFolder) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingJobAdded(pFaxAccount,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingJobChanged(pFaxAccount,bstrJobId,pJobStatus) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingJobRemoved(pFaxAccount,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingMessageAdded(pFaxAccount,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnOutgoingMessageRemoved(pFaxAccount,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxAccountNotify.OnServerShutDown(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2 : [Guid(1634511062,42874,16482,171,253,14,71,18,65,199,170),SupportedOSPlatform(windows6.0.6000)] => [Guid(3969673657,24551,18437,148,103,130,252,217,106,249,3),SupportedOSPlatform(windows6.0.6000)]
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnActivityLoggingConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnDevicesConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnDeviceStatusChange(pFaxServer,lDeviceId,bPoweredOff,bSending,bReceiving,bRinging) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnEventLoggingConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnGeneralServerConfigChanged(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingArchiveConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingJobAdded(pFaxServer,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingJobChanged(pFaxServer,bstrJobId,pJobStatus) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingJobRemoved(pFaxServer,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingMessageAdded(pFaxServer,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnIncomingMessageRemoved(pFaxServer,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnNewCall(pFaxServer,lCallId,lDeviceId,bstrCallerId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutboundRoutingGroupsConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutboundRoutingRulesConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingArchiveConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingJobAdded(pFaxServer,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingJobChanged(pFaxServer,bstrJobId,pJobStatus) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingJobRemoved(pFaxServer,bstrJobId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingMessageAdded(pFaxServer,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingMessageRemoved(pFaxServer,bstrMessageId) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnOutgoingQueueConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnQueuesStatusChange(pFaxServer,bOutgoingQueueBlocked,bOutgoingQueuePaused,bIncomingQueueBlocked) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnReceiptOptionsChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnSecurityConfigChange(pFaxServer) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnServerActivityChange(pFaxServer,lIncomingMessages,lRoutingMessages,lOutgoingMessages,lQueuedMessages) added
+Windows.Win32.Devices.Fax.IFaxServerNotify2.OnServerShutDown(pFaxServer) added
+# Fixed #1332.
+Windows.Win32.Graphics.Imaging.IWICImagingFactory.CreateDecoderFromFilename : pguidVendor : [Const,In] => [Const,In,Optional]
+# Fixed #1333.
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice : dcompositionDevice : [Out] => [ComOutPtr,Out]
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice2 : dcompositionDevice : [Out] => [ComOutPtr,Out]
+Windows.Win32.Graphics.DirectComposition.Apis.DCompositionCreateDevice3 : dcompositionDevice : [Out] => [ComOutPtr,Out]
+# Fixed #1208.
+Windows.Win32.UI.Shell.IExplorerBrowser.SetRect : phdwp...IntPtr* => HDWP*
+Windows.Win32.UI.WindowsAndMessaging.Apis.BeginDeferWindowPos : return...IntPtr => HDWP
+Windows.Win32.UI.WindowsAndMessaging.Apis.DeferWindowPos : hWinPosInfo...IntPtr => HDWP
+Windows.Win32.UI.WindowsAndMessaging.Apis.DeferWindowPos : return...IntPtr => HDWP
+Windows.Win32.UI.WindowsAndMessaging.Apis.EndDeferWindowPos : hWinPosInfo...IntPtr => HDWP
+Windows.Win32.UI.WindowsAndMessaging.HDWP added
+# Fixed #911.
+Windows.Win32.Networking.HttpServer.Apis.HttpAddFragmentToCache : CachePolicy : [In,Out] => [In]
+Windows.Win32.Networking.HttpServer.Apis.HttpAddFragmentToCache : DataChunk : [In,Out] => [In]
+Windows.Win32.Networking.HttpServer.Apis.HttpAddFragmentToCache : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpCancelHttpRequest : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpCreateHttpHandle : RequestQueueHandle : [In,Out] => [Out]
+Windows.Win32.Networking.HttpServer.Apis.HttpCreateRequestQueue : Flags : [In] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpCreateRequestQueue : Name : [Const,In] => [Const,In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpCreateRequestQueue : RequestQueueHandle : [In,Out] => [Out]
+Windows.Win32.Networking.HttpServer.Apis.HttpCreateRequestQueue : SecurityAttributes : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpCreateServerSession : ServerSessionId : [In,Out] => [Out]
+Windows.Win32.Networking.HttpServer.Apis.HttpCreateUrlGroup : pUrlGroupId : [In,Out] => [Out]
+Windows.Win32.Networking.HttpServer.Apis.HttpFlushResponseCache : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpReadFragmentFromCache : ByteRange : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpReadFragmentFromCache : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpReceiveClientCertificate : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpReceiveHttpRequest : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpReceiveRequestEntityBody : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendHttpResponse : BytesSent : [In,Out] => [Optional,Out]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendHttpResponse : CachePolicy : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendHttpResponse : HttpResponse : [In,Out] => [In]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendHttpResponse : LogData : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendHttpResponse : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendResponseEntityBody : BytesSent : [In,Out] => [Optional,Out]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendResponseEntityBody : EntityChunkCount : [In] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendResponseEntityBody : LogData : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendResponseEntityBody : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendResponseEntityBody : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
+Windows.Win32.Networking.HttpServer.Apis.HttpSendResponseEntityBody : Reserved2 : [In,Reserved] => [Optional,Reserved]
+Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDemandStart : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnect : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnectEx : Overlapped : [In,Out] => [In,Optional]
+Windows.Win32.Networking.HttpServer.Apis.HttpWaitForDisconnectEx : Reserved : [In,Reserved] => [In,Optional,Reserved]
+# Parse IN and OUT where possible for #1059.
+Windows.Win32.Devices.Display.PVIDEO_WIN32K_CALLOUT.Invoke : Params : [In,Out] => [In]
+Windows.Win32.Security.Authorization.UI.ISecurityInformation2.IsDaclCanonical : pDacl : [In,Out] => [In]
+Windows.Win32.Security.Authorization.UI.ISecurityInformation2.LookupSids : rgpSids : [In,Out] => [In]
+# Fixed #1336.
+Windows.Win32.Graphics.DirectComposition.IDCompositionSurface.BeginDraw : updateObject : [Out] => [ComOutPtr,Out]
+# Fixed #1338.
+Windows.Win32.Graphics.Direct2D.Matrix4x3F removed
+Windows.Win32.Graphics.Direct2D.Matrix4x4F removed
+Windows.Win32.Graphics.Direct2D.Matrix5x4F removed
+# Fixing enum lengths in xinput
+Windows.Win32.UI.Input.XboxController.BATTERY_DEVTYPE.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Input.XboxController.BATTERY_LEVEL.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Input.XboxController.BATTERY_TYPE.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVSUBTYPE.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Input.XboxController.XINPUT_DEVTYPE.value__...System.UInt32 => System.Byte
+# Change return type of some functions in POWRPROF.dll to WIN32_ERROR (fix #1346).
+Windows.Win32.System.Power.Apis.PowerCanRestoreIndividualDefaultPowerScheme : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerCreatePossibleSetting : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerCreateSetting : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerDeleteScheme : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerDuplicateScheme : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerEnumerate : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerGetActiveScheme : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerImportPowerScheme : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadACValue : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadDCValue : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadDescription : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadFriendlyName : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadIconResourceSpecifier : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadPossibleDescription : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadPossibleFriendlyName : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadPossibleValue : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadValueIncrement : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadValueMax : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadValueMin : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReadValueUnitsSpecifier : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerRegisterSuspendResumeNotification : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerRemovePowerSetting : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerReportThermalEvent : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerRestoreDefaultPowerSchemes : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerRestoreIndividualDefaultPowerScheme : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerSetActiveScheme : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerSettingAccessCheck : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerSettingAccessCheckEx : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerSettingRegisterNotification : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerSettingUnregisterNotification : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerUnregisterSuspendResumeNotification : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteDescription : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteFriendlyName : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteIconResourceSpecifier : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWritePossibleDescription : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWritePossibleFriendlyName : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWritePossibleValue : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteSettingAttributes : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteValueIncrement : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteValueMax : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteValueMin : return...UInt32 => WIN32_ERROR
+Windows.Win32.System.Power.Apis.PowerWriteValueUnitsSpecifier : return...UInt32 => WIN32_ERROR
+# Fixed #1344.
+Windows.Win32.System.SystemServices.SFGAO_FLAGS.value__...System.UInt64 => System.UInt32
+# Fixed #1335.
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothAuthenticateDevice : pbtbi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothAuthenticateDeviceEx : pbtdiInout...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothAuthenticateMultipleDevices : rgbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothDisplayDeviceProperties : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothEnumerateInstalledServices : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindFirstDevice : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothFindNextDevice : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothGetDeviceInfo : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothRegisterForAuthentication : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothRegisterForAuthenticationEx : pbtdiIn...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothRemoveDevice : pAddress...BLUETOOTH_ADDRESS_STRUCT* => BLUETOOTH_ADDRESS*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothSendAuthenticationResponse : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothSetLocalServiceInfo : pServiceInfoIn...BLUETOOTH_LOCAL_SERVICE_INFO_STRUCT* => BLUETOOTH_LOCAL_SERVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothSetServiceState : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.Apis.BluetoothUpdateDeviceRecord : pbtdi...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS added
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS_STRUCT removed
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATE_RESPONSE.bthAddressRemote...Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS_STRUCT => Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_AUTHENTICATION_CALLBACK_PARAMS.deviceInfo...Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT => Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO added
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT removed
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_LOCAL_SERVICE_INFO added
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_LOCAL_SERVICE_INFO_STRUCT removed
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO.address...Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS_STRUCT => Windows.Win32.Devices.Bluetooth.BLUETOOTH_ADDRESS
+Windows.Win32.Devices.Bluetooth.BLUETOOTH_SELECT_DEVICE_PARAMS.pDevices...Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT* => Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.PFN_AUTHENTICATION_CALLBACK.Invoke : pDevice...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+Windows.Win32.Devices.Bluetooth.PFN_DEVICE_CALLBACK.Invoke : pDevice...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+# Fixed #1349.
+Windows.Win32.Security.Apis.InitializeAcl : dwAclRevision...UInt32 => ACE_REVISION
 # CDN 
 Windows.Win32.UI.Controls.Dialogs.COMMON_DIALOG_NOTIFICATION added
 Windows.Win32.UI.Controls.Dialogs.COMMON_DIALOG_NOTIFICATION.CDN_FILEOK added

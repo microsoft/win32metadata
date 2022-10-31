@@ -6,6 +6,9 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#define IN _In_
+#define OUT _Out_
+
 #include <accctrl.h>
 #include <adtgen.h>
 #include <authz.h>

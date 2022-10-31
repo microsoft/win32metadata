@@ -77,7 +77,7 @@
   {
     "Namespace": "Windows.Win32.Foundation",
     "Name": "COLORREF",
-    "ValueType": "uint",
+    "ValueType": "uint"
   },
   {
     "Namespace": "Windows.Win32.System.DataExchange",
@@ -1471,5 +1471,11 @@
     "ValueType": "IntPtr",
     "InvalidHandleValues": [ 0 ],
     "CloseApi": "EvtClose"
+  },
+  {
+    "Namespace": "Windows.Win32.UI.WindowsAndMessaging",
+    "Name": "HDWP",
+    "ValueType": "DECLARE_HANDLE",
+    "InvalidHandleValues": [ 0 ]
   }
 ]

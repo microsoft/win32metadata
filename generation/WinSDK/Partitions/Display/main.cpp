@@ -5,6 +5,9 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
+#define IN _In_
+#define OUT _Out_
+
 #include <winnt.h>
 #include <winddi.h>
 #include <devpropdef.h>

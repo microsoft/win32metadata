@@ -6,6 +6,9 @@
 //#include <windows.h>
 //#include <sdkddkver.h>
 
+#define IN _In_
+#define OUT _Out_
+
 #include <WinSock2.h>
 #include <http.h>
 #include <winhttp.h>
