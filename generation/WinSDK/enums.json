@@ -16318,6 +16318,10 @@
       {
         "method": "AddScopedPolicyIDAce",
         "parameter": "dwAceRevision"
+      },
+      {
+        "method": "InitializeAcl",
+        "parameter": "dwAclRevision"
       }
     ]
   },

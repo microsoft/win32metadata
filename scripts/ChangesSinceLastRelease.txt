@@ -2375,3 +2375,5 @@ Windows.Win32.Devices.Bluetooth.BLUETOOTH_RADIO_INFO.address...Windows.Win32.Dev
 Windows.Win32.Devices.Bluetooth.BLUETOOTH_SELECT_DEVICE_PARAMS.pDevices...Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO_STRUCT* => Windows.Win32.Devices.Bluetooth.BLUETOOTH_DEVICE_INFO*
 Windows.Win32.Devices.Bluetooth.PFN_AUTHENTICATION_CALLBACK.Invoke : pDevice...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
 Windows.Win32.Devices.Bluetooth.PFN_DEVICE_CALLBACK.Invoke : pDevice...BLUETOOTH_DEVICE_INFO_STRUCT* => BLUETOOTH_DEVICE_INFO*
+# Fixed #1349.
+Windows.Win32.Security.Apis.InitializeAcl : dwAclRevision...UInt32 => ACE_REVISION
