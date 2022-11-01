@@ -1477,5 +1477,11 @@
     "Name": "HDWP",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Ole",
+    "Name": "OLE_HANDLE",
+    "ValueType": "uint",
+    "InvalidHandleValues": [ 0 ]
   }
 ]

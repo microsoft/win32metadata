@@ -2573,3 +2573,11 @@ Windows.Win32.System.Performance.Apis.PdhValidatePathExW : return...Int32 => UIn
 Windows.Win32.System.Performance.Apis.PdhValidatePathW : return...Int32 => UInt32
 Windows.Win32.System.Performance.Apis.PdhVerifySQLDBA : return...Int32 => UInt32
 Windows.Win32.System.Performance.Apis.PdhVerifySQLDBW : return...Int32 => UInt32
+# Fixed #1334.
+Windows.Win32.System.Ole.IPicture.get_Handle : pHandle...UInt32* => OLE_HANDLE*
+Windows.Win32.System.Ole.IPicture.get_hPal : phPal...UInt32* => OLE_HANDLE*
+Windows.Win32.System.Ole.IPicture.SelectPicture : phBmpOut...UInt32* => OLE_HANDLE*
+Windows.Win32.System.Ole.IPicture.set_hPal : hPal...UInt32 => OLE_HANDLE
+Windows.Win32.System.Ole.OLE_HANDLE added
+Windows.Win32.System.WindowsProgramming.IEditionUpgradeBroker.InitializeParentWindow : parentHandle...UInt32 => OLE_HANDLE
+Windows.Win32.UI.TabletPC.IInkEdit.get_Hwnd : pohHwnd...UInt32* => OLE_HANDLE*
