@@ -26405,3 +26405,5 @@ DtcGetTransactionManagerExA=XOLEHLP.dll
 DtcGetTransactionManagerExW=XOLEHLP.dll
 StartXpsPrintJob=XPSPRINT.dll
 StartXpsPrintJob1=XPSPRINT.dll
+HtmlHelpA=htmlhelp.dll
+HtmlHelpW=htmlhelp.dll

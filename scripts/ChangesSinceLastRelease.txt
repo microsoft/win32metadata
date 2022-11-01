@@ -2581,3 +2581,6 @@ Windows.Win32.System.Ole.IPicture.set_hPal : hPal...UInt32 => OLE_HANDLE
 Windows.Win32.System.Ole.OLE_HANDLE added
 Windows.Win32.System.WindowsProgramming.IEditionUpgradeBroker.InitializeParentWindow : parentHandle...UInt32 => OLE_HANDLE
 Windows.Win32.UI.TabletPC.IInkEdit.get_Hwnd : pohHwnd...UInt32* => OLE_HANDLE*
+# Fixed #1345.
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpA added
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpW added
