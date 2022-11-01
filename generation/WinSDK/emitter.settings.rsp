@@ -1285,3 +1285,4 @@ PowerWriteValueIncrement::return=WIN32_ERROR
 PowerWriteValueMax::return=WIN32_ERROR
 PowerWriteValueMin::return=WIN32_ERROR
 PowerWriteValueUnitsSpecifier::return=WIN32_ERROR
+^Pdh\w+::return$=uint
