@@ -272,7 +272,12 @@
       "header": "WinUser.h"
     },
     "members": [],
-    "uses": []
+    "uses": [
+      {
+        "method": "OleDuplicateData",
+        "parameter": "cfFormat"
+      }
+  ]
   },
   {
     "name": "WNDCLASS_STYLES",
