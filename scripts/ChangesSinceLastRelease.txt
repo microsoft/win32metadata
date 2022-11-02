@@ -23,3 +23,10 @@ Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_90 removed
 Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_DEFAULT removed
 # Fixed #1317.
 Windows.Win32.Graphics.Direct3D.Fxc.Apis.D3DCOMPILER_DLL removed
+# Fixed #519.
+Windows.Win32.Globalization.Apis.EnumSystemGeoNames : data : [In,Optional] => [In]
+Windows.Win32.Globalization.Apis.FindNLSStringEx : sortHandle : [In,Optional] => [In]
+Windows.Win32.Globalization.Apis.LCMapStringEx : sortHandle : [In,Optional] => [In]
+Windows.Win32.Media.MediaFoundation.Apis.MFPCreateMediaPlayer : creationOptions : [In,Optional] => [In]
+Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageA : lParam : [Optional] => [In]
+Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageA : wParam : [Optional] => [In]
