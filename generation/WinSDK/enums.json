@@ -31858,6 +31858,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.Graphics.Gdi",
     "name": "DEVMODE_DISPLAY_ORIENTATION",
     "autoPopulate": {
       "filter": "DMDO_",
@@ -31876,6 +31877,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.Graphics.Gdi",
     "name": "DEVMODE_DISPLAY_FIXED_OUTPUT",
     "autoPopulate": {
       "filter": "DMDFO_",

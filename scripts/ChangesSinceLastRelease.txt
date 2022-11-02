@@ -1,0 +1,23 @@
+# Fixed #1325.
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_FIXED_OUTPUT added
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_CENTER added
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_DEFAULT added
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_STRETCH added
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_ORIENTATION added
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_ORIENTATION.DMDO_180 added
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_ORIENTATION.DMDO_270 added
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_ORIENTATION.DMDO_90 added
+Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_ORIENTATION.DMDO_DEFAULT added
+Windows.Win32.Graphics.Gdi.DEVMODEA._Anonymous1_e__Union._Anonymous2_e__Struct.dmDisplayFixedOutput...Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT => Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_FIXED_OUTPUT
+Windows.Win32.Graphics.Gdi.DEVMODEA._Anonymous1_e__Union._Anonymous2_e__Struct.dmDisplayOrientation...Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION => Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_ORIENTATION
+Windows.Win32.Graphics.Gdi.DEVMODEW._Anonymous1_e__Union._Anonymous2_e__Struct.dmDisplayFixedOutput...Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT => Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_FIXED_OUTPUT
+Windows.Win32.Graphics.Gdi.DEVMODEW._Anonymous1_e__Union._Anonymous2_e__Struct.dmDisplayOrientation...Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION => Windows.Win32.Graphics.Gdi.DEVMODE_DISPLAY_ORIENTATION
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT removed
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_CENTER removed
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_DEFAULT removed
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_FIXED_OUTPUT.DMDFO_STRETCH removed
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION removed
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_180 removed
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_270 removed
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_90 removed
+Windows.Win32.System.SystemServices.DEVMODE_DISPLAY_ORIENTATION.DMDO_DEFAULT removed
