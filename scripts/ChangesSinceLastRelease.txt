@@ -35,3 +35,13 @@ Windows.Win32.Media.Audio.DirectSound.Apis.DirectSoundCreate : pUnkOuter : [In] 
 Windows.Win32.Media.Audio.DirectSound.IDirectSound.CreateSoundBuffer : pUnkOuter : [In] => [Optional]
 # Fixed #452.
 Windows.Win32.NetworkManagement.Dhcp.Apis.DhcpEnumSubnets : EnumInfo : [In,Out] => [Out]
+# Fixed #1059.
+Windows.Win32.Security.Cryptography.Certificates.FNCERTSRVBACKUPGETDYNAMICFILELISTW.Invoke : hbc : [In,Out] => [In]
+Windows.Win32.Security.Cryptography.Certificates.FNCERTSRVBACKUPGETDYNAMICFILELISTW.Invoke : pcbSize : [In,Out] => [Out]
+Windows.Win32.Security.Cryptography.Certificates.FNCERTSRVBACKUPGETDYNAMICFILELISTW.Invoke : ppwszzFileList : [In,Out] => [Out]
+Windows.Win32.Storage.FileSystem.Apis.FlushLogBuffers : pOverlapped : [In,Out] => [In,Optional,Out]
+Windows.Win32.Storage.FileSystem.Apis.FlushLogBuffers : pvMarshal : [In,Out] => [In]
+Windows.Win32.Storage.FileSystem.Apis.SetLogFileSizeWithPolicy : pDesiredSize : [In,Out] => [In]
+Windows.Win32.Storage.FileSystem.Apis.SetLogFileSizeWithPolicy : pResultingSize : [In,Out] => [Out]
+Windows.Win32.System.Rpc.Apis.I_RpcNsInterfaceExported : EntryName : [In,Out] => [In]
+Windows.Win32.System.Rpc.Apis.I_RpcNsInterfaceExported : RpcInterfaceInformation : [In,Out] => [In]
