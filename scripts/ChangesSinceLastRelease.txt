@@ -30,3 +30,6 @@ Windows.Win32.Globalization.Apis.LCMapStringEx : sortHandle : [In,Optional] => [
 Windows.Win32.Media.MediaFoundation.Apis.MFPCreateMediaPlayer : creationOptions : [In,Optional] => [In]
 Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageA : lParam : [Optional] => [In]
 Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageA : wParam : [Optional] => [In]
+# Fixed #508.
+Windows.Win32.Media.Audio.DirectSound.Apis.DirectSoundCreate : pUnkOuter : [In] => [Optional]
+Windows.Win32.Media.Audio.DirectSound.IDirectSound.CreateSoundBuffer : pUnkOuter : [In] => [Optional]
