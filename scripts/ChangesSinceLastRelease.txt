@@ -33,3 +33,5 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SendMessageA : wParam : [Optional] => 
 # Fixed #508.
 Windows.Win32.Media.Audio.DirectSound.Apis.DirectSoundCreate : pUnkOuter : [In] => [Optional]
 Windows.Win32.Media.Audio.DirectSound.IDirectSound.CreateSoundBuffer : pUnkOuter : [In] => [Optional]
+# Fixed #452.
+Windows.Win32.NetworkManagement.Dhcp.Apis.DhcpEnumSubnets : EnumInfo : [In,Out] => [Out]
