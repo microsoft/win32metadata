@@ -266,13 +266,19 @@
     ]
   },
   {
-    "name": "CLIPBOARD_FORMATS",
+    "name": "CLIPBOARD_FORMAT",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "CF_",
       "header": "WinUser.h"
     },
     "members": [],
-    "uses": []
+    "uses": [
+      {
+        "method": "OleDuplicateData",
+        "parameter": "cfFormat"
+      }
+  ]
   },
   {
     "name": "WNDCLASS_STYLES",

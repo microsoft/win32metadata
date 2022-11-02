@@ -2791,3 +2791,61 @@ Windows.Win32.Security.WinTrust.SPC_IMAGE.GifFile...Windows.Win32.Security.Crypt
 Windows.Win32.Security.WinTrust.SPC_IMAGE.Metafile...Windows.Win32.Security.Cryptography.CRYPTOAPI_BLOB => Windows.Win32.Security.Cryptography.CRYPT_INTEGER_BLOB
 Windows.Win32.Security.WinTrust.SPC_INDIRECT_DATA_CONTENT.Digest...Windows.Win32.Security.Cryptography.CRYPTOAPI_BLOB => Windows.Win32.Security.Cryptography.CRYPT_INTEGER_BLOB
 Windows.Win32.Security.WinTrust.SPC_SERIALIZED_OBJECT.SerializedData...Windows.Win32.Security.Cryptography.CRYPTOAPI_BLOB => Windows.Win32.Security.Cryptography.CRYPT_INTEGER_BLOB
+# Added enum for cfFormat
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_BITMAP removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_DIB removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_DIBV5 removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_DIF removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_DSPBITMAP removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_DSPENHMETAFILE removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_DSPMETAFILEPICT removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_DSPTEXT removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_ENHMETAFILE removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_GDIOBJFIRST removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_GDIOBJLAST removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_HDROP removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_LOCALE removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_MAX removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_METAFILEPICT removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_OEMTEXT removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_OWNERDISPLAY removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_PALETTE removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_PENDATA removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_PRIVATEFIRST removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_PRIVATELAST removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_RIFF removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_SYLK removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_TEXT removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_TIFF removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_UNICODETEXT removed
+Windows.Win32.System.SystemServices.CLIPBOARD_FORMATS.CF_WAVE removed
+Windows.Win32.System.Ole.Apis.OleDuplicateData : cfFormat...UInt16 => CLIPBOARD_FORMAT
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_BITMAP added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_DIB added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_DIBV5 added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_DIF added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_DSPBITMAP added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_DSPENHMETAFILE added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_DSPMETAFILEPICT added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_DSPTEXT added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_ENHMETAFILE added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_GDIOBJFIRST added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_GDIOBJLAST added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_HDROP added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_LOCALE added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_MAX added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_METAFILEPICT added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_OEMTEXT added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_OWNERDISPLAY added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_PALETTE added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_PENDATA added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_PRIVATEFIRST added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_PRIVATELAST added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_RIFF added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_SYLK added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_TEXT added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_TIFF added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_UNICODETEXT added
+Windows.Win32.System.Ole.CLIPBOARD_FORMAT.CF_WAVE added
