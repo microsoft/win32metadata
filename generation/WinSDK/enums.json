@@ -266,7 +266,8 @@
     ]
   },
   {
-    "name": "CLIPBOARD_FORMATS",
+    "name": "CLIPBOARD_FORMAT",
+    "type": "ushort",
     "autoPopulate": {
       "filter": "CF_",
       "header": "WinUser.h"
