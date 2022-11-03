@@ -48,3 +48,8 @@ Windows.Win32.System.Rpc.Apis.I_RpcNsInterfaceExported : RpcInterfaceInformation
 # Fixed #1353.
 Windows.Win32.UI.WindowsAndMessaging.Apis.GetMessageA : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)]
 Windows.Win32.UI.WindowsAndMessaging.Apis.GetMessageW : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)]
+# Fixed #1352.
+Windows.Win32.Devices.Display.Apis.DestroyPhysicalMonitor : return...Int32 => BOOL
+Windows.Win32.Devices.Display.Apis.DestroyPhysicalMonitors : return...Int32 => BOOL
+Windows.Win32.Devices.Display.Apis.GetNumberOfPhysicalMonitorsFromHMONITOR : return...Int32 => BOOL
+Windows.Win32.Devices.Display.Apis.GetPhysicalMonitorsFromHMONITOR : return...Int32 => BOOL

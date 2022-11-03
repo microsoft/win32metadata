@@ -1307,3 +1307,7 @@ FlushLogBuffers::pvMarshal=[In]
 FlushLogBuffers::pOverlapped=[In][Out][Optional]
 GetMessageA=[CanReturnMultipleSuccessValuesAttribute]
 GetMessageW=[CanReturnMultipleSuccessValuesAttribute]
+GetNumberOfPhysicalMonitorsFromHMONITOR::return=BOOL
+GetPhysicalMonitorsFromHMONITOR::return=BOOL
+DestroyPhysicalMonitor::return=BOOL
+DestroyPhysicalMonitors::return=BOOL
