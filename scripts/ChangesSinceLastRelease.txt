@@ -45,3 +45,6 @@ Windows.Win32.Storage.FileSystem.Apis.SetLogFileSizeWithPolicy : pDesiredSize : 
 Windows.Win32.Storage.FileSystem.Apis.SetLogFileSizeWithPolicy : pResultingSize : [In,Out] => [Out]
 Windows.Win32.System.Rpc.Apis.I_RpcNsInterfaceExported : EntryName : [In,Out] => [In]
 Windows.Win32.System.Rpc.Apis.I_RpcNsInterfaceExported : RpcInterfaceInformation : [In,Out] => [In]
+# Fixed #1353.
+Windows.Win32.UI.WindowsAndMessaging.Apis.GetMessageA : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.WindowsAndMessaging.Apis.GetMessageW : [DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(USER32.dll,ExactSpelling=True,PreserveSig=False,SetLastError=True),SupportedOSPlatform(windows5.0)]
