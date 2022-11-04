@@ -53,3 +53,20 @@ Windows.Win32.Devices.Display.Apis.DestroyPhysicalMonitor : return...Int32 => BO
 Windows.Win32.Devices.Display.Apis.DestroyPhysicalMonitors : return...Int32 => BOOL
 Windows.Win32.Devices.Display.Apis.GetNumberOfPhysicalMonitorsFromHMONITOR : return...Int32 => BOOL
 Windows.Win32.Devices.Display.Apis.GetPhysicalMonitorsFromHMONITOR : return...Int32 => BOOL
+# Added enum for OLEIVERB
+Windows.Win32.System.Ole.Apis.OLEIVERB_DISCARDUNDOSTATE removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_HIDE removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_INPLACEACTIVATE removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_OPEN removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_PRIMARY removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_SHOW removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_UIACTIVATE removed
+Windows.Win32.System.Ole.OLEIVERB added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_DISCARDUNDOSTATE added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_HIDE added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_INPLACEACTIVATE added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_OPEN added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_PRIMARY added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_SHOW added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_UIACTIVATE added
+Windows.Win32.System.Ole.OLEVERB.lVerb...System.Int32 => Windows.Win32.System.Ole.OLEIVERB
