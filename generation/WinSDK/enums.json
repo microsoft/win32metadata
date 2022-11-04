@@ -35445,6 +35445,23 @@
       }
     ],
     "uses": []
+  },
+  {
+    "name": "HTML_HELP_COMMAND",
+    "autoPopulate": {
+      "filter": "HH_",
+      "header": "HtmlHelp.h"
+    },
+    "uses": [
+      {
+        "method": "HtmlHelpW",
+        "parameter": "uCommand"
+      },
+      {
+        "method": "HtmlHelpA",
+        "parameter": "uCommand"
+      }
+    ]
   }
 ]
 }
