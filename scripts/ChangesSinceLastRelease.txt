@@ -53,6 +53,81 @@ Windows.Win32.Devices.Display.Apis.DestroyPhysicalMonitor : return...Int32 => BO
 Windows.Win32.Devices.Display.Apis.DestroyPhysicalMonitors : return...Int32 => BOOL
 Windows.Win32.Devices.Display.Apis.GetNumberOfPhysicalMonitorsFromHMONITOR : return...Int32 => BOOL
 Windows.Win32.Devices.Display.Apis.GetPhysicalMonitorsFromHMONITOR : return...Int32 => BOOL
+# Add HTML_HELP_COMMAND enum for HH_ constants
+Windows.Win32.Data.HtmlHelp.Apis.HH_ALINK_LOOKUP removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_CLOSE_ALL removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_DISPLAY_INDEX removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_DISPLAY_SEARCH removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_DISPLAY_TEXT_POPUP removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_DISPLAY_TOC removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_DISPLAY_TOPIC removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_ENUM_CATEGORY removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_ENUM_CATEGORY_IT removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_ENUM_INFO_TYPE removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_FTS_DEFAULT_PROXIMITY removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_GET_LAST_ERROR removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_GET_WIN_HANDLE removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_GET_WIN_TYPE removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_HELP_CONTEXT removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_HELP_FINDER removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_INITIALIZE removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_KEYWORD_LOOKUP removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_MAX_TABS removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_PRETRANSLATEMESSAGE removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_RESERVED1 removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_RESERVED2 removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_RESERVED3 removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_RESET_IT_FILTER removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_SAFE_DISPLAY_TOPIC removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_SET_EXCLUSIVE_FILTER removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_SET_GLOBAL_PROPERTY removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_SET_INCLUSIVE_FILTER removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_SET_INFO_TYPE removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_SET_QUERYSERVICE removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_SET_WIN_TYPE removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_SYNC removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_TP_HELP_CONTEXTMENU removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_TP_HELP_WM_HELP removed
+Windows.Win32.Data.HtmlHelp.Apis.HH_UNINITIALIZE removed
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpA : uCommand...UInt32 => HTML_HELP_COMMAND
+Windows.Win32.Data.HtmlHelp.Apis.HtmlHelpW : uCommand...UInt32 => HTML_HELP_COMMAND
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_ALINK_LOOKUP added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_CLOSE_ALL added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_DISPLAY_INDEX added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_DISPLAY_SEARCH added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_DISPLAY_TEXT_POPUP added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_DISPLAY_TOC added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_DISPLAY_TOPIC added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_ENUM_CATEGORY added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_ENUM_CATEGORY_IT added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_ENUM_INFO_TYPE added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_FTS_DEFAULT_PROXIMITY added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_GET_LAST_ERROR added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_GET_WIN_HANDLE added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_GET_WIN_TYPE added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_HELP_CONTEXT added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_HELP_FINDER added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_INITIALIZE added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_KEYWORD_LOOKUP added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_MAX_TABS added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_MAX_TABS_CUSTOM added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_PRETRANSLATEMESSAGE added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_RESERVED1 added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_RESERVED2 added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_RESERVED3 added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_RESET_IT_FILTER added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SAFE_DISPLAY_TOPIC added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SET_EXCLUSIVE_FILTER added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SET_GLOBAL_PROPERTY added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SET_INCLUSIVE_FILTER added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SET_INFO_TYPE added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SET_QUERYSERVICE added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SET_WIN_TYPE added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SYNC added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_TP_HELP_CONTEXTMENU added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_TP_HELP_WM_HELP added
+Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_UNINITIALIZE added
 # Added enum for OLEIVERB
 Windows.Win32.System.Ole.Apis.OLEIVERB_DISCARDUNDOSTATE removed
 Windows.Win32.System.Ole.Apis.OLEIVERB_HIDE removed
