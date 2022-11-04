@@ -32204,11 +32204,11 @@
     "uses": [
       {
         "struct": "OLEUIBUSYA",
-        "parameter": "dwFlags"
+        "field": "dwFlags"
       },
       {
         "struct": "OLEUIBUSYW",
-        "parameter": "dwFlags"
+        "field": "dwFlags"
       }
     ]
   },
@@ -32375,7 +32375,7 @@
       {
         "interface": "ITypeInfo",
         "method": "Invoke",
-        "field": "wFlags"
+        "parameter": "wFlags"
       }
     ]
   },
@@ -32392,12 +32392,12 @@
       {
         "interface": "ITypeInfo",
         "method": "GetImplTypeFlags",
-        "field": "pImplTypeFlags"
+        "parameter": "pImplTypeFlags"
       },
       {
-        "interface": "ITypeInfo",
+        "interface": "ICreateTypeInfo",
         "method": "SetImplTypeFlags",
-        "field": "ImplTypeFlags"
+        "parameter": "implTypeFlags"
       }
     ]
   },
