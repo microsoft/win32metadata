@@ -128,3 +128,20 @@ Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_SYNC added
 Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_TP_HELP_CONTEXTMENU added
 Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_TP_HELP_WM_HELP added
 Windows.Win32.Data.HtmlHelp.HTML_HELP_COMMAND.HH_UNINITIALIZE added
+# Added enum for OLEIVERB
+Windows.Win32.System.Ole.Apis.OLEIVERB_DISCARDUNDOSTATE removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_HIDE removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_INPLACEACTIVATE removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_OPEN removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_PRIMARY removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_SHOW removed
+Windows.Win32.System.Ole.Apis.OLEIVERB_UIACTIVATE removed
+Windows.Win32.System.Ole.OLEIVERB added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_DISCARDUNDOSTATE added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_HIDE added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_INPLACEACTIVATE added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_OPEN added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_PRIMARY added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_SHOW added
+Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_UIACTIVATE added
+Windows.Win32.System.Ole.OLEVERB.lVerb...System.Int32 => Windows.Win32.System.Ole.OLEIVERB

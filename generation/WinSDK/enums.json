@@ -663,6 +663,21 @@
     ]
   },
   {
+    "name": "OLEIVERB",
+    "type": "int",
+    "autoPopulate": {
+      "filter": "OLEIVERB_",
+      "header": "Ole2.h"
+    },
+    "members": [],
+    "uses": [
+      {
+        "struct": "OLEVERB",
+        "field": "lVerb"
+      }
+    ]
+  },
+  {
     "name": "POINTER_FLAGS",
     "flags": true,
     "autoPopulate": {
