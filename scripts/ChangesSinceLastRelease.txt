@@ -145,3 +145,54 @@ Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_PRIMARY added
 Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_SHOW added
 Windows.Win32.System.Ole.OLEIVERB.OLEIVERB_UIACTIVATE added
 Windows.Win32.System.Ole.OLEVERB.lVerb...System.Int32 => Windows.Win32.System.Ole.OLEIVERB
+# Fixed #775.
+Windows.Win32.UI.Shell.Apis.ASSOCF_APP_TO_APP removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_IGNOREBASECLASS removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_INIT_BYEXENAME removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_INIT_DEFAULTTOFOLDER removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_INIT_DEFAULTTOSTAR removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_INIT_FIXED_PROGID removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_INIT_FOR_FILE removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_INIT_IGNOREUNKNOWN removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_INIT_NOREMAPCLSID removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_IS_FULL_URI removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_IS_PROTOCOL removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_NOFIXUPS removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_NONE removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_NOTRUNCATE removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_NOUSERSETTINGS removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_OPEN_BYEXENAME removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_PER_MACHINE_ONLY removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_REMAPRUNDLL removed
+Windows.Win32.UI.Shell.Apis.ASSOCF_VERIFY removed
+Windows.Win32.UI.Shell.Apis.AssocQueryKeyA : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.Apis.AssocQueryKeyW : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.Apis.AssocQueryStringA : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.Apis.AssocQueryStringByKeyA : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.Apis.AssocQueryStringByKeyW : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.Apis.AssocQueryStringW : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.ASSOCF added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_APP_TO_APP added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_IGNOREBASECLASS added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_INIT_BYEXENAME added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_INIT_DEFAULTTOFOLDER added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_INIT_DEFAULTTOSTAR added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_INIT_FIXED_PROGID added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_INIT_FOR_FILE added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_INIT_IGNOREUNKNOWN added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_INIT_NOREMAPCLSID added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_IS_FULL_URI added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_IS_PROTOCOL added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_NOFIXUPS added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_NONE added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_NOTRUNCATE added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_NOUSERSETTINGS added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_OPEN_BYEXENAME added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_PER_MACHINE_ONLY added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_REMAPRUNDLL added
+Windows.Win32.UI.Shell.ASSOCF.ASSOCF_VERIFY added
+Windows.Win32.UI.Shell.IQueryAssociations.GetData : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.IQueryAssociations.GetEnum : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.IQueryAssociations.GetKey : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.IQueryAssociations.GetString : flags...UInt32 => ASSOCF
+Windows.Win32.UI.Shell.IQueryAssociations.Init : flags...UInt32 => ASSOCF

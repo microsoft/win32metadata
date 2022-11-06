@@ -1149,6 +1149,18 @@ MXDC_S0PAGE_RESOURCE_ESCAPE_T=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 MPEG_TIME=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 SECTION=[StructLayout(LayoutKind.Sequential, Pack = 1)]
 MPEG_DATE_AND_TIME=[StructLayout(LayoutKind.Sequential, Pack = 1)]
+# shlwapi.h
+IQueryAssociations::Init::flags=ASSOCF
+IQueryAssociations::GetString::flags=ASSOCF
+IQueryAssociations::GetKey::flags=ASSOCF
+IQueryAssociations::GetData::flags=ASSOCF
+IQueryAssociations::GetEnum::flags=ASSOCF
+AssocQueryStringA::flags=ASSOCF
+AssocQueryStringW::flags=ASSOCF
+AssocQueryStringByKeyA::flags=ASSOCF
+AssocQueryStringByKeyW::flags=ASSOCF
+AssocQueryKeyA::flags=ASSOCF
+AssocQueryKeyW::flags=ASSOCF
 # snmp.h
 AsnAny=[StructLayout(LayoutKind.Sequential, Pack = 4)]
 SnmpVarBind=[StructLayout(LayoutKind.Sequential, Pack = 4)]
