@@ -199,3 +199,6 @@ Windows.Win32.UI.Shell.IQueryAssociations.Init : flags...UInt32 => ASSOCF
 # Fixed #1362.
 Windows.Win32.Graphics.Direct3D11.D3D11_CLEAR_FLAG :  => [Flags]
 Windows.Win32.Graphics.Direct3D11.D3D11_CLEAR_FLAG.value__...System.Int32 => System.UInt32
+# Fixed #1363.
+Windows.Win32.UI.Shell.Apis.ShellMessageBoxA : fuStyle...UInt32 => MESSAGEBOX_STYLE
+Windows.Win32.UI.Shell.Apis.ShellMessageBoxW : fuStyle...UInt32 => MESSAGEBOX_STYLE

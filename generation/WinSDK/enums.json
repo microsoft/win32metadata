@@ -549,6 +549,14 @@
       {
         "method": "MessageBeep",
         "parameter": "uType"
+      },
+      {
+        "method": "ShellMessageBoxW",
+        "parameter": "fuStyle"
+      },
+      {
+        "method": "ShellMessageBoxA",
+        "parameter": "fuStyle"
       }
     ]
   },
