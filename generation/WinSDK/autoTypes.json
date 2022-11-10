@@ -524,9 +524,9 @@
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
-    "Name": "LsaHandle",
+    "Name": "LSA_HANDLE",
     "ValueType": "IntPtr",
-    "CloseApi": "LsaDeregisterLogonProcess",
+    "CloseApi": "LsaClose",
     "InvalidHandleValues": [ -1, 0 ]
   },
   {

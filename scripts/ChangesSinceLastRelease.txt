@@ -202,3 +202,37 @@ Windows.Win32.Graphics.Direct3D11.D3D11_CLEAR_FLAG.value__...System.Int32 => Sys
 # Fixed #1363.
 Windows.Win32.UI.Shell.Apis.ShellMessageBoxA : fuStyle...UInt32 => MESSAGEBOX_STYLE
 Windows.Win32.UI.Shell.Apis.ShellMessageBoxW : fuStyle...UInt32 => MESSAGEBOX_STYLE
+# Fixed #1106.
+Windows.Win32.Security.Authentication.Identity.Apis.LsaAddAccountRights : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaClose : ObjectHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaCreateTrustedDomainEx : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaCreateTrustedDomainEx : TrustedDomainHandle...Void** => LSA_HANDLE*
+Windows.Win32.Security.Authentication.Identity.Apis.LsaDeleteTrustedDomain : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaDeregisterLogonProcess : LsaHandle...LsaHandle => HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaEnumerateAccountRights : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaEnumerateAccountsWithUserRight : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaEnumerateTrustedDomains : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaEnumerateTrustedDomainsEx : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaLookupNames : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaLookupNames2 : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaLookupSids : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaLookupSids2 : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaOpenPolicy : PolicyHandle...Void** => LSA_HANDLE*
+Windows.Win32.Security.Authentication.Identity.Apis.LsaOpenTrustedDomainByName : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaOpenTrustedDomainByName : TrustedDomainHandle...Void** => LSA_HANDLE*
+Windows.Win32.Security.Authentication.Identity.Apis.LsaQueryDomainInformationPolicy : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaQueryForestTrustInformation : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaQueryInformationPolicy : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaQueryTrustedDomainInfo : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaQueryTrustedDomainInfoByName : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaRegisterLogonProcess : LsaHandle...LsaHandle* => HANDLE*
+Windows.Win32.Security.Authentication.Identity.Apis.LsaRemoveAccountRights : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaRetrievePrivateData : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaSetDomainInformationPolicy : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaSetForestTrustInformation : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaSetInformationPolicy : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaSetTrustedDomainInfoByName : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaSetTrustedDomainInformation : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.Apis.LsaStorePrivateData : PolicyHandle...Void* => LSA_HANDLE
+Windows.Win32.Security.Authentication.Identity.LSA_HANDLE added
+Windows.Win32.Security.Authentication.Identity.LsaHandle removed
