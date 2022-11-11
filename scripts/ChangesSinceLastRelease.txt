@@ -236,3 +236,8 @@ Windows.Win32.Security.Authentication.Identity.Apis.LsaSetTrustedDomainInformati
 Windows.Win32.Security.Authentication.Identity.Apis.LsaStorePrivateData : PolicyHandle...Void* => LSA_HANDLE
 Windows.Win32.Security.Authentication.Identity.LSA_HANDLE added
 Windows.Win32.Security.Authentication.Identity.LsaHandle removed
+# Fixed #950.
+Windows.Win32.Security.Apis.LookupAccountNameLocalA added
+Windows.Win32.Security.Apis.LookupAccountNameLocalW added
+Windows.Win32.Security.Apis.LookupAccountSidLocalA added
+Windows.Win32.Security.Apis.LookupAccountSidLocalW added

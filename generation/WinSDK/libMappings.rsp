@@ -26407,3 +26407,7 @@ StartXpsPrintJob=XPSPRINT.dll
 StartXpsPrintJob1=XPSPRINT.dll
 HtmlHelpA=htmlhelp.dll
 HtmlHelpW=htmlhelp.dll
+LookupAccountNameLocalA=ADVAPI32.dll
+LookupAccountNameLocalW=ADVAPI32.dll
+LookupAccountSidLocalA=ADVAPI32.dll
+LookupAccountSidLocalW=ADVAPI32.dll
