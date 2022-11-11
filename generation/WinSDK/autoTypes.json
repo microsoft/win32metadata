@@ -1371,6 +1371,7 @@
     "Name": "NCRYPT_PROV_HANDLE",
     "ValueType": "UIntPtr",
     "CloseApi": "NCryptFreeObject",
+    "AlsoUsableFor": "NCRYPT_HANDLE",
     "InvalidHandleValues": [ 0 ]
   },
   {
@@ -1378,6 +1379,7 @@
     "Name": "NCRYPT_KEY_HANDLE",
     "ValueType": "UIntPtr",
     "CloseApi": "NCryptFreeObject",
+    "AlsoUsableFor": "NCRYPT_HANDLE",
     "InvalidHandleValues": [ 0 ]
   },
   {

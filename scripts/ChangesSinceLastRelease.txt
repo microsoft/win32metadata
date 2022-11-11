@@ -241,3 +241,6 @@ Windows.Win32.Security.Apis.LookupAccountNameLocalA added
 Windows.Win32.Security.Apis.LookupAccountNameLocalW added
 Windows.Win32.Security.Apis.LookupAccountSidLocalA added
 Windows.Win32.Security.Apis.LookupAccountSidLocalW added
+# Fixed #1364.
+Windows.Win32.Security.Cryptography.NCRYPT_KEY_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)] => [AlsoUsableFor(NCRYPT_HANDLE),InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)]
+Windows.Win32.Security.Cryptography.NCRYPT_PROV_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)] => [AlsoUsableFor(NCRYPT_HANDLE),InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)]
