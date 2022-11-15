@@ -1322,3 +1322,5 @@ GetNumberOfPhysicalMonitorsFromHMONITOR::return=BOOL
 GetPhysicalMonitorsFromHMONITOR::return=BOOL
 DestroyPhysicalMonitor::return=BOOL
 DestroyPhysicalMonitors::return=BOOL
+IAudioProcessingObjectConfiguration::LockForProcess::ppInputConnections=[NativeArrayInfo(CountParamIndex = 0)]
+IAudioProcessingObjectConfiguration::LockForProcess::ppOutputConnections=[NativeArrayInfo(CountParamIndex = 2)]

@@ -244,3 +244,6 @@ Windows.Win32.Security.Apis.LookupAccountSidLocalW added
 # Fixed #1364.
 Windows.Win32.Security.Cryptography.NCRYPT_KEY_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)] => [AlsoUsableFor(NCRYPT_HANDLE),InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)]
 Windows.Win32.Security.Cryptography.NCRYPT_PROV_HANDLE : [InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)] => [AlsoUsableFor(NCRYPT_HANDLE),InvalidHandleValue(0),NativeTypedef,RAIIFree(NCryptFreeObject)]
+# Fixed #1368.
+Windows.Win32.Media.Audio.Apo.IAudioProcessingObjectConfiguration.LockForProcess : ppInputConnections : [In] => [In,NativeArrayInfo(CountParamIndex=0)]
+Windows.Win32.Media.Audio.Apo.IAudioProcessingObjectConfiguration.LockForProcess : ppOutputConnections : [In] => [In,NativeArrayInfo(CountParamIndex=2)]
