@@ -180,7 +180,7 @@ Language projections can use the context provided by attributes to improve the d
 
 Run `./DoAll.ps1 -Clean` in [PowerShell 7](https://aka.ms/powershell-release?tag=stable) to run a full build, then inspect the reported winmd diff to ensure all changes were intentional. A full build can take 25-30 minutes.
 
-If you encounter errors processing .zip or .winmd files, make sure that Git LFS is installed and configured properly per [set up your development environment](#Set-up-your-development-environment).
+If CI builds pass but local builds of the same commit fail with cryptic error messages, clearing the local NuGet cache with `dotnet nuget locals -c all` often helps.
 
 ### Incremental builds
 
