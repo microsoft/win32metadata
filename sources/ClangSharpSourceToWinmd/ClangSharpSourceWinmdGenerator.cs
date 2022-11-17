@@ -1145,7 +1145,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     methodAttrs |= MethodAttributes.SpecialName;
                 }
-                else if (methodName.StartsWith("put_") &&
+                else if ((methodName.StartsWith("set_") || methodName.StartsWith("put_")) &&
                     parameters.Count() == 1 &&
                     (parameters.First().Attrs & ParameterAttributes.In) == ParameterAttributes.In)
                 {
