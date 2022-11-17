@@ -1,0 +1,5 @@
+# Fixed #950.
+Windows.Win32.Security.Apis.LookupAccountNameLocalA removed
+Windows.Win32.Security.Apis.LookupAccountNameLocalW removed
+Windows.Win32.Security.Apis.LookupAccountSidLocalA removed
+Windows.Win32.Security.Apis.LookupAccountSidLocalW removed
