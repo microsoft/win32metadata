@@ -29,3 +29,21 @@ Windows.Win32.System.ApplicationInstallationAndServicing.IPMTileInfo.set_Notifie
 Windows.Win32.System.ApplicationInstallationAndServicing.IPMTilePropertyInfo.set_Property :  => [SpecialName]
 Windows.Win32.System.Ole.IPicture.set_hPal :  => [SpecialName]
 Windows.Win32.System.Ole.IPicture2.set_hPal :  => [SpecialName]
+# Fixed #1244.
+Windows.Win32.System.AddressBook.IWABOBJECT_ removed
+Windows.Win32.System.AddressBook.IWABOBJECT_AddRef_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_AllocateBuffer_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_AllocateMore_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_Backup_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_Find_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_FreeBuffer_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_GetLastError_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_GetMe_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_Import_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_LDAPUrl_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_QueryInterface_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_Release_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_SetMe_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_VCardCreate_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_VCardDisplay_METHOD removed
+Windows.Win32.System.AddressBook.IWABOBJECT_VCardRetrieve_METHOD removed
