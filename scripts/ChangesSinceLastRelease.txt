@@ -57,3 +57,30 @@ Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX.mouseData...Windows.Win32
 Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT.mouseData...Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA => System.UInt32
 # Fixed #1371.
 Windows.Win32.System.Com.IUnknown.QueryInterface :  => [CanReturnErrorsAsSuccess]
+# Fixed #1366.
+Windows.Win32.System.StationsAndDesktops.Apis.OpenInputDesktop : dwDesiredAccess...UInt32 => DESKTOP_ACCESS_FLAGS
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_CREATEMENU added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_CREATEWINDOW added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_DELETE added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_ENUMERATE added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_HOOKCONTROL added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_JOURNALPLAYBACK added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_JOURNALRECORD added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_READ_CONTROL added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_READOBJECTS added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_SWITCHDESKTOP added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_SYNCHRONIZE added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_WRITE_DAC added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_WRITE_OWNER added
+Windows.Win32.System.StationsAndDesktops.DESKTOP_ACCESS_FLAGS.DESKTOP_WRITEOBJECTS added
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_CREATEMENU removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_CREATEWINDOW removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_ENUMERATE removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_HOOKCONTROL removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_JOURNALPLAYBACK removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_JOURNALRECORD removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_READOBJECTS removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_SWITCHDESKTOP removed
+Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_WRITEOBJECTS removed

@@ -32149,8 +32149,34 @@
       "filter": "DESKTOP_",
       "header": "WinUser.h"
     },
-    "members": [],
-    "uses": []
+    "members": [
+      {
+        "name": "DESKTOP_DELETE",
+        "value": "(0x00010000)"
+      },
+      {
+        "name": "DESKTOP_READ_CONTROL",
+        "value": "(0x00020000)"
+      },
+      {
+        "name": "DESKTOP_WRITE_DAC",
+        "value": "(0x00040000)"
+      },
+      {
+        "name": "DESKTOP_WRITE_OWNER",
+        "value": "(0x00080000)"
+      },
+      {
+        "name": "DESKTOP_SYNCHRONIZE",
+        "value": "(0x00100000)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "OpenInputDesktop",
+        "parameter": "dwDesiredAccess"
+      }
+    ]
   },
   {
     "name": "ACTIVEOBJECT_FLAGS",
