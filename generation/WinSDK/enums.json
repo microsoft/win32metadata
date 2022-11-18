@@ -22899,30 +22899,6 @@
     ]
   },
   {
-    "name": "MOUSEHOOKSTRUCTEX_MOUSE_DATA",
-    "flags": true,
-    "members": [
-      {
-        "name": "XBUTTON1",
-        "value": "1"
-      },
-      {
-        "name": "XBUTTON2",
-        "value": "2"
-      }
-    ],
-    "uses": [
-      {
-        "struct": "MOUSEHOOKSTRUCTEX",
-        "field": "mouseData"
-      },
-      {
-        "struct": "MSLLHOOKSTRUCT",
-        "field": "mouseData"
-      }
-    ]
-  },
-  {
     "name": "USE_INFO_ASG_TYPE",
     "members": [
       {

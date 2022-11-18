@@ -47,3 +47,11 @@ Windows.Win32.System.AddressBook.IWABOBJECT_SetMe_METHOD removed
 Windows.Win32.System.AddressBook.IWABOBJECT_VCardCreate_METHOD removed
 Windows.Win32.System.AddressBook.IWABOBJECT_VCardDisplay_METHOD removed
 Windows.Win32.System.AddressBook.IWABOBJECT_VCardRetrieve_METHOD removed
+# Fixed #965.
+Windows.Win32.UI.WindowsAndMessaging.Apis.XBUTTON1 added
+Windows.Win32.UI.WindowsAndMessaging.Apis.XBUTTON2 added
+Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA removed
+Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA.XBUTTON1 removed
+Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA.XBUTTON2 removed
+Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX.mouseData...Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA => System.UInt32
+Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT.mouseData...Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA => System.UInt32
