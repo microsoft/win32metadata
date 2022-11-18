@@ -55,3 +55,5 @@ Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA.XBUTTON1 remov
 Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA.XBUTTON2 removed
 Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX.mouseData...Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA => System.UInt32
 Windows.Win32.UI.WindowsAndMessaging.MSLLHOOKSTRUCT.mouseData...Windows.Win32.UI.WindowsAndMessaging.MOUSEHOOKSTRUCTEX_MOUSE_DATA => System.UInt32
+# Fixed #1371.
+Windows.Win32.System.Com.IUnknown.QueryInterface :  => [CanReturnErrorsAsSuccess]
