@@ -84,3 +84,5 @@ Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_JOURNALRECORD r
 Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_READOBJECTS removed
 Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_SWITCHDESKTOP removed
 Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_WRITEOBJECTS removed
+# Fixed #1373.
+Windows.Win32.Security.Authentication.Identity.Apis.SendSAS added
