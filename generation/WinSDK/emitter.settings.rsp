@@ -1326,3 +1326,4 @@ DestroyPhysicalMonitors::return=BOOL
 IAudioProcessingObjectConfiguration::LockForProcess::ppInputConnections=[NativeArrayInfo(CountParamIndex = 0)]
 IAudioProcessingObjectConfiguration::LockForProcess::ppOutputConnections=[NativeArrayInfo(CountParamIndex = 2)]
 IUnknown::QueryInterface=[CanReturnErrorsAsSuccessAttribute]
+GetPrivateProfileIntW::return=int

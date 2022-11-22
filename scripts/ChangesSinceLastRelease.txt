@@ -88,3 +88,5 @@ Windows.Win32.System.SystemServices.DESKTOP_ACCESS_FLAGS.DESKTOP_WRITEOBJECTS re
 Windows.Win32.Security.Authentication.Identity.Apis.SendSAS added
 # Fixed #1374.
 Windows.Win32.UI.Input.KeyboardAndMouse.Apis.mouse_event : dwData...UInt32 => Int32
+# Fixed #1376.
+Windows.Win32.System.WindowsProgramming.Apis.GetPrivateProfileIntW : return...UInt32 => Int32
