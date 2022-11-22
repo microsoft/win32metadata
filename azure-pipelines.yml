@@ -343,7 +343,52 @@ jobs:
       version: 2.1.x
   - powershell: dotnet tool update --global nbgv
     displayName: ⚙ Install nbgv
-  - script: dotnet pack -c $(BuildConfiguration)
+  - script: dotnet build -c $(BuildConfiguration)
+    displayName: 🏭 dotnet build
+    workingDirectory: apidocs
+  - task: EsrpCodeSigning@1
+    displayName: ✒ Assembly sign
+    inputs:
+      ConnectedServiceName: Xlang Code Signing
+      FolderPath: $(System.DefaultWorkingDirectory)/bin/$(BuildConfiguration)/netstandard2.0
+      Pattern: '*.dll'
+      signConfigType: inlineSignParams
+      inlineOperation: |
+        [
+          {
+            "keyCode": "CP-230012",
+            "operationSetCode": "SigntoolSign",
+            "parameters": [
+              {
+                "parameterName": "OpusName",
+                "parameterValue": "Microsoft"
+              },
+              {
+                "parameterName": "OpusInfo",
+                "parameterValue": "http://www.microsoft.com"
+              },
+              {
+                "parameterName": "PageHash",
+                "parameterValue": "/NPH"
+              },
+              {
+                "parameterName": "FileDigest",
+                "parameterValue": "/fd sha256"
+              },
+              {
+                "parameterName": "TimeStamp",
+                "parameterValue": "/tr \"http://rfc3161.gtm.corp.microsoft.com/TSS/HttpTspServer\" /td sha256"
+              }
+            ],
+            "toolName": "signtool.exe",
+            "toolVersion": "6.2.9304.0"
+          }
+        ]
+      SessionTimeout: 60
+      MaxConcurrency: 50
+      MaxRetryAttempts: 5
+    condition: and(succeeded(), eq(variables['SignFiles'], 'true'), ne(variables['Build.Reason'], 'PullRequest'))
+  - script: dotnet pack Microsoft.Windows.SDK.Win32Docs --no-build -c $(BuildConfiguration) -p:BuildProjectReferences=false
     displayName: 📦 dotnet pack
     workingDirectory: apidocs
   - task: EsrpCodeSigning@1
