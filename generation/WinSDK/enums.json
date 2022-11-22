@@ -35487,6 +35487,20 @@
         "parameter": "uCommand"
       }
     ]
+  },
+  {
+    "name": "COMPRESSION_FORMAT",
+    "type": "ushort",
+    "autoPopulate": {
+      "filter": "COMPRESSION_FORMAT_",
+      "header": "winnt.h"
+    },
+    "uses": [
+      {
+        "struct": "FILE_COMPRESSION_INFO",
+        "field": "CompressionFormat"
+      }
+    ]
   }
 ]
 }
