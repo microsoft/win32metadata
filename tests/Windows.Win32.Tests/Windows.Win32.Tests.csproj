@@ -23,7 +23,7 @@
     <PackageReference Include="Microsoft.Windows.SDK.Win32Metadata" Version="$(LastWin32MetadataReleaseVersion)" GeneratePathProperty="True">
       <PrivateAssets>all</PrivateAssets>
     </PackageReference>
-    
+
   </ItemGroup>
 
   <ItemGroup>
@@ -44,10 +44,6 @@
     <None Update="InterfacesToVerify.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Update="Nerdbank.GitVersioning" Version="3.5.113" />
   </ItemGroup>
 
 </Project>
