@@ -30125,10 +30125,6 @@
       {
         "struct": "PIXELFORMATDESCRIPTOR",
         "field": "iPixelType"
-      },
-      {
-        "method": "DescribePixelFormat",
-        "parameter": "iPixelFormat"
       }
     ]
   },
