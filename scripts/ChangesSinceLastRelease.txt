@@ -143,3 +143,16 @@ Windows.Win32.System.SystemServices.Apis.SE_SACL_PRESENT removed
 Windows.Win32.System.SystemServices.Apis.SE_SACL_PROTECTED removed
 Windows.Win32.System.SystemServices.Apis.SE_SELF_RELATIVE removed
 Windows.Win32.System.SystemServices.SECURITY_DESCRIPTOR_RELATIVE removed
+# Fixed #1382.
+Windows.Win32.Storage.FileSystem.Apis.GetFileType : return...UInt32 => FILE_TYPE
+Windows.Win32.Storage.FileSystem.FILE_TYPE added
+Windows.Win32.Storage.FileSystem.FILE_TYPE.FILE_TYPE_CHAR added
+Windows.Win32.Storage.FileSystem.FILE_TYPE.FILE_TYPE_DISK added
+Windows.Win32.Storage.FileSystem.FILE_TYPE.FILE_TYPE_PIPE added
+Windows.Win32.Storage.FileSystem.FILE_TYPE.FILE_TYPE_REMOTE added
+Windows.Win32.Storage.FileSystem.FILE_TYPE.FILE_TYPE_UNKNOWN added
+Windows.Win32.System.WindowsProgramming.Apis.FILE_TYPE_CHAR removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_TYPE_DISK removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_TYPE_PIPE removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_TYPE_REMOTE removed
+Windows.Win32.System.WindowsProgramming.Apis.FILE_TYPE_UNKNOWN removed

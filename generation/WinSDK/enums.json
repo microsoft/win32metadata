@@ -35556,6 +35556,19 @@
         "field": "Control"
       }
     ]
+  },
+  {
+    "name": "FILE_TYPE",
+    "autoPopulate": {
+      "filter": "FILE_TYPE_",
+      "header": "WinBase.h"
+    },
+    "uses": [
+      {
+        "method": "GetFileType",
+        "parameter": "return"
+      }
+    ]
   }
 ]
 }
