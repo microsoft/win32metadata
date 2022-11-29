@@ -30125,10 +30125,6 @@
       {
         "struct": "PIXELFORMATDESCRIPTOR",
         "field": "iPixelType"
-      },
-      {
-        "method": "DescribePixelFormat",
-        "parameter": "iPixelFormat"
       }
     ]
   },
@@ -35499,6 +35495,78 @@
       {
         "struct": "FILE_COMPRESSION_INFO",
         "field": "CompressionFormat"
+      }
+    ]
+  },
+  {
+    "name": "SECURITY_DESCRIPTOR_CONTROL",
+    "type": "ushort",
+    "flags": true,
+    "members": [
+      {
+        "name": "SE_OWNER_DEFAULTED"
+      },
+      {
+        "name": "SE_GROUP_DEFAULTED"
+      },
+      {
+        "name": "SE_DACL_PRESENT"
+      },
+      {
+        "name": "SE_DACL_DEFAULTED"
+      },
+      {
+        "name": "SE_SACL_PRESENT"
+      },
+      {
+        "name": "SE_SACL_DEFAULTED"
+      },
+      {
+        "name": "SE_DACL_AUTO_INHERIT_REQ"
+      },
+      {
+        "name": "SE_SACL_AUTO_INHERIT_REQ"
+      },
+      {
+        "name": "SE_DACL_AUTO_INHERITED"
+      },
+      {
+        "name": "SE_SACL_AUTO_INHERITED"
+      },
+      {
+        "name": "SE_DACL_PROTECTED"
+      },
+      {
+        "name": "SE_SACL_PROTECTED"
+      },
+      {
+        "name": "SE_RM_CONTROL_VALID"
+      },
+      {
+        "name": "SE_SELF_RELATIVE"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "SECURITY_DESCRIPTOR",
+        "field": "Control"
+      },
+      {
+        "struct": "SECURITY_DESCRIPTOR_RELATIVE",
+        "field": "Control"
+      }
+    ]
+  },
+  {
+    "name": "FILE_TYPE",
+    "autoPopulate": {
+      "filter": "FILE_TYPE_",
+      "header": "WinBase.h"
+    },
+    "uses": [
+      {
+        "method": "GetFileType",
+        "parameter": "return"
       }
     ]
   }
