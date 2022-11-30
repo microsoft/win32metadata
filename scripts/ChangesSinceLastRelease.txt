@@ -5,3 +5,5 @@ Windows.Win32.System.Ole.OLEUIBUSYA.dwFlags...System.UInt32 => Windows.Win32.Sys
 Windows.Win32.System.Ole.OLEUIBUSYW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS
 # Fixed #1386.
 Windows.Win32.System.Diagnostics.Debug.Apis.ContinueDebugEvent : dwContinueStatus...UInt32 => NTSTATUS
+# Fixed #1390.
+Windows.Win32.Graphics.Direct2D.ID2D1Resource.GetFactory : factory : [Out] => [ComOutPtr,Out]
