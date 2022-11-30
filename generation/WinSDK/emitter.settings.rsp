@@ -1328,3 +1328,4 @@ IAudioProcessingObjectConfiguration::LockForProcess::ppOutputConnections=[Native
 IUnknown::QueryInterface=[CanReturnErrorsAsSuccessAttribute]
 GetPrivateProfileIntW::return=int
 OleCreatePictureIndirect::lplpvObj=[ComOutPtr]
+ContinueDebugEvent::dwContinueStatus=NTSTATUS

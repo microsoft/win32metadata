@@ -3,3 +3,5 @@ Windows.Win32.System.Com.ITypeInfo.GetImplTypeFlags : pImplTypeFlags...Int32* =>
 Windows.Win32.System.Ole.ICreateTypeInfo.SetImplTypeFlags : implTypeFlags...Int32 => IMPLTYPEFLAGS
 Windows.Win32.System.Ole.OLEUIBUSYA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS
 Windows.Win32.System.Ole.OLEUIBUSYW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS
+# Fixed #1386.
+Windows.Win32.System.Diagnostics.Debug.Apis.ContinueDebugEvent : dwContinueStatus...UInt32 => NTSTATUS
