@@ -35452,22 +35452,6 @@
     ]
   },
   {
-    "namespace": "Windows.Win32.Foundation",
-    "name": "VARIANT_BOOL",
-    "type": "short",
-    "members": [
-      {
-        "name": "VARIANT_TRUE",
-        "value": "-1"
-      },
-      {
-        "name": "VARIANT_FALSE",
-        "value": "0"
-      }
-    ],
-    "uses": []
-  },
-  {
     "name": "HTML_HELP_COMMAND",
     "autoPopulate": {
       "filter": "HH_",

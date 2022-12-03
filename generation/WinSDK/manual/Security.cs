@@ -4,6 +4,15 @@ using Windows.Win32.Interop;
 
 namespace Windows.Win32.Security
 {
+    public static unsafe partial class Apis
+    {
+        [NativeTypeName("BOOLEAN")]
+        public const byte SECURITY_DYNAMIC_TRACKING = 1;
+        
+        [NativeTypeName("BOOLEAN")]
+        public const byte SECURITY_STATIC_TRACKING = 0;
+    }
+
     // We need to define this manually because of how it's defined with duplicate typedefs
     [UnmanagedFunctionPointer]
     [return: NativeTypeName("NTSTATUS")]

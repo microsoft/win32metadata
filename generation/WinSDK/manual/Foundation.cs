@@ -6,6 +6,18 @@ namespace Windows.Win32.Foundation
 {
     public static unsafe partial class Apis
     {
+        [NativeTypeName("BOOL")]
+        public const int TRUE = 1;
+
+        [NativeTypeName("BOOL")]
+        public const int FALSE = 0;
+
+        [NativeTypeName("VARIANT_BOOL")]
+        public const short VARIANT_TRUE = -1;
+
+        [NativeTypeName("VARIANT_BOOL")]
+        public const short VARIANT_FALSE = 0;
+
         [NativeTypeName("HANDLE")]
         public const int INVALID_HANDLE_VALUE = -1;
 

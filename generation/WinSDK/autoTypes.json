@@ -11,6 +11,11 @@
   },
   {
     "Namespace": "Windows.Win32.Foundation",
+    "Name": "VARIANT_BOOL",
+    "ValueType": "short"
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
     "Name": "BSTR",
     "ValueType": "char*",
     "CloseApi": "SysFreeString"

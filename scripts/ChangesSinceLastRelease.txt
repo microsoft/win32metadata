@@ -7,3 +7,15 @@ Windows.Win32.System.Ole.OLEUIBUSYW.dwFlags...System.UInt32 => Windows.Win32.Sys
 Windows.Win32.System.Diagnostics.Debug.Apis.ContinueDebugEvent : dwContinueStatus...UInt32 => NTSTATUS
 # Fixed #1390.
 Windows.Win32.Graphics.Direct2D.ID2D1Resource.GetFactory : factory : [Out] => [ComOutPtr,Out]
+# Fixed #1389.
+Windows.Win32.Foundation.Apis.FALSE added
+Windows.Win32.Foundation.Apis.TRUE added
+Windows.Win32.Foundation.Apis.VARIANT_FALSE added
+Windows.Win32.Foundation.Apis.VARIANT_TRUE added
+Windows.Win32.Foundation.VARIANT_BOOL :  => [NativeTypedef]
+Windows.Win32.Foundation.VARIANT_BOOL.Value added
+Windows.Win32.Foundation.VARIANT_BOOL.value__ removed
+Windows.Win32.Foundation.VARIANT_BOOL.VARIANT_FALSE removed
+Windows.Win32.Foundation.VARIANT_BOOL.VARIANT_TRUE removed
+Windows.Win32.Security.Apis.SECURITY_DYNAMIC_TRACKING added
+Windows.Win32.Security.Apis.SECURITY_STATIC_TRACKING added
