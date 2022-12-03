@@ -35542,6 +35542,31 @@
     ]
   },
   {
+    "name": "MAP_VIRTUAL_KEY_TYPE",
+    "autoPopulate": {
+      "filter": "MAPVK_",
+      "header": "WinUser.h"
+    },
+    "uses": [
+      {
+        "method": "MapVirtualKeyA",
+        "parameter": "uMapType"
+      },
+      {
+        "method": "MapVirtualKeyExA",
+        "parameter": "uMapType"
+      },
+      {
+        "method": "MapVirtualKeyW",
+        "parameter": "uMapType"
+      },
+      {
+        "method": "MapVirtualKeyExW",
+        "parameter": "uMapType"
+      }
+    ]
+  },
+  {
     "name": "FILE_TYPE",
     "autoPopulate": {
       "filter": "FILE_TYPE_",
