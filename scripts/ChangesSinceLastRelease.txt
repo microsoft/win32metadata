@@ -62,3 +62,19 @@ Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_REDIRECT_PARAM.
 Windows.Win32.Security.Apis.SetSecurityDescriptorControl : ControlBitsOfInterest...UInt16 => SECURITY_DESCRIPTOR_CONTROL
 Windows.Win32.Security.Apis.SetSecurityDescriptorControl : ControlBitsToSet...UInt16 => SECURITY_DESCRIPTOR_CONTROL
 Windows.Win32.System.Hypervisor.SOCKADDR_HV.Family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+# Add Map Virtual Key Type
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.MapVirtualKeyA : uMapType...UInt32 => MAP_VIRTUAL_KEY_TYPE
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.MapVirtualKeyExA : uMapType...UInt32 => MAP_VIRTUAL_KEY_TYPE
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.MapVirtualKeyExW : uMapType...UInt32 => MAP_VIRTUAL_KEY_TYPE
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.MapVirtualKeyW : uMapType...UInt32 => MAP_VIRTUAL_KEY_TYPE
+Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE added
+Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VK_TO_CHAR added
+Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VK_TO_VSC added
+Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VK_TO_VSC_EX added
+Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VSC_TO_VK added
+Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VSC_TO_VK_EX added
+Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VK_TO_CHAR removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VK_TO_VSC removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VK_TO_VSC_EX removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VSC_TO_VK removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VSC_TO_VK_EX removed
