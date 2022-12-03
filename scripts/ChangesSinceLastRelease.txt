@@ -19,3 +19,46 @@ Windows.Win32.Foundation.VARIANT_BOOL.VARIANT_FALSE removed
 Windows.Win32.Foundation.VARIANT_BOOL.VARIANT_TRUE removed
 Windows.Win32.Security.Apis.SECURITY_DYNAMIC_TRACKING added
 Windows.Win32.Security.Apis.SECURITY_STATIC_TRACKING added
+# Added support for remapping short integers
+Windows.Win32.Networking.WinHttp.URL_COMPONENTS.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
+Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_RESULT_ENTRY.ProxyPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
+Windows.Win32.Networking.WinInet.Apis.GopherCreateLocatorA : nServerPort...UInt16 => INTERNET_PORT
+Windows.Win32.Networking.WinInet.Apis.GopherCreateLocatorW : nServerPort...UInt16 => INTERNET_PORT
+Windows.Win32.Networking.WinInet.Apis.InternetConnectA : nServerPort...UInt16 => INTERNET_PORT
+Windows.Win32.Networking.WinInet.Apis.InternetConnectW : nServerPort...UInt16 => INTERNET_PORT
+Windows.Win32.Networking.WinInet.URL_COMPONENTSA.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
+Windows.Win32.Networking.WinInet.URL_COMPONENTSW.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
+Windows.Win32.Networking.WinInet.WININET_PROXY_INFO.ProxyPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
+Windows.Win32.Networking.WinSock.SOCKADDR_DL.sdl_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.Networking.WinSock.SOCKADDR_IN.sin_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.Networking.WinSock.SOCKADDR_IN6.sin6_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.Networking.WinSock.SOCKADDR_INET.si_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.Networking.WinSock.SOCKADDR_STORAGE.ss_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.Networking.WinSock.SOCKADDR_UN.sun_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.Networking.WinSock.SOCKADDR.sa_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.FlushIpNetTable2 : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.FlushIpPathTable : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetAnycastIpAddressTable : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpForwardTable2 : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpInterfaceTable : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpNetTable2 : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpNetworkConnectionBandwidthEstimates : AddressFamily...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpPathTable : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetMulticastIpAddressTable : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetUnicastIpAddressTable : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyIpInterfaceChange : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyRouteChange2 : AddressFamily...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyStableUnicastIpAddressTable : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyUnicastIpAddressChange : Family...UInt16 => ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.IpHelper.MIB_IPINTERFACE_ROW.Family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_CUSTOMER_ADDRESS_CHANGE_PARAM.CAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_CUSTOMER_ADDRESS_CHANGE_PARAM.PAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_POLICY_MISMATCH_PARAM.CAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_POLICY_MISMATCH_PARAM.PAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_PROVIDER_ADDRESS_CHANGE_PARAM.PAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_REDIRECT_PARAM.CAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_REDIRECT_PARAM.NewPAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_REDIRECT_PARAM.PAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
+Windows.Win32.Security.Apis.SetSecurityDescriptorControl : ControlBitsOfInterest...UInt16 => SECURITY_DESCRIPTOR_CONTROL
+Windows.Win32.Security.Apis.SetSecurityDescriptorControl : ControlBitsToSet...UInt16 => SECURITY_DESCRIPTOR_CONTROL
+Windows.Win32.System.Hypervisor.SOCKADDR_HV.Family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
