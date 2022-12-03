@@ -1044,7 +1044,9 @@ namespace ClangSharpSourceToWinmd
             // See if we can map from some generic types to a more specific type
             if (typeSymbol.SpecialType == SpecialType.System_IntPtr ||
                 typeSymbol.SpecialType == SpecialType.System_UIntPtr ||
+                typeSymbol.SpecialType == SpecialType.System_Int16 ||
                 typeSymbol.SpecialType == SpecialType.System_Int32 ||
+                typeSymbol.SpecialType == SpecialType.System_UInt16 ||
                 typeSymbol.SpecialType == SpecialType.System_UInt32 ||
                 typeSymbol.SpecialType == SpecialType.System_Int64 ||
                 typeSymbol.SpecialType == SpecialType.System_UInt64 ||
