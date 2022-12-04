@@ -217,6 +217,10 @@ $"        public const {type} {name} = {valueText};");
             {
                 type = "int";
             }
+            else if (nativeTypeName == "DWORD")
+            {
+                forceType = "uint";
+            }
 
             bool forceUnsigned = forceType == "uint" || forceType == "ulong";
             valueText = FixIntValueText(forceUnsigned, ref type, valueText);
