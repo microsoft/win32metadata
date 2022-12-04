@@ -46,3 +46,50 @@ Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_USER_ACCESS a
 Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_VIRTUAL_CHANNELS added
 # Fixed #1410.
 winmd1: Windows.Win32.Security.TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS = 983295, winmd2 = 983551
+# Added CONTEXT_* flags
+Windows.Win32.System.Diagnostics.Debug.Apis.CopyContext : ContextFlags...UInt32 => CONTEXT_FLAGS
+Windows.Win32.System.Diagnostics.Debug.Apis.InitializeContext : ContextFlags...UInt32 => CONTEXT_FLAGS
+Windows.Win32.System.Diagnostics.Debug.Apis.InitializeContext2 : ContextFlags...UInt32 => CONTEXT_FLAGS
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ALL added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_AMD64 added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64 added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_ALL added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_CONTROL added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_DEBUG_REGISTERS added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_FLOATING_POINT added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_FULL added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_INTEGER added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_RET_TO_GUEST added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_UNWOUND_TO_CALL added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_ARM64_X18 added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_CONTROL added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_DEBUG_REGISTERS added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_EXCEPTION_ACTIVE added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_EXCEPTION_REPORTING added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_EXCEPTION_REQUEST added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_FLOATING_POINT added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_FULL added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_INTEGER added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_KERNEL_CET added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_KERNEL_DEBUGGER added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_SEGMENTS added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_SERVICE_ACTIVE added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_UNWOUND_TO_CALL added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS.CONTEXT_XSTATE added
+Windows.Win32.System.Diagnostics.Debug.CONTEXT.ContextFlags(Arm64)...System.UInt32 => Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS
+Windows.Win32.System.Diagnostics.Debug.CONTEXT.ContextFlags(X64)...System.UInt32 => Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS
+Windows.Win32.System.Diagnostics.Debug.CONTEXT.ContextFlags(X86)...System.UInt32 => Windows.Win32.System.Diagnostics.Debug.CONTEXT_FLAGS
+Windows.Win32.System.SystemServices.Apis.CONTEXT_AMD64 removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_ARM removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_ARM64 removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_ARM64_RET_TO_GUEST removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_ARM64_UNWOUND_TO_CALL removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_EXCEPTION_ACTIVE removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_EXCEPTION_REPORTING removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_EXCEPTION_REQUEST removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_KERNEL_DEBUGGER removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_RET_TO_GUEST removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_SERVICE_ACTIVE removed
+Windows.Win32.System.SystemServices.Apis.CONTEXT_UNWOUND_TO_CALL removed

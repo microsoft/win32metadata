@@ -35561,6 +35561,139 @@
         "value": "(0x000F0000 | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_REMOTE_CONTROL | WTS_SECURITY_LOGON | WTS_SECURITY_MESSAGE | WTS_SECURITY_CONNECT | WTS_SECURITY_DISCONNECT)"
       }
     ]
+  },
+  {
+    "name": "CONTEXT_FLAGS",
+    "type": "uint",
+    "flags": true,
+    "members": [
+      {
+        "name": "CONTEXT_AMD64",
+        "value": "0x00100000"
+      },
+      {
+        "name": "CONTEXT_ARM",
+        "value": "0x00200000"
+      },
+      {
+        "name": "CONTEXT_ARM64",
+        "value": "0x00400000"
+      },
+      {
+        "name": "CONTEXT_CONTROL",
+        "value": "0x00000001"
+      },
+      {
+        "name": "CONTEXT_INTEGER",
+        "value": "0x00000002"
+      },
+      {
+        "name": "CONTEXT_SEGMENTS",
+        "value": "0x00000004"
+      },
+      {
+        "name": "CONTEXT_FLOATING_POINT",
+        "value": "0x00000008"
+      },
+      {
+        "name": "CONTEXT_DEBUG_REGISTERS",
+        "value": "0x00000010"
+      },
+      {
+        "name": "CONTEXT_FULL",
+        "value": "0x0000000A"
+      },
+      {
+        "name": "CONTEXT_ALL",
+        "value": "0x0000001F"
+      },
+      {
+        "name": "CONTEXT_XSTATE",
+        "value": "0x00000040"
+      },
+      {
+        "name": "CONTEXT_KERNEL_CET",
+        "value": "0x00000080"
+      },
+      {
+        "name": "CONTEXT_KERNEL_DEBUGGER",
+        "value": "0x04000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_ACTIVE",
+        "value": "0x08000000"
+      },
+      {
+        "name": "CONTEXT_SERVICE_ACTIVE",
+        "value": "0x10000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REQUEST",
+        "value": "0x40000000"
+      },
+      {
+        "name": "CONTEXT_EXCEPTION_REPORTING",
+        "value": "0x80000000"
+      },
+      {
+        "name": "CONTEXT_UNWOUND_TO_CALL",
+        "value": "0x20000000"
+      },
+      {
+        "name": "CONTEXT_ARM64_UNWOUND_TO_CALL",
+        "value": "0x20000000"
+      },
+      {
+        "name": "CONTEXT_ARM64_RET_TO_GUEST",
+        "value": "0x04000000"
+      },
+      {
+        "name": "CONTEXT_ARM64_CONTROL",
+        "value": "0x00000001"
+      },
+      {
+        "name": "CONTEXT_ARM64_INTEGER",
+        "value": "0x00000002"
+      },
+      {
+        "name": "CONTEXT_ARM64_FLOATING_POINT",
+        "value": "0x00000004"
+      },
+      {
+        "name": "CONTEXT_ARM64_DEBUG_REGISTERS",
+        "value": "0x00000008"
+      },
+      {
+        "name": "CONTEXT_ARM64_X18",
+        "value": "0x00000010"
+      },
+      {
+        "name": "CONTEXT_ARM64_FULL",
+        "value": "0x00000007"
+      },
+      {
+        "name": "CONTEXT_ARM64_ALL",
+        "value": "0x0000001F"
+      }
+    ],
+    "uses": [
+      {
+        "struct": "CONTEXT",
+        "field": "ContextFlags"
+      },
+      {
+        "method": "InitializeContext",
+        "parameter": "ContextFlags"
+      },
+      {
+        "method": "InitializeContext2",
+        "parameter": "ContextFlags"
+      },
+      {
+        "method": "CopyContext",
+        "parameter": "ContextFlags"
+      }
+    ]
   }
 ]
 }
