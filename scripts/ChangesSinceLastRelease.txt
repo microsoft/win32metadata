@@ -78,3 +78,13 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VK_TO_VSC removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VK_TO_VSC_EX removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VSC_TO_VK removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VSC_TO_VK_EX removed
+# Fixed #1394.
+Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.CurrentIdleState...System.UInt64 => System.UInt32
+Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.CurrentMhz...System.UInt64 => System.UInt32
+Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.MaxIdleState...System.UInt64 => System.UInt32
+Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.MaxMhz...System.UInt64 => System.UInt32
+Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.MhzLimit...System.UInt64 => System.UInt32
+Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.Number...System.UInt64 => System.UInt32
+Windows.Win32.System.Power.SYSTEM_POWER_INFORMATION.Idleness...System.UInt64 => System.UInt32
+Windows.Win32.System.Power.SYSTEM_POWER_INFORMATION.MaxIdlenessAllowed...System.UInt64 => System.UInt32
+Windows.Win32.System.Power.SYSTEM_POWER_INFORMATION.TimeRemaining...System.UInt64 => System.UInt32
