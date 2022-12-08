@@ -230,3 +230,7 @@ Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_CONFIGUI_CONFIGURATION_VERSI
 Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_CONFIGURATION_VERSION added
 Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_STATE_DIRTY added
 Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_STATE_ENABLED added
+# Fixed #1402.
+Windows.Win32.System.Threading.Apis.CreateProcessAsUserA : dwCreationFlags...UInt32 => PROCESS_CREATION_FLAGS
+Windows.Win32.System.Threading.Apis.CreateProcessAsUserW : dwCreationFlags...UInt32 => PROCESS_CREATION_FLAGS
+Windows.Win32.System.Threading.Apis.CreateProcessWithLogonW : dwCreationFlags...UInt32 => PROCESS_CREATION_FLAGS
