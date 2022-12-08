@@ -234,3 +234,5 @@ Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_STATE_ENABLED added
 Windows.Win32.System.Threading.Apis.CreateProcessAsUserA : dwCreationFlags...UInt32 => PROCESS_CREATION_FLAGS
 Windows.Win32.System.Threading.Apis.CreateProcessAsUserW : dwCreationFlags...UInt32 => PROCESS_CREATION_FLAGS
 Windows.Win32.System.Threading.Apis.CreateProcessWithLogonW : dwCreationFlags...UInt32 => PROCESS_CREATION_FLAGS
+# Added missed API for #1402.
+Windows.Win32.System.Threading.Apis.CreateProcessWithTokenW : dwCreationFlags...UInt32 => PROCESS_CREATION_FLAGS
