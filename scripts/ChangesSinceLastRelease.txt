@@ -528,3 +528,4 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SystemParametersInfoA : pvParam : [Opt
 Windows.Win32.UI.WindowsAndMessaging.Apis.SystemParametersInfoW : pvParam : [Optional,Out] => [In,Optional]
 Windows.Win32.Web.MsHtml.IDocHostUIHandler.FilterDataObject : ppDORet : [Optional,Out] => [Out]
 Windows.Win32.Web.MsHtml.IDocHostUIHandler.GetExternal : ppDispatch : [Optional,Out] => [Out]
+Windows.Win32.AI.MachineLearning.WinML.IMLOperatorKernelContext.GetOutputTensor : tensor : [ComOutPtr,Optional,Out] => [ComOutPtr,Out]
