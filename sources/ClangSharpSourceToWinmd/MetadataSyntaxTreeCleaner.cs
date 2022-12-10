@@ -843,7 +843,7 @@ namespace ClangSharpSourceToWinmd
 
                             break;
                         }
-                        else if (salAttr.P1 == "_Pre_maybenull_")
+                        else if (salAttr.P1 == "_Maybenull_" || salAttr.P1 == "_Pre_maybenull_")
                         {
                             isIn = true;
                             isOpt = true;
