@@ -803,17 +803,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     if (salAttr.Name == "SAL_name")
                     {
-                        if (salAttr.P1.StartsWith("_COM_Outptr"))
-                        {
-                            isComOutPtr = true;
-                            continue;
-                        }
-                        else if (salAttr.P1.StartsWith("_Outptr_") && !isComOutPtr)
-                        {
-                            isOut = true;
-                            continue;
-                        }
-                        else if (salAttr.P1.StartsWith("__RPC__"))
+                        if (salAttr.P1.StartsWith("__RPC__"))
                         {
                             // TODO: Handle ecount, xcount and others that deal with counts
                             bool deref = false;
@@ -853,17 +843,34 @@ namespace ClangSharpSourceToWinmd
 
                             break;
                         }
+                        else if (salAttr.P1 == "_Maybenull_" || salAttr.P1 == "_Pre_maybenull_")
+                        {
+                            isIn = true;
+                            isOpt = true;
+
+                            break;
+                        }
+
+                        if (salAttr.P1.Contains("_opt"))
+                        {
+                            isOpt = true;
+                        }
+
+                        if (salAttr.P1.StartsWith("_COM_Outptr"))
+                        {
+                            isComOutPtr = true;
+                            continue;
+                        }
+                        else if (salAttr.P1.StartsWith("_Outptr_") && !isComOutPtr)
+                        {
+                            isOut = true;
+                            continue;
+                        }
                         else if (salAttr.P1 == "_Reserved_")
                         {
                             isReserved = true;
                             continue;
                         }
-                    }
-
-                    if (salAttr.Name == "SAL_null" && salAttr.P1 == "__maybe")
-                    {
-                        isOpt = true;
-                        continue;
                     }
 
                     if (salAttr.Name == "SAL_retval")
@@ -905,12 +912,6 @@ namespace ClangSharpSourceToWinmd
                             isIn = isOut = true;
                         }
 
-                        continue;
-                    }
-
-                    if (salAttr.Name == "SAL_name" && salAttr.P1 == "_Post_valid_")
-                    {
-                        isOut = true;
                         continue;
                     }
 
