@@ -240,6 +240,7 @@ Windows.Win32.System.Threading.Apis.CreateProcessWithTokenW : dwCreationFlags...
 Windows.Win32.AI.MachineLearning.WinML.IMLOperatorKernelContext.GetExecutionInterface : executionObject : [Optional,Out] => [Out]
 Windows.Win32.AI.MachineLearning.WinML.IMLOperatorKernelContext.GetInputTensor : tensor : [ComOutPtr,Optional,Out] => [ComOutPtr,Out]
 Windows.Win32.AI.MachineLearning.WinML.IMLOperatorKernelContext.GetOutputTensor : tensor : [ComOutPtr,Optional,Out] => [ComOutPtr,Out]
+Windows.Win32.AI.MachineLearning.WinML.IMLOperatorKernelContext.GetOutputTensor : tensor : [ComOutPtr,Optional,Out] => [ComOutPtr,Out]
 Windows.Win32.AI.MachineLearning.WinML.IMLOperatorKernelCreationContext.GetExecutionInterface : executionObject : [ComOutPtr,Optional,Out] => [ComOutPtr,Out]
 Windows.Win32.AI.MachineLearning.WinML.IMLOperatorTensor.GetDataInterface : dataInterface : [ComOutPtr,Optional,Out] => [ComOutPtr,Out]
 Windows.Win32.Data.Xml.XmlLite.IXmlReader.GetBaseUri : ppwszBaseUri : [Optional,Out] => [Out]
@@ -525,7 +526,6 @@ Windows.Win32.UI.WindowsAndMessaging.Apis.SystemParametersInfoW : pvParam : [Opt
 Windows.Win32.Web.MsHtml.IDocHostUIHandler.FilterDataObject : ppDORet : [Optional,Out] => [Out]
 Windows.Win32.Web.MsHtml.IDocHostUIHandler.GetExternal : ppDispatch : [Optional,Out] => [Out]
 # Detect _Maybenull_ as [In][Optional].
-Windows.Win32.AI.MachineLearning.WinML.IMLOperatorKernelContext.GetOutputTensor : tensor : [ComOutPtr,Optional,Out] => [ComOutPtr,Out]
 Windows.Win32.System.EventLog.Apis.EvtSubscribe : Callback : [Optional] => [In,Optional]
 Windows.Win32.System.EventLog.Apis.EvtSubscribe : Context : [Optional] => [In,Optional]
 Windows.Win32.System.EventLog.EVT_SUBSCRIBE_CALLBACK.Invoke : UserContext : [Optional] => [In,Optional]

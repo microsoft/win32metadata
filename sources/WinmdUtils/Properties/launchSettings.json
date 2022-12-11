@@ -6,7 +6,7 @@
     },
     "compare": {
       "commandName": "Project",
-      "commandLineArgs": "compare --first $(USERPROFILE)\\.nuget\\packages\\microsoft.windows.sdk.win32metadata\\29.0.6-preview\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --knownDiffsFile $(ProjectDir)..\\..\\scripts\\ChangesSinceLastRelease.txt"
+      "commandLineArgs": "compare --first $(USERPROFILE)\\.nuget\\packages\\microsoft.windows.sdk.win32metadata\\39.0.18-preview\\Windows.Win32.winmd --second $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --knownDiffsFile $(ProjectDir)..\\..\\scripts\\ChangesSinceLastRelease.txt"
     },
     "compareWithUpdate": {
       "commandName": "Project",
