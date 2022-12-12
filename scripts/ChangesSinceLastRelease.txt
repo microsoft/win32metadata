@@ -20,15 +20,6 @@ Windows.Win32.Foundation.VARIANT_BOOL.VARIANT_TRUE removed
 Windows.Win32.Security.Apis.SECURITY_DYNAMIC_TRACKING added
 Windows.Win32.Security.Apis.SECURITY_STATIC_TRACKING added
 # Added support for remapping short integers
-Windows.Win32.Networking.WinHttp.URL_COMPONENTS.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_RESULT_ENTRY.ProxyPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinInet.Apis.GopherCreateLocatorA : nServerPort...UInt16 => INTERNET_PORT
-Windows.Win32.Networking.WinInet.Apis.GopherCreateLocatorW : nServerPort...UInt16 => INTERNET_PORT
-Windows.Win32.Networking.WinInet.Apis.InternetConnectA : nServerPort...UInt16 => INTERNET_PORT
-Windows.Win32.Networking.WinInet.Apis.InternetConnectW : nServerPort...UInt16 => INTERNET_PORT
-Windows.Win32.Networking.WinInet.URL_COMPONENTSA.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinInet.URL_COMPONENTSW.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinInet.WININET_PROXY_INFO.ProxyPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
 Windows.Win32.Networking.WinSock.SOCKADDR_DL.sdl_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
 Windows.Win32.Networking.WinSock.SOCKADDR_IN.sin_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
 Windows.Win32.Networking.WinSock.SOCKADDR_IN6.sin6_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
@@ -529,3 +520,15 @@ Windows.Win32.Web.MsHtml.IDocHostUIHandler.GetExternal : ppDispatch : [Optional,
 Windows.Win32.System.EventLog.Apis.EvtSubscribe : Callback : [Optional] => [In,Optional]
 Windows.Win32.System.EventLog.Apis.EvtSubscribe : Context : [Optional] => [In,Optional]
 Windows.Win32.System.EventLog.EVT_SUBSCRIBE_CALLBACK.Invoke : UserContext : [Optional] => [In,Optional]
+# Fixed #1406.
+Windows.Win32.Networking.WinHttp.Apis.INTERNET_DEFAULT_HTTP_PORT added
+Windows.Win32.Networking.WinHttp.Apis.INTERNET_DEFAULT_HTTPS_PORT added
+Windows.Win32.Networking.WinHttp.Apis.INTERNET_DEFAULT_PORT added
+Windows.Win32.Networking.WinHttp.Apis.WinHttpConnect : nServerPort...INTERNET_PORT => UInt16
+Windows.Win32.Networking.WinHttp.INTERNET_PORT removed
+Windows.Win32.Networking.WinHttp.INTERNET_PORT.INTERNET_DEFAULT_HTTP_PORT removed
+Windows.Win32.Networking.WinHttp.INTERNET_PORT.INTERNET_DEFAULT_HTTPS_PORT removed
+Windows.Win32.Networking.WinHttp.INTERNET_PORT.INTERNET_DEFAULT_PORT removed
+Windows.Win32.Networking.WinInet.Apis.INTERNET_DEFAULT_FTP_PORT...System.UInt32 => System.UInt16
+Windows.Win32.Networking.WinInet.Apis.INTERNET_DEFAULT_GOPHER_PORT...System.UInt32 => System.UInt16
+Windows.Win32.Networking.WinInet.Apis.INTERNET_DEFAULT_SOCKS_PORT...System.UInt32 => System.UInt16

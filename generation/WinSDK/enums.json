@@ -5994,26 +5994,6 @@
     ]
   },
   {
-    "name": "INTERNET_PORT",
-    "members": [
-      {
-        "name": "INTERNET_DEFAULT_HTTP_PORT"
-      },
-      {
-        "name": "INTERNET_DEFAULT_HTTPS_PORT"
-      },
-      {
-        "name": "INTERNET_DEFAULT_PORT"
-      }
-    ],
-    "uses": [
-      {
-        "method": "WinHttpConnect",
-        "parameter": "nServerPort"
-      }
-    ]
-  },
-  {
     "name": "VERIFIER_ENUM_RESOURCE_FLAGS",
     "flags": true,
     "members": [
