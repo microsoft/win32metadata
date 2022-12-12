@@ -1334,3 +1334,5 @@ GetPrivateProfileIntW::return=int
 OleCreatePictureIndirect::lplpvObj=[ComOutPtr]
 ContinueDebugEvent::dwContinueStatus=NTSTATUS
 ID2D1Resource::GetFactory::factory=[ComOutPtr]
+IDxcCompiler3::Compile::ppResult=[ComOutPtr]
+IDxcCompiler3::Disassemble::ppResult=[ComOutPtr]
