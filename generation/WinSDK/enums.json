@@ -5287,8 +5287,9 @@
     ]
   },
   {
-    "name": "ADDRESS_FAMILY",
     "namespace": "Windows.Win32.Networking.WinSock",
+    "name": "ADDRESS_FAMILY",
+    "type": "ushort",
     "members": [
       {
         "name": "AF_INET",
@@ -5303,32 +5304,7 @@
         "value": "0"
       }
     ],
-    "uses": [
-      {
-        "method": "GetUdpStatisticsEx2",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetIpStatisticsEx",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetTcpStatisticsEx2",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetTcpStatisticsEx",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetUdpStatisticsEx",
-        "parameter": "Family"
-      },
-      {
-        "method": "GetAdaptersAddresses",
-        "parameter": "Family"
-      }
-    ]
+    "uses": []
   },
   {
     "name": "WORD_BREAK_ACTION",

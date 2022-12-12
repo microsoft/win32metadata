@@ -532,3 +532,11 @@ Windows.Win32.Networking.WinHttp.INTERNET_PORT.INTERNET_DEFAULT_PORT removed
 Windows.Win32.Networking.WinInet.Apis.INTERNET_DEFAULT_FTP_PORT...System.UInt32 => System.UInt16
 Windows.Win32.Networking.WinInet.Apis.INTERNET_DEFAULT_GOPHER_PORT...System.UInt32 => System.UInt16
 Windows.Win32.Networking.WinInet.Apis.INTERNET_DEFAULT_SOCKS_PORT...System.UInt32 => System.UInt16
+# Fixed #1398.
+Windows.Win32.Networking.WinSock.ADDRESS_FAMILY.value__...System.UInt32 => System.UInt16
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetAdaptersAddresses : Family...ADDRESS_FAMILY => UInt32
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpStatisticsEx : Family...ADDRESS_FAMILY => UInt32
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetTcpStatisticsEx : Family...ADDRESS_FAMILY => UInt32
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetTcpStatisticsEx2 : Family...ADDRESS_FAMILY => UInt32
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetUdpStatisticsEx : Family...ADDRESS_FAMILY => UInt32
+Windows.Win32.NetworkManagement.IpHelper.Apis.GetUdpStatisticsEx2 : Family...ADDRESS_FAMILY => UInt32
