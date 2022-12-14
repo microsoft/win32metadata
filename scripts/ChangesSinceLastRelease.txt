@@ -1,3 +1,18 @@
 # Fixed #1391.
 Windows.Win32.Graphics.Direct3D.Dxc.IDxcCompiler3.Compile : ppResult : [Out] => [ComOutPtr,Out]
 Windows.Win32.Graphics.Direct3D.Dxc.IDxcCompiler3.Disassemble : ppResult : [Out] => [ComOutPtr,Out]
+# Fixed #1407.
+Windows.Win32.Networking.WinSock.Apis.NLA_SERVICE_CLASS_GUID added
+Windows.Win32.Networking.WinSock.Apis.WSAID_ACCEPTEX added
+Windows.Win32.Networking.WinSock.Apis.WSAID_CONNECTEX added
+Windows.Win32.Networking.WinSock.Apis.WSAID_DISCONNECTEX added
+Windows.Win32.Networking.WinSock.Apis.WSAID_GETACCEPTEXSOCKADDRS added
+Windows.Win32.Networking.WinSock.Apis.WSAID_TRANSMITFILE added
+Windows.Win32.Networking.WinSock.Apis.WSAID_TRANSMITPACKETS added
+Windows.Win32.Networking.WinSock.Apis.WSAID_WSAPOLL added
+Windows.Win32.Networking.WinSock.Apis.WSAID_WSARECVMSG added
+Windows.Win32.System.Search.Apis.DB_NULLGUID added
+Windows.Win32.System.Search.Apis.DBCIDGUID added
+Windows.Win32.System.Search.Apis.DBGUID_ROWDEFAULTSTREAM added
+Windows.Win32.System.Search.Apis.DBGUID_ROWURL added
+Windows.Win32.System.Search.Apis.DBSELFGUID added
