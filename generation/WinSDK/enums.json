@@ -35534,6 +35534,33 @@
         "parameter": "return"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.System.RemoteDesktop",
+    "name": "WTS_SECURITY_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "WTS_SECURITY_",
+      "header": "wtsapi32.h"
+    },
+    "members": [
+      {
+        "name": "WTS_SECURITY_CURRENT_GUEST_ACCESS",
+        "value": "(WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_LOGOFF)"
+      },
+      {
+        "name": "WTS_SECURITY_USER_ACCESS",
+        "value": "(WTS_SECURITY_CURRENT_GUEST_ACCESS | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_CONNECT)"
+      },
+      {
+        "name": "WTS_SECURITY_CURRENT_USER_ACCESS",
+        "value": "(WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_LOGOFF | WTS_SECURITY_DISCONNECT)"
+      },
+      {
+        "name": "WTS_SECURITY_ALL_ACCESS",
+        "value": "(0x000F0000 | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_REMOTE_CONTROL | WTS_SECURITY_LOGON | WTS_SECURITY_MESSAGE | WTS_SECURITY_CONNECT | WTS_SECURITY_DISCONNECT)"
+      }
+    ]
   }
 ]
 }
