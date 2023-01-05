@@ -35601,11 +35601,11 @@
       },
       {
         "name": "CONTEXT_FULL",
-        "value": "0x0000000A"
+        "value": "(CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_FLOATING_POINT)"
       },
       {
         "name": "CONTEXT_ALL",
-        "value": "0x0000001F"
+        "value": "(CONTEXT_CONTROL | CONTEXT_INTEGER | CONTEXT_SEGMENTS | CONTEXT_FLOATING_POINT | CONTEXT_DEBUG_REGISTERS)"
       },
       {
         "name": "CONTEXT_XSTATE",
@@ -35669,11 +35669,11 @@
       },
       {
         "name": "CONTEXT_ARM64_FULL",
-        "value": "0x00000007"
+        "value": "(CONTEXT_ARM64_CONTROL | CONTEXT_ARM64_INTEGER | CONTEXT_ARM64_FLOATING_POINT)"
       },
       {
         "name": "CONTEXT_ARM64_ALL",
-        "value": "0x0000001F"
+        "value": "(CONTEXT_ARM64_CONTROL | CONTEXT_ARM64_INTEGER | CONTEXT_ARM64_FLOATING_POINT | CONTEXT_ARM64_DEBUG_REGISTERS | CONTEXT_ARM64_X18)"
       }
     ],
     "uses": [
