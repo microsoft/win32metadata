@@ -429,7 +429,7 @@ namespace ClangSharpSourceToWinmd
             if (symbol != null)
             {
                 this.interfaceSymbols.Add(symbol);
-                this.interfaceMethodCount[symbol] = interfaceInfo.Methods.Count();
+                this.interfaceMethodCount[symbol] = interfaceInfo.ImplementedMethodCount;
                 if (!this.namesToInterfaceSymbols.TryGetValue(symbol.Name, out var symbols))
                 {
                     symbols = new List<ISymbol>();
