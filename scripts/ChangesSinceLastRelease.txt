@@ -46,3 +46,6 @@ Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_USER_ACCESS a
 Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_VIRTUAL_CHANNELS added
 # Fixed #1410.
 winmd1: Windows.Win32.Security.TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS = 983295, winmd2 = 983551
+# Fixed #1430.
+Windows.Win32.UI.WindowsAndMessaging.WINDOWINFO.dwExStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_EX_STYLE
+Windows.Win32.UI.WindowsAndMessaging.WINDOWINFO.dwStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE

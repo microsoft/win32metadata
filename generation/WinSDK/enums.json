@@ -922,6 +922,10 @@
     "members": [],
     "uses": [
       {
+        "struct": "WINDOWINFO",
+        "field": "dwExStyle"
+      },
+      {
         "method": "CreateWindowExA",
         "parameter": "dwExStyle"
       },
@@ -967,6 +971,10 @@
       {
         "struct": "MDICREATESTRUCTW",
         "field": "style"
+      },
+      {
+        "struct": "WINDOWINFO",
+        "field": "dwStyle"
       },
       {
         "struct": "MDICREATESTRUCTA",
