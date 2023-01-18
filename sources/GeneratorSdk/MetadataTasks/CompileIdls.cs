@@ -56,6 +56,11 @@ namespace MetadataTasks
             get; set;
         }
 
+        public string MidlSwitches
+        {
+            get; set;
+        }
+
         public override bool Execute()
         {
 #if DEBUG
@@ -92,6 +97,11 @@ namespace MetadataTasks
             if (!string.IsNullOrEmpty(this.AdditionalIncludes))
             {
                 commonMidlArgs += $" /I\"{this.AdditionalIncludes}\"";
+            }
+            
+            if (!string.IsNullOrEmpty(this.MidlSwitches))
+            {
+                commonMidlArgs += $" {this.MidlSwitches}";
             }
 
             foreach (var idl in idls)
