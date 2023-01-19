@@ -57,3 +57,7 @@ Windows.Win32.System.Com.Apis.CoGetClassObject : ppv : [Out] => [ComOutPtr,Out]
 Windows.Win32.System.Com.Apis.CoGetObject : ppv : [Out] => [ComOutPtr,Out]
 Windows.Win32.System.Com.Apis.CoGetObjectContext : ppv : [Out] => [ComOutPtr,Out]
 Windows.Win32.System.Com.Apis.CreateDataCache : ppv : [Out] => [ComOutPtr,Out]
+# Fixed #1424.
+Windows.Win32.Devices.Display.Apis.GetDisplayConfigBufferSizes : return...Int32 => WIN32_ERROR
+Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : currentTopologyId : [Out] => [Optional,Out]
+Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : return...Int32 => WIN32_ERROR
