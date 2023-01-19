@@ -35601,6 +35601,10 @@
       {
         "method": "QueryDisplayConfig",
         "parameter": "flags"
+      },
+      {
+        "method": "GetDisplayConfigBufferSizes",
+        "parameter": "flags"
       }
     ]
   }

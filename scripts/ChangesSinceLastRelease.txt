@@ -111,3 +111,5 @@ Windows.Win32.Graphics.Gdi.Apis.SDC_USE_SUPPLIED_DISPLAY_CONFIG removed
 Windows.Win32.Graphics.Gdi.Apis.SDC_VALIDATE removed
 Windows.Win32.Graphics.Gdi.Apis.SDC_VIRTUAL_MODE_AWARE removed
 Windows.Win32.Graphics.Gdi.Apis.SDC_VIRTUAL_REFRESH_RATE_AWARE removed
+# Fixed #1414.
+Windows.Win32.Devices.Display.Apis.GetDisplayConfigBufferSizes : flags...UInt32 => QUERY_DISPLAY_CONFIG_FLAGS
