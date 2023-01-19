@@ -35607,6 +35607,24 @@
         "parameter": "flags"
       }
     ]
+  },
+  {
+    "name": "ENUM_DISPLAY_SETTINGS_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "EDS_",
+      "header": "winuser.h"
+    },
+    "uses": [
+      {
+        "method": "EnumDisplaySettingsExA",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "EnumDisplaySettingsExW",
+        "parameter": "dwFlags"
+      }
+    ]
   }
 ]
 }

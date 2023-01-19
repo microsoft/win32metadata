@@ -705,3 +705,11 @@ Windows.Win32.Graphics.Gdi.Apis.SDC_VIRTUAL_MODE_AWARE removed
 Windows.Win32.Graphics.Gdi.Apis.SDC_VIRTUAL_REFRESH_RATE_AWARE removed
 # Fixed #1414.
 Windows.Win32.Devices.Display.Apis.GetDisplayConfigBufferSizes : flags...UInt32 => QUERY_DISPLAY_CONFIG_FLAGS
+# Fixed #1413.
+Windows.Win32.Graphics.Gdi.Apis.EnumDisplaySettingsExA : dwFlags...UInt32 => ENUM_DISPLAY_SETTINGS_FLAGS
+Windows.Win32.Graphics.Gdi.Apis.EnumDisplaySettingsExW : dwFlags...UInt32 => ENUM_DISPLAY_SETTINGS_FLAGS
+Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS added
+Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS.EDS_RAWMODE added
+Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS.EDS_ROTATEDMODE added
+Windows.Win32.UI.WindowsAndMessaging.Apis.EDS_RAWMODE removed
+Windows.Win32.UI.WindowsAndMessaging.Apis.EDS_ROTATEDMODE removed
