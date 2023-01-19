@@ -61,3 +61,53 @@ Windows.Win32.System.Com.Apis.CreateDataCache : ppv : [Out] => [ComOutPtr,Out]
 Windows.Win32.Devices.Display.Apis.GetDisplayConfigBufferSizes : return...Int32 => WIN32_ERROR
 Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : currentTopologyId : [Out] => [Optional,Out]
 Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : return...Int32 => WIN32_ERROR
+# Fixed #1415 and #1416.
+Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : flags...UInt32 => QUERY_DISPLAY_CONFIG_FLAGS
+Windows.Win32.Devices.Display.Apis.SetDisplayConfig : flags...UInt32 => SET_DISPLAY_CONFIG_FLAGS
+Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS added
+Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_ALL_PATHS added
+Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_DATABASE_CURRENT added
+Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_INCLUDE_HMD added
+Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_ONLY_ACTIVE_PATHS added
+Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_VIRTUAL_MODE_AWARE added
+Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_VIRTUAL_REFRESH_RATE_AWARE added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_ALLOW_CHANGES added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_ALLOW_PATH_ORDER_CHANGES added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_APPLY added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_FORCE_MODE_ENUMERATION added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_NO_OPTIMIZATION added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_PATH_PERSIST_IF_REQUIRED added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_SAVE_TO_DATABASE added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_CLONE added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_EXTEND added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_EXTERNAL added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_INTERNAL added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_SUPPLIED added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_USE_DATABASE_CURRENT added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_USE_SUPPLIED_DISPLAY_CONFIG added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_VALIDATE added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_VIRTUAL_MODE_AWARE added
+Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_VIRTUAL_REFRESH_RATE_AWARE added
+Windows.Win32.Graphics.Gdi.Apis.QDC_ALL_PATHS removed
+Windows.Win32.Graphics.Gdi.Apis.QDC_DATABASE_CURRENT removed
+Windows.Win32.Graphics.Gdi.Apis.QDC_INCLUDE_HMD removed
+Windows.Win32.Graphics.Gdi.Apis.QDC_ONLY_ACTIVE_PATHS removed
+Windows.Win32.Graphics.Gdi.Apis.QDC_VIRTUAL_MODE_AWARE removed
+Windows.Win32.Graphics.Gdi.Apis.QDC_VIRTUAL_REFRESH_RATE_AWARE removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_ALLOW_CHANGES removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_ALLOW_PATH_ORDER_CHANGES removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_APPLY removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_FORCE_MODE_ENUMERATION removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_NO_OPTIMIZATION removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_PATH_PERSIST_IF_REQUIRED removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_SAVE_TO_DATABASE removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_CLONE removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_EXTEND removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_EXTERNAL removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_INTERNAL removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_SUPPLIED removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_USE_SUPPLIED_DISPLAY_CONFIG removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_VALIDATE removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_VIRTUAL_MODE_AWARE removed
+Windows.Win32.Graphics.Gdi.Apis.SDC_VIRTUAL_REFRESH_RATE_AWARE removed

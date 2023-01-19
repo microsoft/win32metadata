@@ -35569,6 +35569,40 @@
         "value": "(0x000F0000 | WTS_SECURITY_QUERY_INFORMATION | WTS_SECURITY_SET_INFORMATION | WTS_SECURITY_RESET | WTS_SECURITY_VIRTUAL_CHANNELS | WTS_SECURITY_REMOTE_CONTROL | WTS_SECURITY_LOGON | WTS_SECURITY_MESSAGE | WTS_SECURITY_CONNECT | WTS_SECURITY_DISCONNECT)"
       }
     ]
+  },
+  {
+    "name": "SET_DISPLAY_CONFIG_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "SDC_",
+      "header": "wingdi.h"
+    },
+    "members": [
+      {
+        "name": "SDC_USE_DATABASE_CURRENT",
+        "value": "(SDC_TOPOLOGY_INTERNAL | SDC_TOPOLOGY_CLONE | SDC_TOPOLOGY_EXTEND | SDC_TOPOLOGY_EXTERNAL)"
+      }
+    ],
+    "uses": [
+      {
+        "method": "SetDisplayConfig",
+        "parameter": "flags"
+      }
+    ]
+  },
+  {
+    "name": "QUERY_DISPLAY_CONFIG_FLAGS",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "QDC_",
+      "header": "wingdi.h"
+    },
+    "uses": [
+      {
+        "method": "QueryDisplayConfig",
+        "parameter": "flags"
+      }
+    ]
   }
 ]
 }
