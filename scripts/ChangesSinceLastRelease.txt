@@ -713,3 +713,40 @@ Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS.EDS_RAWMODE added
 Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS.EDS_ROTATEDMODE added
 Windows.Win32.UI.WindowsAndMessaging.Apis.EDS_RAWMODE removed
 Windows.Win32.UI.WindowsAndMessaging.Apis.EDS_ROTATEDMODE removed
+# Fixed #1417.
+Windows.Win32.System.SystemServices.Apis.SE_ASSIGNPRIMARYTOKEN_NAME => Windows.Win32.Security.Apis.SE_ASSIGNPRIMARYTOKEN_NAME
+Windows.Win32.System.SystemServices.Apis.SE_AUDIT_NAME => Windows.Win32.Security.Apis.SE_AUDIT_NAME
+Windows.Win32.System.SystemServices.Apis.SE_BACKUP_NAME => Windows.Win32.Security.Apis.SE_BACKUP_NAME
+Windows.Win32.System.SystemServices.Apis.SE_CHANGE_NOTIFY_NAME => Windows.Win32.Security.Apis.SE_CHANGE_NOTIFY_NAME
+Windows.Win32.System.SystemServices.Apis.SE_CREATE_GLOBAL_NAME => Windows.Win32.Security.Apis.SE_CREATE_GLOBAL_NAME
+Windows.Win32.System.SystemServices.Apis.SE_CREATE_PAGEFILE_NAME => Windows.Win32.Security.Apis.SE_CREATE_PAGEFILE_NAME
+Windows.Win32.System.SystemServices.Apis.SE_CREATE_PERMANENT_NAME => Windows.Win32.Security.Apis.SE_CREATE_PERMANENT_NAME
+Windows.Win32.System.SystemServices.Apis.SE_CREATE_SYMBOLIC_LINK_NAME => Windows.Win32.Security.Apis.SE_CREATE_SYMBOLIC_LINK_NAME
+Windows.Win32.System.SystemServices.Apis.SE_CREATE_TOKEN_NAME => Windows.Win32.Security.Apis.SE_CREATE_TOKEN_NAME
+Windows.Win32.System.SystemServices.Apis.SE_DEBUG_NAME => Windows.Win32.Security.Apis.SE_DEBUG_NAME
+Windows.Win32.System.SystemServices.Apis.SE_DELEGATE_SESSION_USER_IMPERSONATE_NAME => Windows.Win32.Security.Apis.SE_DELEGATE_SESSION_USER_IMPERSONATE_NAME
+Windows.Win32.System.SystemServices.Apis.SE_ENABLE_DELEGATION_NAME => Windows.Win32.Security.Apis.SE_ENABLE_DELEGATION_NAME
+Windows.Win32.System.SystemServices.Apis.SE_IMPERSONATE_NAME => Windows.Win32.Security.Apis.SE_IMPERSONATE_NAME
+Windows.Win32.System.SystemServices.Apis.SE_INC_BASE_PRIORITY_NAME => Windows.Win32.Security.Apis.SE_INC_BASE_PRIORITY_NAME
+Windows.Win32.System.SystemServices.Apis.SE_INC_WORKING_SET_NAME => Windows.Win32.Security.Apis.SE_INC_WORKING_SET_NAME
+Windows.Win32.System.SystemServices.Apis.SE_INCREASE_QUOTA_NAME => Windows.Win32.Security.Apis.SE_INCREASE_QUOTA_NAME
+Windows.Win32.System.SystemServices.Apis.SE_LOAD_DRIVER_NAME => Windows.Win32.Security.Apis.SE_LOAD_DRIVER_NAME
+Windows.Win32.System.SystemServices.Apis.SE_LOCK_MEMORY_NAME => Windows.Win32.Security.Apis.SE_LOCK_MEMORY_NAME
+Windows.Win32.System.SystemServices.Apis.SE_MACHINE_ACCOUNT_NAME => Windows.Win32.Security.Apis.SE_MACHINE_ACCOUNT_NAME
+Windows.Win32.System.SystemServices.Apis.SE_MANAGE_VOLUME_NAME => Windows.Win32.Security.Apis.SE_MANAGE_VOLUME_NAME
+Windows.Win32.System.SystemServices.Apis.SE_PROF_SINGLE_PROCESS_NAME => Windows.Win32.Security.Apis.SE_PROF_SINGLE_PROCESS_NAME
+Windows.Win32.System.SystemServices.Apis.SE_RELABEL_NAME => Windows.Win32.Security.Apis.SE_RELABEL_NAME
+Windows.Win32.System.SystemServices.Apis.SE_REMOTE_SHUTDOWN_NAME => Windows.Win32.Security.Apis.SE_REMOTE_SHUTDOWN_NAME
+Windows.Win32.System.SystemServices.Apis.SE_RESTORE_NAME => Windows.Win32.Security.Apis.SE_RESTORE_NAME
+Windows.Win32.System.SystemServices.Apis.SE_SECURITY_NAME => Windows.Win32.Security.Apis.SE_SECURITY_NAME
+Windows.Win32.System.SystemServices.Apis.SE_SHUTDOWN_NAME => Windows.Win32.Security.Apis.SE_SHUTDOWN_NAME
+Windows.Win32.System.SystemServices.Apis.SE_SYNC_AGENT_NAME => Windows.Win32.Security.Apis.SE_SYNC_AGENT_NAME
+Windows.Win32.System.SystemServices.Apis.SE_SYSTEM_ENVIRONMENT_NAME => Windows.Win32.Security.Apis.SE_SYSTEM_ENVIRONMENT_NAME
+Windows.Win32.System.SystemServices.Apis.SE_SYSTEM_PROFILE_NAME => Windows.Win32.Security.Apis.SE_SYSTEM_PROFILE_NAME
+Windows.Win32.System.SystemServices.Apis.SE_SYSTEMTIME_NAME => Windows.Win32.Security.Apis.SE_SYSTEMTIME_NAME
+Windows.Win32.System.SystemServices.Apis.SE_TAKE_OWNERSHIP_NAME => Windows.Win32.Security.Apis.SE_TAKE_OWNERSHIP_NAME
+Windows.Win32.System.SystemServices.Apis.SE_TCB_NAME => Windows.Win32.Security.Apis.SE_TCB_NAME
+Windows.Win32.System.SystemServices.Apis.SE_TIME_ZONE_NAME => Windows.Win32.Security.Apis.SE_TIME_ZONE_NAME
+Windows.Win32.System.SystemServices.Apis.SE_TRUSTED_CREDMAN_ACCESS_NAME => Windows.Win32.Security.Apis.SE_TRUSTED_CREDMAN_ACCESS_NAME
+Windows.Win32.System.SystemServices.Apis.SE_UNDOCK_NAME => Windows.Win32.Security.Apis.SE_UNDOCK_NAME
+Windows.Win32.System.SystemServices.Apis.SE_UNSOLICITED_INPUT_NAME => Windows.Win32.Security.Apis.SE_UNSOLICITED_INPUT_NAME
