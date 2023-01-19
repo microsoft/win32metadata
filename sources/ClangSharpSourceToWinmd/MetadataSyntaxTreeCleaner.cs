@@ -968,7 +968,7 @@ namespace ClangSharpSourceToWinmd
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Reserved")));
                 }
 
-                if (isOpt)
+                if (isOpt || isReserved)
                 {
                     attributesList.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName("Optional")));
                 }
