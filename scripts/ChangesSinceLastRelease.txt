@@ -49,3 +49,11 @@ winmd1: Windows.Win32.Security.TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS = 983295, winm
 # Fixed #1430.
 Windows.Win32.UI.WindowsAndMessaging.WINDOWINFO.dwExStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_EX_STYLE
 Windows.Win32.UI.WindowsAndMessaging.WINDOWINFO.dwStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE
+# Fixed #1425.
+Windows.Win32.System.Com.Apis.BindMoniker : ppvResult : [Out] => [ComOutPtr,Out]
+Windows.Win32.System.Com.Apis.CoGetCallContext : ppInterface : [Out] => [ComOutPtr,Out]
+Windows.Win32.System.Com.Apis.CoGetCancelObject : ppUnk : [Out] => [ComOutPtr,Out]
+Windows.Win32.System.Com.Apis.CoGetClassObject : ppv : [Out] => [ComOutPtr,Out]
+Windows.Win32.System.Com.Apis.CoGetObject : ppv : [Out] => [ComOutPtr,Out]
+Windows.Win32.System.Com.Apis.CoGetObjectContext : ppv : [Out] => [ComOutPtr,Out]
+Windows.Win32.System.Com.Apis.CreateDataCache : ppv : [Out] => [ComOutPtr,Out]
