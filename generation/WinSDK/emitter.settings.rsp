@@ -1343,3 +1343,6 @@ CoGetObjectContext::ppv=[ComOutPtr]
 CoGetClassObject::ppv=[ComOutPtr]
 CoGetCallContext::ppInterface=[ComOutPtr]
 CoGetCancelObject::ppUnk=[ComOutPtr]
+QueryDisplayConfig::return=WIN32_ERROR
+QueryDisplayConfig::currentTopologyId=[Optional]
+GetDisplayConfigBufferSizes::return=WIN32_ERROR
