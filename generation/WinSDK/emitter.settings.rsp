@@ -1346,3 +1346,5 @@ CoGetCancelObject::ppUnk=[ComOutPtr]
 QueryDisplayConfig::return=WIN32_ERROR
 QueryDisplayConfig::currentTopologyId=[Optional]
 GetDisplayConfigBufferSizes::return=WIN32_ERROR
+WTSQuerySessionInformationA::hServer=[Optional]
+WTSQuerySessionInformationW::hServer=[Optional]

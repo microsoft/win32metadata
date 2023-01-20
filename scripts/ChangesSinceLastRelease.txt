@@ -750,3 +750,6 @@ Windows.Win32.System.SystemServices.Apis.SE_TIME_ZONE_NAME => Windows.Win32.Secu
 Windows.Win32.System.SystemServices.Apis.SE_TRUSTED_CREDMAN_ACCESS_NAME => Windows.Win32.Security.Apis.SE_TRUSTED_CREDMAN_ACCESS_NAME
 Windows.Win32.System.SystemServices.Apis.SE_UNDOCK_NAME => Windows.Win32.Security.Apis.SE_UNDOCK_NAME
 Windows.Win32.System.SystemServices.Apis.SE_UNSOLICITED_INPUT_NAME => Windows.Win32.Security.Apis.SE_UNSOLICITED_INPUT_NAME
+# Fixed #1435.
+Windows.Win32.System.RemoteDesktop.Apis.WTSQuerySessionInformationA : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSQuerySessionInformationW : hServer : [In] => [Optional]
