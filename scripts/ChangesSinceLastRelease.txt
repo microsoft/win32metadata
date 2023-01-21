@@ -753,3 +753,5 @@ Windows.Win32.System.SystemServices.Apis.SE_UNSOLICITED_INPUT_NAME => Windows.Wi
 # Fixed #1435.
 Windows.Win32.System.RemoteDesktop.Apis.WTSQuerySessionInformationA : hServer : [In] => [Optional]
 Windows.Win32.System.RemoteDesktop.Apis.WTSQuerySessionInformationW : hServer : [In] => [Optional]
+# Fixed #1431.
+Windows.Win32.Media.MediaFoundation.Apis.MF_VERSION added
