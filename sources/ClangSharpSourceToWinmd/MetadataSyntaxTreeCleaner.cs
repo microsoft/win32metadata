@@ -7,6 +7,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using MetadataUtils;
+using System.Xml.Linq;
 
 namespace ClangSharpSourceToWinmd
 {
@@ -153,8 +154,9 @@ namespace ClangSharpSourceToWinmd
 
                 string fullName = GetFullNameWithoutArchSuffix(node);
 
-                if (this.GetRemapInfo(fullName, out var listAttributes, node.Type.ToString(), out string newType, out string newName))
+                if (this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Type.ToString(), out string newType, out string newName))
                 {
+
                     node = (ParameterSyntax)base.VisitParameter(node);
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
                         
@@ -191,7 +193,7 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 string fullName = GetFullNameWithoutArchSuffix(node);
-                if (this.GetRemapInfo(fullName, out var listAttributes, null, out _, out string newName))
+                if (this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, null, out _, out string newName))
                 {
                     node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
@@ -226,7 +228,7 @@ namespace ClangSharpSourceToWinmd
 
                 string fullName = GetFullNameWithoutArchSuffix(node);
 
-                this.GetRemapInfo(fullName, out var listAttributes, node.Declaration.Type.ToString(), out string newType, out string newName);
+                this.GetRemapInfo(fullName, node.AttributeLists, out var listAttributes, node.Declaration.Type.ToString(), out string newType, out string newName);
 
                 // ClangSharp mistakenly emits string[] for WCHAR[] Foo = "Bar".
                 // Change it to string
@@ -413,7 +415,7 @@ namespace ClangSharpSourceToWinmd
                 node = (EnumDeclarationSyntax)base.VisitEnumDeclaration(node);
 
                 var enumName = node.Identifier.ValueText;
-                if (this.GetRemapInfo(enumName, out var listAttributes, null, out _, out _))
+                if (this.GetRemapInfo(enumName, node.AttributeLists, out var listAttributes, null, out _, out _))
                 {
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes));
                 }
@@ -476,7 +478,7 @@ namespace ClangSharpSourceToWinmd
                 string fixedName = GetFullNameWithoutArchSuffix(node);
                 string returnFullName = $"{fixedName}::return";
 
-                if (this.GetRemapInfo(returnFullName, out var listAttributes, node.ReturnType.ToString(), out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, node.AttributeLists, out var listAttributes, node.ReturnType.ToString(), out var newType, out _))
                 {
                     node = (DelegateDeclarationSyntax)base.VisitDelegateDeclaration(node);
 
@@ -557,13 +559,13 @@ namespace ClangSharpSourceToWinmd
                 }
 
                 // See if there are any attributes directly on the method
-                if (this.GetRemapInfo(fullName, out var methodAttributes, null, out _, out _))
+                if (this.GetRemapInfo(fullName, node.AttributeLists, out var methodAttributes, null, out _, out _))
                 {
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, methodAttributes));
                 }
 
                 // Find remap info for the return parameter for this method and apply any that we find
-                if (this.GetRemapInfo(returnFullName, out var listAttributes, nodeReturnType, out var newType, out _))
+                if (this.GetRemapInfo(returnFullName, node.AttributeLists, out var listAttributes, nodeReturnType, out var newType, out _))
                 {
                     var target = SyntaxFactory.AttributeTargetSpecifier(SyntaxFactory.Token(SyntaxKind.ReturnKeyword));
                     node = node.WithAttributeLists(FixRemappedAttributes(node.AttributeLists, listAttributes, target));
@@ -1089,7 +1091,7 @@ namespace ClangSharpSourceToWinmd
                 return null;
             }
 
-            private bool GetRemapInfo(string fullName, out List<AttributeSyntax> listAttributes, string currentType, out string newType, out string newName)
+            private bool GetRemapInfo(string fullName, SyntaxList<AttributeListSyntax> existingAttrList, out List<AttributeSyntax> listAttributes, string currentType, out string newType, out string newName)
             {
                 listAttributes = null;
                 newType = null;
@@ -1114,6 +1116,37 @@ namespace ClangSharpSourceToWinmd
                                 newType += currentType.Substring(starIndex);
                             }
                         }
+                        //SyntaxList<AttributeListSyntax> existingAttrList 
+                        foreach (var attrList in existingAttrList.ToArray())
+                        {
+                            foreach (var attr in attrList.Attributes)
+                            {
+                                var something = attr.Name.ToString();
+                            }
+                        }
+
+                        /*
+                        foreach (var attrList in existingAttrList.ToArray())
+                        {
+                            foreach (var attr in attrList.Attributes)
+                            {
+
+                                hasNativeTypeName = true;
+                                if (attr.Name.ToString() == "NativeTypeName")
+                                {
+                                    
+                                }
+                            }
+                        }
+
+                        
+
+                        if (!hasNativeTypeName)
+                        {
+                            var newNode = SyntaxFactory.Attribute(SyntaxFactory.ParseName("NativeTypeName"), SyntaxFactory.ParseAttributeArgumentList(currentType));
+                            listAttributes.Add(newNode);
+                        }
+                        */
                     }
                 }
 
