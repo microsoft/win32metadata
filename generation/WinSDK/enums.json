@@ -35625,6 +35625,69 @@
         "parameter": "dwFlags"
       }
     ]
+  },
+  {
+    "name": "WINUSB_PIPE_POLICY",
+    "members": [
+      {
+        "name": "SHORT_PACKET_TERMINATE"
+      },
+      {
+        "name": "AUTO_CLEAR_STALL"
+      },
+      {
+        "name": "PIPE_TRANSFER_TIMEOUT"
+      },
+      {
+        "name": "IGNORE_SHORT_PACKETS"
+      },
+      {
+        "name": "ALLOW_PARTIAL_READS"
+      },
+      {
+        "name": "AUTO_FLUSH"
+      },
+      {
+        "name": "RAW_IO"
+      },
+      {
+        "name": "MAXIMUM_TRANSFER_SIZE"
+      },
+      {
+        "name": "RESET_PIPE_ON_RESUME"
+      }
+    ],
+    "uses": [
+      {
+        "method": "WinUsb_GetPipePolicy",
+        "parameter": "PolicyType"
+      },
+      {
+        "method": "WinUsb_SetPipePolicy",
+        "parameter": "PolicyType"
+      }
+    ]
+  },
+  {
+    "name": "WINUSB_POWER_POLICY",
+    "members": [
+      {
+        "name": "AUTO_SUSPEND"
+      },
+      {
+        "name": "SUSPEND_DELAY"
+      }
+    ],
+    "uses": [
+      {
+        "method": "WinUsb_GetPowerPolicy",
+        "parameter": "PolicyType"
+      },
+      {
+        "method": "WinUsb_SetPowerPolicy",
+        "parameter": "PolicyType"
+      }
+    ]
   }
 ]
 }

@@ -755,3 +755,60 @@ Windows.Win32.System.RemoteDesktop.Apis.WTSQuerySessionInformationA : hServer : 
 Windows.Win32.System.RemoteDesktop.Apis.WTSQuerySessionInformationW : hServer : [In] => [Optional]
 # Fixed #1431.
 Windows.Win32.Media.MediaFoundation.Apis.MF_VERSION added
+# Fixed #1408.
+Windows.Win32.Devices.Usb.Apis.ALLOW_PARTIAL_READS removed
+Windows.Win32.Devices.Usb.Apis.AUTO_CLEAR_STALL removed
+Windows.Win32.Devices.Usb.Apis.AUTO_FLUSH removed
+Windows.Win32.Devices.Usb.Apis.AUTO_SUSPEND removed
+Windows.Win32.Devices.Usb.Apis.IGNORE_SHORT_PACKETS removed
+Windows.Win32.Devices.Usb.Apis.MAXIMUM_TRANSFER_SIZE removed
+Windows.Win32.Devices.Usb.Apis.PIPE_TRANSFER_TIMEOUT removed
+Windows.Win32.Devices.Usb.Apis.RAW_IO removed
+Windows.Win32.Devices.Usb.Apis.RESET_PIPE_ON_RESUME removed
+Windows.Win32.Devices.Usb.Apis.SHORT_PACKET_TERMINATE removed
+Windows.Win32.Devices.Usb.Apis.SUSPEND_DELAY removed
+Windows.Win32.Devices.Usb.Apis.WinUsb_AbortPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_ControlTransfer : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_FlushPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_Free : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetAssociatedInterface : AssociatedInterfaceHandle...Void** => WINUSB_INTERFACE_HANDLE*
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetAssociatedInterface : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetCurrentAlternateSetting : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetCurrentFrameNumber : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetCurrentFrameNumberAndQpc : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetDescriptor : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetOverlappedResult : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetPipePolicy : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetPipePolicy : PolicyType...UInt32 => WINUSB_PIPE_POLICY
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetPowerPolicy : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_GetPowerPolicy : PolicyType...UInt32 => WINUSB_POWER_POLICY
+Windows.Win32.Devices.Usb.Apis.WinUsb_Initialize : InterfaceHandle...Void** => WINUSB_INTERFACE_HANDLE*
+Windows.Win32.Devices.Usb.Apis.WinUsb_QueryDeviceInformation : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_QueryInterfaceSettings : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_QueryPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_QueryPipeEx : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_ReadPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_RegisterIsochBuffer : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_ResetPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_SetCurrentAlternateSetting : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_SetPipePolicy : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_SetPipePolicy : PolicyType...UInt32 => WINUSB_PIPE_POLICY
+Windows.Win32.Devices.Usb.Apis.WinUsb_SetPowerPolicy : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_SetPowerPolicy : PolicyType...UInt32 => WINUSB_POWER_POLICY
+Windows.Win32.Devices.Usb.Apis.WinUsb_StartTrackingForTimeSync : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_StopTrackingForTimeSync : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.Apis.WinUsb_WritePipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
+Windows.Win32.Devices.Usb.WINUSB_INTERFACE_HANDLE added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.ALLOW_PARTIAL_READS added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.AUTO_CLEAR_STALL added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.AUTO_FLUSH added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.IGNORE_SHORT_PACKETS added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.MAXIMUM_TRANSFER_SIZE added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.PIPE_TRANSFER_TIMEOUT added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.RAW_IO added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.RESET_PIPE_ON_RESUME added
+Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.SHORT_PACKET_TERMINATE added
+Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY added
+Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY.AUTO_SUSPEND added
+Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY.SUSPEND_DELAY added
