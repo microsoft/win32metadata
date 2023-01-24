@@ -812,3 +812,7 @@ Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.SHORT_PACKET_TERMINATE added
 Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY added
 Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY.AUTO_SUSPEND added
 Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY.SUSPEND_DELAY added
+# Added WTS_CURRENT_SERVER constants for #1403.
+Windows.Win32.System.RemoteDesktop.Apis.WTS_CURRENT_SERVER added
+Windows.Win32.System.RemoteDesktop.Apis.WTS_CURRENT_SERVER_HANDLE added
+Windows.Win32.System.RemoteDesktop.Apis.WTS_CURRENT_SERVER_NAME added
