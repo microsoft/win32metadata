@@ -1116,16 +1116,29 @@ namespace ClangSharpSourceToWinmd
                                 newType += currentType.Substring(starIndex);
                             }
                         }
+
+                        bool hasNativeTypeName = false;
                         //SyntaxList<AttributeListSyntax> existingAttrList 
                         foreach (var attrList in existingAttrList.ToArray())
                         {
                             foreach (var attr in attrList.Attributes)
                             {
-                                var something = attr.Name.ToString();
+                                var attrName = attr.Name.ToString();
+                                if (attrName == "NativeTypeName")
+                                {
+                                    hasNativeTypeName = true;
+                                }
                             }
                         }
-
                         /*
+
+                        if (!hasNativeTypeName)
+                        {
+                            var newNode = SyntaxFactory.Attribute(SyntaxFactory.ParseName("NativeTypeName"), SyntaxFactory.ParseAttributeArgumentList(currentType));
+                            listAttributes.Add(newNode);
+                        }
+
+                        
                         foreach (var attrList in existingAttrList.ToArray())
                         {
                             foreach (var attr in attrList.Attributes)
