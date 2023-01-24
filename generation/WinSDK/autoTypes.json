@@ -350,6 +350,30 @@
     "InvalidHandleValues": [ 0 ]
   },
   {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_IO",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_TIMER",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_WAIT",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_WORK",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
     "Name": "PTP_POOL",
     "ValueType": "IntPtr",
     "CloseApi": "CloseThreadpool"
