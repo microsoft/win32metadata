@@ -1130,36 +1130,28 @@ namespace ClangSharpSourceToWinmd
                                 }
                             }
                         }
-                        /*
+
+                        if (currentType == null)
+                        {
+
+                        }
+
+                        var newCurrentType = "(" + currentType + ")";
 
                         if (!hasNativeTypeName)
                         {
-                            var newNode = SyntaxFactory.Attribute(SyntaxFactory.ParseName("NativeTypeName"), SyntaxFactory.ParseAttributeArgumentList(currentType));
-                            listAttributes.Add(newNode);
-                        }
+                            
+                            var attrNameNode = SyntaxFactory.ParseName("NativeTypeName");
+                            var argsNode = !string.IsNullOrEmpty(currentType) ? SyntaxFactory.ParseAttributeArgumentList(newCurrentType) : null;
+                            var newNode = SyntaxFactory.Attribute(attrNameNode, argsNode);
 
-                        
-                        foreach (var attrList in existingAttrList.ToArray())
-                        {
-                            foreach (var attr in attrList.Attributes)
+                            if (listAttributes == null)
                             {
-
-                                hasNativeTypeName = true;
-                                if (attr.Name.ToString() == "NativeTypeName")
-                                {
-                                    
-                                }
+                                listAttributes = new List<AttributeSyntax>();
                             }
-                        }
 
-                        
-
-                        if (!hasNativeTypeName)
-                        {
-                            var newNode = SyntaxFactory.Attribute(SyntaxFactory.ParseName("NativeTypeName"), SyntaxFactory.ParseAttributeArgumentList(currentType));
                             listAttributes.Add(newNode);
                         }
-                        */
                     }
                 }
 
