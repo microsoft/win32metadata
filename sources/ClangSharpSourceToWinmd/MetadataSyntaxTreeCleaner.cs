@@ -1137,7 +1137,6 @@ namespace ClangSharpSourceToWinmd
                             var newCurrentType = "(\"" + currentType + "\")";
                             newCurrentType = newCurrentType.ToUpper();
 
-
                             var attrNameNode = SyntaxFactory.ParseName("NativeTypeName");
                             var argsNode = !string.IsNullOrEmpty(currentType) ? SyntaxFactory.ParseAttributeArgumentList(newCurrentType) : null;
                             var newNode = SyntaxFactory.Attribute(attrNameNode, argsNode);
