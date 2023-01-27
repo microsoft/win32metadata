@@ -26,3 +26,28 @@ Windows.Win32.Web.MsHtml.Apis.IEShowOpenFileDialog added
 Windows.Win32.Web.MsHtml.Apis.IEShowSaveFileDialog added
 Windows.Win32.Web.MsHtml.Apis.IETrackingProtectionEnabled added
 Windows.Win32.Web.MsHtml.Apis.IEUnregisterWritableRegistry added
+# Fixed #1446.
+Windows.Win32.Graphics.Printing.Apis.AddMonitorA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddMonitorW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterDriverA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterDriverW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeleteMonitorA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeleteMonitorW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePrinter : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumJobsA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumJobsW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDriversA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDriversW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrintersA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrintersW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetPrinterA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetPrinterW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetSpoolFileHandle : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.SetPortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.SetPortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
