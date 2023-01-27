@@ -4,8 +4,8 @@
  * Licensed under the MIT license
  *
  *-------------------------------------------------------------------------------------*/
-import "OAIdl.idl";
-import "OCIdl.idl";
+import "oaidl.idl";
+import "ocidl.idl";
 
 import "dxgicommon.idl";
 import "d3d12.idl";
@@ -79,6 +79,20 @@ typedef enum D3D12_FEATURE_VIDEO
     D3D12_FEATURE_VIDEO_MOTION_ESTIMATOR_PROTECTED_RESOURCES = 30,
     D3D12_FEATURE_VIDEO_DECODER_HEAP_SIZE1 = 31,
     D3D12_FEATURE_VIDEO_PROCESSOR_SIZE1 = 32,
+    D3D12_FEATURE_VIDEO_ENCODER_CODEC = 33,
+    D3D12_FEATURE_VIDEO_ENCODER_PROFILE_LEVEL = 34,
+    D3D12_FEATURE_VIDEO_ENCODER_OUTPUT_RESOLUTION_RATIOS_COUNT = 35,
+    D3D12_FEATURE_VIDEO_ENCODER_OUTPUT_RESOLUTION = 36,
+    D3D12_FEATURE_VIDEO_ENCODER_INPUT_FORMAT = 37,
+    D3D12_FEATURE_VIDEO_ENCODER_RATE_CONTROL_MODE = 38,
+    D3D12_FEATURE_VIDEO_ENCODER_INTRA_REFRESH_MODE = 39,
+    D3D12_FEATURE_VIDEO_ENCODER_FRAME_SUBREGION_LAYOUT_MODE = 40,
+    D3D12_FEATURE_VIDEO_ENCODER_HEAP_SIZE = 41,
+    D3D12_FEATURE_VIDEO_ENCODER_CODEC_CONFIGURATION_SUPPORT = 42,
+    D3D12_FEATURE_VIDEO_ENCODER_SUPPORT = 43,
+    D3D12_FEATURE_VIDEO_ENCODER_CODEC_PICTURE_CONTROL_SUPPORT = 44,
+    D3D12_FEATURE_VIDEO_ENCODER_RESOURCE_REQUIREMENTS = 45,
+
 
 } D3D12_FEATURE_VIDEO;
 
@@ -1367,6 +1381,16 @@ interface ID3D12VideoDecodeCommandList2
         SIZE_T ExecutionParametersSizeInBytes);
 }
 
+[uuid(2aee8c37-9562-42da-8abf-61efeb2e4513), object, local, pointer_default(unique)]
+interface ID3D12VideoDecodeCommandList3
+    : ID3D12VideoDecodeCommandList2
+{
+    void Barrier(
+        UINT32 NumBarrierGroups,
+        [annotation("_In_reads_(NumBarrierGroups)")] const D3D12_BARRIER_GROUP *pBarrierGroups
+        );
+}
+
 [uuid(db525ae4-6ad6-473c-baa7-59b2e37082e4), object, local, pointer_default(unique)]
 interface ID3D12VideoProcessCommandList2
     : ID3D12VideoProcessCommandList1
@@ -1385,6 +1409,16 @@ interface ID3D12VideoProcessCommandList2
         [annotation("_In_")] ID3D12VideoExtensionCommand* pExtensionCommand,
         [annotation("_In_reads_bytes_(ExecutionParametersSizeInBytes)")] const void *pExecutionParameters, 
         SIZE_T ExecutionParametersSizeInBytes);
+}
+
+[uuid(1a0a4ca4-9f08-40ce-9558-b411fd2666ff), object, local, pointer_default(unique)]
+interface ID3D12VideoProcessCommandList3
+    : ID3D12VideoProcessCommandList2
+{
+    void Barrier(
+        UINT32 NumBarrierGroups,
+        [annotation("_In_reads_(NumBarrierGroups)")] const D3D12_BARRIER_GROUP *pBarrierGroups
+        );
 }
 
 [uuid(94971eca-2bdb-4769-88cf-3675ea757ebc), object, local, pointer_default(unique)]
@@ -2065,8 +2099,8 @@ interface ID3D12VideoEncoder
     UINT GetNodeMask(); 
     D3D12_VIDEO_ENCODER_FLAGS GetEncoderFlags(); 
     D3D12_VIDEO_ENCODER_CODEC GetCodec(); 
-    HRESULT GetCodecProfile([annotation("_Out_")] D3D12_VIDEO_ENCODER_PROFILE_DESC dstProfile);
-    HRESULT GetCodecConfiguration([annotation("_Out_")] D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION dstCodecConfig);
+    HRESULT GetCodecProfile([annotation("_Inout_")] D3D12_VIDEO_ENCODER_PROFILE_DESC dstProfile);
+    HRESULT GetCodecConfiguration([annotation("_Inout_")] D3D12_VIDEO_ENCODER_CODEC_CONFIGURATION dstCodecConfig);
     DXGI_FORMAT GetInputFormat();
     D3D12_VIDEO_ENCODER_MOTION_ESTIMATION_PRECISION_MODE GetMaxMotionEstimationPrecision();
 }
@@ -2078,8 +2112,8 @@ interface ID3D12VideoEncoderHeap
     UINT GetNodeMask(); 
     D3D12_VIDEO_ENCODER_HEAP_FLAGS GetEncoderHeapFlags(); 
     D3D12_VIDEO_ENCODER_CODEC GetCodec(); 
-    HRESULT GetCodecProfile([annotation("_Out_")] D3D12_VIDEO_ENCODER_PROFILE_DESC dstProfile); 
-    HRESULT GetCodecLevel([annotation("_Out_")] D3D12_VIDEO_ENCODER_LEVEL_SETTING dstLevel); 
+    HRESULT GetCodecProfile([annotation("_Inout_")] D3D12_VIDEO_ENCODER_PROFILE_DESC dstProfile); 
+    HRESULT GetCodecLevel([annotation("_Inout_")] D3D12_VIDEO_ENCODER_LEVEL_SETTING dstLevel); 
     UINT GetResolutionListCount(); 
     HRESULT GetResolutionList(
         const UINT ResolutionsListCount,
@@ -2408,6 +2442,18 @@ interface ID3D12VideoEncodeCommandList2
         [annotation("_In_")] const D3D12_VIDEO_ENCODER_RESOLVE_METADATA_OUTPUT_ARGUMENTS* pOutputArguments);
 }
 
+
+[uuid(7f027b22-1515-4e85-aa0d-026486580576), object, local, pointer_default(unique)]
+interface ID3D12VideoEncodeCommandList3
+    : ID3D12VideoEncodeCommandList2
+{
+
+    void Barrier(
+        UINT32 NumBarrierGroups,
+        [annotation("_In_reads_(NumBarrierGroups)")] const D3D12_BARRIER_GROUP *pBarrierGroups
+        );
+}
+
 cpp_quote("#endif /* WINAPI_FAMILY_PARTITION(WINAPI_PARTITION_APP | WINAPI_PARTITION_GAMES) */")
 #pragma endregion
 
@@ -2429,9 +2475,12 @@ cpp_quote( "DEFINE_GUID(IID_ID3D12VideoProcessor1,0xF3CFE615,0x553F,0x425C,0x86,
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoExtensionCommand,0x554E41E8,0xAE8E,0x4A8C,0xB7,0xD2,0x5B,0x4F,0x27,0x4A,0x30,0xE4);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoDevice2,0xF019AC49,0xF838,0x4A95,0x9B,0x17,0x57,0x94,0x37,0xC8,0xF5,0x13);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoDecodeCommandList2,0x6e120880,0xc114,0x4153,0x80,0x36,0xd2,0x47,0x05,0x1e,0x17,0x29);" )
+cpp_quote( "DEFINE_GUID(IID_ID3D12VideoDecodeCommandList3,0x2aee8c37,0x9562,0x42da,0x8a,0xbf,0x61,0xef,0xeb,0x2e,0x45,0x13);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoProcessCommandList2,0xdb525ae4,0x6ad6,0x473c,0xba,0xa7,0x59,0xb2,0xe3,0x70,0x82,0xe4);" )
+cpp_quote( "DEFINE_GUID(IID_ID3D12VideoProcessCommandList3,0x1a0a4ca4,0x9f08,0x40ce,0x95,0x58,0xb4,0x11,0xfd,0x26,0x66,0xff);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoEncodeCommandList1,0x94971eca,0x2bdb,0x4769,0x88,0xcf,0x36,0x75,0xea,0x75,0x7e,0xbc);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoEncoder,0x2E0D212D,0x8DF9,0x44A6,0xA7,0x70,0xBB,0x28,0x9B,0x18,0x27,0x37);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoEncoderHeap,0x22B35D96,0x876A,0x44C0,0xB2,0x5E,0xFB,0x8C,0x9C,0x7F,0x1C,0x4A);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoDevice3,0x4243ADB4,0x3A32,0x4666,0x97,0x3C,0x0C,0xCC,0x56,0x25,0xDC,0x44);" )
 cpp_quote( "DEFINE_GUID(IID_ID3D12VideoEncodeCommandList2,0x895491e2,0xe701,0x46a9,0x9a,0x1f,0x8d,0x34,0x80,0xed,0x86,0x7a);" )
+cpp_quote( "DEFINE_GUID(IID_ID3D12VideoEncodeCommandList3,0x7f027b22,0x1515,0x4e85,0xaa,0x0d,0x02,0x64,0x86,0x58,0x05,0x76);" )
