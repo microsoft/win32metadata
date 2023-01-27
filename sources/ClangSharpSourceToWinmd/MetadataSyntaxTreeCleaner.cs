@@ -40,7 +40,6 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
-            private static readonly Regex NormalizeNativeTypeNameRegex = new Regex(@"((?:const )?(?:unsigned )?\S+)\s?(\*{2})");
 
             public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
