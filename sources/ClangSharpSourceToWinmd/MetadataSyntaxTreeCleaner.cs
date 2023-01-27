@@ -40,6 +40,7 @@ namespace ClangSharpSourceToWinmd
             private HashSet<string> enumMemberNames;
             private HashSet<string> enumsToMakeFlags;
             private HashSet<string> usingNamespaces = new HashSet<string>();
+            private static readonly Regex NormalizeNativeTypeNameRegex = new Regex(@"((?:const )?(?:unsigned )?\S+)\s?(\*{2})");
 
             public TreeRewriter(Dictionary<string, string> remaps, Dictionary<string, Dictionary<string, string>> enumAdditions, HashSet<string> enumsToMakeFlags, Dictionary<string, string> requiredNamespaces, Dictionary<string, string> staticLibs, HashSet<string> nonEmptyStructs, HashSet<string> enumMemberNames)
             {
@@ -1117,8 +1118,9 @@ namespace ClangSharpSourceToWinmd
                             }
                         }
 
+                        // Add NativeTypeName attribute if it is missing 
                         bool hasNativeTypeName = false;
-                        //SyntaxList<AttributeListSyntax> existingAttrList 
+
                         foreach (var attrList in existingAttrList.ToArray())
                         {
                             foreach (var attr in attrList.Attributes)
@@ -1131,16 +1133,12 @@ namespace ClangSharpSourceToWinmd
                             }
                         }
 
-                        if (currentType == null)
+                        if (!hasNativeTypeName && !(currentType.Contains("IUnknown**")) && !(currentType.Contains("IInspectable**")))
                         {
+                            var newCurrentType = "(\"" + currentType + "\")";
+                            newCurrentType = newCurrentType.ToUpper();
 
-                        }
 
-                        var newCurrentType = "(" + currentType + ")";
-
-                        if (!hasNativeTypeName)
-                        {
-                            
                             var attrNameNode = SyntaxFactory.ParseName("NativeTypeName");
                             var argsNode = !string.IsNullOrEmpty(currentType) ? SyntaxFactory.ParseAttributeArgumentList(newCurrentType) : null;
                             var newNode = SyntaxFactory.Attribute(attrNameNode, argsNode);

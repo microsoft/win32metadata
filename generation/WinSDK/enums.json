@@ -13172,6 +13172,7 @@
   },
   {
     "name": "IMAGE_DIRECTORY_ENTRY",
+    "type": "ushort",
     "members": [
       {
         "name": "IMAGE_DIRECTORY_ENTRY_ARCHITECTURE",

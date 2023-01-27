@@ -750,3 +750,5 @@ Windows.Win32.System.SystemServices.Apis.SE_TIME_ZONE_NAME => Windows.Win32.Secu
 Windows.Win32.System.SystemServices.Apis.SE_TRUSTED_CREDMAN_ACCESS_NAME => Windows.Win32.Security.Apis.SE_TRUSTED_CREDMAN_ACCESS_NAME
 Windows.Win32.System.SystemServices.Apis.SE_UNDOCK_NAME => Windows.Win32.Security.Apis.SE_UNDOCK_NAME
 Windows.Win32.System.SystemServices.Apis.SE_UNSOLICITED_INPUT_NAME => Windows.Win32.Security.Apis.SE_UNSOLICITED_INPUT_NAME
+# Change type 
+Windows.Win32.System.Diagnostics.Debug.IMAGE_DIRECTORY_ENTRY.value__...System.UInt32 => System.UInt16
