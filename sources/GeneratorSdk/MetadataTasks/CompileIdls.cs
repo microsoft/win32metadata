@@ -92,7 +92,7 @@ namespace MetadataTasks
             string umDir = Path.Combine(this.SdkIncRoot, "um");
             string sharedDir = Path.Combine(this.SdkIncRoot, "shared");
             string winrtDir = Path.Combine(this.SdkIncRoot, "winrt");
-            string commonMidlArgs = $"/out \"{this.ObjDir}\" /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000B /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1  /Di386 /D_X86_ /D_WCHAR_T_DEFINED /no_stamp /nologo  /no_settings_comment /lcid 1033 -sal /win32 -target NT100 /Zp8 /I\"{umDir}\" /I\"{sharedDir}\" /I\"{winrtDir}\"";
+            string commonMidlArgs = $"/out \"{this.ObjDir}\" /notlb /no_warn /DUNICODE /D_UNICODE /DWINVER=0x0A00 -D_APISET_MINWIN_VERSION=0x010F /DNTDDI_VERSION=0x0A00000B /DBUILD_UMS_ENABLED=0 /DBUILD_WOW64_ENABLED=0 /DBUILD_ARM64X_ENABLED=0 /DEXECUTABLE_WRITES_SUPPORT=0 -D_USE_DECLSPECS_FOR_SAL=1 -D_CONTROL_FLOW_GUARD_SVCTAB=1  /Di386 /D_X86_ /D_WCHAR_T_DEFINED /no_stamp /nologo /no_settings_comment /lcid 1033 -sal /win32 -target NT100 /Zp8 /I\"{umDir}\" /I\"{sharedDir}\" /I\"{winrtDir}\"";
 
             if (!string.IsNullOrEmpty(this.AdditionalIncludes))
             {
