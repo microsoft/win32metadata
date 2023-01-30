@@ -1348,3 +1348,7 @@ QueryDisplayConfig::currentTopologyId=[Optional]
 GetDisplayConfigBufferSizes::return=WIN32_ERROR
 WTSQuerySessionInformationA::hServer=[Optional]
 WTSQuerySessionInformationW::hServer=[Optional]
+AssocQueryStringA=[CanReturnMultipleSuccessValues]
+AssocQueryStringW=[CanReturnMultipleSuccessValues]
+AssocQueryStringByKeyA=[CanReturnMultipleSuccessValues]
+AssocQueryStringByKeyW=[CanReturnMultipleSuccessValues]
