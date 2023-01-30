@@ -1,51 +1,58 @@
-# Fixed #1391.
-Windows.Win32.Graphics.Direct3D.Dxc.IDxcCompiler3.Compile : ppResult : [Out] => [ComOutPtr,Out]
-Windows.Win32.Graphics.Direct3D.Dxc.IDxcCompiler3.Disassemble : ppResult : [Out] => [ComOutPtr,Out]
-# Fixed #1407.
-Windows.Win32.Networking.WinSock.Apis.NLA_SERVICE_CLASS_GUID added
-Windows.Win32.Networking.WinSock.Apis.WSAID_ACCEPTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_CONNECTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_DISCONNECTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_GETACCEPTEXSOCKADDRS added
-Windows.Win32.Networking.WinSock.Apis.WSAID_TRANSMITFILE added
-Windows.Win32.Networking.WinSock.Apis.WSAID_TRANSMITPACKETS added
-Windows.Win32.Networking.WinSock.Apis.WSAID_WSAPOLL added
-Windows.Win32.Networking.WinSock.Apis.WSAID_WSARECVMSG added
-Windows.Win32.System.Search.Apis.DB_NULLGUID added
-Windows.Win32.System.Search.Apis.DBCIDGUID added
-Windows.Win32.System.Search.Apis.DBGUID_ROWDEFAULTSTREAM added
-Windows.Win32.System.Search.Apis.DBGUID_ROWURL added
-Windows.Win32.System.Search.Apis.DBSELFGUID added
-# Added WTS_SECURITY_FLAGS for #1403.
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_CONNECT removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_DISCONNECT removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_GUEST_ACCESS removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_LOGOFF removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_LOGON removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_MESSAGE removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_QUERY_INFORMATION removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_REMOTE_CONTROL removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_RESET removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_SET_INFORMATION removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_VIRTUAL_CHANNELS removed
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_ALL_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CONNECT added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CURRENT_GUEST_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CURRENT_USER_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_DISCONNECT added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_GUEST_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_LOGOFF added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_LOGON added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_MESSAGE added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_QUERY_INFORMATION added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_REMOTE_CONTROL added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_RESET added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_SET_INFORMATION added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_USER_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_VIRTUAL_CHANNELS added
-# Fixed #1410.
-winmd1: Windows.Win32.Security.TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS = 983295, winmd2 = 983551
-# Fixed #1430.
-Windows.Win32.UI.WindowsAndMessaging.WINDOWINFO.dwExStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_EX_STYLE
-Windows.Win32.UI.WindowsAndMessaging.WINDOWINFO.dwStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE
+# Fixed #1448.
+Windows.Win32.Web.MsHtml.Apis.IEAssociateThreadWithTab added
+Windows.Win32.Web.MsHtml.Apis.IECancelSaveFile added
+Windows.Win32.Web.MsHtml.Apis.IECreateDirectory added
+Windows.Win32.Web.MsHtml.Apis.IEDeleteFile added
+Windows.Win32.Web.MsHtml.Apis.IEDisassociateThreadWithTab added
+Windows.Win32.Web.MsHtml.Apis.IEFindFirstFile added
+Windows.Win32.Web.MsHtml.Apis.IEGetFileAttributesEx added
+Windows.Win32.Web.MsHtml.Apis.IEGetProtectedModeCookie added
+Windows.Win32.Web.MsHtml.Apis.IEGetWriteableFolderPath added
+Windows.Win32.Web.MsHtml.Apis.IEGetWriteableLowHKCU added
+Windows.Win32.Web.MsHtml.Apis.IEInPrivateFilteringEnabled added
+Windows.Win32.Web.MsHtml.Apis.IEIsInPrivateBrowsing added
+Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeProcess added
+Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeURL added
+Windows.Win32.Web.MsHtml.Apis.IELaunchURL added
+Windows.Win32.Web.MsHtml.Apis.IEMoveFileEx added
+Windows.Win32.Web.MsHtml.Apis.IERefreshElevationPolicy added
+Windows.Win32.Web.MsHtml.Apis.IERegCreateKeyEx added
+Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryKey added
+Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryValue added
+Windows.Win32.Web.MsHtml.Apis.IERemoveDirectory added
+Windows.Win32.Web.MsHtml.Apis.IESaveFile added
+Windows.Win32.Web.MsHtml.Apis.IESetProtectedModeCookie added
+Windows.Win32.Web.MsHtml.Apis.IEShowOpenFileDialog added
+Windows.Win32.Web.MsHtml.Apis.IEShowSaveFileDialog added
+Windows.Win32.Web.MsHtml.Apis.IETrackingProtectionEnabled added
+Windows.Win32.Web.MsHtml.Apis.IEUnregisterWritableRegistry added
+# Fixed #1446.
+Windows.Win32.Graphics.Printing.Apis.AddMonitorA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddMonitorW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterDriverA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterDriverW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeleteMonitorA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeleteMonitorW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePrinter : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumJobsA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumJobsW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDriversA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDriversW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrintersA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrintersW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetPrinterA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetPrinterW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetSpoolFileHandle : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.SetPortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.SetPortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+# Fixed #1449.
+Windows.Win32.UI.Shell.Apis.AssocQueryStringA : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringByKeyA : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringByKeyW : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringW : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]

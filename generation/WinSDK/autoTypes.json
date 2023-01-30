@@ -1490,5 +1490,11 @@
     "Name": "OLE_HANDLE",
     "ValueType": "uint",
     "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Name": "WINUSB_INTERFACE_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "WinUsb_Free",
+    "InvalidHandleValues": [ 0 ]
   }
 ]

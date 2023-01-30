@@ -7,26 +7,12 @@ For a list of high priority issues, see [High Priority Issues](https://github.co
 <table>
   <tbody>
     <tr>
-      <th>//BUILD 2021</th>
-      <th>End of 2021</th>
-      <th>2022++</th>
+      <th>2023+</th>
     </tr>
     <tr>
       <td>
         <ul>
-            <li>Win32 metadata package published to NuGet.org in preview for latest Windows SDK version</li>
-            <li>C#, C++, and Rust projections in preview</li>
-         </ul>
-     </td>
-      <td>
-        <ul>
-            <li>Win32 metadata package published to NuGet.org with versioning metadata for all supported Windows SDK versions</li>
-            <li>C#, C++, and Rust projections published</li>
-            <li>.NET 5 TFM integration of the C# projection</li>
-         </ul>
-     </td>
-    <td>
-        <ul>
+            <li>Continue expanding API coverage and improving API usability</li>
             <li>Additional language projections based on demand</li>
          </ul>
      </td>

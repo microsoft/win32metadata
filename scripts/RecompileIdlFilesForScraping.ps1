@@ -22,6 +22,12 @@ copy-item -Path "$sdkIncludeDir\shared" -destination "$recompiledIdlHeadersDir" 
 copy-item -Path "$sdkIncludeDir\winrt" -destination "$recompiledIdlHeadersDir" -recurse
 copy-item -Path "$sdkIncludeDir\ucrt" -destination "$recompiledIdlHeadersDir" -recurse
 
+$d3dPkgPath = Get-BuildToolsNugetPropsProperty("PkgMicrosoft_Direct3D_D3D12")
+$d3dIncludeDir = Join-Path $d3dPkgPath "build/native/include/"
+Write-Host "Updating to latest Direct3D headers...$d3dIncludeDir to $recompiledIdlHeadersDir"
+copy-item -Path "$d3dIncludeDir\*.*" -destination "$recompiledIdlHeadersDir\um" -Exclude dxgiformat.* -recurse
+copy-item -Path "$d3dIncludeDir\dxgiformat.*" -destination "$recompiledIdlHeadersDir\shared" -recurse
+
 Write-Host "Recompiling midl headers with SAL annotations in $recompiledIdlHeadersDir"
 
 $version = [System.IO.Path]::GetFileName($cppPkgPath)
