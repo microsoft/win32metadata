@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -33,7 +34,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineConstantRegex =
                 new Regex(
-                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\{(?:(?:0x)?[\da-f]{2}L?,?\s*){8}\}\})|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
+                    @"^((_HRESULT_TYPEDEF_|_NDIS_ERROR_TYPEDEF_)\(((?:0x)?[\da-f]+L?)\)|(\(HRESULT\)((?:0x)?[\da-f]+L?))|(-?\d+\.\d+(?:e\+\d+)?f?)|((?:0x[\da-f]+|\-?\d+)(?:UL|L)?)|((\d+)\s*(<<\s*\d+))|(MAKEINTRESOURCE[AW]{0,1}\(\s*(\-?\d+)\s*\))|(\(HWND\)(-?\d+))|([a-z0-9_]+\s*\+\s*(\d+|0x[0-de-f]+))|(\(NTSTATUS\)((?:0x)?[\da-f]+L?))|(\s*\(DWORD\)\s*\(?\s*-1(L|\b)\s*\)?)|(\(DWORD\)((?:0x)?[\da-f]+L?))|(\(BCRYPT_ALG_HANDLE\)\s*((?:0x)?[\da-f]+L?))|(\{(?:(?:0x)?[\da-f]{4,8}L?,?\s*){3}\{(?:(?:0x)?[\da-f]{2}L?,?\s*){8}\}\})|(HIDP_ERROR_CODES\((.*),(.*)\))|([a-z0-9_]+))$", RegexOptions.IgnoreCase);
 
             private static readonly Regex DefineGuidConstRegex =
                 new Regex(
@@ -767,10 +768,22 @@ namespace MetadataUtils
 
                                 continue;
                             }
-                            // SOME_OTHER_CONSTANT
+                            // HIDP_ERROR_CODES(0x0,0)
                             else if (match.Groups[26].Success)
                             {
-                                string otherName = match.Groups[26].Value;
+                                nativeTypeName = "NTSTATUS";
+
+                                var SEV = int.Parse(match.Groups[27].Value.Replace("0x", String.Empty), NumberStyles.HexNumber);
+                                var CODE = int.Parse(match.Groups[28].Value.Replace("0x", String.Empty), NumberStyles.HexNumber);
+                                valueText = $"(({SEV} << 28) | (0x11 << 16) | ({CODE}))";
+                                this.AddConstantInteger(currentNamespace, nativeTypeName, name, valueText);
+
+                                continue;
+                            }
+                            // SOME_OTHER_CONSTANT
+                            else if (match.Groups[29].Success)
+                            {
+                                string otherName = match.Groups[29].Value;
 
                                 matchedToOtherName = true;
 
