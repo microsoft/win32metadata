@@ -1,1 +1,13 @@
 Windows.Win32.System.Diagnostics.Debug.IMAGE_DIRECTORY_ENTRY.value__...System.UInt32 => System.UInt16
+Windows.Win32.Graphics.Gdi.PAN_ARM_STYLE.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_CONTRAST.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_FAMILY_TYPE.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_LETT_FORM.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_MIDLINE.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_PROPORTION.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_SERIF_STYLE.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_STROKE_VARIATION.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_WEIGHT.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_XHEIGHT.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATA.bCharSet...Windows.Win32.Graphics.Gdi.EMBED_FONT_CHARSET => Windows.Win32.Graphics.Gdi.FONT_CHARSET
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATW.bCharSet...Windows.Win32.Graphics.Gdi.EMBED_FONT_CHARSET => Windows.Win32.Graphics.Gdi.FONT_CHARSET
