@@ -85,3 +85,25 @@ Windows.Win32.System.RemoteDesktop.Apis.WTSTerminateProcess : hServer : [In] => 
 Windows.Win32.System.RemoteDesktop.Apis.WTSUnRegisterSessionNotificationEx : hServer : [In] => [Optional]
 Windows.Win32.System.RemoteDesktop.Apis.WTSVirtualChannelOpen : hServer : [In] => [Optional,Reserved]
 Windows.Win32.System.RemoteDesktop.Apis.WTSWaitSystemEvent : hServer : [In] => [Optional]
+# Fixed #964.
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BAD_LOG_PHY_VALUES added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BUFFER_TOO_SMALL added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BUTTON_NOT_PRESSED added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_DATA_INDEX_NOT_FOUND added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_DATA_INDEX_OUT_OF_RANGE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_I8042_TRANS_UNKNOWN added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_I8242_TRANS_UNKNOWN added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INCOMPATIBLE_REPORT_ID added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INTERNAL_ERROR added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_PREPARSED_DATA added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_REPORT_LENGTH added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_REPORT_TYPE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_IS_VALUE_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_BUTTON_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_IMPLEMENTED added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_VALUE_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NULL added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_REPORT_DOES_NOT_EXIST added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_SUCCESS added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_USAGE_NOT_FOUND added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_VALUE_OUT_OF_RANGE added
