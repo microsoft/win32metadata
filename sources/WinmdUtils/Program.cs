@@ -13,8 +13,8 @@ using System.Text.RegularExpressions;
 using ICSharpCode.Decompiler;
 using ICSharpCode.Decompiler.Metadata;
 using ICSharpCode.Decompiler.TypeSystem;
-using Windows.Win32.Interop;
 using MetadataUtils;
+using Windows.Win32.Interop;
 
 namespace WinmdUtilsProgram
 {
@@ -1808,12 +1808,13 @@ namespace WinmdUtilsProgram
 
         private class DifferencesWriter
         {
-            private HashSet<string> differencesToIgnore = new HashSet<string>();
-            private List<string> differences = new List<string>();
+            private HashSet<string> differencesToIgnore = new();
+            private HashSet<string> unusedDifferencesToIgnore = new();
+            private readonly List<string> differences = new();
 
             public bool DifferencesFound => this.DifferencesCount != 0;
 
-            public bool KnownDifferencesNotVisitedFound => this.differencesToIgnore.Count != 0;
+            public bool KnownDifferencesNotVisitedFound => this.unusedDifferencesToIgnore.Count != 0;
 
             public int DifferencesCount { get; private set; }
 
@@ -1851,6 +1852,8 @@ namespace WinmdUtilsProgram
                 {
                     this.differencesToIgnore.Add(value);
                 }
+
+                this.unusedDifferencesToIgnore = new HashSet<string>(differencesToIgnore);
             }
 
             public void WriteDifference(string line, bool infoOnly)
@@ -1859,7 +1862,7 @@ namespace WinmdUtilsProgram
                 {
                     if (this.differencesToIgnore.Contains(line))
                     {
-                        this.differencesToIgnore.Remove(line);
+                        this.unusedDifferencesToIgnore.Remove(line);
                         return;
                     }
 
@@ -1876,7 +1879,7 @@ namespace WinmdUtilsProgram
 
             public IEnumerable<string> Differences => this.differences;
 
-            public IEnumerable<string> KnownDifferencesNotVisited => this.differencesToIgnore;
+            public IEnumerable<string> KnownDifferencesNotVisited => this.unusedDifferencesToIgnore;
         }
     }
 }

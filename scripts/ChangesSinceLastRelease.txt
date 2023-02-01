@@ -1,232 +1,109 @@
-# Fixed #1355.
-Windows.Win32.System.Com.ITypeInfo.GetImplTypeFlags : pImplTypeFlags...Int32* => IMPLTYPEFLAGS*
-Windows.Win32.System.Ole.ICreateTypeInfo.SetImplTypeFlags : implTypeFlags...Int32 => IMPLTYPEFLAGS
-Windows.Win32.System.Ole.OLEUIBUSYA.dwFlags...System.UInt32 => Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS
-Windows.Win32.System.Ole.OLEUIBUSYW.dwFlags...System.UInt32 => Windows.Win32.System.Ole.BUSY_DIALOG_FLAGS
-# Fixed #1386.
-Windows.Win32.System.Diagnostics.Debug.Apis.ContinueDebugEvent : dwContinueStatus...UInt32 => NTSTATUS
-# Fixed #1390.
-Windows.Win32.Graphics.Direct2D.ID2D1Resource.GetFactory : factory : [Out] => [ComOutPtr,Out]
-# Fixed #1389.
-Windows.Win32.Foundation.Apis.FALSE added
-Windows.Win32.Foundation.Apis.TRUE added
-Windows.Win32.Foundation.Apis.VARIANT_FALSE added
-Windows.Win32.Foundation.Apis.VARIANT_TRUE added
-Windows.Win32.Foundation.VARIANT_BOOL :  => [NativeTypedef]
-Windows.Win32.Foundation.VARIANT_BOOL.Value added
-Windows.Win32.Foundation.VARIANT_BOOL.value__ removed
-Windows.Win32.Foundation.VARIANT_BOOL.VARIANT_FALSE removed
-Windows.Win32.Foundation.VARIANT_BOOL.VARIANT_TRUE removed
-Windows.Win32.Security.Apis.SECURITY_DYNAMIC_TRACKING added
-Windows.Win32.Security.Apis.SECURITY_STATIC_TRACKING added
-# Added support for remapping short integers
-Windows.Win32.Networking.WinHttp.URL_COMPONENTS.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinHttp.WINHTTP_PROXY_RESULT_ENTRY.ProxyPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinInet.Apis.GopherCreateLocatorA : nServerPort...UInt16 => INTERNET_PORT
-Windows.Win32.Networking.WinInet.Apis.GopherCreateLocatorW : nServerPort...UInt16 => INTERNET_PORT
-Windows.Win32.Networking.WinInet.Apis.InternetConnectA : nServerPort...UInt16 => INTERNET_PORT
-Windows.Win32.Networking.WinInet.Apis.InternetConnectW : nServerPort...UInt16 => INTERNET_PORT
-Windows.Win32.Networking.WinInet.URL_COMPONENTSA.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinInet.URL_COMPONENTSW.nPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinInet.WININET_PROXY_INFO.ProxyPort...System.UInt16 => Windows.Win32.Networking.WinHttp.INTERNET_PORT
-Windows.Win32.Networking.WinSock.SOCKADDR_DL.sdl_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.Networking.WinSock.SOCKADDR_IN.sin_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.Networking.WinSock.SOCKADDR_IN6.sin6_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.Networking.WinSock.SOCKADDR_INET.si_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.Networking.WinSock.SOCKADDR_STORAGE.ss_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.Networking.WinSock.SOCKADDR_UN.sun_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.Networking.WinSock.SOCKADDR.sa_family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.FlushIpNetTable2 : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.FlushIpPathTable : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetAnycastIpAddressTable : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpForwardTable2 : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpInterfaceTable : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpNetTable2 : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpNetworkConnectionBandwidthEstimates : AddressFamily...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetIpPathTable : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetMulticastIpAddressTable : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetUnicastIpAddressTable : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyIpInterfaceChange : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyRouteChange2 : AddressFamily...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyStableUnicastIpAddressTable : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.Apis.NotifyUnicastIpAddressChange : Family...UInt16 => ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.IpHelper.MIB_IPINTERFACE_ROW.Family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_CUSTOMER_ADDRESS_CHANGE_PARAM.CAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_CUSTOMER_ADDRESS_CHANGE_PARAM.PAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_POLICY_MISMATCH_PARAM.CAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_POLICY_MISMATCH_PARAM.PAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_PROVIDER_ADDRESS_CHANGE_PARAM.PAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_REDIRECT_PARAM.CAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_REDIRECT_PARAM.NewPAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.NetworkManagement.WindowsNetworkVirtualization.WNV_REDIRECT_PARAM.PAFamily...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-Windows.Win32.Security.Apis.SetSecurityDescriptorControl : ControlBitsOfInterest...UInt16 => SECURITY_DESCRIPTOR_CONTROL
-Windows.Win32.Security.Apis.SetSecurityDescriptorControl : ControlBitsToSet...UInt16 => SECURITY_DESCRIPTOR_CONTROL
-Windows.Win32.System.Hypervisor.SOCKADDR_HV.Family...System.UInt16 => Windows.Win32.Networking.WinSock.ADDRESS_FAMILY
-# Add Map Virtual Key Type
-Windows.Win32.UI.Input.KeyboardAndMouse.Apis.MapVirtualKeyA : uMapType...UInt32 => MAP_VIRTUAL_KEY_TYPE
-Windows.Win32.UI.Input.KeyboardAndMouse.Apis.MapVirtualKeyExA : uMapType...UInt32 => MAP_VIRTUAL_KEY_TYPE
-Windows.Win32.UI.Input.KeyboardAndMouse.Apis.MapVirtualKeyExW : uMapType...UInt32 => MAP_VIRTUAL_KEY_TYPE
-Windows.Win32.UI.Input.KeyboardAndMouse.Apis.MapVirtualKeyW : uMapType...UInt32 => MAP_VIRTUAL_KEY_TYPE
-Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE added
-Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VK_TO_CHAR added
-Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VK_TO_VSC added
-Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VK_TO_VSC_EX added
-Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VSC_TO_VK added
-Windows.Win32.UI.Input.KeyboardAndMouse.MAP_VIRTUAL_KEY_TYPE.MAPVK_VSC_TO_VK_EX added
-Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VK_TO_CHAR removed
-Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VK_TO_VSC removed
-Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VK_TO_VSC_EX removed
-Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VSC_TO_VK removed
-Windows.Win32.UI.WindowsAndMessaging.Apis.MAPVK_VSC_TO_VK_EX removed
-# Fixed #1394.
-Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.CurrentIdleState...System.UInt64 => System.UInt32
-Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.CurrentMhz...System.UInt64 => System.UInt32
-Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.MaxIdleState...System.UInt64 => System.UInt32
-Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.MaxMhz...System.UInt64 => System.UInt32
-Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.MhzLimit...System.UInt64 => System.UInt32
-Windows.Win32.System.Power.PROCESSOR_POWER_INFORMATION.Number...System.UInt64 => System.UInt32
-Windows.Win32.System.Power.SYSTEM_POWER_INFORMATION.Idleness...System.UInt64 => System.UInt32
-Windows.Win32.System.Power.SYSTEM_POWER_INFORMATION.MaxIdlenessAllowed...System.UInt64 => System.UInt32
-Windows.Win32.System.Power.SYSTEM_POWER_INFORMATION.TimeRemaining...System.UInt64 => System.UInt32
-# Fixed #1381.
-Windows.Win32.Devices.Fax.Apis.STI_GENCAP_COMMON_MASK added
-Windows.Win32.Networking.WinSock.Apis.WSA_WAIT_TIMEOUT added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_AUTHORIZED_UNEXPECTED added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_BAD_SEQUENCE added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_CHALLENGE_MISMATCH added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_CHALLENGE_SIZE_MISMATCH added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_DEVICE_DIGEST_MISSING added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_FRIENDLY_NAME_TOO_LONG added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_GROUP_POLICY_FORBIDDEN_OPERATION added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_GROUP_POLICY_FORBIDDEN_USE added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_INCOMPLETE_COMMAND added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_INCONSISTENT_PARAM_LENGTH added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_INVALID_CAPABILITY added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_INVALID_FIELD_IDENTIFIER added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_INVALID_PARAM_COMBINATION added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_INVALID_PARAM_LENGTH added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_INVALID_RESPONSE added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_INVALID_SILO added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_NO_AUTHENTICATION_REQUIRED added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_NO_PROBE added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_NOT_AUTHORIZED_UNEXPECTED added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_OTHER_SECURITY_PROTOCOL_ACTIVE added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_PASSWORD_HINT_TOO_LONG added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_PASSWORD_TOO_LONG added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_PROVISIONED_UNEXPECTED added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_SILO_NAME_TOO_LONG added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_UNKNOWN_DIGEST_ALGORITHM added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_UNPROVISIONED_HARDWARE added
-Windows.Win32.Storage.EnhancedStorage.Apis.ES_E_UNSUPPORTED_HARDWARE added
-Windows.Win32.Storage.FileSystem.Apis.INVALID_FILE_SIZE added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_FCR_DMA_MODE added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_FCR_FIFO_ENABLE added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_FCR_RCVR_RESET added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_FCR_RCVR_TRIGGER_LSB added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_FCR_RCVR_TRIGGER_MSB added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_FCR_RES1 added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_FCR_RES2 added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_FCR_XMIT_RESET added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_MCR_DTR added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_MCR_LOOP added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_MCR_OUT1 added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_MCR_OUT2 added
-Windows.Win32.System.Ioctl.Apis.SERIAL_IOC_MCR_RTS added
-Windows.Win32.System.Ole.Apis.VAR_CALENDAR_GREGORIAN added
-Windows.Win32.System.Ole.Apis.VAR_CALENDAR_HIJRI added
-Windows.Win32.System.Ole.Apis.VAR_CALENDAR_THAI added
-Windows.Win32.System.Ole.Apis.VAR_DATEVALUEONLY added
-Windows.Win32.System.Ole.Apis.VAR_FORMAT_NOSUBSTITUTE added
-Windows.Win32.System.Ole.Apis.VAR_FOURDIGITYEARS added
-Windows.Win32.System.Ole.Apis.VAR_LOCALBOOL added
-Windows.Win32.System.Ole.Apis.VAR_TIMEVALUEONLY added
-Windows.Win32.System.Ole.Apis.VAR_VALIDDATE added
-Windows.Win32.System.Performance.Apis.PLAL_ALERT_CMD_LINE_A_NAME added
-Windows.Win32.System.Performance.Apis.PLAL_ALERT_CMD_LINE_C_NAME added
-Windows.Win32.System.Performance.Apis.PLAL_ALERT_CMD_LINE_D_TIME added
-Windows.Win32.System.Performance.Apis.PLAL_ALERT_CMD_LINE_L_VAL added
-Windows.Win32.System.Performance.Apis.PLAL_ALERT_CMD_LINE_M_VAL added
-Windows.Win32.System.Performance.Apis.PLAL_ALERT_CMD_LINE_MASK added
-Windows.Win32.System.Performance.Apis.PLAL_ALERT_CMD_LINE_SINGLE added
-Windows.Win32.System.Performance.Apis.PLAL_ALERT_CMD_LINE_U_TEXT added
-Windows.Win32.System.Search.Apis.PRTH_E_ACCESS_DENIED added
-Windows.Win32.System.Search.Apis.PRTH_E_ACL_IS_READ_NONE added
-Windows.Win32.System.Search.Apis.PRTH_E_ACL_TOO_BIG added
-Windows.Win32.System.Search.Apis.PRTH_E_BAD_REQUEST added
-Windows.Win32.System.Search.Apis.PRTH_E_COMM_ERROR added
-Windows.Win32.System.Search.Apis.PRTH_E_HTTP_CANNOT_CONNECT added
-Windows.Win32.System.Search.Apis.PRTH_E_NOT_REDIRECTED added
-Windows.Win32.System.Search.Apis.PRTH_E_OBJ_NOT_FOUND added
-Windows.Win32.System.Search.Apis.PRTH_E_REQUEST_ERROR added
-Windows.Win32.System.Search.Apis.PRTH_E_SERVER_ERROR added
-Windows.Win32.System.Search.Apis.PRTH_S_ACL_IS_READ_EVERYONE added
-Windows.Win32.System.Search.Apis.PRTH_S_NOT_ALL_PARTS added
-Windows.Win32.System.Search.Apis.PRTH_S_NOT_MODIFIED added
-Windows.Win32.System.Threading.Apis.FLS_OUT_OF_INDEXES added
-Windows.Win32.System.Threading.Apis.TLS_OUT_OF_INDEXES added
-Windows.Win32.System.Time.Apis.TIME_ZONE_ID_INVALID added
-Windows.Win32.System.VirtualDosMachines.Apis.WOW_SYSTEM added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_075 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_110 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_115200 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_1200 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_128K added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_134_5 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_14400 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_150 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_1800 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_19200 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_2400 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_300 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_38400 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_4800 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_56K added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_57600 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_600 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_7200 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_9600 added
-Windows.Win32.System.WindowsProgramming.Apis.BAUD_USER added
-Windows.Win32.System.WindowsProgramming.Apis.COMMPROP_INITIALIZED added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_16BITMODE added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_DTRDSR added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_INTTIMEOUTS added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_PARITY_CHECK added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_RLSD added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_RTSCTS added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_SETXCHAR added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_SPECIALCHARS added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_TOTALTIMEOUTS added
-Windows.Win32.System.WindowsProgramming.Apis.PCF_XONXOFF added
-Windows.Win32.System.WindowsProgramming.Apis.PST_FAX added
-Windows.Win32.System.WindowsProgramming.Apis.PST_LAT added
-Windows.Win32.System.WindowsProgramming.Apis.PST_MODEM added
-Windows.Win32.System.WindowsProgramming.Apis.PST_NETWORK_BRIDGE added
-Windows.Win32.System.WindowsProgramming.Apis.PST_PARALLELPORT added
-Windows.Win32.System.WindowsProgramming.Apis.PST_RS232 added
-Windows.Win32.System.WindowsProgramming.Apis.PST_RS422 added
-Windows.Win32.System.WindowsProgramming.Apis.PST_RS423 added
-Windows.Win32.System.WindowsProgramming.Apis.PST_RS449 added
-Windows.Win32.System.WindowsProgramming.Apis.PST_SCANNER added
-Windows.Win32.System.WindowsProgramming.Apis.PST_TCPIP_TELNET added
-Windows.Win32.System.WindowsProgramming.Apis.PST_UNSPECIFIED added
-Windows.Win32.System.WindowsProgramming.Apis.PST_X25 added
-Windows.Win32.System.WindowsProgramming.Apis.SP_BAUD added
-Windows.Win32.System.WindowsProgramming.Apis.SP_DATABITS added
-Windows.Win32.System.WindowsProgramming.Apis.SP_HANDSHAKING added
-Windows.Win32.System.WindowsProgramming.Apis.SP_PARITY added
-Windows.Win32.System.WindowsProgramming.Apis.SP_PARITY_CHECK added
-Windows.Win32.System.WindowsProgramming.Apis.SP_RLSD added
-Windows.Win32.System.WindowsProgramming.Apis.SP_SERIALCOMM added
-Windows.Win32.System.WindowsProgramming.Apis.SP_STOPBITS added
-Windows.Win32.System.WindowsSync.Apis.SCC_CAN_CREATE_WITHOUT_UI added
-Windows.Win32.System.WindowsSync.Apis.SCC_CAN_MODIFY_WITHOUT_UI added
-Windows.Win32.System.WindowsSync.Apis.SCC_CREATE_NOT_SUPPORTED added
-Windows.Win32.System.WindowsSync.Apis.SCC_DEFAULT added
-Windows.Win32.System.WindowsSync.Apis.SCC_MODIFY_NOT_SUPPORTED added
-Windows.Win32.System.WindowsSync.Apis.SPC_DEFAULT added
-Windows.Win32.System.WindowsSync.Apis.SYNC_32_BIT_SUPPORTED added
-Windows.Win32.System.WindowsSync.Apis.SYNC_64_BIT_SUPPORTED added
-Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_CONFIGUI_CONFIGURATION_VERSION added
-Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_CONFIGURATION_VERSION added
-Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_STATE_DIRTY added
-Windows.Win32.System.WindowsSync.Apis.SYNC_PROVIDER_STATE_ENABLED added
+# Fixed #1448.
+Windows.Win32.Web.MsHtml.Apis.IEAssociateThreadWithTab added
+Windows.Win32.Web.MsHtml.Apis.IECancelSaveFile added
+Windows.Win32.Web.MsHtml.Apis.IECreateDirectory added
+Windows.Win32.Web.MsHtml.Apis.IEDeleteFile added
+Windows.Win32.Web.MsHtml.Apis.IEDisassociateThreadWithTab added
+Windows.Win32.Web.MsHtml.Apis.IEFindFirstFile added
+Windows.Win32.Web.MsHtml.Apis.IEGetFileAttributesEx added
+Windows.Win32.Web.MsHtml.Apis.IEGetProtectedModeCookie added
+Windows.Win32.Web.MsHtml.Apis.IEGetWriteableFolderPath added
+Windows.Win32.Web.MsHtml.Apis.IEGetWriteableLowHKCU added
+Windows.Win32.Web.MsHtml.Apis.IEInPrivateFilteringEnabled added
+Windows.Win32.Web.MsHtml.Apis.IEIsInPrivateBrowsing added
+Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeProcess added
+Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeURL added
+Windows.Win32.Web.MsHtml.Apis.IELaunchURL added
+Windows.Win32.Web.MsHtml.Apis.IEMoveFileEx added
+Windows.Win32.Web.MsHtml.Apis.IERefreshElevationPolicy added
+Windows.Win32.Web.MsHtml.Apis.IERegCreateKeyEx added
+Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryKey added
+Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryValue added
+Windows.Win32.Web.MsHtml.Apis.IERemoveDirectory added
+Windows.Win32.Web.MsHtml.Apis.IESaveFile added
+Windows.Win32.Web.MsHtml.Apis.IESetProtectedModeCookie added
+Windows.Win32.Web.MsHtml.Apis.IEShowOpenFileDialog added
+Windows.Win32.Web.MsHtml.Apis.IEShowSaveFileDialog added
+Windows.Win32.Web.MsHtml.Apis.IETrackingProtectionEnabled added
+Windows.Win32.Web.MsHtml.Apis.IEUnregisterWritableRegistry added
+# Fixed #1446.
+Windows.Win32.Graphics.Printing.Apis.AddMonitorA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddMonitorW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterDriverA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterDriverW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeleteMonitorA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeleteMonitorW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePrinter : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumJobsA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumJobsW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDriversA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDriversW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrintersA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrintersW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetPrinterA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetPrinterW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetSpoolFileHandle : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.SetPortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.SetPortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+# Fixed #1449.
+Windows.Win32.UI.Shell.Apis.AssocQueryStringA : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringByKeyA : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringByKeyW : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringW : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+# Fixed #1436.
+Windows.Win32.System.RemoteDesktop.Apis.WTSCreateListenerA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSCreateListenerW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSDisconnectSession : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateListenersA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateListenersW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateProcessesA : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateProcessesExA : hServer : [In] => [In,Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateProcessesExW : hServer : [In] => [In,Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateProcessesW : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateSessionsA : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateSessionsExA : hServer : [In] => [In,Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateSessionsExW : hServer : [In] => [In,Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateSessionsW : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSGetListenerSecurityA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSGetListenerSecurityW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSLogoffSession : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSQueryListenerConfigA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSQueryListenerConfigW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSRegisterSessionNotificationEx : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSSendMessageA : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSSendMessageW : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSSetListenerSecurityA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSSetListenerSecurityW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSShutdownSystem : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSTerminateProcess : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSUnRegisterSessionNotificationEx : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSVirtualChannelOpen : hServer : [In] => [Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSWaitSystemEvent : hServer : [In] => [Optional]
+# Fixed #964.
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BAD_LOG_PHY_VALUES added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BUFFER_TOO_SMALL added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BUTTON_NOT_PRESSED added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_DATA_INDEX_NOT_FOUND added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_DATA_INDEX_OUT_OF_RANGE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_I8042_TRANS_UNKNOWN added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_I8242_TRANS_UNKNOWN added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INCOMPATIBLE_REPORT_ID added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INTERNAL_ERROR added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_PREPARSED_DATA added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_REPORT_LENGTH added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_REPORT_TYPE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_IS_VALUE_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_BUTTON_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_IMPLEMENTED added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_VALUE_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NULL added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_REPORT_DOES_NOT_EXIST added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_SUCCESS added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_USAGE_NOT_FOUND added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_VALUE_OUT_OF_RANGE added

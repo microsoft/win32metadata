@@ -213,7 +213,7 @@ $"        public const {type} {name} = {valueText};");
             }
 
             string type = null;
-            if (nativeTypeName == "HRESULT" || nativeTypeName == "LPCWSTR" || nativeTypeName == "LPCSTR" || nativeTypeName == "HWND")
+            if (nativeTypeName == "HRESULT" || nativeTypeName == "NTSTATUS" || nativeTypeName == "LPCWSTR" || nativeTypeName == "LPCSTR" || nativeTypeName == "HWND")
             {
                 type = "int";
             }
