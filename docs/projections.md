@@ -35,7 +35,11 @@ Alternatively, a JSON translation of the winmd file can be found at https://gith
 
 ### Scenarios
 
+The ECMA-335 specification defines the basic format and structure of the metadata in our winmd files. We have defined additional patterns and custom attributes that allow language projections to understand Win32-specific semantics and provide an improved developer experience.
+
 Below are scenarios that are represented in the metadata and that language projections should handle for the best possible developer experience.
+
+DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 
 * Namespaces allow users to import only the APIs they require and/or to control any code generation that is producing language bindings
 * typedefs (e.g. `BCRYPT_KEY_HANDLE`) are represented as CLR structs with a single field where the `NativeTypedef` attribute is applied to the struct. The type being defined is given by the name of the struct, and the type it is being defined as is the type of the struct field. typedefs can include the attributes `AlsoUsableFor`, `RAIIFree` and `InvalidHandleValue`:
@@ -43,6 +47,8 @@ Below are scenarios that are represented in the metadata and that language proje
   * `RAIIFree` indicates what function should be used to close the handle (e.g. `BCryptDestroyKey`)
   * `InvalidHandleValue` attributes indicate invalid handle values (e.g. `0L`)
   * NOTE: `BCRYPT_KEY_HANDLE` demonstrates all of these attributes.
+* Native unions are represented as CLR structs with an explicit layout where all fields contain an offset of 0
 * CanReturnAlternateSuccessCodes / CanReturnErrorsAsSuccess ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
 * Struct initializers ([#1337](https://github.com/microsoft/win32metadata/issues/1337))
-* Native unions are represented as CLR structs with an explicit layout where all fields contain an offset of 0
+
+DISCLAIMER: This list is a work in progress and is not yet comprehensive.
