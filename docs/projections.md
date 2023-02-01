@@ -35,4 +35,8 @@ Alternatively, a JSON translation of the winmd file can be found at https://gith
 
 ### Scenarios
 
+Below are scenarios that are represented in the metadata and that language projections should handle for the best possible developer experience.
+
+* Namespaces allow users to import only the APIs they require and/or to control any code generation that is producing language bindings
+* CanReturnAlternateSuccessCodes / CanReturnErrorsAsSuccess ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
 * Struct initializers ([#1337](https://github.com/microsoft/win32metadata/issues/1337))
