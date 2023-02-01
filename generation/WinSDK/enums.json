@@ -30917,10 +30917,6 @@
         "field": "bV5Compression"
       },
       {
-        "struct": "BITMAPINFOHEADER",
-        "field": "biCompression"
-      },
-      {
         "struct": "BITMAPV4HEADER",
         "field": "bV4V4Compression"
       }

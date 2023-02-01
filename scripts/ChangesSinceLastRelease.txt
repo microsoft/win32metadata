@@ -107,3 +107,5 @@ Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_REPORT_DOES_NOT_EXIS
 Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_SUCCESS added
 Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_USAGE_NOT_FOUND added
 Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_VALUE_OUT_OF_RANGE added
+# Correct BITMAPINFOHEADER.biCompression type
+Windows.Win32.Graphics.Gdi.BITMAPINFOHEADER.biCompression...Windows.Win32.Graphics.Gdi.BI_COMPRESSION => System.UInt32
