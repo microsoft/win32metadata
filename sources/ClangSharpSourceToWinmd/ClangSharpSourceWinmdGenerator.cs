@@ -267,6 +267,11 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
+        private static bool HasConstantAttribute(SyntaxList<AttributeListSyntax> attributeLists)
+        {
+            return attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Constant"));
+        }
+
         private static string FixArchSpecificName(string name)
         {
             if (name.EndsWith("____1") || name.EndsWith("____2"))
@@ -1265,7 +1270,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     fieldAttributes = FieldAttributes.Public | FieldAttributes.Static;
 
-                    if (!HasGuidAttribute(field.AttributeLists) && !HasPropertyKeyAttribute(field.AttributeLists))
+                    if (!HasGuidAttribute(field.AttributeLists) && !HasPropertyKeyAttribute(field.AttributeLists) && !HasConstantAttribute(field.AttributeLists))
                     {
                         continue;
                     }
