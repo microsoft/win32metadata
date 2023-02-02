@@ -390,7 +390,7 @@ namespace ClangSharpSourceToWinmd
                         case "ULONG64":
                         case "INT64":
                         case "UINT64":
-                        case "__int64":
+                        case "__INT64":
                             nativeSize = 8;
                             break;
 
