@@ -5854,6 +5854,7 @@
   },
   {
     "name": "EMBED_FONT_CHARSET",
+    "type": "uint",
     "members": [
       {
         "name": "CHARSET_UNICODE"
@@ -5874,14 +5875,6 @@
       {
         "method": "TTEmbedFontFromFileA",
         "parameter": "ulCharSet"
-      },
-      {
-        "struct": "CHARFORMATA",
-        "field": "bCharSet"
-      },
-      {
-        "struct": "CHARFORMATW",
-        "field": "bCharSet"
       }
     ]
   },
@@ -13172,6 +13165,7 @@
   },
   {
     "name": "IMAGE_DIRECTORY_ENTRY",
+    "type": "ushort",
     "members": [
       {
         "name": "IMAGE_DIRECTORY_ENTRY_ARCHITECTURE",
@@ -13702,6 +13696,14 @@
       {
         "struct": "DLGTEMPLATEEX",
         "field": "charset"
+      },
+      {
+        "struct": "CHARFORMATA",
+        "field": "bCharSet"
+      },
+      {
+        "struct": "CHARFORMATW",
+        "field": "bCharSet"
       }
     ]
   },
@@ -34674,6 +34676,7 @@
   },
   {
     "name": "PAN_FAMILY_TYPE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_FAMILY_",
       "header": "wingdi.h"
@@ -34697,6 +34700,7 @@
   },
   {
     "name": "PAN_SERIF_STYLE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_SERIF_",
       "header": "wingdi.h"
@@ -34720,6 +34724,7 @@
   },
   {
     "name": "PAN_WEIGHT",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_WEIGHT_",
       "header": "wingdi.h"
@@ -34743,6 +34748,7 @@
   },
   {
     "name": "PAN_STROKE_VARIATION",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_STROKE_",
       "header": "wingdi.h"
@@ -34766,6 +34772,7 @@
   },
   {
     "name": "PAN_PROPORTION",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_PROP_",
       "header": "wingdi.h"
@@ -34789,6 +34796,7 @@
   },
   {
     "name": "PAN_CONTRAST",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_CONTRAST_",
       "header": "wingdi.h"
@@ -34812,6 +34820,7 @@
   },
   {
     "name": "PAN_ARM_STYLE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_STRAIGHT_|PAN_BENT_",
       "header": "wingdi.h"
@@ -34835,6 +34844,7 @@
   },
   {
     "name": "PAN_LETT_FORM",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_LETT_",
       "header": "wingdi.h"
@@ -34858,6 +34868,7 @@
   },
   {
     "name": "PAN_MIDLINE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_MIDLINE_",
       "header": "wingdi.h"
@@ -34881,6 +34892,7 @@
   },
   {
     "name": "PAN_XHEIGHT",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_XHEIGHT_",
       "header": "wingdi.h"

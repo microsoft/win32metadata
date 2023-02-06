@@ -360,6 +360,7 @@ namespace ClangSharpSourceToWinmd
                         case "CHAR":
                         case "INT8":
                         case "UINT8":
+                        case "BYTE":
                             nativeSize = 1;
                             break;
 
