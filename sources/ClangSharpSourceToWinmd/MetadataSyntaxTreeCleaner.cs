@@ -679,6 +679,11 @@ namespace ClangSharpSourceToWinmd
                         isNullTerminated = true;
                         break;
 
+                    case "LPBSTR":
+                        metadataType = "Windows.Win32.Foundation.PBSTR";
+                        isNullTerminated = true;
+                        break;
+
                     case "LPCWSTR":
                     case "PCWSTR":
                     case "LPCWCH":
