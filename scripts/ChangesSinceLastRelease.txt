@@ -159,3 +159,6 @@ Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_NOCODEINPUT added
 Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_NOROMAN added
 Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ROMAN added
 Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_SBCSCHAR added
+# Fixed #1466.
+Windows.Win32.System.Wmi.IWbemClassObject.Get : plFlavor : [In,Out] => [Optional]
+Windows.Win32.System.Wmi.IWbemClassObject.Get : pType : [In,Out] => [Optional]
