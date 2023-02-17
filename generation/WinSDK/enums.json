@@ -29663,6 +29663,57 @@
       {
         "name": "VK_Z",
         "value": "0x5A"
+      },
+      {
+        "name": "VK_ABNT_C1"
+      },
+      {
+        "name": "VK_ABNT_C2"
+      },
+      {
+        "name": "VK_DBE_ALPHANUMERIC"
+      },
+      {
+        "name": "VK_DBE_CODEINPUT"
+      },
+      {
+        "name": "VK_DBE_DBCSCHAR"
+      },
+      {
+        "name": "VK_DBE_DETERMINESTRING"
+      },
+      {
+        "name": "VK_DBE_ENTERDLGCONVERSIONMODE"
+      },
+      {
+        "name": "VK_DBE_ENTERIMECONFIGMODE"
+      },
+      {
+        "name": "VK_DBE_ENTERWORDREGISTERMODE"
+      },
+      {
+        "name": "VK_DBE_FLUSHSTRING"
+      },
+      {
+        "name": "VK_DBE_HIRAGANA"
+      },
+      {
+        "name": "VK_DBE_KATAKANA"
+      },
+      {
+        "name": "VK_DBE_NOCODEINPUT"
+      },
+      {
+        "name": "VK_DBE_NOROMAN"
+      },
+      {
+        "name": "VK_DBE_ROMAN"
+      },
+      {
+        "name": "VK_DBE_SBCSCHAR"
+      },
+      {
+        "name": "VK__none_"
       }
     ],
     "uses": [

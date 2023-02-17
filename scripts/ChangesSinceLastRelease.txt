@@ -124,3 +124,38 @@ Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_VALUE_OUT_OF_RANGE a
 Windows.Win32.Security.Apis.SECURITY_NT_AUTHORITY added
 # Fixed #1453.
 Windows.Win32.Graphics.Direct3D12.ID3D12GraphicsCommandList.ClearRenderTargetView : pRects : [Const,In,NativeArrayInfo(CountParamIndex=2)] => [Const,In,NativeArrayInfo(CountParamIndex=2),Optional]
+# Fixed #1465.
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK__none_ removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_ABNT_C1 removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_ABNT_C2 removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ALPHANUMERIC removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_CODEINPUT removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_DBCSCHAR removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_DETERMINESTRING removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ENTERDLGCONVERSIONMODE removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ENTERIMECONFIGMODE removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ENTERWORDREGISTERMODE removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_FLUSHSTRING removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_HIRAGANA removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_KATAKANA removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_NOCODEINPUT removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_NOROMAN removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ROMAN removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_SBCSCHAR removed
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK__none_ added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_ABNT_C1 added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_ABNT_C2 added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ALPHANUMERIC added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_CODEINPUT added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_DBCSCHAR added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_DETERMINESTRING added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ENTERDLGCONVERSIONMODE added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ENTERIMECONFIGMODE added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ENTERWORDREGISTERMODE added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_FLUSHSTRING added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_HIRAGANA added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_KATAKANA added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_NOCODEINPUT added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_NOROMAN added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ROMAN added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_SBCSCHAR added
