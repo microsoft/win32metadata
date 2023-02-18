@@ -198,3 +198,31 @@ Windows.Win32.UI.Shell.IShellWindows.FindWindowSW : swClass...Int32 => ShellWind
 Windows.Win32.UI.Shell.IShellWindows.FindWindowSW : swfwOptions...Int32 => ShellWindowFindWindowOptions
 Windows.Win32.UI.Shell.IShellWindows.Register : swClass...Int32 => ShellWindowTypeConstants
 Windows.Win32.UI.Shell.IShellWindows.RegisterPending : swClass...Int32 => ShellWindowTypeConstants
+# Untangle window scroll/status enums and flags
+Windows.Win32.Media.DirectShow.IVideoWindow.get_WindowState : WindowState...Int32* => SHOW_WINDOW_CMD*
+Windows.Win32.System.Ole.IPropertyPage.Show : nCmdShow...UInt32 => SHOW_WINDOW_CMD
+Windows.Win32.UI.Controls.RichEdit.ITextHost.TxScrollWindowEx : fuScroll...SHOW_WINDOW_CMD => SCROLL_WINDOW_FLAGS
+Windows.Win32.UI.Shell.IShellLinkA.GetShowCmd : piShowCmd...Int32* => SHOW_WINDOW_CMD*
+Windows.Win32.UI.Shell.IShellLinkA.SetShowCmd : iShowCmd...Int32 => SHOW_WINDOW_CMD
+Windows.Win32.UI.Shell.IShellLinkW.GetShowCmd : piShowCmd...Int32* => SHOW_WINDOW_CMD*
+Windows.Win32.UI.Shell.IShellLinkW.SetShowCmd : iShowCmd...Int32 => SHOW_WINDOW_CMD
+Windows.Win32.UI.WindowsAndMessaging.Apis.ScrollWindowEx : flags...SHOW_WINDOW_CMD => SCROLL_WINDOW_FLAGS
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS added
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS.SW_ERASE added
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS.SW_INVALIDATE added
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS.SW_SCROLLCHILDREN added
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS.SW_SMOOTHSCROLL added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD : [Flags] => 
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_ERASE removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_INVALIDATE removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_OTHERUNZOOM removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_OTHERZOOM removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_PARENTCLOSING removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_PARENTOPENING removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SCROLLCHILDREN removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SMOOTHSCROLL removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_OTHERUNZOOM added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_OTHERZOOM added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_PARENTCLOSING added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_PARENTOPENING added
