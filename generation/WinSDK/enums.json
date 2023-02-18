@@ -35751,6 +35751,43 @@
         "parameter": "PolicyType"
       }
     ]
+  },
+  {
+    "addUsesTo": "ShellWindowTypeConstants",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IShellWindows",
+        "method": "FindWindowSW",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IShellWindows",
+        "method": "Register",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IShellWindows",
+        "method": "RegisterPending",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IBrowserService",
+        "method": "RegisterWindow",
+        "parameter": "swc"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "ShellWindowFindWindowOptions",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IShellWindows",
+        "method": "FindWindowSW",
+        "parameter": "swfwOptions"
+      }
+    ]
   }
 ]
 }
