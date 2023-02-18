@@ -717,47 +717,42 @@
   },
   {
     "name": "SHOW_WINDOW_CMD",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SW_",
-      "header": "WinUser.h"
-    },
     "members": [
-      {
-        "name": "SW_FORCEMINIMIZE",
-        "value": "11"
-      },
       {
         "name": "SW_HIDE",
         "value": "0"
       },
       {
-        "name": "SW_MAXIMIZE",
-        "value": "3"
+        "name": "SW_SHOWNORMAL",
+        "value": "1"
       },
       {
-        "name": "SW_MINIMIZE",
-        "value": "6"
+        "name": "SW_NORMAL",
+        "value": "1"
       },
       {
-        "name": "SW_RESTORE",
-        "value": "9"
-      },
-      {
-        "name": "SW_SHOW",
-        "value": "5"
-      },
-      {
-        "name": "SW_SHOWDEFAULT",
-        "value": "10"
+        "name": "SW_SHOWMINIMIZED",
+        "value": "2"
       },
       {
         "name": "SW_SHOWMAXIMIZED",
         "value": "3"
       },
       {
-        "name": "SW_SHOWMINIMIZED",
-        "value": "2"
+        "name": "SW_MAXIMIZE",
+        "value": "3"
+      },
+      {
+        "name": "SW_SHOWNOACTIVATE",
+        "value": "4"
+      },
+      {
+        "name": "SW_SHOW",
+        "value": "5"
+      },
+      {
+        "name": "SW_MINIMIZE",
+        "value": "6"
       },
       {
         "name": "SW_SHOWMINNOACTIVE",
@@ -768,12 +763,20 @@
         "value": "8"
       },
       {
-        "name": "SW_SHOWNOACTIVATE",
-        "value": "4"
+        "name": "SW_RESTORE",
+        "value": "9"
       },
       {
-        "name": "SW_SHOWNORMAL",
-        "value": "1"
+        "name": "SW_SHOWDEFAULT",
+        "value": "10"
+      },
+      {
+        "name": "SW_FORCEMINIMIZE",
+        "value": "11"
+      },
+      {
+        "name": "SW_MAX",
+        "value": "11"
       }
     ],
     "uses": [
@@ -786,17 +789,102 @@
         "parameter": "nCmdShow"
       },
       {
+        "method": "ShellExecuteW",
+        "parameter": "nShowCmd"
+      },
+      {
         "struct": "WINDOWPLACEMENT",
         "field": "showCmd"
+      },
+      {
+        "interface": "IShellLinkW",
+        "method": "SetShowCmd",
+        "parameter": "iShowCmd"
+      },
+      {
+        "interface": "IShellLinkW",
+        "method": "GetShowCmd",
+        "parameter": "piShowCmd"
+      },
+      {
+        "interface": "IShellLinkA",
+        "method": "SetShowCmd",
+        "parameter": "iShowCmd"
+      },
+      {
+        "interface": "IShellLinkA",
+        "method": "GetShowCmd",
+        "parameter": "piShowCmd"
+      },
+      {
+        "interface": "IPropertyPage",
+        "method": "Show",
+        "parameter": "nCmdShow"
+      },
+      {
+        "interface": "ITfFnConfigure",
+        "method": "Show",
+        "parameter": "nCmdShow"
+      },
+      {
+        "interface": "IVideoWindow",
+        "method": "get_WindowState",
+        "parameter": "WindowState"
+      }
+    ]
+  },
+  {
+    "name": "SHOW_WINDOW_STATUS",
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
+    "members": [
+      {
+        "name": "SW_PARENTCLOSING",
+        "value": "1"
+      },
+      {
+        "name": "SW_OTHERZOOM",
+        "value": "2"
+      },
+      {
+        "name": "SW_PARENTOPENING",
+        "value": "3"
+      },
+      {
+        "name": "SW_OTHERUNZOOM",
+        "value": "4"
+      }
+    ]
+  },
+  {
+    "name": "SCROLL_WINDOW_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "SW_SCROLLCHILDREN",
+        "value": "1"
+      },
+      {
+        "name": "SW_INVALIDATE",
+        "value": "2"
+      },
+      {
+        "name": "SW_ERASE",
+        "value": "4"
+      },
+      {
+        "name": "SW_SMOOTHSCROLL",
+        "value": "16"
+      }
+    ],
+    "uses": [
+      {
+        "method": "ScrollWindowEx",
+        "parameter": "flags"
       },
       {
         "interface": "ITextHost",
         "method": "TxScrollWindowEx",
         "parameter": "fuScroll"
-      },
-      {
-        "method": "ScrollWindowEx",
-        "parameter": "flags"
       }
     ]
   },
