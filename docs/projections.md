@@ -47,6 +47,7 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
   * `RAIIFree` indicates what function should be used to close the handle (e.g. `BCryptDestroyKey`)
   * `InvalidHandleValue` attributes indicate invalid handle values (e.g. `0L`)
   * NOTE: `BCRYPT_KEY_HANDLE` demonstrates all of these attributes.
+* String constants are considered UTF-16 unless decorated with the `[NativeEncoding("ansi")]` attribute ([#1008](https://github.com/microsoft/win32metadata/issues/1008))
 * Native unions are represented as CLR structs with an explicit layout where all fields contain an offset of 0
 * CanReturnAlternateSuccessCodes / CanReturnErrorsAsSuccess ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
 * Struct initializers ([#1337](https://github.com/microsoft/win32metadata/issues/1337))
