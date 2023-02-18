@@ -35751,6 +35751,64 @@
         "parameter": "PolicyType"
       }
     ]
+  },
+  {
+    "addUsesTo": "_SVGIO",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IFolderView",
+        "method": "Items",
+        "parameter": "uFlags"
+      },
+      {
+        "interface": "IFolderView",
+        "method": "ItemCount",
+        "parameter": "uFlags"
+      },
+      {
+        "interface": "IShellView",
+        "method": "GetItemObject",
+        "parameter": "uItem"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "ShellWindowTypeConstants",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IShellWindows",
+        "method": "FindWindowSW",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IShellWindows",
+        "method": "Register",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IShellWindows",
+        "method": "RegisterPending",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IBrowserService",
+        "method": "RegisterWindow",
+        "parameter": "swc"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "ShellWindowFindWindowOptions",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IShellWindows",
+        "method": "FindWindowSW",
+        "parameter": "swfwOptions"
+      }
+    ]
   }
 ]
 }
