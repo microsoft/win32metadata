@@ -192,3 +192,9 @@ Windows.Win32.System.Ole.Apis.VarBstrCat : pbstrResult...UInt16** => PBSTR
 Windows.Win32.UI.Shell.IFolderView.ItemCount : uFlags...UInt32 => _SVGIO
 Windows.Win32.UI.Shell.IFolderView.Items : uFlags...UInt32 => _SVGIO
 Windows.Win32.UI.Shell.IShellView.GetItemObject : uItem...UInt32 => _SVGIO
+# Add usage hints for ShellWindowTypeConstants, ShellWindowFindWindowOptions
+Windows.Win32.UI.Shell.IBrowserService.RegisterWindow : swc...Int32 => ShellWindowTypeConstants
+Windows.Win32.UI.Shell.IShellWindows.FindWindowSW : swClass...Int32 => ShellWindowTypeConstants
+Windows.Win32.UI.Shell.IShellWindows.FindWindowSW : swfwOptions...Int32 => ShellWindowFindWindowOptions
+Windows.Win32.UI.Shell.IShellWindows.Register : swClass...Int32 => ShellWindowTypeConstants
+Windows.Win32.UI.Shell.IShellWindows.RegisterPending : swClass...Int32 => ShellWindowTypeConstants
