@@ -35751,6 +35751,27 @@
         "parameter": "PolicyType"
       }
     ]
+  },
+  {
+    "addUsesTo": "_SVGIO",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IFolderView",
+        "method": "Items",
+        "parameter": "uFlags"
+      },
+      {
+        "interface": "IFolderView",
+        "method": "ItemCount",
+        "parameter": "uFlags"
+      },
+      {
+        "interface": "IShellView",
+        "method": "GetItemObject",
+        "parameter": "uItem"
+      }
+    ]
   }
 ]
 }
