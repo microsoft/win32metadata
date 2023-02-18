@@ -188,6 +188,10 @@ Windows.Win32.System.Mmc.View.get_CellContents : CellContents...UInt16** => PBST
 Windows.Win32.System.Mmc.View.get_Memento : Memento...UInt16** => PBSTR
 Windows.Win32.System.Ole.Apis.QueryPathOfRegTypeLib : lpbstrPathName...UInt16** => PBSTR
 Windows.Win32.System.Ole.Apis.VarBstrCat : pbstrResult...UInt16** => PBSTR
+# Add usage hints for _SVGIO
+Windows.Win32.UI.Shell.IFolderView.ItemCount : uFlags...UInt32 => _SVGIO
+Windows.Win32.UI.Shell.IFolderView.Items : uFlags...UInt32 => _SVGIO
+Windows.Win32.UI.Shell.IShellView.GetItemObject : uItem...UInt32 => _SVGIO
 # Add usage hints for ShellWindowTypeConstants, ShellWindowFindWindowOptions
 Windows.Win32.UI.Shell.IBrowserService.RegisterWindow : swc...Int32 => ShellWindowTypeConstants
 Windows.Win32.UI.Shell.IShellWindows.FindWindowSW : swClass...Int32 => ShellWindowTypeConstants
