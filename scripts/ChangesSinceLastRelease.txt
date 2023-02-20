@@ -226,3 +226,6 @@ Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_OTHERUNZOOM added
 Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_OTHERZOOM added
 Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_PARENTCLOSING added
 Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_PARENTOPENING added
+# Fixed #612.
+Windows.Win32.Storage.FileSystem.Apis.WriteFile : lpBuffer...Void* => Byte*
+Windows.Win32.Storage.FileSystem.Apis.WriteFileEx : lpBuffer...Void* => Byte*
