@@ -1389,3 +1389,4 @@ WriteFile::lpBuffer=byte*
 WriteFileEx::lpBuffer=byte*
 PrivateExtractIconsA::piconid=[-NativeArrayInfo]
 PrivateExtractIconsW::piconid=[-NativeArrayInfo]
+CfConnectSyncRoot::CallbackTable=[NativeArrayInfo]
