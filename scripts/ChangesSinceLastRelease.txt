@@ -162,32 +162,6 @@ Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_SBCSCHAR added
 # Fixed #1466.
 Windows.Win32.System.Wmi.IWbemClassObject.Get : plFlavor : [In,Out] => [Optional]
 Windows.Win32.System.Wmi.IWbemClassObject.Get : pType : [In,Out] => [Optional]
-# Fixed #947.
-Windows.Win32.Foundation.PBSTR added
-Windows.Win32.System.Mmc.Document.get_Location : Location...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Document.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Extension.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Extension.get_SnapinCLSID : SnapinCLSID...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Extension.get_Vendor : Vendor...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Extension.get_Version : Version...UInt16** => PBSTR
-Windows.Win32.System.Mmc.INodeProperties.GetProperty : pbstrProperty...UInt16** => PBSTR
-Windows.Win32.System.Mmc.MenuItem.get_DisplayName : DisplayName...UInt16** => PBSTR
-Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentName : LanguageIndependentName...UInt16** => PBSTR
-Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentPath : LanguageIndependentPath...UInt16** => PBSTR
-Windows.Win32.System.Mmc.MenuItem.get_Path : Path...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Node.get_Bookmark : Bookmark...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Node.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Node.get_Nodetype : Nodetype...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Node.get_Property : PropertyValue...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Property.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.SnapIn.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.SnapIn.get_SnapinCLSID : SnapinCLSID...UInt16** => PBSTR
-Windows.Win32.System.Mmc.SnapIn.get_Vendor : Vendor...UInt16** => PBSTR
-Windows.Win32.System.Mmc.SnapIn.get_Version : Version...UInt16** => PBSTR
-Windows.Win32.System.Mmc.View.get_CellContents : CellContents...UInt16** => PBSTR
-Windows.Win32.System.Mmc.View.get_Memento : Memento...UInt16** => PBSTR
-Windows.Win32.System.Ole.Apis.QueryPathOfRegTypeLib : lpbstrPathName...UInt16** => PBSTR
-Windows.Win32.System.Ole.Apis.VarBstrCat : pbstrResult...UInt16** => PBSTR
 # Add usage hints for _SVGIO
 Windows.Win32.UI.Shell.IFolderView.ItemCount : uFlags...UInt32 => _SVGIO
 Windows.Win32.UI.Shell.IFolderView.Items : uFlags...UInt32 => _SVGIO
@@ -348,3 +322,28 @@ Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_UINT32 added
 Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_UINT64 added
 Windows.Win32.Devices.Sensors.Apis.PropVariantGetInformation : RemappedType...UInt32* => DEVPROPTYPE*
 Windows.Win32.Media.MediaFoundation.IMFVirtualCamera.AddProperty : Type...UInt32 => DEVPROPTYPE
+# Fixed #947.
+Windows.Win32.System.Mmc.Document.get_Location : Location...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Document.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Extension.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Extension.get_SnapinCLSID : SnapinCLSID...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Extension.get_Vendor : Vendor...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Extension.get_Version : Version...UInt16** => BSTR*
+Windows.Win32.System.Mmc.INodeProperties.GetProperty : pbstrProperty...UInt16** => BSTR*
+Windows.Win32.System.Mmc.MenuItem.get_DisplayName : DisplayName...UInt16** => BSTR*
+Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentName : LanguageIndependentName...UInt16** => BSTR*
+Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentPath : LanguageIndependentPath...UInt16** => BSTR*
+Windows.Win32.System.Mmc.MenuItem.get_Path : Path...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Node.get_Bookmark : Bookmark...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Node.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Node.get_Nodetype : Nodetype...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Node.get_Property : PropertyValue...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Property.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.SnapIn.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.SnapIn.get_SnapinCLSID : SnapinCLSID...UInt16** => BSTR*
+Windows.Win32.System.Mmc.SnapIn.get_Vendor : Vendor...UInt16** => BSTR*
+Windows.Win32.System.Mmc.SnapIn.get_Version : Version...UInt16** => BSTR*
+Windows.Win32.System.Mmc.View.get_CellContents : CellContents...UInt16** => BSTR*
+Windows.Win32.System.Mmc.View.get_Memento : Memento...UInt16** => BSTR*
+Windows.Win32.System.Ole.Apis.QueryPathOfRegTypeLib : lpbstrPathName...UInt16** => BSTR*
+Windows.Win32.System.Ole.Apis.VarBstrCat : pbstrResult...UInt16** => BSTR*

@@ -971,10 +971,6 @@ namespace ClangSharpSourceToWinmd
                         fixedName = Win32WideStringType;
                         break;
 
-                    case "LPBSTR":
-                        fixedName = "Windows.Win32.Foundation.PBSTR";
-                        break;
-
                     default:
                         break;
                 }

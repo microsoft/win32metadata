@@ -22,11 +22,6 @@
   },
   {
     "Namespace": "Windows.Win32.Foundation",
-    "Name": "PBSTR",
-    "ValueType": "BSTR*"
-  },
-  {
-    "Namespace": "Windows.Win32.Foundation",
     "Name": "HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "CloseHandle",
