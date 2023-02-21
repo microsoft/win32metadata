@@ -232,3 +232,20 @@ Windows.Win32.Storage.FileSystem.Apis.WriteFileEx : lpBuffer...Void* => Byte*
 # Fixed #614.
 Windows.Win32.UI.WindowsAndMessaging.Apis.PrivateExtractIconsA : piconid : [NativeArrayInfo(CountParamIndex=6),Optional,Out] => [Optional,Out]
 Windows.Win32.UI.WindowsAndMessaging.Apis.PrivateExtractIconsW : piconid : [NativeArrayInfo(CountParamIndex=6),Optional,Out] => [Optional,Out]
+# Fixed #885.
+Windows.Win32.System.Rpc._NDR_SCONTEXT removed
+Windows.Win32.System.Rpc.Apis.NdrContextHandleInitialize : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextMarshall : CContext...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextMarshall2 : CContext...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextMarshallEx : CContext...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextUnmarshall : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextUnmarshall2 : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextUnmarshallEx : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NdrServerContextMarshall : ContextHandle...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NdrServerContextNewMarshall : ContextHandle...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NdrServerContextNewUnmarshall : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NdrServerContextUnmarshall : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.SavedContextHandles...Windows.Win32.System.Rpc.NDR_SCONTEXT_1** => Windows.Win32.System.Rpc.NDR_SCONTEXT**
+Windows.Win32.System.Rpc.NDR_SCONTEXT added
+Windows.Win32.System.Rpc.NDR_SCONTEXT_1 removed
+Windows.Win32.System.Rpc.SCONTEXT_QUEUE.ArrayOfObjects...Windows.Win32.System.Rpc.NDR_SCONTEXT_1** => Windows.Win32.System.Rpc.NDR_SCONTEXT**
