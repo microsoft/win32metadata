@@ -229,3 +229,6 @@ Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_PARENTOPENING added
 # Fixed #612.
 Windows.Win32.Storage.FileSystem.Apis.WriteFile : lpBuffer...Void* => Byte*
 Windows.Win32.Storage.FileSystem.Apis.WriteFileEx : lpBuffer...Void* => Byte*
+# Fixed #614.
+Windows.Win32.UI.WindowsAndMessaging.Apis.PrivateExtractIconsA : piconid : [NativeArrayInfo(CountParamIndex=6),Optional,Out] => [Optional,Out]
+Windows.Win32.UI.WindowsAndMessaging.Apis.PrivateExtractIconsW : piconid : [NativeArrayInfo(CountParamIndex=6),Optional,Out] => [Optional,Out]
