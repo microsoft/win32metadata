@@ -266,3 +266,85 @@ Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_NO_PACKAGE added
 Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_PACKAGE_IDENTITY_CORRUPT added
 Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_PACKAGE_NOT_AVAILABLE added
 Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_PACKAGE_RUNTIME_CORRUPT added
+# Fixed #958.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Class_Property_ExW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Class_PropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_Property_ExW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_PropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_DevNode_Property_ExW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_DevNode_PropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_Class_Property_ExW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_Class_PropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_Device_Interface_Property_ExW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_Device_Interface_PropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_DevNode_Property_ExW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_DevNode_PropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassPropertyExW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassPropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDeviceInterfacePropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDevicePropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetClassPropertyExW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetClassPropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetDeviceInterfacePropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetDevicePropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceQuery.DEV_QUERY_PARAMETER.Type...System.UInt32 => Windows.Win32.Devices.Properties.DEVPROPTYPE
+Windows.Win32.Devices.PortableDevices.IPortableDeviceConnector.GetProperty : pPropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.PortableDevices.IPortableDeviceConnector.SetProperty : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_BOOLEAN removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_BYTE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_CURRENCY removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DATE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DECIMAL removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DEVPROPKEY removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DEVPROPTYPE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DOUBLE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_EMPTY removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_ERROR removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_FILETIME removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_FLOAT removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_GUID removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_INT16 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_INT32 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_INT64 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_NTSTATUS removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_NULL removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_SBYTE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_SECURITY_DESCRIPTOR removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_SECURITY_DESCRIPTOR_STRING removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_STRING removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_STRING_INDIRECT removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_UINT16 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_UINT32 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_UINT64 removed
+Windows.Win32.Devices.Properties.DEVPROPERTY.Type...System.UInt32 => Windows.Win32.Devices.Properties.DEVPROPTYPE
+Windows.Win32.Devices.Properties.DEVPROPTYPE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_BINARY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_BOOLEAN added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_BYTE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_CURRENCY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DATE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DECIMAL added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DEVPROPKEY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DEVPROPTYPE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DOUBLE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_EMPTY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_ERROR added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_FILETIME added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_FLOAT added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_GUID added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_INT16 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_INT32 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_INT64 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_NTSTATUS added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_NULL added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_SBYTE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_SECURITY_DESCRIPTOR added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_SECURITY_DESCRIPTOR_STRING added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_STRING added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_STRING_INDIRECT added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_STRING_LIST added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_UINT16 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_UINT32 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_UINT64 added
+Windows.Win32.Devices.Sensors.Apis.PropVariantGetInformation : RemappedType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Media.MediaFoundation.IMFVirtualCamera.AddProperty : Type...UInt32 => DEVPROPTYPE

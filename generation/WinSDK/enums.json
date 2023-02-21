@@ -35897,6 +35897,15 @@
         "parameter": "swfwOptions"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.Properties",
+    "name": "DEVPROPTYPE",
+    "autoPopulate": {
+      "filter": "DEVPROP_TYPE_",
+      "header": "devpropdef.h"
+    },
+    "uses": []
   }
 ]
 }
