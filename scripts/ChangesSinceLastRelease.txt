@@ -429,3 +429,5 @@ Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke : Instance...TP_CALLBACK
 Windows.Win32.System.Threading.TP_CALLBACK_INSTANCE removed
 # Fixed #619.
 Windows.Win32.Storage.CloudFilters.Apis.CfConnectSyncRoot : CallbackTable : [Const,In] => [Const,In,NativeArrayInfo]
+# Fixed #951.
+rgExtension :  => [NativeArrayInfo(CountFieldName=cExtension)]

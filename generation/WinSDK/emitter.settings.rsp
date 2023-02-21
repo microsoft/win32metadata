@@ -1390,3 +1390,4 @@ WriteFileEx::lpBuffer=byte*
 PrivateExtractIconsA::piconid=[-NativeArrayInfo]
 PrivateExtractIconsW::piconid=[-NativeArrayInfo]
 CfConnectSyncRoot::CallbackTable=[NativeArrayInfo]
+CERT_INFO::rgExtension=[NativeArrayInfo(CountFieldName="cExtension")]
