@@ -4118,7 +4118,7 @@
     "type": "uint",
     "name": "WIN32_ERROR",
     "autoPopulate": {
-      "filter": "ERROR_|DNS_ERROR_",
+      "filter": "ERROR_|DNS_ERROR_|APPMODEL_ERROR_",
       "header": "winerror.h"
     },
     "members": [
@@ -35897,6 +35897,15 @@
         "parameter": "swfwOptions"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.Devices.Properties",
+    "name": "DEVPROPTYPE",
+    "autoPopulate": {
+      "filter": "DEVPROP_TYPE_",
+      "header": "devpropdef.h"
+    },
+    "uses": []
   }
 ]
 }

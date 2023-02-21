@@ -162,32 +162,6 @@ Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_SBCSCHAR added
 # Fixed #1466.
 Windows.Win32.System.Wmi.IWbemClassObject.Get : plFlavor : [In,Out] => [Optional]
 Windows.Win32.System.Wmi.IWbemClassObject.Get : pType : [In,Out] => [Optional]
-# Fixed #947.
-Windows.Win32.Foundation.PBSTR added
-Windows.Win32.System.Mmc.Document.get_Location : Location...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Document.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Extension.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Extension.get_SnapinCLSID : SnapinCLSID...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Extension.get_Vendor : Vendor...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Extension.get_Version : Version...UInt16** => PBSTR
-Windows.Win32.System.Mmc.INodeProperties.GetProperty : pbstrProperty...UInt16** => PBSTR
-Windows.Win32.System.Mmc.MenuItem.get_DisplayName : DisplayName...UInt16** => PBSTR
-Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentName : LanguageIndependentName...UInt16** => PBSTR
-Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentPath : LanguageIndependentPath...UInt16** => PBSTR
-Windows.Win32.System.Mmc.MenuItem.get_Path : Path...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Node.get_Bookmark : Bookmark...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Node.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Node.get_Nodetype : Nodetype...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Node.get_Property : PropertyValue...UInt16** => PBSTR
-Windows.Win32.System.Mmc.Property.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.SnapIn.get_Name : Name...UInt16** => PBSTR
-Windows.Win32.System.Mmc.SnapIn.get_SnapinCLSID : SnapinCLSID...UInt16** => PBSTR
-Windows.Win32.System.Mmc.SnapIn.get_Vendor : Vendor...UInt16** => PBSTR
-Windows.Win32.System.Mmc.SnapIn.get_Version : Version...UInt16** => PBSTR
-Windows.Win32.System.Mmc.View.get_CellContents : CellContents...UInt16** => PBSTR
-Windows.Win32.System.Mmc.View.get_Memento : Memento...UInt16** => PBSTR
-Windows.Win32.System.Ole.Apis.QueryPathOfRegTypeLib : lpbstrPathName...UInt16** => PBSTR
-Windows.Win32.System.Ole.Apis.VarBstrCat : pbstrResult...UInt16** => PBSTR
 # Add usage hints for _SVGIO
 Windows.Win32.UI.Shell.IFolderView.ItemCount : uFlags...UInt32 => _SVGIO
 Windows.Win32.UI.Shell.IFolderView.Items : uFlags...UInt32 => _SVGIO
@@ -302,3 +276,127 @@ Windows.Win32.System.Threading.TP_IO removed
 Windows.Win32.System.Threading.TP_TIMER removed
 Windows.Win32.System.Threading.TP_WAIT removed
 Windows.Win32.System.Threading.TP_WORK removed
+# Fixed #1311.
+Windows.Win32.Foundation.Apis.APPMODEL_ERROR_DYNAMIC_PROPERTY_INVALID removed
+Windows.Win32.Foundation.Apis.APPMODEL_ERROR_DYNAMIC_PROPERTY_READ_FAILED removed
+Windows.Win32.Foundation.Apis.APPMODEL_ERROR_NO_APPLICATION removed
+Windows.Win32.Foundation.Apis.APPMODEL_ERROR_NO_MUTABLE_DIRECTORY removed
+Windows.Win32.Foundation.Apis.APPMODEL_ERROR_NO_PACKAGE removed
+Windows.Win32.Foundation.Apis.APPMODEL_ERROR_PACKAGE_IDENTITY_CORRUPT removed
+Windows.Win32.Foundation.Apis.APPMODEL_ERROR_PACKAGE_NOT_AVAILABLE removed
+Windows.Win32.Foundation.Apis.APPMODEL_ERROR_PACKAGE_RUNTIME_CORRUPT removed
+Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_DYNAMIC_PROPERTY_INVALID added
+Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_DYNAMIC_PROPERTY_READ_FAILED added
+Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_NO_APPLICATION added
+Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_NO_MUTABLE_DIRECTORY added
+Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_NO_PACKAGE added
+Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_PACKAGE_IDENTITY_CORRUPT added
+Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_PACKAGE_NOT_AVAILABLE added
+Windows.Win32.Foundation.WIN32_ERROR.APPMODEL_ERROR_PACKAGE_RUNTIME_CORRUPT added
+# Fixed #958.
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Class_Property_ExW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Class_PropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_Property_ExW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_Device_Interface_PropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_DevNode_Property_ExW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Get_DevNode_PropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_Class_Property_ExW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_Class_PropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_Device_Interface_Property_ExW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_Device_Interface_PropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_DevNode_Property_ExW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.CM_Set_DevNode_PropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassPropertyExW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassPropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDeviceInterfacePropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetDevicePropertyW : PropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetClassPropertyExW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetClassPropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetDeviceInterfacePropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetDevicePropertyW : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.DeviceQuery.DEV_QUERY_PARAMETER.Type...System.UInt32 => Windows.Win32.Devices.Properties.DEVPROPTYPE
+Windows.Win32.Devices.PortableDevices.IPortableDeviceConnector.GetProperty : pPropertyType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Devices.PortableDevices.IPortableDeviceConnector.SetProperty : PropertyType...UInt32 => DEVPROPTYPE
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_BOOLEAN removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_BYTE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_CURRENCY removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DATE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DECIMAL removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DEVPROPKEY removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DEVPROPTYPE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_DOUBLE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_EMPTY removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_ERROR removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_FILETIME removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_FLOAT removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_GUID removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_INT16 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_INT32 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_INT64 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_NTSTATUS removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_NULL removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_SBYTE removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_SECURITY_DESCRIPTOR removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_SECURITY_DESCRIPTOR_STRING removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_STRING removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_STRING_INDIRECT removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_UINT16 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_UINT32 removed
+Windows.Win32.Devices.Properties.Apis.DEVPROP_TYPE_UINT64 removed
+Windows.Win32.Devices.Properties.DEVPROPERTY.Type...System.UInt32 => Windows.Win32.Devices.Properties.DEVPROPTYPE
+Windows.Win32.Devices.Properties.DEVPROPTYPE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_BINARY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_BOOLEAN added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_BYTE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_CURRENCY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DATE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DECIMAL added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DEVPROPKEY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DEVPROPTYPE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_DOUBLE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_EMPTY added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_ERROR added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_FILETIME added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_FLOAT added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_GUID added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_INT16 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_INT32 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_INT64 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_NTSTATUS added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_NULL added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_SBYTE added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_SECURITY_DESCRIPTOR added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_SECURITY_DESCRIPTOR_STRING added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_STRING added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_STRING_INDIRECT added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_STRING_LIST added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_UINT16 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_UINT32 added
+Windows.Win32.Devices.Properties.DEVPROPTYPE.DEVPROP_TYPE_UINT64 added
+Windows.Win32.Devices.Sensors.Apis.PropVariantGetInformation : RemappedType...UInt32* => DEVPROPTYPE*
+Windows.Win32.Media.MediaFoundation.IMFVirtualCamera.AddProperty : Type...UInt32 => DEVPROPTYPE
+# Fixed #947.
+Windows.Win32.System.Mmc.Document.get_Location : Location...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Document.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Extension.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Extension.get_SnapinCLSID : SnapinCLSID...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Extension.get_Vendor : Vendor...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Extension.get_Version : Version...UInt16** => BSTR*
+Windows.Win32.System.Mmc.INodeProperties.GetProperty : pbstrProperty...UInt16** => BSTR*
+Windows.Win32.System.Mmc.MenuItem.get_DisplayName : DisplayName...UInt16** => BSTR*
+Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentName : LanguageIndependentName...UInt16** => BSTR*
+Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentPath : LanguageIndependentPath...UInt16** => BSTR*
+Windows.Win32.System.Mmc.MenuItem.get_Path : Path...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Node.get_Bookmark : Bookmark...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Node.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Node.get_Nodetype : Nodetype...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Node.get_Property : PropertyValue...UInt16** => BSTR*
+Windows.Win32.System.Mmc.Property.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.SnapIn.get_Name : Name...UInt16** => BSTR*
+Windows.Win32.System.Mmc.SnapIn.get_SnapinCLSID : SnapinCLSID...UInt16** => BSTR*
+Windows.Win32.System.Mmc.SnapIn.get_Vendor : Vendor...UInt16** => BSTR*
+Windows.Win32.System.Mmc.SnapIn.get_Version : Version...UInt16** => BSTR*
+Windows.Win32.System.Mmc.View.get_CellContents : CellContents...UInt16** => BSTR*
+Windows.Win32.System.Mmc.View.get_Memento : Memento...UInt16** => BSTR*
+Windows.Win32.System.Ole.Apis.QueryPathOfRegTypeLib : lpbstrPathName...UInt16** => BSTR*
+Windows.Win32.System.Ole.Apis.VarBstrCat : pbstrResult...UInt16** => BSTR*
