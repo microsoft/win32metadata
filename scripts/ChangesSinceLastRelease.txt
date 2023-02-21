@@ -249,3 +249,56 @@ Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.SavedContextHandles...Windows.Win32.S
 Windows.Win32.System.Rpc.NDR_SCONTEXT added
 Windows.Win32.System.Rpc.NDR_SCONTEXT_1 removed
 Windows.Win32.System.Rpc.SCONTEXT_QUEUE.ArrayOfObjects...Windows.Win32.System.Rpc.NDR_SCONTEXT_1** => Windows.Win32.System.Rpc.NDR_SCONTEXT**
+# Fixed #1404.
+Windows.Win32.System.Threading.Apis.CancelThreadpoolIo : pio : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.CancelThreadpoolIo : pio...TP_IO* => PTP_IO
+Windows.Win32.System.Threading.Apis.CloseThreadpoolIo : pio : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.CloseThreadpoolIo : pio...TP_IO* => PTP_IO
+Windows.Win32.System.Threading.Apis.CloseThreadpoolTimer : pti : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.CloseThreadpoolTimer : pti...TP_TIMER* => PTP_TIMER
+Windows.Win32.System.Threading.Apis.CloseThreadpoolWait : pwa : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.CloseThreadpoolWait : pwa...TP_WAIT* => PTP_WAIT
+Windows.Win32.System.Threading.Apis.CloseThreadpoolWork : pwk : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.CloseThreadpoolWork : pwk...TP_WORK* => PTP_WORK
+Windows.Win32.System.Threading.Apis.CreateThreadpoolIo : return...TP_IO* => PTP_IO
+Windows.Win32.System.Threading.Apis.CreateThreadpoolTimer : return...TP_TIMER* => PTP_TIMER
+Windows.Win32.System.Threading.Apis.CreateThreadpoolWait : return...TP_WAIT* => PTP_WAIT
+Windows.Win32.System.Threading.Apis.CreateThreadpoolWork : return...TP_WORK* => PTP_WORK
+Windows.Win32.System.Threading.Apis.IsThreadpoolTimerSet : pti : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.IsThreadpoolTimerSet : pti...TP_TIMER* => PTP_TIMER
+Windows.Win32.System.Threading.Apis.SetThreadpoolTimer : pti : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.SetThreadpoolTimer : pti...TP_TIMER* => PTP_TIMER
+Windows.Win32.System.Threading.Apis.SetThreadpoolTimerEx : pti : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.SetThreadpoolTimerEx : pti...TP_TIMER* => PTP_TIMER
+Windows.Win32.System.Threading.Apis.SetThreadpoolWait : pwa : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.SetThreadpoolWait : pwa...TP_WAIT* => PTP_WAIT
+Windows.Win32.System.Threading.Apis.SetThreadpoolWaitEx : pwa : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.SetThreadpoolWaitEx : pwa...TP_WAIT* => PTP_WAIT
+Windows.Win32.System.Threading.Apis.StartThreadpoolIo : pio : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.StartThreadpoolIo : pio...TP_IO* => PTP_IO
+Windows.Win32.System.Threading.Apis.SubmitThreadpoolWork : pwk : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.SubmitThreadpoolWork : pwk...TP_WORK* => PTP_WORK
+Windows.Win32.System.Threading.Apis.WaitForThreadpoolIoCallbacks : pio : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.WaitForThreadpoolIoCallbacks : pio...TP_IO* => PTP_IO
+Windows.Win32.System.Threading.Apis.WaitForThreadpoolTimerCallbacks : pti : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.WaitForThreadpoolTimerCallbacks : pti...TP_TIMER* => PTP_TIMER
+Windows.Win32.System.Threading.Apis.WaitForThreadpoolWaitCallbacks : pwa : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.WaitForThreadpoolWaitCallbacks : pwa...TP_WAIT* => PTP_WAIT
+Windows.Win32.System.Threading.Apis.WaitForThreadpoolWorkCallbacks : pwk : [In,Out] => [In]
+Windows.Win32.System.Threading.Apis.WaitForThreadpoolWorkCallbacks : pwk...TP_WORK* => PTP_WORK
+Windows.Win32.System.Threading.PTP_IO added
+Windows.Win32.System.Threading.PTP_TIMER added
+Windows.Win32.System.Threading.PTP_TIMER_CALLBACK.Invoke : Timer : [In,Out] => [In]
+Windows.Win32.System.Threading.PTP_TIMER_CALLBACK.Invoke : Timer...TP_TIMER* => PTP_TIMER
+Windows.Win32.System.Threading.PTP_WAIT added
+Windows.Win32.System.Threading.PTP_WAIT_CALLBACK.Invoke : Wait : [In,Out] => [In]
+Windows.Win32.System.Threading.PTP_WAIT_CALLBACK.Invoke : Wait...TP_WAIT* => PTP_WAIT
+Windows.Win32.System.Threading.PTP_WIN32_IO_CALLBACK.Invoke : Io : [In,Out] => [In]
+Windows.Win32.System.Threading.PTP_WIN32_IO_CALLBACK.Invoke : Io...TP_IO* => PTP_IO
+Windows.Win32.System.Threading.PTP_WORK added
+Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke : Work : [In,Out] => [In]
+Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke : Work...TP_WORK* => PTP_WORK
+Windows.Win32.System.Threading.TP_IO removed
+Windows.Win32.System.Threading.TP_TIMER removed
+Windows.Win32.System.Threading.TP_WAIT removed
+Windows.Win32.System.Threading.TP_WORK removed
