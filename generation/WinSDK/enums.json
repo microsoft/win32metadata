@@ -717,47 +717,42 @@
   },
   {
     "name": "SHOW_WINDOW_CMD",
-    "flags": true,
-    "autoPopulate": {
-      "filter": "SW_",
-      "header": "WinUser.h"
-    },
     "members": [
-      {
-        "name": "SW_FORCEMINIMIZE",
-        "value": "11"
-      },
       {
         "name": "SW_HIDE",
         "value": "0"
       },
       {
-        "name": "SW_MAXIMIZE",
-        "value": "3"
+        "name": "SW_SHOWNORMAL",
+        "value": "1"
       },
       {
-        "name": "SW_MINIMIZE",
-        "value": "6"
+        "name": "SW_NORMAL",
+        "value": "1"
       },
       {
-        "name": "SW_RESTORE",
-        "value": "9"
-      },
-      {
-        "name": "SW_SHOW",
-        "value": "5"
-      },
-      {
-        "name": "SW_SHOWDEFAULT",
-        "value": "10"
+        "name": "SW_SHOWMINIMIZED",
+        "value": "2"
       },
       {
         "name": "SW_SHOWMAXIMIZED",
         "value": "3"
       },
       {
-        "name": "SW_SHOWMINIMIZED",
-        "value": "2"
+        "name": "SW_MAXIMIZE",
+        "value": "3"
+      },
+      {
+        "name": "SW_SHOWNOACTIVATE",
+        "value": "4"
+      },
+      {
+        "name": "SW_SHOW",
+        "value": "5"
+      },
+      {
+        "name": "SW_MINIMIZE",
+        "value": "6"
       },
       {
         "name": "SW_SHOWMINNOACTIVE",
@@ -768,12 +763,20 @@
         "value": "8"
       },
       {
-        "name": "SW_SHOWNOACTIVATE",
-        "value": "4"
+        "name": "SW_RESTORE",
+        "value": "9"
       },
       {
-        "name": "SW_SHOWNORMAL",
-        "value": "1"
+        "name": "SW_SHOWDEFAULT",
+        "value": "10"
+      },
+      {
+        "name": "SW_FORCEMINIMIZE",
+        "value": "11"
+      },
+      {
+        "name": "SW_MAX",
+        "value": "11"
       }
     ],
     "uses": [
@@ -786,17 +789,102 @@
         "parameter": "nCmdShow"
       },
       {
+        "method": "ShellExecuteW",
+        "parameter": "nShowCmd"
+      },
+      {
         "struct": "WINDOWPLACEMENT",
         "field": "showCmd"
+      },
+      {
+        "interface": "IShellLinkW",
+        "method": "SetShowCmd",
+        "parameter": "iShowCmd"
+      },
+      {
+        "interface": "IShellLinkW",
+        "method": "GetShowCmd",
+        "parameter": "piShowCmd"
+      },
+      {
+        "interface": "IShellLinkA",
+        "method": "SetShowCmd",
+        "parameter": "iShowCmd"
+      },
+      {
+        "interface": "IShellLinkA",
+        "method": "GetShowCmd",
+        "parameter": "piShowCmd"
+      },
+      {
+        "interface": "IPropertyPage",
+        "method": "Show",
+        "parameter": "nCmdShow"
+      },
+      {
+        "interface": "ITfFnConfigure",
+        "method": "Show",
+        "parameter": "nCmdShow"
+      },
+      {
+        "interface": "IVideoWindow",
+        "method": "get_WindowState",
+        "parameter": "WindowState"
+      }
+    ]
+  },
+  {
+    "name": "SHOW_WINDOW_STATUS",
+    "namespace": "Windows.Win32.UI.WindowsAndMessaging",
+    "members": [
+      {
+        "name": "SW_PARENTCLOSING",
+        "value": "1"
+      },
+      {
+        "name": "SW_OTHERZOOM",
+        "value": "2"
+      },
+      {
+        "name": "SW_PARENTOPENING",
+        "value": "3"
+      },
+      {
+        "name": "SW_OTHERUNZOOM",
+        "value": "4"
+      }
+    ]
+  },
+  {
+    "name": "SCROLL_WINDOW_FLAGS",
+    "flags": true,
+    "members": [
+      {
+        "name": "SW_SCROLLCHILDREN",
+        "value": "1"
+      },
+      {
+        "name": "SW_INVALIDATE",
+        "value": "2"
+      },
+      {
+        "name": "SW_ERASE",
+        "value": "4"
+      },
+      {
+        "name": "SW_SMOOTHSCROLL",
+        "value": "16"
+      }
+    ],
+    "uses": [
+      {
+        "method": "ScrollWindowEx",
+        "parameter": "flags"
       },
       {
         "interface": "ITextHost",
         "method": "TxScrollWindowEx",
         "parameter": "fuScroll"
-      },
-      {
-        "method": "ScrollWindowEx",
-        "parameter": "flags"
       }
     ]
   },
@@ -5854,6 +5942,7 @@
   },
   {
     "name": "EMBED_FONT_CHARSET",
+    "type": "uint",
     "members": [
       {
         "name": "CHARSET_UNICODE"
@@ -5874,14 +5963,6 @@
       {
         "method": "TTEmbedFontFromFileA",
         "parameter": "ulCharSet"
-      },
-      {
-        "struct": "CHARFORMATA",
-        "field": "bCharSet"
-      },
-      {
-        "struct": "CHARFORMATW",
-        "field": "bCharSet"
       }
     ]
   },
@@ -13172,6 +13253,7 @@
   },
   {
     "name": "IMAGE_DIRECTORY_ENTRY",
+    "type": "ushort",
     "members": [
       {
         "name": "IMAGE_DIRECTORY_ENTRY_ARCHITECTURE",
@@ -13702,6 +13784,14 @@
       {
         "struct": "DLGTEMPLATEEX",
         "field": "charset"
+      },
+      {
+        "struct": "CHARFORMATA",
+        "field": "bCharSet"
+      },
+      {
+        "struct": "CHARFORMATW",
+        "field": "bCharSet"
       }
     ]
   },
@@ -29661,6 +29751,57 @@
       {
         "name": "VK_Z",
         "value": "0x5A"
+      },
+      {
+        "name": "VK_ABNT_C1"
+      },
+      {
+        "name": "VK_ABNT_C2"
+      },
+      {
+        "name": "VK_DBE_ALPHANUMERIC"
+      },
+      {
+        "name": "VK_DBE_CODEINPUT"
+      },
+      {
+        "name": "VK_DBE_DBCSCHAR"
+      },
+      {
+        "name": "VK_DBE_DETERMINESTRING"
+      },
+      {
+        "name": "VK_DBE_ENTERDLGCONVERSIONMODE"
+      },
+      {
+        "name": "VK_DBE_ENTERIMECONFIGMODE"
+      },
+      {
+        "name": "VK_DBE_ENTERWORDREGISTERMODE"
+      },
+      {
+        "name": "VK_DBE_FLUSHSTRING"
+      },
+      {
+        "name": "VK_DBE_HIRAGANA"
+      },
+      {
+        "name": "VK_DBE_KATAKANA"
+      },
+      {
+        "name": "VK_DBE_NOCODEINPUT"
+      },
+      {
+        "name": "VK_DBE_NOROMAN"
+      },
+      {
+        "name": "VK_DBE_ROMAN"
+      },
+      {
+        "name": "VK_DBE_SBCSCHAR"
+      },
+      {
+        "name": "VK__none_"
       }
     ],
     "uses": [
@@ -34674,6 +34815,7 @@
   },
   {
     "name": "PAN_FAMILY_TYPE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_FAMILY_",
       "header": "wingdi.h"
@@ -34697,6 +34839,7 @@
   },
   {
     "name": "PAN_SERIF_STYLE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_SERIF_",
       "header": "wingdi.h"
@@ -34720,6 +34863,7 @@
   },
   {
     "name": "PAN_WEIGHT",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_WEIGHT_",
       "header": "wingdi.h"
@@ -34743,6 +34887,7 @@
   },
   {
     "name": "PAN_STROKE_VARIATION",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_STROKE_",
       "header": "wingdi.h"
@@ -34766,6 +34911,7 @@
   },
   {
     "name": "PAN_PROPORTION",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_PROP_",
       "header": "wingdi.h"
@@ -34789,6 +34935,7 @@
   },
   {
     "name": "PAN_CONTRAST",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_CONTRAST_",
       "header": "wingdi.h"
@@ -34812,6 +34959,7 @@
   },
   {
     "name": "PAN_ARM_STYLE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_STRAIGHT_|PAN_BENT_",
       "header": "wingdi.h"
@@ -34835,6 +34983,7 @@
   },
   {
     "name": "PAN_LETT_FORM",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_LETT_",
       "header": "wingdi.h"
@@ -34858,6 +35007,7 @@
   },
   {
     "name": "PAN_MIDLINE",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_MIDLINE_",
       "header": "wingdi.h"
@@ -34881,6 +35031,7 @@
   },
   {
     "name": "PAN_XHEIGHT",
+    "type": "byte",
     "autoPopulate": {
       "filter": "PAN_XHEIGHT_",
       "header": "wingdi.h"
@@ -35686,6 +35837,64 @@
       {
         "method": "WinUsb_SetPowerPolicy",
         "parameter": "PolicyType"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "_SVGIO",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IFolderView",
+        "method": "Items",
+        "parameter": "uFlags"
+      },
+      {
+        "interface": "IFolderView",
+        "method": "ItemCount",
+        "parameter": "uFlags"
+      },
+      {
+        "interface": "IShellView",
+        "method": "GetItemObject",
+        "parameter": "uItem"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "ShellWindowTypeConstants",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IShellWindows",
+        "method": "FindWindowSW",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IShellWindows",
+        "method": "Register",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IShellWindows",
+        "method": "RegisterPending",
+        "parameter": "swClass"
+      },
+      {
+        "interface": "IBrowserService",
+        "method": "RegisterWindow",
+        "parameter": "swc"
+      }
+    ]
+  },
+  {
+    "addUsesTo": "ShellWindowFindWindowOptions",
+    "members": [],
+    "uses": [
+      {
+        "interface": "IShellWindows",
+        "method": "FindWindowSW",
+        "parameter": "swfwOptions"
       }
     ]
   }

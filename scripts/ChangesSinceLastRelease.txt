@@ -1,867 +1,251 @@
-# Fixed #1391.
-Windows.Win32.Graphics.Direct3D.Dxc.IDxcCompiler3.Compile : ppResult : [Out] => [ComOutPtr,Out]
-Windows.Win32.Graphics.Direct3D.Dxc.IDxcCompiler3.Disassemble : ppResult : [Out] => [ComOutPtr,Out]
-# Fixed #1407.
-Windows.Win32.Networking.WinSock.Apis.NLA_SERVICE_CLASS_GUID added
-Windows.Win32.Networking.WinSock.Apis.WSAID_ACCEPTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_CONNECTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_DISCONNECTEX added
-Windows.Win32.Networking.WinSock.Apis.WSAID_GETACCEPTEXSOCKADDRS added
-Windows.Win32.Networking.WinSock.Apis.WSAID_TRANSMITFILE added
-Windows.Win32.Networking.WinSock.Apis.WSAID_TRANSMITPACKETS added
-Windows.Win32.Networking.WinSock.Apis.WSAID_WSAPOLL added
-Windows.Win32.Networking.WinSock.Apis.WSAID_WSARECVMSG added
-Windows.Win32.System.Search.Apis.DB_NULLGUID added
-Windows.Win32.System.Search.Apis.DBCIDGUID added
-Windows.Win32.System.Search.Apis.DBGUID_ROWDEFAULTSTREAM added
-Windows.Win32.System.Search.Apis.DBGUID_ROWURL added
-Windows.Win32.System.Search.Apis.DBSELFGUID added
-# Added WTS_SECURITY_FLAGS for #1403.
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_CONNECT removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_DISCONNECT removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_GUEST_ACCESS removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_LOGOFF removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_LOGON removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_MESSAGE removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_QUERY_INFORMATION removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_REMOTE_CONTROL removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_RESET removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_SET_INFORMATION removed
-Windows.Win32.System.RemoteDesktop.Apis.WTS_SECURITY_VIRTUAL_CHANNELS removed
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_ALL_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CONNECT added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CURRENT_GUEST_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_CURRENT_USER_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_DISCONNECT added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_GUEST_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_LOGOFF added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_LOGON added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_MESSAGE added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_QUERY_INFORMATION added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_REMOTE_CONTROL added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_RESET added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_SET_INFORMATION added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_USER_ACCESS added
-Windows.Win32.System.RemoteDesktop.WTS_SECURITY_FLAGS.WTS_SECURITY_VIRTUAL_CHANNELS added
-# Fixed #1410.
-winmd1: Windows.Win32.Security.TOKEN_ACCESS_MASK.TOKEN_ALL_ACCESS = 983295, winmd2 = 983551
-# Fixed #1430.
-Windows.Win32.UI.WindowsAndMessaging.WINDOWINFO.dwExStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_EX_STYLE
-Windows.Win32.UI.WindowsAndMessaging.WINDOWINFO.dwStyle...System.UInt32 => Windows.Win32.UI.WindowsAndMessaging.WINDOW_STYLE
-# Fixed #1425.
-Windows.Win32.System.Com.Apis.BindMoniker : ppvResult : [Out] => [ComOutPtr,Out]
-Windows.Win32.System.Com.Apis.CoGetCallContext : ppInterface : [Out] => [ComOutPtr,Out]
-Windows.Win32.System.Com.Apis.CoGetCancelObject : ppUnk : [Out] => [ComOutPtr,Out]
-Windows.Win32.System.Com.Apis.CoGetClassObject : ppv : [Out] => [ComOutPtr,Out]
-Windows.Win32.System.Com.Apis.CoGetObject : ppv : [Out] => [ComOutPtr,Out]
-Windows.Win32.System.Com.Apis.CoGetObjectContext : ppv : [Out] => [ComOutPtr,Out]
-Windows.Win32.System.Com.Apis.CreateDataCache : ppv : [Out] => [ComOutPtr,Out]
-# Fixed #1421.
-Windows.Win32.Devices.BiometricFramework.PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN.Invoke : Pipeline : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_1_FN.Invoke : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN.Invoke : Pipeline : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_2_FN.Invoke : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_FRAMEWORK_VSM_STORAGE_RESERVED_3_FN.Invoke : Pipeline : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_STORAGE_RESERVED_1_FN.Invoke : Identity : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_STORAGE_RESERVED_1_FN.Invoke : Pipeline : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_STORAGE_RESERVED_1_FN.Invoke : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_STORAGE_RESERVED_1_FN.Invoke : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_STORAGE_RESERVED_2_FN.Invoke : Identity : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.BiometricFramework.PIBIO_STORAGE_RESERVED_2_FN.Invoke : Pipeline : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddInstallSectionToDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddInstallSectionToDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddInstallSectionToDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddInstallSectionToDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddSectionToDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddSectionToDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddSectionToDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddSectionToDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddToDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddToDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddToDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAddToDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAdjustDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAdjustDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAdjustDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupAdjustDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupCreateDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupCreateDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupCreateDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupCreateDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiBuildClassInfoListExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiBuildClassInfoListExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiClassGuidsFromNameExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiClassGuidsFromNameExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiClassNameFromGuidExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiClassNameFromGuidExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCreateDeviceInfoListExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCreateDeviceInfoListExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCreateDeviceInterfaceRegKeyA : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiCreateDeviceInterfaceRegKeyW : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiDeleteDeviceInterfaceRegKey : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetActualModelsSectionA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetActualModelsSectionW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetActualSectionToInstallExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetActualSectionToInstallExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDescriptionExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDescriptionExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassDevsExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassImageListExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassImageListExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassPropertyExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassPropertyKeysExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassRegistryPropertyA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetClassRegistryPropertyW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetHwProfileFriendlyNameExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetHwProfileFriendlyNameExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetHwProfileListExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiGetHwProfileListExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiInstallClassExA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiInstallClassExA : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiInstallClassExW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiInstallClassExW : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiOpenClassRegKeyExA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiOpenClassRegKeyExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiOpenDeviceInterfaceRegKey : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetClassPropertyExW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetClassRegistryPropertyA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetClassRegistryPropertyW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDiSetDeviceInterfaceDefault : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDuplicateDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDuplicateDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDuplicateDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupDuplicateDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupInitDefaultQueueCallbackEx : Reserved1 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupInitDefaultQueueCallbackEx : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupInstallServicesFromInfSectionExA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupInstallServicesFromInfSectionExA : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupInstallServicesFromInfSectionExW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupInstallServicesFromInfSectionExW : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupIterateCabinetA : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupIterateCabinetW : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupQuerySpaceRequiredOnDriveA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupQuerySpaceRequiredOnDriveA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupQuerySpaceRequiredOnDriveW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupQuerySpaceRequiredOnDriveW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveFromDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveFromDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveFromDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveFromDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveInstallSectionFromDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveInstallSectionFromDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveInstallSectionFromDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveInstallSectionFromDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveSectionFromDiskSpaceListA : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveSectionFromDiskSpaceListA : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveSectionFromDiskSpaceListW : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupRemoveSectionFromDiskSpaceListW : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupSetDirectoryIdExA : Reserved1 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupSetDirectoryIdExA : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupSetDirectoryIdExW : Reserved1 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupSetDirectoryIdExW : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupUninstallNewlyCopiedInfs : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupUninstallOEMInfA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Devices.DeviceAndDriverInstallation.Apis.SetupUninstallOEMInfW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Globalization.Apis.CompareStringEx : lParam : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Globalization.Apis.CompareStringEx : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Globalization.Apis.CompareStringEx : lpVersionInformation : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Globalization.Apis.ScriptTextOut : iReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Globalization.Apis.ScriptTextOut : pwcReserved : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Globalization.IEnumCodePage.Clone : ppEnum : [Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Globalization.IEnumRfc1766.Clone : ppEnum : [Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Globalization.IEnumScript.Clone : ppEnum : [Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Globalization.IMLangStringAStr.GetAStr : puCodePageOut : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Gdi.Apis.AddFontMemResourceEx : pvResrved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Gdi.Apis.AddFontResourceExA : res : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Gdi.Apis.AddFontResourceExW : res : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Gdi.Apis.ChangeDisplaySettingsExA : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Gdi.Apis.ChangeDisplaySettingsExW : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Gdi.Apis.RemoveFontResourceExA : pdv : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Gdi.Apis.RemoveFontResourceExW : pdv : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Printing.IPrintCoreUI2.EnumConstrainedOptions : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Printing.IPrintCoreUI2.EnumFeatures : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Printing.IPrintCoreUI2.EnumOptions : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Printing.IPrintCoreUI2.GetFeatureAttribute : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Printing.IPrintCoreUI2.GetGlobalAttribute : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Printing.IPrintCoreUI2.GetOptionAttribute : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Printing.IPrintCoreUI2.GetOptions : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Graphics.Printing.IPrintCoreUI2.WhyConstrained : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Media.Audio.XAudio2.IXAudio2.SetDebugConfiguration : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Media.DirectShow.IAMResourceControl.Reserve : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Media.DirectShow.IFilterGraph2.RenderEx : pvContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Media.MediaFoundation.IDirectXVideoDecoderService.GetDecoderConfigurations : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Media.MediaFoundation.IMFSourceReader.SetCurrentMediaType : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Media.Multimedia.Apis.ICSeqCompressFrame : uiFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsAddSidHistoryA : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsAddSidHistoryW : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsInheritSecurityIdentityA : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsInheritSecurityIdentityW : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsQuerySitesByCostA : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsQuerySitesByCostW : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsReplicaModifyA : ReplicaFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsReplicaModifyA : TransportDn : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Networking.ActiveDirectory.Apis.DsReplicaModifyW : TransportDn : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Networking.Clustering.Apis.ResUtilSetPropertyTable : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.Clustering.Apis.ResUtilVerifyPropertyTable : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.Clustering.PRESUTIL_SET_PROPERTY_TABLE.Invoke : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.Clustering.PRESUTIL_VERIFY_PROPERTY_TABLE.Invoke : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpAddUrl : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpAddUrlToUrlGroup : Reserved : [In,Reserved] => [In,Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpCreateHttpHandle : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpCreateServerSession : Reserved : [In,Reserved] => [In,Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpCreateUrlGroup : Reserved : [In,Reserved] => [In,Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpDeleteServiceConfiguration : pOverlapped : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpDeleteServiceConfiguration : ServiceHandle : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpInitialize : pReserved : [In,Out,Reserved] => [In,Optional,Out,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpPrepareUrl : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpPrepareUrl : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpQueryRequestQueueProperty : Reserved1 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpQueryRequestQueueProperty : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpQueryServiceConfiguration : pOverlapped : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpQueryServiceConfiguration : ServiceHandle : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpSendHttpResponse : Reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpSendHttpResponse : Reserved2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpSetRequestQueueProperty : Reserved1 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpSetRequestQueueProperty : Reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpSetServiceConfiguration : pOverlapped : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpSetServiceConfiguration : ServiceHandle : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpTerminate : pReserved : [In,Out,Reserved] => [In,Optional,Out,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpUpdateServiceConfiguration : Handle : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.HttpServer.Apis.HttpUpdateServiceConfiguration : Overlapped : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.CommitUrlCacheEntryA : lpszFileExtension : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.CommitUrlCacheEntryW : lpszFileExtension : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.CreateUrlCacheContainerA : cbBuffer : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.CreateUrlCacheContainerA : pvBuffer : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.CreateUrlCacheContainerW : cbBuffer : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.CreateUrlCacheContainerW : pvBuffer : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.CreateUrlCacheGroup : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.DeleteUrlCacheGroup : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheEntryExA : lpcbGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheEntryExA : lpGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheEntryExA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheEntryExW : lpcbGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheEntryExW : lpGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheEntryExW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheGroup : dwSearchCondition : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheGroup : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindFirstUrlCacheGroup : lpSearchCondition : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindNextUrlCacheEntryExA : lpcbGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindNextUrlCacheEntryExA : lpGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindNextUrlCacheEntryExA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindNextUrlCacheEntryExW : lpcbGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindNextUrlCacheEntryExW : lpGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindNextUrlCacheEntryExW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.FindNextUrlCacheGroup : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheConfigInfoA : lpcbCacheConfigInfo : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheConfigInfoW : lpcbCacheConfigInfo : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheEntryInfoExA : lpcbRedirectUrl : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheEntryInfoExA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheEntryInfoExA : lpszRedirectUrl : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheEntryInfoExW : lpcbRedirectUrl : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheEntryInfoExW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheEntryInfoExW : lpszRedirectUrl : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheGroupAttributeA : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheGroupAttributeA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheGroupAttributeW : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.GetUrlCacheGroupAttributeW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetAlgIdToStringA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetAlgIdToStringW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetAutodialHangup : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetDialA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetDialW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetFortezzaCommand : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetGetConnectedState : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetGetConnectedStateExA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetGetConnectedStateExW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetGetCookieExA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetGetCookieExW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetHangUp : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetQueryFortezzaStatus : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetSecurityProtocolToStringA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetSecurityProtocolToStringW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetSetDialStateA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetSetDialStateW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetSetFilePointer : dwContext : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetTimeToSystemTime : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetTimeToSystemTimeA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.InternetTimeToSystemTimeW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.PerformOperationOverUrlCacheA : pdwReserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.PerformOperationOverUrlCacheA : pReserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.PerformOperationOverUrlCacheA : pReserved3 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.ReadUrlCacheEntryStream : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.RetrieveUrlCacheEntryFileA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.RetrieveUrlCacheEntryFileW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.RetrieveUrlCacheEntryStreamA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.RetrieveUrlCacheEntryStreamW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroup : cbGroupAttributes : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroup : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroup : pbGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroupA : cbGroupAttributes : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroupA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroupA : pbGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroupW : cbGroupAttributes : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroupW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheEntryGroupW : pbGroupAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheGroupAttributeA : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheGroupAttributeA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheGroupAttributeW : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.SetUrlCacheGroupAttributeW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.UnlockUrlCacheEntryFile : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.UnlockUrlCacheEntryFileA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.UnlockUrlCacheEntryFileW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinInet.Apis.UnlockUrlCacheEntryStream : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinSock.Apis.WSAConnectByList : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinSock.Apis.WSAConnectByNameA : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Networking.WinSock.Apis.WSAConnectByNameW : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.Dhcp.Apis.DhcpRegisterParamChange : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.Dhcp.Apis.DhcpUndoRequestParams : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.Dhcp.Apis.DhcpUndoRequestParams : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.IpHelper.Apis.GetAdaptersAddresses : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.NetManagement.Apis.NetRequestProvisioningPackageInstall : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.NetManagement.IEnumNetCfgBindingInterface.Clone : ppenum : [Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.NetManagement.IEnumNetCfgBindingPath.Clone : ppenum : [Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.NetManagement.IEnumNetCfgComponent.Clone : ppenum : [Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.NetManagement.INetCfg.Initialize : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.NetManagement.INetCfgClassSetup2.UpdateNonEnumeratedComponent : dwSetupFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.NetManagement.INetCfgClassSetup2.UpdateNonEnumeratedComponent : dwUpgradeFromBuildNo : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.QoS.Apis.QOSNotifyFlow : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.QoS.Apis.QOSRemoveSocketFromFlow : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.QoS.Apis.QOSSetFlow : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.QoS.Apis.QOSStartTrackingClient : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.QoS.Apis.QOSStopTrackingClient : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanCloseHandle : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanConnect : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanConnect2 : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanDeleteProfile : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanDisconnect : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanEnumInterfaces : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanExtractPsdIEDataList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanGetAvailableNetworkList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanGetAvailableNetworkList2 : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanGetFilterList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanGetInterfaceCapability : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanGetNetworkBssList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanGetProfile : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanGetProfileCustomUserData : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanGetProfileList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkForceStart : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkForceStop : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkInitSettings : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkQueryProperty : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkQuerySecondaryKey : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkQueryStatus : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkRefreshSecuritySettings : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkSetProperty : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkSetSecondaryKey : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkStartUsing : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanHostedNetworkStopUsing : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanOpenHandle : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanQueryAutoConfigParameter : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanQueryInterface : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanReasonCodeToString : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanRegisterNotification : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanRegisterVirtualStationNotification : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanRenameProfile : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSaveTemporaryProfile : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanScan : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetAutoConfigParameter : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetFilterList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetInterface : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetProfile : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetProfileCustomUserData : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetProfileEapUserData : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetProfileEapXmlUserData : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetProfileList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetProfilePosition : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanSetPsdIEDataList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.Apis.WlanUIEditProfile : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.DOT11EXT_QUERY_VIRTUAL_STATION_PROPERTIES.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.DOT11EXT_RELEASE_VIRTUAL_STATION.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.DOT11EXT_REQUEST_VIRTUAL_STATION.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.DOT11EXT_SET_VIRTUAL_STATION_AP_PROPERTIES.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.DOT11EXTIHV_INIT_SERVICE.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WiFi.DOT11EXTIHV_INIT_VIRTUAL_STATION.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WindowsConnectionManager.Apis.WcmGetProfileList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WindowsConnectionManager.Apis.WcmQueryProperty : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WindowsConnectionManager.Apis.WcmSetProfileList : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WindowsConnectionManager.Apis.WcmSetProperty : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.FwpmSystemPortsSubscribe0 : reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecKeyManagerGetSecurityInfoByKey0 : reserved : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.NetworkManagement.WindowsFilteringPlatform.Apis.IPsecKeyManagerSetSecurityInfoByKey0 : reserved : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Security.AppLocker.Apis.SaferCreateLevel : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.AppLocker.Apis.SaferGetPolicyInformation : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.AppLocker.Apis.SaferRecordEventLogEntry : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.AppLocker.Apis.SaferSetPolicyInformation : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Authentication.Identity.Apis.SLConsumeRight : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredDeleteA : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredDeleteW : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredEnumerateA : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredEnumerateW : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredReadA : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredReadW : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredRenameA : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredRenameW : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredUICmdLinePromptForCredentialsA : pContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredUICmdLinePromptForCredentialsW : pContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredUIPromptForCredentialsA : pContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.CredUIPromptForCredentialsW : pContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.SCardEstablishContext : pvReserved1 : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Security.Credentials.Apis.SCardEstablishContext : pvReserved2 : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertCreateCTLEntryFromCertificateContextProperties : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertFindCertificateInCRL : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertFindSubjectInSortedCTL : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertGetCertificateChain : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertGetServerOcspResponseContext : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertIsValidCRLForCertificate : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertRegisterPhysicalStore : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertRegisterSystemStore : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertRetrieveLogoOrBiometricInfo : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertStrToNameA : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CertStrToNameW : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptContextAddRef : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptCreateKeyIdentifierFromCSP : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptDuplicateHash : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptDuplicateKey : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptEnumKeyIdentifierProperties : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptEnumProvidersA : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptEnumProvidersW : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptEnumProviderTypesA : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptEnumProviderTypesW : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptFindCertificateKeyProvInfo : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptGetDefaultProviderA : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptGetDefaultProviderW : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptGetKeyIdentifierProperty : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptGetObjectUrl : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptHashCertificate2 : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptInstallCancelRetrieval : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptInstallDefaultContext : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptMsgOpenToDecode : pRecipientInfo : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptProtectData : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptSetKeyIdentifierProperty : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptSetProviderExA : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptSetProviderExW : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptUninstallCancelRetrieval : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptUninstallDefaultContext : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Apis.CryptUnprotectData : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATAdminAcquireContext : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATAdminAcquireContext2 : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATAdminCalcHashFromFileHandle : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATAdminCalcHashFromFileHandle2 : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.Catalog.Apis.CryptCATAdminEnumCatalogFromHash : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CERT_ENUM_PHYSICAL_STORE.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CERT_ENUM_SYSTEM_STORE_LOCATION.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CERT_ENUM_SYSTEM_STORE.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_CNG_IMPORT_CONTENT_ENCRYPT_KEY.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_CNG_IMPORT_KEY_AGREE.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_CNG_IMPORT_KEY_TRANS.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_EXPORT_KEY_AGREE.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_EXPORT_KEY_TRANS.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_EXPORT_MAIL_LIST.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_GEN_CONTENT_ENCRYPT_KEY.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_IMPORT_KEY_AGREE.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_IMPORT_KEY_TRANS.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CMSG_IMPORT_MAIL_LIST.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Security.Cryptography.PFN_CRYPT_ENUM_KEYID_PROP.Invoke : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.DistributedFileSystem.Apis.NetDfsRemoveFtRoot : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.DistributedFileSystem.Apis.NetDfsRemoveFtRootForced : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.DistributedFileSystem.Apis.NetDfsRemoveStdRoot : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.CreateFileTransactedA : lpExtendedParameter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.CreateFileTransactedW : lpExtendedParameter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.CreateHardLinkA : lpSecurityAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.CreateHardLinkTransactedA : lpSecurityAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.CreateHardLinkTransactedW : lpSecurityAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.CreateHardLinkW : lpSecurityAttributes : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.DecryptFileA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.DecryptFileW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.FindFirstFileExA : lpSearchFilter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.FindFirstFileExFromAppW : lpSearchFilter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.FindFirstFileExW : lpSearchFilter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.FindFirstFileTransactedA : lpSearchFilter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.FindFirstFileTransactedW : lpSearchFilter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.FindFirstStreamTransactedW : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.FindFirstStreamW : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.GetFileVersionInfoA : dwHandle : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.GetFileVersionInfoExA : dwHandle : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.GetFileVersionInfoExW : dwHandle : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.GetFileVersionInfoW : dwHandle : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.LockFileEx : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.NetShareDel : reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.NetShareDelSticky : reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.ReadFileScatter : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.ReplaceFileA : lpExclude : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.ReplaceFileA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.ReplaceFileFromAppW : lpExclude : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.ReplaceFileFromAppW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.ReplaceFileW : lpExclude : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.ReplaceFileW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.SetUserFileEncryptionKeyEx : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.UnlockFileEx : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.FileSystem.Apis.WriteFileGather : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.Storage.Packaging.Appx.Apis.GetPackagePath : reserved : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Storage.Packaging.Appx.Apis.OpenPackageInfoByFullName : reserved : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.Storage.Packaging.Appx.Apis.OpenPackageInfoByFullNameForUser : reserved : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.FindActCtxSectionGuid : lpExtensionGuid : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.FindActCtxSectionStringA : lpExtensionGuid : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.FindActCtxSectionStringW : lpExtensionGuid : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumRelatedProductsA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiEnumRelatedProductsW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiExtractPatchXMLDataA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiExtractPatchXMLDataW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentExA : dwUnused1 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentExA : dwUnused2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentExW : dwUnused1 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiProvideQualifiedComponentExW : dwUnused2 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiSourceListAddSourceA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiSourceListAddSourceW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiSourceListClearAllA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiSourceListClearAllW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiSourceListForceResolutionA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiSourceListForceResolutionW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiUseFeatureExA : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.ApplicationInstallationAndServicing.Apis.MsiUseFeatureExW : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Apis.CreateUri : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Apis.CreateUriFromMultiByteString : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Apis.CreateUriWithFragment : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.IDataAdviseHolder.SendOnDataChange : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.IForegroundTransfer.AllowForegroundTransfer : lpvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.IStdMarshalInfo.GetClassForHandler : pvDestContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.ISurrogateService.CatalogRefresh : ulReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Marshal.IMarshal.GetMarshalSizeMax : pvDestContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Marshal.IMarshal.GetUnmarshalClass : pvDestContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Marshal.IMarshal.MarshalInterface : pvDestContext : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.Apis.StgConvertVariantToProperty : fReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.Apis.StgCreateDocfile : reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.Apis.StgCreatePropSetStg : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.Apis.StgCreatePropStg : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.Apis.StgOpenPropStg : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.Apis.StgOpenStorageOnILockBytes : reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.Apis.StgPropertyLengthAsVariant : bReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.ILayoutStorage.LayoutScript : glfInterleavedFlag : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.IStorage.EnumElements : reserved1 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.IStorage.EnumElements : reserved2 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.IStorage.EnumElements : reserved3 : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.StructuredStorage.IStorage.OpenStream : reserved1 : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Urlmon.Apis.CoGetClassObjectFromURL : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Urlmon.Apis.CoInternetCombineUrl : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Urlmon.Apis.CoInternetGetSecurityUrl : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Urlmon.Apis.CoInternetGetSecurityUrlEx : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Urlmon.Apis.CoInternetParseIUri : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Urlmon.Apis.FindMimeFromData : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Urlmon.Apis.UrlMkGetSessionOption : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Com.Urlmon.Apis.UrlMkSetSessionOption : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Console.Apis.CreateConsoleScreenBuffer : lpScreenBufferData : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Console.Apis.WriteConsoleA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Console.Apis.WriteConsoleW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.DataExchange.Apis.DdeInitializeA : ulRes : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.DataExchange.Apis.DdeInitializeW : ulRes : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.EventLog.Apis.EvtOpenSession : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.EventLog.Apis.EvtOpenSession : Timeout : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.EventLog.Apis.EvtSeek : Timeout : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.GroupPolicy.Apis.GetManagedApplicationCategories : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.LibraryLoader.Apis.LoadLibraryExA : hFile : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.LibraryLoader.Apis.LoadLibraryExW : hFile : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.LibraryLoader.Apis.LoadPackagedLibrary : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Ole.IClassFactory2.CreateInstanceLic : pUnkReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Ole.IOleCache2.UpdateCache : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegCreateKeyExA : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegCreateKeyExW : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegCreateKeyTransactedA : pExtendedParemeter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegCreateKeyTransactedA : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegCreateKeyTransactedW : pExtendedParemeter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegCreateKeyTransactedW : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegDeleteKeyExA : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegDeleteKeyExW : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegDeleteKeyTransactedA : pExtendedParameter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegDeleteKeyTransactedA : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegDeleteKeyTransactedW : pExtendedParameter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegDeleteKeyTransactedW : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegEnumKeyExA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegEnumKeyExW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegEnumValueA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegEnumValueW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegLoadAppKeyA : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegLoadAppKeyW : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegOpenKeyTransactedA : pExtendedParemeter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegOpenKeyTransactedW : pExtendedParemeter : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegOpenUserClassesRoot : dwOptions : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegQueryInfoKeyA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegQueryInfoKeyW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegQueryValueExA : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegQueryValueExW : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegSetValueExA : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Registry.Apis.RegSetValueExW : Reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.RemoteManagement.Apis.WSManGetErrorMessage : flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.RestartManager.Apis.RmRestart : dwRestartFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.RestartManager.Apis.RmStartSession : dwSessionFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopA : lpszDevice : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopA : pDevmode : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopExA : lpszDevice : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopExA : pDevmode : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopExA : pvoid : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopExW : lpszDevice : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopExW : pDevmode : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopExW : pvoid : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopW : lpszDevice : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.System.StationsAndDesktops.Apis.CreateDesktopW : pDevmode : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.SystemInformation.Apis.GetSystemCpuSetInformation : Flags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Threading.Apis.CreateSemaphoreExA : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Threading.Apis.CreateSemaphoreExW : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Threading.Apis.CreateThreadpool : reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Threading.Apis.InitializeProcThreadAttributeList : dwFlags : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.System.Threading.Apis.SetThreadpoolWaitEx : Reserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.WindowsProgramming.Apis.TranslateInfStringA : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.WindowsProgramming.Apis.TranslateInfStringExA : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.WindowsProgramming.Apis.TranslateInfStringExW : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.System.WindowsProgramming.Apis.TranslateInfStringW : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.ColorSystem.Apis.UpdateICMRegKeyA : reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.ColorSystem.Apis.UpdateICMRegKeyW : reserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Input.XboxController.Apis.XInputGetKeystroke : dwReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.LegacyWindowsEnvironmentFeatures.IReconcilableObject.Reconcile : pvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.DuplicateIcon : hInst : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.ExtractAssociatedIconA : hInst : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.ExtractAssociatedIconExA : hInst : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.ExtractAssociatedIconExW : hInst : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.ExtractAssociatedIconW : hInst : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.ExtractIconA : hInst : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.ExtractIconW : hInst : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHCloneSpecialIDList : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHCopyKeyA : fReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHCopyKeyW : fReserved : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHGetFolderLocation : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHGetFolderPathA : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHGetFolderPathAndSubDirA : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHGetFolderPathAndSubDirW : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHGetFolderPathW : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHGetSpecialFolderLocation : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHGetSpecialFolderPathA : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHGetSpecialFolderPathW : hwnd : [In,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHLoadIndirectString : ppvReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHQueryValueExA : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.Apis.SHQueryValueExW : pdwReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.IContextMenu.GetCommandString : pReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.IProgressDialog.SetCancelMsg : pvResevered : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.UI.Shell.IProgressDialog.SetLine : pvResevered : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.UI.Shell.IProgressDialog.StartProgressDialog : pvResevered : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.UI.Shell.IProgressDialog.Timer : pvResevered : [Const,In,Reserved] => [Const,Optional,Reserved]
-Windows.Win32.UI.Shell.IShellFolder.GetUIObjectOf : rgfReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.Shell.IShellFolder.ParseDisplayName : pchEaten : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.WindowsAndMessaging.Apis.InSendMessageEx : lpReserved : [In,Out,Reserved] => [Optional,Reserved]
-Windows.Win32.UI.WindowsAndMessaging.Apis.TrackPopupMenu : nReserved : [In,Reserved] => [Optional,Reserved]
-# Fixed #1424.
-Windows.Win32.Devices.Display.Apis.GetDisplayConfigBufferSizes : return...Int32 => WIN32_ERROR
-Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : currentTopologyId : [Out] => [Optional,Out]
-Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : return...Int32 => WIN32_ERROR
-# Fixed #1415 and #1416.
-Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : flags...UInt32 => QUERY_DISPLAY_CONFIG_FLAGS
-Windows.Win32.Devices.Display.Apis.SetDisplayConfig : flags...UInt32 => SET_DISPLAY_CONFIG_FLAGS
-Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS added
-Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_ALL_PATHS added
-Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_DATABASE_CURRENT added
-Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_INCLUDE_HMD added
-Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_ONLY_ACTIVE_PATHS added
-Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_VIRTUAL_MODE_AWARE added
-Windows.Win32.Devices.Display.QUERY_DISPLAY_CONFIG_FLAGS.QDC_VIRTUAL_REFRESH_RATE_AWARE added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_ALLOW_CHANGES added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_ALLOW_PATH_ORDER_CHANGES added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_APPLY added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_FORCE_MODE_ENUMERATION added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_NO_OPTIMIZATION added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_PATH_PERSIST_IF_REQUIRED added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_SAVE_TO_DATABASE added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_CLONE added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_EXTEND added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_EXTERNAL added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_INTERNAL added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_TOPOLOGY_SUPPLIED added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_USE_DATABASE_CURRENT added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_USE_SUPPLIED_DISPLAY_CONFIG added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_VALIDATE added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_VIRTUAL_MODE_AWARE added
-Windows.Win32.Devices.Display.SET_DISPLAY_CONFIG_FLAGS.SDC_VIRTUAL_REFRESH_RATE_AWARE added
-Windows.Win32.Graphics.Gdi.Apis.QDC_ALL_PATHS removed
-Windows.Win32.Graphics.Gdi.Apis.QDC_DATABASE_CURRENT removed
-Windows.Win32.Graphics.Gdi.Apis.QDC_INCLUDE_HMD removed
-Windows.Win32.Graphics.Gdi.Apis.QDC_ONLY_ACTIVE_PATHS removed
-Windows.Win32.Graphics.Gdi.Apis.QDC_VIRTUAL_MODE_AWARE removed
-Windows.Win32.Graphics.Gdi.Apis.QDC_VIRTUAL_REFRESH_RATE_AWARE removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_ALLOW_CHANGES removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_ALLOW_PATH_ORDER_CHANGES removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_APPLY removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_FORCE_MODE_ENUMERATION removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_NO_OPTIMIZATION removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_PATH_PERSIST_IF_REQUIRED removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_SAVE_TO_DATABASE removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_CLONE removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_EXTEND removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_EXTERNAL removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_INTERNAL removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_TOPOLOGY_SUPPLIED removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_USE_SUPPLIED_DISPLAY_CONFIG removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_VALIDATE removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_VIRTUAL_MODE_AWARE removed
-Windows.Win32.Graphics.Gdi.Apis.SDC_VIRTUAL_REFRESH_RATE_AWARE removed
-# Fixed #1414.
-Windows.Win32.Devices.Display.Apis.GetDisplayConfigBufferSizes : flags...UInt32 => QUERY_DISPLAY_CONFIG_FLAGS
-# Fixed #1413.
-Windows.Win32.Graphics.Gdi.Apis.EnumDisplaySettingsExA : dwFlags...UInt32 => ENUM_DISPLAY_SETTINGS_FLAGS
-Windows.Win32.Graphics.Gdi.Apis.EnumDisplaySettingsExW : dwFlags...UInt32 => ENUM_DISPLAY_SETTINGS_FLAGS
-Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS added
-Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS.EDS_RAWMODE added
-Windows.Win32.Graphics.Gdi.ENUM_DISPLAY_SETTINGS_FLAGS.EDS_ROTATEDMODE added
-Windows.Win32.UI.WindowsAndMessaging.Apis.EDS_RAWMODE removed
-Windows.Win32.UI.WindowsAndMessaging.Apis.EDS_ROTATEDMODE removed
-# Fixed #1417.
-Windows.Win32.System.SystemServices.Apis.SE_ASSIGNPRIMARYTOKEN_NAME => Windows.Win32.Security.Apis.SE_ASSIGNPRIMARYTOKEN_NAME
-Windows.Win32.System.SystemServices.Apis.SE_AUDIT_NAME => Windows.Win32.Security.Apis.SE_AUDIT_NAME
-Windows.Win32.System.SystemServices.Apis.SE_BACKUP_NAME => Windows.Win32.Security.Apis.SE_BACKUP_NAME
-Windows.Win32.System.SystemServices.Apis.SE_CHANGE_NOTIFY_NAME => Windows.Win32.Security.Apis.SE_CHANGE_NOTIFY_NAME
-Windows.Win32.System.SystemServices.Apis.SE_CREATE_GLOBAL_NAME => Windows.Win32.Security.Apis.SE_CREATE_GLOBAL_NAME
-Windows.Win32.System.SystemServices.Apis.SE_CREATE_PAGEFILE_NAME => Windows.Win32.Security.Apis.SE_CREATE_PAGEFILE_NAME
-Windows.Win32.System.SystemServices.Apis.SE_CREATE_PERMANENT_NAME => Windows.Win32.Security.Apis.SE_CREATE_PERMANENT_NAME
-Windows.Win32.System.SystemServices.Apis.SE_CREATE_SYMBOLIC_LINK_NAME => Windows.Win32.Security.Apis.SE_CREATE_SYMBOLIC_LINK_NAME
-Windows.Win32.System.SystemServices.Apis.SE_CREATE_TOKEN_NAME => Windows.Win32.Security.Apis.SE_CREATE_TOKEN_NAME
-Windows.Win32.System.SystemServices.Apis.SE_DEBUG_NAME => Windows.Win32.Security.Apis.SE_DEBUG_NAME
-Windows.Win32.System.SystemServices.Apis.SE_DELEGATE_SESSION_USER_IMPERSONATE_NAME => Windows.Win32.Security.Apis.SE_DELEGATE_SESSION_USER_IMPERSONATE_NAME
-Windows.Win32.System.SystemServices.Apis.SE_ENABLE_DELEGATION_NAME => Windows.Win32.Security.Apis.SE_ENABLE_DELEGATION_NAME
-Windows.Win32.System.SystemServices.Apis.SE_IMPERSONATE_NAME => Windows.Win32.Security.Apis.SE_IMPERSONATE_NAME
-Windows.Win32.System.SystemServices.Apis.SE_INC_BASE_PRIORITY_NAME => Windows.Win32.Security.Apis.SE_INC_BASE_PRIORITY_NAME
-Windows.Win32.System.SystemServices.Apis.SE_INC_WORKING_SET_NAME => Windows.Win32.Security.Apis.SE_INC_WORKING_SET_NAME
-Windows.Win32.System.SystemServices.Apis.SE_INCREASE_QUOTA_NAME => Windows.Win32.Security.Apis.SE_INCREASE_QUOTA_NAME
-Windows.Win32.System.SystemServices.Apis.SE_LOAD_DRIVER_NAME => Windows.Win32.Security.Apis.SE_LOAD_DRIVER_NAME
-Windows.Win32.System.SystemServices.Apis.SE_LOCK_MEMORY_NAME => Windows.Win32.Security.Apis.SE_LOCK_MEMORY_NAME
-Windows.Win32.System.SystemServices.Apis.SE_MACHINE_ACCOUNT_NAME => Windows.Win32.Security.Apis.SE_MACHINE_ACCOUNT_NAME
-Windows.Win32.System.SystemServices.Apis.SE_MANAGE_VOLUME_NAME => Windows.Win32.Security.Apis.SE_MANAGE_VOLUME_NAME
-Windows.Win32.System.SystemServices.Apis.SE_PROF_SINGLE_PROCESS_NAME => Windows.Win32.Security.Apis.SE_PROF_SINGLE_PROCESS_NAME
-Windows.Win32.System.SystemServices.Apis.SE_RELABEL_NAME => Windows.Win32.Security.Apis.SE_RELABEL_NAME
-Windows.Win32.System.SystemServices.Apis.SE_REMOTE_SHUTDOWN_NAME => Windows.Win32.Security.Apis.SE_REMOTE_SHUTDOWN_NAME
-Windows.Win32.System.SystemServices.Apis.SE_RESTORE_NAME => Windows.Win32.Security.Apis.SE_RESTORE_NAME
-Windows.Win32.System.SystemServices.Apis.SE_SECURITY_NAME => Windows.Win32.Security.Apis.SE_SECURITY_NAME
-Windows.Win32.System.SystemServices.Apis.SE_SHUTDOWN_NAME => Windows.Win32.Security.Apis.SE_SHUTDOWN_NAME
-Windows.Win32.System.SystemServices.Apis.SE_SYNC_AGENT_NAME => Windows.Win32.Security.Apis.SE_SYNC_AGENT_NAME
-Windows.Win32.System.SystemServices.Apis.SE_SYSTEM_ENVIRONMENT_NAME => Windows.Win32.Security.Apis.SE_SYSTEM_ENVIRONMENT_NAME
-Windows.Win32.System.SystemServices.Apis.SE_SYSTEM_PROFILE_NAME => Windows.Win32.Security.Apis.SE_SYSTEM_PROFILE_NAME
-Windows.Win32.System.SystemServices.Apis.SE_SYSTEMTIME_NAME => Windows.Win32.Security.Apis.SE_SYSTEMTIME_NAME
-Windows.Win32.System.SystemServices.Apis.SE_TAKE_OWNERSHIP_NAME => Windows.Win32.Security.Apis.SE_TAKE_OWNERSHIP_NAME
-Windows.Win32.System.SystemServices.Apis.SE_TCB_NAME => Windows.Win32.Security.Apis.SE_TCB_NAME
-Windows.Win32.System.SystemServices.Apis.SE_TIME_ZONE_NAME => Windows.Win32.Security.Apis.SE_TIME_ZONE_NAME
-Windows.Win32.System.SystemServices.Apis.SE_TRUSTED_CREDMAN_ACCESS_NAME => Windows.Win32.Security.Apis.SE_TRUSTED_CREDMAN_ACCESS_NAME
-Windows.Win32.System.SystemServices.Apis.SE_UNDOCK_NAME => Windows.Win32.Security.Apis.SE_UNDOCK_NAME
-Windows.Win32.System.SystemServices.Apis.SE_UNSOLICITED_INPUT_NAME => Windows.Win32.Security.Apis.SE_UNSOLICITED_INPUT_NAME
-# Fixed #1435.
-Windows.Win32.System.RemoteDesktop.Apis.WTSQuerySessionInformationA : hServer : [In] => [Optional]
-Windows.Win32.System.RemoteDesktop.Apis.WTSQuerySessionInformationW : hServer : [In] => [Optional]
-# Fixed #1431.
-Windows.Win32.Media.MediaFoundation.Apis.MF_VERSION added
-# Fixed #1408.
-Windows.Win32.Devices.Usb.Apis.ALLOW_PARTIAL_READS removed
-Windows.Win32.Devices.Usb.Apis.AUTO_CLEAR_STALL removed
-Windows.Win32.Devices.Usb.Apis.AUTO_FLUSH removed
-Windows.Win32.Devices.Usb.Apis.AUTO_SUSPEND removed
-Windows.Win32.Devices.Usb.Apis.IGNORE_SHORT_PACKETS removed
-Windows.Win32.Devices.Usb.Apis.MAXIMUM_TRANSFER_SIZE removed
-Windows.Win32.Devices.Usb.Apis.PIPE_TRANSFER_TIMEOUT removed
-Windows.Win32.Devices.Usb.Apis.RAW_IO removed
-Windows.Win32.Devices.Usb.Apis.RESET_PIPE_ON_RESUME removed
-Windows.Win32.Devices.Usb.Apis.SHORT_PACKET_TERMINATE removed
-Windows.Win32.Devices.Usb.Apis.SUSPEND_DELAY removed
-Windows.Win32.Devices.Usb.Apis.WinUsb_AbortPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_ControlTransfer : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_FlushPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_Free : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetAssociatedInterface : AssociatedInterfaceHandle...Void** => WINUSB_INTERFACE_HANDLE*
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetAssociatedInterface : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetCurrentAlternateSetting : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetCurrentFrameNumber : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetCurrentFrameNumberAndQpc : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetDescriptor : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetOverlappedResult : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetPipePolicy : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetPipePolicy : PolicyType...UInt32 => WINUSB_PIPE_POLICY
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetPowerPolicy : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_GetPowerPolicy : PolicyType...UInt32 => WINUSB_POWER_POLICY
-Windows.Win32.Devices.Usb.Apis.WinUsb_Initialize : InterfaceHandle...Void** => WINUSB_INTERFACE_HANDLE*
-Windows.Win32.Devices.Usb.Apis.WinUsb_QueryDeviceInformation : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_QueryInterfaceSettings : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_QueryPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_QueryPipeEx : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_ReadPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_RegisterIsochBuffer : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_ResetPipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_SetCurrentAlternateSetting : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_SetPipePolicy : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_SetPipePolicy : PolicyType...UInt32 => WINUSB_PIPE_POLICY
-Windows.Win32.Devices.Usb.Apis.WinUsb_SetPowerPolicy : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_SetPowerPolicy : PolicyType...UInt32 => WINUSB_POWER_POLICY
-Windows.Win32.Devices.Usb.Apis.WinUsb_StartTrackingForTimeSync : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_StopTrackingForTimeSync : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.Apis.WinUsb_WritePipe : InterfaceHandle...Void* => WINUSB_INTERFACE_HANDLE
-Windows.Win32.Devices.Usb.WINUSB_INTERFACE_HANDLE added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.ALLOW_PARTIAL_READS added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.AUTO_CLEAR_STALL added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.AUTO_FLUSH added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.IGNORE_SHORT_PACKETS added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.MAXIMUM_TRANSFER_SIZE added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.PIPE_TRANSFER_TIMEOUT added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.RAW_IO added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.RESET_PIPE_ON_RESUME added
-Windows.Win32.Devices.Usb.WINUSB_PIPE_POLICY.SHORT_PACKET_TERMINATE added
-Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY added
-Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY.AUTO_SUSPEND added
-Windows.Win32.Devices.Usb.WINUSB_POWER_POLICY.SUSPEND_DELAY added
-# Fixed #1404.
-Windows.Win32.System.Threading.Apis.CancelThreadpoolIo : pio : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.CancelThreadpoolIo : pio...TP_IO* => PTP_IO
-Windows.Win32.System.Threading.Apis.CloseThreadpoolIo : pio : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.CloseThreadpoolIo : pio...TP_IO* => PTP_IO
-Windows.Win32.System.Threading.Apis.CloseThreadpoolTimer : pti : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.CloseThreadpoolTimer : pti...TP_TIMER* => PTP_TIMER
-Windows.Win32.System.Threading.Apis.CloseThreadpoolWait : pwa : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.CloseThreadpoolWait : pwa...TP_WAIT* => PTP_WAIT
-Windows.Win32.System.Threading.Apis.CloseThreadpoolWork : pwk : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.CloseThreadpoolWork : pwk...TP_WORK* => PTP_WORK
-Windows.Win32.System.Threading.Apis.CreateThreadpoolIo : return...TP_IO* => PTP_IO
-Windows.Win32.System.Threading.Apis.CreateThreadpoolTimer : return...TP_TIMER* => PTP_TIMER
-Windows.Win32.System.Threading.Apis.CreateThreadpoolWait : return...TP_WAIT* => PTP_WAIT
-Windows.Win32.System.Threading.Apis.CreateThreadpoolWork : return...TP_WORK* => PTP_WORK
-Windows.Win32.System.Threading.Apis.IsThreadpoolTimerSet : pti : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.IsThreadpoolTimerSet : pti...TP_TIMER* => PTP_TIMER
-Windows.Win32.System.Threading.Apis.SetThreadpoolTimer : pti : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.SetThreadpoolTimer : pti...TP_TIMER* => PTP_TIMER
-Windows.Win32.System.Threading.Apis.SetThreadpoolTimerEx : pti : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.SetThreadpoolTimerEx : pti...TP_TIMER* => PTP_TIMER
-Windows.Win32.System.Threading.Apis.SetThreadpoolWait : pwa : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.SetThreadpoolWait : pwa...TP_WAIT* => PTP_WAIT
-Windows.Win32.System.Threading.Apis.SetThreadpoolWaitEx : pwa : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.SetThreadpoolWaitEx : pwa...TP_WAIT* => PTP_WAIT
-Windows.Win32.System.Threading.Apis.StartThreadpoolIo : pio : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.StartThreadpoolIo : pio...TP_IO* => PTP_IO
-Windows.Win32.System.Threading.Apis.SubmitThreadpoolWork : pwk : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.SubmitThreadpoolWork : pwk...TP_WORK* => PTP_WORK
-Windows.Win32.System.Threading.Apis.WaitForThreadpoolIoCallbacks : pio : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.WaitForThreadpoolIoCallbacks : pio...TP_IO* => PTP_IO
-Windows.Win32.System.Threading.Apis.WaitForThreadpoolTimerCallbacks : pti : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.WaitForThreadpoolTimerCallbacks : pti...TP_TIMER* => PTP_TIMER
-Windows.Win32.System.Threading.Apis.WaitForThreadpoolWaitCallbacks : pwa : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.WaitForThreadpoolWaitCallbacks : pwa...TP_WAIT* => PTP_WAIT
-Windows.Win32.System.Threading.Apis.WaitForThreadpoolWorkCallbacks : pwk : [In,Out] => [In]
-Windows.Win32.System.Threading.Apis.WaitForThreadpoolWorkCallbacks : pwk...TP_WORK* => PTP_WORK
-Windows.Win32.System.Threading.PTP_IO added
-Windows.Win32.System.Threading.PTP_TIMER added
-Windows.Win32.System.Threading.PTP_TIMER_CALLBACK.Invoke : Timer : [In,Out] => [In]
-Windows.Win32.System.Threading.PTP_TIMER_CALLBACK.Invoke : Timer...TP_TIMER* => PTP_TIMER
-Windows.Win32.System.Threading.PTP_WAIT added
-Windows.Win32.System.Threading.PTP_WAIT_CALLBACK.Invoke : Wait : [In,Out] => [In]
-Windows.Win32.System.Threading.PTP_WAIT_CALLBACK.Invoke : Wait...TP_WAIT* => PTP_WAIT
-Windows.Win32.System.Threading.PTP_WIN32_IO_CALLBACK.Invoke : Io : [In,Out] => [In]
-Windows.Win32.System.Threading.PTP_WIN32_IO_CALLBACK.Invoke : Io...TP_IO* => PTP_IO
-Windows.Win32.System.Threading.PTP_WORK added
-Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke : Work : [In,Out] => [In]
-Windows.Win32.System.Threading.PTP_WORK_CALLBACK.Invoke : Work...TP_WORK* => PTP_WORK
-Windows.Win32.System.Threading.TP_IO removed
-Windows.Win32.System.Threading.TP_TIMER removed
-Windows.Win32.System.Threading.TP_WAIT removed
-Windows.Win32.System.Threading.TP_WORK removed
+Windows.Win32.System.Diagnostics.Debug.IMAGE_DIRECTORY_ENTRY.value__...System.UInt32 => System.UInt16
+Windows.Win32.Graphics.Gdi.PAN_ARM_STYLE.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_CONTRAST.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_FAMILY_TYPE.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_LETT_FORM.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_MIDLINE.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_PROPORTION.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_SERIF_STYLE.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_STROKE_VARIATION.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_WEIGHT.value__...System.UInt32 => System.Byte
+Windows.Win32.Graphics.Gdi.PAN_XHEIGHT.value__...System.UInt32 => System.Byte
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATA.bCharSet...Windows.Win32.Graphics.Gdi.EMBED_FONT_CHARSET => Windows.Win32.Graphics.Gdi.FONT_CHARSET
+Windows.Win32.UI.Controls.RichEdit.CHARFORMATW.bCharSet...Windows.Win32.Graphics.Gdi.EMBED_FONT_CHARSET => Windows.Win32.Graphics.Gdi.FONT_CHARSET
+# Fixed #1448.
+Windows.Win32.Web.MsHtml.Apis.IEAssociateThreadWithTab added
+Windows.Win32.Web.MsHtml.Apis.IECancelSaveFile added
+Windows.Win32.Web.MsHtml.Apis.IECreateDirectory added
+Windows.Win32.Web.MsHtml.Apis.IEDeleteFile added
+Windows.Win32.Web.MsHtml.Apis.IEDisassociateThreadWithTab added
+Windows.Win32.Web.MsHtml.Apis.IEFindFirstFile added
+Windows.Win32.Web.MsHtml.Apis.IEGetFileAttributesEx added
+Windows.Win32.Web.MsHtml.Apis.IEGetProtectedModeCookie added
+Windows.Win32.Web.MsHtml.Apis.IEGetWriteableFolderPath added
+Windows.Win32.Web.MsHtml.Apis.IEGetWriteableLowHKCU added
+Windows.Win32.Web.MsHtml.Apis.IEInPrivateFilteringEnabled added
+Windows.Win32.Web.MsHtml.Apis.IEIsInPrivateBrowsing added
+Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeProcess added
+Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeURL added
+Windows.Win32.Web.MsHtml.Apis.IELaunchURL added
+Windows.Win32.Web.MsHtml.Apis.IEMoveFileEx added
+Windows.Win32.Web.MsHtml.Apis.IERefreshElevationPolicy added
+Windows.Win32.Web.MsHtml.Apis.IERegCreateKeyEx added
+Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryKey added
+Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryValue added
+Windows.Win32.Web.MsHtml.Apis.IERemoveDirectory added
+Windows.Win32.Web.MsHtml.Apis.IESaveFile added
+Windows.Win32.Web.MsHtml.Apis.IESetProtectedModeCookie added
+Windows.Win32.Web.MsHtml.Apis.IEShowOpenFileDialog added
+Windows.Win32.Web.MsHtml.Apis.IEShowSaveFileDialog added
+Windows.Win32.Web.MsHtml.Apis.IETrackingProtectionEnabled added
+Windows.Win32.Web.MsHtml.Apis.IEUnregisterWritableRegistry added
+# Fixed #1446.
+Windows.Win32.Graphics.Printing.Apis.AddMonitorA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddMonitorW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterDriverA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterDriverW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.AddPrinterW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeleteMonitorA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeleteMonitorW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.DeletePrinter : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumJobsA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumJobsW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDriversA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrinterDriversW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrintersA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.EnumPrintersW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetPrinterA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetPrinterW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.GetSpoolFileHandle : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.SetPortA : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+Windows.Win32.Graphics.Printing.Apis.SetPortW : [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False)] => [DllImport(winspool.drv,ExactSpelling=True,PreserveSig=False,SetLastError=True)]
+# Fixed #1449.
+Windows.Win32.UI.Shell.Apis.AssocQueryStringA : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringByKeyA : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringByKeyW : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+Windows.Win32.UI.Shell.Apis.AssocQueryStringW : [DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)] => [CanReturnMultipleSuccessValues,DllImport(SHLWAPI.dll,ExactSpelling=True,PreserveSig=False),SupportedOSPlatform(windows5.0)]
+# Fixed #1436.
+Windows.Win32.System.RemoteDesktop.Apis.WTSCreateListenerA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSCreateListenerW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSDisconnectSession : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateListenersA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateListenersW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateProcessesA : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateProcessesExA : hServer : [In] => [In,Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateProcessesExW : hServer : [In] => [In,Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateProcessesW : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateSessionsA : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateSessionsExA : hServer : [In] => [In,Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateSessionsExW : hServer : [In] => [In,Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSEnumerateSessionsW : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSGetListenerSecurityA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSGetListenerSecurityW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSLogoffSession : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSQueryListenerConfigA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSQueryListenerConfigW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSRegisterSessionNotificationEx : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSSendMessageA : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSSendMessageW : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSSetListenerSecurityA : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSSetListenerSecurityW : hServer : [In] => [In,Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSShutdownSystem : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSTerminateProcess : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSUnRegisterSessionNotificationEx : hServer : [In] => [Optional]
+Windows.Win32.System.RemoteDesktop.Apis.WTSVirtualChannelOpen : hServer : [In] => [Optional,Reserved]
+Windows.Win32.System.RemoteDesktop.Apis.WTSWaitSystemEvent : hServer : [In] => [Optional]
+# Fixed #964.
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BAD_LOG_PHY_VALUES added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BUFFER_TOO_SMALL added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_BUTTON_NOT_PRESSED added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_DATA_INDEX_NOT_FOUND added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_DATA_INDEX_OUT_OF_RANGE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_I8042_TRANS_UNKNOWN added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_I8242_TRANS_UNKNOWN added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INCOMPATIBLE_REPORT_ID added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INTERNAL_ERROR added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_PREPARSED_DATA added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_REPORT_LENGTH added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_INVALID_REPORT_TYPE added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_IS_VALUE_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_BUTTON_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_IMPLEMENTED added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NOT_VALUE_ARRAY added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_NULL added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_REPORT_DOES_NOT_EXIST added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_SUCCESS added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_USAGE_NOT_FOUND added
+Windows.Win32.Devices.HumanInterfaceDevice.Apis.HIDP_STATUS_VALUE_OUT_OF_RANGE added
+# Fixed #1337.
+Windows.Win32.Security.Apis.SECURITY_NT_AUTHORITY added
+# Fixed #1453.
+Windows.Win32.Graphics.Direct3D12.ID3D12GraphicsCommandList.ClearRenderTargetView : pRects : [Const,In,NativeArrayInfo(CountParamIndex=2)] => [Const,In,NativeArrayInfo(CountParamIndex=2),Optional]
+# Fixed #1465.
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK__none_ removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_ABNT_C1 removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_ABNT_C2 removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ALPHANUMERIC removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_CODEINPUT removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_DBCSCHAR removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_DETERMINESTRING removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ENTERDLGCONVERSIONMODE removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ENTERIMECONFIGMODE removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ENTERWORDREGISTERMODE removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_FLUSHSTRING removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_HIRAGANA removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_KATAKANA removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_NOCODEINPUT removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_NOROMAN removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_ROMAN removed
+Windows.Win32.UI.Input.KeyboardAndMouse.Apis.VK_DBE_SBCSCHAR removed
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK__none_ added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_ABNT_C1 added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_ABNT_C2 added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ALPHANUMERIC added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_CODEINPUT added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_DBCSCHAR added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_DETERMINESTRING added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ENTERDLGCONVERSIONMODE added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ENTERIMECONFIGMODE added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ENTERWORDREGISTERMODE added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_FLUSHSTRING added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_HIRAGANA added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_KATAKANA added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_NOCODEINPUT added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_NOROMAN added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_ROMAN added
+Windows.Win32.UI.Input.KeyboardAndMouse.VIRTUAL_KEY.VK_DBE_SBCSCHAR added
+# Fixed #1466.
+Windows.Win32.System.Wmi.IWbemClassObject.Get : plFlavor : [In,Out] => [Optional]
+Windows.Win32.System.Wmi.IWbemClassObject.Get : pType : [In,Out] => [Optional]
+# Fixed #947.
+Windows.Win32.Foundation.PBSTR added
+Windows.Win32.System.Mmc.Document.get_Location : Location...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Document.get_Name : Name...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Extension.get_Name : Name...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Extension.get_SnapinCLSID : SnapinCLSID...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Extension.get_Vendor : Vendor...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Extension.get_Version : Version...UInt16** => PBSTR
+Windows.Win32.System.Mmc.INodeProperties.GetProperty : pbstrProperty...UInt16** => PBSTR
+Windows.Win32.System.Mmc.MenuItem.get_DisplayName : DisplayName...UInt16** => PBSTR
+Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentName : LanguageIndependentName...UInt16** => PBSTR
+Windows.Win32.System.Mmc.MenuItem.get_LanguageIndependentPath : LanguageIndependentPath...UInt16** => PBSTR
+Windows.Win32.System.Mmc.MenuItem.get_Path : Path...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Node.get_Bookmark : Bookmark...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Node.get_Name : Name...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Node.get_Nodetype : Nodetype...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Node.get_Property : PropertyValue...UInt16** => PBSTR
+Windows.Win32.System.Mmc.Property.get_Name : Name...UInt16** => PBSTR
+Windows.Win32.System.Mmc.SnapIn.get_Name : Name...UInt16** => PBSTR
+Windows.Win32.System.Mmc.SnapIn.get_SnapinCLSID : SnapinCLSID...UInt16** => PBSTR
+Windows.Win32.System.Mmc.SnapIn.get_Vendor : Vendor...UInt16** => PBSTR
+Windows.Win32.System.Mmc.SnapIn.get_Version : Version...UInt16** => PBSTR
+Windows.Win32.System.Mmc.View.get_CellContents : CellContents...UInt16** => PBSTR
+Windows.Win32.System.Mmc.View.get_Memento : Memento...UInt16** => PBSTR
+Windows.Win32.System.Ole.Apis.QueryPathOfRegTypeLib : lpbstrPathName...UInt16** => PBSTR
+Windows.Win32.System.Ole.Apis.VarBstrCat : pbstrResult...UInt16** => PBSTR
+# Add usage hints for _SVGIO
+Windows.Win32.UI.Shell.IFolderView.ItemCount : uFlags...UInt32 => _SVGIO
+Windows.Win32.UI.Shell.IFolderView.Items : uFlags...UInt32 => _SVGIO
+Windows.Win32.UI.Shell.IShellView.GetItemObject : uItem...UInt32 => _SVGIO
+# Add usage hints for ShellWindowTypeConstants, ShellWindowFindWindowOptions
+Windows.Win32.UI.Shell.IBrowserService.RegisterWindow : swc...Int32 => ShellWindowTypeConstants
+Windows.Win32.UI.Shell.IShellWindows.FindWindowSW : swClass...Int32 => ShellWindowTypeConstants
+Windows.Win32.UI.Shell.IShellWindows.FindWindowSW : swfwOptions...Int32 => ShellWindowFindWindowOptions
+Windows.Win32.UI.Shell.IShellWindows.Register : swClass...Int32 => ShellWindowTypeConstants
+Windows.Win32.UI.Shell.IShellWindows.RegisterPending : swClass...Int32 => ShellWindowTypeConstants
+# Untangle window scroll/status enums and flags
+Windows.Win32.Media.DirectShow.IVideoWindow.get_WindowState : WindowState...Int32* => SHOW_WINDOW_CMD*
+Windows.Win32.System.Ole.IPropertyPage.Show : nCmdShow...UInt32 => SHOW_WINDOW_CMD
+Windows.Win32.UI.Controls.RichEdit.ITextHost.TxScrollWindowEx : fuScroll...SHOW_WINDOW_CMD => SCROLL_WINDOW_FLAGS
+Windows.Win32.UI.Shell.IShellLinkA.GetShowCmd : piShowCmd...Int32* => SHOW_WINDOW_CMD*
+Windows.Win32.UI.Shell.IShellLinkA.SetShowCmd : iShowCmd...Int32 => SHOW_WINDOW_CMD
+Windows.Win32.UI.Shell.IShellLinkW.GetShowCmd : piShowCmd...Int32* => SHOW_WINDOW_CMD*
+Windows.Win32.UI.Shell.IShellLinkW.SetShowCmd : iShowCmd...Int32 => SHOW_WINDOW_CMD
+Windows.Win32.UI.WindowsAndMessaging.Apis.ScrollWindowEx : flags...SHOW_WINDOW_CMD => SCROLL_WINDOW_FLAGS
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS added
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS.SW_ERASE added
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS.SW_INVALIDATE added
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS.SW_SCROLLCHILDREN added
+Windows.Win32.UI.WindowsAndMessaging.SCROLL_WINDOW_FLAGS.SW_SMOOTHSCROLL added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD : [Flags] => 
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_ERASE removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_INVALIDATE removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_OTHERUNZOOM removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_OTHERZOOM removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_PARENTCLOSING removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_PARENTOPENING removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SCROLLCHILDREN removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_CMD.SW_SMOOTHSCROLL removed
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_OTHERUNZOOM added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_OTHERZOOM added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_PARENTCLOSING added
+Windows.Win32.UI.WindowsAndMessaging.SHOW_WINDOW_STATUS.SW_PARENTOPENING added
+# Fixed #612.
+Windows.Win32.Storage.FileSystem.Apis.WriteFile : lpBuffer...Void* => Byte*
+Windows.Win32.Storage.FileSystem.Apis.WriteFileEx : lpBuffer...Void* => Byte*
+# Fixed #614.
+Windows.Win32.UI.WindowsAndMessaging.Apis.PrivateExtractIconsA : piconid : [NativeArrayInfo(CountParamIndex=6),Optional,Out] => [Optional,Out]
+Windows.Win32.UI.WindowsAndMessaging.Apis.PrivateExtractIconsW : piconid : [NativeArrayInfo(CountParamIndex=6),Optional,Out] => [Optional,Out]
+# Fixed #885.
+Windows.Win32.System.Rpc._NDR_SCONTEXT removed
+Windows.Win32.System.Rpc.Apis.NdrContextHandleInitialize : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextMarshall : CContext...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextMarshall2 : CContext...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextMarshallEx : CContext...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextUnmarshall : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextUnmarshall2 : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NDRSContextUnmarshallEx : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NdrServerContextMarshall : ContextHandle...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NdrServerContextNewMarshall : ContextHandle...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NdrServerContextNewUnmarshall : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.Apis.NdrServerContextUnmarshall : return...NDR_SCONTEXT_1* => NDR_SCONTEXT*
+Windows.Win32.System.Rpc.MIDL_STUB_MESSAGE.SavedContextHandles...Windows.Win32.System.Rpc.NDR_SCONTEXT_1** => Windows.Win32.System.Rpc.NDR_SCONTEXT**
+Windows.Win32.System.Rpc.NDR_SCONTEXT added
+Windows.Win32.System.Rpc.NDR_SCONTEXT_1 removed
+Windows.Win32.System.Rpc.SCONTEXT_QUEUE.ArrayOfObjects...Windows.Win32.System.Rpc.NDR_SCONTEXT_1** => Windows.Win32.System.Rpc.NDR_SCONTEXT**

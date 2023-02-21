@@ -11,6 +11,9 @@ namespace Windows.Win32.Security
         
         [NativeTypeName("BOOLEAN")]
         public const byte SECURITY_STATIC_TRACKING = 0;
+
+        [Constant("{0, 0, 0, 0, 0, 5}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_NT_AUTHORITY;
     }
 
     // We need to define this manually because of how it's defined with duplicate typedefs
