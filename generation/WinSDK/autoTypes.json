@@ -374,6 +374,12 @@
     "InvalidHandleValues": [ 0 ]
   },
   {
+    "Namespace": "Windows.Win32.System.Threading",
+    "Name": "PTP_CALLBACK_INSTANCE",
+    "ValueType": "IntPtr",
+    "InvalidHandleValues": [ 0 ]
+  },
+  {
     "Name": "PTP_POOL",
     "ValueType": "IntPtr",
     "CloseApi": "CloseThreadpool"

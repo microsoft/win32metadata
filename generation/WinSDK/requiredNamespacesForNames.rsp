@@ -1908,7 +1908,6 @@ TOKEN_TYPE=Windows.Win32.Security
 TOKEN_USER_CLAIMS=Windows.Win32.Security
 TOKEN_USER=Windows.Win32.Security
 TP_CALLBACK_ENVIRON_V3=Windows.Win32.System.Threading
-TP_CALLBACK_INSTANCE=Windows.Win32.System.Threading
 TP_CALLBACK_PRIORITY=Windows.Win32.System.Threading
 TP_POOL_STACK_INFORMATION=Windows.Win32.System.Threading
 TRANSACTION_OUTCOME=Windows.Win32.Storage.FileSystem
