@@ -6,7 +6,6 @@
 #include "windows.fixed.h"
 #include <sdkddkver.h>
 
-#include <Mshtml.h>
 #include <docobjectservice.h>
 #include <downloadmgr.h>
 #include <exdispid.h>
@@ -23,12 +22,7 @@
 #include <iextag.h>
 #include <inetreg.h>
 #include <inetsdk.h>
-#include <mshtmcid.h>
 #include <idispids.h>
-#include <mshtmdid.h>
-#include <mshtmhst.h>
-#include <mshtmlc.h>
-#include <mshtmldiagnostics.h>
 #include <msiehost.h>
 //#include <msoav.h> -- doesn't compile - no MSOAPI_ defined
 #include <openservice.h>

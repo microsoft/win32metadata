@@ -1,0 +1,733 @@
+# Fixed #1476.
+Windows.Win32.Web.InternetExplorer.ADDURL_FLAG added
+Windows.Win32.Web.InternetExplorer.ADDURL_FLAG.ADDURL_ADDTOCACHE added
+Windows.Win32.Web.InternetExplorer.ADDURL_FLAG.ADDURL_ADDTOHISTORYANDCACHE added
+Windows.Win32.Web.InternetExplorer.ADDURL_FLAG.ADDURL_FIRST added
+Windows.Win32.Web.InternetExplorer.ADDURL_FLAG.ADDURL_Max added
+Windows.Win32.Web.InternetExplorer.ExtensionValidationContexts added
+Windows.Win32.Web.InternetExplorer.ExtensionValidationContexts.ExtensionValidationContextDynamic added
+Windows.Win32.Web.InternetExplorer.ExtensionValidationContexts.ExtensionValidationContextNone added
+Windows.Win32.Web.InternetExplorer.ExtensionValidationContexts.ExtensionValidationContextParsed added
+Windows.Win32.Web.InternetExplorer.ExtensionValidationResults added
+Windows.Win32.Web.InternetExplorer.ExtensionValidationResults.ExtensionValidationResultArrestPageLoad added
+Windows.Win32.Web.InternetExplorer.ExtensionValidationResults.ExtensionValidationResultDoNotInstantiate added
+Windows.Win32.Web.InternetExplorer.ExtensionValidationResults.ExtensionValidationResultNone added
+Windows.Win32.Web.InternetExplorer.FINDFRAME_FLAGS added
+Windows.Win32.Web.InternetExplorer.FINDFRAME_FLAGS.FINDFRAME_INTERNAL added
+Windows.Win32.Web.InternetExplorer.FINDFRAME_FLAGS.FINDFRAME_JUSTTESTEXISTENCE added
+Windows.Win32.Web.InternetExplorer.FINDFRAME_FLAGS.FINDFRAME_NONE added
+Windows.Win32.Web.InternetExplorer.FRAMEOPTIONS_FLAGS added
+Windows.Win32.Web.InternetExplorer.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_BROWSERBAND added
+Windows.Win32.Web.InternetExplorer.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_DESKTOP added
+Windows.Win32.Web.InternetExplorer.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_NO3DBORDER added
+Windows.Win32.Web.InternetExplorer.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_NORESIZE added
+Windows.Win32.Web.InternetExplorer.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_SCROLL_AUTO added
+Windows.Win32.Web.InternetExplorer.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_SCROLL_NO added
+Windows.Win32.Web.InternetExplorer.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_SCROLL_YES added
+Windows.Win32.Web.InternetExplorer.IELAUNCHOPTION_FLAGS added
+Windows.Win32.Web.InternetExplorer.IELAUNCHOPTION_FLAGS.IELAUNCHOPTION_FORCE_COMPAT added
+Windows.Win32.Web.InternetExplorer.IELAUNCHOPTION_FLAGS.IELAUNCHOPTION_FORCE_EDGE added
+Windows.Win32.Web.InternetExplorer.IELAUNCHOPTION_FLAGS.IELAUNCHOPTION_LOCK_ENGINE added
+Windows.Win32.Web.InternetExplorer.IELAUNCHOPTION_FLAGS.IELAUNCHOPTION_SCRIPTDEBUG added
+Windows.Win32.Web.InternetExplorer.INTERNETEXPLORERCONFIGURATION added
+Windows.Win32.Web.InternetExplorer.INTERNETEXPLORERCONFIGURATION.INTERNETEXPLORERCONFIGURATION_HOST added
+Windows.Win32.Web.InternetExplorer.INTERNETEXPLORERCONFIGURATION.INTERNETEXPLORERCONFIGURATION_WEB_DRIVER added
+Windows.Win32.Web.InternetExplorer.INTERNETEXPLORERCONFIGURATION.INTERNETEXPLORERCONFIGURATION_WEB_DRIVER_EDGE added
+Windows.Win32.Web.InternetExplorer.MEDIA_ACTIVITY_NOTIFY_TYPE added
+Windows.Win32.Web.InternetExplorer.MEDIA_ACTIVITY_NOTIFY_TYPE.MediaCasting added
+Windows.Win32.Web.InternetExplorer.MEDIA_ACTIVITY_NOTIFY_TYPE.MediaPlayback added
+Windows.Win32.Web.InternetExplorer.MEDIA_ACTIVITY_NOTIFY_TYPE.MediaRecording added
+Windows.Win32.Web.InternetExplorer.NAVIGATEFRAME_FLAGS added
+Windows.Win32.Web.InternetExplorer.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_AUTH_FAIL_CACHE_OK added
+Windows.Win32.Web.InternetExplorer.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_NO_DOC_CACHE added
+Windows.Win32.Web.InternetExplorer.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_NO_IMAGE_CACHE added
+Windows.Win32.Web.InternetExplorer.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_POST added
+Windows.Win32.Web.InternetExplorer.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_REALLY_SENDING_FROM_FORM added
+Windows.Win32.Web.InternetExplorer.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_RECORD added
+Windows.Win32.Web.InternetExplorer.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_SENDING_FROM_FORM added
+Windows.Win32.Web.InternetExplorer.OpenServiceActivityContentType added
+Windows.Win32.Web.InternetExplorer.OpenServiceActivityContentType.ActivityContentCount added
+Windows.Win32.Web.InternetExplorer.OpenServiceActivityContentType.ActivityContentDocument added
+Windows.Win32.Web.InternetExplorer.OpenServiceActivityContentType.ActivityContentLink added
+Windows.Win32.Web.InternetExplorer.OpenServiceActivityContentType.ActivityContentNone added
+Windows.Win32.Web.InternetExplorer.OpenServiceActivityContentType.ActivityContentSelection added
+Windows.Win32.Web.InternetExplorer.OpenServiceErrors added
+Windows.Win32.Web.InternetExplorer.OpenServiceErrors.OS_E_CANCELLED added
+Windows.Win32.Web.InternetExplorer.OpenServiceErrors.OS_E_GPDISABLED added
+Windows.Win32.Web.InternetExplorer.OpenServiceErrors.OS_E_NOTFOUND added
+Windows.Win32.Web.InternetExplorer.OpenServiceErrors.OS_E_NOTSUPPORTED added
+Windows.Win32.Web.InternetExplorer.SCROLLABLECONTEXTMENU_PLACEMENT added
+Windows.Win32.Web.InternetExplorer.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_BOTTOM added
+Windows.Win32.Web.InternetExplorer.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_FULL added
+Windows.Win32.Web.InternetExplorer.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_LEFT added
+Windows.Win32.Web.InternetExplorer.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_RIGHT added
+Windows.Win32.Web.InternetExplorer.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_TOP added
+Windows.Win32.Web.MsHtml.ADDURL_FLAG removed
+Windows.Win32.Web.MsHtml.ADDURL_FLAG.ADDURL_ADDTOCACHE removed
+Windows.Win32.Web.MsHtml.ADDURL_FLAG.ADDURL_ADDTOHISTORYANDCACHE removed
+Windows.Win32.Web.MsHtml.ADDURL_FLAG.ADDURL_FIRST removed
+Windows.Win32.Web.MsHtml.ADDURL_FLAG.ADDURL_Max removed
+Windows.Win32.Web.MsHtml.AnchorClick => Windows.Win32.Web.InternetExplorer.AnchorClick
+Windows.Win32.Web.MsHtml.Apis.ADDRESSBAND => Windows.Win32.Web.InternetExplorer.Apis.ADDRESSBAND
+Windows.Win32.Web.MsHtml.Apis.CATID_MSOfficeAntiVirus => Windows.Win32.Web.InternetExplorer.Apis.CATID_MSOfficeAntiVirus
+Windows.Win32.Web.MsHtml.Apis.COLOR_NO_TRANSPARENT => Windows.Win32.Web.InternetExplorer.Apis.COLOR_NO_TRANSPARENT
+Windows.Win32.Web.MsHtml.Apis.ComputeInvCMAP => Windows.Win32.Web.InternetExplorer.Apis.ComputeInvCMAP
+Windows.Win32.Web.MsHtml.Apis.CreateDDrawSurfaceOnDIB => Windows.Win32.Web.InternetExplorer.Apis.CreateDDrawSurfaceOnDIB
+Windows.Win32.Web.MsHtml.Apis.CreateMIMEMap => Windows.Win32.Web.InternetExplorer.Apis.CreateMIMEMap
+Windows.Win32.Web.MsHtml.Apis.DecodeImage => Windows.Win32.Web.InternetExplorer.Apis.DecodeImage
+Windows.Win32.Web.MsHtml.Apis.DecodeImageEx => Windows.Win32.Web.InternetExplorer.Apis.DecodeImageEx
+Windows.Win32.Web.MsHtml.Apis.DISPID_ACTIVEXFILTERINGENABLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ACTIVEXFILTERINGENABLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDCHANNEL => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDCHANNEL
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDDESKTOPCOMPONENT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDDESKTOPCOMPONENT
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDFAVORITE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDFAVORITE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDSEARCHPROVIDER => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDSEARCHPROVIDER
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDSERVICE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDSERVICE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDSITEMODE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDSITEMODE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDTHUMBNAILBUTTONS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDTHUMBNAILBUTTONS
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDTOFAVORITESBAR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDTOFAVORITESBAR
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADDTRACKINGPROTECTIONLIST => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADDTRACKINGPROTECTIONLIST
+Windows.Win32.Web.MsHtml.Apis.DISPID_ADVANCEERROR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ADVANCEERROR
+Windows.Win32.Web.MsHtml.Apis.DISPID_AMBIENT_OFFLINEIFNOTCONNECTED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_AMBIENT_OFFLINEIFNOTCONNECTED
+Windows.Win32.Web.MsHtml.Apis.DISPID_AMBIENT_SILENT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_AMBIENT_SILENT
+Windows.Win32.Web.MsHtml.Apis.DISPID_AUTOCOMPLETEATTACH => Windows.Win32.Web.InternetExplorer.Apis.DISPID_AUTOCOMPLETEATTACH
+Windows.Win32.Web.MsHtml.Apis.DISPID_AUTOCOMPLETESAVEFORM => Windows.Win32.Web.InternetExplorer.Apis.DISPID_AUTOCOMPLETESAVEFORM
+Windows.Win32.Web.MsHtml.Apis.DISPID_AUTOSCAN => Windows.Win32.Web.InternetExplorer.Apis.DISPID_AUTOSCAN
+Windows.Win32.Web.MsHtml.Apis.DISPID_BEFORENAVIGATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_BEFORENAVIGATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_BEFORENAVIGATE2 => Windows.Win32.Web.InternetExplorer.Apis.DISPID_BEFORENAVIGATE2
+Windows.Win32.Web.MsHtml.Apis.DISPID_BEFORESCRIPTEXECUTE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_BEFORESCRIPTEXECUTE
+Windows.Win32.Web.MsHtml.Apis.DISPID_BRANDIMAGEURI => Windows.Win32.Web.InternetExplorer.Apis.DISPID_BRANDIMAGEURI
+Windows.Win32.Web.MsHtml.Apis.DISPID_BUILDNEWTABPAGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_BUILDNEWTABPAGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_CANADVANCEERROR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CANADVANCEERROR
+Windows.Win32.Web.MsHtml.Apis.DISPID_CANRETREATERROR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CANRETREATERROR
+Windows.Win32.Web.MsHtml.Apis.DISPID_CHANGEDEFAULTBROWSER => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CHANGEDEFAULTBROWSER
+Windows.Win32.Web.MsHtml.Apis.DISPID_CLEARNOTIFICATION => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CLEARNOTIFICATION
+Windows.Win32.Web.MsHtml.Apis.DISPID_CLEARSITEMODEICONOVERLAY => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CLEARSITEMODEICONOVERLAY
+Windows.Win32.Web.MsHtml.Apis.DISPID_CLIENTTOHOSTWINDOW => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CLIENTTOHOSTWINDOW
+Windows.Win32.Web.MsHtml.Apis.DISPID_COMMANDSTATECHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_COMMANDSTATECHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_CONTENTDISCOVERYRESET => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CONTENTDISCOVERYRESET
+Windows.Win32.Web.MsHtml.Apis.DISPID_COUNTVIEWTYPES => Windows.Win32.Web.InternetExplorer.Apis.DISPID_COUNTVIEWTYPES
+Windows.Win32.Web.MsHtml.Apis.DISPID_CREATESUBSCRIPTION => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CREATESUBSCRIPTION
+Windows.Win32.Web.MsHtml.Apis.DISPID_CUSTOMIZECLEARTYPE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CUSTOMIZECLEARTYPE
+Windows.Win32.Web.MsHtml.Apis.DISPID_CUSTOMIZESETTINGS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_CUSTOMIZESETTINGS
+Windows.Win32.Web.MsHtml.Apis.DISPID_DEFAULTSEARCHPROVIDER => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DEFAULTSEARCHPROVIDER
+Windows.Win32.Web.MsHtml.Apis.DISPID_DELETESUBSCRIPTION => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DELETESUBSCRIPTION
+Windows.Win32.Web.MsHtml.Apis.DISPID_DEPTH => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DEPTH
+Windows.Win32.Web.MsHtml.Apis.DISPID_DIAGNOSECONNECTION => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DIAGNOSECONNECTION
+Windows.Win32.Web.MsHtml.Apis.DISPID_DIAGNOSECONNECTIONUILESS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DIAGNOSECONNECTIONUILESS
+Windows.Win32.Web.MsHtml.Apis.DISPID_DOCUMENTCOMPLETE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DOCUMENTCOMPLETE
+Windows.Win32.Web.MsHtml.Apis.DISPID_DOUBLECLICK => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DOUBLECLICK
+Windows.Win32.Web.MsHtml.Apis.DISPID_DOWNLOADBEGIN => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DOWNLOADBEGIN
+Windows.Win32.Web.MsHtml.Apis.DISPID_DOWNLOADCOMPLETE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_DOWNLOADCOMPLETE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ENABLENOTIFICATIONQUEUE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ENABLENOTIFICATIONQUEUE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ENABLENOTIFICATIONQUEUELARGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ENABLENOTIFICATIONQUEUELARGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ENABLENOTIFICATIONQUEUESQUARE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ENABLENOTIFICATIONQUEUESQUARE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ENABLENOTIFICATIONQUEUEWIDE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ENABLENOTIFICATIONQUEUEWIDE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ENABLESUGGESTEDSITES => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ENABLESUGGESTEDSITES
+Windows.Win32.Web.MsHtml.Apis.DISPID_ENUMOPTIONS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ENUMOPTIONS
+Windows.Win32.Web.MsHtml.Apis.DISPID_EXPAND => Windows.Win32.Web.InternetExplorer.Apis.DISPID_EXPAND
+Windows.Win32.Web.MsHtml.Apis.DISPID_EXPORT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_EXPORT
+Windows.Win32.Web.MsHtml.Apis.DISPID_FAVSELECTIONCHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_FAVSELECTIONCHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_FILEDOWNLOAD => Windows.Win32.Web.InternetExplorer.Apis.DISPID_FILEDOWNLOAD
+Windows.Win32.Web.MsHtml.Apis.DISPID_FLAGS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_FLAGS
+Windows.Win32.Web.MsHtml.Apis.DISPID_FRAMEBEFORENAVIGATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_FRAMEBEFORENAVIGATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_FRAMENAVIGATECOMPLETE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_FRAMENAVIGATECOMPLETE
+Windows.Win32.Web.MsHtml.Apis.DISPID_FRAMENEWWINDOW => Windows.Win32.Web.InternetExplorer.Apis.DISPID_FRAMENEWWINDOW
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETALWAYSSHOWLOCKSTATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETALWAYSSHOWLOCKSTATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETCVLISTDATA => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETCVLISTDATA
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETCVLISTLOCALDATA => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETCVLISTLOCALDATA
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETDETAILSSTATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETDETAILSSTATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETEMIELISTDATA => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETEMIELISTDATA
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETEMIELISTLOCALDATA => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETEMIELISTLOCALDATA
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETERRORCHAR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETERRORCHAR
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETERRORCODE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETERRORCODE
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETERRORLINE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETERRORLINE
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETERRORMSG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETERRORMSG
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETERRORURL => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETERRORURL
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETEXPERIMENTALFLAG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETEXPERIMENTALFLAG
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETEXPERIMENTALVALUE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETEXPERIMENTALVALUE
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETNEEDHVSIAUTOLAUNCHFLAG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETNEEDHVSIAUTOLAUNCHFLAG
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETNEEDIEAUTOLAUNCHFLAG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETNEEDIEAUTOLAUNCHFLAG
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETOSSKU => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETOSSKU
+Windows.Win32.Web.MsHtml.Apis.DISPID_GETPERERRSTATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_GETPERERRSTATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_HASNEEDHVSIAUTOLAUNCHFLAG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_HASNEEDHVSIAUTOLAUNCHFLAG
+Windows.Win32.Web.MsHtml.Apis.DISPID_HASNEEDIEAUTOLAUNCHFLAG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_HASNEEDIEAUTOLAUNCHFLAG
+Windows.Win32.Web.MsHtml.Apis.DISPID_IMPORT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_IMPORT
+Windows.Win32.Web.MsHtml.Apis.DISPID_IMPORTEXPORTFAVORITES => Windows.Win32.Web.InternetExplorer.Apis.DISPID_IMPORTEXPORTFAVORITES
+Windows.Win32.Web.MsHtml.Apis.DISPID_INITIALIZED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_INITIALIZED
+Windows.Win32.Web.MsHtml.Apis.DISPID_INPRIVATEFILTERINGENABLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_INPRIVATEFILTERINGENABLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_INVOKECONTEXTMENU => Windows.Win32.Web.InternetExplorer.Apis.DISPID_INVOKECONTEXTMENU
+Windows.Win32.Web.MsHtml.Apis.DISPID_ISMETAREFERRERAVAILABLE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ISMETAREFERRERAVAILABLE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ISSEARCHMIGRATED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ISSEARCHMIGRATED
+Windows.Win32.Web.MsHtml.Apis.DISPID_ISSEARCHPROVIDERINSTALLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ISSEARCHPROVIDERINSTALLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_ISSERVICEINSTALLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ISSERVICEINSTALLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_ISSITEMODE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ISSITEMODE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ISSITEMODEFIRSTRUN => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ISSITEMODEFIRSTRUN
+Windows.Win32.Web.MsHtml.Apis.DISPID_ISSUBSCRIBED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ISSUBSCRIBED
+Windows.Win32.Web.MsHtml.Apis.DISPID_LAUNCHIE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_LAUNCHIE
+Windows.Win32.Web.MsHtml.Apis.DISPID_LAUNCHINHVSI => Windows.Win32.Web.InternetExplorer.Apis.DISPID_LAUNCHINHVSI
+Windows.Win32.Web.MsHtml.Apis.DISPID_LAUNCHINTERNETOPTIONS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_LAUNCHINTERNETOPTIONS
+Windows.Win32.Web.MsHtml.Apis.DISPID_LAUNCHNETWORKCLIENTHELP => Windows.Win32.Web.InternetExplorer.Apis.DISPID_LAUNCHNETWORKCLIENTHELP
+Windows.Win32.Web.MsHtml.Apis.DISPID_MODE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_MODE
+Windows.Win32.Web.MsHtml.Apis.DISPID_MOVESELECTIONDOWN => Windows.Win32.Web.InternetExplorer.Apis.DISPID_MOVESELECTIONDOWN
+Windows.Win32.Web.MsHtml.Apis.DISPID_MOVESELECTIONTO => Windows.Win32.Web.InternetExplorer.Apis.DISPID_MOVESELECTIONTO
+Windows.Win32.Web.MsHtml.Apis.DISPID_MOVESELECTIONUP => Windows.Win32.Web.InternetExplorer.Apis.DISPID_MOVESELECTIONUP
+Windows.Win32.Web.MsHtml.Apis.DISPID_NAVIGATEANDFIND => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NAVIGATEANDFIND
+Windows.Win32.Web.MsHtml.Apis.DISPID_NAVIGATECOMPLETE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NAVIGATECOMPLETE
+Windows.Win32.Web.MsHtml.Apis.DISPID_NAVIGATECOMPLETE2 => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NAVIGATECOMPLETE2
+Windows.Win32.Web.MsHtml.Apis.DISPID_NAVIGATEERROR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NAVIGATEERROR
+Windows.Win32.Web.MsHtml.Apis.DISPID_NAVIGATETOSUGGESTEDSITES => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NAVIGATETOSUGGESTEDSITES
+Windows.Win32.Web.MsHtml.Apis.DISPID_NEWFOLDER => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NEWFOLDER
+Windows.Win32.Web.MsHtml.Apis.DISPID_NEWPROCESS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NEWPROCESS
+Windows.Win32.Web.MsHtml.Apis.DISPID_NEWWINDOW => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NEWWINDOW
+Windows.Win32.Web.MsHtml.Apis.DISPID_NEWWINDOW2 => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NEWWINDOW2
+Windows.Win32.Web.MsHtml.Apis.DISPID_NEWWINDOW3 => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NEWWINDOW3
+Windows.Win32.Web.MsHtml.Apis.DISPID_NSCOLUMNS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_NSCOLUMNS
+Windows.Win32.Web.MsHtml.Apis.DISPID_ONADDRESSBAR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ONADDRESSBAR
+Windows.Win32.Web.MsHtml.Apis.DISPID_ONFULLSCREEN => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ONFULLSCREEN
+Windows.Win32.Web.MsHtml.Apis.DISPID_ONMENUBAR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ONMENUBAR
+Windows.Win32.Web.MsHtml.Apis.DISPID_ONQUIT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ONQUIT
+Windows.Win32.Web.MsHtml.Apis.DISPID_ONSTATUSBAR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ONSTATUSBAR
+Windows.Win32.Web.MsHtml.Apis.DISPID_ONTHEATERMODE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ONTHEATERMODE
+Windows.Win32.Web.MsHtml.Apis.DISPID_ONTOOLBAR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ONTOOLBAR
+Windows.Win32.Web.MsHtml.Apis.DISPID_ONVISIBLE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ONVISIBLE
+Windows.Win32.Web.MsHtml.Apis.DISPID_OPENFAVORITESPANE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_OPENFAVORITESPANE
+Windows.Win32.Web.MsHtml.Apis.DISPID_OPENFAVORITESSETTINGS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_OPENFAVORITESSETTINGS
+Windows.Win32.Web.MsHtml.Apis.DISPID_PHISHINGENABLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_PHISHINGENABLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_PINNEDSITESTATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_PINNEDSITESTATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_PRINTTEMPLATEINSTANTIATION => Windows.Win32.Web.InternetExplorer.Apis.DISPID_PRINTTEMPLATEINSTANTIATION
+Windows.Win32.Web.MsHtml.Apis.DISPID_PRINTTEMPLATETEARDOWN => Windows.Win32.Web.InternetExplorer.Apis.DISPID_PRINTTEMPLATETEARDOWN
+Windows.Win32.Web.MsHtml.Apis.DISPID_PRIVACYIMPACTEDSTATECHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_PRIVACYIMPACTEDSTATECHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_PROGRESSCHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_PROGRESSCHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_PROPERTYCHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_PROPERTYCHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_PROVISIONNETWORKS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_PROVISIONNETWORKS
+Windows.Win32.Web.MsHtml.Apis.DISPID_QUIT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_QUIT
+Windows.Win32.Web.MsHtml.Apis.DISPID_REDIRECTXDOMAINBLOCKED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_REDIRECTXDOMAINBLOCKED
+Windows.Win32.Web.MsHtml.Apis.DISPID_REFRESHOFFLINEDESKTOP => Windows.Win32.Web.InternetExplorer.Apis.DISPID_REFRESHOFFLINEDESKTOP
+Windows.Win32.Web.MsHtml.Apis.DISPID_REMOVESCHEDULEDTILENOTIFICATION => Windows.Win32.Web.InternetExplorer.Apis.DISPID_REMOVESCHEDULEDTILENOTIFICATION
+Windows.Win32.Web.MsHtml.Apis.DISPID_REPORTSAFEURL => Windows.Win32.Web.InternetExplorer.Apis.DISPID_REPORTSAFEURL
+Windows.Win32.Web.MsHtml.Apis.DISPID_RESETEXPERIMENTALFLAGS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_RESETEXPERIMENTALFLAGS
+Windows.Win32.Web.MsHtml.Apis.DISPID_RESETFIRSTBOOTMODE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_RESETFIRSTBOOTMODE
+Windows.Win32.Web.MsHtml.Apis.DISPID_RESETSAFEMODE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_RESETSAFEMODE
+Windows.Win32.Web.MsHtml.Apis.DISPID_RESETSORT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_RESETSORT
+Windows.Win32.Web.MsHtml.Apis.DISPID_RETREATERROR => Windows.Win32.Web.InternetExplorer.Apis.DISPID_RETREATERROR
+Windows.Win32.Web.MsHtml.Apis.DISPID_ROOT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_ROOT
+Windows.Win32.Web.MsHtml.Apis.DISPID_RUNONCEHASSHOWN => Windows.Win32.Web.InternetExplorer.Apis.DISPID_RUNONCEHASSHOWN
+Windows.Win32.Web.MsHtml.Apis.DISPID_RUNONCEREQUIREDSETTINGSCOMPLETE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_RUNONCEREQUIREDSETTINGSCOMPLETE
+Windows.Win32.Web.MsHtml.Apis.DISPID_RUNONCESHOWN => Windows.Win32.Web.InternetExplorer.Apis.DISPID_RUNONCESHOWN
+Windows.Win32.Web.MsHtml.Apis.DISPID_SCHEDULEDTILENOTIFICATION => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SCHEDULEDTILENOTIFICATION
+Windows.Win32.Web.MsHtml.Apis.DISPID_SEARCHGUIDEURL => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SEARCHGUIDEURL
+Windows.Win32.Web.MsHtml.Apis.DISPID_SELECTEDITEM => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SELECTEDITEM
+Windows.Win32.Web.MsHtml.Apis.DISPID_SELECTEDITEMS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SELECTEDITEMS
+Windows.Win32.Web.MsHtml.Apis.DISPID_SELECTIONCHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SELECTIONCHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETACTIVITIESVISIBLE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETACTIVITIESVISIBLE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETDETAILSSTATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETDETAILSSTATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETEXPERIMENTALFLAG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETEXPERIMENTALFLAG
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETEXPERIMENTALVALUE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETEXPERIMENTALVALUE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETMSDEFAULTS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETMSDEFAULTS
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETNEEDHVSIAUTOLAUNCHFLAG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETNEEDHVSIAUTOLAUNCHFLAG
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETNEEDIEAUTOLAUNCHFLAG => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETNEEDIEAUTOLAUNCHFLAG
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETPERERRSTATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETPERERRSTATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETPHISHINGFILTERSTATUS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETPHISHINGFILTERSTATUS
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETRECENTLYCLOSEDVISIBLE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETRECENTLYCLOSEDVISIBLE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETROOT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETROOT
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETSECURELOCKICON => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETSECURELOCKICON
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETSITEMODEICONOVERLAY => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETSITEMODEICONOVERLAY
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETSITEMODEPROPERTIES => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETSITEMODEPROPERTIES
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETTHUMBNAILBUTTONS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETTHUMBNAILBUTTONS
+Windows.Win32.Web.MsHtml.Apis.DISPID_SETVIEWTYPE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SETVIEWTYPE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SHELLUIHELPERLAST => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SHELLUIHELPERLAST
+Windows.Win32.Web.MsHtml.Apis.DISPID_SHOWBROWSERUI => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SHOWBROWSERUI
+Windows.Win32.Web.MsHtml.Apis.DISPID_SHOWINPRIVATEHELP => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SHOWINPRIVATEHELP
+Windows.Win32.Web.MsHtml.Apis.DISPID_SHOWTABSHELP => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SHOWTABSHELP
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODEACTIVATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODEACTIVATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODEADDBUTTONSTYLE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODEADDBUTTONSTYLE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODEADDJUMPLISTITEM => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODEADDJUMPLISTITEM
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODECLEARBADGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODECLEARBADGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODECLEARJUMPLIST => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODECLEARJUMPLIST
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODECREATEJUMPLIST => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODECREATEJUMPLIST
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODEREFRESHBADGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODEREFRESHBADGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODESHOWBUTTONSTYLE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODESHOWBUTTONSTYLE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SITEMODESHOWJUMPLIST => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SITEMODESHOWJUMPLIST
+Windows.Win32.Web.MsHtml.Apis.DISPID_SKIPRUNONCE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SKIPRUNONCE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SKIPTABSWELCOME => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SKIPTABSWELCOME
+Windows.Win32.Web.MsHtml.Apis.DISPID_SQMENABLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SQMENABLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_STARTBADGEUPDATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_STARTBADGEUPDATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_STARTPERIODICUPDATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_STARTPERIODICUPDATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_STARTPERIODICUPDATEBATCH => Windows.Win32.Web.InternetExplorer.Apis.DISPID_STARTPERIODICUPDATEBATCH
+Windows.Win32.Web.MsHtml.Apis.DISPID_STATUSTEXTCHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_STATUSTEXTCHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_STOPBADGEUPDATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_STOPBADGEUPDATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_STOPPERIODICUPDATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_STOPPERIODICUPDATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_SUBSCRIPTIONSENABLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SUBSCRIPTIONSENABLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_SUGGESTEDSITESENABLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SUGGESTEDSITESENABLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_SYNCHRONIZE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_SYNCHRONIZE
+Windows.Win32.Web.MsHtml.Apis.DISPID_THIRDPARTYURLBLOCKED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_THIRDPARTYURLBLOCKED
+Windows.Win32.Web.MsHtml.Apis.DISPID_TITLECHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_TITLECHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_TITLEICONCHANGE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_TITLEICONCHANGE
+Windows.Win32.Web.MsHtml.Apis.DISPID_TRACKINGPROTECTIONENABLED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_TRACKINGPROTECTIONENABLED
+Windows.Win32.Web.MsHtml.Apis.DISPID_TVFLAGS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_TVFLAGS
+Windows.Win32.Web.MsHtml.Apis.DISPID_UNSELECTALL => Windows.Win32.Web.InternetExplorer.Apis.DISPID_UNSELECTALL
+Windows.Win32.Web.MsHtml.Apis.DISPID_UPDATEPAGESTATUS => Windows.Win32.Web.InternetExplorer.Apis.DISPID_UPDATEPAGESTATUS
+Windows.Win32.Web.MsHtml.Apis.DISPID_UPDATETHUMBNAILBUTTON => Windows.Win32.Web.InternetExplorer.Apis.DISPID_UPDATETHUMBNAILBUTTON
+Windows.Win32.Web.MsHtml.Apis.DISPID_VIEWUPDATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_VIEWUPDATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_WEBWORKERFINISHED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WEBWORKERFINISHED
+Windows.Win32.Web.MsHtml.Apis.DISPID_WEBWORKERSTARTED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WEBWORKERSTARTED
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWACTIVATE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWACTIVATE
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWCLOSING => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWCLOSING
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWMOVE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWMOVE
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWREGISTERED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWREGISTERED
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWRESIZE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWRESIZE
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWREVOKED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWREVOKED
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWSETHEIGHT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWSETHEIGHT
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWSETLEFT => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWSETLEFT
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWSETRESIZABLE => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWSETRESIZABLE
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWSETTOP => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWSETTOP
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWSETWIDTH => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWSETWIDTH
+Windows.Win32.Web.MsHtml.Apis.DISPID_WINDOWSTATECHANGED => Windows.Win32.Web.InternetExplorer.Apis.DISPID_WINDOWSTATECHANGED
+Windows.Win32.Web.MsHtml.Apis.DitherTo8 => Windows.Win32.Web.InternetExplorer.Apis.DitherTo8
+Windows.Win32.Web.MsHtml.Apis.E_SURFACE_DISCARDED => Windows.Win32.Web.InternetExplorer.Apis.E_SURFACE_DISCARDED
+Windows.Win32.Web.MsHtml.Apis.E_SURFACE_NODC => Windows.Win32.Web.InternetExplorer.Apis.E_SURFACE_NODC
+Windows.Win32.Web.MsHtml.Apis.E_SURFACE_NOSURFACE => Windows.Win32.Web.InternetExplorer.Apis.E_SURFACE_NOSURFACE
+Windows.Win32.Web.MsHtml.Apis.E_SURFACE_NOTMYDC => Windows.Win32.Web.InternetExplorer.Apis.E_SURFACE_NOTMYDC
+Windows.Win32.Web.MsHtml.Apis.E_SURFACE_NOTMYPOINTER => Windows.Win32.Web.InternetExplorer.Apis.E_SURFACE_NOTMYPOINTER
+Windows.Win32.Web.MsHtml.Apis.E_SURFACE_UNKNOWN_FORMAT => Windows.Win32.Web.InternetExplorer.Apis.E_SURFACE_UNKNOWN_FORMAT
+Windows.Win32.Web.MsHtml.Apis.GetMaxMIMEIDBytes => Windows.Win32.Web.InternetExplorer.Apis.GetMaxMIMEIDBytes
+Windows.Win32.Web.MsHtml.Apis.IdentifyMIMEType => Windows.Win32.Web.InternetExplorer.Apis.IdentifyMIMEType
+Windows.Win32.Web.MsHtml.Apis.IE_USE_OE_MAIL_HKEY => Windows.Win32.Web.InternetExplorer.Apis.IE_USE_OE_MAIL_HKEY
+Windows.Win32.Web.MsHtml.Apis.IE_USE_OE_MAIL_KEY => Windows.Win32.Web.InternetExplorer.Apis.IE_USE_OE_MAIL_KEY
+Windows.Win32.Web.MsHtml.Apis.IE_USE_OE_MAIL_VALUE => Windows.Win32.Web.InternetExplorer.Apis.IE_USE_OE_MAIL_VALUE
+Windows.Win32.Web.MsHtml.Apis.IE_USE_OE_NEWS_HKEY => Windows.Win32.Web.InternetExplorer.Apis.IE_USE_OE_NEWS_HKEY
+Windows.Win32.Web.MsHtml.Apis.IE_USE_OE_NEWS_KEY => Windows.Win32.Web.InternetExplorer.Apis.IE_USE_OE_NEWS_KEY
+Windows.Win32.Web.MsHtml.Apis.IE_USE_OE_NEWS_VALUE => Windows.Win32.Web.InternetExplorer.Apis.IE_USE_OE_NEWS_VALUE
+Windows.Win32.Web.MsHtml.Apis.IE_USE_OE_PRESENT_HKEY => Windows.Win32.Web.InternetExplorer.Apis.IE_USE_OE_PRESENT_HKEY
+Windows.Win32.Web.MsHtml.Apis.IE_USE_OE_PRESENT_KEY => Windows.Win32.Web.InternetExplorer.Apis.IE_USE_OE_PRESENT_KEY
+Windows.Win32.Web.MsHtml.Apis.IEAssociateThreadWithTab => Windows.Win32.Web.InternetExplorer.Apis.IEAssociateThreadWithTab
+Windows.Win32.Web.MsHtml.Apis.IECancelSaveFile => Windows.Win32.Web.InternetExplorer.Apis.IECancelSaveFile
+Windows.Win32.Web.MsHtml.Apis.IECMDID_ARG_CLEAR_FORMS_ALL => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_ARG_CLEAR_FORMS_ALL
+Windows.Win32.Web.MsHtml.Apis.IECMDID_ARG_CLEAR_FORMS_ALL_BUT_PASSWORDS => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_ARG_CLEAR_FORMS_ALL_BUT_PASSWORDS
+Windows.Win32.Web.MsHtml.Apis.IECMDID_ARG_CLEAR_FORMS_PASSWORDS_ONLY => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_ARG_CLEAR_FORMS_PASSWORDS_ONLY
+Windows.Win32.Web.MsHtml.Apis.IECMDID_BEFORENAVIGATE_DOEXTERNALBROWSE => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_BEFORENAVIGATE_DOEXTERNALBROWSE
+Windows.Win32.Web.MsHtml.Apis.IECMDID_BEFORENAVIGATE_GETIDLIST => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_BEFORENAVIGATE_GETIDLIST
+Windows.Win32.Web.MsHtml.Apis.IECMDID_BEFORENAVIGATE_GETSHELLBROWSE => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_BEFORENAVIGATE_GETSHELLBROWSE
+Windows.Win32.Web.MsHtml.Apis.IECMDID_CLEAR_AUTOCOMPLETE_FOR_FORMS => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_CLEAR_AUTOCOMPLETE_FOR_FORMS
+Windows.Win32.Web.MsHtml.Apis.IECMDID_GET_INVOKE_DEFAULT_BROWSER_ON_NEW_WINDOW => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_GET_INVOKE_DEFAULT_BROWSER_ON_NEW_WINDOW
+Windows.Win32.Web.MsHtml.Apis.IECMDID_SET_INVOKE_DEFAULT_BROWSER_ON_NEW_WINDOW => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_SET_INVOKE_DEFAULT_BROWSER_ON_NEW_WINDOW
+Windows.Win32.Web.MsHtml.Apis.IECMDID_SETID_AUTOCOMPLETE_FOR_FORMS => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_SETID_AUTOCOMPLETE_FOR_FORMS
+Windows.Win32.Web.MsHtml.Apis.IECreateDirectory => Windows.Win32.Web.InternetExplorer.Apis.IECreateDirectory
+Windows.Win32.Web.MsHtml.Apis.IEDeleteFile => Windows.Win32.Web.InternetExplorer.Apis.IEDeleteFile
+Windows.Win32.Web.MsHtml.Apis.IEDisassociateThreadWithTab => Windows.Win32.Web.InternetExplorer.Apis.IEDisassociateThreadWithTab
+Windows.Win32.Web.MsHtml.Apis.IEFindFirstFile => Windows.Win32.Web.InternetExplorer.Apis.IEFindFirstFile
+Windows.Win32.Web.MsHtml.Apis.IEGetFileAttributesEx => Windows.Win32.Web.InternetExplorer.Apis.IEGetFileAttributesEx
+Windows.Win32.Web.MsHtml.Apis.IEGetProcessModule_PROC_NAME => Windows.Win32.Web.InternetExplorer.Apis.IEGetProcessModule_PROC_NAME
+Windows.Win32.Web.MsHtml.Apis.IEGetProtectedModeCookie => Windows.Win32.Web.InternetExplorer.Apis.IEGetProtectedModeCookie
+Windows.Win32.Web.MsHtml.Apis.IEGetTabWindowExports_PROC_NAME => Windows.Win32.Web.InternetExplorer.Apis.IEGetTabWindowExports_PROC_NAME
+Windows.Win32.Web.MsHtml.Apis.IEGetWriteableFolderPath => Windows.Win32.Web.InternetExplorer.Apis.IEGetWriteableFolderPath
+Windows.Win32.Web.MsHtml.Apis.IEGetWriteableLowHKCU => Windows.Win32.Web.InternetExplorer.Apis.IEGetWriteableLowHKCU
+Windows.Win32.Web.MsHtml.Apis.IEInPrivateFilteringEnabled => Windows.Win32.Web.InternetExplorer.Apis.IEInPrivateFilteringEnabled
+Windows.Win32.Web.MsHtml.Apis.IEIsInPrivateBrowsing => Windows.Win32.Web.InternetExplorer.Apis.IEIsInPrivateBrowsing
+Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeProcess => Windows.Win32.Web.InternetExplorer.Apis.IEIsProtectedModeProcess
+Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeURL => Windows.Win32.Web.InternetExplorer.Apis.IEIsProtectedModeURL
+Windows.Win32.Web.MsHtml.Apis.IELaunchURL => Windows.Win32.Web.InternetExplorer.Apis.IELaunchURL
+Windows.Win32.Web.MsHtml.Apis.IEMoveFileEx => Windows.Win32.Web.InternetExplorer.Apis.IEMoveFileEx
+Windows.Win32.Web.MsHtml.Apis.IEPROCESS_MODULE_NAME => Windows.Win32.Web.InternetExplorer.Apis.IEPROCESS_MODULE_NAME
+Windows.Win32.Web.MsHtml.Apis.IERefreshElevationPolicy => Windows.Win32.Web.InternetExplorer.Apis.IERefreshElevationPolicy
+Windows.Win32.Web.MsHtml.Apis.IERegCreateKeyEx => Windows.Win32.Web.InternetExplorer.Apis.IERegCreateKeyEx
+Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryKey => Windows.Win32.Web.InternetExplorer.Apis.IERegisterWritableRegistryKey
+Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryValue => Windows.Win32.Web.InternetExplorer.Apis.IERegisterWritableRegistryValue
+Windows.Win32.Web.MsHtml.Apis.IERemoveDirectory => Windows.Win32.Web.InternetExplorer.Apis.IERemoveDirectory
+Windows.Win32.Web.MsHtml.Apis.IESaveFile => Windows.Win32.Web.InternetExplorer.Apis.IESaveFile
+Windows.Win32.Web.MsHtml.Apis.IESetProtectedModeCookie => Windows.Win32.Web.InternetExplorer.Apis.IESetProtectedModeCookie
+Windows.Win32.Web.MsHtml.Apis.IEShowOpenFileDialog => Windows.Win32.Web.InternetExplorer.Apis.IEShowOpenFileDialog
+Windows.Win32.Web.MsHtml.Apis.IEShowSaveFileDialog => Windows.Win32.Web.InternetExplorer.Apis.IEShowSaveFileDialog
+Windows.Win32.Web.MsHtml.Apis.IETrackingProtectionEnabled => Windows.Win32.Web.InternetExplorer.Apis.IETrackingProtectionEnabled
+Windows.Win32.Web.MsHtml.Apis.IEUnregisterWritableRegistry => Windows.Win32.Web.InternetExplorer.Apis.IEUnregisterWritableRegistry
+Windows.Win32.Web.MsHtml.Apis.IMGDECODE_EVENT_BEGINBITS => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_EVENT_BEGINBITS
+Windows.Win32.Web.MsHtml.Apis.IMGDECODE_EVENT_BITSCOMPLETE => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_EVENT_BITSCOMPLETE
+Windows.Win32.Web.MsHtml.Apis.IMGDECODE_EVENT_PALETTE => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_EVENT_PALETTE
+Windows.Win32.Web.MsHtml.Apis.IMGDECODE_EVENT_PROGRESS => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_EVENT_PROGRESS
+Windows.Win32.Web.MsHtml.Apis.IMGDECODE_EVENT_USEDDRAW => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_EVENT_USEDDRAW
+Windows.Win32.Web.MsHtml.Apis.IMGDECODE_HINT_BOTTOMUP => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_HINT_BOTTOMUP
+Windows.Win32.Web.MsHtml.Apis.IMGDECODE_HINT_FULLWIDTH => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_HINT_FULLWIDTH
+Windows.Win32.Web.MsHtml.Apis.IMGDECODE_HINT_TOPDOWN => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_HINT_TOPDOWN
+Windows.Win32.Web.MsHtml.Apis.LINKSBAND => Windows.Win32.Web.InternetExplorer.Apis.LINKSBAND
+Windows.Win32.Web.MsHtml.Apis.MAPMIME_CLSID => Windows.Win32.Web.InternetExplorer.Apis.MAPMIME_CLSID
+Windows.Win32.Web.MsHtml.Apis.MAPMIME_DEFAULT => Windows.Win32.Web.InternetExplorer.Apis.MAPMIME_DEFAULT
+Windows.Win32.Web.MsHtml.Apis.MAPMIME_DEFAULT_ALWAYS => Windows.Win32.Web.InternetExplorer.Apis.MAPMIME_DEFAULT_ALWAYS
+Windows.Win32.Web.MsHtml.Apis.MAPMIME_DISABLE => Windows.Win32.Web.InternetExplorer.Apis.MAPMIME_DISABLE
+Windows.Win32.Web.MsHtml.Apis.MAX_SEARCH_FORMAT_STRING => Windows.Win32.Web.InternetExplorer.Apis.MAX_SEARCH_FORMAT_STRING
+Windows.Win32.Web.MsHtml.Apis.msodsvFailed => Windows.Win32.Web.InternetExplorer.Apis.msodsvFailed
+Windows.Win32.Web.MsHtml.Apis.msodsvLowSecurityLevel => Windows.Win32.Web.InternetExplorer.Apis.msodsvLowSecurityLevel
+Windows.Win32.Web.MsHtml.Apis.msodsvNoMacros => Windows.Win32.Web.InternetExplorer.Apis.msodsvNoMacros
+Windows.Win32.Web.MsHtml.Apis.msodsvPassedTrusted => Windows.Win32.Web.InternetExplorer.Apis.msodsvPassedTrusted
+Windows.Win32.Web.MsHtml.Apis.msodsvPassedTrustedCert => Windows.Win32.Web.InternetExplorer.Apis.msodsvPassedTrustedCert
+Windows.Win32.Web.MsHtml.Apis.msodsvUnsigned => Windows.Win32.Web.InternetExplorer.Apis.msodsvUnsigned
+Windows.Win32.Web.MsHtml.Apis.msoedmDisable => Windows.Win32.Web.InternetExplorer.Apis.msoedmDisable
+Windows.Win32.Web.MsHtml.Apis.msoedmDontOpen => Windows.Win32.Web.InternetExplorer.Apis.msoedmDontOpen
+Windows.Win32.Web.MsHtml.Apis.msoedmEnable => Windows.Win32.Web.InternetExplorer.Apis.msoedmEnable
+Windows.Win32.Web.MsHtml.Apis.msoslHigh => Windows.Win32.Web.InternetExplorer.Apis.msoslHigh
+Windows.Win32.Web.MsHtml.Apis.msoslMedium => Windows.Win32.Web.InternetExplorer.Apis.msoslMedium
+Windows.Win32.Web.MsHtml.Apis.msoslNone => Windows.Win32.Web.InternetExplorer.Apis.msoslNone
+Windows.Win32.Web.MsHtml.Apis.msoslUndefined => Windows.Win32.Web.InternetExplorer.Apis.msoslUndefined
+Windows.Win32.Web.MsHtml.Apis.RatingAccessDeniedDialog => Windows.Win32.Web.InternetExplorer.Apis.RatingAccessDeniedDialog
+Windows.Win32.Web.MsHtml.Apis.RatingAccessDeniedDialog2 => Windows.Win32.Web.InternetExplorer.Apis.RatingAccessDeniedDialog2
+Windows.Win32.Web.MsHtml.Apis.RatingAccessDeniedDialog2W => Windows.Win32.Web.InternetExplorer.Apis.RatingAccessDeniedDialog2W
+Windows.Win32.Web.MsHtml.Apis.RatingAccessDeniedDialogW => Windows.Win32.Web.InternetExplorer.Apis.RatingAccessDeniedDialogW
+Windows.Win32.Web.MsHtml.Apis.RatingAddToApprovedSites => Windows.Win32.Web.InternetExplorer.Apis.RatingAddToApprovedSites
+Windows.Win32.Web.MsHtml.Apis.RatingCheckUserAccess => Windows.Win32.Web.InternetExplorer.Apis.RatingCheckUserAccess
+Windows.Win32.Web.MsHtml.Apis.RatingCheckUserAccessW => Windows.Win32.Web.InternetExplorer.Apis.RatingCheckUserAccessW
+Windows.Win32.Web.MsHtml.Apis.RatingClickedOnPRFInternal => Windows.Win32.Web.InternetExplorer.Apis.RatingClickedOnPRFInternal
+Windows.Win32.Web.MsHtml.Apis.RatingClickedOnRATInternal => Windows.Win32.Web.InternetExplorer.Apis.RatingClickedOnRATInternal
+Windows.Win32.Web.MsHtml.Apis.RatingEnable => Windows.Win32.Web.InternetExplorer.Apis.RatingEnable
+Windows.Win32.Web.MsHtml.Apis.RatingEnabledQuery => Windows.Win32.Web.InternetExplorer.Apis.RatingEnabledQuery
+Windows.Win32.Web.MsHtml.Apis.RatingEnableW => Windows.Win32.Web.InternetExplorer.Apis.RatingEnableW
+Windows.Win32.Web.MsHtml.Apis.RatingFreeDetails => Windows.Win32.Web.InternetExplorer.Apis.RatingFreeDetails
+Windows.Win32.Web.MsHtml.Apis.RatingInit => Windows.Win32.Web.InternetExplorer.Apis.RatingInit
+Windows.Win32.Web.MsHtml.Apis.RatingObtainCancel => Windows.Win32.Web.InternetExplorer.Apis.RatingObtainCancel
+Windows.Win32.Web.MsHtml.Apis.RatingObtainQuery => Windows.Win32.Web.InternetExplorer.Apis.RatingObtainQuery
+Windows.Win32.Web.MsHtml.Apis.RatingObtainQueryW => Windows.Win32.Web.InternetExplorer.Apis.RatingObtainQueryW
+Windows.Win32.Web.MsHtml.Apis.RatingSetupUI => Windows.Win32.Web.InternetExplorer.Apis.RatingSetupUI
+Windows.Win32.Web.MsHtml.Apis.RatingSetupUIW => Windows.Win32.Web.InternetExplorer.Apis.RatingSetupUIW
+Windows.Win32.Web.MsHtml.Apis.REGSTR_PATH_CURRENT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_PATH_CURRENT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_PATH_DEFAULT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_PATH_DEFAULT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_PATH_INETCPL_RESTRICTIONS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_PATH_INETCPL_RESTRICTIONS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_PATH_MIME_DATABASE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_PATH_MIME_DATABASE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_PATH_REMOTEACCESS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_PATH_REMOTEACCESS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_PATH_REMOTEACESS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_PATH_REMOTEACESS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_SHIFTQUICKSUFFIX => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_SHIFTQUICKSUFFIX
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ACCEPT_LANGUAGE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ACCEPT_LANGUAGE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ACCESSMEDIUM => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ACCESSMEDIUM
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ACCESSTYPE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ACCESSTYPE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ALIASTO => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ALIASTO
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ANCHORCOLOR => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ANCHORCOLOR
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ANCHORCOLORHOVER => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ANCHORCOLORHOVER
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ANCHORCOLORVISITED => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ANCHORCOLORVISITED
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ANCHORUNDERLINE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ANCHORUNDERLINE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_AUTODETECT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_AUTODETECT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_AUTODIAL_MONITORCLASSNAME => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_AUTODIAL_MONITORCLASSNAME
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_AUTODIAL_TRYONLYONCE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_AUTODIAL_TRYONLYONCE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_AUTODIALDLLNAME => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_AUTODIALDLLNAME
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_AUTODIALFCNNAME => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_AUTODIALFCNNAME
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_AUTONAVIGATE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_AUTONAVIGATE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_AUTOSEARCH => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_AUTOSEARCH
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_BACKBITMAP => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_BACKBITMAP
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_BACKGROUNDCOLOR => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_BACKGROUNDCOLOR
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_BODYCHARSET => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_BODYCHARSET
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_BYPASSAUTOCONFIG => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_BYPASSAUTOCONFIG
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_CACHEPREFIX => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_CACHEPREFIX
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_CHECKASSOC => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_CHECKASSOC
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_CODEDOWNLOAD => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_CODEDOWNLOAD
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_CODEDOWNLOAD_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_CODEDOWNLOAD_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_CODEPAGE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_CODEPAGE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_COVEREXCLUDE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_COVEREXCLUDE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_DAYSTOKEEP => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_DAYSTOKEEP
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_DEF_ENCODING => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_DEF_ENCODING
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_DEF_INETENCODING => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_DEF_INETENCODING
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_DEFAULT_CODEPAGE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_DEFAULT_CODEPAGE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_DEFAULT_SCRIPT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_DEFAULT_SCRIPT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_DESCRIPTION => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_DESCRIPTION
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_DIRECTORY => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_DIRECTORY
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_DISCONNECTIDLETIME => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_DISCONNECTIDLETIME
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ENABLEAUTODIAL => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ENABLEAUTODIAL
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ENABLEAUTODIALDISCONNECT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ENABLEAUTODIALDISCONNECT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ENABLEAUTODISCONNECT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ENABLEAUTODISCONNECT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ENABLEEXITDISCONNECT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ENABLEEXITDISCONNECT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ENABLESECURITYCHECK => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ENABLESECURITYCHECK
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ENABLEUNATTENDED => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ENABLEUNATTENDED
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_ENCODENAME => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_ENCODENAME
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_FAMILY => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_FAMILY
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_FIXED_FONT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_FIXED_FONT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_FIXEDWIDTHFONT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_FIXEDWIDTHFONT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_FONT_SCRIPT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_FONT_SCRIPT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_FONT_SCRIPT_NAME => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_FONT_SCRIPT_NAME
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_FONT_SCRIPTS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_FONT_SCRIPTS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_FONT_SIZE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_FONT_SIZE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_FONT_SIZE_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_FONT_SIZE_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_HEADERCHARSET => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_HEADERCHARSET
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_HTTP_ERRORS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_HTTP_ERRORS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_IE_CUSTOMCOLORS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_IE_CUSTOMCOLORS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETCPL_ADVANCEDTAB => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETCPL_ADVANCEDTAB
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETCPL_CONNECTIONSTAB => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETCPL_CONNECTIONSTAB
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETCPL_CONTENTTAB => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETCPL_CONTENTTAB
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETCPL_GENERALTAB => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETCPL_GENERALTAB
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETCPL_IEAK => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETCPL_IEAK
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETCPL_PRIVACYTAB => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETCPL_PRIVACYTAB
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETCPL_PROGRAMSTAB => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETCPL_PROGRAMSTAB
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETCPL_SECURITYTAB => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETCPL_SECURITYTAB
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INETENCODING => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INETENCODING
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INTERNETENTRY => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INTERNETENTRY
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INTERNETENTRYBKUP => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INTERNETENTRYBKUP
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_INTERNETPROFILE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_INTERNETPROFILE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_JAVAJIT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_JAVAJIT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_JAVAJIT_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_JAVAJIT_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_JAVALOGGING => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_JAVALOGGING
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_JAVALOGGING_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_JAVALOGGING_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_LEVEL => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_LEVEL
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_LOADIMAGES => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_LOADIMAGES
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_LOCALPAGE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_LOCALPAGE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_MOSDISCONNECT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_MOSDISCONNECT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_NEWDIRECTORY => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_NEWDIRECTORY
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_NONETAUTODIAL => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_NONETAUTODIAL
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_PLAYSOUNDS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_PLAYSOUNDS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_PLAYVIDEOS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_PLAYVIDEOS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_PRIVCONVERTER => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_PRIVCONVERTER
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_PROP_FONT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_PROP_FONT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_PROPORTIONALFONT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_PROPORTIONALFONT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_PROXYENABLE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_PROXYENABLE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_PROXYOVERRIDE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_PROXYOVERRIDE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_PROXYSERVER => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_PROXYSERVER
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_REDIALATTEMPTS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_REDIALATTEMPTS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_REDIALINTERVAL => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_REDIALINTERVAL
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_RNAINSTALLED => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_RNAINSTALLED
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SAFETYWARNINGLEVEL => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SAFETYWARNINGLEVEL
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SCHANNELENABLEPROTOCOL => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SCHANNELENABLEPROTOCOL
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SCHANNELENABLEPROTOCOL_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SCHANNELENABLEPROTOCOL_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SCRIPT_FIXED_FONT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SCRIPT_FIXED_FONT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SCRIPT_PROP_FONT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SCRIPT_PROP_FONT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SEARCHPAGE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SEARCHPAGE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYACTICEXSCRIPTS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYACTICEXSCRIPTS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYACTICEXSCRIPTS_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYACTICEXSCRIPTS_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYACTIVEX => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYACTIVEX
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYACTIVEX_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYACTIVEX_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYALLOWCOOKIES => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYALLOWCOOKIES
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYALLOWCOOKIES_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYALLOWCOOKIES_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYDISABLECACHINGOFSSLPAGES => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYDISABLECACHINGOFSSLPAGES
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYDISABLECACHINGOFSSLPAGES_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYDISABLECACHINGOFSSLPAGES_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYJAVA => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYJAVA
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYJAVA_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYJAVA_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONBADCERTSENDING => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONBADCERTSENDING
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONBADCERTSENDING_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONBADCERTSENDING_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONBADCERTVIEWING => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONBADCERTVIEWING
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONBADCERTVIEWING_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONBADCERTVIEWING_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONSEND => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONSEND
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONSEND_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONSEND_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONSENDALWAYS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONSENDALWAYS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONSENDALWAYS_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONSENDALWAYS_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONVIEW => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONVIEW
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONVIEW_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONVIEW_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONZONECROSSING => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONZONECROSSING
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SECURITYWARNONZONECROSSING_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SECURITYWARNONZONECROSSING_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SHOWADDRESSBAR => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SHOWADDRESSBAR
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SHOWFOCUS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SHOWFOCUS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SHOWFOCUS_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SHOWFOCUS_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SHOWFULLURLS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SHOWFULLURLS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SHOWTOOLBAR => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SHOWTOOLBAR
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SMOOTHSCROLL => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SMOOTHSCROLL
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_SMOOTHSCROLL_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_SMOOTHSCROLL_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_STARTPAGE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_STARTPAGE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_TEXTCOLOR => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_TEXTCOLOR
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_TRUSTWARNINGLEVEL_HIGH => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_TRUSTWARNINGLEVEL_HIGH
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_TRUSTWARNINGLEVEL_LOW => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_TRUSTWARNINGLEVEL_LOW
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_TRUSTWARNINGLEVEL_MED => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_TRUSTWARNINGLEVEL_MED
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USEAUTOAPPEND => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USEAUTOAPPEND
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USEAUTOCOMPLETE => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USEAUTOCOMPLETE
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USEAUTOSUGGEST => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USEAUTOSUGGEST
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USEDLGCOLORS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USEDLGCOLORS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USEHOVERCOLOR => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USEHOVERCOLOR
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USEIBAR => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USEIBAR
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USEICM => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USEICM
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USEICM_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USEICM_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USERAGENT => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USERAGENT
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USESTYLESHEETS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USESTYLESHEETS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_USESTYLESHEETS_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_USESTYLESHEETS_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_VISIBLEBANDS => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_VISIBLEBANDS
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_VISIBLEBANDS_DEF => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_VISIBLEBANDS_DEF
+Windows.Win32.Web.MsHtml.Apis.REGSTR_VAL_WEBCHARSET => Windows.Win32.Web.InternetExplorer.Apis.REGSTR_VAL_WEBCHARSET
+Windows.Win32.Web.MsHtml.Apis.REGSTRA_VAL_STARTPAGE => Windows.Win32.Web.InternetExplorer.Apis.REGSTRA_VAL_STARTPAGE
+Windows.Win32.Web.MsHtml.Apis.S_SURFACE_DISCARDED => Windows.Win32.Web.InternetExplorer.Apis.S_SURFACE_DISCARDED
+Windows.Win32.Web.MsHtml.Apis.SniffStream => Windows.Win32.Web.InternetExplorer.Apis.SniffStream
+Windows.Win32.Web.MsHtml.Apis.STATURL_QUERYFLAG_ISCACHED => Windows.Win32.Web.InternetExplorer.Apis.STATURL_QUERYFLAG_ISCACHED
+Windows.Win32.Web.MsHtml.Apis.STATURL_QUERYFLAG_NOTITLE => Windows.Win32.Web.InternetExplorer.Apis.STATURL_QUERYFLAG_NOTITLE
+Windows.Win32.Web.MsHtml.Apis.STATURL_QUERYFLAG_NOURL => Windows.Win32.Web.InternetExplorer.Apis.STATURL_QUERYFLAG_NOURL
+Windows.Win32.Web.MsHtml.Apis.STATURL_QUERYFLAG_TOPLEVEL => Windows.Win32.Web.InternetExplorer.Apis.STATURL_QUERYFLAG_TOPLEVEL
+Windows.Win32.Web.MsHtml.Apis.STATURLFLAG_ISCACHED => Windows.Win32.Web.InternetExplorer.Apis.STATURLFLAG_ISCACHED
+Windows.Win32.Web.MsHtml.Apis.STATURLFLAG_ISTOPLEVEL => Windows.Win32.Web.InternetExplorer.Apis.STATURLFLAG_ISTOPLEVEL
+Windows.Win32.Web.MsHtml.Apis.SURFACE_LOCK_ALLOW_DISCARD => Windows.Win32.Web.InternetExplorer.Apis.SURFACE_LOCK_ALLOW_DISCARD
+Windows.Win32.Web.MsHtml.Apis.SURFACE_LOCK_EXCLUSIVE => Windows.Win32.Web.InternetExplorer.Apis.SURFACE_LOCK_EXCLUSIVE
+Windows.Win32.Web.MsHtml.Apis.SURFACE_LOCK_WAIT => Windows.Win32.Web.InternetExplorer.Apis.SURFACE_LOCK_WAIT
+Windows.Win32.Web.MsHtml.Apis.SZ_IE_DEFAULT_HTML_EDITOR => Windows.Win32.Web.InternetExplorer.Apis.SZ_IE_DEFAULT_HTML_EDITOR
+Windows.Win32.Web.MsHtml.Apis.SZ_IE_IBAR => Windows.Win32.Web.InternetExplorer.Apis.SZ_IE_IBAR
+Windows.Win32.Web.MsHtml.Apis.SZ_IE_IBAR_BANDS => Windows.Win32.Web.InternetExplorer.Apis.SZ_IE_IBAR_BANDS
+Windows.Win32.Web.MsHtml.Apis.SZ_IE_MAIN => Windows.Win32.Web.InternetExplorer.Apis.SZ_IE_MAIN
+Windows.Win32.Web.MsHtml.Apis.SZ_IE_SEARCHSTRINGS => Windows.Win32.Web.InternetExplorer.Apis.SZ_IE_SEARCHSTRINGS
+Windows.Win32.Web.MsHtml.Apis.SZ_IE_SECURITY => Windows.Win32.Web.InternetExplorer.Apis.SZ_IE_SECURITY
+Windows.Win32.Web.MsHtml.Apis.SZ_IE_SETTINGS => Windows.Win32.Web.InternetExplorer.Apis.SZ_IE_SETTINGS
+Windows.Win32.Web.MsHtml.Apis.SZ_IE_THRESHOLDS => Windows.Win32.Web.InternetExplorer.Apis.SZ_IE_THRESHOLDS
+Windows.Win32.Web.MsHtml.Apis.SZBACKBITMAP => Windows.Win32.Web.InternetExplorer.Apis.SZBACKBITMAP
+Windows.Win32.Web.MsHtml.Apis.SZJAVAVMPATH => Windows.Win32.Web.InternetExplorer.Apis.SZJAVAVMPATH
+Windows.Win32.Web.MsHtml.Apis.SZNOTEXT => Windows.Win32.Web.InternetExplorer.Apis.SZNOTEXT
+Windows.Win32.Web.MsHtml.Apis.SZTOOLBAR => Windows.Win32.Web.InternetExplorer.Apis.SZTOOLBAR
+Windows.Win32.Web.MsHtml.Apis.SZTRUSTWARNLEVEL => Windows.Win32.Web.InternetExplorer.Apis.SZTRUSTWARNLEVEL
+Windows.Win32.Web.MsHtml.Apis.SZVISIBLE => Windows.Win32.Web.InternetExplorer.Apis.SZVISIBLE
+Windows.Win32.Web.MsHtml.Apis.TARGET_NOTIFY_OBJECT_NAME => Windows.Win32.Web.InternetExplorer.Apis.TARGET_NOTIFY_OBJECT_NAME
+Windows.Win32.Web.MsHtml.Apis.TF_NAVIGATE => Windows.Win32.Web.InternetExplorer.Apis.TF_NAVIGATE
+Windows.Win32.Web.MsHtml.Apis.TIMERMODE_NORMAL => Windows.Win32.Web.InternetExplorer.Apis.TIMERMODE_NORMAL
+Windows.Win32.Web.MsHtml.Apis.TIMERMODE_VISIBILITYAWARE => Windows.Win32.Web.InternetExplorer.Apis.TIMERMODE_VISIBILITYAWARE
+Windows.Win32.Web.MsHtml.Apis.TOOLSBAND => Windows.Win32.Web.InternetExplorer.Apis.TOOLSBAND
+Windows.Win32.Web.MsHtml.Apis.TSZCALENDARPROTOCOL => Windows.Win32.Web.InternetExplorer.Apis.TSZCALENDARPROTOCOL
+Windows.Win32.Web.MsHtml.Apis.TSZCALLTOPROTOCOL => Windows.Win32.Web.InternetExplorer.Apis.TSZCALLTOPROTOCOL
+Windows.Win32.Web.MsHtml.Apis.TSZINTERNETCLIENTSPATH => Windows.Win32.Web.InternetExplorer.Apis.TSZINTERNETCLIENTSPATH
+Windows.Win32.Web.MsHtml.Apis.TSZLDAPPROTOCOL => Windows.Win32.Web.InternetExplorer.Apis.TSZLDAPPROTOCOL
+Windows.Win32.Web.MsHtml.Apis.TSZMAILTOPROTOCOL => Windows.Win32.Web.InternetExplorer.Apis.TSZMAILTOPROTOCOL
+Windows.Win32.Web.MsHtml.Apis.TSZMICROSOFTPATH => Windows.Win32.Web.InternetExplorer.Apis.TSZMICROSOFTPATH
+Windows.Win32.Web.MsHtml.Apis.TSZNEWSPROTOCOL => Windows.Win32.Web.InternetExplorer.Apis.TSZNEWSPROTOCOL
+Windows.Win32.Web.MsHtml.Apis.TSZPROTOCOLSPATH => Windows.Win32.Web.InternetExplorer.Apis.TSZPROTOCOLSPATH
+Windows.Win32.Web.MsHtml.Apis.TSZSCHANNELPATH => Windows.Win32.Web.InternetExplorer.Apis.TSZSCHANNELPATH
+Windows.Win32.Web.MsHtml.Apis.TSZVSOURCEPROTOCOL => Windows.Win32.Web.InternetExplorer.Apis.TSZVSOURCEPROTOCOL
+Windows.Win32.Web.MsHtml.CDeviceRect => Windows.Win32.Web.InternetExplorer.CDeviceRect
+Windows.Win32.Web.MsHtml.CDownloadBehavior => Windows.Win32.Web.InternetExplorer.CDownloadBehavior
+Windows.Win32.Web.MsHtml.CHeaderFooter => Windows.Win32.Web.InternetExplorer.CHeaderFooter
+Windows.Win32.Web.MsHtml.CLayoutRect => Windows.Win32.Web.InternetExplorer.CLayoutRect
+Windows.Win32.Web.MsHtml.CoDitherToRGB8 => Windows.Win32.Web.InternetExplorer.CoDitherToRGB8
+Windows.Win32.Web.MsHtml.CoMapMIMEToCLSID => Windows.Win32.Web.InternetExplorer.CoMapMIMEToCLSID
+Windows.Win32.Web.MsHtml.CoSniffStream => Windows.Win32.Web.InternetExplorer.CoSniffStream
+Windows.Win32.Web.MsHtml.CPersistDataPeer => Windows.Win32.Web.InternetExplorer.CPersistDataPeer
+Windows.Win32.Web.MsHtml.CPersistHistory => Windows.Win32.Web.InternetExplorer.CPersistHistory
+Windows.Win32.Web.MsHtml.CPersistShortcut => Windows.Win32.Web.InternetExplorer.CPersistShortcut
+Windows.Win32.Web.MsHtml.CPersistSnapshot => Windows.Win32.Web.InternetExplorer.CPersistSnapshot
+Windows.Win32.Web.MsHtml.CPersistUserData => Windows.Win32.Web.InternetExplorer.CPersistUserData
+Windows.Win32.Web.MsHtml.ExtensionValidationContexts removed
+Windows.Win32.Web.MsHtml.ExtensionValidationContexts.ExtensionValidationContextDynamic removed
+Windows.Win32.Web.MsHtml.ExtensionValidationContexts.ExtensionValidationContextNone removed
+Windows.Win32.Web.MsHtml.ExtensionValidationContexts.ExtensionValidationContextParsed removed
+Windows.Win32.Web.MsHtml.ExtensionValidationResults removed
+Windows.Win32.Web.MsHtml.ExtensionValidationResults.ExtensionValidationResultArrestPageLoad removed
+Windows.Win32.Web.MsHtml.ExtensionValidationResults.ExtensionValidationResultDoNotInstantiate removed
+Windows.Win32.Web.MsHtml.ExtensionValidationResults.ExtensionValidationResultNone removed
+Windows.Win32.Web.MsHtml.FINDFRAME_FLAGS removed
+Windows.Win32.Web.MsHtml.FINDFRAME_FLAGS.FINDFRAME_INTERNAL removed
+Windows.Win32.Web.MsHtml.FINDFRAME_FLAGS.FINDFRAME_JUSTTESTEXISTENCE removed
+Windows.Win32.Web.MsHtml.FINDFRAME_FLAGS.FINDFRAME_NONE removed
+Windows.Win32.Web.MsHtml.FRAMEOPTIONS_FLAGS removed
+Windows.Win32.Web.MsHtml.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_BROWSERBAND removed
+Windows.Win32.Web.MsHtml.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_DESKTOP removed
+Windows.Win32.Web.MsHtml.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_NO3DBORDER removed
+Windows.Win32.Web.MsHtml.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_NORESIZE removed
+Windows.Win32.Web.MsHtml.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_SCROLL_AUTO removed
+Windows.Win32.Web.MsHtml.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_SCROLL_NO removed
+Windows.Win32.Web.MsHtml.FRAMEOPTIONS_FLAGS.FRAMEOPTIONS_SCROLL_YES removed
+Windows.Win32.Web.MsHtml.HomePage => Windows.Win32.Web.InternetExplorer.HomePage
+Windows.Win32.Web.MsHtml.HomePageSetting => Windows.Win32.Web.InternetExplorer.HomePageSetting
+Windows.Win32.Web.MsHtml.HTMLPersistEvents => Windows.Win32.Web.InternetExplorer.HTMLPersistEvents
+Windows.Win32.Web.MsHtml.IActiveXUIHandlerSite => Windows.Win32.Web.InternetExplorer.IActiveXUIHandlerSite
+Windows.Win32.Web.MsHtml.IActiveXUIHandlerSite2 => Windows.Win32.Web.InternetExplorer.IActiveXUIHandlerSite2
+Windows.Win32.Web.MsHtml.IActiveXUIHandlerSite3 => Windows.Win32.Web.InternetExplorer.IActiveXUIHandlerSite3
+Windows.Win32.Web.MsHtml.IAnchorClick => Windows.Win32.Web.InternetExplorer.IAnchorClick
+Windows.Win32.Web.MsHtml.IAudioSessionSite => Windows.Win32.Web.InternetExplorer.IAudioSessionSite
+Windows.Win32.Web.MsHtml.ICaretPositionProvider => Windows.Win32.Web.InternetExplorer.ICaretPositionProvider
+Windows.Win32.Web.MsHtml.IDeviceRect => Windows.Win32.Web.InternetExplorer.IDeviceRect
+Windows.Win32.Web.MsHtml.IDithererImpl => Windows.Win32.Web.InternetExplorer.IDithererImpl
+Windows.Win32.Web.MsHtml.IDocObjectService => Windows.Win32.Web.InternetExplorer.IDocObjectService
+Windows.Win32.Web.MsHtml.IDownloadBehavior => Windows.Win32.Web.InternetExplorer.IDownloadBehavior
+Windows.Win32.Web.MsHtml.IDownloadManager => Windows.Win32.Web.InternetExplorer.IDownloadManager
+Windows.Win32.Web.MsHtml.IELAUNCHOPTION_FLAGS removed
+Windows.Win32.Web.MsHtml.IELAUNCHOPTION_FLAGS.IELAUNCHOPTION_FORCE_COMPAT removed
+Windows.Win32.Web.MsHtml.IELAUNCHOPTION_FLAGS.IELAUNCHOPTION_FORCE_EDGE removed
+Windows.Win32.Web.MsHtml.IELAUNCHOPTION_FLAGS.IELAUNCHOPTION_LOCK_ENGINE removed
+Windows.Win32.Web.MsHtml.IELAUNCHOPTION_FLAGS.IELAUNCHOPTION_SCRIPTDEBUG removed
+Windows.Win32.Web.MsHtml.IELAUNCHURLINFO => Windows.Win32.Web.InternetExplorer.IELAUNCHURLINFO
+Windows.Win32.Web.MsHtml.IEnumManagerFrames => Windows.Win32.Web.InternetExplorer.IEnumManagerFrames
+Windows.Win32.Web.MsHtml.IEnumOpenServiceActivity => Windows.Win32.Web.InternetExplorer.IEnumOpenServiceActivity
+Windows.Win32.Web.MsHtml.IEnumOpenServiceActivityCategory => Windows.Win32.Web.InternetExplorer.IEnumOpenServiceActivityCategory
+Windows.Win32.Web.MsHtml.IEnumSTATURL => Windows.Win32.Web.InternetExplorer.IEnumSTATURL
+Windows.Win32.Web.MsHtml.IEWebDriverManager => Windows.Win32.Web.InternetExplorer.IEWebDriverManager
+Windows.Win32.Web.MsHtml.IExtensionValidation => Windows.Win32.Web.InternetExplorer.IExtensionValidation
+Windows.Win32.Web.MsHtml.IHeaderFooter => Windows.Win32.Web.InternetExplorer.IHeaderFooter
+Windows.Win32.Web.MsHtml.IHeaderFooter2 => Windows.Win32.Web.InternetExplorer.IHeaderFooter2
+Windows.Win32.Web.MsHtml.IHomePage => Windows.Win32.Web.InternetExplorer.IHomePage
+Windows.Win32.Web.MsHtml.IHomePageSetting => Windows.Win32.Web.InternetExplorer.IHomePageSetting
+Windows.Win32.Web.MsHtml.IHTMLPersistData => Windows.Win32.Web.InternetExplorer.IHTMLPersistData
+Windows.Win32.Web.MsHtml.IHTMLPersistDataOM => Windows.Win32.Web.InternetExplorer.IHTMLPersistDataOM
+Windows.Win32.Web.MsHtml.IHTMLUserDataOM => Windows.Win32.Web.InternetExplorer.IHTMLUserDataOM
+Windows.Win32.Web.MsHtml.IIEWebDriverManager => Windows.Win32.Web.InternetExplorer.IIEWebDriverManager
+Windows.Win32.Web.MsHtml.IIEWebDriverSite => Windows.Win32.Web.InternetExplorer.IIEWebDriverSite
+Windows.Win32.Web.MsHtml.IImageDecodeEventSink => Windows.Win32.Web.InternetExplorer.IImageDecodeEventSink
+Windows.Win32.Web.MsHtml.IImageDecodeEventSink2 => Windows.Win32.Web.InternetExplorer.IImageDecodeEventSink2
+Windows.Win32.Web.MsHtml.IImageDecodeFilter => Windows.Win32.Web.InternetExplorer.IImageDecodeFilter
+Windows.Win32.Web.MsHtml.IIntelliForms => Windows.Win32.Web.InternetExplorer.IIntelliForms
+Windows.Win32.Web.MsHtml.IInternetExplorerManager => Windows.Win32.Web.InternetExplorer.IInternetExplorerManager
+Windows.Win32.Web.MsHtml.IInternetExplorerManager2 => Windows.Win32.Web.InternetExplorer.IInternetExplorerManager2
+Windows.Win32.Web.MsHtml.ILayoutRect => Windows.Win32.Web.InternetExplorer.ILayoutRect
+Windows.Win32.Web.MsHtml.IMapMIMEToCLSID => Windows.Win32.Web.InternetExplorer.IMapMIMEToCLSID
+Windows.Win32.Web.MsHtml.IMediaActivityNotifySite => Windows.Win32.Web.InternetExplorer.IMediaActivityNotifySite
+Windows.Win32.Web.MsHtml.IntelliForms => Windows.Win32.Web.InternetExplorer.IntelliForms
+Windows.Win32.Web.MsHtml.INTERNETEXPLORERCONFIGURATION removed
+Windows.Win32.Web.MsHtml.INTERNETEXPLORERCONFIGURATION.INTERNETEXPLORERCONFIGURATION_HOST removed
+Windows.Win32.Web.MsHtml.INTERNETEXPLORERCONFIGURATION.INTERNETEXPLORERCONFIGURATION_WEB_DRIVER removed
+Windows.Win32.Web.MsHtml.INTERNETEXPLORERCONFIGURATION.INTERNETEXPLORERCONFIGURATION_WEB_DRIVER_EDGE removed
+Windows.Win32.Web.MsHtml.InternetExplorerManager => Windows.Win32.Web.InternetExplorer.InternetExplorerManager
+Windows.Win32.Web.MsHtml.IOpenService => Windows.Win32.Web.InternetExplorer.IOpenService
+Windows.Win32.Web.MsHtml.IOpenServiceActivity => Windows.Win32.Web.InternetExplorer.IOpenServiceActivity
+Windows.Win32.Web.MsHtml.IOpenServiceActivityCategory => Windows.Win32.Web.InternetExplorer.IOpenServiceActivityCategory
+Windows.Win32.Web.MsHtml.IOpenServiceActivityInput => Windows.Win32.Web.InternetExplorer.IOpenServiceActivityInput
+Windows.Win32.Web.MsHtml.IOpenServiceActivityManager => Windows.Win32.Web.InternetExplorer.IOpenServiceActivityManager
+Windows.Win32.Web.MsHtml.IOpenServiceActivityOutputContext => Windows.Win32.Web.InternetExplorer.IOpenServiceActivityOutputContext
+Windows.Win32.Web.MsHtml.IOpenServiceManager => Windows.Win32.Web.InternetExplorer.IOpenServiceManager
+Windows.Win32.Web.MsHtml.IPeerFactory => Windows.Win32.Web.InternetExplorer.IPeerFactory
+Windows.Win32.Web.MsHtml.IPersistHistory => Windows.Win32.Web.InternetExplorer.IPersistHistory
+Windows.Win32.Web.MsHtml.IPrintTaskRequestFactory => Windows.Win32.Web.InternetExplorer.IPrintTaskRequestFactory
+Windows.Win32.Web.MsHtml.IPrintTaskRequestHandler => Windows.Win32.Web.InternetExplorer.IPrintTaskRequestHandler
+Windows.Win32.Web.MsHtml.IScrollableContextMenu => Windows.Win32.Web.InternetExplorer.IScrollableContextMenu
+Windows.Win32.Web.MsHtml.IScrollableContextMenu2 => Windows.Win32.Web.InternetExplorer.IScrollableContextMenu2
+Windows.Win32.Web.MsHtml.ISniffStream => Windows.Win32.Web.InternetExplorer.ISniffStream
+Windows.Win32.Web.MsHtml.ISurfacePresenterFlip => Windows.Win32.Web.InternetExplorer.ISurfacePresenterFlip
+Windows.Win32.Web.MsHtml.ISurfacePresenterFlip2 => Windows.Win32.Web.InternetExplorer.ISurfacePresenterFlip2
+Windows.Win32.Web.MsHtml.ISurfacePresenterFlipBuffer => Windows.Win32.Web.InternetExplorer.ISurfacePresenterFlipBuffer
+Windows.Win32.Web.MsHtml.ITargetContainer => Windows.Win32.Web.InternetExplorer.ITargetContainer
+Windows.Win32.Web.MsHtml.ITargetEmbedding => Windows.Win32.Web.InternetExplorer.ITargetEmbedding
+Windows.Win32.Web.MsHtml.ITargetFrame => Windows.Win32.Web.InternetExplorer.ITargetFrame
+Windows.Win32.Web.MsHtml.ITargetFrame2 => Windows.Win32.Web.InternetExplorer.ITargetFrame2
+Windows.Win32.Web.MsHtml.ITargetFramePriv => Windows.Win32.Web.InternetExplorer.ITargetFramePriv
+Windows.Win32.Web.MsHtml.ITargetFramePriv2 => Windows.Win32.Web.InternetExplorer.ITargetFramePriv2
+Windows.Win32.Web.MsHtml.ITargetNotify => Windows.Win32.Web.InternetExplorer.ITargetNotify
+Windows.Win32.Web.MsHtml.ITargetNotify2 => Windows.Win32.Web.InternetExplorer.ITargetNotify2
+Windows.Win32.Web.MsHtml.ITimer => Windows.Win32.Web.InternetExplorer.ITimer
+Windows.Win32.Web.MsHtml.ITimerEx => Windows.Win32.Web.InternetExplorer.ITimerEx
+Windows.Win32.Web.MsHtml.ITimerService => Windows.Win32.Web.InternetExplorer.ITimerService
+Windows.Win32.Web.MsHtml.ITimerSink => Windows.Win32.Web.InternetExplorer.ITimerSink
+Windows.Win32.Web.MsHtml.ITridentTouchInput => Windows.Win32.Web.InternetExplorer.ITridentTouchInput
+Windows.Win32.Web.MsHtml.ITridentTouchInputSite => Windows.Win32.Web.InternetExplorer.ITridentTouchInputSite
+Windows.Win32.Web.MsHtml.IUrlHistoryNotify => Windows.Win32.Web.InternetExplorer.IUrlHistoryNotify
+Windows.Win32.Web.MsHtml.IUrlHistoryStg => Windows.Win32.Web.InternetExplorer.IUrlHistoryStg
+Windows.Win32.Web.MsHtml.IUrlHistoryStg2 => Windows.Win32.Web.InternetExplorer.IUrlHistoryStg2
+Windows.Win32.Web.MsHtml.IViewObjectPresentFlip => Windows.Win32.Web.InternetExplorer.IViewObjectPresentFlip
+Windows.Win32.Web.MsHtml.IViewObjectPresentFlip2 => Windows.Win32.Web.InternetExplorer.IViewObjectPresentFlip2
+Windows.Win32.Web.MsHtml.IViewObjectPresentFlipSite => Windows.Win32.Web.InternetExplorer.IViewObjectPresentFlipSite
+Windows.Win32.Web.MsHtml.IViewObjectPresentFlipSite2 => Windows.Win32.Web.InternetExplorer.IViewObjectPresentFlipSite2
+Windows.Win32.Web.MsHtml.IWebBrowserEventsService => Windows.Win32.Web.InternetExplorer.IWebBrowserEventsService
+Windows.Win32.Web.MsHtml.IWebBrowserEventsUrlService => Windows.Win32.Web.InternetExplorer.IWebBrowserEventsUrlService
+Windows.Win32.Web.MsHtml.Iwfolders => Windows.Win32.Web.InternetExplorer.Iwfolders
+Windows.Win32.Web.MsHtml.LayoutRectEvents => Windows.Win32.Web.InternetExplorer.LayoutRectEvents
+Windows.Win32.Web.MsHtml.MEDIA_ACTIVITY_NOTIFY_TYPE removed
+Windows.Win32.Web.MsHtml.MEDIA_ACTIVITY_NOTIFY_TYPE.MediaCasting removed
+Windows.Win32.Web.MsHtml.MEDIA_ACTIVITY_NOTIFY_TYPE.MediaPlayback removed
+Windows.Win32.Web.MsHtml.MEDIA_ACTIVITY_NOTIFY_TYPE.MediaRecording removed
+Windows.Win32.Web.MsHtml.NAVIGATEDATA => Windows.Win32.Web.InternetExplorer.NAVIGATEDATA
+Windows.Win32.Web.MsHtml.NAVIGATEFRAME_FLAGS removed
+Windows.Win32.Web.MsHtml.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_AUTH_FAIL_CACHE_OK removed
+Windows.Win32.Web.MsHtml.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_NO_DOC_CACHE removed
+Windows.Win32.Web.MsHtml.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_NO_IMAGE_CACHE removed
+Windows.Win32.Web.MsHtml.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_POST removed
+Windows.Win32.Web.MsHtml.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_REALLY_SENDING_FROM_FORM removed
+Windows.Win32.Web.MsHtml.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_RECORD removed
+Windows.Win32.Web.MsHtml.NAVIGATEFRAME_FLAGS.NAVIGATEFRAME_FL_SENDING_FROM_FORM removed
+Windows.Win32.Web.MsHtml.OpenServiceActivityContentType removed
+Windows.Win32.Web.MsHtml.OpenServiceActivityContentType.ActivityContentCount removed
+Windows.Win32.Web.MsHtml.OpenServiceActivityContentType.ActivityContentDocument removed
+Windows.Win32.Web.MsHtml.OpenServiceActivityContentType.ActivityContentLink removed
+Windows.Win32.Web.MsHtml.OpenServiceActivityContentType.ActivityContentNone removed
+Windows.Win32.Web.MsHtml.OpenServiceActivityContentType.ActivityContentSelection removed
+Windows.Win32.Web.MsHtml.OpenServiceActivityManager => Windows.Win32.Web.InternetExplorer.OpenServiceActivityManager
+Windows.Win32.Web.MsHtml.OpenServiceErrors removed
+Windows.Win32.Web.MsHtml.OpenServiceErrors.OS_E_CANCELLED removed
+Windows.Win32.Web.MsHtml.OpenServiceErrors.OS_E_GPDISABLED removed
+Windows.Win32.Web.MsHtml.OpenServiceErrors.OS_E_NOTFOUND removed
+Windows.Win32.Web.MsHtml.OpenServiceErrors.OS_E_NOTSUPPORTED removed
+Windows.Win32.Web.MsHtml.OpenServiceManager => Windows.Win32.Web.InternetExplorer.OpenServiceManager
+Windows.Win32.Web.MsHtml.PeerFactory => Windows.Win32.Web.InternetExplorer.PeerFactory
+Windows.Win32.Web.MsHtml.SCROLLABLECONTEXTMENU_PLACEMENT removed
+Windows.Win32.Web.MsHtml.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_BOTTOM removed
+Windows.Win32.Web.MsHtml.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_FULL removed
+Windows.Win32.Web.MsHtml.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_LEFT removed
+Windows.Win32.Web.MsHtml.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_RIGHT removed
+Windows.Win32.Web.MsHtml.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_TOP removed
+Windows.Win32.Web.MsHtml.STATURL => Windows.Win32.Web.InternetExplorer.STATURL
+Windows.Win32.Web.MsHtml.wfolders => Windows.Win32.Web.InternetExplorer.wfolders
