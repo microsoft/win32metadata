@@ -312,33 +312,24 @@ Windows.Win32.Web.MsHtml.Apis.IECMDID_CLEAR_AUTOCOMPLETE_FOR_FORMS => Windows.Wi
 Windows.Win32.Web.MsHtml.Apis.IECMDID_GET_INVOKE_DEFAULT_BROWSER_ON_NEW_WINDOW => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_GET_INVOKE_DEFAULT_BROWSER_ON_NEW_WINDOW
 Windows.Win32.Web.MsHtml.Apis.IECMDID_SET_INVOKE_DEFAULT_BROWSER_ON_NEW_WINDOW => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_SET_INVOKE_DEFAULT_BROWSER_ON_NEW_WINDOW
 Windows.Win32.Web.MsHtml.Apis.IECMDID_SETID_AUTOCOMPLETE_FOR_FORMS => Windows.Win32.Web.InternetExplorer.Apis.IECMDID_SETID_AUTOCOMPLETE_FOR_FORMS
-Windows.Win32.Web.MsHtml.Apis.IECreateDirectory => Windows.Win32.Web.InternetExplorer.Apis.IECreateDirectory
-Windows.Win32.Web.MsHtml.Apis.IEDeleteFile => Windows.Win32.Web.InternetExplorer.Apis.IEDeleteFile
 Windows.Win32.Web.MsHtml.Apis.IEDisassociateThreadWithTab => Windows.Win32.Web.InternetExplorer.Apis.IEDisassociateThreadWithTab
-Windows.Win32.Web.MsHtml.Apis.IEFindFirstFile => Windows.Win32.Web.InternetExplorer.Apis.IEFindFirstFile
-Windows.Win32.Web.MsHtml.Apis.IEGetFileAttributesEx => Windows.Win32.Web.InternetExplorer.Apis.IEGetFileAttributesEx
 Windows.Win32.Web.MsHtml.Apis.IEGetProcessModule_PROC_NAME => Windows.Win32.Web.InternetExplorer.Apis.IEGetProcessModule_PROC_NAME
 Windows.Win32.Web.MsHtml.Apis.IEGetProtectedModeCookie => Windows.Win32.Web.InternetExplorer.Apis.IEGetProtectedModeCookie
 Windows.Win32.Web.MsHtml.Apis.IEGetTabWindowExports_PROC_NAME => Windows.Win32.Web.InternetExplorer.Apis.IEGetTabWindowExports_PROC_NAME
 Windows.Win32.Web.MsHtml.Apis.IEGetWriteableFolderPath => Windows.Win32.Web.InternetExplorer.Apis.IEGetWriteableFolderPath
 Windows.Win32.Web.MsHtml.Apis.IEGetWriteableLowHKCU => Windows.Win32.Web.InternetExplorer.Apis.IEGetWriteableLowHKCU
-Windows.Win32.Web.MsHtml.Apis.IEInPrivateFilteringEnabled => Windows.Win32.Web.InternetExplorer.Apis.IEInPrivateFilteringEnabled
-Windows.Win32.Web.MsHtml.Apis.IEIsInPrivateBrowsing => Windows.Win32.Web.InternetExplorer.Apis.IEIsInPrivateBrowsing
 Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeProcess => Windows.Win32.Web.InternetExplorer.Apis.IEIsProtectedModeProcess
 Windows.Win32.Web.MsHtml.Apis.IEIsProtectedModeURL => Windows.Win32.Web.InternetExplorer.Apis.IEIsProtectedModeURL
 Windows.Win32.Web.MsHtml.Apis.IELaunchURL => Windows.Win32.Web.InternetExplorer.Apis.IELaunchURL
-Windows.Win32.Web.MsHtml.Apis.IEMoveFileEx => Windows.Win32.Web.InternetExplorer.Apis.IEMoveFileEx
 Windows.Win32.Web.MsHtml.Apis.IEPROCESS_MODULE_NAME => Windows.Win32.Web.InternetExplorer.Apis.IEPROCESS_MODULE_NAME
 Windows.Win32.Web.MsHtml.Apis.IERefreshElevationPolicy => Windows.Win32.Web.InternetExplorer.Apis.IERefreshElevationPolicy
 Windows.Win32.Web.MsHtml.Apis.IERegCreateKeyEx => Windows.Win32.Web.InternetExplorer.Apis.IERegCreateKeyEx
 Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryKey => Windows.Win32.Web.InternetExplorer.Apis.IERegisterWritableRegistryKey
 Windows.Win32.Web.MsHtml.Apis.IERegisterWritableRegistryValue => Windows.Win32.Web.InternetExplorer.Apis.IERegisterWritableRegistryValue
-Windows.Win32.Web.MsHtml.Apis.IERemoveDirectory => Windows.Win32.Web.InternetExplorer.Apis.IERemoveDirectory
 Windows.Win32.Web.MsHtml.Apis.IESaveFile => Windows.Win32.Web.InternetExplorer.Apis.IESaveFile
 Windows.Win32.Web.MsHtml.Apis.IESetProtectedModeCookie => Windows.Win32.Web.InternetExplorer.Apis.IESetProtectedModeCookie
 Windows.Win32.Web.MsHtml.Apis.IEShowOpenFileDialog => Windows.Win32.Web.InternetExplorer.Apis.IEShowOpenFileDialog
 Windows.Win32.Web.MsHtml.Apis.IEShowSaveFileDialog => Windows.Win32.Web.InternetExplorer.Apis.IEShowSaveFileDialog
-Windows.Win32.Web.MsHtml.Apis.IETrackingProtectionEnabled => Windows.Win32.Web.InternetExplorer.Apis.IETrackingProtectionEnabled
 Windows.Win32.Web.MsHtml.Apis.IEUnregisterWritableRegistry => Windows.Win32.Web.InternetExplorer.Apis.IEUnregisterWritableRegistry
 Windows.Win32.Web.MsHtml.Apis.IMGDECODE_EVENT_BEGINBITS => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_EVENT_BEGINBITS
 Windows.Win32.Web.MsHtml.Apis.IMGDECODE_EVENT_BITSCOMPLETE => Windows.Win32.Web.InternetExplorer.Apis.IMGDECODE_EVENT_BITSCOMPLETE
@@ -731,3 +722,24 @@ Windows.Win32.Web.MsHtml.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_RIGHT removed
 Windows.Win32.Web.MsHtml.SCROLLABLECONTEXTMENU_PLACEMENT.SCMP_TOP removed
 Windows.Win32.Web.MsHtml.STATURL => Windows.Win32.Web.InternetExplorer.STATURL
 Windows.Win32.Web.MsHtml.wfolders => Windows.Win32.Web.InternetExplorer.wfolders
+# Fixed bugs in InternetExplorer APIs.
+Windows.Win32.Web.InternetExplorer.Apis.IECreateDirectory added
+Windows.Win32.Web.InternetExplorer.Apis.IECreateFile added
+Windows.Win32.Web.InternetExplorer.Apis.IEDeleteFile added
+Windows.Win32.Web.InternetExplorer.Apis.IEFindFirstFile added
+Windows.Win32.Web.InternetExplorer.Apis.IEGetFileAttributesEx added
+Windows.Win32.Web.InternetExplorer.Apis.IEInPrivateFilteringEnabled added
+Windows.Win32.Web.InternetExplorer.Apis.IEIsInPrivateBrowsing added
+Windows.Win32.Web.InternetExplorer.Apis.IEMoveFileEx added
+Windows.Win32.Web.InternetExplorer.Apis.IERegSetValueEx added
+Windows.Win32.Web.InternetExplorer.Apis.IERemoveDirectory added
+Windows.Win32.Web.InternetExplorer.Apis.IETrackingProtectionEnabled added
+Windows.Win32.Web.MsHtml.Apis.IECreateDirectory removed
+Windows.Win32.Web.MsHtml.Apis.IEDeleteFile removed
+Windows.Win32.Web.MsHtml.Apis.IEFindFirstFile removed
+Windows.Win32.Web.MsHtml.Apis.IEGetFileAttributesEx removed
+Windows.Win32.Web.MsHtml.Apis.IEInPrivateFilteringEnabled removed
+Windows.Win32.Web.MsHtml.Apis.IEIsInPrivateBrowsing removed
+Windows.Win32.Web.MsHtml.Apis.IEMoveFileEx removed
+Windows.Win32.Web.MsHtml.Apis.IERemoveDirectory removed
+Windows.Win32.Web.MsHtml.Apis.IETrackingProtectionEnabled removed
