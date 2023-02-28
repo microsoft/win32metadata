@@ -1526,5 +1526,11 @@
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "WinUsb_Free",
     "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Name": "UPDATERESOURCE_HANDLE",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "EndUpdateResourceW",
+    "InvalidHandleValues": [ 0 ]
   }
 ]

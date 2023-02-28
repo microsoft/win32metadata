@@ -865,3 +865,11 @@ Windows.Win32.Storage.CloudFilters.CF_POPULATION_POLICY_MODIFIER_USHORT removed
 Windows.Win32.Storage.CloudFilters.CF_POPULATION_POLICY_PRIMARY_USHORT removed
 Windows.Win32.Storage.CloudFilters.CF_POPULATION_POLICY.Modifier...Windows.Win32.Storage.CloudFilters.CF_POPULATION_POLICY_MODIFIER_USHORT => Windows.Win32.Storage.CloudFilters.CF_POPULATION_POLICY_MODIFIER
 Windows.Win32.Storage.CloudFilters.CF_POPULATION_POLICY.Primary...Windows.Win32.Storage.CloudFilters.CF_POPULATION_POLICY_PRIMARY_USHORT => Windows.Win32.Storage.CloudFilters.CF_POPULATION_POLICY_PRIMARY
+# Fixed #781.
+Windows.Win32.System.LibraryLoader.Apis.BeginUpdateResourceA : return...HANDLE => UPDATERESOURCE_HANDLE
+Windows.Win32.System.LibraryLoader.Apis.BeginUpdateResourceW : return...HANDLE => UPDATERESOURCE_HANDLE
+Windows.Win32.System.LibraryLoader.Apis.EndUpdateResourceA : hUpdate...HANDLE => UPDATERESOURCE_HANDLE
+Windows.Win32.System.LibraryLoader.Apis.EndUpdateResourceW : hUpdate...HANDLE => UPDATERESOURCE_HANDLE
+Windows.Win32.System.LibraryLoader.Apis.UpdateResourceA : hUpdate...HANDLE => UPDATERESOURCE_HANDLE
+Windows.Win32.System.LibraryLoader.Apis.UpdateResourceW : hUpdate...HANDLE => UPDATERESOURCE_HANDLE
+Windows.Win32.System.LibraryLoader.UPDATERESOURCE_HANDLE added
