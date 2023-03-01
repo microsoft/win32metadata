@@ -9351,9 +9351,12 @@
     ]
   },
   {
-    "name": "NCRYPT_FLAGS",
+    "name": "BCRYPT_FLAGS",
     "flags": true,
     "members": [
+      {
+        "name": "BCRYPT_BLOCK_PADDING"
+      },
       {
         "name": "BCRYPT_PAD_NONE"
       },
@@ -9365,7 +9368,31 @@
       },
       {
         "name": "BCRYPT_PAD_PSS"
+      }
+    ],
+    "uses": [
+      {
+        "method": "BCryptDecrypt",
+        "parameter": "dwFlags"
       },
+      {
+        "method": "BCryptEncrypt",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "BCryptVerifySignature",
+        "parameter": "dwFlags"
+      },
+      {
+        "method": "BCryptSignHash",
+        "parameter": "dwFlags"
+      }
+    ]
+  },
+  {
+    "name": "NCRYPT_FLAGS",
+    "flags": true,
+    "members": [
       {
         "name": "NCRYPT_SILENT_FLAG"
       },
@@ -9413,22 +9440,6 @@
       }
     ],
     "uses": [
-      {
-        "method": "BCryptDecrypt",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "BCryptEncrypt",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "BCryptVerifySignature",
-        "parameter": "dwFlags"
-      },
-      {
-        "method": "BCryptSignHash",
-        "parameter": "dwFlags"
-      },
       {
         "method": "NCryptDecrypt",
         "parameter": "dwFlags"

@@ -873,3 +873,19 @@ Windows.Win32.System.LibraryLoader.Apis.EndUpdateResourceW : hUpdate...HANDLE =>
 Windows.Win32.System.LibraryLoader.Apis.UpdateResourceA : hUpdate...HANDLE => UPDATERESOURCE_HANDLE
 Windows.Win32.System.LibraryLoader.Apis.UpdateResourceW : hUpdate...HANDLE => UPDATERESOURCE_HANDLE
 Windows.Win32.System.LibraryLoader.UPDATERESOURCE_HANDLE added
+# Fixed #1012.
+Windows.Win32.Security.Cryptography.Apis.BCRYPT_BLOCK_PADDING removed
+Windows.Win32.Security.Cryptography.Apis.BCryptDecrypt : dwFlags...NCRYPT_FLAGS => BCRYPT_FLAGS
+Windows.Win32.Security.Cryptography.Apis.BCryptEncrypt : dwFlags...NCRYPT_FLAGS => BCRYPT_FLAGS
+Windows.Win32.Security.Cryptography.Apis.BCryptSignHash : dwFlags...NCRYPT_FLAGS => BCRYPT_FLAGS
+Windows.Win32.Security.Cryptography.Apis.BCryptVerifySignature : dwFlags...NCRYPT_FLAGS => BCRYPT_FLAGS
+Windows.Win32.Security.Cryptography.BCRYPT_FLAGS added
+Windows.Win32.Security.Cryptography.BCRYPT_FLAGS.BCRYPT_BLOCK_PADDING added
+Windows.Win32.Security.Cryptography.BCRYPT_FLAGS.BCRYPT_PAD_NONE added
+Windows.Win32.Security.Cryptography.BCRYPT_FLAGS.BCRYPT_PAD_OAEP added
+Windows.Win32.Security.Cryptography.BCRYPT_FLAGS.BCRYPT_PAD_PKCS1 added
+Windows.Win32.Security.Cryptography.BCRYPT_FLAGS.BCRYPT_PAD_PSS added
+Windows.Win32.Security.Cryptography.NCRYPT_FLAGS.BCRYPT_PAD_NONE removed
+Windows.Win32.Security.Cryptography.NCRYPT_FLAGS.BCRYPT_PAD_OAEP removed
+Windows.Win32.Security.Cryptography.NCRYPT_FLAGS.BCRYPT_PAD_PKCS1 removed
+Windows.Win32.Security.Cryptography.NCRYPT_FLAGS.BCRYPT_PAD_PSS removed
