@@ -13,8 +13,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClangSharpSourceToWinmd", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinmdUtils", "WinmdUtils\WinmdUtils.csproj", "{D58855C2-F427-4C4D-990A-7F932A7B4CA3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Win32MetadataInterop", "Win32MetadataInterop\Win32MetadataInterop.csproj", "{C8AA8253-FF34-4963-9CD0-B7A4C28D33BB}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{4D4F6043-CD81-4FD3-A6E5-0A2148281E78}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetadataUtils", "MetadataUtils\MetadataUtils.csproj", "{08297558-5DC0-4ACB-A67B-3E498638AD4B}"

@@ -325,7 +325,7 @@ namespace MetadataUtils
                 SyntaxFactory.AttributeList(
                     SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                         SyntaxFactory.Attribute(
-                            SyntaxFactory.ParseName("Windows.Win32.Interop.Guid"),
+                            SyntaxFactory.ParseName("Windows.Win32.Foundation.Metadata.Guid"),
                             SyntaxFactory.ParseAttributeArgumentList(args))));
         }
     }

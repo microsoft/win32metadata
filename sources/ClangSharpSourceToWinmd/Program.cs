@@ -23,7 +23,6 @@ namespace ClangSharpSourceToWinmd
             {
                 new Option<string>("--sourceDir", "The location of the source files.") { IsRequired = true },
                 new Option<string>("--arch", () => "x64", "The CPU architecture."),
-                new Option<string>("--interopFileName", "The path to Windows.Win32.Interop.dll") { IsRequired = true },
                 new Option<string>("--outputFileName", "The path to the .winmd to create") { IsRequired = true },
                 new Option<string>("--version", description: "The version to use on the .winmd", getDefaultValue: () => "1.0.0.0"),
                 new Option<string>("--memberRemap", "Remaps fields and parameters by adding attributes or changing the type.", ArgumentArity.OneOrMore),
@@ -48,7 +47,6 @@ namespace ClangSharpSourceToWinmd
         {
             string sourceDirectory = context.ParseResult.ValueForOption<string>("--sourceDir");
             string arch = context.ParseResult.ValueForOption<string>("--arch");
-            string interopFileName = context.ParseResult.ValueForOption<string>("--interopFileName");
             string outputFileName = context.ParseResult.ValueForOption<string>("--outputFileName");
             string version = context.ParseResult.ValueForOption<string>("--version");
             var remappedNameValuePairs = context.ParseResult.ValueForOption<string[]>("--memberRemap");
@@ -118,7 +116,7 @@ namespace ClangSharpSourceToWinmd
 
             ClangSharpSourceCompilation clangSharpCompliation =
                 ClangSharpSourceCompilation.Create(
-                    sourceDirectory, arch, interopFileName, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs);
+                    sourceDirectory, arch, remaps, enumAdditions, enumMakeFlags, typeImports, requiredNamespaces, reducePointerLevels, refs, staticLibs);
 
             System.Diagnostics.Stopwatch errorsWatch = System.Diagnostics.Stopwatch.StartNew();
             Console.WriteLine("  Looking for compilation errors...");

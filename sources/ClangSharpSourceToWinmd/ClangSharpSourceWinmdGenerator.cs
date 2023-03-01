@@ -26,13 +26,11 @@ namespace ClangSharpSourceToWinmd
         public const string Win32WideStringType = "Windows.Win32.Foundation.PWSTR";
         public const string Win32StringType = "Windows.Win32.Foundation.PSTR";
 
-        private const string InteropNamespace = "Windows.Win32.Interop";
         private const string ScannedSuffix = "__scanned__";
         private const string RemovePrefix = "__remove__";
         private const string ForceConstPrefix = "__forceconst__";
 
         private const string SystemAssemblyName = "netstandard";
-        private const string Win32InteropAssemblyName = "Windows.Win32.Interop";
         private const string Win32MetadataAssemblyName = "Windows.Win32.winmd";
 
         private static readonly Regex TypeImportRegex = new Regex(@"<(([^,]+),\s*Version=(\d+\.\d+\.\d+\.\d+),\s*Culture=([^,]+),\s*PublicKeyToken=([^>]+))>(\S+)");
@@ -100,7 +98,7 @@ namespace ClangSharpSourceToWinmd
 
             void VerifySymbolsLoadedByCompiler()
             {
-                string[] standardSymbolNames = new string[] { "System.Object", "System.Attribute", $"{InteropNamespace}.ConstAttribute" };
+                string[] standardSymbolNames = new string[] { "System.Object", "System.Attribute" };
 
                 foreach (var name in standardSymbolNames)
                 {
@@ -156,17 +154,6 @@ namespace ClangSharpSourceToWinmd
                         default,
                         default);
                 this.assemblyNamesToRefHandles[SystemAssemblyName] = systemAssemblyRef;
-
-                var interopAssembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == Win32InteropAssemblyName);
-                var interopAssemblyRef =
-                    this.metadataBuilder.AddAssemblyReference(
-                        this.metadataBuilder.GetOrAddString(InteropNamespace),
-                        interopAssembly.Version,
-                        default,
-                        this.metadataBuilder.GetOrAddBlob(interopAssembly.PublicKeyToken),
-                        default,
-                        default);
-                this.assemblyNamesToRefHandles[Win32InteropAssemblyName] = interopAssemblyRef;
 
                 var win32Assembly = this.compilation.ReferencedAssemblyNames.ToList().Find(a => a.Name == Win32MetadataAssemblyName);
                 if (win32Assembly != null)
@@ -257,7 +244,7 @@ namespace ClangSharpSourceToWinmd
 
         private static bool HasGuidAttribute(SyntaxList<AttributeListSyntax> attributeLists)
         {
-            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Windows.Win32.Interop.Guid"));
+            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Windows.Win32.Foundation.Metadata.Guid"));
             return ret;
         }
 
@@ -602,10 +589,6 @@ namespace ClangSharpSourceToWinmd
                     if (@namespace.StartsWith("System"))
                     {
                         scopeRef = this.assemblyNamesToRefHandles[SystemAssemblyName];
-                    }
-                    else if (@namespace.StartsWith(InteropNamespace))
-                    {
-                        scopeRef = this.assemblyNamesToRefHandles[Win32InteropAssemblyName];
                     }
                     else
                     {
@@ -977,7 +960,7 @@ namespace ClangSharpSourceToWinmd
 
                 if (!fixedName.Contains("."))
                 {
-                    foreach (string @namespace in new string[] { InteropNamespace, "System" })
+                    foreach (string @namespace in new string[] { "System" })
                     {
                         var fullNameToCheck = GetQualifiedName(@namespace, fixedName);
                         ret = this.compilation.GetTypeByMetadataName(fullNameToCheck);

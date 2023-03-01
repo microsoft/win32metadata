@@ -19,7 +19,7 @@ Note: Community projects are listed here to help with discovery but are not offi
 
 See the [roadmap](./docs/roadmap.md) and [FAQ](./docs/faq.md) for more details.
 
-If you'd like to browse the metadata to see what we're emitting, extract Windows.Win32.winmd and Windows.Win32.Interop.dll from the [Microsoft.Windows.SDK.Win32Metadata](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/) NuGet package and load Windows.Win32.winmd in [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest). Download the package and rename it to .zip to browse and extract its content.
+If you'd like to browse the metadata to see what we're emitting, extract Windows.Win32.winmd from the [Microsoft.Windows.SDK.Win32Metadata](https://www.nuget.org/packages/Microsoft.Windows.SDK.Win32Metadata/) NuGet package and load Windows.Win32.winmd in [ILSpy](https://github.com/icsharpcode/ILSpy/releases/latest). Download the package and rename it to .zip to browse and extract its content.
 
 ![ILSpy with winmd](./images/ILSpyWithWinmd.png)
 
