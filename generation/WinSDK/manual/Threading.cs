@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using Windows.Win32.Foundation;
 using Windows.Win32.Interop;
 
 namespace Windows.Win32.System.Threading
@@ -10,6 +11,21 @@ namespace Windows.Win32.System.Threading
         public const uint WAIT_ABANDONED = 0x00000080;
         public const uint WAIT_ABANDONED_0 = 0x00000080;
         public const uint WAIT_IO_COMPLETION = 0x000000C0;
+    }
+
+    public unsafe partial struct PROCESS_BASIC_INFORMATION
+    {
+        public NTSTATUS ExitStatus;
+
+        public unsafe PEB* PebBaseAddress;
+
+        public UIntPtr AffinityMask;
+
+        public int BasePriority;
+
+        public UIntPtr UniqueProcessId;
+
+        public UIntPtr InheritedFromUniqueProcessId;
     }
     
     [Flags]
