@@ -3,7 +3,6 @@ HANDLE_OPTIONS=uint
 --with-attribute
 HANDLE_OPTIONS=Flags
 --exclude
-PFNGETACTIVATIONFACTORY
 RO_REGISTRATION_COOKIE
 RoGetActivatableClassRegistration
 RoErrorReportingFlags

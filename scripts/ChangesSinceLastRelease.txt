@@ -889,3 +889,6 @@ Windows.Win32.Security.Cryptography.NCRYPT_FLAGS.BCRYPT_PAD_NONE removed
 Windows.Win32.Security.Cryptography.NCRYPT_FLAGS.BCRYPT_PAD_OAEP removed
 Windows.Win32.Security.Cryptography.NCRYPT_FLAGS.BCRYPT_PAD_PKCS1 removed
 Windows.Win32.Security.Cryptography.NCRYPT_FLAGS.BCRYPT_PAD_PSS removed
+# Fixed #1372.
+Windows.Win32.System.WinRT.Apis.RoRegisterActivationFactories : activationFactoryCallbacks...IntPtr* => PFNGETACTIVATIONFACTORY*
+Windows.Win32.System.WinRT.PFNGETACTIVATIONFACTORY added
