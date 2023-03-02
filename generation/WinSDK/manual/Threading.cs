@@ -91,7 +91,7 @@ namespace Windows.Win32.System.Threading
     }
 
     // Define this manually to consolidate SDK and WDK duplicate definitions
-    public enum PROCESSINFOCLASS : uint
+    public enum PROCESSINFOCLASS : int
     {
         ProcessBasicInformation                      = 0,
         ProcessQuotaLimits                           = 1,
@@ -171,7 +171,7 @@ namespace Windows.Win32.System.Threading
     }
 
     // Define this manually to consolidate SDK and WDK duplicate definitions
-    public enum THREADINFOCLASS : uint
+    public enum THREADINFOCLASS : int
     {
         ThreadBasicInformation          = 0,
         ThreadTimes                     = 1,

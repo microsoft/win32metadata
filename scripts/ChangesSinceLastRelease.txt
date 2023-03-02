@@ -814,7 +814,6 @@ Windows.Win32.System.Threading.PROCESSINFOCLASS.ProcessWorkingSetControl added
 Windows.Win32.System.Threading.PROCESSINFOCLASS.ProcessWorkingSetWatch added
 Windows.Win32.System.Threading.PROCESSINFOCLASS.ProcessWorkingSetWatchEx added
 Windows.Win32.System.Threading.PROCESSINFOCLASS.ProcessWx86Information added
-Windows.Win32.System.Threading.PROCESSINFOCLASS.value__...System.Int32 => System.UInt32
 Windows.Win32.System.Threading.THREADINFOCLASS.MaxThreadInfoClass added
 Windows.Win32.System.Threading.THREADINFOCLASS.ThreadActualBasePriority added
 Windows.Win32.System.Threading.THREADINFOCLASS.ThreadActualGroupAffinity added
@@ -855,7 +854,6 @@ Windows.Win32.System.Threading.THREADINFOCLASS.ThreadTimes added
 Windows.Win32.System.Threading.THREADINFOCLASS.ThreadUmsInformation added
 Windows.Win32.System.Threading.THREADINFOCLASS.ThreadWow64Context added
 Windows.Win32.System.Threading.THREADINFOCLASS.ThreadZeroTlsCell added
-Windows.Win32.System.Threading.THREADINFOCLASS.value__...System.Int32 => System.UInt32
 # Fixed #1252.
 Windows.Win32.Storage.CloudFilters.CF_HYDRATION_POLICY_MODIFIER_USHORT removed
 Windows.Win32.Storage.CloudFilters.CF_HYDRATION_POLICY_PRIMARY_USHORT removed
