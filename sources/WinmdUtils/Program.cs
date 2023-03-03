@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.CommandLine;
 using System.CommandLine.Invocation;
 using System.CommandLine.IO;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -80,6 +81,15 @@ namespace WinmdUtilsProgram
 
             showPointersToDelegates.Handler = CommandHandler.Create<FileInfo, string[], IConsole>(ShowPointersToDelegates);
 
+            var showSuggestedRemappings = new Command("showSuggestedRemappings", "Show suggested remappings.")
+            {
+                new Option<FileInfo>("--winmd", "The winmd to inspect.") { IsRequired = true }.ExistingOnly(),
+                new Option<string>("--allowItem", "Item to allow and not flag as an error.", ArgumentArity.OneOrMore),
+                new Option<string>("--projectRoot", "The path to the root of the project.", ArgumentArity.ExactlyOne)
+            };
+
+            showSuggestedRemappings.Handler = CommandHandler.Create<FileInfo, string[], string, IConsole>(ShowSuggestedRemappings);
+
             var showLibImports = new Command("dumpImports", "Show lib imports.")
             {
                 new Option<FileInfo>("--lib", "The lib path.") { IsRequired = true }.ExistingOnly(),
@@ -131,6 +141,7 @@ namespace WinmdUtilsProgram
                 showDuplicateConstants,
                 showEmptyDelegates,
                 showPointersToDelegates,
+                showSuggestedRemappings,
                 compareCommand,
                 showLibImports,
                 createLibRsp,
@@ -436,6 +447,55 @@ namespace WinmdUtilsProgram
             }
 
             return pointersFound ? -1 : 0;
+        }
+        
+
+        public static int ShowSuggestedRemappings(FileInfo winmd, string[] allowItem, string projectRoot, IConsole console)
+        {
+            HashSet<string> allowTable = new HashSet<string>(allowItem);
+            using WinmdUtils w1 = WinmdUtils.LoadFromFile(winmd.FullName);
+            bool suggestedRemappingsFound = false;
+
+            var scriptPath = $"{Path.GetTempFileName()}.ps1";
+            var scratchPath = Path.Combine(projectRoot, "obj/scratch");
+            File.WriteAllText(scriptPath, string.Format(
+            @"Get-ChildItem {0} -Recurse -Filter '*.txt' |
+            Select-String -Pattern ""Recommended remapping: \'([^\']*)\'"" |
+            ForEach-Object {{ $_.Matches.Groups[1].Value }} |
+            Select-Object -Unique", scratchPath));
+
+            var process = new Process();
+            process.StartInfo.FileName = @"pwsh.exe";
+            process.StartInfo.Arguments = string.Format("-NoProfile -File \"{0}\"", scriptPath);
+            process.StartInfo.UseShellExecute = false;
+            process.StartInfo.RedirectStandardOutput = true;
+            process.Start();
+
+            StreamReader reader = process.StandardOutput;
+            var suggestedRemappings = reader.ReadToEnd().Split("\r\n");
+
+            foreach (var remapping in suggestedRemappings)
+            {
+                if (string.IsNullOrEmpty(remapping) || allowTable.Contains(remapping))
+                {
+                    continue;
+                }
+
+                if (!suggestedRemappingsFound)
+                {
+                    console.Out.Write("Suggested remappings detected:\r\n");
+                    suggestedRemappingsFound = true;
+                }
+
+                console?.Out.Write($"{remapping}\r\n");
+            }
+
+            if (!suggestedRemappingsFound)
+            {
+                console.Out.Write("No suggested remappings found.\r\n");
+            }
+
+            return suggestedRemappingsFound ? -1 : 0;
         }
 
         public static int ShowDuplicateConstants(FileInfo winmd, IConsole console)

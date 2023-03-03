@@ -32,6 +32,10 @@
       "commandName": "Project",
       "commandLineArgs": "showPointersToDelegates --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\pointersToDelegatesAllowList.rsp"
     },
+    "showSuggestedRemappings": {
+      "commandName": "Project",
+      "commandLineArgs": "showSuggestedRemappings --winmd $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd @$(ProjectDir)..\\..\\tests\\Windows.Win32.Tests\\assets\\suggestedRemappingsAllowList.rsp --projectRoot $(ProjectDir)..\\..\\generation\\WinSDK"
+    },
     "dumpImports": {
       "commandName": "Project",
       "commandLineArgs": "dumpImports --lib \"C:\\Program Files (x86)\\Windows Kits\\10\\Lib\\10.0.19041.0\\um\\x86\\advapi32.Lib\""

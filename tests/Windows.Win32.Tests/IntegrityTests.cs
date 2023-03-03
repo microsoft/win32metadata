@@ -52,6 +52,15 @@ namespace Windows.Win32.Tests
         }
 
         [Fact]
+        public void NoSuggestedRemappings()
+        {
+            string suggestedRemappingsFileName = TestUtils.GetAssetFile("suggestedRemappingsAllowList.rsp");
+            string projectRoot = Path.GetFullPath(Path.Combine(TestUtils.Win32WinmdPath, "../../generation/WinSDK"));
+            string args = $"showSuggestedRemappings --winmd \"{TestUtils.Win32WinmdPath}\" \"@{suggestedRemappingsFileName}\" --projectRoot {projectRoot}";
+            this.ExecWinmdUtils(args);
+        }
+
+        [Fact]
         public void NoBrokenArchTypes()
         {
             string args = $"showBrokenArchTypes --winmd \"{TestUtils.Win32WinmdPath}\"";
