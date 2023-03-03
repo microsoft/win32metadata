@@ -54,5 +54,6 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
   * NOTE: `SECURITY_NT_AUTHORITY` demonstrates struct initializers.
 * Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property of the `DllImport` attribute
 * `[CanReturnAlternateSuccessCodes]` and `[CanReturnErrorsAsSuccess]` attributes add semantic information about the possible return values of a function ([#1315](https://github.com/microsoft/win32metadata/issues/1315))
+* `[ReturnsUnownedHandle]` on a return value or out parameter indicates the returned handle is unowned ([#792](https://github.com/microsoft/win32metadata/issues/792))
 
 DISCLAIMER: This list is a work in progress and is not yet comprehensive.
