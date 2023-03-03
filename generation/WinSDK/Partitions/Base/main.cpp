@@ -25,7 +25,6 @@
 #include <wct.h>
 #include <minidumpapiset.h>
 #include <winioctl.h>
-#include <ioevent.h>
 #include <storprop.h>
 #include <ioapiset.h>
 #include <atlthunk.h>

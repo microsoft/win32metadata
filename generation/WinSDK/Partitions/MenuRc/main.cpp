@@ -13,3 +13,4 @@
 #include <strsafe.h>
 #include <mrmresourceindexer.h>
 #include <dbt.h>
+#include <ioevent.h>

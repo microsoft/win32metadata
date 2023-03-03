@@ -32,7 +32,6 @@ _D3DTEXTURETRANSFORMFLAGS
 PENCLAVE_ROUTINE
 LPENCLAVE_ROUTINE
 --traverse
-<IncludeRoot>/shared/ioevent.h
 <IncludeRoot>/um/d3dnthal.h
 <IncludeRoot>/um/d3dcaps.h
 <IncludeRoot>/um/d3dtypes.h
