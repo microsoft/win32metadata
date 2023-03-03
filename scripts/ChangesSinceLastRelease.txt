@@ -1486,3 +1486,28 @@ Windows.Win32.System.SystemServices.USER_ACTIVITY_PRESENCE.PowerUserInvalid remo
 Windows.Win32.System.SystemServices.USER_ACTIVITY_PRESENCE.PowerUserMaximum removed
 Windows.Win32.System.SystemServices.USER_ACTIVITY_PRESENCE.PowerUserNotPresent removed
 Windows.Win32.System.SystemServices.USER_ACTIVITY_PRESENCE.PowerUserPresent removed
+# Moved PPM APIs out of SystemServices.
+Windows.Win32.System.Power.PPM_IDLE_ACCOUNTING added
+Windows.Win32.System.Power.PPM_IDLE_ACCOUNTING_EX added
+Windows.Win32.System.Power.PPM_IDLE_STATE_ACCOUNTING_EX added
+Windows.Win32.System.Power.PPM_WMI_IDLE_STATES added
+Windows.Win32.System.Power.PPM_WMI_IDLE_STATES_EX added
+Windows.Win32.System.Power.PPM_WMI_PERF_STATES added
+Windows.Win32.System.Power.PPM_WMI_PERF_STATES_EX added
+Windows.Win32.System.SystemServices.PPM_IDLE_ACCOUNTING removed
+Windows.Win32.System.SystemServices.PPM_IDLE_ACCOUNTING_EX removed
+Windows.Win32.System.SystemServices.PPM_IDLE_STATE_ACCOUNTING => Windows.Win32.System.Power.PPM_IDLE_STATE_ACCOUNTING
+Windows.Win32.System.SystemServices.PPM_IDLE_STATE_ACCOUNTING_EX removed
+Windows.Win32.System.SystemServices.PPM_IDLE_STATE_BUCKET_EX => Windows.Win32.System.Power.PPM_IDLE_STATE_BUCKET_EX
+Windows.Win32.System.SystemServices.PPM_IDLESTATE_EVENT => Windows.Win32.System.Power.PPM_IDLESTATE_EVENT
+Windows.Win32.System.SystemServices.PPM_PERFSTATE_DOMAIN_EVENT => Windows.Win32.System.Power.PPM_PERFSTATE_DOMAIN_EVENT
+Windows.Win32.System.SystemServices.PPM_PERFSTATE_EVENT => Windows.Win32.System.Power.PPM_PERFSTATE_EVENT
+Windows.Win32.System.SystemServices.PPM_THERMAL_POLICY_EVENT => Windows.Win32.System.Power.PPM_THERMAL_POLICY_EVENT
+Windows.Win32.System.SystemServices.PPM_THERMALCHANGE_EVENT => Windows.Win32.System.Power.PPM_THERMALCHANGE_EVENT
+Windows.Win32.System.SystemServices.PPM_WMI_IDLE_STATE => Windows.Win32.System.Power.PPM_WMI_IDLE_STATE
+Windows.Win32.System.SystemServices.PPM_WMI_IDLE_STATES removed
+Windows.Win32.System.SystemServices.PPM_WMI_IDLE_STATES_EX removed
+Windows.Win32.System.SystemServices.PPM_WMI_LEGACY_PERFSTATE => Windows.Win32.System.Power.PPM_WMI_LEGACY_PERFSTATE
+Windows.Win32.System.SystemServices.PPM_WMI_PERF_STATE => Windows.Win32.System.Power.PPM_WMI_PERF_STATE
+Windows.Win32.System.SystemServices.PPM_WMI_PERF_STATES removed
+Windows.Win32.System.SystemServices.PPM_WMI_PERF_STATES_EX removed
