@@ -4230,6 +4230,21 @@
       "filter": "FACILITY_",
       "header": "ntstatus.h"
     },
+    "members": [
+      {
+        "name": "FACILITY_MCA_ERROR_CODE"
+      }
+    ],
+    "uses": []
+  },
+  {
+    "namespace": "Windows.Win32.Foundation",
+    "type": "uint",
+    "name": "NTSTATUS_SEVERITY_CODE",
+    "autoPopulate": {
+      "filter": "STATUS_SEVERITY_",
+      "header": "ntstatus.h"
+    },
     "members": [],
     "uses": []
   },

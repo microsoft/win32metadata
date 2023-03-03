@@ -40,7 +40,6 @@ LPENCLAVE_ROUTINE
 <IncludeRoot>/um/minwinbase.h
 <IncludeRoot>/um/storprop.h
 <IncludeRoot>/um/atlthunk.h
-<IncludeRoot>/shared/ntiologc.h
 <IncludeRoot>/um/dlnadeviceinterfaceids.h
 <IncludeRoot>/um/dlnametadataproviderproperties.h
 --namespace
