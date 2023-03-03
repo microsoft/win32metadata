@@ -1816,6 +1816,7 @@
     ]
   },
   {
+    "namespace": "Windows.Win32.System.Memory",
     "name": "SECTION_FLAGS",
     "flags": true,
     "autoPopulate": {

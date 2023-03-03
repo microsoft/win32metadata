@@ -940,3 +940,101 @@ Windows.Win32.System.Search.Apis.DBBMKGUID added
 Windows.Win32.System.Search.Apis.PSGUID_STORAGE added
 # Fixed #792.
 Windows.Win32.System.DataExchange.Apis.GetClipboardData : return :  => [ReturnsUnownedHandle]
+# Moved dbt.h out of SystemServices.
+Windows.Win32.System.Memory.SECTION_FLAGS added
+Windows.Win32.System.Memory.SECTION_FLAGS.SECTION_ALL_ACCESS added
+Windows.Win32.System.Memory.SECTION_FLAGS.SECTION_EXTEND_SIZE added
+Windows.Win32.System.Memory.SECTION_FLAGS.SECTION_MAP_EXECUTE added
+Windows.Win32.System.Memory.SECTION_FLAGS.SECTION_MAP_EXECUTE_EXPLICIT added
+Windows.Win32.System.Memory.SECTION_FLAGS.SECTION_MAP_READ added
+Windows.Win32.System.Memory.SECTION_FLAGS.SECTION_MAP_WRITE added
+Windows.Win32.System.Memory.SECTION_FLAGS.SECTION_QUERY added
+Windows.Win32.System.SystemServices._DEV_BROADCAST_HEADER => Windows.Win32.UI.WindowsAndMessaging._DEV_BROADCAST_HEADER
+Windows.Win32.System.SystemServices._DEV_BROADCAST_USERDEFINED removed
+Windows.Win32.System.SystemServices.Apis.BSF_MSGSRV32ISOK => Windows.Win32.UI.WindowsAndMessaging.Apis.BSF_MSGSRV32ISOK
+Windows.Win32.System.SystemServices.Apis.BSF_MSGSRV32ISOK_BIT => Windows.Win32.UI.WindowsAndMessaging.Apis.BSF_MSGSRV32ISOK_BIT
+Windows.Win32.System.SystemServices.Apis.DBT_APPYBEGIN => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_APPYBEGIN
+Windows.Win32.System.SystemServices.Apis.DBT_APPYEND => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_APPYEND
+Windows.Win32.System.SystemServices.Apis.DBT_CONFIGCHANGECANCELED => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_CONFIGCHANGECANCELED
+Windows.Win32.System.SystemServices.Apis.DBT_CONFIGCHANGED => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_CONFIGCHANGED
+Windows.Win32.System.SystemServices.Apis.DBT_CONFIGMGAPI32 => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_CONFIGMGAPI32
+Windows.Win32.System.SystemServices.Apis.DBT_CONFIGMGPRIVATE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_CONFIGMGPRIVATE
+Windows.Win32.System.SystemServices.Apis.DBT_CUSTOMEVENT => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_CUSTOMEVENT
+Windows.Win32.System.SystemServices.Apis.DBT_DEVICEARRIVAL => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVICEARRIVAL
+Windows.Win32.System.SystemServices.Apis.DBT_DEVICEQUERYREMOVE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVICEQUERYREMOVE
+Windows.Win32.System.SystemServices.Apis.DBT_DEVICEQUERYREMOVEFAILED => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVICEQUERYREMOVEFAILED
+Windows.Win32.System.SystemServices.Apis.DBT_DEVICEREMOVECOMPLETE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVICEREMOVECOMPLETE
+Windows.Win32.System.SystemServices.Apis.DBT_DEVICEREMOVEPENDING => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVICEREMOVEPENDING
+Windows.Win32.System.SystemServices.Apis.DBT_DEVICETYPESPECIFIC => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVICETYPESPECIFIC
+Windows.Win32.System.SystemServices.Apis.DBT_DEVNODES_CHANGED => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVNODES_CHANGED
+Windows.Win32.System.SystemServices.Apis.DBT_DEVTYP_DEVNODE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVTYP_DEVNODE
+Windows.Win32.System.SystemServices.Apis.DBT_DEVTYP_NET => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_DEVTYP_NET
+Windows.Win32.System.SystemServices.Apis.DBT_LOW_DISK_SPACE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_LOW_DISK_SPACE
+Windows.Win32.System.SystemServices.Apis.DBT_MONITORCHANGE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_MONITORCHANGE
+Windows.Win32.System.SystemServices.Apis.DBT_NO_DISK_SPACE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_NO_DISK_SPACE
+Windows.Win32.System.SystemServices.Apis.DBT_QUERYCHANGECONFIG => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_QUERYCHANGECONFIG
+Windows.Win32.System.SystemServices.Apis.DBT_SHELLLOGGEDON => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_SHELLLOGGEDON
+Windows.Win32.System.SystemServices.Apis.DBT_USERDEFINED => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_USERDEFINED
+Windows.Win32.System.SystemServices.Apis.DBT_VOLLOCKLOCKFAILED => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_VOLLOCKLOCKFAILED
+Windows.Win32.System.SystemServices.Apis.DBT_VOLLOCKLOCKRELEASED => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_VOLLOCKLOCKRELEASED
+Windows.Win32.System.SystemServices.Apis.DBT_VOLLOCKLOCKTAKEN => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_VOLLOCKLOCKTAKEN
+Windows.Win32.System.SystemServices.Apis.DBT_VOLLOCKQUERYLOCK => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_VOLLOCKQUERYLOCK
+Windows.Win32.System.SystemServices.Apis.DBT_VOLLOCKQUERYUNLOCK => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_VOLLOCKQUERYUNLOCK
+Windows.Win32.System.SystemServices.Apis.DBT_VOLLOCKUNLOCKFAILED => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_VOLLOCKUNLOCKFAILED
+Windows.Win32.System.SystemServices.Apis.DBT_VPOWERDAPI => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_VPOWERDAPI
+Windows.Win32.System.SystemServices.Apis.DBT_VXDINITCOMPLETE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBT_VXDINITCOMPLETE
+Windows.Win32.System.SystemServices.Apis.DBTF_RESOURCE => Windows.Win32.UI.WindowsAndMessaging.Apis.DBTF_RESOURCE
+Windows.Win32.System.SystemServices.Apis.DBTF_SLOWNET => Windows.Win32.UI.WindowsAndMessaging.Apis.DBTF_SLOWNET
+Windows.Win32.System.SystemServices.Apis.DBTF_XPORT => Windows.Win32.UI.WindowsAndMessaging.Apis.DBTF_XPORT
+Windows.Win32.System.SystemServices.Apis.LOCKF_LOGICAL_LOCK => Windows.Win32.UI.WindowsAndMessaging.Apis.LOCKF_LOGICAL_LOCK
+Windows.Win32.System.SystemServices.Apis.LOCKF_PHYSICAL_LOCK => Windows.Win32.UI.WindowsAndMessaging.Apis.LOCKF_PHYSICAL_LOCK
+Windows.Win32.System.SystemServices.Apis.LOCKP_ALLOW_MEM_MAPPING => Windows.Win32.UI.WindowsAndMessaging.Apis.LOCKP_ALLOW_MEM_MAPPING
+Windows.Win32.System.SystemServices.Apis.LOCKP_ALLOW_WRITES => Windows.Win32.UI.WindowsAndMessaging.Apis.LOCKP_ALLOW_WRITES
+Windows.Win32.System.SystemServices.Apis.LOCKP_FAIL_MEM_MAPPING => Windows.Win32.UI.WindowsAndMessaging.Apis.LOCKP_FAIL_MEM_MAPPING
+Windows.Win32.System.SystemServices.Apis.LOCKP_FAIL_WRITES => Windows.Win32.UI.WindowsAndMessaging.Apis.LOCKP_FAIL_WRITES
+Windows.Win32.System.SystemServices.Apis.LOCKP_LOCK_FOR_FORMAT => Windows.Win32.UI.WindowsAndMessaging.Apis.LOCKP_LOCK_FOR_FORMAT
+Windows.Win32.System.SystemServices.Apis.LOCKP_USER_MASK => Windows.Win32.UI.WindowsAndMessaging.Apis.LOCKP_USER_MASK
+Windows.Win32.System.SystemServices.Apis.UnregisterDeviceNotification => Windows.Win32.UI.WindowsAndMessaging.Apis.UnregisterDeviceNotification
+Windows.Win32.System.SystemServices.DEV_BROADCAST_DEVICEINTERFACE_A => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_DEVICEINTERFACE_A
+Windows.Win32.System.SystemServices.DEV_BROADCAST_DEVICEINTERFACE_W => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_DEVICEINTERFACE_W
+Windows.Win32.System.SystemServices.DEV_BROADCAST_DEVNODE => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_DEVNODE
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HANDLE => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HANDLE
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HANDLE32 => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HANDLE32
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HANDLE64 => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HANDLE64
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HDR removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HDR_DEVICE_TYPE removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_DEVICEINTERFACE removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_HANDLE removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_OEM removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_PORT removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_VOLUME removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_NET => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_NET
+Windows.Win32.System.SystemServices.DEV_BROADCAST_OEM => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_OEM
+Windows.Win32.System.SystemServices.DEV_BROADCAST_PORT_A => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_PORT_A
+Windows.Win32.System.SystemServices.DEV_BROADCAST_PORT_W => Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_PORT_W
+Windows.Win32.System.SystemServices.DEV_BROADCAST_VOLUME removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_VOLUME_FLAGS removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_VOLUME_FLAGS.DBTF_MEDIA removed
+Windows.Win32.System.SystemServices.DEV_BROADCAST_VOLUME_FLAGS.DBTF_NET removed
+Windows.Win32.System.SystemServices.SECTION_FLAGS removed
+Windows.Win32.System.SystemServices.SECTION_FLAGS.SECTION_ALL_ACCESS removed
+Windows.Win32.System.SystemServices.SECTION_FLAGS.SECTION_EXTEND_SIZE removed
+Windows.Win32.System.SystemServices.SECTION_FLAGS.SECTION_MAP_EXECUTE removed
+Windows.Win32.System.SystemServices.SECTION_FLAGS.SECTION_MAP_EXECUTE_EXPLICIT removed
+Windows.Win32.System.SystemServices.SECTION_FLAGS.SECTION_MAP_READ removed
+Windows.Win32.System.SystemServices.SECTION_FLAGS.SECTION_MAP_WRITE removed
+Windows.Win32.System.SystemServices.SECTION_FLAGS.SECTION_QUERY removed
+Windows.Win32.System.SystemServices.VolLockBroadcast removed
+Windows.Win32.UI.WindowsAndMessaging._DEV_BROADCAST_USERDEFINED added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HDR added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HDR_DEVICE_TYPE added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_DEVICEINTERFACE added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_HANDLE added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_OEM added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_PORT added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_HDR_DEVICE_TYPE.DBT_DEVTYP_VOLUME added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_VOLUME added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_VOLUME_FLAGS added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_VOLUME_FLAGS.DBTF_MEDIA added
+Windows.Win32.UI.WindowsAndMessaging.DEV_BROADCAST_VOLUME_FLAGS.DBTF_NET added
+Windows.Win32.UI.WindowsAndMessaging.VolLockBroadcast added
