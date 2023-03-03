@@ -2,7 +2,7 @@
   "profiles": {
     "ClangSharpSourceToWinmd": {
       "commandName": "Project",
-      "commandLineArgs": "--sourceDir $(ProjectDir)..\\..\\generation\\emitter --arch crossarch --interopFileName $(ProjectDir)..\\..\\bin\\Debug\\netstandard2.1\\Windows.Win32.Interop.dll --outputFileName $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --version 10.0.19041.5 @$(ProjectDir)..\\..\\generation\\emitter\\remap.rsp --autoTypes $(ProjectDir)..\\..\\generation\\autoTypes.json @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\emitter\\generated\\x64\\enumsRemap.rsp @$(ProjectDir)..\\..\\generation\\emitter\\generated\\x64\\functionPointerFixups.generated.rsp @$(ProjectDir)..\\..\\generation\\emitter\\generated\\x64\\enumsMakeFlags.generated.rsp"
+      "commandLineArgs": "--sourceDir $(ProjectDir)..\\..\\generation\\WinSDK --arch crossarch --interopFileName $(ProjectDir)..\\..\\bin\\Debug\\netstandard2.1\\Windows.Win32.Interop.dll --outputFileName $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --version 10.0.19041.5 @$(ProjectDir)..\\..\\generation\\WinSDK\\emitter.settings.rsp --autoTypes $(ProjectDir)..\\..\\generation\\WinSDK\\autoTypes.json @$(ProjectDir)..\\..\\generation\\WinSDK\\requiredNamespacesForNames.rsp"
     },
     "TestSource": {
       "commandName": "Project",
