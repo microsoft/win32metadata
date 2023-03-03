@@ -938,3 +938,5 @@ Windows.Win32.System.MessageQueuing.Apis.MQ_QTYPE_TEST added
 Windows.Win32.System.Search.Apis.CLSID_CISimpleCommandCreator added
 Windows.Win32.System.Search.Apis.DBBMKGUID added
 Windows.Win32.System.Search.Apis.PSGUID_STORAGE added
+# Fixed #792.
+Windows.Win32.System.DataExchange.Apis.GetClipboardData : return :  => [ReturnsUnownedHandle]
