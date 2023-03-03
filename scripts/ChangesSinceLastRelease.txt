@@ -1511,3 +1511,5 @@ Windows.Win32.System.SystemServices.PPM_WMI_LEGACY_PERFSTATE => Windows.Win32.Sy
 Windows.Win32.System.SystemServices.PPM_WMI_PERF_STATE => Windows.Win32.System.Power.PPM_WMI_PERF_STATE
 Windows.Win32.System.SystemServices.PPM_WMI_PERF_STATES removed
 Windows.Win32.System.SystemServices.PPM_WMI_PERF_STATES_EX removed
+# Fixed #1003.
+Windows.Win32.System.SystemServices.Apis.IMAGE_ORDINAL_FLAG removed
