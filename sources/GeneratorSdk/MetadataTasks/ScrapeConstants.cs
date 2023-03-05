@@ -24,6 +24,9 @@ namespace MetadataTasks
         [Required]
         public ITaskItem[] Partitions { get; set; }
 
+        [Required]
+        public ITaskItem[] ManualCs {get; set;}
+
         public string EnumsJson { get; set; }
 
         [Required]
@@ -113,6 +116,8 @@ namespace MetadataTasks
         private bool AreNonPartitionFilesUpToDate()
         {
             IEnumerable<string> files = TaskUtils.GetFullPaths(this.ResponseFiles, this.MSBuildProjectDirectory);
+
+            files = files.Concat(TaskUtils.GetFullPaths(this.ManualCs, this.MSBuildProjectDirectory));
 
             if (this.EnumsJson != null)
             {
