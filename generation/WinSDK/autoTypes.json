@@ -499,6 +499,20 @@
     "InvalidHandleValues": [ -1, 0 ]
   },
   {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HLOCAL",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "LocalFree",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Foundation",
+    "Name": "HGLOBAL",
+    "ValueType": "DECLARE_HANDLE",
+    "CloseApi": "GlobalFree",
+    "InvalidHandleValues": [ -1, 0 ]
+  },
+  {
     "Name": "HCOLORSPACE",
     "ValueType": "DECLARE_HANDLE",
     "CloseApi": "DeleteColorSpace",
