@@ -1614,3 +1614,6 @@ Windows.Win32.UI.Controls.RichEdit.IRichEditOle.ImportDataObject : hMetaPict...I
 Windows.Win32.UI.Controls.RichEdit.IRichEditOleCallback.QueryAcceptData : hMetaPict...IntPtr => HGLOBAL
 Windows.Win32.Web.MsHtml.IMarkupServices.ParseGlobal : hglobalHTML...IntPtr => HGLOBAL
 Windows.Win32.Web.MsHtml.IMarkupServices2.ParseGlobalEx : hglobalHTML...IntPtr => HGLOBAL
+# Fixed #1271.
+Windows.Win32.System.Com.Apis.COLE_DEFAULT_AUTHINFO added
+Windows.Win32.System.Com.Apis.COLE_DEFAULT_PRINCIPAL added
