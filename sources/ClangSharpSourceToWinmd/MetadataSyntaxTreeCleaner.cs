@@ -467,17 +467,6 @@ namespace ClangSharpSourceToWinmd
                                     SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                                         SyntaxFactory.Attribute(SyntaxFactory.ParseName("global::System.Flags")))).WithLeadingTrivia(node.GetLeadingTrivia()));
                     }
-
-                    if (node.BaseList == null)
-                    {
-                        var baseList =
-                            SyntaxFactory.BaseList(
-                                SyntaxFactory.SingletonSeparatedList<BaseTypeSyntax>(
-                                    SyntaxFactory.SimpleBaseType(SyntaxFactory.ParseTypeName("uint").WithLeadingTrivia(SyntaxFactory.Space))))
-                                    .WithTrailingTrivia(SyntaxFactory.Whitespace("\r\n"));
-                        node = node.WithIdentifier(node.Identifier.WithTrailingTrivia(SyntaxFactory.Space));
-                        node = node.WithBaseList(baseList);
-                    }
                 }
 
                 return node;
