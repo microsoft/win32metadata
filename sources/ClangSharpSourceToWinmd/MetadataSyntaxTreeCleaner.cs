@@ -222,7 +222,7 @@ namespace ClangSharpSourceToWinmd
                                 SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
                                     SyntaxFactory.Attribute(
                                         SyntaxFactory.ParseName("StructSizeField"),
-                                        SyntaxFactory.ParseAttributeArgumentList("(\"cbSize\")"))));
+                                        SyntaxFactory.ParseAttributeArgumentList($"(\"{fieldName}\")"))));
 
                         node = node.AddAttributeLists(attributeList);
                     }
