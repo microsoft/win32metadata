@@ -208,6 +208,26 @@ namespace ClangSharpSourceToWinmd
                     node = (StructDeclarationSyntax)base.VisitStructDeclaration(node);
                 }
 
+                foreach (var member in node.Members)
+                {
+                    if (!(member is FieldDeclarationSyntax))
+                    {
+                        continue;
+                    }
+
+                    var fieldName = ((FieldDeclarationSyntax)member).Declaration.Variables[0].Identifier.Value.ToString();
+                    if (fieldName == "cbSize")
+                    {
+                        var attributeList = SyntaxFactory.AttributeList(
+                                SyntaxFactory.SingletonSeparatedList<AttributeSyntax>(
+                                    SyntaxFactory.Attribute(
+                                        SyntaxFactory.ParseName("StructSizeField"),
+                                        SyntaxFactory.ParseAttributeArgumentList($"(\"{fieldName}\")"))));
+
+                        node = node.AddAttributeLists(attributeList);
+                    }
+                }
+
                 return node;
             }
 
