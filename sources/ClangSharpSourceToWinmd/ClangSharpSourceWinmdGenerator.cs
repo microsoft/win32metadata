@@ -48,12 +48,12 @@ namespace ClangSharpSourceToWinmd
         private Dictionary<string, TypeDefinitionHandle> namesToTypeDefHandles = new Dictionary<string, TypeDefinitionHandle>();
         private Dictionary<string, MethodDefinitionHandle> namesToMethodDefHandles = new Dictionary<string, MethodDefinitionHandle>();
         private HashSet<TypeDeclarationSyntax> visitedPartialDefs = new HashSet<TypeDeclarationSyntax>();
-        private HashSet<ISymbol> interfaceSymbols = new HashSet<ISymbol>();
+        private HashSet<ISymbol> interfaceSymbols = new HashSet<ISymbol>(SymbolEqualityComparer.Default);
         private Dictionary<string, List<ISymbol>> namesToInterfaceSymbols = new Dictionary<string, List<ISymbol>>();
-        private Dictionary<ITypeSymbol, FixedBufferInfo> fixedBufferTypeToInfo = new Dictionary<ITypeSymbol, FixedBufferInfo>();
+        private Dictionary<ITypeSymbol, FixedBufferInfo> fixedBufferTypeToInfo = new Dictionary<ITypeSymbol, FixedBufferInfo>(SymbolEqualityComparer.Default);
         private Dictionary<SyntaxTree, SemanticModel> treeToModels = new Dictionary<SyntaxTree, SemanticModel>();
         private HashSet<StructDeclarationSyntax> interfaceStructs = new HashSet<StructDeclarationSyntax>();
-        private Dictionary<ISymbol, int> interfaceMethodCount = new Dictionary<ISymbol, int>();
+        private Dictionary<ISymbol, int> interfaceMethodCount = new Dictionary<ISymbol, int>(SymbolEqualityComparer.Default);
         private Dictionary<string, EntityHandle> ctorNamesToRefs = new Dictionary<string, EntityHandle>();
         private Dictionary<string, ModuleReferenceHandle> moduleRefHandles = new Dictionary<string, ModuleReferenceHandle>();
         private List<GeneratorDiagnostic> diagnostics = new List<GeneratorDiagnostic>();
@@ -1824,7 +1824,7 @@ namespace ClangSharpSourceToWinmd
                     interfaceTypeAttr
                         .Constructors
                         .First(c => c.Parameters.Length == argTypes.Length && c.Parameters.Select(param => param.Type)
-                        .SequenceEqual(typeSymbols));
+                        .SequenceEqual(typeSymbols, SymbolEqualityComparer.Default));
 
                 var @namespace = interfaceTypeAttr.ContainingNamespace.ToString();
                 var name = interfaceTypeAttr.Name;
