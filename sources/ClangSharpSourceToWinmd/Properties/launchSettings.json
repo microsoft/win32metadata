@@ -2,7 +2,7 @@
   "profiles": {
     "ClangSharpSourceToWinmd": {
       "commandName": "Project",
-      "commandLineArgs": "--sourceDir $(ProjectDir)..\\..\\generation\\WinSDK --arch crossarch --interopFileName $(ProjectDir)..\\..\\bin\\Debug\\netstandard2.1\\Windows.Win32.Interop.dll --outputFileName $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --version 10.0.19041.5 @$(ProjectDir)..\\..\\generation\\WinSDK\\emitter.settings.rsp --autoTypes $(ProjectDir)..\\..\\generation\\WinSDK\\autoTypes.json @$(ProjectDir)..\\..\\generation\\WinSDK\\requiredNamespacesForNames.rsp"
+      "commandLineArgs": "--sourceDir $(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated --arch crossarch --interopFileName $(ProjectDir)..\\..\\bin\\Debug\\netstandard2.1\\Windows.Win32.Interop.dll --outputFileName $(ProjectDir)..\\..\\bin\\Windows.Win32.winmd --version 10.0.19041.5 @$(ProjectDir)..\\..\\generation\\WinSDK\\emitter.settings.rsp --autoTypes $(ProjectDir)..\\..\\generation\\WinSDK\\autoTypes.json @$(ProjectDir)..\\..\\generation\\WinSDK\\requiredNamespacesForNames.rsp"
     },
     "TestSource": {
       "commandName": "Project",
