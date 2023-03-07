@@ -54,7 +54,7 @@ namespace MetadataUtils
 
             private static readonly Regex DefineEnumFlagsRegex =
                 new Regex(
-                    @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;\s*$");
+                    @"^\s*DEFINE_ENUM_FLAG_OPERATORS\(\s*(\S+)\s*\)\s*\;?\s*$");
 
             private static readonly Regex CtlCodeRegex =
                 new Regex(
