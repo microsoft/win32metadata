@@ -12,8 +12,30 @@ namespace Windows.Win32.Security
         [NativeTypeName("BOOLEAN")]
         public const byte SECURITY_STATIC_TRACKING = 0;
 
+        [Constant("{0, 0, 0, 0, 0, 0}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_NULL_SID_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 1}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_WORLD_SID_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 2}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_LOCAL_SID_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 3}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_CREATOR_SID_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 4}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_NON_UNIQUE_AUTHORITY;
         [Constant("{0, 0, 0, 0, 0, 5}")]
         public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_NT_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 9}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_RESOURCE_MANAGER_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 15}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_APP_PACKAGE_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 16}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_MANDATORY_LABEL_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 17}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_SCOPED_POLICY_ID_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 18}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_AUTHENTICATION_AUTHORITY;
+        [Constant("{0, 0, 0, 0, 0, 19}")]
+        public static readonly SID_IDENTIFIER_AUTHORITY SECURITY_PROCESS_TRUST_AUTHORITY;
     }
 
     // We need to define this manually because of how it's defined with duplicate typedefs
