@@ -713,7 +713,7 @@ namespace ClangSharpSourceToWinmd
                         break;
 
                     default:
-                        if (nativeTypeName.StartsWith("const "))
+                        if (nativeTypeName.StartsWith("const ") || Regex.IsMatch(nativeTypeName, "^L?PCW?STR"))
                         {
                             isConst = true;
                         }
