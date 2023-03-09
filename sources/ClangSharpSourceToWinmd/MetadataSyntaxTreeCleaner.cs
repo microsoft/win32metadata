@@ -854,12 +854,12 @@ namespace ClangSharpSourceToWinmd
 
                             break;
                         }
-                        else if (salAttr.P1 == "_Maybenull_" || salAttr.P1 == "_Pre_maybenull_")
+                        else if (salAttr.P1 == "_Maybenull_" || salAttr.P1 == "_Pre_maybenull_" || salAttr.P1 == "_Pre_null_")
                         {
                             isIn = true;
                             isOpt = true;
 
-                            break;
+                            continue;
                         }
 
                         if (salAttr.P1.Contains("_opt"))

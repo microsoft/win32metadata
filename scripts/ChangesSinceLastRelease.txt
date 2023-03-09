@@ -4050,3 +4050,15 @@ Windows.Win32.UI.Shell.Apis.SHGetDiskFreeSpaceExW : pulTotalNumberOfFreeBytes...
 Windows.Win32.UI.Shell.IFileSystemBindData2.GetFileID : pliFileID...LARGE_INTEGER* => Int64*
 Windows.Win32.UI.Shell.IFileSystemBindData2.SetFileID : liFileID...LARGE_INTEGER => Int64
 Windows.Win32.UI.WindowsAndMessaging.DEVICE_EVENT_EXTERNAL_REQUEST.SystemTime...Windows.Win32.Foundation.LARGE_INTEGER => System.Int64
+# Fixed #1260.
+Windows.Win32.Devices.Display.Apis.QueryDisplayConfig : currentTopologyId : [Optional,Out] => [In,Optional,Out]
+Windows.Win32.Media.Audio.DirectSound.Apis.DirectSoundCaptureCreate : pUnkOuter : [In] => [In,Optional]
+Windows.Win32.Media.Audio.DirectSound.Apis.DirectSoundCaptureCreate8 : pUnkOuter : [In] => [In,Optional]
+Windows.Win32.Media.Audio.DirectSound.Apis.DirectSoundCreate : pUnkOuter : [Optional] => [In,Optional]
+Windows.Win32.Media.Audio.DirectSound.Apis.DirectSoundCreate8 : pUnkOuter : [In] => [In,Optional]
+Windows.Win32.Media.Audio.DirectSound.Apis.DirectSoundFullDuplexCreate : pUnkOuter : [In] => [In,Optional]
+Windows.Win32.Media.Audio.DirectSound.IDirectSound.CreateSoundBuffer : pUnkOuter : [Optional] => [In,Optional]
+Windows.Win32.Media.Audio.DirectSound.IDirectSoundCapture.CreateCaptureBuffer : pUnkOuter : [In] => [In,Optional]
+Windows.Win32.UI.HiDpi.Apis.SystemParametersInfoForDpi : pvParam : [In,Optional] => [In,Optional,Out]
+Windows.Win32.UI.WindowsAndMessaging.Apis.SystemParametersInfoA : pvParam : [In,Optional] => [In,Optional,Out]
+Windows.Win32.UI.WindowsAndMessaging.Apis.SystemParametersInfoW : pvParam : [In,Optional] => [In,Optional,Out]
