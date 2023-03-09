@@ -52,7 +52,7 @@ namespace MetadataUtils
             this.namesToValues[name] = args;
 
             this.Writer.WriteLine(
-$@"        [PropertyKey({args})]
+$@"        [Constant({args})]
         public static readonly {structType} {name};");
 
             this.Writer.WriteLine();

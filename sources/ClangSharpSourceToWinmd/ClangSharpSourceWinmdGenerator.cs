@@ -261,12 +261,6 @@ namespace ClangSharpSourceToWinmd
             return ret;
         }
 
-        private static bool HasPropertyKeyAttribute(SyntaxList<AttributeListSyntax> attributeLists)
-        {
-            bool ret = attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "PropertyKey"));
-            return ret;
-        }
-
         private static bool HasConstantAttribute(SyntaxList<AttributeListSyntax> attributeLists)
         {
             return attributeLists.Any(list => list.Attributes.Any(attr => attr.Name.ToString() == "Constant"));
@@ -1271,7 +1265,7 @@ namespace ClangSharpSourceToWinmd
                 {
                     fieldAttributes = FieldAttributes.Public | FieldAttributes.Static;
 
-                    if (!HasGuidAttribute(field.AttributeLists) && !HasPropertyKeyAttribute(field.AttributeLists) && !HasConstantAttribute(field.AttributeLists))
+                    if (!HasGuidAttribute(field.AttributeLists) && !HasConstantAttribute(field.AttributeLists))
                     {
                         continue;
                     }
