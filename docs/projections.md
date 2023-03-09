@@ -51,7 +51,7 @@ DISCLAIMER: This list is a work in progress and is not yet comprehensive.
 * Array parameters are qualified with the `[NativeArrayInfo]` attribute that can contain the size of a fixed-length array (`CountConst`), the 0-based index of the parameter that defines the size of the array (`CountParamIndex`), or the struct field name (`CountFieldName`) that defines the size of the array
 * String constants are considered UTF-16 unless decorated with the `[NativeEncoding("ansi")]` attribute ([#1008](https://github.com/microsoft/win32metadata/issues/1008))
 * Struct initializers are defined as constants where the type of the constant is the struct and the initializer string is contained in the `[Constant]` attribute ([#1337](https://github.com/microsoft/win32metadata/issues/1337))
-  * NOTE: `SECURITY_NT_AUTHORITY` demonstrates struct initializers.
+  * NOTE: `SECURITY_NT_AUTHORITY` and all `DEVPROPKEY` and `PROPERTYKEY` constants demonstrate struct initializers.
 * Calling convention is captured in the [CallingConvention](https://learn.microsoft.com/dotnet/api/system.runtime.interopservices.dllimportattribute.callingconvention) property of the `DllImport` attribute
 * `[StructSizeField("<FIELDNAME>")]` on a struct indicates which field of the struct indicates the struct size ([#433](https://github.com/microsoft/win32metadata/issues/433)) so that language projections can automatically initialize the field
   * NOTE: Examples of `"<FIELDNAME>"` include `"cbSize"` for a field on the struct or `"StartupInfo.cb"` for a nested field like `StartupInfo.cb` on the `STARTUPINFOEXW` struct
