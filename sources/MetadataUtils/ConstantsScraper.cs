@@ -342,7 +342,18 @@ namespace MetadataUtils
                 if (defineGuidKeyword == "DEFINE_DEVPROPKEY" || defineGuidKeyword == "DEFINE_PROPERTYKEY")
                 {
                     string structType = defineGuidKeyword == "DEFINE_DEVPROPKEY" ? "DEVPROPKEY" : "PROPERTYKEY";
-                    writer.AddPropKey(structType, name, args);
+
+                    var guidParts = args[..args.LastIndexOf(',')].Split(", ");
+                    for (int i = 0; i < guidParts.Length; i++)
+                    {
+                        guidParts[i] = Convert.ToUInt32(guidParts[i].Trim(), 16).ToString();
+                    }
+
+                    var fmtid = $"{{{string.Join(", ", guidParts)}}}";
+                    var pid = args[(args.LastIndexOf(',') + 1)..].Trim();
+                    pid = pid.StartsWith("0x", StringComparison.InvariantCultureIgnoreCase) ? Convert.ToUInt32(pid, 16).ToString() : pid;
+
+                    writer.AddPropKey(structType, name, $"\"{fmtid}, {pid}\"");
                 }
                 else
                 {

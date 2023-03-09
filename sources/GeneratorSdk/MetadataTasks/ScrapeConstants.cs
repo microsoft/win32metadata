@@ -142,6 +142,8 @@ namespace MetadataTasks
             {
                 rsp.Insert(0, "--traversedFileToNamespace\n");
             }
+
+            File.WriteAllText(Path.Combine(this.ScraperOutputDir, "traversedFileToNamespace.rsp"), rsp.ToString());
         }
     }
 }

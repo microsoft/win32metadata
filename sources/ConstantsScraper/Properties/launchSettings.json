@@ -2,7 +2,7 @@
   "profiles": {
     "ConstantScraper": {
       "commandName": "Project",
-      "commandLineArgs": "--repoRoot $(ProjectDir)..\\.. --arch x64 --enumsJson $(ProjectDir)..\\..\\generation\\scraper\\enums.json --headerTextFile $(ProjectDir)..\\..\\generation\\scraper\\ConstantsHeader.txt @$(ProjectDir)..\\..\\generation\\scraper\\ConstantsScraper.rsp @$(ProjectDir)..\\..\\generation\\emitter\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\emitter\\remap.rsp"
+      "commandLineArgs": "--scraperOutputDir $(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated @$(ProjectDir)..\\..\\generation\\WinSDK\\obj\\generated\\traversedFileToNamespace.rsp --enumsJson $(ProjectDir)..\\..\\generation\\WinSDK\\enums.json --headerTextFile $(ProjectDir)..\\..\\generation\\WinSDK\\ConstantsScraper.header.txt @$(ProjectDir)..\\..\\generation\\WinSDK\\ConstantsScraper.settings.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\requiredNamespacesForNames.rsp @$(ProjectDir)..\\..\\generation\\WinSDK\\emitter.settings.rsp"
     }
   }
 }
