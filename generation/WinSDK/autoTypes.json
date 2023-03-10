@@ -1552,5 +1552,15 @@
     "Name": "LOADIMAGE_HANDLE",
     "ValueType": "DECLARE_HANDLE",
     "InvalidHandleValues": [ 0 ]
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "socklen_t",
+    "ValueType": "int"
+  },
+  {
+    "Namespace": "Windows.Win32.Networking.WinSock",
+    "Name": "sa_family_t",
+    "ValueType": "ushort"
   }
 ]

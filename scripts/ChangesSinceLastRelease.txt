@@ -1,0 +1,5 @@
+# Fixed #1041.
+Windows.Win32.Networking.WinSock.Apis.getnameinfo : SockaddrLength...Int32 => socklen_t
+Windows.Win32.Networking.WinSock.Apis.GetNameInfoW : SockaddrLength...Int32 => socklen_t
+Windows.Win32.Networking.WinSock.sa_family_t added
+Windows.Win32.Networking.WinSock.socklen_t added
