@@ -3,3 +3,47 @@ Windows.Win32.Networking.WinSock.Apis.getnameinfo : SockaddrLength...Int32 => so
 Windows.Win32.Networking.WinSock.Apis.GetNameInfoW : SockaddrLength...Int32 => socklen_t
 Windows.Win32.Networking.WinSock.sa_family_t added
 Windows.Win32.Networking.WinSock.socklen_t added
+# Fixed #904.
+Windows.Win32.Networking.WinSock.Apis.POLLERR removed
+Windows.Win32.Networking.WinSock.Apis.POLLHUP removed
+Windows.Win32.Networking.WinSock.Apis.POLLIN removed
+Windows.Win32.Networking.WinSock.Apis.POLLNVAL removed
+Windows.Win32.Networking.WinSock.Apis.POLLOUT removed
+Windows.Win32.Networking.WinSock.Apis.POLLPRI removed
+Windows.Win32.Networking.WinSock.Apis.POLLRDBAND removed
+Windows.Win32.Networking.WinSock.Apis.POLLRDNORM removed
+Windows.Win32.Networking.WinSock.Apis.POLLWRBAND removed
+Windows.Win32.Networking.WinSock.Apis.POLLWRNORM removed
+Windows.Win32.Networking.WinSock.Apis.SD_BOTH removed
+Windows.Win32.Networking.WinSock.Apis.SD_RECEIVE removed
+Windows.Win32.Networking.WinSock.Apis.SD_SEND removed
+Windows.Win32.Networking.WinSock.Apis.shutdown : how...Int32 => WINSOCK_SHUTDOWN_HOW
+Windows.Win32.Networking.WinSock.Apis.SOCK_DGRAM removed
+Windows.Win32.Networking.WinSock.Apis.SOCK_RAW removed
+Windows.Win32.Networking.WinSock.Apis.SOCK_RDM removed
+Windows.Win32.Networking.WinSock.Apis.SOCK_SEQPACKET removed
+Windows.Win32.Networking.WinSock.Apis.SOCK_STREAM removed
+Windows.Win32.Networking.WinSock.Apis.socket : type...Int32 => WINSOCK_SOCKET_TYPE
+Windows.Win32.Networking.WinSock.WINSOCK_SHUTDOWN_HOW added
+Windows.Win32.Networking.WinSock.WINSOCK_SHUTDOWN_HOW.SD_BOTH added
+Windows.Win32.Networking.WinSock.WINSOCK_SHUTDOWN_HOW.SD_RECEIVE added
+Windows.Win32.Networking.WinSock.WINSOCK_SHUTDOWN_HOW.SD_SEND added
+Windows.Win32.Networking.WinSock.WINSOCK_SOCKET_TYPE added
+Windows.Win32.Networking.WinSock.WINSOCK_SOCKET_TYPE.SOCK_DGRAM added
+Windows.Win32.Networking.WinSock.WINSOCK_SOCKET_TYPE.SOCK_RAW added
+Windows.Win32.Networking.WinSock.WINSOCK_SOCKET_TYPE.SOCK_RDM added
+Windows.Win32.Networking.WinSock.WINSOCK_SOCKET_TYPE.SOCK_SEQPACKET added
+Windows.Win32.Networking.WinSock.WINSOCK_SOCKET_TYPE.SOCK_STREAM added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLERR added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLHUP added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLIN added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLNVAL added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLOUT added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLPRI added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLRDBAND added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLRDNORM added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLWRBAND added
+Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS.POLLWRNORM added
+Windows.Win32.Networking.WinSock.WSAPOLLFD.events...System.Int16 => Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS
+Windows.Win32.Networking.WinSock.WSAPOLLFD.revents...System.Int16 => Windows.Win32.Networking.WinSock.WSAPOLL_EVENT_FLAGS

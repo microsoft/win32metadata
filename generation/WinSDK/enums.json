@@ -35973,6 +35973,66 @@
         "field": "Modifier"
       }
     ]
+  },
+  {
+    "name": "WSAPOLL_EVENT_FLAGS",
+    "type": "short",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "POLL",
+      "header": "winsock2.h"
+    },
+    "uses": [
+      {
+        "struct": "WSAPOLLFD",
+        "field": "events"
+      },
+      {
+        "struct": "WSAPOLLFD",
+        "field": "revents"
+      }
+    ]
+  },
+  {
+    "name": "WINSOCK_SHUTDOWN_HOW",
+    "type": "int",
+    "autoPopulate": {
+      "filter": "SD_",
+      "header": "winsock2.h"
+    },
+    "uses": [
+      {
+        "method": "shutdown",
+        "parameter": "how"
+      }
+    ]
+  },
+  {
+    "name": "WINSOCK_SOCKET_TYPE",
+    "type": "int",
+    "members": [
+      {
+        "name": "SOCK_STREAM"
+      },
+      {
+        "name": "SOCK_DGRAM"
+      },
+      {
+        "name": "SOCK_RAW"
+      },
+      {
+        "name": "SOCK_RDM"
+      },
+      {
+        "name": "SOCK_SEQPACKET"
+      }
+    ],
+    "uses": [
+      {
+        "method": "socket",
+        "parameter": "type"
+      }
+    ]
   }
 ]
 }
