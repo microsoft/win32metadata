@@ -5256,3 +5256,7 @@ Windows.Win32.System.ServerBackup.IWsbApplicationAsync : [Guid(138671863,35164,1
 Windows.Win32.System.ServerBackup.IWsbApplicationBackupSupport : [Guid(520041744,18983,18093,185,224,8,51,47,15,79,109),SupportedOSPlatform(windowsServer2008)] => [Guid(520041744,18983,18093,185,224,8,51,47,15,79,109),SupportedOSPlatform(windowsserver2008)]
 Windows.Win32.System.ServerBackup.IWsbApplicationRestoreSupport : [Guid(2369510200,20200,18200,133,249,199,219,196,171,119,170),SupportedOSPlatform(windowsServer2008)] => [Guid(2369510200,20200,18200,133,249,199,219,196,171,119,170),SupportedOSPlatform(windowsserver2008)]
 Windows.Win32.System.Wmi.IWbemUnsecuredApartment : [Guid(829660420,13425,19700,154,124,87,164,74,231,25,86),SupportedOSPlatform(windowsServer2008)] => [Guid(829660420,13425,19700,154,124,87,164,74,231,25,86),SupportedOSPlatform(windowsserver2008)]
+# Fixed #611.
+Windows.Win32.UI.WindowsAndMessaging.Apis.LoadImageA : return...HANDLE => LOADIMAGE_HANDLE
+Windows.Win32.UI.WindowsAndMessaging.Apis.LoadImageW : return...HANDLE => LOADIMAGE_HANDLE
+Windows.Win32.UI.WindowsAndMessaging.LOADIMAGE_HANDLE added

@@ -1398,3 +1398,5 @@ UpdateResourceW::hUpdate=UPDATERESOURCE_HANDLE
 EndUpdateResourceA::hUpdate=UPDATERESOURCE_HANDLE
 EndUpdateResourceW::hUpdate=UPDATERESOURCE_HANDLE
 GetClipboardData::return=[ReturnsUnownedHandle]
+LoadImageA::return=LOADIMAGE_HANDLE
+LoadImageW::return=LOADIMAGE_HANDLE
