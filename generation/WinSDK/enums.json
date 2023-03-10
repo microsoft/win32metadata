@@ -36033,6 +36033,54 @@
         "parameter": "type"
       }
     ]
+  },
+  {
+    "namespace": "Windows.Win32.System.MessageQueuing",
+    "name": "MQQUEUEACCESSMASK",
+    "flags": true,
+    "autoPopulate": {
+      "filter": "MQSEC_",
+      "header": "mq.h"
+    },
+    "members": [
+      {
+        "name": "MQSEC_DELETE_QUEUE",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.DELETE)"
+      },
+      {
+        "name": "MQSEC_GET_QUEUE_PERMISSIONS",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.READ_CONTROL)"
+      },
+      {
+        "name": "MQSEC_CHANGE_QUEUE_PERMISSIONS",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.WRITE_DAC)"
+      },
+      {
+        "name": "MQSEC_TAKE_QUEUE_OWNERSHIP",
+        "value": "(Windows.Win32.Storage.FileSystem.FILE_ACCESS_FLAGS.WRITE_OWNER)"
+      },
+      {
+        "name": "MQSEC_RECEIVE_MESSAGE",
+        "value": "(MQSEC_DELETE_MESSAGE | MQSEC_PEEK_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_RECEIVE_JOURNAL_MESSAGE",
+        "value": "(MQSEC_DELETE_JOURNAL_MESSAGE | MQSEC_PEEK_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_READ",
+        "value": "(MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_WRITE",
+        "value": "(MQSEC_GET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_WRITE_MESSAGE)"
+      },
+      {
+        "name": "MQSEC_QUEUE_GENERIC_ALL",
+        "value": "(MQSEC_RECEIVE_MESSAGE | MQSEC_RECEIVE_JOURNAL_MESSAGE | MQSEC_WRITE_MESSAGE | MQSEC_SET_QUEUE_PROPERTIES | MQSEC_GET_QUEUE_PROPERTIES | MQSEC_DELETE_QUEUE | MQSEC_GET_QUEUE_PERMISSIONS | MQSEC_CHANGE_QUEUE_PERMISSIONS | MQSEC_TAKE_QUEUE_OWNERSHIP)"
+      }
+    ],
+    "uses": []
   }
 ]
 }
